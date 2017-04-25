@@ -1,0 +1,74 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"D:\partybuildeb\public/../application/admin\view\base\login.html";i:1492583058;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    <link href="/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/admin/css/animate.css" rel="stylesheet">
+    <link href="/admin/css/style.css" rel="stylesheet">
+    <style type="text/css">
+        .check-tips {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+        .login-logo {
+            width: 150px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <img src="/admin/images/logo.png" class="login-logo">
+        </div>
+        <h3>欢迎来到 党建管理平台</h3>
+        <p>登入后台管理系统</p>
+        <form class="m-t" role="form" action="<?php echo Url('login'); ?>" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="用户名" required="" name="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码" required="" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登入</button>
+            <div class="check-tips"></div>
+            <a href="<?php echo Url('forgot_password'); ?>"><small>忘记密码?</small></a>
+            <p class="text-muted text-center"><small>没有帐号?</small></p>
+            <!--<a class="btn btn-sm btn-white btn-block" href="<?php echo Url('register'); ?>">创建一个新帐号</a>-->
+        </form>
+        <p class="m-t"> <small>杭州之图科技网络有限公司 &copy; 2015-2016</small> </p>
+    </div>
+</div>
+<!-- Mainly scripts -->
+<script src="/admin/js/jquery-2.1.1.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script>
+    //表单提交
+    $(document)
+        .ajaxStart(function(){
+            $("button:submit").addClass("log-in").attr("disabled", true);
+        })
+        .ajaxStop(function(){
+            $("button:submit").removeClass("log-in").attr("disabled", false);
+        });
+
+    $("form").submit(function(){
+        var self = $(this);
+        $.post(self.attr("action"), self.serialize(), success, "json");
+        return false;
+
+        function success(data){
+            if(data.code){
+                window.location.href = data.url;
+            } else {
+                self.find(".check-tips").text(data.msg);
+            }
+        }
+    });
+</script>
+</body>
+</html>
