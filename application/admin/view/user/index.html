@@ -1,0 +1,206 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+<!-- Sweet Alert -->
+<link href="/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>用户管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Admin</a>
+            </li>
+            <li class="active">
+                <strong>User</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>后台用户列表</h5>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-primary" href="#modal-form">添加新用户</a>
+                        <div id="modal-form" class="modal fade" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form class="form-horizontal from-add-user" method="post" action="{:Url('User/add')}">
+                                            <p>添加新用户</p>
+                                            <div class="form-group"><label class="col-lg-2 control-label">账号</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" placeholder="账号只能为字母或数字" class="form-control" required="" name="username">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="col-lg-2 control-label">邮箱</label>
+                                                <div class="col-lg-10">
+                                                    <input type="email" placeholder="用户邮箱，用于找回密码等安全操作" class="form-control" required="" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="col-lg-2 control-label">密码</label>
+                                                <div class="col-lg-10">
+                                                    <input type="password" placeholder="至少6位数字或字母" class="form-control" required="" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="col-lg-2 control-label">确认密码</label>
+                                                <div class="col-lg-10">
+                                                    <input type="password" placeholder="确认密码" class="form-control" required="" name="repassword">
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="col-lg-2 control-label">用户组</label>
+                                                <div class="col-lg-10 checkbox-inline">
+                                                    {volist name="authGroups" id="vo"}
+                                                    <label><input class="auth_groups i-checks" type="radio" name="group_id" value="{$vo.id}" {eq name="i" value="1"}checked{/eq}> {$vo.title}</label>
+                                                    {/volist}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-primary ajax-post" type="submit" target-form="from-add-user">添加</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-form-3" class="modal fade" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <form class="form-horizontal form-edit-user" method="post" action="{:Url('User/edit')}">
+                                    <p>编辑用户</p>
+                                    <div class="form-group"><label class="col-lg-2 control-label">昵称</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" placeholder="用户名会作为默认的昵称" class="form-control" required="" name="username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="col-lg-2 control-label">邮箱</label>
+                                        <div class="col-lg-10">
+                                            <input type="email" placeholder="用户邮箱，用于找回密码等安全操作" class="form-control" required="" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="col-lg-2 control-label">密码</label>
+                                        <div class="col-lg-10">
+                                            <input type="password" placeholder="至少6位数字或字母" class="form-control" required="" name="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="col-lg-2 control-label">确认密码</label>
+                                        <div class="col-lg-10">
+                                            <input type="password" placeholder="确认密码" class="form-control" required="" name="repassword">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label class="col-lg-2 control-label">用户组</label>
+                                        <div class="col-lg-10 checkbox-inline">
+                                            {volist name="authGroups" id="vo"}
+                                            <label><input class="auth_groups i-checks" type="radio" name="group_id" value="{$vo.id}"> {$vo.title}</label>
+                                            {/volist}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-primary ajax-post" type="submit" target-form="form-edit-user">确认</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id" value="">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="i-checks check-all" type="checkbox"></th>
+                                <th>UID</th>
+                                <th>昵称</th>
+                                <th>登录次数</th>
+                                <th>最后登入时间 </th>
+                                <th>最后登入IP</th>
+                                <th>所属组</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td><input type="checkbox" class="i-checks ids" name="input[]"></td>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.nickname}</td>
+                                <td>{$vo.login_total}</td>
+                                <td><span>{$vo.last_login_time|time_format}</span></td>
+                                <td><span>{:long2ip($vo['last_login_ip'])}</span></td>
+                                <td>{notempty name="vo.roles.0"}{$vo->roles[0]->title}{/notempty}</td>
+                                <td><span class="label label-info">{$vo.status_text}</span></td>
+                                <td>
+                                    {eq name="vo.status" value="1"}
+                                        <a href="{:Url('User/changeStatus?method=forbidUser&id='.$vo.id)}" class="ajax-get">禁用</a>
+                                    {else/}
+                                        <a href="{:Url('User/changeStatus?method=resumeUser&id='.$vo.id)}" class="ajax-get">启用</a>
+                                    {/eq}
+                                    <a data-toggle="modal" class="authorize"  href="#modal-form-3" onclick="editUser('{$vo.id}','{$vo.nickname}','{$vo.email}','{notempty name="vo.roles.0"}{$vo->roles[0]->id}{/notempty}')">编辑</a>
+                                    <a href="{:Url('User/changeStatus?method=deleteUser&id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="page">{$_page}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+$(function(){
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
+    $(".check-all").on("ifChanged",function(){
+        $("tbody").find(".ids").iCheck("toggle");
+    });
+});
+function editUser(uid, name, email, groupId) {
+    var useForm = $("#modal-form-3");
+    useForm.find("input[name='id']").val(uid);
+    useForm.find("input[name='username']").val(name);
+    useForm.find("input[name='email']").val(email);
+
+    var groupCheck = useForm.find("input[name='group_id'][value="+groupId+"]");
+    groupCheck.iCheck('check');
+    groupCheck.attr("checked",true);
+}
+</script>
+{/block}

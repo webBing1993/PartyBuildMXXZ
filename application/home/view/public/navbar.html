@@ -1,0 +1,67 @@
+<style>
+    body{padding: 0;margin: 0;}
+    .top{width: 100%;height: 100px;background-image: url("/home/images/topback.png");background-size: 100% 100%;position: fixed;top: 0;z-index: 999;}
+    .message , .user_logo{width: 30px;height: 30px;border-radius: 15px;background: #ac2130;line-height: 30px;text-align: center;margin: 10px;display: inline-block;float: left;}
+    .user_logo{float: right;}
+    .user_logo img{width: 100%;height: 100%;border-radius: 15px;}
+    .message .fa{color: #fff;font-size: 14px;margin-top: 8px;}
+    .message .m_num{color: #fff;float: left;font-size: 14px;width: 30px;height: 30px;border-radius: 15px;font-weight: 800;}
+    .list{width:calc(100% - 102px);height: 50px;line-height: 50px;display: inline-block;}
+    .list span{display: inline-block;color: rgba(255,255,255,0.6);font-size: 14px;float: left;text-align: center;width: calc((100% -102px)/3)}
+</style>
+<div class="top">
+    <div class="message">
+        {eq name="visit" value="0"}
+            {eq name="$common['number']" value="0"}
+            <a href="{:Url('User/mymessage')}"><span class="fa fa-bell"></span></a>
+            {else/}
+            <a href="{:Url('User/mymessage')}"><div class="m_num">{if condition="$common['number'] > 99"}99+{else/}{$common['number']}{/if}</div></a>
+            {/eq}
+        {else/}
+            <span class="fa fa-bell visitor"></span>
+        {/eq}
+
+    </div>
+    <div class="list">
+        <a href="{:Url('Focus/index')}"><span>第一聚焦</span></a>
+        <a href="{:Url('Activity/index')}"><span>活动通知</span></a>
+        <a href="{:Url('Special/index')}"><span>品牌特色</span></a>
+    </div>
+    {eq name="visit" value="0"}
+    <div class="user_logo">
+        <a href="{:Url('User/index')}">
+            <img src="{$common['userid']|get_header}">
+        </a>
+    </div>
+    {else/}
+    <div class="user_logo visitor">
+        <img src="/home/images/vistor.jpg">
+    </div>
+    {/eq}
+</div>
+<script>
+    var win_w = $(window).width();
+    var top_h = (4/25)*win_w;
+    var list_w = (win_w-102)*(1/3);
+    $('.list').find('span').css('width',list_w);
+    $('.top').css('height',top_h);
+    $('.list').find('span').each(function(){
+        $(this).on('click',function(){
+            $(this).css({'color':'#fff','font-size':'16px'}).siblings().css({'color':'rgba(255,255,255,0.6)','font-size':'14px'});
+        });
+    });
+//    $('.message').on('click',function(){
+//        $(this).find('.fa').hide();
+//        $(this).find('.m_num').show();
+//        setTimeout(function(){
+//            $('.m_num').animate({'margin-top':'12px'},50,function(){
+//                $('.m_num').animate({'margin-top':'-12px'},100,function(){
+//                    $('.m_num').animate({'margin-top':'0px'},50);
+//                });
+//            });
+//        },100);
+//    });
+    $(".visitor").click(function () {
+        alert("游客不具备该操作权限！");
+    })
+</script>

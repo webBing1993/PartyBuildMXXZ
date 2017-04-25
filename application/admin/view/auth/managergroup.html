@@ -1,0 +1,198 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+<style type="text/css">
+    .checkmod dt{
+        border-bottom-color: #ebebeb;
+        background-color: #ECECEC;
+    }
+
+    .form-horizontal .checkbox {
+        min-height: 27px;
+        margin-left: 20px;
+        margin-top: 8px;
+    }
+    /*.checkbox input[type=checkbox] {*/
+        /*position: absolute;*/
+        /*margin-top: 4px\9;*/
+        /*margin-left: -15px;*/
+    /*}*/
+    .bg{
+        height: 50px;
+        background-color: rgba(219, 219, 219, 0.13);
+    }
+    .form-horizontal .checkbox span{
+        margin-left: 10px;
+    }
+
+
+</style>
+{/block}
+
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>访问授权</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:Url('Auth/index')}">Index</a>
+            </li>
+            <li class="active">
+                <strong>access</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>授权列表</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="tab-pane in">
+                        <form action="{:Url('Auth/writeGroup')}" enctype="application/x-www-form-urlencoded" method="POST" class="form-horizontal auth-form">
+                            {volist name="node_list" id="node"}
+                            <dl class="">
+                                <dt class="hd bg">
+                                    <label class="checkbox"><input class="auth_rules rules_all i-checks" type="checkbox" name="rules[]" value="<?php echo $main_rules[$node['url']] ?>"><span>{$node.title}管理</span></label>
+                                </dt>
+                                <dd class="bd">
+                                    {present name="node['child']"}
+                                    {volist name="node['child']" id="child"}
+                                    <div class="rule_check">
+                                        <div>
+                                            <label class="checkbox" {notempty name="child['tip']"} title='{$child.tip}'{/notempty}>
+                                            <input class="auth_rules rules_row i-checks" type="checkbox" name="rules[]" value="<?php echo $auth_rules[$child['url']] ?>"/><span>{$child.title}</span>
+                                            </label>
+                                        </div>
+                                        {notempty name="child['operator']"}
+                                        <span class="divsion">&nbsp;</span>
+                                            <span class="child_row">
+                                            {volist name="child['operator']" id="op"}
+                                                <label class="checkbox" {notempty name="op['tip']"} title='{$op.tip}'{/notempty}>
+                                                <input class="auth_rules i-checks gchild" type="checkbox" name="rules[]" value="<?php echo $auth_rules[$op['url']] ?>"/><span>{$op.title}</span>
+                                                </label>
+                                                {/volist}
+                                            </span>
+                                        {/notempty}
+                                    </div>
+                                    {/volist}
+                                    {/present}
+                                </dd>
+                            </dl>
+                            {/volist}
+
+                            <input type="hidden" class="i-checks" name="id" value="{$this_group.id}" />
+                            <button type="submit" class="btn btn-primary submit-btn ajax-post" target-form="auth-form">确 定</button>
+                            <button class="btn btn-default btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="/static/qtip/jquery.qtip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/qtip/jquery.qtip.min.css" media="all">
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    +function($){
+        var rules = [{$this_group.rules}];
+        $('.auth_rules').each(function(){
+            if( $.inArray( parseInt(this.value,10),rules )>-1 ){
+                $(this).prop('checked',true);
+            }
+            if(this.value==''){
+                $(this).closest('span').remove();
+            }
+        });
+        //全选节点
+        $('.rules_all').on('ifChanged',function(){
+            var state = '';
+            if(this.checked){
+                state='check';
+            }else{
+                state='uncheck';
+            }
+            $(this).closest('dl').find('dd').find('input').iCheck(state);
+        });
+        $('.rules_row').on('ifChanged',function(){
+            var state = '';
+            if(this.checked){
+                state='check';
+            }else{
+                state='uncheck';
+            }
+            $(this).closest('.rule_check').find('.child_row').find('input').iCheck(state);
+        });
+
+        $('.checkbox').each(function(){
+            $(this).qtip({
+                content: {
+                    text: $(this).attr('title'),
+                    title: $(this).text()
+                },
+                position: {
+                    my: 'bottom center',
+                    at: 'top center',
+                    target: $(this)
+                },
+                style: {
+                    classes: 'qtip-dark',
+                    tip: {
+                        corner: true,
+                        mimic: false,
+                        width: 10,
+                        height: 10
+                    }
+                }
+            });
+        });
+
+        $('select[name=group]').change(function(){
+            location.href = this.value;
+        });
+        //导航高亮
+        highlight_subnav('{:Url('Auth/index')}');
+        //多选按钮样式
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+    }(jQuery);
+</script>
+
+
+{/block}

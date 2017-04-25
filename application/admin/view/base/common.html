@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<title>{$Think.config.WEB_SITE_TITLE}</title>-->
+    <title>香市党建管理后台</title>
+    <!-- CSS Files -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <style type="text/css">
+        .profile-element {
+            text-align: center;
+        }
+    </style>
+    {block name="style"}{/block}
+    <!-- iCheck -->
+    <link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="/admin/css/animate.css" rel="stylesheet">
+    <link href="/admin/css/style.css" rel="stylesheet">
+    <link href="/admin/css/main.css" rel="stylesheet">
+    <script src="/admin/js/jquery-2.1.1.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <!-- 左侧系统菜单栏 -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>{eq name="user.header" value=""}<img alt="image" class="img-circle" src="/admin/images/profile_small.jpg" />{else/}<img alt="image" style="width: 48px;height: 48px;" class="img-circle" src="{$user.header}" />{/eq}</span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{$user['username']}</strong></span>
+                            <span class="text-muted text-xs block"><b class="caret"></b></span> </span> </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a href="{:Url('Index/editPassWord')}">修改密码</a></li>
+                            <!--<li><a href="contacts.html">联系方式</a></li>-->
+                            <!--<li><a href="mailbox.html">消息中心</a></li>-->
+                            <!--<li class="divider"></li>-->
+                            <li><a href="{:Url('Base/logout')}">退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        MIN+
+                    </div>
+                </li>
+                {volist name="__MENU__" id="menu"}
+                {empty name="menu.child" }
+                {eq name="menu.id" value="$subMenu.id"}<li class="active">{else/}<li>{/eq}
+                <a href="{:Url($menu['url'])}"><i class="fa {$menu.icon}"></i><span class="nav-label">{$menu.title}</span></a></li>
+                {else /}
+                {eq name="subMenu.pid" value="$menu.id"}<li class="active">{else /}<li>{/eq}
+                <a href="{:Url($menu['url'])}"><i class="fa {$menu.icon}"></i> <span class="nav-label">{$menu.title}</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse {eq name='subMenu.pid' value='$menu.id'}in{/eq}">
+                    {volist name="menu.child" id="child"}
+                    {eq name="subMenu.id" value="$child.id"}<li class="active">{else/}<li>{/eq}<a href="{:Url($child.url)}">{$child.title}</a></li>
+                    {/volist}
+                </ul></li>
+                {/empty}
+                {/volist}
+                <!--<li class="landing_link">-->
+                    <!--<a target="_blank" href="landing.html"><i class="fa fa-star"></i> <span class="nav-label">最新动态</span> <span class="label label-warning pull-right">NEW</span></a>-->
+                <!--</li>-->
+                <li class="special_link">
+                    <a href="https://qy.weixin.qq.com" target="_blank"><i class="fa fa-wechat"></i> <span class="nav-label">微信管理平台</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 右侧主体内容 -->
+    <div id="page-wrapper" class="gray-bg">
+        <!-- 中间头部 -->
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="{:Url('Index/search')}">
+                        <div class="form-group">
+                            <input type="text" placeholder="搜索内容" class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎使用{$Think.config.WEB_SITE_TITLE}</span>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-envelope"></i>  <span class="label label-warning">0</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">0</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:Url('Base/logout')}">
+                            <i class="fa fa-sign-out"></i> 退出
+                        </a>
+                    </li>
+                    <li>
+                        <a class="right-sidebar-toggle">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- 页面路径 -->
+        {block name="page-header"}{/block}
+        <!-- 中间主体内容 -->
+        {block name="main"}{/block}
+        <!-- 底部信息 -->
+        <div class="footer">
+            <div class="pull-right">
+                版本 <strong>0.3</strong>
+            </div>
+            <div>
+                <strong>Copyright</strong>杭州之图网络科技有限公司 &copy;2016-2017
+            </div>
+        </div>
+    </div>
+    <!-- 右侧工具栏 -->
+</div>
+<!-- Mainly scripts -->
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/admin/js/inspinia.js"></script>
+<script src="/admin/js/plugins/pace/pace.min.js"></script>
+<script src="/admin/js/common.js"></script>
+<!-- Toastr script -->
+<script src="/admin/js/plugins/toastr/toastr.min.js"></script>
+<script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+{block name="script"}{/block}
+</body>
+</html>

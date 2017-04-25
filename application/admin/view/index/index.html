@@ -1,0 +1,37 @@
+{extend name="base/common"}
+
+{block name="style"}
+<!-- Toastr style -->
+<link href="/admin/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+<!-- Gritter -->
+<link href="/admin/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+{/block}
+
+{block name="page-header"}
+{/block}
+
+{block name="main"}
+
+</div>
+{/block}
+
+{block name="script"}
+<!-- Flot -->
+<script src="/admin/js/plugins/flot/jquery.flot.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.symbol.js"></script>
+<script src="/admin/js/plugins/flot/jquery.flot.time.js"></script>
+<script type="text/javascript">
+    /* 插件块关闭操作 */
+    $(".title-opt .wm-slide").each(function(){
+        $(this).click(function(){
+            $(this).closest(".columns-mod").find(".bd").toggle();
+            $(this).find("i").toggleClass("mod-up");
+        });
+    })
+</script>
+
+{/block}

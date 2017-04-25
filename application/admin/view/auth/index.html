@@ -1,0 +1,168 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link href="/admin/css/plugins/iCheck/custom.css" rel="stylesheet">
+<!-- Sweet Alert -->
+<link href="/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="/admin/css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="/admin/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+<link href="/admin/css/style.css" rel="stylesheet">
+
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>用户管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Admin</a>
+            </li>
+            <li class="active">
+                <strong>Auth</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>管理组列表</h5>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-primary" href="#modal-form">添加新管理组</a>
+                        <div id="modal-form" class="modal fade" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form class="form-horizontal form-add-auth" method="post" action="{:Url('Auth/createGroup')}" enctype="application/x-www-form-urlencoded">
+                                            <p>添加新管理组</p>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">用户组</label>
+                                                <div class="col-lg-10">
+                                                    <input type="text" class="form-control" required="" name="title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">描述</label>
+                                                <div class="col-lg-10">
+                                                    <textarea type="text" class="form-control" name="description"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-primary ajax-post" type="submit" target-form="form-add-auth">添加</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-form-4" class="modal fade" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div  class="modal-body">
+                                <form class="form-horizontal form-edit-auth" method="post" action="{:Url('Auth/edit')}" enctype="application/x-www-form-urlencoded">
+                                    <p>编辑管理组</p>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">用户组</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" required="" name="title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">描述</label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" class="form-control" name="description"></textarea>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id">
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-10">
+                                            <button class="btn btn-primary ajax-post" type="submit" target-form="form-edit-auth">确定</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" class="i-checks" name="input[]"></th>
+                                <th>用户组</th>
+                                <th>描述</th>
+                                <th>授权</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="_list" id="vo"}
+                            <tr>
+                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td>{$vo.title}</td>
+                                <td>{:mb_strimwidth($vo['description'],0,60,"...","utf-8")}</td>
+                                <td>
+                                    <a href="{:Url('Auth/access?group_name='.$vo['title'].'&group_id='.$vo['id'])}" >访问授权</a>
+                                    <!--<a href="{:Url('Auth/user?group_name='.$vo['title'].'&group_id='.$vo['id'])}" >成员授权</a>-->
+                                </td>
+                                <td>{$vo.status_text}</td>
+                                <td>
+                                    {eq name="vo.status" value="1"}
+                                    <a href="{:Url('Auth/changeStatus?method=forbidGroup&id='.$vo['id'])}" class="ajax-get">禁用</a>
+                                    {else/}
+                                    <a href="{:Url('Auth/changeStatus?method=resumeGroup&id='.$vo['id'])}" class="ajax-get">启用</a>
+                                    {/eq}
+                                    <a data-toggle="modal" href="#modal-form-4" class="" onclick="editAuth('{$vo.title}','{$vo.description}','{$vo.id}')">编辑</a>
+                                    <a href="{:Url('Auth/changeStatus?method=deleteGroup&id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+
+<!-- Peity -->
+<script src="/admin/js/demo/peity-demo.js"></script>
+<script src="/admin/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- iCheck -->
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Sweet alert -->
+<script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    });
+    function editAuth(title,desc,id){
+        var authForm = $("#modal-form-4");
+        authForm.find("input[name='title']").val(title);
+        authForm.find("textarea[name='description']").val(desc);
+        authForm.find("input[name='id']").val(id);
+    }
+</script>
+{/block}
