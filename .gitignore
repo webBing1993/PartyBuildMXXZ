@@ -1,0 +1,9 @@
+.idea/
+application/database.php
+runtime/
+thinkphp/
+vendor/
+data/
+composer.lock
+public/ueditor/
+public/uploads/
