@@ -40,11 +40,8 @@
  *   				)
  *  		);
  *   $result = $weObj->createMenu($newmenu);
- * Created by PhpStorm.
- * User: 虚空之翼 <183700295@qq.com>
- * Date: 16/4/3
- * Time: 14:48
  */
+
 namespace com\wechat;
 
 class Wechat
@@ -58,6 +55,7 @@ class Wechat
     const MSGTYPE_NEWS = 'news';
     const MSGTYPE_VOICE = 'voice';
     const MSGTYPE_VIDEO = 'video';
+    const MSGTYPE_SHORTVIDEO = 'shortvideo';
     const EVENT_SUBSCRIBE = 'subscribe';       //订阅
     const EVENT_UNSUBSCRIBE = 'unsubscribe';   //取消订阅
     const EVENT_SCAN = 'SCAN';                 //扫描带参数二维码
@@ -85,6 +83,9 @@ class Wechat
     const MENU_CREATE_URL = '/menu/create?';
     const MENU_GET_URL = '/menu/get?';
     const MENU_DELETE_URL = '/menu/delete?';
+    const MENU_ADDCONDITIONAL_URL = '/menu/addconditional?';
+    const MENU_DELCONDITIONAL_URL = '/menu/delconditional?';
+    const MENU_TRYMATCH_URL = '/menu/trymatch?';
     const GET_TICKET_URL = '/ticket/getticket?';
     const CALLBACKSERVER_GET_URL = '/getcallbackip?';
     const QRCODE_CREATE_URL='/qrcode/create?';
@@ -94,6 +95,7 @@ class Wechat
     const SHORT_URL='/shorturl?';
     const USER_GET_URL='/user/get?';
     const USER_INFO_URL='/user/info?';
+    const USERS_INFO_URL='/user/info/batchget?';
     const USER_UPDATEREMARK_URL='/user/info/updateremark?';
     const GROUP_GET_URL='/groups/get?';
     const USER_GROUP_URL='/groups/getid?';
@@ -104,8 +106,8 @@ class Wechat
     const CUSTOM_SEND_URL='/message/custom/send?';
     const MEDIA_UPLOADNEWS_URL = '/media/uploadnews?';
     const MASS_SEND_URL = '/message/mass/send?';
-    const TEMPLATE_SET_INDUSTRY_URL = '/message/template/api_set_industry?';
-    const TEMPLATE_ADD_TPL_URL = '/message/template/api_add_template?';
+    const TEMPLATE_SET_INDUSTRY_URL = '/template/api_set_industry?';
+    const TEMPLATE_ADD_TPL_URL = '/template/api_add_template?';
     const TEMPLATE_SEND_URL = '/message/template/send?';
     const MASS_SEND_GROUP_URL = '/message/mass/sendall?';
     const MASS_DELETE_URL = '/message/mass/delete?';
@@ -150,6 +152,7 @@ class Wechat
     const CARD_DELETE                     = '/card/delete?';
     const CARD_UPDATE                     = '/card/update?';
     const CARD_GET                        = '/card/get?';
+    const CARD_USER_GETCARDLIST         = '/card/user/getcardlist?';
     const CARD_BATCHGET                   = '/card/batchget?';
     const CARD_MODIFY_STOCK               = '/card/modifystock?';
     const CARD_LOCATION_BATCHADD          = '/card/location/batchadd?';
@@ -1129,7 +1132,24 @@ class Wechat
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($oCurl, CURLOPT_SSLVERSION, 1); //CURL_SSLVERSION_TLSv1
         }
-        if (is_string($param) || $post_file) {
+        if (PHP_VERSION_ID >= 50500 && class_exists('\CURLFile')) {
+            $is_curlFile = true;
+        } else {
+            $is_curlFile = false;
+            if (defined('CURLOPT_SAFE_UPLOAD')) {
+                curl_setopt($oCurl, CURLOPT_SAFE_UPLOAD, false);
+            }
+        }
+        if (is_string($param)) {
+            $strPOST = $param;
+        }elseif($post_file) {
+            if($is_curlFile) {
+                foreach ($param as $key => $val) {
+                    if (substr($val, 0, 1) == '@') {
+                        $param[$key] = new \CURLFile(realpath(substr($val,1)));
+                    }
+                }
+            }
             $strPOST = $param;
         } else {
             $aPOST = array();
@@ -1312,6 +1332,37 @@ class Wechat
             "timestamp" => $timestamp,
             "url"       => $url,
             "signature" => $sign
+        );
+        return $signPackage;
+    }
+
+    /**
+     * 获取卡券签名cardSign
+     * @param string $card_type 卡券的类型，不可为空，官方jssdk文档说这个值可空，但签名验证工具又必填这个值，官方文档到处是坑，
+     * @param string $card_id 卡券的ID，可空
+     * @param string $location_id 卡券的适用门店ID，可空
+     * @param string $timestamp 当前时间戳 (为空则自动生成)
+     * @param string $noncestr 随机串 (为空则自动生成)
+     * @param string $appid 用于多个appid时使用,可空
+     * @return array|bool 返回签名字串
+     */
+    public function getCardSign($card_type='',$card_id='',$code='',$location_id='',$timestamp=0, $noncestr='', $appid=''){
+        if (!$this->api_ticket && !$this->getJsCardTicket($appid)) return false;
+        if (!$timestamp)
+            $timestamp = time();
+        if (!$noncestr)
+            $noncestr = $this->generateNonceStr();
+        $arrdata = array("api_ticket" => $this->api_ticket,"app_id" => $this->appid,"card_id" => $card_id,"code" => $code,"card_type" => $card_type,"location_id" => $location_id,"timestamp" => $timestamp, "noncestr" => $noncestr );
+        $sign = $this->getTicketSignature($arrdata);
+        if (!$sign)
+            return false;
+        $signPackage = array(
+            "cardType"     => $card_type,
+            "cardId"       => $card_id,
+            "shopId"       => $location_id,         //location_id就是shopId
+            "nonceStr"  => $noncestr,
+            "timestamp" => $timestamp,
+            "cardSign" => $sign
         );
         return $signPackage;
     }
@@ -1578,6 +1629,72 @@ class Wechat
                 return false;
             }
             return true;
+        }
+        return false;
+    }
+
+    /**
+     * 创建个性化菜单(认证后的订阅号可用)
+     * @param array $data
+     * @return bool
+     *
+     */
+    public function addconditionalMenu($data){
+        if (!$this->access_token && !$this->checkAuth()) return false;
+        $result = $this->http_post(self::API_URL_PREFIX.self::MENU_ADDCONDITIONAL_URL.'access_token='.$this->access_token,self::json_encode($data));
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除个性化菜单(认证后的订阅号可用)
+     * @param $data {"menuid":"208379533"}
+     *
+     * @return bool
+     */
+    public function delconditionalMenu($data){
+        if (!$this->access_token && !$this->checkAuth()) return false;
+        $result = $this->http_post(self::API_URL_PREFIX.self::MENU_DELCONDITIONAL_URL.'access_token='.$this->access_token,self::json_encode($data));
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 测试个性化菜单匹配结果(认证后的订阅号可用)
+     * @param $data {"user_id":"weixin"} user_id可以是粉丝的OpenID，也可以是粉丝的微信号
+     *
+     * @return bool|array('button'=>array(....s))
+     */
+    public function trymatchMenu($data){
+        if (!$this->access_token && !$this->checkAuth()) return false;
+        $result = $this->http_post(self::API_URL_PREFIX.self::MENU_TRYMATCH_URL.'access_token='.$this->access_token,self::json_encode($data));
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            return $json;
         }
         return false;
     }
@@ -2197,12 +2314,34 @@ class Wechat
     /**
      * 获取关注者详细信息
      * @param string $openid
+     * @param string $lang 返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
      * @return array {subscribe,openid,nickname,sex,city,province,country,language,headimgurl,subscribe_time,[unionid]}
      * 注意：unionid字段 只有在用户将公众号绑定到微信开放平台账号后，才会出现。建议调用前用isset()检测一下
      */
-    public function getUserInfo($openid){
+    public function getUserInfo($openid, $lang = 'zh_CN'){
         if (!$this->access_token && !$this->checkAuth()) return false;
-        $result = $this->http_get(self::API_URL_PREFIX.self::USER_INFO_URL.'access_token='.$this->access_token.'&openid='.$openid);
+        $result = $this->http_get(self::API_URL_PREFIX.self::USER_INFO_URL.'access_token='.$this->access_token.'&openid='.$openid.'&lang='.$lang);
+        if ($result)
+        {
+            $json = json_decode($result,true);
+            if (isset($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg = $json['errmsg'];
+                return false;
+            }
+            return $json;
+        }
+        return false;
+    }
+    /**
+     * 批量获取关注者详细信息
+     * @param array $openids user_list{{'openid:xxxxxx'},{},{}}
+     * @return array user_info_list{subscribe,openid,nickname,sex,city,province,country,language,headimgurl,subscribe_time,[unionid]}{}{}...
+     * 注意：unionid字段 只有在用户将公众号绑定到微信开放平台账号后，才会出现。建议调用前用isset()检测一下
+     */
+    public function getUsersInfo($openids){
+        if (!$this->access_token && !$this->checkAuth()) return false;
+        $result = $this->http_post(self::API_URL_PREFIX.self::USERS_INFO_URL.'access_token='.$this->access_token,json_encode($openids));
         if ($result)
         {
             $json = json_decode($result,true);
@@ -3102,6 +3241,40 @@ class Wechat
     }
 
     /**
+     * 获取用户已领取卡券接口
+     * @param string $openid
+     * @param string $card_id
+     * @return boolean|array    返回数组信息比较复杂，请参看卡券接口文档
+     * 成功返回结果
+     *  {
+     * "errcode":0,
+     * "errmsg":"ok",
+     * "card_list": [
+     * {"code": "xxx1434079154", "card_id": "xxxxxxxxxx"},
+     * {"code": "xxx1434079155", "card_id": "xxxxxxxxxx"}
+     * ]
+     * }
+     */
+    public function getUserCardList($openid,$card_id) {
+        $data = array(
+            'openid' => $openid,
+            'card_id' => $card_id
+        );
+        if (!$this->access_token && !$this->checkAuth()) return false;
+        $result = $this->http_post(self::API_BASE_URL_PREFIX . self::CARD_USER_GETCARDLIST . 'access_token=' . $this->access_token, self::json_encode($data));
+        if ($result) {
+            $json = json_decode($result, true);
+            if (!$json || !empty($json['errcode'])) {
+                $this->errCode = $json['errcode'];
+                $this->errMsg  = $json['errmsg'];
+                return false;
+            }
+            return $json;
+        }
+        return false;
+    }
+
+    /**
      * 获取颜色列表
      * 获得卡券的最新颜色列表，用于创建卡券
      * @return boolean|array   返回数组请参看 微信卡券接口文档 的json格式
@@ -3844,7 +4017,7 @@ class Wechat
      */
     public function uploadShakeAroundMedia($data){
         if (!$this->access_token && !$this->checkAuth()) return false;
-        $result = $this->http_post(self::API_URL_PREFIX.self::SHAKEAROUND_MATERIAL_ADD.'access_token='.$this->access_token,$data,true);
+        $result = $this->http_post(self::API_BASE_URL_PREFIX.self::SHAKEAROUND_MATERIAL_ADD.'access_token='.$this->access_token,$data,true);
         if ($result)
         {
             $json = json_decode($result,true);
@@ -4617,4 +4790,3 @@ class ErrorCode
         };
     }
 }
-
