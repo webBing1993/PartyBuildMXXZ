@@ -16,13 +16,13 @@ return [
     // 数据库连接DSN配置
     'dsn'         => '',
     // 服务器地址
-    'hostname'    => '',
+    'hostname'    => '192.168.1.53',
     // 数据库名
-    'database'    => ' ',
+    'database'    => 'dypb',
     // 数据库用户名
     'username'    => 'guest',
     // 数据库密码
-    'password'    => '',
+    'password'    => '123456',
     // 数据库连接端口
     'hostport'    => '3306',
     // 数据库连接参数
