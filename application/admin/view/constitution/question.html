@@ -1,0 +1,109 @@
+{extend name="base/common"}
+
+{block name="style"}
+
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>题库管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                题库管理
+            </li>
+            <li class="active">
+                <strong>题目目录</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>题目目录</h5>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="{:Url('Constitution/plus')}">添加</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="i-checks check-all" type="checkbox"></th>
+                                <th>ID</th>
+                                <th style="max-width: 40vw">标题</th>
+                                <th style="min-width: 40px">题型</th>
+                                <th>选项</th>
+                                <th style="max-width: 30vw">正确答案</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="question" id="vo"}
+                            <tr>
+                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td>{$vo.id}</td>
+                                <td style="max-width: 30vw">{$vo.title}</td>
+                                <td style="min-width: 40px">{eq name="$vo.type" value='0'}单选{else/}多选{/eq}</td>
+                                <td style="max-width: 30vw">{$vo->Option|implode=###,'&nbsp;&nbsp;&nbsp;&nbsp;'}</td>
+                                <td>{$vo->Right}</td>
+                                <td>
+                                    <a href="{:Url('Constitution/update?id='.$vo['id'])}">修改</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <a onclick="closeQuestion({$vo['id']})">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <div class="page">{$_page}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    highlight_subnav("{:Url('Constitution/question')}");
+
+    $(document).ready(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+    function closeQuestion(vid){
+        $.ajax({
+            type:"get",
+            url:"{:Url('Constitution/del')}",
+            data:{id:vid},
+            success:function(data){
+                if(data.code==1){
+                    updateAlert(data.msg );
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                }
+            }
+        });
+    }
+</script>
+{/block}

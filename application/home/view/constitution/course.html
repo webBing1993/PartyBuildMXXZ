@@ -1,0 +1,77 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/course.css">
+{/block}
+
+{block name="body"}
+<div class="banner">
+	<img src="/home/images/test/3.png" alt="每日一课banner" class="banner-img">
+	<span class="tag">每日一课</span>
+</div>
+<div class="lists">
+	{volist name="question" id="vo" key="n"}
+	<div class="list" data-tab="{$vo.id}">
+		<div class="title">{$vo.title}</div>
+		{volist name="vo->Option" id="value"}
+		<label>{$value}</label>
+		{/volist}
+		<div class="number">{$n} / 3</div>
+	</div>
+	{/volist}
+</div>
+<div class="submit" data-toggle="modal" data-target="#modal">确认提交</div>
+<!--模态框-->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div>正确答案 : <span id="true1"></span></div>
+				<div class="text-center">本次得分：<span class="score"></span> 分</div>
+			</div>
+			<div class="modal-footer">
+				<a href="" id="link">查看详情</a>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+$(function(){
+	//模块标题
+	$('title' ).text('两学一做');
+	//提交
+	$('.submit').on('click',function(e){
+		var data = [];
+		$('.list').each(function(){
+			var id = $(this ).attr('data-tab');
+			var answer = $(this ).find('.checked' ).index();
+			data.push([id,answer]);
+			});
+//		console.log(data);
+//		$('#modal').modal('show');
+		$.ajax({
+			type:"post",
+			url:"{:Url('Constitution/commit')}",
+			data:{'data':data},
+			success:function(data){
+				console.log(data);
+				$('.score').html(data.url.score);
+				$('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]);
+				var link='scan';
+				$('#link').attr('href',link+'/id/'+data.url.id);
+			}
+		});
+	});
+	//选中样式变化
+	$('label').on('click',function(e){
+		var it = $(this);
+		it.addClass('checked');
+		it.siblings('label' ).removeClass('checked');
+	});
+
+})
+</script>
+{/block}

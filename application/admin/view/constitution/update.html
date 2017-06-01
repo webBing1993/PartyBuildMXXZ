@@ -1,0 +1,229 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>题库管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                题库管理
+            </li>
+            <li class="active">
+                <strong>题目修改</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>修改</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+                <div class="ibox-content all">
+                    <form id="form" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label for="type">题 目:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入题目" class="form-control" name="que" value="{$question->title}">
+                                <input type="hidden" name="question_id" value="{$question->id}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label for="type">题 型:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="type" id="type">
+                                    <option  value="0">单选</option>
+                                    <option value="1" {eq name="$question->type" value='1' }selected='selected'{/eq} >多选</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label for="type">选 项:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                {if condition="$num eq 4"}
+                                    {volist name='option' id='op'}
+                                    <div class="input-group">
+                                        <span class="input-group-addon">{$op.style}</span>
+                                        <input type="text" placeholder='请输入选项{$op.style}' class="form-control" name='opt_{$op.style}' value="{$op.content}">
+                                        <input type="hidden" name="option_{$op.style}" value="{$op.id}"/>
+                                    </div>
+                                    {/volist}
+                                {elseif condition="$num eq 3" /}
+                                {volist name='option' id='op'}
+                                <div class="input-group">
+                                    <span class="input-group-addon">{$op.style}</span>
+                                    <input type="text" placeholder='请输入选项{$op.style}' class="form-control" name='opt_{$op.style}' value="{$op.content}">
+                                    <input type="hidden" name="option_{$op.style}" value="{$op.id}"/>
+                                </div>
+                                {/volist}
+                                <div class="input-group">
+                                    <span class="input-group-addon">D</span>
+                                    <input type="text" placeholder='请输入选项D' class="form-control" name='opt_D' value="">
+                                </div>
+                                {elseif condition="$num eq 2"  /}
+                                {volist name='option' id='op'}
+                                <div class="input-group">
+                                    <span class="input-group-addon">{$op.style}</span>
+                                    <input type="text" placeholder='请输入选项{$op.style}' class="form-control" name='opt_{$op.style}' value="{$op.content}">
+                                    <input type="hidden" name="option_{$op.style}" value="{$op.id}"/>
+                                </div>
+                                {/volist}
+                                <div class="input-group">
+                                    <span class="input-group-addon">C</span>
+                                    <input type="text" placeholder='请输入选项C' class="form-control" name='opt_C' value="">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">D</span>
+                                    <input type="text" placeholder='请输入选项D' class="form-control" name='opt_D' value="">
+                                </div>
+                                {else/}
+                                {volist name='option' id='op'}
+                                <div class="input-group">
+                                    <span class="input-group-addon">{$op.style}</span>
+                                    <input type="text" placeholder='请输入选项{$op.style}' class="form-control" name='opt_{$op.style}' value="{$op.content}">
+                                    <input type="hidden" name="option_{$op.style}" value="{$op.id}"/>
+                                </div>
+                                {/volist}
+                                <div class="input-group">
+                                    <span class="input-group-addon">B</span>
+                                    <input type="text" placeholder='请输入选项B' class="form-control" name='opt_B' value="">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">C</span>
+                                    <input type="text" placeholder='请输入选项C' class="form-control" name='opt_C' value="">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">D</span>
+                                    <input type="text" placeholder='请输入选项D' class="form-control" name='opt_D' value="">
+                                </div>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label a_l">
+                                <label for="answer">正确答案:</label>
+                            </div>
+                            <div class="col-lg-11 a_s">
+                                {if condition="$question->type eq 1"}
+                                    <select class="chosen-select form-control" id="answer" data-placeholder="--请选择答案--" name="answer"  multiple>
+                                        <option value="1" {foreach $right as $value }{eq name="$value" value="1"}selected="selected"{/eq}{/foreach}>A</option>
+                                        <option value="2" {foreach $right as $value }{eq name="$value" value="2"}selected="selected"{/eq}{/foreach}>B</option>
+                                        <option value="3" {foreach $right as $value }{eq name="$value" value="3"}selected="selected"{/eq}{/foreach}>C</option>
+                                        <option value="4" {foreach $right as $value }{eq name="$value" value="4"}selected="selected"{/eq}{/foreach}>D</option>
+                                    </select>
+                                {else/}
+                                    <select class="chosen-select form-control" id="answer" data-placeholder="--请选择答案--" name="answer"  >
+                                        <option value="1" {eq name="$right" value="1"}selected="selected"{/eq}>A</option>
+                                        <option value="2" {eq name="$right" value="2"}selected="selected"{/eq}>B</option>
+                                        <option value="3" {eq name="$right" value="3"}selected="selected"{/eq}>C</option>
+                                        <option value="4" {eq name="$right" value="4"}selected="selected"{/eq}>D</option>
+                                    </select>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-11 col-lg-offset-1">
+                                <button class="btn btn-primary submit" type="button"  >上传</button>
+                                <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/chosen.jquery.js"></script>
+<script>
+    highlight_subnav("{:Url('Constitution/question')}");
+    $(function(){
+        $("select" ).chosen({
+            no_results_text: "没有找到该选项",
+            allow_single_de: true,
+            width:'100%',
+            max_selected_options:'100'
+        });
+        //题型切换
+        $('#type' ).on('change',function(){
+            var it= $(this);
+            var html = '<div class="col-lg-11 a_s">';
+            if(it.val() == 0){
+                html+= '<select class="chosen-select form-control" id="answer" data-placeholder="--请选择答案--" name="answer">';
+            }else{
+                html+= '<select class="chosen-select form-control" id="answer" data-placeholder="--请选择答案--" name="answer" multiple>';
+            }
+            html+= '<option value="1">A</option>'+
+                    '<option value="2">B</option>'+
+                    '<option value="3">C</option>'+
+                    '<option value="4">D</option>'+
+                    '</select>'+
+                    '</div>';
+            $('.a_s').remove();
+            $('.a_l' ).after(html);
+            $("select" ).chosen({
+                no_results_text: "没有找到该选项",
+                allow_single_de: true,
+                width:'100%',
+                max_selected_options:'100'
+            });
+        });
+        //提交
+        $('.submit' ).on('click',function(){
+            var data = {
+                title:$("input[name='que']").val(),
+                question_id:$("input[name='question_id']").val(),
+                option_id:$("input[name='option_id']").val(),
+                type:$("select[name='type']").val(),
+                opt_A:$("input[name='opt_A']").val(),
+                opt_B:$("input[name='opt_B']").val(),
+                opt_C:$("input[name='opt_C']").val(),
+                opt_D:$("input[name='opt_D']").val(),
+                answer: $("select[name='answer']").val()
+            };
+            $.ajax({
+                type:"post",
+                url:"{:Url('Constitution/update')}",
+                data:data,
+                success:function(data){
+                    console.log(data);
+                    if(data.code == 1){
+                        if (data.url) {
+                            updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                        }else{
+                            updateAlert(data.msg ,'success');
+                        }
+                        setTimeout(function(){window.location.href="{:Url('Constitution/question')}";},2000)
+                    } else {
+                        updateAlert(data.msg, 'error');
+                    }
+
+                }
+            })
+        })
+
+    })
+</script>
+{/block}

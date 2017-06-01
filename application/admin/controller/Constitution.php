@@ -15,8 +15,7 @@ class Constitution extends Admin {
      * 题目列表
      */
     public function question(){
-        $data=array();
-        $question=$this->lists('Question',$data,'id');
+        $question=$this->lists('Question',array(),'id desc');
         $this->assign('question',$question);
         return $this->fetch();
     }
@@ -26,38 +25,107 @@ class Constitution extends Admin {
     public function plus(){
         if(IS_POST){
             $post=input('post.');
-            //根据传递的值获得选项的信息
-            $right=$post['answer'];
-            if($post['type']==1){//获得多选的选项信息
-                $right=implode($right,":");
+            if (empty($post['title'])){
+                return $this->error('请输入题目标题');
             }
-            if(empty($post['id'])){
-                return $this->error("请输入题目");
-            }else{
-                //添加题目
-                $Question=new Question();
-                $Question->title="{$post['id']}";
-                $Question->type=$post['type'];
-                $Question->value=$right;
-                if($Question->save()){
-                    //获取添加的题目id
-                    $question_id=$Question->id;
-                    $Option=new OptionModel();
-                    $list=[
-                        ['question_id'=>$question_id,'content'=>"{$post['opt_A']}",'style'=>"A"],
-                        ['question_id'=>$question_id,'content'=>"{$post['opt_B']}",'style'=>"B"],
-                        ['question_id'=>$question_id,'content'=>"{$post['opt_C']}",'style'=>"C"],
-                        ['question_id'=>$question_id,'content'=>"{$post['opt_D']}",'style'=>"D"]
-                    ];
-                    $result=$Option->saveAll($list); //根据获取的题目id,添加选项表
-                    if($result){
-                        return $this->success("新增成功",Url("Constitution/question"));
-                    }else{
-                        return $this->error("新增选项失败");
-                    }
+            if ((!empty($post['opt_D'])) && (empty($post['opt_C']) || empty($post['opt_B']) || empty($post['opt_A']))){
+                return  $this->error('请顺序添加选项');
+            }
+            if ((!empty($post['opt_C'])) && (empty($post['opt_B']) || empty($post['opt_A']))){
+                return  $this->error('请顺序添加选项');
+            }
+            if ((!empty($post['opt_B'])) && empty($post['opt_A'])){
+                return  $this->error('请顺序添加选项');
+            }
+            if (empty($post['opt_A'])){
+                return  $this->error('请顺序添加选项');
+            }
+            if ($post['type'] == 1){
+                if (empty($post['answer'])){
+                    return  $this->error('请添加多选的正确答案');
                 }else{
-                    return $this->error("新增题目失败");
+                    if (count($post['answer']) < 2){
+                        return  $this->error('正确答案不符合题目类型');
+                    }else{
+                        if (empty($post['opt_D'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 4){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                        if (empty($post['opt_C'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 3){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                        if (empty($post['opt_B'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 2){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                    }
                 }
+            }else{
+                if (empty($post['opt_D'])){
+                    if ($post['answer'] >= 4){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+                if (empty($post['opt_C'])){
+                    if ($post['answer'] >= 3){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+                if (empty($post['opt_B'])){
+                    if ($post['answer'] >= 2){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+            }
+            // 添加题目 入表
+            $data = array(
+                'title' => $post['title'],
+                'type' => $post['type'],
+                'value' => json_encode($post['answer'])
+            );
+            $Question=new Question();
+            $res = $Question->save($data);
+            if ($res){
+                $Option=new OptionModel();
+                if (!empty($post['opt_D'])){
+                    $list = [
+                        ['question_id'=>$res,'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$res,'content'=>$post['opt_B'],'style'=>"B"],
+                        ['question_id'=>$res,'content'=>$post['opt_C'],'style'=>"C"],
+                        ['question_id'=>$res,'content'=>$post['opt_D'],'style'=>"D"]
+                    ];
+                }else if (!empty($post['opt_C'])){
+                    $list = [
+                        ['question_id'=>$res,'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$res,'content'=>$post['opt_B'],'style'=>"B"],
+                        ['question_id'=>$res,'content'=>$post['opt_C'],'style'=>"C"],
+                    ];
+                }else if(!empty($post['opt_B'])){
+                    $list = [
+                        ['question_id'=>$res,'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$res,'content'=>$post['opt_B'],'style'=>"B"],
+                    ];
+                }else{
+                    $list = ['question_id'=>$res,'content'=>$post['opt_A'],'style'=>"A"];
+                }
+                $result = $Option->saveAll($list);
+                if ($result){
+                    return $this->success("新增成功",Url("Constitution/question"));
+                }else{
+                    return $this->error($Option->getError());
+                }
+            }else{
+                return $this->error($Question->getError());
             }
         }else{
             return $this->fetch();
@@ -82,31 +150,111 @@ class Constitution extends Admin {
      */
     public function update(){
         if(IS_POST){
-            $data=input('post.');
-            $Question=new Question();
-            $right=$data['answer'];
-            if($data['type']==1){//获得多选的选项信息
-                $right=implode($right,":");
+            $post=input('post.');
+            if (empty($post['title'])){
+                return $this->error('请输入题目标题');
             }
-            //更新题目
-            $result=$Question->update(array('title'=>$data['id'],'type'=>$data['type'],'value'=>$right),array('id'=>$data['question_id']));
-            if($result){
-                //更新选项
-                $Option1=OptionModel::get($data['option_A']);
-                $Option1->content=$data['opt_A'];
-                $Option1->save();
-                $Option2=OptionModel::get($data['option_B']);
-                $Option2->content=$data['opt_B'];
-                $Option2->save();
-                $Option3=OptionModel::get($data['option_C']);
-                $Option3->content=$data['opt_C'];
-                $Option3->save();
-                $Option4=OptionModel::get($data['option_D']);
-                $Option4->content=$data['opt_D'];
-                $Option4->save();
-                return $this->success('更新成功',url('Constitution/question'));
+            if ((!empty($post['opt_D'])) && (empty($post['opt_C']) || empty($post['opt_B']) || empty($post['opt_A']))){
+                return  $this->error('请顺序添加选项');
+            }
+            if ((!empty($post['opt_C'])) && (empty($post['opt_B']) || empty($post['opt_A']))){
+                return  $this->error('请顺序添加选项');
+            }
+            if ((!empty($post['opt_B'])) && empty($post['opt_A'])){
+                return  $this->error('请顺序添加选项');
+            }
+            if (empty($post['opt_A'])){
+                return  $this->error('请顺序添加选项');
+            }
+            if ($post['type'] == 1){
+                if (empty($post['answer'])){
+                    return  $this->error('请添加多选的正确答案');
+                }else{
+                    if (count($post['answer']) < 2){
+                        return  $this->error('正确答案不符合题目类型');
+                    }else{
+                        if (empty($post['opt_D'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 4){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                        if (empty($post['opt_C'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 3){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                        if (empty($post['opt_B'])){
+                            foreach($post['answer'] as $val){
+                                if ($val >= 2){
+                                    return  $this->error('正确答案出现未知选项');
+                                }
+                            }
+                        }
+                    }
+                }
+
             }else{
-                return $this->error('更新失败');
+                if (empty($post['opt_D'])){
+                    if ($post['answer'] >= 4){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+                if (empty($post['opt_C'])){
+                    if ($post['answer'] >= 3){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+                if (empty($post['opt_B'])){
+                    if ($post['answer'] >= 2){
+                        return  $this->error('正确答案出现未知选项');
+                    }
+                }
+            }
+            // 修改 题目 数据
+            $data = array(
+                'title' => $post['title'],
+                'type' => $post['type'],
+                'value' => json_encode($post['answer'])
+            );
+            $Question=new Question();
+            $res = $Question->save($data,['id' => $post['question_id']]);
+            if ($res){
+                $Option=new OptionModel();
+                if (!empty($post['opt_D'])){
+                    $list = [
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_B'],'style'=>"B"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_C'],'style'=>"C"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_D'],'style'=>"D"]
+                    ];
+                }else if (!empty($post['opt_C'])){
+                    $list = [
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_B'],'style'=>"B"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_C'],'style'=>"C"],
+                    ];
+                }else if(!empty($post['opt_B'])){
+                    $list = [
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_A'],'style'=>"A"],
+                        ['question_id'=>$post['question_id'],'content'=>$post['opt_B'],'style'=>"B"],
+                    ];
+                }else{
+                    $list = ['question_id'=>$post['question_id'],'content'=>$post['opt_A'],'style'=>"A"];
+                }
+                if($Option->where('question_id',$post['question_id'])->delete()){
+                    $result = $Option->saveAll($list);
+                    if ($result){
+                        return $this->success("修改成功",Url("Constitution/question"));
+                    }else{
+                        return $this->get_update_error_msg($Option->getError());
+                    }
+                }
+            }else{
+                return $this->get_update_error_msg($Question->getError());
             }
         }else{
             //获得id并强制转换为整型
@@ -114,21 +262,26 @@ class Constitution extends Admin {
             //获取题目记录
             $question=Question::get($question_id);
             //判断该记录是否存在
-            if(false===$question){
+            if(empty($question)){
                 return $this->error('系统错误,不存在该条记录');
             }
             $Option=new OptionModel();
             //获取选项信息
-            $option=$Option->where('question_id='.$question_id)->select();
+            $option=$Option->where('question_id='.$question_id)->order('id asc')->select();
             $Right=Question::get($question_id);
-            $rights=$Right->value;
-            //获取正确答案信息
-            $arr=explode(":",$rights);
-            foreach($arr as $value){
-                $right[]=$value;
+            $rights=$Right['value'];
+            if ($Right['type'] == 1){
+                // 多选
+                foreach(json_decode($rights) as $value){
+                    $right[]=$value;
+                }
+            }else{
+                // 单选
+                $right = json_decode($rights);
             }
             $this->assign('right',$right);
             $this->assign('option',$option);
+            $this->assign('num',count($option));
             $this->assign('question',$question);
             return $this->fetch();
         }

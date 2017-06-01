@@ -1,0 +1,30 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/course.css">
+{/block}
+
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/test/3.png" alt="每日一课banner" class="banner-img">
+    <span class="tag">每日一课</span>
+</div>
+<div class="lists">
+    {volist name="question" id="vo" key="n"}
+    <div class="list" data-tab="题号">
+        <div class="title" >{$vo.title}</div>
+        {volist name="vo->Option" id="value" key="k"}
+        <label {eq name="vo.right" value="$k" }class="checked" {/eq}>{$value}</label>
+        {/volist}
+        <div class="note">
+            <span class="true">正确答案：<i>{$vo->Right}</i></span>
+            <span class="number">{$n} / 3</span>
+        </div>
+    </div>
+    {/volist}
+</div>
+{/block}
+
+{block name="script"}
+
+{/block}
