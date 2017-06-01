@@ -30,7 +30,7 @@ return [
     
     /* 公众号配置 */
     'party' => array(
-        'login' => '',
+        'login' => 'http://zthm.0571ztnet.com/home/verify/index',
         'token' => 'N3mIjNX',
         'encodingaeskey' => 'RxanruTaFxW7X5r5Cx2xRrI91dhRgNUx77KM3paUfS7',
         'appid' => 'wx89994ef58b069d2b',
