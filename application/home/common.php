@@ -136,19 +136,32 @@ function get_header($userid){
         return false;
     }
     $map = array(
-        'status' => array('egt',0),
         'userid' => $userid,
     );
     $user = \app\home\model\WechatUser::where($map)->find();
-    if(empty($user['header']) && empty($user['avatar'])){
-        $header = "/home/images/default_avatar.png";
-    }elseif(empty($user['header']) && $user['avatar']){
-        $header = $user['avatar'];
-    }elseif($user['header'] && empty($user['avatar'])){
-        $header = $user['header'];
+    if(empty($user['header'])){
+        $header = '/home/images/vistor.jpg';
     }else{
-        $header = $user['header'];
+        $header = $user['headimgurl'];
     }
-
     return $header;
 }
+/**
+ * 获取用户名称
+ */
+function get_name($userid){
+    if(empty($userid)){
+        return false;
+    }
+    $map = array(
+        'userid' => $userid,
+    );
+    $user = \app\home\model\WechatUser::where($map)->find();
+    if(empty($user['name'])){
+        $name = '未定义';
+    }else{
+        $name = $user['name'];
+    }
+    return $name;
+}
+

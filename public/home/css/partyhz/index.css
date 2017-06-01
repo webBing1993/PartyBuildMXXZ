@@ -1,0 +1,66 @@
+*{ padding:0; margin:0; border:0;}
+html,body{min-height:100%;}
+body{ background: #FFF; background-size: 100%;}
+a:link,a:visited{ color: #000; text-decoration: none;}
+.clear{ clear:both;}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block; overflow:hidden; clear:both; height:0; visibility:hidden; content:".";}
+.navBar{ padding:10px 0 0 2%; background: url('') repeat-x left bottom;}
+.navBar span{ width: 98%; float: left; display: inline-block; position: relative; margin-right: -2%; background-size: 100%; text-align: center; font-size: 14px; font-weight: 700; line-height: 2.5;border-bottom: 1px solid #E20E02;}
+.navBar span:nth-child(1){ z-index: 3;}
+.navBar span:nth-child(2){ z-index: 2;}
+.navBar span:nth-child(3){ z-index: 1;}
+.navBar span.cur{ z-index: 5; background:#E20E02; background-size: 100%; color: #fff;}
+.tabCon{ padding:0; width: 100%; display: none;}
+.tablist{ float: left; width: 29%; height:7rem; margin:0 2%; overflow: hidden; text-align:center; font-size: 0.5rem; margin-bottom:0.5rem; }
+.tablist .icon{ width:60%;margin:0 20%;}
+.tablist .icon a{ display:block; width: 100%;}
+.tablist .icon a img{ width: 100%; display: block; border-radius:50%;}
+.tablist p{ padding:6px 0; font-size:0.8rem;}
+.tablist p a{ display:block;}
+
+
+@keyframes myfirst
+{
+    0%{opacity:0;transform:scale3d(.3,.3,.3)}
+    50%{opacity:1}
+    100%{opacity:1;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    0%{opacity:0;-moz-transform:scale3d(.3,.3,.3)}
+    50%{opacity:1}
+    100%{opacity:1;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+    0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3)}
+    50%{opacity:1}
+    100%{opacity:1;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+    0%{opacity:0;-o-transform:scale3d(.3,.3,.3)}
+    50%{opacity:1}
+    100%{opacity:1;}
+}
+
+.clearfix .tablist{
+    animation:myfirst 1s ease both;
+    /* Firefox: */
+    -moz-animation:myfirst 1s ease both;
+    /* Safari and Chrome: */
+    -webkit-animation:myfirst 1s ease both;
+    /* Opera: */
+    -o-animation:myfirst 1s ease both;
+}
+.tabBox{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+#sub1{
+    display: block; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);
+}
