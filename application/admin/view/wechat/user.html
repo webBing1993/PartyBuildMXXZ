@@ -42,7 +42,7 @@
                         </div>
                     </div></form>
                     <div class="ibox-tools progress-demo">
-                        <button class="ladda-button ladda-button-user btn btn-primary"  data-style="zoom-in">同步用户</button>
+                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="/admin/wechat/add_user">添加用户</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -53,12 +53,9 @@
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th>UserID</th>
                                 <td>名称</td>
-                                <th>所属部门</th>
-                                <th>职位信息</th>
-                                <th>手机号码</th>
                                 <th>性别 </th>
-                                <th>邮箱</th>
-                                <th>微信号</th>
+                                <th>手机号码</th>
+                                <th>所属部门</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
@@ -69,19 +66,19 @@
                                 <td><input type="checkbox" class="i-checks ids" name="input[]"></td>
                                 <td>{$vo.userid}</td>
                                 <td>{$vo.name}</td>
-                                <td>{$vo.department}</td>
-                                <td>{$vo.position}</td>
-                                <td>{$vo.mobile}</td>
                                 <td>{$vo.gender_text}</td>
-                                <td>{$vo.email}</td>
-                                <td>{$vo.weixinid}</td>
+                                <td>{$vo.mobile}</td>
+                                <td>{$vo.department}</td>
                                 <td>{switch name="vo.status"}
                                     {case value="2"}<span class="label label-danger">{$vo.status_text}</span>{/case}
                                     {case value="4"}<span class="label label-warning">{$vo.status_text}</span>{/case}
                                     {default /}<span class="label label-info">{$vo.status_text}</span>
                                     {/switch}
                                 </td>
-                                <td>查看详情</td>
+                                <td>
+                                    <a href="{:Url('Wechat/add_user?id='.$vo.id)}">修改</a>
+                                    <a href="{:Url('Wechat/del_user?id='.$vo.id) }"  class="confirm ajax-del">删除</a>
+                                </td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -104,35 +101,7 @@
 {block name="script"}
 <script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
 <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
-
 <script src="/admin/js/plugins/ladda/spin.min.js"></script>
 <script src="/admin/js/plugins/ladda/ladda.min.js"></script>
 <script src="/admin/js/plugins/ladda/ladda.jquery.min.js"></script>
-<script>
-    $(function(){
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-        $(".check-all").on("ifChanged",function(){
-            $("tbody").find(".ids").iCheck("toggle");
-        });
-
-        var l = $( '.ladda-button-user' ).ladda();
-        l.click(function(){
-            l.ladda( 'start' );
-            $.ajax({
-                type: "get",
-                url: "{:Url('Wechat/synchronizeUser')}",
-                success: function (response) {
-                    swal(response.msg, response.data);
-                    l.ladda('stop');
-                },
-                error: function (err) {
-                    l.ladda('stop');
-                }
-            });
-        });
-    });
-</script>
 {/block}

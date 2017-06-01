@@ -34,8 +34,8 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>部门列表</h5>
-                    <div class="ibox-tools progress-demo">
-                        <button class="ladda-button ladda-button-user btn btn-primary"  data-style="zoom-in">同步部门</button>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-sm btn-primary" href="/admin/wechat/add_department">添加</a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -55,7 +55,10 @@
                                 <td><input type="checkbox" class="i-checks ids" name="input[]"></td>
                                 <td>{$vo.id}</td>
                                 <td>{$vo.name}</td>
-                                <td>查看详情</td>
+                                <td>
+                                    <a href="{:Url('Wechat/add_department?id='.$vo.id)}">修改</a>
+                                    <a href="{:Url('Wechat/del_department?id='.$vo.id) }"  class="confirm ajax-del">删除</a>
+                                </td>
                             </tr>
                             {/volist}
                             </tbody>
@@ -89,21 +92,6 @@
         });
         $(".check-all").on("ifChanged",function(){
             $("tbody").find(".ids").iCheck("toggle");
-        });
-        var l = $( '.ladda-button-user' ).ladda();
-        l.click(function(){
-            l.ladda( 'start' );
-            $.ajax({
-                type: "get",
-                url: "{:Url('Wechat/synchronizeDp')}",
-                success: function (response) {
-                    swal(response.msg, response.data);
-                    l.ladda('stop');
-                },
-                error: function (err) {
-                    l.ladda('stop');
-                }
-            });
         });
     });
 </script>

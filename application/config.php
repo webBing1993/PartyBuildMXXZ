@@ -28,14 +28,13 @@ return [
         '__HOME__' => '/home',
     ],
     
-    /* 企业配置 */
+    /* 公众号配置 */
     'party' => array(
-        'login' => 'http://xspb.0571ztnet.com/home/index/login',
+        'login' => '',
         'token' => 'N3mIjNX',
         'encodingaeskey' => 'RxanruTaFxW7X5r5Cx2xRrI91dhRgNUx77KM3paUfS7',
-        'appid' => '',
-        'appsecret' => '',
-        'agentid' => 1
+        'appid' => 'wx89994ef58b069d2b',
+        'appsecret' => 'c1a2250667aae7d6898517343b0270f1'
     ),
     
 

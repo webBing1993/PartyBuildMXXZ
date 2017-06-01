@@ -19,221 +19,125 @@ use com\wechat\TPWechat;
 use think\Config;
 use think\Input;
 
-class Wechat extends Admin
-{
-    public function index() {
-        $xx = substr('1993.10',0,4);
-        $ss = date("Y",time());
-        dump($ss);
-        dump($ss - $xx);
-//        $Wechat = new QYWechat(Config::get('party'));
-//        $list = $Wechat->getDepartment();
-//        dump($list);
-//
-//        foreach ($list['department'] as $key=>$value) {
-//            $users = $Wechat->getUserListInfo($list['department'][$key]['id']);
-//            foreach ($users['userlist'] as $user) {
-//                $user['department'] = json_encode($user['department']);
-//                $user['extattr'] = json_encode($user['extattr']);
-////                dump($user);
-////                if(WechatUser::get(['userid'=>$user['userid']])) {
-////                    WechatUser::where(['userid'=>$user['userid']])->update($user);
-////                } else {
-////                    WechatUser::create($user);
-////                }
-//            }
-//        }
-//
-//        $tags = $Wechat->getTagList();
-////        dump($tags);
-    }
-
-
+class Wechat extends Admin{
+    //用户页面
     public function user() {
         $name = input('name');
-        $map = ['name' => ['like', "%$name%"]];
-        $list = $this->lists("WechatUser", $map);
-        $department = WechatDepartment::column('id, name');
+        $map = ['name' => ['like', "%$name%"],'state' => 1];
+        $list = $this->lists("WechatUser",$map);
 
+        //部门进行转换
         foreach ($list as $key=>$value) {
-            $departmentId = json_decode($value['department']);
+            $departmentId = $value['department'];
             if($departmentId){
-                foreach ($departmentId as $k=>$v) {
-                    $name = $department[$v];
-                    if ($k < count($departmentId) - 1 ) {
-                        $name .= ',';
-                    }
-                }
-                $list[$key]['department'] = $name;
+                $record = WechatDepartment::where('id',$departmentId) ->find();
+                $list[$key]['department'] = $record['name'];
             }else{
                 $list[$key]['department'] = "暂无";
             }
         }
-        // 状态转化
+       // 状态转化
         wechat_status_to_string($list);
-        $this->assign('list', $list);
-        $this->assign('department', $department);
-
+        $this->assign('list',$list );
         return $this->fetch();
     }
-
-
     /**
-     * 同步通讯录用户
+     * 部门添加跟修改
      */
-    public function synchronizeUser() {
-        $Wechat = new QYWechat(Config::get('party'));
-        if($Wechat->errCode != 40001) {
-            return $this->error("同步出错");
-        }
-
-        /* 同步部门 */
-        $list = $Wechat->getDepartment();
-
-        /* 同步最顶级部门下面的用户 */
-        foreach ($list['department'] as $key=>$value) {
-            $users = $Wechat->getUserListInfo($list['department'][$key]['id']);
-            foreach ($users['userlist'] as $user) {
-                $user['department'] = json_encode($user['department']);
-                foreach ($user['extattr']['attrs'] as $value) {
-                    switch ($value['name']){
-                        case "出生日期":
-                            $user['birthday'] = $value['value'];
-                            if(!empty($value['value'])) {
-                                $user['age'] = date("Y",time()) - substr($value['value'],0,4);
-                            }else{
-                                $user['age'] = null;
-                            }
-                            break;
-                        case "所属支部":
-                            $user['branch'] = $value['value'];
-                            break;
-                        case "学历":
-                            $user['education'] = $value['value'];
-                            break;
-                        case "入党时间":
-                            $user['partytime'] = $value['value'];
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                $user['extattr'] = json_encode($user['extattr']);
-                if(WechatUser::get(['userid'=>$user['userid']])) {
-                    WechatUser::where(['userid'=>$user['userid']])->update($user);
-                } else {
-                    WechatUser::create($user);
-                }
-            }
-        }
-        $data = "用户数:".count($users['userlist'])."!";
-
-        return $this->success("同步成功", '', $data);
-    }
-
-    /**
-     * 同步部门
-     */
-    public function synchronizeDp(){
-        $Wechat = new QYWechat(Config::get('party'));
-        if($Wechat->errCode != 40001) {
-            return $this->error("同步出错");
-        }
-
-        /* 同步部门 */
-        $list = $Wechat->getDepartment();
-        foreach ($list['department'] as $key=>$value) {
-            if(WechatDepartment::get($value['id'])){
-                WechatDepartment::update($value);
-            } else {
-                WechatDepartment::create($value);
-            }
-        }
-
-        /* 同步部门-用户关系表 */
-        WechatDepartmentUser::where('1=1')->delete();
-        foreach ($list['department'] as $key=>$value) {
-            $users = $Wechat->getUserListInfo($value['id']);
-            foreach ($users['userlist'] as $user) {
-                $data = ['departmentid'=>$value['id'], 'userid'=>$user['userid']];
-                if(empty(WechatDepartmentUser::where($data)->find())){
-                    WechatDepartmentUser::create($data);
-                }
-                
-                if($value['id'] != 1) {
-                    $data1 = ['departmentid' => 1, 'userid' => $user['userid']];     //当部门补位1时补全用户
-                    if(empty(WechatDepartmentUser::where($data1)->find())){
-                        WechatDepartmentUser::create($data1);
-                    }
-                }
-            }
-        }
-
-        $data = "同步部门数:".count($list['department'])."!";
-
-        return $this->success("同步成功", '', $data);
-    }
-
-    /**
-     * 同步标签
-     */
-    public function synchronizeTag(){
-        $Wechat = new QYWechat(Config::get('party'));
-        if($Wechat->errCode != 40001) {
-            return $this->error("同步出错");
-        }
-
-        /* 同步标签 */
-        WechatTag::where('1=1')->delete();
-        $tags = $Wechat->getTagList();
-        foreach ($tags['taglist'] as $tag) {
-            if(WechatTag::get(['tagid'=>$tag['tagid']])) {
-                WechatTag::where(['tagid'=>$tag['tagid']])->update($tag);
-            } else {
-                WechatTag::create($tag);
-            }
-        }
-
-        /* 同步标签-用户关系表 */
-        WechatUserTag::where('1=1')->delete();
-        foreach ($tags['taglist'] as $value) {
-            $users = $Wechat->getTag($value['tagid']);
-            if(empty($users['userlist'])){
-                foreach ($users['partylist'] as $user){
-                    $info = $Wechat->getUserListInfo($user);
-                    foreach ($info['userlist'] as $val){
-                        $data = ['tagid' => $value['tagid'],'userid' => $val['userid']];
-                        if(empty(WechatUserTag::where($data)->find())){
-                            WechatUserTag::create($data);
-                        }
-                    }
-                };
+    public function add_department(){
+        $data = input('post.');
+        if(input('post.')){
+            $department = new WechatDepartment();
+            $result = $department ->add($data);
+            if($result['code']){
+                return $this ->success($result['msg']);
             }else{
-                foreach ($users['userlist'] as $user) {
-                    $data = ['tagid'=>$value['tagid'], 'userid'=>$user['userid']];
-                    if(empty(WechatUserTag::where($data)->find())){
-                        WechatUserTag::create($data);
-                    }
-                }
+                return $this ->error($result['msg']);
             }
+        }else{
+            $id = input('id');
+            //$type 1为修改 0为新增
+            if($id){
+                $type = 1;
+                $record = WechatDepartment::where('id',$id) ->field('name') ->find();
+                $this ->assign('name',$record['name']);
+            }else{
+                $type = 0;
+            }
+            $this ->assign('id',$id);
+            $this ->assign('type',$type);
+            return $this->fetch();
         }
-
-        $data = "同步标签数:".count($tags['taglist'])."!";
-
-        return $this->success("同步成功", '', $data);
-    }
-    
-    public function department(){
-        $list = $this->lists("WechatDepartment");
-        $this->assign('list', $list);
-
-        return $this->fetch();
     }
 
+    /**
+     * 删除部门
+     */
+    public function del_department(){
+        $id = input('get.id');
+        if($id){
+            //该部门已经由成员就禁止删除
+            $record = WechatUser::where(['department' => $id,'state' => 1]) ->find();
+            if($record){
+                return $this ->error('该部门已经存在用户,静止删除!');
+            }else{
+                $wd = new WechatDepartment();
+                $wd ->save(['status' => 0,], ['id' => $id]);
+                return $this ->success('删除成功!');
+            }
+        }else{
+            return $this ->error('参数错误!');
+        }
+    }
+    /**
+     * 用户的增加与修改
+     */
+    public function add_user(){
+        $data = input('post.');
+        $user = new WechatUser();
+        if(input('post.')){
+            $info = $user ->add($data);
+            if($info['code'] == 1){
+                return $this ->success($info['msg']);
+            }else{
+                return $this ->error($info['msg']);
+            }
+        }else{
+            $id = input('id');
+            //$type 1为修改 0为新增
+            if($id){
+                $type = 1;
+                $info = $user ->where('id',$id) ->find();
+                $this ->assign('info',$info);
+            }else{
+                $type = 0;
+            }
+            $department = WechatDepartment::where('status',1) ->select();
+            $this ->assign('department',$department);
+            $this ->assign('type',$type);
+            return $this->fetch();
+        }
+    }
+    /**
+     * 删除用户
+     */
+    public function del_user(){
+        $id = input('get.id');
+        if($id){
+            $user = new WechatUser();
+            $record = $user ->save(['state' => 0],['id' => $id]);
+            if($record){
+                return $this ->success('删除成功');
+            }else{
+                return $this ->error('删除失败');
+            }
+        }else{
+            return $this ->error('参数错误');
+        }
+    }
     public function tag(){
         $list = $this->lists("WechatTag");
         $this->assign('list', $list);
-
         return $this->fetch();
     }
 

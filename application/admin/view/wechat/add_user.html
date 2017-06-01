@@ -1,0 +1,237 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/static/datepicker/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="/static/iCheck/custom.css">
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>通讯录</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:Url('Wechat/department')}">用户</a>
+            </li>
+            <li class="active">
+                {eq name="type" value="0"}
+                <strong>新增</strong>
+                {else/}
+                <strong>修改</strong>
+                {/eq}
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight ">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    {eq name="type" value="0"}
+                    <h5>新增页面</h5>
+                    {else/}
+                    <h5>修改页面</h5>
+                    {/eq}
+                    <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+                <div class="ibox-content all">
+                    <form id="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <!--名称-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>名称:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="名称 必填" class="form-control form_title" name="name" value="{$info.name|default=''}">
+                            </div>
+                        </div>
+                        <!--性别-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>性别:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="gender">
+                                    <option value="1" {eq name="$info.gender|default='0'" value="1"}selected{/eq}>男</option>
+                                    <option value="2" {eq name="$info.gender|default='0'" value="2"}selected{/eq}>女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--手机号-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>手机号码:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="手机号码 必填" class="form-control form_title" name="mobile" value="{$info.mobile|default=''}">
+                            </div>
+                        </div>
+                        <!--所属部门-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>所属部门:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="department">
+                                    {volist name="department" id="vo"}
+                                    <option value="{$vo.id}" {eq name="$vo.id" value="$info.department|default='0'"}selected{/eq}>{$vo.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <!--职位-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>职位:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="职位" class="form-control form_title" name="position" value="{$info.position|default=''}">
+                            </div>
+                        </div>
+                        <!--出生年月-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>出生年月:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" class="form-control datetimepicker " placeholder="出生年月" name="birthday"  value="{$info.birthday|default=''}" >
+                            </div>
+                        </div>
+                        <!--学历-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>学历:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="学历" class="form-control form_title" name="education" value="{$info.education|default=''}">
+                            </div>
+                        </div>
+                        <!--名族-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>名族:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="学历" class="form-control form_title" name="nation" value="{$info.nation|default=''}">
+                            </div>
+                        </div>
+                        <!--入党时间-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>入党时间:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" class="form-control datetimepicker " placeholder="入党时间" name="partytime"  value="{$info.partytime|default=''}"/>
+                            </div>
+                        </div>
+                        <!--籍贯-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>籍贯:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="籍贯" class="form-control form_title" name="address" value="{$info.address|default=''}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-11 col-lg-offset-1">
+                                <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal">发布</button>
+                                <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
+                            </div>
+                        </div>
+
+                        <div class="selblo"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/iCheck/icheck.min.js"></script>
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
+<script src="/admin/js/chosen.jquery.js"></script>
+<script>
+    //导航高亮
+    highlight_subnav("{:Url('Wechat/user')}");
+    //数据提交
+    $('.post-add').click(function(){
+        var data ={};
+        data.name= $("input[name='name']").val().trim(); //名称
+        data.gender = $("select[name='gender']").val(); //性别
+        data.mobile = $("input[name='mobile']").val().trim(); //手机号码 跟 id
+        data.department = $("select[name='department']").val(); //部门
+        data.position = $("input[name='position']").val().trim(); //职位
+        data.birthday = $("input[name='birthday']").val(); //出生年月
+        data.education = $("input[name='education']").val().trim(); //学历
+        data.nation = $("input[name='nation']").val().trim(); //学历
+        data.partytime = $("input[name='partytime']").val(); //入党时间
+        data.address = $("input[name='address']").val().trim(); //籍贯
+        data.check = "{$info.id|default=''}"; //判断是否新增还是修改
+        //验证判断
+        if(!data.name){
+            warning({msg: "名称不能为空"});
+        }else if(!data.name){
+            warning({msg: "手机号码不能为空"});
+        }
+
+        var it = $(this);
+        $.ajax({
+            type: 'post',
+            url: "{:Url('wechat/add_user')}",
+            data: data,
+            success: function(data){
+                it.prop('disabled','true');
+                it.next('button').prop('disabled','true');
+                if(data.code == 1){
+                    updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                    setTimeout(function(){
+                        location.href = "{:Url('Wechat/user')}";
+                        it.removeAttr('disabled');
+                        it.next('button').removeAttr('disabled')
+                    },2000);
+                }else{
+                    updateAlert(data.msg + '','error');
+                    setTimeout(function(){
+                        it.removeAttr('disabled');
+                        it.next('button').removeAttr('disabled')
+                    },1000);
+                }
+            }
+        })
+    })
+</script>
+<!--时间日历-->
+<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+    $(function(){
+        //    时间日历
+        $( ".datetimepicker" ).datetimepicker( {
+            language:  'cn',
+            format: 'yyyy-mm-dd',
+            minView: "month",
+            forceParse: false,
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: 1,
+            minuteStep: 5
+        });
+    })
+</script>
+{/block}
