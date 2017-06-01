@@ -14,14 +14,14 @@ use app\user\model\WechatUser;
 use app\home\model\Years;
 use think\Config;
 use think\Controller;
-use com\wechat\TPQYWechat;
+use com\wechat\TPWechat;
 use think\Cache;
 use think\Input;
 use think\Log;
 
 class Base extends Controller {
     public function _initialize(){
-        session('userId','18768112486');
+        session('userId','15700004138');
 //        session('header','/home/images/vistor.jpg');
 //        session('nickname','游客');
         if(!empty($_SERVER['REQUEST_URI'])){
@@ -39,7 +39,7 @@ class Base extends Controller {
             session('header','/home/images/vistor.jpg');
         }else{
             //微信认证
-            $Wechat = new TPQYWechat(Config::get('party'));
+            $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
             if(empty($userId)) {
                 $redirect_uri = Config::get("party.login");
@@ -59,7 +59,7 @@ class Base extends Controller {
      * 微信官方认证URL
      */
     public function oauth(){
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPWechat(Config::get('party'));
         $Wechat->valid();
     }
 
@@ -80,7 +80,7 @@ class Base extends Controller {
      * 获取企业号签名
      */
     public function jssdk(){
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPWechat(Config::get('party'));
         $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $jsSign = $Wechat->getJsSign($url);
         $this->assign("jsSign", $jsSign);
@@ -109,7 +109,7 @@ class Base extends Controller {
      */
     public function login(){
         // 获取用户信息
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPWechat(Config::get('party'));
         $result = $Wechat->getUserId(input('code'), Config::get('party.agentid'));
         if(isset($result['UserId'])) {
             $user = $Wechat->getUserInfo($result['UserId']);

@@ -9,7 +9,7 @@
 namespace app\home\controller;
 use app\home\model\Message;
 use app\home\model\WechatUser;
-use com\wechat\TPQYWechat;
+use com\wechat\TPWechat;
 use think\Config;
 use think\Controller;
 use app\user\controller\Index as APIIndex;
@@ -28,30 +28,23 @@ class Index extends Controller {
      */
     public function login(){
         // 获取用户信息
-        $Wechat = new TPQYWechat(config('party'));
-        $result = $Wechat->getUserId(input('code'), config('party.agentid'));
-        if(isset($result['UserId'])) {
-            $user = $Wechat->getUserInfo($result['UserId']);
-
-            // 添加本地数据
-            $UserAPI = new APIIndex();
-            $localUser = $UserAPI->checkWechatUser($result['UserId']);
-            if($localUser) {
-                $UserAPI->updateWechatUser($user);
-            } else {
-                $UserAPI->addWechatUser($user);
-            }
-            session("userId", $result['UserId']);
-            //存在url则跳转，不存在则回主页
-            if(session('url')){
-                $this->redirect(session('url'));
-                session('url','');
-            }else{
-                $this->redirect("Activity/index");
-            }
-        } else {
-            // 用户不存在通讯录默认为游客，跳转到url;
-            session('userId','visitor');
+        $Wechat = new TPWechat(Config::get('party'));
+        $result = $Wechat->getOauthAccessToken();
+        $newUser = $Wechat ->getUserInfo($result["openid"]);
+        //查询本地用户是否存在
+        $map = array(["openid"=>$result["openid"],'state' => 1]);
+        $user = model("WechatUser") ->where($map) ->find();
+        //不存在
+        if(empty($user)) {
+            $this->redirect('');//跳转登录页
+        }else{
+            //更新用户信息
+            $user ->save($newUser, ['openid' => $result["openid"]]);
+        }
+        session('userId', $result["openid"]);
+        if(empty(session('url'))){
+            $this->redirect('');//跳转首页
+        }else{
             $this->redirect(session('url'));
         }
     }
