@@ -1,0 +1,54 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/static/framework7/framework7.ios.colors.css">
+<link rel="stylesheet" href="/static/framework7/framework7.ios.css">
+<link rel="stylesheet" href="/home/css/review/passlist.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+{/block}
+
+{block name="body"}
+<div class="views">
+    <div class="list-block" id="list-block-company">
+        <div id="nomessage">
+            <img src="/home/images/common/nomessage.png" alt="" >
+        </div>
+        <ul>
+            {volist name="list" id="vo"}
+            <li class="swipeout">
+                <div class="swipeout-content">
+                    <img src="{$vo ->get_info($vo.push_id)['front_cover']|get_cover='path'}" alt="封面图片">
+                    <div class="list">
+                        <span class="title" >{$vo ->get_info($vo.push_id)['title']}</span>
+                        <span class="sent_time">
+                            <!--<span style="margin-right: 5px;font-weight: bolder;display: block;height:25px;line-height:25px;">{//$vo.class_name}</span>-->
+                            <span>审核人：{$vo.username}</span>
+                            <span>{$vo.review_time|date="Y-m-d",###}</span>
+                        </span>
+                    </div>
+                    {eq name="vo.status" value="0"}
+                    <div class="arrow green">
+                        <img src="/home/images/review/yes.png" alt="通过">
+                    </div>
+                    {/eq}
+                    {eq name="vo.status" value="-1"}
+                    <div class="arrow red">
+                        <img src="/home/images/review/tanhao.png" alt="拒绝">
+                    </div>
+                    {/eq}
+                </div>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+
+    if($("ul").find("li").length == 0){
+        $('#nomessage').show()
+    }
+</script>
+{/block}

@@ -22,38 +22,51 @@
 }
 /*列表修改*/
 .content .notices .notice .list {
-    height: 80px;
+    height: 22vw;
 }
 .content .notices .notice .list {
     display: block;
     width: 100%;
-    padding-left: 13px;
-    padding-right: 13px;
+    padding-left: 3vw;
+    padding-right:  3vw;
     border-bottom: 1px solid #f1f1f1;
     color: #666666;
 }
 .content .notices .notice .list .fl img {
-    width: 80px;
-    height: 60px;
-    margin-top: 10px;
+    width: 21.3vw;
+    height: 16vw;
+    margin-top: 3vw;
 }
 .content .notices .notice .list .right {
-    width: calc(100% - 90px);
-    height: 60px;
-    margin-top: 10px;
-    margin-left: 10px;
+    width: 69vw;
+    height: 16vw;
+    margin-top: 3vw;
+    margin-left: 3vw;
+    position: relative;
 }
 .content .notices .notice .list .right .title {
-    margin-bottom: 5px;
-    height: 38px;
+    float: left;
+    color: #111;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 1.5rem;
+    width: 100%;
 }
 .content .notices .notice .list .title {
     color: #333333;
     font-size: 1.4rem;
 }
 .content .notices .notice .list .time {
-    margin-top: 5px;
+    display: block;
+    width: 65vw;
     font-size: 1.2rem;
+    color: #999;
+    position: absolute;
+    bottom: 0;
 }
 .content .notices .notice.activity .list .right {
     width: 100%;

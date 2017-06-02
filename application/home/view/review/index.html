@@ -1,0 +1,52 @@
+{extend name="public/pure"}
+{block name="style"}
+<link rel="stylesheet" href="/home/css/review/index.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<title>推送审核</title>
+<style>
+    iframe{
+        width:100vw;
+        /*display:none;*/
+        float:left;
+        height:0;
+    }
+</style>
+{/block}
+{block name="body"}
+    <!--tab-->
+    <div class="tabs clear">
+        <div class="tab"><span class="active">未审核</span></div>
+        <div class="tab"><span>已审核</span></div>
+    </div>
+    <iframe src="/home/review/reviewlist" frameborder="0"  id="tab0"></iframe>
+    <iframe src="/home/review/passlist" frameborder="0"  id="tab1" ></iframe>
+{/block}
+{block name="script"}
+<script>
+    $(function(){
+        var WH = $(window).height();
+        $('#tab0').height(WH - 45);
+
+        $('.tabs>.tab ').on('click',function(){
+            var eq = $(this ).index();
+            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
+            $(this ).find('span' ).addClass('active');
+//            //先全部隐藏
+            $('iframe').css('display','none');
+            $('iframe').height(0);
+            if(eq == 0){
+
+            }else if(eq == 1){
+                //未审核列表有操作就刷新一下
+                var review = sessionStorage.getItem('review');
+                if(review){
+                    $('#tab'+eq)[0].src='/home/review/passlist';
+                    sessionStorage.removeItem("review");
+                }
+            }
+            $('#tab'+eq).height(WH - 45);
+            $('#tab'+eq).show();
+        });
+    });
+</script>
+{/block}

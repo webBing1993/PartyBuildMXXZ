@@ -1,0 +1,122 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/static/framework7/framework7.ios.colors.css">
+<link rel="stylesheet" href="/static/framework7/framework7.ios.css">
+<link rel="stylesheet" href="/home/css/review/review.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<title>推送审核</title>
+{/block}
+
+{block name="body"}
+<div class="views">
+	<div class="list-block" id="list-block-company">
+        <div id="nomessage">
+            <img src="/home/images/common/nomessage.png" alt="无消息">
+        </div>
+		<ul>
+			{volist name="list" id="vo"}
+			<li class="swipeout">
+				<div class="swipeout-content" onclick="jump('{$vo.id}')">
+					<img src="{$vo.front_cover|get_cover='path'}" alt="封面图片">
+					<div class="list">
+						<span class="title" >{$vo.title}</span>
+						<span class="sent_time">
+							<!--<span style="margin-right: 5px;font-weight: bolder;">{//$vo.type_name}</span>-->
+							<span>发布人：{$vo.publisher}</span>
+							<span>{$vo.create_time|time_format='Y-m-d'}</span>
+						</span>
+					</div>
+					<div class="arrow">
+						<img src="/home/images/common/rightArrow.png" alt="">
+					</div>
+				</div>
+				<div class="swipeout-actions-right">
+					<a class="green" onclick='dispose(this,{$vo.id},0)'>通&emsp;过</a>
+					<a class="red" onclick='dispose(this,{$vo.id},-1)'>不通过</a>
+				</div>
+			</li>
+	{/volist}
+	</ul>
+</div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/framework7/framework7.js"></script>
+<script>
+var myApp=new Framework7;
+var $$=Dom7;
+
+$(function(){
+	check();
+});
+//没有消息显示无消息提醒
+function check(){
+	if($("ul").find("li").length == 0){
+		$('#nomessage').show();
+	}
+}
+
+//跳转新闻详情
+function jump(id){
+	parent.location.href="/home/details/index/id/"+id;
+}
+//提交操作
+function dispose(i,id,status){
+	swal({
+		title: ' ',
+		text: '确认当前操作吗？',
+		type: 'warning',
+		confirmButtonText:'确定',
+		showCancelButton:true,
+		cancelButtonText:'取消'
+	}, function(isConfirm){
+		//确认之后执行函数
+		if (isConfirm) {
+			$.ajax({
+				type: "post",
+				url: "{:Url('Review/review')}",
+				data: {
+					id:id,
+					status:status
+				},
+				beforeSend:function(){
+					swal({
+						title: ' ',
+						text: '提交中...',
+						showConfirmButton:false
+					});
+				},
+				success: function(data){
+					//成功后刷新页面
+					if(data.code == 1){
+						$(i).parent().parent().fadeOut(500);
+						swal({
+							title: ' ',
+							text: data.msg,
+							type: 'success',
+							confirmButtonText:'确定'
+						},function(){
+							$(i).parent().parent().remove();
+							//判断是否还有消息
+							check();
+							//未审核页面有操作,审核页面用来判断刷新
+							sessionStorage.setItem("review","true");
+						})
+					}else{
+						swal({
+							title: ' ',
+							text: data.msg,
+							type: 'erroe',
+							confirmButtonText:'确定'
+						})
+					}
+				}
+			})
+		}
+	});
+}
+
+</script>
+{/block}
