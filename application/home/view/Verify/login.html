@@ -1,12 +1,84 @@
 {extend name="public/pure"}
 {block name="style"}
-<title></title>
+<title>和合家园</title>
+<link rel="stylesheet" href="/home/css/verify/login.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/admin/css/plugins/sweetalert/sweetalert.css">
 {/block}
 {block name="body"}
-
+<div class="outbox">
+    <div class="inbox">
+        <div class="login-box">
+            <h1>之图红盟登陆页</h1>
+            <div class="form">
+                <div class="uid">
+                    <span></span><input type="text" maxlength="11" placeholder="请输入您的手机号码">
+                </div>
+                <div class="upwd">
+                    <span></span><input type="password" maxlength="10" placeholder="请输入密码" class="">
+                </div>
+            </div>
+            <div class="btn">立即登陆</div>
+        </div>
+        <div class="footer">
+            <span class="line fl"></span>
+            <span>首次登陆需要验证党员身份</span>
+            <span class="line fr"></span>
+        </div>
+    </div>
+</div>
 {/block}
 {block name="script"}
+<script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
+    window.onload=function(){
+        $('.btn').on("click",function(){
+            login()
+        })
+    };
+    /**登陆**/
+    function login(){
+        var re=reg();
+        if(re==true){
+            $.ajax({
+                url:'',
+                type:'',
+                data:'',
+                success:function(msg){
+                    console.log(msg)
+                },
+                error:function() {
+                }
+            })
+        }else{
+            console.log(re);
+            swal({
+                title: ' ',
+                text: re,
+                type: 'error',
+                confirmButtonText:'确定',
+                confirmButtonColor:'#FF8F7A'
+            });
+        }
+    }
+    /**表单验证**/
+    function reg(){
+        var uid=$('.uid>input').val();
+        var pwd=$('.upwd>input').val();
+        if(uid==''||uid==null){
+           return "请输入您的手机号码";
+        }else{
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if(!myreg.test(uid)||uid.length<11)
+            {
+                return '请输入有效的手机号码！';
+            }else if(pwd==''||pwd==null){
+                return '请输入密码';
+            }else{
+                return true
+            }
+        }
+    }
 
 </script>
 {/block}

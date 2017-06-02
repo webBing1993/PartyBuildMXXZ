@@ -41,4 +41,5 @@ class Verify extends Controller{
     public function login(){
         return $this ->fetch();
     }
+   
 }

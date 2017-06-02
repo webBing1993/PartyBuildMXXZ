@@ -1,0 +1,145 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+
+/***outbox***/
+.outbox{
+    width:100vw;
+    min-height:177vw;
+    background: #FCFCFC url("/home/images/verify/banner.jpg") no-repeat;
+    background-size: 100%;
+}
+
+/***inbox***/
+.inbox{
+    width:80vw;
+    position: relative;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%,35%) ;
+    -moz-transform: translate(-50%,35%) ;
+    -ms-transform:  translate(-50%,35%);
+    -o-transform:  translate(-50%,35%);
+    transform:  translate(-50%,35%);
+}
+/***login-box***/
+.login-box{
+    width:80vw;
+    height:93vw;
+    background: #ffffff;
+    border-radius: 10px;
+    -webkit-box-shadow:0px 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    z-index:999;
+}
+.login-box:before{
+    -webkit-transform: skew(-15deg) rotate(-9deg);
+    transform: skew(-15deg) rotate(-9deg);
+    left:5vw;
+}
+.login-box:after{
+    -webkit-transform: skew(15deg) rotate(9deg);
+    transform: skew(15deg) rotate(9deg);
+    right:5vw;
+}
+.login-box:before,.login-box:after{
+    border-radius: 10px;
+    width: 70%;
+    height: 50vw;
+    content: ' ';
+    -webkit-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 38vw;
+    z-index: -99;
+}
+.login-box>h1{
+    line-height: 24vw;
+    text-align: center;
+    font-weight: 100;
+    font-size: 2.4rem;
+    color: #828282;
+    font-family: "幼圆";
+}
+.login-box>.form{
+    padding:0 8vw;
+}
+.login-box>.form input{
+    border:none;
+    border-bottom:1px solid #e8e8e8;
+    height:8vw;
+    width:53vw;
+    float: right;
+    outline: none;
+    padding:0;
+    line-height: 8vw;
+    border-radius: 0;
+    font-size: 1.4rem;
+}
+.login-box>.form input::-webkit-input-placeholder{
+    color: #e8e8e8;
+    font-size: 1.4rem;
+}
+.login-box>.form input:-moz-placeholder{
+    color: #e8e8e8;
+    font-size: 1.4rem;
+}
+.login-box>.form input:-ms-input-placeholder{
+    color: #e8e8e8;
+    font-size: 1.4rem;
+}
+.login-box>.form>div.upwd{
+    margin-top:8vw;
+}
+.login-box>.form>.upwd>span{
+    background:url('/home/images/verify/password.png') no-repeat;
+    background-size: 7.1vw 8vw;
+}
+.login-box>.form>.uid>span{
+    background:url('/home/images/verify/phone.png') no-repeat;
+    background-size: 7.1vw 8vw;
+}
+.login-box>.form>div>span{
+    display: inline-block;
+    width:7.1vw;
+    height:8vw;
+    margin-right: 2.85vw;
+}
+.btn{
+    width:67vw;
+    height:10.67vw;
+    background: url("/home/images/verify/btn.png") no-repeat;
+    background-size: 100% 100%;
+    margin:0 auto;
+    line-height: 10.67vw;
+    font-size: 2rem;
+    text-align: center;
+    color: #ffffff;
+    margin-top:20vw;
+}
+
+/***footer***/
+.footer{
+    margin-top:10.67vw;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #dbdbdb;
+}
+.footer>.line{
+    width:11.7vw;
+    height:2px;
+    background: url("/home/images/verify/line.png") no-repeat;
+    background-size:11.7vw 2px;
+    margin-top:2.4vw;
+}
+.footer>.line.fr{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
