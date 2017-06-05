@@ -8,7 +8,7 @@
 /***outbox***/
 .outbox{
     width:100vw;
-    min-height:177vw;
+    /*min-height:177vw;*/
     background: #FCFCFC url("/home/images/verify/banner.jpg") no-repeat;
     background-size: 100%;
 }
@@ -128,6 +128,7 @@
     text-align: center;
     font-size: 1.5rem;
     color: #dbdbdb;
+    margin-bottom:5vw;
 }
 .footer>.line{
     width:11.7vw;

@@ -1,0 +1,217 @@
+.top{
+    height:50vw;
+    background:url("/home/images/rank/1.png") no-repeat center center;
+    background-size:cover;
+    position:relative;
+}
+.top>.userImg{
+    width: 16vw;
+    height: 16vw;
+    left:50%;
+    top: 10vw;
+    /*border:1px solid #fff;*/
+    border-radius: 50%;
+    position:absolute;
+    overflow: hidden;
+    -webkit-transform: translateX(-50%);
+    /*padding-left:2px;*/
+    /*padding-top:2px;*/
+}
+.top>.userImg>img{
+    width: 16vw;
+    height: 16vw;
+    border-radius: 50%;
+    display:block;
+    float:left;
+    border:1px solid #fff;
+    padding: 2px;
+}
+.top>.now{
+    font-size: 1.5rem;
+    color: #fff;
+    width:100%;
+    position:absolute;
+    bottom: 4vw;
+}
+.top>.now>li{
+    width:50%;
+    text-align: center;
+    float:left;
+}
+.navbar>.classify{
+    margin-top: 2.6vw;
+    height: 11vw;
+    margin-left: 3.2vw;
+    margin-right: 3.2vw;
+    border:1px solid #fc4f41;
+    border-radius: 40px;
+    overflow: hidden;
+}
+.navbar>.classify>li{
+    width:33.33%;
+    border-radius: 39px;
+    background:url("") no-repeat center center;
+    background-size:cover;
+    float:left;
+    height: 11vw;
+    text-align: center;
+    line-height: 11vw;
+    font-size: 1.5rem;
+    color:#fc4f41;
+    border-top: 1px solid transparent;
+    margin-top: -1px;
+}
+.navbar>.classify>li.active{
+    background-image:url('/home/images/rank/3.png');
+    color:#fff;
+}
+.name{
+    padding-left: 3.2vw;
+    padding-right: 3.2vw;
+    font-size: 1.4rem;
+    color:#999;
+    line-height: 9vw;
+    border-bottom: 1px solid #e5e5e5;
+}
+.name>span:last-child{
+    float:right;
+}
+.ranging>div>ul>li{
+    height: 13.6vw;
+    border-bottom: 1px solid #e5e5e5;
+    padding-left: 3.2vw;
+    overflow: hidden;
+}
+.ranging>div>ul>li>.king{
+    width: 8.2vw;
+    height: 6.4vw;
+    float:left;
+    margin-top: 3.6vw;
+}
+.ranging>div>ul>li>span{
+    width: 31px;
+    height:24px;
+    float:left;
+    margin-top:13px;
+    line-height: 24px;
+    font-size: 20px;
+    color:#333;
+    text-align: center;
+    display:none;
+}
+.ranging>div>ul>li>.userImg{
+    width: 8vw;
+    height: 8vw;
+    float: left;
+    margin-top: 2.8vw;
+    margin-left: 2.8vw;
+    border-radius: 50%;
+}
+.ranging>div>ul>li>b{
+    float:right;
+    font-weight: normal;
+    color:#333;
+    font-size: 15px;
+    line-height: 13.6vw;
+    margin-right: 3.2vw;
+}
+.ranging>div>ul>li>p{
+    float:left;
+    line-height: 13.6vw;
+    font-size: 1.4rem;
+    color:#666;
+    text-align: center;
+    margin-left: 2.6vw;
+}
+.ranging>div>ul>li:nth-child(-n+3)>b{
+    color:#fc4f41;
+}
+.ranging>div>ul>li:nth-child(n+4)>span{
+    display:block;
+}
+.ranging>div>ul>li:nth-child(n+4)>.king{
+    display:none;
+}
+.ranging>div>ul>li:nth-child(1)>.king{
+    background: url("/home/images/rank/4.png") no-repeat center center;
+    background-size:cover;
+}
+.ranging>div>ul>li:nth-child(2)>.king{
+    background: url("/home/images/rank/5.png") no-repeat center center;
+    background-size:cover;
+}
+.ranging>div>ul>li:nth-child(3)>.king{
+    background: url("/home/images/rank/6.png") no-repeat center center;
+    background-size:cover;
+}
+.topName{
+    position:absolute;
+    top: 26vw;
+    text-align: center;
+    width:100%;
+    font-size: 1.6rem;
+    color:#fff;
+    margin-top: 4vw;
+}
+#bk{
+    background-color:rgba(0,0,0,.5);
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+    z-index: 1001;
+}
+#bk>div{
+    width:80%;
+    height:auto;
+    position:absolute;
+    top: 25%;
+    left:50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    border-radius: 20px 0 20px 0;
+    overflow: hidden;
+    background-color:#fff;
+    border: none;
+    transition: all  linear 0.3s;
+    background-color:#eee;
+}
+#bk>div>a{
+    position:absolute;
+    width: 9vw;
+    height: 9vw;
+    background: url("/home/images/rank/9.png") no-repeat center center;
+    background-size:cover;
+    top:0;
+    right:0;
+}
+#bk>div>img{
+    width:100%;
+}
+#bk>div>p{
+    margin-top: 4vw;
+    font-size: 1.5rem;
+    color:#333;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 4vw;
+}
+.rule{
+    width: 17vw;
+    position:absolute;
+    top: 3vw;
+    right: 3vw;
+}
+.rule>img{
+    width: 5.3vw;
+    height: 5.3vw;
+    display:block;
+    margin: 0 auto;
+    margin-bottom: 0.5vw;
+}
+.rule>span{
+    font-size: 1.4rem;
+    color:#fff;
+    display: block;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 {extend name="public/pure"}
 {block name="style"}
-<title>和合家园</title>
+<title>之图红盟</title>
 <link rel="stylesheet" href="/home/css/verify/login.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/admin/css/plugins/sweetalert/sweetalert.css">
@@ -31,27 +31,46 @@
 {block name="script"}
 <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
-    window.onload=function(){
+    $(function(){
         $('.btn').on("click",function(){
             login()
         })
-    };
+    });
     /**登陆**/
     function login(){
         var re=reg();
+        var uid=$('.uid>input').val();
+        var pwd=$('.upwd>input').val();
         if(re==true){
             $.ajax({
-                url:'',
-                type:'',
-                data:'',
-                success:function(msg){
-                    console.log(msg)
+                url: "{:Url('Verify/login')}",
+                type: 'post',
+                data: {
+                    user: uid,
+                    password: pwd
                 },
-                error:function() {
+                success:function(data){
+                    //data.code  1为成功 0为失败
+                    if(data.code == 1){
+                        swal({
+                            title: ' ',
+                            text: data.msg,
+                            type: 'success',
+                            confirmButtonText:'确定',
+                            confirmButtonColor:'#FF8F7A'
+                        });
+                    }else{
+                        swal({
+                            title: ' ',
+                            text: data.msg,
+                            type: 'error',
+                            confirmButtonText:'确定',
+                            confirmButtonColor:'#FF8F7A'
+                        });
+                    }
                 }
             })
         }else{
-            console.log(re);
             swal({
                 title: ' ',
                 text: re,

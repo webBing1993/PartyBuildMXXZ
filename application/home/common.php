@@ -139,7 +139,7 @@ function get_header($userid){
         'userid' => $userid,
     );
     $user = \app\home\model\WechatUser::where($map)->find();
-    if(empty($user['header'])){
+    if(empty($user['headimgurl'])){
         $header = '/home/images/vistor.jpg';
     }else{
         $header = $user['headimgurl'];

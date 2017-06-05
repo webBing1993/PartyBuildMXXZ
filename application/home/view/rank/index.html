@@ -1,0 +1,145 @@
+{extend name="public/pure"}
+{block name="style"}
+    <title>积分排行</title>
+    <link rel="stylesheet" href="/home/css/rank/index.css">
+    <link rel="stylesheet" href="/home/css/common/rem.css">
+{/block}
+
+{block name="body"}
+    <div class="top">
+        <div class="userImg">
+            <img src="{$personal.userid|get_header}" alt="">
+        </div>
+        <div class="topName">{$personal.name}</div>
+        <ul class="now">
+            <li>当前积分 {$personal.score}</li>
+            {eq name="$personal.score" value="0"}
+            <li>当前排名 无</li>
+            {else/}
+            <li>当前排名 {$personal.rank}</li>
+            {/eq}
+        </ul>
+        <div class="rule">
+            <img src="/home/images/rank/8.png" alt="">
+            <span>积分规则</span>
+        </div>
+    </div>
+
+    <div class="navbar">
+
+        <ul class="classify">
+            <li class="active">周榜</li>
+            <li>月榜</li>
+            <li>总榜</li>
+        </ul>
+
+        <div class="name">
+            <span>排名</span>
+            <span>积分</span>
+        </div>
+
+        <div class="ranging">
+            <!--//周榜-->
+            <div class="weeklist" data-id="1">
+                <ul>
+                    {volist name="week" id="fi" key="k"}
+                    <li>
+                        <!--前三名头像-->
+                        <div class="king"></div>
+                        <!--排名-->
+                        <span>{$k}</span>
+                        <!--用户头像-->
+                        <img src="{$fi.userid|get_header}" alt="" class="userImg">
+                        <p>{$fi.name}</p>
+                        <!--积分-->
+                        <b>{$fi.score}</b>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="monthlist" data-id="2" style="display:none">
+                <ul>
+                    {volist name="month" id="mo" key="k"}
+                    <li>
+                        <!--前三名头像-->
+                        <div class="king"></div>
+                        <!--排名-->
+                        <span>{$k}</span>
+                        <!--用户头像-->
+                        <img src="{$mo.userid|get_header}" alt="" class="userImg">
+                        <p>{$mo.name}</p>
+                        <!--积分-->
+                        <b>{$mo.score}</b>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="sumlist" data-id="3" style="display:none">
+                <ul>
+                    {volist name="all" id="vo" key="k"}
+                    <li>
+                        <!--前三名头像-->
+                        <div class="king"></div>
+                        <!--排名-->
+                        <span>{$k}</span>
+                        <!--用户头像-->
+                        <img src="{$vo.userid|get_header}" alt="" class="userImg">
+                        <p>{$vo.name}</p>
+                        <!--积分-->
+                        <b>{$vo.score}</b>
+                    </li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="bk" style="">
+        <div>
+            <a></a>
+            <img src="/home/images/rank/7.png" alt="">
+            <p>
+                您可以通过浏览文章、点赞、评论等获取相应积分，具体如下：
+                <br>
+                <br>
+                文章浏览：<b>1</b>分
+                <br>
+                评论点赞：<b>1</b>分
+                <br>
+                发表评论：<b>1</b>分
+                <br>
+                每日一课：<b>1</b>分
+                <br>
+                <br>
+                通过以上互动行为，您可以累积积分，并在积分排行榜中显示个人积分排行状况！加油哦！
+            </p>
+        </div>
+    </div>
+{/block}
+
+{block name="script"}
+<script>
+    //周月总切换
+    $('.classify>li').click(function(){
+        if(!$(this).hasClass('active')){
+            $(this).parent().find('.active').removeClass('active');
+            $(this).addClass('active');
+            $('.ranging>div').hide();
+            $('[data-id='+($(this).index()+1)+']').show();
+        }
+    });
+    //css适配
+    $(function(){
+        $('#bk').height($(window).height());
+    });
+    //积分规则
+    $('.rule').click(function(){
+        $('#bk').fadeIn(300);
+        $('#bk>div').fadeIn(300).css({'top':'50%'});
+    });
+    //积分窗口关闭
+    $('#bk>div>a').click(function(){
+        $('#bk').fadeOut(300);
+        $('#bk>div').fadeOut(300).css({'top':'0%'});
+    })
+</script>
+{/block}
