@@ -31,6 +31,13 @@ class WechatUser extends Base
      *用户的新增跟修改
      */
     public function add($data){
+        //出生年月 跟入党时间 时间戳修改
+        if($data['birthday']){
+            $data['birthday'] = strtotime($data['birthday']);
+        }
+        if($data['partytime']){
+            $data['partytime'] = strtotime($data['partytime']);
+        }
         //修改用户
         if(!empty($data['check'])){
             $this ->allowField([

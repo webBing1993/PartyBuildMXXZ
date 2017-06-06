@@ -104,7 +104,7 @@
                                 <label>出生年月:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" class="form-control datetimepicker " placeholder="出生年月" name="birthday"  value="{$info.birthday|default=''}" >
+                                <input type="text" class="form-control datetimepicker " placeholder="出生年月" name="birthday"  value="{$info.birthday?date('Y-m-d',$info.birthday):''}" >
                             </div>
                         </div>
                         <!--学历-->
@@ -119,10 +119,10 @@
                         <!--名族-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>名族:</label>
+                                <label>民族:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="学历" class="form-control form_title" name="nation" value="{$info.nation|default=''}">
+                                <input type="text" placeholder="民族" class="form-control form_title" name="nation" value="{$info.nation|default=''}">
                             </div>
                         </div>
                         <!--入党时间-->
@@ -131,7 +131,7 @@
                                 <label>入党时间:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" class="form-control datetimepicker " placeholder="入党时间" name="partytime"  value="{$info.partytime|default=''}"/>
+                                <input type="text" class="form-control datetimepicker " placeholder="入党时间" name="partytime"  value="{$info.partytime?date('Y-m-d',$info.partytime):''}"/>
                             </div>
                         </div>
                         <!--籍贯-->
