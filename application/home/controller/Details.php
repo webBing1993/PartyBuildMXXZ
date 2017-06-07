@@ -14,6 +14,7 @@ use app\home\model\Picture;
 use app\home\model\Like;
 use app\home\model\Comment;
 use app\home\model\Answers;
+use think\Cookie;
 
 class Details extends Controller{
     public function index(){
@@ -98,6 +99,10 @@ class Details extends Controller{
      * 判断是否是游客登录
      */
     public function anonymous() {
+        //读取本地cookie
+        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+        session('userId',Cookie::get('dypb')['user']);
+
         $userId = session('userId');
         //如果userId等于visitor  则为游客登录，否则则正常显示
         if(empty($userId)){

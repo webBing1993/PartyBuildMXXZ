@@ -78,7 +78,7 @@ class Service extends Controller
 
     //订阅号验证
     public function oauth2(){
-        $Wechat = new TPWechat(Config::get('news'));
+        $Wechat = new TPWechat(Config::get('party'));
         $Wechat->valid();
     }
 

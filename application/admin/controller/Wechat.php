@@ -19,6 +19,7 @@ use com\wechat\TPWechat;
 use think\Config;
 use think\Input;
 use think\Loader;
+use \think\cache\driver\File as FileModel;
 
 class Wechat extends Admin{
     //用户页面
@@ -168,6 +169,7 @@ class Wechat extends Admin{
             $excel_array = $obj_PHPExcel ->getsheet(0) ->toArray();   //转换为数组格式
             array_shift($excel_array);  //删除第一个数组(标题);
             $result = $this ->add_excel($excel_array);
+            unlink($exclePath);//完成后删除该文件
             return $result;
          } else {
               return $file ->getError();

@@ -21,15 +21,21 @@ use app\home\model\Answers;
 use app\home\model\Comment;
 use app\home\model\Like;
 use think\Db;
+use think\Cookie;
 
 class Base extends Controller {
     public function _initialize(){
-        session('userId','15036667391');
+//        session('userId','15036667391');
 //        session('header','/home/images/vistor.jpg');
 //        session('nickname','游客');
+
         if(!empty($_SERVER['REQUEST_URI'])){
             session('url',$_SERVER['REQUEST_URI']);
         }
+        //读取本地cookie
+        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+        session('userId',Cookie::get('dypb')['user']);
+
         $userId = session('userId');
 
         if(Config::get('WEB_SITE_CLOSE')){
@@ -45,9 +51,9 @@ class Base extends Controller {
             $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
             if(empty($userId)) {
-                $redirect_uri = Config::get("party.login");
-                $url = $Wechat->getOauthRedirect($redirect_uri);
-                $this->redirect($url);
+//                $redirect_uri = Config::get("party.login");
+//                $url = $Wechat->getOauthRedirect($redirect_uri);
+                $this->redirect('Verify/login');//跳转登录页
             }
 
             // 2获取jsapi_ticket

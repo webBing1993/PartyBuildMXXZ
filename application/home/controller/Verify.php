@@ -10,6 +10,7 @@ use think\Controller;
 use think\Config;
 use com\wechat\TPWechat;
 use app\home\model\WechatUser;
+use think\Cookie;
 
 class Verify extends Controller{
     /**
@@ -44,33 +45,24 @@ class Verify extends Controller{
     public function login(){
         //没有session值 跳转微信认证
 //        $newUser = session('newuser');//暂时储存用户微信数据
-//        if(empty($newUser)){
+//        $id = session('userId');
+//        if(empty($newUser)&&empty($id)){
 //            return $this ->fetch('index');
 //        }
-        $newUser = array(
-            'openid' => '15700004138',
-            'nickname' => 'stiff',
-            'sex' => '1',
-            'city' => '杭州',
-            'province' => '浙江',
-            'country' => '中国',
-            'language' => 'en',
-            'headimgurl' => 'http://wx.qlogo.cn/mmopen/PiajxSqBRaEKlsVNxbstk0iaBJaqibfombfH0Q4rWUIGnO2VP5IjJ0nj1fveoPG4JCM9mvR6jibpDBBqoKEia5MIjKw/0',
-            'subscribe_time' => '1495784632',
-            'subscribe' => '1',
-            'tagid_list' => '',
-            'status' => 1
-        );
         $pass = '123456';//默认密码123456
         $vali = input('post.');
         if($vali){
             $user = new WechatUser();
-            $result = $user ->where('mobile',$vali['user']) ->find();
+            $result = $user ->where(['mobile' => $vali['user'],'state' => 1]) ->find();
             if($result && $vali['password'] == $pass){
-                //userid 为 openid
-                $newUser['userid'] =  $newUser['openid'];
-                $user ->save( $newUser , ['mobile' => $vali['user']]);
-                return $this ->success('登录成功!');
+                //cookie初始化
+                Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+                session('userId', $vali['user']);
+                Cookie::set('dypb',['user' =>$vali['user']]);
+                if(empty($result['userid'])){
+                    $user ->save( ['userid' => $vali['user']] , ['mobile' => $vali['user']]);
+                }
+                    return $this ->success('登录成功!');
             }else{
                 return $this ->error('账号或密码错误!');
             }
