@@ -25,9 +25,9 @@ use think\Cookie;
 
 class Base extends Controller {
     public function _initialize(){
-//        session('userId','15036667391');
-//        session('header','/home/images/vistor.jpg');
-//        session('nickname','游客');
+
+        //判断是不是微信打开
+//        $this ->oauth();
 
         if(!empty($_SERVER['REQUEST_URI'])){
             session('url',$_SERVER['REQUEST_URI']);
@@ -65,11 +65,18 @@ class Base extends Controller {
     }
     
     /**
-     * 微信官方认证URL
+     * 判断是否微信打开
      */
     public function oauth(){
-        $Wechat = new TPWechat(Config::get('party'));
-        $Wechat->valid();
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (strpos($user_agent, 'MicroMessenger') === false) {
+            // 非微信浏览器禁止浏览
+            return $this ->error('请在微信打开!');
+        } else {
+            // 微信浏览器，允许访问
+            // 获取版本号
+            preg_match('/.*?(MicroMessenger\/([0-9.]+))\s*/', $user_agent, $matches);
+        }
     }
 
     /**

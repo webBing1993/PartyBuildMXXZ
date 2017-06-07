@@ -1,13 +1,156 @@
-{extend name="public/common"}
+{extend name="public/pure"}
 
 {block name="style"}
-
+<title>之图红盟</title>
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/index/index.css">
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 {/block}
 
 {block name="body"}
+<!--banner-->
+<div class="banner">
+    <img src="/home/images/common/banner.png" alt="首页banner图">
+</div>
+<!--图标轮播-->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <ul class="model clearfix">
+                <li>
+                    <a href="{:Url('News/index')}">
+                        <img src="/home/images/index/1.png" alt="党建之家">
+                        <span>党建之家</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('partyhz/index')}">
+                        <img src="/home/images/index/9.png" alt="红色汇集">
+                        <span>红色汇集</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Constitution/course')}">
+                        <img src="/home/images/index/3.png" alt="每日一课">
+                        <span>每日一课</span>
+                    </a>
+                </li>
 
+            </ul>
+        </div>
+    </div>
+</div>
+<!--分割线-->
+<div class="level"></div>
+<!--新闻通知-->
+<div class="content">
+    <div class="notices">
+        <div class="notice party">
+            {volist name="list2" id="loo"}
+            <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
+                <div class="fl">
+                    <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
+                </div>
+                <div class="fr right">
+                    <div class="title limit_">{$loo.title}</div>
+                    <div class="clear time">
+                        <span class="fl">{$loo.publisher}</span>
+                        <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
+                    </div>
+                </div>
+            </a>
+            {/volist}
+        </div>
+    </div>
+</div>
+<!--加载更多-->
+<div class="tip"></div>
+<div class="loading hidden">
+    <div class="typing_loader"></div>
+</div>
 {/block}
 
 {block name="script"}
-
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script>
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    var mySwiper = new Swiper('.swiper-container', {
+//        loop: true,
+        autoplayDisableOnInteraction: false,
+//        pagination : '.swiper-pagination',
+//        paginationClickable :true
+    });
+    $(function(){
+        var len = $('.notice .list').length;
+        if(len >= 6){
+            $('.tip' ).text('上拉加载更多');
+        }
+        loadScroll();
+    });
+    //上拉加载更多
+    function loadScroll(){
+        $(window).off("scroll" ).on("scroll",function(){
+            var ntc = $('.notices');
+            var dh = $(document).height();
+            var end = $(window).height() + $(window).scrollTop();
+            var len = $('.notice .list').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            if(dh == end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: "{:Url('News/listmore')}",
+                    data:{
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addLists(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+    //数据循环
+    function addLists(data){
+        var type;
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a href="/home/details/index/id/'+ list.id+'.html" class="list clear">'+
+                    '<div class="fl">'+
+                    '<img src="'+list.path+'" alt="图片">'+
+                    '</div>'+
+                    '<div class="fr right">'+
+                    '<div class="title limit_">'+list.title+'</div>'+
+                    '<div class="clear time">'+
+                    '<span class="fl">'+list.publisher+'</span>'+
+                    '<span class="fr">'+list.time+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '</a>'
+        }
+        $('.notice').append(html);
+    }
+</script>
 {/block}

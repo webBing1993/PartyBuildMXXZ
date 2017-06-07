@@ -759,4 +759,20 @@ class Rank extends Base{
         
         return $this->fetch();
     }
+    /**
+     * 修改头像
+     */
+    public function setHeader(){
+        $userId = session('userId');
+        $header = input('header');
+        $map = array(
+            'headimgurl' => $header,
+        );
+        $info = WechatUser::where('userid',$userId)->update($map);
+        if($info){
+            return $this->success("修改成功");
+        }else{
+            return $this->error("修改失败");
+        }
+    }
 }

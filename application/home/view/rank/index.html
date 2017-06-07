@@ -3,12 +3,22 @@
     <title>积分排行</title>
     <link rel="stylesheet" href="/home/css/rank/index.css">
     <link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+    #upload{
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+</style>
 {/block}
 
 {block name="body"}
     <div class="top">
         <div class="userImg">
             <img src="{$personal.userid|get_header}" alt="">
+            <input type="file"  id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
         </div>
         <div class="topName">{$personal.name}</div>
         <ul class="now">
@@ -32,7 +42,7 @@
 
         <ul class="classify">
             <li class="active">周榜</li>
-            <li>月榜</li>
+            <li>季榜</li>
             <li>总榜</li>
         </ul>
 
@@ -143,6 +153,64 @@
     $('#bk>div>a').click(function(){
         $('#bk').fadeOut(300);
         $('#bk>div').fadeOut(300).css({'top':'0%'});
-    })
+    });
+
+    //上传图片并获取信息
+    $('#upload').off("change").on('change',function(){
+        var up = $('.userImg>img');
+        var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+        if(size <= 2048){
+            var img = $(this)[0].files[0];
+            var formData = new FormData();
+            formData.append("picture",img);
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/uploadPicture')}",
+                data:formData,
+                processData : false,
+                contentType : false,
+                success:function(data){
+                    var msg = $.parseJSON(data);
+                    if(msg.code == 1){
+                        var image = new Image();
+                        image.src = msg.data.path ;
+                        up.attr('src',msg.data.path);
+                        $.ajax({
+                            type:"post",
+                            url:"{:Url('Rank/setHeader')}",
+                            data:{header:msg.data.path},
+                            success:function(data){
+                                swal({
+                                    title: ' ',
+                                    text: data.msg,
+                                    type: 'success',
+                                    confirmButtonText:'确定',
+                                    timer:2000
+                                });
+                            }
+                        })
+                    } else {
+                        swal({
+                            title: ' ',
+                            text: '上传失败!',
+                            type: 'error',
+                            confirmButtonText:'确定',
+                            timer:2000
+                        });
+                        return;
+                    }
+                }
+            });
+        } else {
+            swal({
+                title: ' ',
+                text: '您选择的图片超过2mb，请重新选择!',
+                type: 'error',
+                confirmButtonText:'确定',
+                timer:2000
+            });
+            return;
+        }
+    });
 </script>
 {/block}
