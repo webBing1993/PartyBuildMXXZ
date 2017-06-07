@@ -9,13 +9,18 @@ namespace app\home\controller;
 use app\home\model\News;
 use app\home\model\Push;
 use app\home\model\PushReview;
+use app\home\model\WechatUser;
 
 class Review extends Base{
     public function index(){
+        //审核权限检查
+        $this ->check();
         return $this ->fetch();
     }
     //推送审核
     public function reviewlist(){
+        //审核权限检查
+        $this ->check();
         $news = new News();
         $lists = $news ->where(['status' => 0,'push' => 1]) ->order('create_time desc') ->select();
         $this ->assign('list',$lists);
@@ -54,9 +59,19 @@ class Review extends Base{
     }
     //新闻审核结果
     public function passlist(){
+        //审核权限检查
+        $this ->check();
         $push = new PushReview();
         $list = $push ->order('review_time desc') ->select();
         $this ->assign('list',$list);
         return $this ->fetch();
+    }
+    //审核权限
+    public function check(){
+        $userid = session('userId');
+        $result = WechatUser::where('userid',$userid) ->find();
+        if($result['review'] == 0){
+            return $this ->error('抱歉,您没有权限访问该页面!');
+        }
     }
 }
