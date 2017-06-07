@@ -114,7 +114,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         //本周答题
-        $answers = Answers::where(['create_time' => array('egt',$t),'score' => 1])->select();
+        $answers = Answers::where(['create_time' => array('egt',$t),'score' =>  array('egt',1)])->select();
         $list4 = array();
         foreach ($answers as $value){
             $k = $value['userid'];
@@ -122,9 +122,12 @@ class Rank extends Base{
         }
         $new4 = array();
         foreach ($list4 as $u => $val){
-            $count = count($list4[$u])*1;
             $cen['userid'] = $u;
-            $cen['score'] = $count;
+            $score = 0;
+            foreach ($val as $k){
+                $score += $k['score'];
+            }
+            $cen['score'] = $score;
             $new4[] = $cen;
         }
 
@@ -256,8 +259,8 @@ class Rank extends Base{
             $cen['score'] = $count;
             $new3_m[] = $cen;
         }
-        //本周答题
-        $answers_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' => 1])->select();
+        //本月答题
+        $answers_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' =>  array('egt',1)])->select();
         $list4_m = array();
         foreach ($answers_m as $value){
             $k = $value['userid'];
@@ -265,9 +268,12 @@ class Rank extends Base{
         }
         $new4_m = array();
         foreach ($list4_m as $u => $val){
-            $count = count($list4_m[$u])*1;
             $cen['userid'] = $u;
-            $cen['score'] = $count;
+            $score = 0;
+            foreach ($val as $k){
+                $score += $k['score'];
+            }
+            $cen['score'] = $score;
             $new4_m[] = $cen;
         }
 
@@ -491,7 +497,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         // 本周答题
-        $answer = Answers::where(['create_time' => array('egt',$t),'score' => 1])->select();
+        $answer = Answers::where(['create_time' => array('egt',$t),'score' =>  array('egt',1)])->select();
         $list4 = array();
         foreach($answer as $value){
             $k = $value['userid'];
@@ -652,7 +658,7 @@ class Rank extends Base{
             $new3_m[] = $cen;
         }
         // 本月答题
-        $answer_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' => 1])->select();
+        $answer_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' =>  array('egt',1)])->select();
         $list4_m = array();
         foreach($answer_m as $value){
             $k = $value['userid'];
