@@ -145,6 +145,20 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>审核权限:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="review" {eq name="$info.review|default='0'" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="0" name="review" {eq name="$info.review|default='0'" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
                                 <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal">发布</button>
                                 <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
@@ -168,6 +182,11 @@
 <script src="/static/ueditor/ueditor.all.min.js"></script>
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
+    //    单选按钮
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green'
+    });
     //导航高亮
     highlight_subnav("{:Url('Wechat/user')}");
     //数据提交
@@ -184,6 +203,7 @@
         data.partytime = $("input[name='partytime']").val(); //入党时间
         data.address = $("input[name='address']").val().trim(); //籍贯
         data.check = "{$info.id|default=''}"; //判断是否新增还是修改
+        data.review = $("input[name='review']:checked").val();
         //验证判断
         var patrn=/0?(13|14|15|18)[0-9]{9}/;
         if(!data.name){
