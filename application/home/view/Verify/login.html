@@ -58,9 +58,16 @@
                             type: 'success',
                             confirmButtonText:'确定',
                             confirmButtonColor:'#FF8F7A'
-                        },function(){
-                            window.location.href="{:Url('rank/index')}";
                         });
+                        setTimeout(function(){
+                            var url = '';
+                            if(!data.url){
+                                url = '/home/index/index';
+                            }else{
+                                url = data.url;
+                            }
+                            window.location.href = url;
+                        },1000);
                     }else{
                         swal({
                             title: ' ',
