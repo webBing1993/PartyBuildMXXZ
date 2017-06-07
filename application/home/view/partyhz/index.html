@@ -1,14 +1,11 @@
 {extend name="public/pure"}
 {block name="style"}
 <title>红色汇集</title>
-<link rel="stylesheet" href="/home/css/partyhz/index.css">
-<script src="/home/js/zepto.min.js"></script>
+    <link rel="stylesheet" href="/home/css/partyhz/index.css">
+    <link rel="stylesheet" href="/home/css/common/rem.css">
+    <script src="/home/js/zepto.min.js"></script>
 {/block}
 {block name="body"}
-<div class="navBar clearfix">
-    <!--<span class="awdo cur" id="nav1">杭城红色矩阵</span>-->
-    <!--<span class="awdo" id="nav2" onmousedown="javascript:doClick(this)">党建网站</span>-->
-</div>
 <div class="tabBox">
     <div id="sub1" class="tabCon clearfix" >
         <!--微信公众号-->
@@ -145,8 +142,8 @@
 {/block}
 {block name="script"}
 <script>
-    var WH = $(window).width();
-    $('.tablist').height($('.tablist').width()*0.6+$($('.tablist p')[0]).height()*2+12);
-    $('.tablist').css({'margin':WH*0.02});
+//    var WH = $(window).width();
+//    $('.tablist').height($('.tablist').width()*0.6+$($('.tablist p')[0]).height()*2+12);
+//    $('.tablist').css({'margin':WH*0.02});
 </script>
 {/block}

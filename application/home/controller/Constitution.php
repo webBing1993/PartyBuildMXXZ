@@ -192,7 +192,7 @@ class Constitution extends Base {
         $users = session('userId');
         //将分数添加至用户积分排名
         $wechatModel = new WechatUser();
-        $wechatModel->where('openid',$users)->setInc('score',$score);
+        $wechatModel->where('userid',$users)->setInc('score',$score);
         //将获取的数据进行json格式转化  存储 表
         $Answers = new Answers();
         $Answers->userid = $users;

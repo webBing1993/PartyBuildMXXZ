@@ -114,7 +114,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         //本周答题
-        $answers = Answers::where($map)->select();
+        $answers = Answers::where(['create_time' => array('egt',$t),'score' => 1])->select();
         $list4 = array();
         foreach ($answers as $value){
             $k = $value['userid'];
@@ -257,7 +257,7 @@ class Rank extends Base{
             $new3_m[] = $cen;
         }
         //本周答题
-        $answers_m = Answers::where($map)->select();
+        $answers_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' => 1])->select();
         $list4_m = array();
         foreach ($answers_m as $value){
             $k = $value['userid'];
@@ -491,7 +491,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         // 本周答题
-        $answer = Answers::where(['create_time' => array('egt',$t)])->select();
+        $answer = Answers::where(['create_time' => array('egt',$t),'score' => 1])->select();
         $list4 = array();
         foreach($answer as $value){
             $k = $value['userid'];
@@ -652,7 +652,7 @@ class Rank extends Base{
             $new3_m[] = $cen;
         }
         // 本月答题
-        $answer_m = Answers::where(['create_time' => array('between',[$start,$end])])->select();
+        $answer_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' => 1])->select();
         $list4_m = array();
         foreach($answer_m as $value){
             $k = $value['userid'];
