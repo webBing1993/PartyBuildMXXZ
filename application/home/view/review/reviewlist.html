@@ -81,36 +81,19 @@ function dispose(i,id,status){
 					id:id,
 					status:status
 				},
-				beforeSend:function(){
-					swal({
-						title: ' ',
-						text: '提交中...',
-						showConfirmButton:false
-					});
-				},
 				success: function(data){
 					//成功后刷新页面
 					if(data.code == 1){
+						//未审核页面有操作,审核页面用来判断刷新
+						sessionStorage.setItem("review","true");
 						$(i).parent().parent().fadeOut(500);
-						swal({
-							title: ' ',
-							text: data.msg,
-							type: 'success',
-							confirmButtonText:'确定'
-						},function(){
-							$(i).parent().parent().remove();
-							//判断是否还有消息
-							check();
-							//未审核页面有操作,审核页面用来判断刷新
-							sessionStorage.setItem("review","true");
-						})
+						$(i).parent().parent().remove();
+						//判断是否还有消息
+						check();
+						//swal回调里继续使用swal有时不会被触发
+						aleats('操作成功!','success');
 					}else{
-						swal({
-							title: ' ',
-							text: data.msg,
-							type: 'erroe',
-							confirmButtonText:'确定'
-						})
+						aleats('操作失败!','error');
 					}
 				}
 			})
@@ -118,5 +101,13 @@ function dispose(i,id,status){
 	});
 }
 
+function aleats(msg,status){
+	swal({
+		title: ' ',
+		text: msg,
+		type: status,
+		confirmButtonText:'确定'
+	})
+}
 </script>
 {/block}
