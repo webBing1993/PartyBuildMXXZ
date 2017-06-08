@@ -15,11 +15,15 @@ use app\home\model\Like;
 use app\home\model\Comment;
 use app\home\model\Answers;
 use think\Cookie;
+use com\wechat\TPWechat;
+use think\Config;
 
 class Details extends Controller{
     public function index(){
         //判断是否是游客
         $this ->anonymous();
+        //获取jssdk
+        $this ->jssdk();
         $userId = session('userId');
         $id = input('id');
         $newsModel = new News();
@@ -111,5 +115,14 @@ class Details extends Controller{
         }else{
             $this->assign('visit', 0);
         }
+    }
+    /**
+     * 获取公众号签名
+     */
+    public function jssdk(){
+        $Wechat = new TPWechat(Config::get('party'));
+        $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $jsSign = $Wechat->getJsSign($url);
+        $this->assign("jsSign", $jsSign);
     }
 }
