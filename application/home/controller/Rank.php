@@ -70,6 +70,7 @@ class Rank extends Base{
         }
         $map = array(
             'create_time' => array('egt',$t),
+            'score' =>  array('egt',1)
         );
         //本周浏览
         $browse = Browse::where($map)->select();
@@ -114,7 +115,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         //本周答题
-        $answers = Answers::where(['create_time' => array('egt',$t),'score' =>  array('egt',1)])->select();
+        $answers = Answers::where($map)->select();
         $list4 = array();
         foreach ($answers as $value){
             $k = $value['userid'];
@@ -213,6 +214,7 @@ class Rank extends Base{
         $end = mktime(23,59,59,$season*3,date('t',mktime(0, 0 , 0,$season*3,1,date("Y"))),date('Y'));
         $map = array(
             'create_time' => array('between',[$start,$end]),    //在时间区间内
+            'score' =>  array('egt',1)
         );
 
         //本月浏览
@@ -260,7 +262,7 @@ class Rank extends Base{
             $new3_m[] = $cen;
         }
         //本月答题
-        $answers_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' =>  array('egt',1)])->select();
+        $answers_m = Answers::where($map)->select();
         $list4_m = array();
         foreach ($answers_m as $value){
             $k = $value['userid'];
@@ -452,7 +454,7 @@ class Rank extends Base{
         }
         $map = array(
             'create_time' => array('egt',$t),
-            'score' => array('eq',1)
+            'score' => array('egt',1)
         );
         //本周浏览
         $browse = Browse::where($map)->select();
@@ -497,7 +499,7 @@ class Rank extends Base{
             $new3[] = $cen;
         }
         // 本周答题
-        $answer = Answers::where(['create_time' => array('egt',$t),'score' =>  array('egt',1)])->select();
+        $answer = Answers::where($map)->select();
         $list4 = array();
         foreach($answer as $value){
             $k = $value['userid'];
@@ -611,7 +613,7 @@ class Rank extends Base{
         $end = mktime(23,59,59,$season*3,date('t',mktime(0, 0 , 0,$season*3,1,date("Y"))),date('Y'));
         $map = array(
             'create_time' => array('between',[$start,$end]),    //在时间区间内
-            'score' => array('eq',1)
+            'score' => array('egt',1)
         );
 
         //本月浏览
@@ -658,7 +660,7 @@ class Rank extends Base{
             $new3_m[] = $cen;
         }
         // 本月答题
-        $answer_m = Answers::where(['create_time' => array('between',[$start,$end]),'score' =>  array('egt',1)])->select();
+        $answer_m = Answers::where($map)->select();
         $list4_m = array();
         foreach($answer_m as $value){
             $k = $value['userid'];
