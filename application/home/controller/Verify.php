@@ -17,6 +17,7 @@ class Verify extends Controller{
      * 用户登入获取信息
      */
     public function index(){
+//        dump(md5(uniqid()));
         // 获取用户信息
 //        $Wechat = new TPWechat(Config::get('party'));
 //        $result = $Wechat->getOauthAccessToken();
@@ -54,9 +55,10 @@ class Verify extends Controller{
             if($result && $vali['password'] == $pass){
                 //cookie初始化
                 Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
-                Cookie::set('dypb',['user' =>$vali['user']]);
+                $id = md5(uniqid()+$vali['user']);
+                Cookie::set('dypb',['user' =>$id]);
                 if(empty($result['userid'])){
-                    $user ->save( ['userid' => $vali['user']] , ['mobile' => $vali['user']]);
+                    $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
                 }
                     return $this ->success('登录成功!', session('url'));
             }else{
