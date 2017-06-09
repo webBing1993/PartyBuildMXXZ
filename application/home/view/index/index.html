@@ -102,18 +102,21 @@
         loadScroll();
         $(".banner>.exit").on("click",function(){
             swal({
-                        title:"提示",
+                        title:"",
                         text: "是否确认退出",
                         type: "warning",
                         showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
+                        confirmButtonColor:'#FF8F7A',
                         confirmButtonText: "确认退出",
                         closeOnConfirm: false,
                         cancelButtonText:"取消"
                     },
                     function(){
+                        swal("", "您已成功退出", "success");
+                        setTimeout(function(){
+                            location.href="{:Url('Verify/logout')}"
 
-                        swal("退出", "您已成功退出", "success");
+                        },1000)
                     });
         })
     });
