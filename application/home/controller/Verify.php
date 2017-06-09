@@ -83,4 +83,13 @@ class Verify extends Controller{
             preg_match('/.*?(MicroMessenger\/([0-9.]+))\s*/', $user_agent, $matches);
         }
     }
+    /**
+     * 退出登录
+     */
+    public function logout(){
+        //cookie初始化
+        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+        Cookie::clear('dypb');
+        return $this ->fetch('Verify/login');
+    }
 }
