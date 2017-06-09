@@ -90,6 +90,6 @@ class Verify extends Controller{
         //cookie初始化
         Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
         Cookie::delete('dypb');
-        return $this ->fetch('Verify/login');
+        return $this ->fetch('login');
     }
 }
