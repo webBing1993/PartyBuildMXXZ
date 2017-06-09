@@ -60,12 +60,7 @@
                             confirmButtonColor:'#FF8F7A'
                         });
                         setTimeout(function(){
-                            var url = '';
-                            if(data.url == ""){
-                                url = '/home/index/index';
-                            }else{
-                                url = data.url;
-                            }
+                            url = '/home/index/index';
                             window.location.href = url;
                         },1000);
                     }else{
