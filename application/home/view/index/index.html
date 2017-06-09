@@ -15,7 +15,7 @@
     <a href="#" class="exit">
         <img src="/home/images/index/exit.png" alt="">
     </a>
-    <a href="" class="rank">
+    <a href="{:Url('Rank/index')}" class="rank">
         <img src="/home/images/index/rank.png" alt="">
     </a>
 </div>
@@ -75,10 +75,13 @@
 <div class="loading hidden">
     <div class="typing_loader"></div>
 </div>
-<a href="#" class="examine">
+<!--审核-->
+{eq name="$user.review"  value="1"}
+<a href="{:Url('Review/index')}" class="examine">
     <img src="/home/images/index/msg.png" alt="">
-    <span class="point"></span>
+    {$user.count?'<span class="point"></span>':''}
 </a>
+{/eq}
 {/block}
 
 {block name="script"}
