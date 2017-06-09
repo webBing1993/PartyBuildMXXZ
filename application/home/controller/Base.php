@@ -93,7 +93,7 @@ class Base extends Controller {
     }
 
     /**
-     * 获取企业号签名
+     * 获取公众号签名
      */
     public function jssdk(){
         $Wechat = new TPWechat(Config::get('party'));

@@ -19,7 +19,13 @@ use com\wechat\TPWechat;
 use think\Config;
 
 class Details extends Controller{
+    /**
+     * 新闻详情页
+     * @return mixed
+     */
     public function index(){
+        //判断是不是微信打开
+//        $this ->oauth();
         //判断是否是游客
         $this ->anonymous();
         //获取jssdk
@@ -124,5 +130,19 @@ class Details extends Controller{
         $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $jsSign = $Wechat->getJsSign($url);
         $this->assign("jsSign", $jsSign);
+    }
+    /**
+     * 判断是否微信打开
+     */
+    public function oauth(){
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        if (strpos($user_agent, 'MicroMessenger') === false) {
+            // 非微信浏览器禁止浏览
+            return $this ->error('请在微信打开!');
+        } else {
+            // 微信浏览器，允许访问
+            // 获取版本号
+            preg_match('/.*?(MicroMessenger\/([0-9.]+))\s*/', $user_agent, $matches);
+        }
     }
 }

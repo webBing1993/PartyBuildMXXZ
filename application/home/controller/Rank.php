@@ -19,16 +19,8 @@ class Rank extends Base{
      * 个人积分排行
      */
     public function index(){
-
         $wechatModel = new WechatUser();
         $userId = session('userId');
-//        //所在部门名称
-//        $dp = Db::table('pb_wechat_department_user')
-//            ->alias('a')
-//            ->join('pb_wechat_department b','a.departmentid = b.id','LEFT')
-//            ->where('a.userid',$userId)
-//            ->find();
-
         //个人信息
         $personal = $wechatModel::where('userid',$userId)->find();
         //总榜

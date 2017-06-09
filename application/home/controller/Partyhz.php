@@ -8,7 +8,7 @@
 namespace app\home\controller;
 
 class Partyhz extends Base{
-    //红色矩阵首页
+    //红色汇集首页
     public function index(){
         return $this ->fetch();
     }

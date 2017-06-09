@@ -12,12 +12,18 @@ use app\home\model\PushReview;
 use app\home\model\WechatUser;
 
 class Review extends Base{
+    /**
+     * 推送审核首页
+     * @return mixed
+     */
     public function index(){
         //审核权限检查
         $this ->check();
         return $this ->fetch();
     }
-    //推送审核
+    /**
+     * 推送审核
+     */
     public function reviewlist(){
         //审核权限检查
         $this ->check();
@@ -26,7 +32,10 @@ class Review extends Base{
         $this ->assign('list',$lists);
         return $this ->fetch();
     }
-    //新闻推送审核
+    /**
+     * 新闻推送审核
+     * @return array|void
+     */
     public function review(){
         $data = input('post.');
         $push = new Push();
@@ -57,7 +66,10 @@ class Review extends Base{
             return $this ->error('参数错误!');
         }
     }
-    //新闻审核结果
+    /**
+     * 新闻审核结果
+     * @return mixed
+     */
     public function passlist(){
         //审核权限检查
         $this ->check();
@@ -66,7 +78,11 @@ class Review extends Base{
         $this ->assign('list',$list);
         return $this ->fetch();
     }
-    //审核权限
+    /**
+     * 审核权限
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
     public function check(){
         $userid = session('userId');
         $result = WechatUser::where('userid',$userid) ->find();
