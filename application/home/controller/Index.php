@@ -15,6 +15,7 @@ use think\Controller;
 use think\Log;
 use app\home\model\News as NewsModel;
 
+
 /**
  * 党建主页
  */
@@ -23,7 +24,13 @@ class Index extends Base {
         $news = new NewsModel();
         $list2 = $news ->where(['status' => ['egt',0]]) ->order('create_time desc') ->limit(6)->select();
         $this ->assign('list2',$list2);
-        $this ->assign('user',session('userId'));
+        //判断是否审核有权限
+        $id = session('userId');
+        $user = WechatUser::where('userid',$id) ->find();
+        //记录是否有审核
+        $count = $news ->where(['status' => 0,'push' => 1]) ->count();
+        $user['count'] = $count;
+        $this ->assign('user',$user);
         return $this->fetch();
     }
 }
