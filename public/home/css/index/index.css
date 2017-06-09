@@ -32,9 +32,27 @@
     border-radius: 50%;
     border: 1px solid #fff;
 }
+.banner>.exit{
+    position: absolute;
+    top:15px;
+    left:15px;
+}
+.banner>.exit>img{
+    width:40px;
+    height:40px;
+}
+.banner>.rank{
+    position: absolute;
+    top:15px;
+    right:15px;
+}
+.banner>.rank>img{
+    width:40px;
+    height:40px;
+}
 /*model*/
 .model{
-    padding-bottom: 2vw;
+    padding: 5.5vw 0;
 }
 .model>li{
     float: left;
@@ -135,4 +153,23 @@
     height: 60px;
     margin-top: 10px;
     margin-left: 10px;
+}
+.examine{
+    position: fixed;
+    bottom:60px;
+    right:15px;
+}
+.examine>img{
+    width:60px;
+    height:60px;
+}
+.examine>.point{
+    display: block;
+    border-radius: 50%;
+    width:8px;
+    height:8px;
+    background-color: #FF2A41;;
+    position: absolute;
+    right:16px;
+    top:14px;
 }

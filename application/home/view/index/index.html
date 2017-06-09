@@ -11,7 +11,13 @@
 {block name="body"}
 <!--banner-->
 <div class="banner">
-    <img src="/home/images/common/banner.png" alt="首页banner图">
+    <img src="/home/images/index/banner20170609154838.png" alt="首页banner图">
+    <a href="#" class="exit">
+        <img src="/home/images/index/exit.png" alt="">
+    </a>
+    <a href="" class="rank">
+        <img src="/home/images/index/rank.png" alt="">
+    </a>
 </div>
 <!--图标轮播-->
 <div class="swiper-container">
@@ -20,19 +26,19 @@
             <ul class="model clearfix">
                 <li>
                     <a href="{:Url('News/index')}">
-                        <img src="/home/images/index/1.png" alt="党建之家">
+                        <img src="/home/images/index/djzj.png" alt="党建之家">
                         <span>党建之家</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('partyhz/index')}">
-                        <img src="/home/images/index/9.png" alt="红色汇集">
+                        <img src="/home/images/index/hshj.png" alt="红色汇集">
                         <span>红色汇集</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('Constitution/course')}">
-                        <img src="/home/images/index/3.png" alt="每日一课">
+                        <img src="/home/images/index/mryk.png" alt="每日一课">
                         <span>每日一课</span>
                     </a>
                 </li>
@@ -69,6 +75,10 @@
 <div class="loading hidden">
     <div class="typing_loader"></div>
 </div>
+<a href="#" class="examine">
+    <img src="/home/images/index/msg.png" alt="">
+    <span class="point"></span>
+</a>
 {/block}
 
 {block name="script"}
@@ -87,6 +97,22 @@
             $('.tip' ).text('上拉加载更多');
         }
         loadScroll();
+        $(".banner>.exit").on("click",function(){
+            swal({
+                        title:"提示",
+                        text: "是否确认退出",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确认退出",
+                        closeOnConfirm: false,
+                        cancelButtonText:"取消"
+                    },
+                    function(){
+
+                        swal("退出", "您已成功退出", "success");
+                    });
+        })
     });
     //上拉加载更多
     function loadScroll(){
