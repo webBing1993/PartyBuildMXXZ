@@ -118,8 +118,7 @@
                             confirmButtonText:'确定'
                         });
                         setTimeout(function(){
-                            location.href="{:Url('Verify/logout')}"
-
+                            window.location.replace("{:Url('Verify/logout')}");
                         },1000)
                     });
         })
