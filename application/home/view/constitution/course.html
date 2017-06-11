@@ -30,7 +30,7 @@
 				<div class="text-center">本次得分：<span class="score"></span> 分</div>
 			</div>
 			<div class="modal-footer">
-				<a href="" id="link">查看详情</a>
+				<a  id="link">查看详情</a>
 			</div>
 		</div>
 	</div>
@@ -57,11 +57,10 @@ $(function(){
 			url:"{:Url('Constitution/commit')}",
 			data:{'data':data},
 			success:function(data){
-				console.log(data);
 				$('.score').html(data.url.score);
 				$('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]);
 				var link='scan';
-				$('#link').attr('href',link+'/id/'+data.url.id);
+				$('#link').click(function(){window.location.replace(link+'/id/'+data.url.id);});
 			}
 		});
 	});

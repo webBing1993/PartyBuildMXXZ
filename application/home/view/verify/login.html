@@ -56,20 +56,22 @@
                             title: ' ',
                             text: data.msg,
                             type: 'success',
-                            confirmButtonText:'确定',
-                            confirmButtonColor:'#FF8F7A'
+                            confirmButtonText:'确定'
                         });
-                        setTimeout(function(){
+                        var url = data.url;
+                        //如果没有session的Url就默认跳首页
+                        if(!url) {
                             url = '/home/index/index';
-                            window.location.href = url;
+                        }
+                        setTimeout(function(){
+                            window.location.replace(url);
                         },1000);
                     }else{
                         swal({
                             title: ' ',
                             text: data.msg,
                             type: 'error',
-                            confirmButtonText:'确定',
-                            confirmButtonColor:'#FF8F7A'
+                            confirmButtonText:'确定'
                         });
                     }
                 }
@@ -79,8 +81,7 @@
                 title: ' ',
                 text: re,
                 type: 'error',
-                confirmButtonText:'确定',
-                confirmButtonColor:'#FF8F7A'
+                confirmButtonText:'确定'
             });
         }
     }

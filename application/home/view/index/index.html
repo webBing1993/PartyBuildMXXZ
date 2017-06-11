@@ -106,13 +106,17 @@
                         text: "是否确认退出",
                         type: "warning",
                         showCancelButton: true,
-                        confirmButtonColor:'#FF8F7A',
                         confirmButtonText: "确认",
                         closeOnConfirm: false,
                         cancelButtonText:"取消"
                     },
                     function(){
-                        swal("", "您已成功退出", "success");
+                        swal({
+                            title: ' ',
+                            text: '退出成功！',
+                            type: 'success',
+                            confirmButtonText:'确定'
+                        });
                         setTimeout(function(){
                             location.href="{:Url('Verify/logout')}"
 

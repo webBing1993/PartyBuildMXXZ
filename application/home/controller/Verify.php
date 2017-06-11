@@ -11,7 +11,7 @@ use think\Config;
 use com\wechat\TPWechat;
 use app\home\model\WechatUser;
 use think\Cookie;
-
+use think\Session;
 class Verify extends Controller{
     /**
      * 用户登入获取信息
@@ -61,7 +61,15 @@ class Verify extends Controller{
                 if(empty($result['userid'])){
                     $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
                 }
-                    return $this ->success('登录成功!', session('url'));
+                //登陆后跳转判断
+                if(Session::has('url')) {
+                    $url = session('url');
+                    Session::delete('url');//跳转后清空
+                }else{
+                    $url = '';
+                }
+                
+                return $this ->success('登录成功!', $url);
             }else{
                 return $this ->error('账号或密码错误!');
             }
