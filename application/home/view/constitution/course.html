@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<title>每日一课</title>
 <link rel="stylesheet" href="/home/css/constitution/course.css">
 {/block}
 
@@ -40,8 +41,6 @@
 {block name="script"}
 <script>
 $(function(){
-	//模块标题
-	$('title' ).text('两学一做');
 	//提交
 	$('.submit').on('click',function(e){
 		var data = [];
@@ -50,8 +49,6 @@ $(function(){
 			var answer = $(this ).find('.checked' ).index();
 			data.push([id,answer]);
 			});
-//		console.log(data);
-//		$('#modal').modal('show');
 		$.ajax({
 			type:"post",
 			url:"{:Url('Constitution/commit')}",
