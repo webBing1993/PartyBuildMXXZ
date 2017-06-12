@@ -56,10 +56,12 @@ class Verify extends Controller{
                 //cookie初始化
                 Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
                 Cookie::clear('dypb');
-                $id = md5(uniqid()+$vali['user']);
-                Cookie::set('dypb',['user' =>$id]);
                 if(empty($result['userid'])){
+                    $id = md5(uniqid()+$vali['user']);
+                    Cookie::set('dypb',['user' =>$id]);
                     $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
+                }else{
+                    Cookie::set('dypb',['user' =>$result['userid']]);
                 }
                 //登陆后跳转判断
                 if(Session::has('url')) {
