@@ -57,7 +57,7 @@ class Verify extends Controller{
                 Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
                 Cookie::clear('dypb');
                 if(empty($result['userid'])){
-                    $id = md5(uniqid()+$vali['user']);
+                    $id = md5(uniqid());//不重复随机id
                     Cookie::set('dypb',['user' =>$id]);
                     $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
                 }else{
