@@ -63,6 +63,7 @@
                                 <th>性别 </th>
                                 <th>手机号码</th>
                                 <th>所属部门</th>
+                                <th>权限</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
@@ -71,16 +72,23 @@
                             {volist name="list" id="vo"}
                             <tr>
                                 <td><input type="checkbox" class="i-checks ids" name="input[]"></td>
-                                <td>{$vo.userid}</td>
+                                <td>{$vo.id}</td>
                                 <td>{$vo.name}</td>
                                 <td>{$vo.gender_text}</td>
                                 <td>{$vo.mobile}</td>
                                 <td>{$vo.department}</td>
-                                <td>{switch name="vo.status"}
-                                    {case value="2"}<span class="label label-danger">{$vo.status_text}</span>{/case}
-                                    {case value="4"}<span class="label label-warning">{$vo.status_text}</span>{/case}
-                                    {default /}<span class="label label-info">{$vo.status_text}</span>
-                                    {/switch}
+                                <td>
+                                    {eq name="vo.review" value="0"}
+                                    <span class="label label-info">普通权限</span>
+                                    {else/}
+                                    <span class="label label-info">审核权限</span>
+                                    {/eq}
+                                </td>
+                                <td>{eq name="vo.userid" value=""}
+                                    <span class="label label-warning">未关注</span>
+                                    {else/}
+                                    <span class="label label-info">已使用</span>
+                                    {/eq}
                                 </td>
                                 <td>
                                     <a href="{:Url('Wechat/add_user?id='.$vo.id)}">修改</a>
