@@ -5,6 +5,7 @@ namespace app\home\controller;
 use app\home\model\File as FileModel;
 use app\home\model\Picture;
 use think\Config;
+use org\Image;
 
 class File extends Base
 {
@@ -73,4 +74,28 @@ class File extends Base
 
         return json_encode($return);
     }
+    /**
+     * 上传头像
+     */
+    public function uploadHead(){
+
+        $image = new Image();
+        //打开图片
+        $image = $image::open($_FILES ["picture"]["tmp_name"]);
+        //获取 宽高
+        $w = $image ->width();
+        $h = $image ->height();
+        //设置保存路径
+        $path =  substr(Config::get('download_upload')['rootPath'].''.date('Y-m-d',NOW_TIME).'/'.uniqid().'.jpg',1);
+        //居中裁剪
+        if($w >= $h){
+            $result = $image ->crop($h,$h,($w-$h)/2 ,0) ->save('.'.$path);
+        }else{
+            $result = $image ->crop($w,$w,($h-$w)/2 ,0) ->save('.'.$path);
+        }
+        $return['data']['path'] = $path;
+        $return['code'] = 1;
+        return json_encode($return);
+    }
+
 }

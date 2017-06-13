@@ -12,6 +12,7 @@ use app\home\model\Comment;
 use app\home\model\Answers;
 use app\home\model\Browse;
 use app\home\model\WechatDepartment;
+use think\Config;
 use think\Db;
 
 class Rank extends Base{
@@ -768,7 +769,11 @@ class Rank extends Base{
         $map = array(
             'headimgurl' => $header,
         );
-        $info = WechatUser::where('userid',$userId)->update($map);
+        $user = WechatUser::where('userid',$userId) ->find();
+        if($user !== Config::get('head_img')){
+            unlink('.'.$user['headimgurl']);//删除之前的头像
+        }
+        $info = $user ->where('userid',$userId)->update($map);
         if($info){
             return $this->success("修改成功");
         }else{
