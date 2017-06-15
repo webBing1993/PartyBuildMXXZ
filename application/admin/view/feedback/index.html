@@ -1,0 +1,118 @@
+{extend name="base/common"}
+
+{block name="style"}
+<style>
+    .shadow{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.4);z-index: 88;}
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>意见反馈</h2>
+        <ol class="breadcrumb">
+            <li>
+                反馈管理
+            </li>
+            <li class="active">
+                <strong><a href="{:Url('Feedback/index')}">列表页</a></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>列表显示</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="i-checks check-all" type="checkbox"></th>
+                                <th>反馈内容</th>
+                                <th>反馈人姓名</th>
+                                <th>反馈人部门</th>
+                                <th>反馈时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr >
+                                <td style="vertical-align: middle"><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td style="width: 600px; vertical-align: middle" >{$vo.content|mb_substr= ###,0,20}...</td>
+                                <td style="vertical-align: middle">{$vo.name}</td>
+                                <td style="vertical-align: middle">{$vo.department}</td>
+                                <td style="vertical-align: middle">{$vo.create_time|time_format='Y-m-d'}</td>
+                                <td style="vertical-align: middle">
+                                    <a onclick="scan({$vo.id})">查看详情</a>&emsp;
+                                    <a href="{:Url('Feedback/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="page">{$_page}</div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="iframe" src="" style="height: 80%;width: 392px;z-index: 99;position: absolute;top: 10%;border: 0;left: 32%;background: #fff;display: none;" scrolling="auto" seamless></iframe>
+<div class="shadow" style="display: none"></div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/admin/js/layer/layer.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+    //代表当前对应的ID
+    var me;
+    var inputId;
+    function change1(a){
+        me = a;
+        inputId = $(a).attr('data-id');
+        $('input[name = title]').val($(a).attr('data-name'));
+        $('textarea[name = content]').val($(a).attr('data-content'));
+    }
+    function scan(Id) {
+        $.ajax({
+            type:"post",
+            url:"{:Url('Feedback/detail')}",
+            data:"id="+Id,
+            success:function(data){
+                html = "<br><p style='margin: 10px'>&emsp;&emsp;&emsp;"+data+"</p><hr>";
+                parent.layer.open({
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['750px', '600px'], //宽高
+                    content:html
+                });
+            }
+        });
+
+    }
+</script>
+{/block}
