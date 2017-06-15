@@ -16,6 +16,7 @@
 
 {block name="body"}
     <div class="top">
+        {eq name="visit" value="0"}
         <div class="userImg">
             <img src="{$personal.userid|get_header}" alt="">
             <input type="file"  id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
@@ -29,6 +30,12 @@
             <li>当前排名 {$personal.rank}</li>
             {/eq}
         </ul>
+        {else/}
+        <div class="userImg">
+            <img src="/home/images/common/vistor.jpg" alt="">
+        </div>
+        <div class="topName">游客</div>
+        {/eq}
         <div class="rule">
             <img src="/home/images/rank/8.png" alt="">
             <!--<span>积分规则</span>-->

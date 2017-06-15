@@ -12,6 +12,7 @@
 
 {block name="body"}
 <div class="top">
+    {eq name="visit" value="0"}
     <div class="userImg">
         <img src="/home/images/common/party.png" alt="">
     </div>
@@ -24,6 +25,12 @@
         <li>部门所在排名 {$deparment.rank}</li>
         {/eq}
     </ul>
+    {else/}
+    <div class="userImg">
+        <img src="/home/images/common/vistor.jpg" alt="">
+    </div>
+    <div class="topName">游客</div>
+    {/eq}
     <div class="rule">
         <img src="/home/images/rank/8.png" alt="">
         <!--<span>积分规则</span>-->
