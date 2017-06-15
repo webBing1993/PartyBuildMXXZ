@@ -39,35 +39,35 @@
 }
 .activity .lists .list:before {
   position: absolute;
-  top: 5.6vw;
+  top: 6vw;
   left: 4vw;
   content: '';
-  width: 15px;
-  height: 15px;
+  width: 4vw;
+  height: 4vw;
   background: url('/home/images/constitution/circle01.png') 0 0 no-repeat;
-  background-size: 15px 15px;
+  background-size: 4vw 4vw;
 }
 .activity .lists .list:nth-child(2):before {
   background: url('/home/images/constitution/circle02.png') 0 0 no-repeat;
-  background-size: 15px 15px;
+  background-size: 4vw 4vw;
 }
 .activity .lists .list:nth-child(3):before {
   background: url('/home/images/constitution/circle03.png') 0 0 no-repeat;
-  background-size: 15px 15px;
+  background-size: 4vw 4vw;
 }
 .activity .lists .list .title {
   width: 100%;
   color: #333333;
   font-size: 1.6rem;
-  line-height: 20px;
-  margin-bottom: 8px;
+  line-height: 6vw;
+  margin-bottom:2.1vw;
 }
 .activity .lists .list label {
   display: block;
   width: 100%;
   color: #333333;
   font-size: 1.5rem;
-  line-height: 24px;
+  line-height: 7vw;
   font-weight: normal;
 }
 .activity .lists .list label.checked {
@@ -89,7 +89,7 @@
   text-align: right;
   color: #999999;
   font-size: 1.2rem;
-  line-height: 14px;
+  line-height: 3.7vw;
 }
 .activity .submit {
   width: 80vw;
@@ -121,5 +121,5 @@
 #modal .modal-content .modal-footer a {
   color: #fc4f42;
   font-size: 1.6rem;
-  line-height: 30px;
+  line-height: 8vw;
 }

@@ -40,35 +40,35 @@
   position: relative;
   display: block;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 2.67vw;
+  margin-bottom: 2.67vw;
   background: #ffffff;
   text-align: center;
   overflow: hidden;
 }
 .regularmore .lists .list .tab {
   position: absolute;
-  top: 20px;
-  left: 5px;
-  width: 45px;
-  height: 30px;
+  top: 5.53vw;
+  left: 1.13vw;
+  width: 12vw;
+  height: 8vw;
   background: url("/home/images/learn/bg_blue.png") no-repeat;
-  background-size: 45px 30px;
+  background-size: 12vw 8vw;
   color: #ffffff;
   font-size: 1.2rem;
   text-align: center;
-  line-height: 20px;
+  line-height:5.33vw;
 }
 .regularmore .lists .list .img {
   width: 100%;
-  height: 180px;
+  height: 48vw;
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
 .regularmore .lists .list .title {
   color: #333333;
   font-size: 1.4rem;
-  line-height: 36px;
+  line-height: 9.6vw
 }
 .regularmore .lists .list .study {
   display: inline-block;
@@ -81,15 +81,15 @@
 }
 /*提示*/
 .tip {
-  height: 40px;
+  height: 10.67vw;
   text-align: center;
-  line-height: 40px;
+  line-height: 10.67vw;
   color: #c1c1c1;
   background: #ffffff;
 }
 .loading {
   width: 100%;
-  height: 40px;
+  height: 10.67px;
 }
 .typing_loader {
   width: 6px;
@@ -99,6 +99,6 @@
   -moz-animation: Typing 1s linear infinite alternate;
   animation: typing 1s linear infinite alternate;
   position: relative;
-  top: 17px;
+  top: 4.53vw;
   left: calc( 50vw - 15px );
 }
