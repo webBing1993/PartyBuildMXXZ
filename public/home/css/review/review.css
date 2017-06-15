@@ -15,12 +15,12 @@ body{
 	text-align: center;
 }
 .list-block {
-	margin: 10px 0;
+	margin: 2.6vw 0;
 }
 li {
-	margin: 10px 0;
+	margin: 2.6vw 0;
 	background-color: #fff;
-	height: 23.6vw;
+	height: 22vw;
 }
 .list-block ul {
 	background-color: #f1f1f1;
@@ -31,20 +31,20 @@ li {
 }
 .swipeout-content>img {
 	border-radius: 4px;
-	margin: 2.6vw;
-	width: 18.4vw;
-	height: 18.4vw;
+	margin: 3vw;
+	width: 21.3vw;
+	height: 16vw;
 	float: left;
 }
 .list{
 	float:left;
-	height: 23.6vw;
-	width: 65vw;
+	height: 22vw;
+	width: 61.7vw;
 	position:relative;
 }
 .list .title {
 	float: left;
-	margin-top: 2.6vw;
+	margin-top: 3vw;
 	color: #111;
 	text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;
@@ -57,11 +57,11 @@ li {
 }
 .list .sent_time {
 	display: block;
-	width: 65vw;
+	width: 61.7vw;
 	font-size: 1.2rem;
 	color: #999;
 	position:absolute;
-	bottom: 2.6vw;
+	bottom: 3vw;
 }
 .list .sent_time>span:last-child{
 	display:inline-block;
@@ -70,7 +70,7 @@ li {
 .arrow{
 	float:left;
 	width: 11vw;
-	height: 23.6vw;
+	height: 22vw;
 }
 .arrow>img{
 	width: 5.3vw;

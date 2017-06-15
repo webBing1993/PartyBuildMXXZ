@@ -34,26 +34,32 @@ class Push extends Controller{
         }else{
 //            //先上传素材 media_id
             foreach($list as $k => $v){
-                $data = array(
-                    "media" => '@.'.$v['img']
-                );
-                $img = $Wechat ->uploadForeverMedia($data,'thumb');
-                $v['thumb_media_id'] = $img['media_id'];
-                $id = $v['id'];
-                $v['content_source_url'] = "$request/home/details/index/id/$id";
+                //class 1新闻
+                if($v['class' == 1]){
+                    $data = array(
+                        "media" => '@.'.$v['img']
+                    );
+                    $img = $Wechat ->uploadForeverMedia($data,'thumb');
+                    $v['thumb_media_id'] = $img['media_id'];
+                    $id = $v['id'];
+                    $v['content_source_url'] = "$request/home/details/index/id/$id";
+                }
             }
             //图文素材列表
             $article = array();
             foreach ($list as $k =>$v ){
-                $article['articles'][$k] = [
-                    'thumb_media_id' => $v['thumb_media_id'],
-                    'author' => $v['publisher'],
-                    'title' => $v['title'],
-                    'content_source_url' => $v['content_source_url'],
-                    "content" => $v['content'],
-                    "digest" => $v['title'],
-                    "show_cover_pic" => 0,
-                ];
+                //class 1新闻
+                if($v['class' == 1]) {
+                    $article['articles'][$k] = [
+                        'thumb_media_id' => $v['thumb_media_id'],
+                        'author' => $v['publisher'],
+                        'title' => $v['title'],
+                        'content_source_url' => $v['content_source_url'],
+                        "content" => $v['content'],
+                        "digest" => $v['title'],
+                        "show_cover_pic" => 0,
+                    ];
+                }
             }
             //最后一条加入每日一课
             $article['articles'][count($article['articles'])] = [
@@ -68,8 +74,8 @@ class Push extends Controller{
             $lists =  $article;
             //上传多条图文素材
             $info = $Wechat ->uploadForeverArticles($lists);
-            //对应的新闻修改状态
             $push = new PushModel();
+            //对应的修改状态
             if (!empty($info['media_id'])){
                 foreach ($list as $k => $v){
                     $push ->where('focus_main',$v['id']) ->update(['status' => 1]);//1为已推送
@@ -143,21 +149,31 @@ class Push extends Controller{
     /**
      * 待推送的新闻列表
      */
-    public function pushlist(){
+    private function pushlist(){
         $push = new PushModel();
-        //获取未推送的前7条新闻
-        $list = $push ->alias('a')
-            ->join('pb_news as b','b.id = a.focus_main')
-            ->where('a.status',0)
-            ->field('b.id,b.title,b.content,b.publisher,b.front_cover')
-            ->order('a.create_time desc')
-            ->limit('7')
-            ->select();
-        //图片转化
+        //获取未推送的前7条数据
+        $map = array('status' => 0);
+        $order = array('create_time desc');
+        $field = "class,focus_main";
+        $list = $push ->where($map) ->order($order) ->field($field) ->select();
+        //class 1新闻
+        $all_list = array();
+        $new_list = array();
         foreach ($list as $k => $v){
-            $img = Picture::get($v['front_cover']);
-            $v['img'] = $img['path'];
+            if($v['class'] == 1){
+                $new = News::where('id',$v['focus_main']) ->find() ->toArray();
+                $new_list = array_merge(
+                    [
+                        'class' => $v['class'],
+                        'focus_main' => $v['focus_main']
+                    ], $new);
+                //图片地址转化
+                $img = Picture::get($new['front_cover']);
+                $new_list['img'] = $img['path'];
+                //压入数据
+                array_push($all_list, $new_list);
+            }
         }
-        return $list;
+        return $all_list;
     }
 }

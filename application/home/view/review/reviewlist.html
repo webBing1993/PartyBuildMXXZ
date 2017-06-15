@@ -32,8 +32,8 @@
 					</div>
 				</div>
 				<div class="swipeout-actions-right">
-					<a class="green" onclick='dispose(this,{$vo.id},0)'>通&emsp;过</a>
-					<a class="red" onclick='dispose(this,{$vo.id},-1)'>不通过</a>
+					<a class="green" onclick='dispose(this,"{$vo.id}",0,"{$vo.class}")'>通&emsp;过</a>
+					<a class="red" onclick='dispose(this,"{$vo.id}",-1,"{$vo.class}")'>不通过</a>
 				</div>
 			</li>
 	{/volist}
@@ -63,7 +63,7 @@ function jump(id){
 	parent.location.href="/home/details/index/id/"+id;
 }
 //提交操作
-function dispose(i,id,status){
+function dispose(i,id,status,type){
 	swal({
 		title: ' ',
 		text: '确认当前操作吗？',
@@ -79,7 +79,8 @@ function dispose(i,id,status){
 				url: "{:Url('Review/review')}",
 				data: {
 					id:id,
-					status:status
+					status:status,
+					class : type
 				},
 				success: function(data){
 					//成功后刷新页面
@@ -91,9 +92,13 @@ function dispose(i,id,status){
 						//判断是否还有消息
 						check();
 						//swal回调里继续使用swal有时不会被触发
-						aleats('操作成功!','success');
+						setTimeout(function(){
+							aleats('操作成功!','success');
+						},200);
 					}else{
-						aleats('操作失败!','error');
+						setTimeout(function(){
+							aleats('操作失败!','error');
+						},200);
 					}
 				}
 			})

@@ -39,7 +39,6 @@
             }else if(eq == 1){
                 //未审核列表有操作就刷新一下
                 var review = sessionStorage.getItem('review');
-                console.log(review);
                 if(review){
                     $('#tab'+eq)[0].src='/home/review/passlist';
                     sessionStorage.removeItem("review");
