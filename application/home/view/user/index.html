@@ -7,16 +7,12 @@
 {block name="body"}
 {eq name="visit" value="1"}
 <div class="banner">
-	<img src="/home/images/user/vistor.jpg" alt="个人头像" class="up">
+	<img src="/home/images/common/vistor.jpg" alt="个人头像" class="up">
 	<div class="name">游客</div>
 </div>
 {else/}
 <div class="banner">
-	{eq name="user.header" value=""}
-	<div class="up" data-tab="{$user.avatar}"></div>
-	{else/}
-	<div class="up" data-tab="{$user.header}"></div>
-	{/eq}
+	<div class="up" data-tab="{$user.headimgurl}"></div>
 	<div class="name">{$user.name}</div>
 	<input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
 	<input type="hidden" name="header"  value="" required="">
@@ -46,16 +42,6 @@
 		<span>意见反馈</span>
 		<i class="fa fa-angle-right fr"></i>
 	</a>
-	<!--{eq name="is" value="1"}-->
-	<!--<a href="{:Url('User/mynotes')}" class="list clear">-->
-		<!--<span>情况发布</span>-->
-		<!--<i class="fa fa-angle-right fr"></i>-->
-	<!--</a>-->
-	<!--<a href="{:Url('User/mypublish')}" class="list clear">-->
-		<!--<span>通知发布</span>-->
-		<!--<i class="fa fa-angle-right fr"></i>-->
-	<!--</a>-->
-	<!--{/eq}-->
 </div>
 {/eq}
 {/block}
@@ -112,7 +98,7 @@ $(function(){
 						};
 						$.ajax({
 							type:"post",
-							url:"{:Url('User/setHeader')}",
+							url:"{:Url('Rank/setHeader')}",
 							data:{header:msg.data.path},
 							dataType: "Json",
 							success:function(){

@@ -32,18 +32,6 @@ class User extends Base {
         $userId = session('userId');
         $user = WechatUser::where('userid',$userId)->find();
         $this->assign('user',$user);
-
-        //是否具备我的发布权限,具备为1，无则为0
-        $map = array(
-            'userid' => $userId,
-            'tagid' => 5, //权限标签id
-        );
-        $info = WechatUserTag::where($map)->find();
-        if($info) {
-            $this->assign('is',1);
-        }else{
-            $this->assign('is',0);
-        }
         return $this->fetch();
     }
 
