@@ -8,11 +8,7 @@
 
 namespace app\home\controller;
 use app\home\model\Message;
-use app\home\model\WechatUser;
-use com\wechat\TPQYWechat;
-use think\Config;
 use think\Controller;
-use think\Log;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
 

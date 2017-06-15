@@ -95,6 +95,17 @@ class Base extends Controller {
     }
 
     /**
+     * 检查游客登陆
+     */
+    public function checkAnonymous(){
+        $userId = session('userId');
+        //如果userId等于visitor  
+        if($userId == 'visitor'){
+           return $this ->error('抱歉,游客暂无相关权限!');
+        }
+    }
+    
+    /**
      * 获取公众号签名
      */
     public function jssdk(){

@@ -10,9 +10,7 @@ namespace app\home\controller;
 use app\home\model\WechatUser;
 use think\Controller;
 use app\admin\model\Question;
-use app\home\model\Answer;
 use app\home\model\Answers;
-use think\Url;
 
 /**
  * class Constitution

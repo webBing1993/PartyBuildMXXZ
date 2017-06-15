@@ -11,7 +11,6 @@ use app\home\model\Like;
 use app\home\model\Comment;
 use app\home\model\Answers;
 use app\home\model\Browse;
-use app\home\model\WechatDepartment;
 use think\Config;
 use think\Db;
 

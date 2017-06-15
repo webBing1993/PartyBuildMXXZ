@@ -108,6 +108,8 @@ class User extends Base {
      * 意见反馈
      */
     public function feedback() {
+        //游客没有相关权限
+        $this ->checkAnonymous();
         return $this->fetch();
     }
     /*

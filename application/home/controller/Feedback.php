@@ -11,8 +11,6 @@ use app\home\model\Comment;
 use app\home\model\Like;
 use app\home\model\Opinion;
 use app\home\model\Picture;
-use com\wechat\TPQYWechat;
-use think\Config;
 use think\Db;
 
 /**

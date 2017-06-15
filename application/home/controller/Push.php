@@ -9,9 +9,7 @@ namespace app\home\controller;
 use think\Controller;
 use com\wechat\TPWechat;
 use think\Config;
-use think\Request;
 use app\home\model\News;
-use app\home\model\Push as PushModel;
 use app\home\model\Picture;
 
 class Push extends Controller{

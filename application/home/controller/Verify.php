@@ -7,8 +7,6 @@
  */
 namespace app\home\controller;
 use think\Controller;
-use think\Config;
-use com\wechat\TPWechat;
 use app\home\model\WechatUser;
 use think\Cookie;
 use think\Session;

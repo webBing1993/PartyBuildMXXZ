@@ -13,10 +13,6 @@ use  app\home\model\WechatUser;
 use app\home\model\Picture;
 use app\home\model\Like;
 use app\home\model\Comment;
-use app\home\model\Answers;
-use think\Cookie;
-use com\wechat\TPWechat;
-use think\Config;
 
 class Details extends Base{
     /**
