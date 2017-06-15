@@ -39,7 +39,7 @@ class Learn extends Base{
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list2 = LearnModel::where($map2)->limit(3)->order('id desc')->select();
+        $list2 = LearnModel::where($map2)->limit(5)->order('id desc')->select();
         $this->assign('list2',$list2);
         if(empty($Answers)){   // 没有数据
             //取单选
