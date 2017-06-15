@@ -7,6 +7,7 @@
  */
 namespace app\home\model;
 use think\Model;
+
 class Feedback extends Model{
     protected $insert = [
         'create_time' => NOW_TIME
