@@ -1,0 +1,131 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/structure.css">
+{/block}
+
+{block name="body"}
+<div class="banner">
+	<img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
+</div>
+<div class="tabs">
+	<span class="tab active">小镇党委</span>
+	<span class="tab">服务中心</span>
+	<span class="tab">VR</span>
+</div>
+<div class="listbox">
+	<div class="town box active">
+		<!--小镇党委-->
+		<div class="box_ or">
+			<div class="lists">
+				<!--第一层-->
+				<div class="list clear">
+					<div class="party1">
+						<div class="tri"></div>
+						<div class="name1">单建党支部</div>
+					</div>
+					<!--第二层-->
+					<div class="down detail1">
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江中测新图地理信息技术有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江正元地理信息有限责任公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江南方测绘科技有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江房联科技有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江中海达空间信息技术有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江国遥地理信息技术有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州经纬信息技术股份有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江天下图地理信息技术有限公司党支部</a>
+						<!--<a class="name2 limit" href="{:Url('Structure/detail')}">浙江圣周信息科技有限公司党支部</a>-->
+					</div>
+					<!--/第二层-->
+				</div>
+				<!--/第一层-->
+
+				<!--第一层-->
+				<div class="list clear">
+					<div class="party1">
+						<div class="tri"></div>
+						<div class="name1">企业联合党支部</div>
+					</div>
+					<!--第二层-->
+					<div class="down detail1">
+						<a class="name2 limit" href="{:Url('Structure/detail')}">地信梦工场联合党支部</a>
+					</div>
+					<!--/第二层-->
+				</div>
+				<!--/第一层-->
+				<!--第一层-->
+				<div class="list clear">
+					<div class="party1">
+						<div class="tri"></div>
+						<div class="name1">党群服务中心党支部</div>
+					</div>
+					<!--第二层-->
+					<div class="down detail1">
+						<a class="name2 limit" href="{:Url('Structure/detail')}">地信小镇党群服务中心党支部</a>
+					</div>
+					<!--/第二层-->
+				</div>
+				<!--/第一层-->
+			</div>
+		</div>
+		<div class="box_ summary">
+			<p>
+				根据《中共湖州莫干山高新技术产业开发区工作委员会关于设立高新区管委会机关党委、高新区企业党委、高新区地理信息小镇党委的通知》（莫高委发〔2016〕1号）文件精神，于2016年10月批准成立高新区地理信息小镇党委。地理信息小镇党委下设党支部10个，党员103名，其中预备党员2名。党委委员会设委员5名，其中书记1名，副书记1名。
+			</p>
+		</div>
+		<!--/小镇党委-->
+	</div>
+	<div class="service box hidden">
+		<!--服务中心-->
+		<div class="box_ summary">
+			<p>
+				德清地理信息小镇党群服务中心是县委为进一步探索特色小镇党建工作、加强和改进党员教育管理而搭建的“服务党员、服务人才、服务群众、服务发展”的一体化平台，于2016年10月成立，现有单建企业支部8个、企业联合支部1个、党群服务中心支部1个。中心由服务大厅、红领学院、红盟书吧三大功能区构成，围绕党员、创业、人才、志愿四大服务内容，中心专门组建专业服务团队，整合资源成立地理信息小镇红色联盟简称“地信红盟”（“红色盟员”，由18个县级机关部门、30个社会组织和党群服务中心组成，努力形成党建、部门、社会组织三方联动服务构架；“红色盟约”，以“一周一轮值、一月一主题、一季一交流、一年一排名”为内容，实现中心运行规范化和长效化；“服务清单”，以提供党建指导、党务办理、教育管理、创业服务、人才联络、志愿帮扶等服务为抓手，推动各项工作有效推进），有效服务创业创新、凝聚党员人才，全力助推小镇产、城、人、文高度融合。
+			</p>
+		</div>
+		<!--/服务中心-->
+	</div>
+	<div class="vr box hidden">
+		<a href="http://720yun.com/t/e3cjO5mvuO2?pano_id=2107800">
+			<div class="title">德清地理信息小镇党群服务中心全景展示</div>
+			<img src="/home/images/structure/vr.jpg" alt="vr封面">
+		</a>
+	</div>
+</div>
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+$('title' ).text('组织架构');
+$(function(){
+	//tab值记录
+	tabRecord('.tab' ,'.box');
+	//组织架构切换
+	slide();
+	//tab切换
+	tabSwitch('.tab' ,'.box');
+	$('.name2' ).each(function(){
+		var t = $(this ).text();
+		var href = '/home/structure/detail?party='+t+'';
+		$(this ).attr('href', href);
+	})
+
+});
+function slide(){
+	$('.lists .party1' ).on('click',function(){
+		var it = $(this);
+		var detail = it.next('.detail1' );
+		if(detail.hasClass('down')){
+			detail.slideDown();
+			it.find('.tri').removeClass('toup').addClass('todown');
+		}else{
+			detail.slideUp();
+			it.find('.tri').removeClass('todown').addClass('toup');
+		}
+		detail.toggleClass('down');
+	});
+}
+
+</script>
+{/block}
