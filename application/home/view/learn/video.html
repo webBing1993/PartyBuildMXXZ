@@ -40,9 +40,9 @@
 				<span class="read">{$video.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="video.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,1,{$video.id})">{$video.likes}</span>
+				<span class="isgood good_" onclick="isGood(this,3,{$video.id})">{$video.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,1,{$video.id})">{$video.likes}</span>
+				<span class="isgood good" onclick="isGood(this,3,{$video.id})">{$video.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$video.likes}</span>
@@ -85,7 +85,7 @@
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想！">
 		</div>
-		<div class="send fr" onclick="send(this,1,{$video['id']})">发送</div>
+		<div class="send fr" onclick="send(this,3,{$video['id']})">发送</div>
 	</div>
 	{/eq}
 </div>
@@ -108,7 +108,7 @@ $(function(){
 	//ios fix兼容
 //	tofixed();
 	//ue限定
-	ueLimit();
+//	ueLimit();
 });
 /**
  * 点赞
@@ -249,7 +249,7 @@ function loadScroll(){
 				type:"post",
 				url:"{:Url('Base/morecomment')}",
 				data:{
-					type:1,
+					type:3,
 					aid:id,
 					length:len
 				},
@@ -322,9 +322,9 @@ function ueLimit(){
 	//---微信接口JS-SDK的调用
 	wx.config({
 		debug: false,
-		appId: '{$jsSign.appid}', // 必填，公众号的唯一标识
-		timestamp: {$jsSign['timestamp']}, // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
-		nonceStr: '{$jsSign.noncestr}', // 必填，生成签名的随机串
+		appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
+		timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+		nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
 		signature: '{$jsSign.signature}', // 必填，签名，见附录1
 		jsApiList: [
 			'checkJsApi',

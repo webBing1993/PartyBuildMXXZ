@@ -16,9 +16,12 @@
 
 {block name="body"}
     <div class="top">
+        {eq name="visit" value="0"}
         <div class="userImg">
-            <img src="{$personal.userid|get_header}" alt="">
-            <input type="file"  id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
+            <div class="shadow"></div>
+            <div class="userImgBox">
+                <img src="{$personal.userid|get_header}" alt="">
+            </div>
         </div>
         <div class="topName">{$personal.name}</div>
         <ul class="now">
@@ -29,11 +32,20 @@
             <li>当前排名 {$personal.rank}</li>
             {/eq}
         </ul>
+        {else/}
+        <div class="userImg">
+            <div class="shadow"></div>
+            <div class="userImgBox">
+                <img src="/home/images/common/vistor.jpg" alt="">
+            </div>
+        </div>
+        <div class="topName">游客</div>
+        {/eq}
         <div class="rule">
-            <img src="/home/images/rank/8.png" alt="">
+            <img src="/home/images/rank/help.png" alt="">
             <!--<span>积分规则</span>-->
         </div>
-        <div class="other">
+        <div class="other gr">
             <a onclick="window.location.replace('/home/rank/department')"></a>
         </div>
     </div>
@@ -46,10 +58,7 @@
             <li>总榜</li>
         </ul>
 
-        <div class="name">
-            <span>排名</span>
-            <span>积分</span>
-        </div>
+
 
         <div class="ranging">
             <!--//周榜-->

@@ -20,6 +20,8 @@ class Rank extends Base{
      * 个人积分排行
      */
     public function index(){
+        //判断游客登陆
+        $this ->anonymous();
         $wechatModel = new WechatUser();
         $userId = session('userId');
         //个人信息
@@ -351,74 +353,84 @@ class Rank extends Base{
      * 部门积分排行
      */
     public function department(){
+        //判断游客登陆
+        $this ->anonymous();
         $userId = session('userId');
+            //所在部门名称
+            if($userId !== 'visitor'){
+                $personal = Db::table('pb_wechat_user')
+                    ->alias('a')
+                    ->join('pb_wechat_department b','a.department = b.id')
+                    ->field('a.userid,b.name,b.id')
+                    ->where('a.userid',$userId)
+                    ->find();
+                //部门总分
+                $personal['sum'] = WechatUser::where('department',$personal['id']) ->sum('score');
+            }
 
-        //所在部门名称
-        $personal = Db::table('pb_wechat_user')
-            ->alias('a')
-            ->join('pb_wechat_department b','a.department = b.id')
-            ->field('a.userid,b.name,b.id')
-            ->where('a.userid',$userId)
-            ->find();
-        //部门总分
-        $personal['sum'] = WechatUser::where('department',$personal['id']) ->sum('score');
-        //
-        $dpall = Db::table('pb_wechat_department')
-            ->alias('a')
-            ->join('pb_wechat_user b','b.department = a.id','LEFT')
-            ->field('a.id,a.name,b.score')
-            ->select();
-        //合并相同数组的数据并值累加
-        $item = array();
-        foreach($dpall as $k=>$v){
-            //没有送积分
-//            if ($v['score'] != 0){
-//                $v['score'] += 10;
-//            }
-            if(!isset($item[$v['id']])){
-                $item[$v['id']]=$v;
-            }else{
-                $item[$v['id']]['score']+=$v['score'];
+            //
+            $dpall = Db::table('pb_wechat_department')
+                ->alias('a')
+                ->join('pb_wechat_user b','b.department = a.id','LEFT')
+                ->field('a.id,a.name,b.score')
+                ->select();
+            //合并相同数组的数据并值累加
+            $item = array();
+            foreach($dpall as $k=>$v){
+                //没有送积分
+    //            if ($v['score'] != 0){
+    //                $v['score'] += 10;
+    //            }
+                if(!isset($item[$v['id']])){
+                    $item[$v['id']]=$v;
+                }else{
+                    $item[$v['id']]['score']+=$v['score'];
+                }
             }
-        }
-        //倒序，字段score排序
-        $sort = array(
-            'direction' => 'SORT_DESC',
-            'field' => 'score',
-        );
-        $arrSort = array();
-        foreach ($item as $k => $v){
-            foreach ($v as $key => $value){
-                $arrSort[$key][$k] = $value;
+            //倒序，字段score排序
+            $sort = array(
+                'direction' => 'SORT_DESC',
+                'field' => 'score',
+            );
+            $arrSort = array();
+            foreach ($item as $k => $v){
+                foreach ($v as $key => $value){
+                    $arrSort[$key][$k] = $value;
+                }
             }
-        }
-        if($sort['direction'] && $arrSort){
-            array_multisort($arrSort[$sort['field']],constant($sort['direction']),$item);
-        }
-        //获取头部信息，并取20名用户
-        $new = array();
-        foreach ($item as $key=>$value){
-            if($value['id'] == $personal['id']){
-                $personal['score'] = $value['score'];
+            if($sort['direction'] && $arrSort){
+                array_multisort($arrSort[$sort['field']],constant($sort['direction']),$item);
             }
-            if($value['score'] != 0){
-                $new[$key] = $value;
+            //获取头部信息，并取20名用户
+            $new = array();
+            foreach ($item as $key=>$value){
+                if($userId !== 'visitor') {
+                    if ($value['id'] == $personal['id']) {
+                        $personal['score'] = $value['score'];
+                    }
+                }
+                if($value['score'] != 0){
+                    $new[$key] = $value;
+                }
             }
-        }
 
-        $last = array();
-        foreach ($new as $k => $v){
-            if($v['id'] == $personal['id']){
-                $personal['score'] = $v['score'];
-                $personal['rank'] = $k+1;
+            $last = array();
+            foreach ($new as $k => $v){
+                if($userId !== 'visitor') {
+                    if ($v['id'] == $personal['id']) {
+                        $personal['score'] = $v['score'];
+                        $personal['rank'] = $k + 1;
+                    }
+                }
+                if($k < 20){ //取小于20名排行
+                        $last[$k] = $v;
+                }
             }
-            if($k < 20){ //取小于20名排行
-                    $last[$k] = $v;
-            }
-        }
 
-        $this->assign('all',$last);
-        $this ->assign('deparment',$personal);
+            $this->assign('all',$last);
+            if($userId !== 'visitor'){
+                $this ->assign('deparment',$personal);
+            }
 
         //获取周榜信息
         date_default_timezone_set("PRC");        //初始化时区
@@ -766,7 +778,7 @@ class Rank extends Base{
             'headimgurl' => $header,
         );
         $user = WechatUser::where('userid',$userId) ->find();
-        if($user !== Config::get('head_img')){
+        if($user['headimgurl'] !== Config::get('head_img')){
             unlink('.'.$user['headimgurl']);//删除之前的头像
         }
         $info = $user ->where('userid',$userId)->update($map);

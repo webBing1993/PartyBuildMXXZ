@@ -97,9 +97,20 @@ class Verify extends Controller{
      * 退出登录
      */
     public function logout(){
-        //cookie初始化
+        //cookie初始化 session 初始化
         Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
         Cookie::delete('dypb');
+        session('userId',null);
         return $this ->fetch('login');
+    }
+    /**
+     * 游客登录
+     */
+    public function tourist(){
+        //cookie初始化 session 初始化
+        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+        Cookie::delete('dypb');
+        session('userId','visitor');
+        return $this ->redirect(session('url'));
     }
 }

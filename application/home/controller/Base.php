@@ -32,11 +32,13 @@ class Base extends Controller {
         if(!empty($_SERVER['REQUEST_URI'])){
             session('url',$_SERVER['REQUEST_URI']);
         }
-        //读取本地cookie
-        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
-        session('userId',Cookie::get('dypb')['user']);
-
         $userId = session('userId');
+        //读取本地cookie
+        if(empty($userId)){
+            Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+            session('userId',Cookie::get('dypb')['user']);
+            $userId = session('userId');
+        }
 
         if(Config::get('WEB_SITE_CLOSE')){
             return $this->error('站点维护中，请稍后访问~');
@@ -45,7 +47,7 @@ class Base extends Controller {
         //如果是游客的话默认userid为visitors
         if($userId == 'visitor'){
             session('nickname','游客');
-            session('header','/home/images/vistor.jpg');
+            session('header','/home/images/common/vistor.jpg');
         }else{
             //微信认证
             $Wechat = new TPWechat(Config::get('party'));
