@@ -74,11 +74,14 @@ class Push extends Controller{
             $lists =  $article;
             //上传多条图文素材
             $info = $Wechat ->uploadForeverArticles($lists);
-            $push = new PushModel();
             //对应的修改状态
+            $news = new News();
             if (!empty($info['media_id'])){
+                //class 1新闻
                 foreach ($list as $k => $v){
-                    $push ->where('focus_main',$v['id']) ->update(['status' => 1]);//1为已推送
+                    if($v['class'] == 1){
+                        $news ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
+                    }
                 }
             }
         }
@@ -147,32 +150,30 @@ class Push extends Controller{
     }
 
     /**
-     * 待推送的新闻列表
+     * 待推送的列表
      */
-    private function pushlist(){
-        $push = new PushModel();
+    public function pushlist(){
         //获取未推送的前7条数据
-        $map = array('status' => 0);
-        $order = array('create_time desc');
-        $field = "class,focus_main";
-        $list = $push ->where($map) ->order($order) ->field($field) ->select();
-        //class 1新闻
+        $news =new News();
+        //获取未推送的前7条数据
+        $map = array('status' => 0,'push' => 1);
+        $order = 'create_time desc';
+        $list = $news ->where($map) ->order($order) ->limit(7) ->select();
         $all_list = array();
-        $new_list = array();
         foreach ($list as $k => $v){
-            if($v['class'] == 1){
-                $new = News::where('id',$v['focus_main']) ->find() ->toArray();
-                $new_list = array_merge(
-                    [
-                        'class' => $v['class'],
-                        'focus_main' => $v['focus_main']
-                    ], $new);
-                //图片地址转化
-                $img = Picture::get($new['front_cover']);
-                $new_list['img'] = $img['path'];
-                //压入数据
-                array_push($all_list, $new_list);
-            }
+            //图片地址转化
+            $img = Picture::get($v['front_cover']);
+            //class 1新闻
+            $temp = array(
+                'id' => $v['id'],
+                'publisher' => $v['publisher'],
+                'title' => $v['title'],
+                'content' => $v['content'],
+                'img' => $img['path'],
+                'class' => 1
+            );
+            //压入数据
+            array_push($all_list,$temp);
         }
         return $all_list;
     }

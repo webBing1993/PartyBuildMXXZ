@@ -18,14 +18,12 @@ use think\Cookie;
 use com\wechat\TPWechat;
 use think\Config;
 
-class Details extends Controller{
+class Details extends Base{
     /**
      * 新闻详情页
      * @return mixed
      */
     public function index(){
-        //判断是不是微信打开
-//        $this ->oauth();
         //判断是否是游客
         $this ->anonymous();
         //获取jssdk
@@ -73,76 +71,5 @@ class Details extends Controller{
         $comment = $commentModel->getComment(1,$id,$userId);
         $this->assign('comment',$comment);
         return $this->fetch();
-    }
-    /*
-    * 判断当天积分是否达到上限
-    */
-    public function score_up(){
-        $con = strtotime(date("Y-m-d",time()));  //  获取当天年月日时间戳
-        $userid = session('userId');
-        $map = array(
-            'create_time' => ['egt',$con],
-            'user_id' => $userid,
-        );
-        $map1 = array(
-            'create_time' => ['egt',$con],
-            'uid' => $userid,
-            'score' => 1
-        );
-        $map2 = array(
-            'create_time' => ['egt',$con],
-            'userid' => $userid
-        );
-        $browse = Browse::where($map)->count(); //  浏览得分
-        $like = Like::where($map1)->count();  // 点赞得分
-        $comment = Comment::where($map1)->count();  // 评论得分
-        $Answer = Answers::where($map2)->find();
-        $answer = $Answer['score'];  // 答题得分
-        $num = $browse + $like + $comment + $answer;
-        if ($num < 15){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    /**
-     * 判断是否是游客登录
-     */
-    public function anonymous() {
-        //读取本地cookie
-        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
-        session('userId',Cookie::get('dypb')['user']);
-
-        $userId = session('userId');
-        //如果userId等于visitor  则为游客登录，否则则正常显示
-        if(empty($userId)){
-            $this->assign('visit', 1);
-            session('userId','visitor');
-        }else{
-            $this->assign('visit', 0);
-        }
-    }
-    /**
-     * 获取公众号签名
-     */
-    public function jssdk(){
-        $Wechat = new TPWechat(Config::get('party'));
-        $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        $jsSign = $Wechat->getJsSign($url);
-        $this->assign("jsSign", $jsSign);
-    }
-    /**
-     * 判断是否微信打开
-     */
-    public function oauth(){
-        $user_agent = $_SERVER['HTTP_USER_AGENT'];
-        if (strpos($user_agent, 'MicroMessenger') === false) {
-            // 非微信浏览器禁止浏览
-            return $this ->error('请在微信打开!');
-        } else {
-            // 微信浏览器，允许访问
-            // 获取版本号
-            preg_match('/.*?(MicroMessenger\/([0-9.]+))\s*/', $user_agent, $matches);
-        }
     }
 }

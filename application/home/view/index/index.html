@@ -27,19 +27,19 @@
                 <li>
                     <a href="{:Url('News/index')}">
                         <img src="/home/images/index/djzj.png" alt="党建之家">
-                        <span>党建之家</span>
+                        <span>新闻发布</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('partyhz/index')}">
                         <img src="/home/images/index/hshj.png" alt="红色汇集">
-                        <span>红色汇集</span>
+                        <span>红色矩阵</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{:Url('Constitution/course')}">
+                    <a href="{:Url('Learn/index?c=1')}">
                         <img src="/home/images/index/mryk.png" alt="每日一课">
-                        <span>每日一课</span>
+                        <span>两学一做</span>
                     </a>
                 </li>
 
@@ -54,9 +54,12 @@
     <div class="notices">
         <div class="notice party">
             {volist name="list2" id="loo"}
-            <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
+            <a href="{eq name='$loo.class' value='1'}{:Url('Details/index?id='.$loo['id'])}{else/}{eq name='$loo.type' value='1'}{:Url('Learn/video?id='.$loo['id'])}{else/}{:Url('Learn/article?id='.$loo['id'])}{/eq}{/eq}" class="list clear" data-type="{$loo.class}">
                 <div class="fl">
                     <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
+                    <span class="type">
+                    {eq name="$loo.class" value="1"}新闻发布{else/}两学一做{/eq}
+                   </span>
                 </div>
                 <div class="fr right">
                     <div class="title limit_">{$loo.title}</div>
@@ -75,13 +78,6 @@
 <div class="loading hidden">
     <div class="typing_loader"></div>
 </div>
-<!--审核-->
-{eq name="$user.review"  value="1"}
-<a href="{:Url('Review/index')}" class="examine">
-    <img src="/home/images/index/msg.png" alt="">
-    {$user.count?'<span class="point"></span>':''}
-</a>
-{/eq}
 {/block}
 
 {block name="script"}
@@ -129,16 +125,18 @@
             var ntc = $('.notices');
             var dh = $(document).height();
             var end = $(window).height() + $(window).scrollTop();
-            var len = $('.notice .list').length;
+            var news_len = $('.notice .list[data-type=1]').length;
+            var learn_len = $('.notice .list[data-type=2]').length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
-                    type:"post",
-                    url: "{:Url('News/listmore')}",
+                    type:"get",
+                    url: "{:Url('Index/moreDataList')}",
                     data:{
-                        length:len
+                        news : news_len,
+                        learn : learn_len
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -150,7 +148,7 @@
                         if(data.code == 1){
                             addLists(data);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 6){
                                 tip.text('上拉加载更多');
                             }
                         }else{
@@ -171,10 +169,26 @@
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
+            var link = '';
+            var type_name ='';
+            if(list.class == 1){
+                class_name = '新闻发布';
+                link = '/home/details/index/id/'+list.id;
+            }else{
+                class_name = '两学一做';
+                //1视频 2文字
+                if(list.type == 2){
+                    link = '/home/learn/article/id/'+list.id;
+                }else{
+                    link = '/home/learn/video/id/'+list.id;
+                }
+
+            }
             html +=
-                    '<a href="/home/details/index/id/'+ list.id+'.html" class="list clear">'+
+                    '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
                     '<div class="fl">'+
                     '<img src="'+list.path+'" alt="图片">'+
+                    '<span class="type">'+class_name+'</span>'+
                     '</div>'+
                     '<div class="fr right">'+
                     '<div class="title limit_">'+list.title+'</div>'+
