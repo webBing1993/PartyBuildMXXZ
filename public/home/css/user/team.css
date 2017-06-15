@@ -1,0 +1,92 @@
+.banner {
+  width: 100vw;
+  height: 50vw;
+}
+.banner .banner-img {
+  width: 100%;
+  height: 100%;
+}
+.tabs {
+  width: 100vw;
+  height: 30px;
+  background: #f1f1f1;
+  margin-top: 10px;
+}
+.tabs .tab {
+  display: inline-block;
+  width: 32.5vw;
+  height: 100%;
+  color: #333333;
+  font-size: 1.4rem;
+  line-height: 30px;
+  text-align: center;
+}
+.tabs .active span {
+  height: 100%;
+  display: inline-block;
+  border-bottom: 2px solid #f03b41;
+}
+.boxs {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 64vw;
+}
+.boxs .box {
+  position: absolute;
+  top: 0;
+  width: 99vw;
+}
+.boxs .box:nth-child(1) {
+  left: 0;
+}
+.boxs .box:nth-child(2) {
+  left: 100vw;
+}
+.boxs .box:nth-child(3) {
+  left: 200vw;
+}
+.boxs .box .lists .list {
+  display: inline-block;
+  width: 100vw;
+  height: 24vw;
+  padding: 0 4vw;
+  border-bottom: 1px solid #f1f1f1;
+}
+.boxs .box .lists .list > div {
+  display: inline-block;
+}
+.boxs .box .lists .list .left {
+  width: 24vw;
+  height: 16vw;
+  margin: 4vw 0;
+  overflow: hidden;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.boxs .box .lists .list .content {
+  width: 63vw;
+  margin-left: 3vw;
+  margin-top: 2vw;
+}
+.boxs .box .lists .list .content .title {
+  width: 100%;
+  color: #333333;
+  font-size: 1.4rem;
+  line-height: 12vw;
+}
+.boxs .box .lists .list .content .note {
+  width: 100%;
+  color: #999999;
+  font-size: 1.2rem;
+  line-height: 6vw;
+}
+.boxs .box .lists .list .content .note > div {
+  display: inline-block;
+  width: 49%;
+}
+.boxs .box .lists .list .content .note .angle {
+  text-align: right;
+  font-size: 16px;
+}

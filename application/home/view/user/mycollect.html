@@ -1,0 +1,398 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/collect.css">
+{/block}
+
+{block name="body"}
+{eq name="is_empty" value="1"}
+<div class="default">
+	<img src="/home/images/notice/nomessage.png" alt="暂无消息">
+</div>
+{else/}
+<div class="lists">
+	<!--收藏类型：相关通知详情，党课详情，活动招募和活动详情-->
+	{volist name="list" id="vo"}
+	<div class="listbox">
+		{if condition="$vo.type eq 1"}
+		<a href="{:Url('News/detail?id='.$vo['news_id'])}" class="list list_img clear">
+			<div class="fl">
+				<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+			</div>
+			<div class="fl lr">
+				<div class="title limit_">{$vo.title}</div>
+				<div class="clear">
+					<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+					<span class="fr">详情</span>
+				</div>
+			</div>
+		{elseif condition="$vo.type eq 2"/}
+			{if condition="$vo.class eq 1"}
+			<a href="{:Url('Notice/relevant?id='.$vo['notice_id'])}" class="list list_des">
+				<div class="title limit">{$vo.title}</div>
+				<div class="content limit_">{$vo.description}</div>
+				<div class="note clear">
+					<span class="time fr">{$vo.time|time_format="Y-m-d"}</span>
+				</div>
+			{elseif condition="$vo.class eq 2"/}
+			<a href="{:Url('Notice/meet?id='.$vo['notice_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{elseif condition="$vo.class eq 3"/}
+			<a href="{:Url('Notice/party?id='.$vo['notice_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}{$vo.front_cover}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{elseif condition="$vo.class eq 4"/}
+			<a href="{:Url('Notice/recruit?id='.$vo['notice_id'])}" class="list list_des">
+				<div class="title limit">{$vo.title}</div>
+				<div class="content limit_">{$vo.description}</div>
+				<div class="note clear">
+					<span class="time fr">{$vo.time|time_format="Y-m-d"}</span>
+				</div>
+			{elseif condition="$vo.class eq 5"/}
+			<a href="{:Url('Notice/activity?id='.$vo['notice_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{elseif condition="$vo.class eq 6"/}
+			<a href="{:Url('Notice/volunteer?id='.$vo['notice_id'])}" class="list list_des">
+				<div class="title limit">{$vo.title}</div>
+				<div class="content limit_">{$vo.description}</div>
+				<div class="note clear">
+					<span class="time fr">{$vo.time|time_format="Y-m-d"}</span>
+				</div>
+			{else/}
+			<a href="{:Url('Notice/situation?id='.$vo['notice_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{/if}
+		{else/}
+			{eq name="$vo.class" value="1"}
+			<a href="{:Url('Learn/video?id='.$vo['learn_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{else/}
+			<a href="{:Url('Learn/article?id='.$vo['learn_id'])}" class="list list_img clear">
+				<div class="fl">
+					<img src="{$vo['front_cover']|get_cover='path'}" alt="{$vo.title}">
+				</div>
+				<div class="fl lr">
+					<div class="title limit_">{$vo.title}</div>
+					<div class="clear">
+						<span class="fl">{$vo.create_time|time_format='Y-m-d'}</span>
+						<span class="fr">详情</span>
+					</div>
+				</div>
+			{/eq}
+		{/if}
+		</a>
+		<div class="delete" onclick="listDel(this,{$vo.id})">
+			删除
+		</div>
+	</div>
+	{/volist}
+</div>
+<div class="tip"></div>
+<div class="loading hidden">
+	<div class="typing_loader"></div>
+</div>
+{/eq}
+{/block}
+
+{block name="script"}
+<script>
+$(function(){
+	//模块标题
+	$('title' ).text('个人中心');
+	//reset
+	var len = $(".list" ).length;
+	if(len >= 7){
+		$('.tip' ).text('上拉加载更多');
+	}
+	//上拉加载
+	loadScroll();
+	//滑动删除
+	listMove();
+	//列表页：ue图片过滤
+	$('.limit_ img' ).replaceWith('');
+	$('.limit_ hr' ).replaceWith('');
+});
+function listMove(){
+	var lastX;
+	var pressedObj;
+	var lastLeftObj;
+	var start; //按下的点
+	var list = $('.listbox');
+	// 滑动删除
+	for (var i = 0; i < list.length; ++i) {
+		//当前滑动的点
+		list[i].addEventListener('touchstart', function(e){
+			lastX = e.changedTouches[0].pageX;
+			pressedObj = this;
+			var touches = event.touches[0];
+			start = {
+				x: touches.pageX,
+				y: touches.pageY
+			};
+		});
+		//阻止纵向滚动
+		list[i].addEventListener('touchmove',function(e){
+			var touches = event.touches[0];
+			delta = {
+				x: touches.pageX - start.x,
+				y: touches.pageY - start.y
+			};
+			if (Math.abs(delta.x) > Math.abs(delta.y)) {
+				event.preventDefault();
+			}
+		});
+		list[i].addEventListener('touchend', function(e){
+			var diffX = e.changedTouches[0].pageX - lastX;
+			var del = $(this ).find('.delete');
+//			alert( e.changedTouches[0].pageX+','+lastX+','+diffX);
+			if (diffX < 0) {
+				// 左滑
+				$(pressedObj).animate({marginLeft:"-60px"},{duration: 400, easing: "swing" });
+				del.animate({'right':0},{duration: 400, easing: "swing" });
+				// 重置
+				lastLeftObj && lastLeftObj != pressedObj &&
+				$(lastLeftObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" })&&
+				$(lastLeftObj).find(".delete").animate({'right':'-60px'},{duration: 400, easing: "swing" });
+				lastLeftObj = pressedObj;
+			} else if (diffX > 0) {
+				// 右滑
+				$(pressedObj).animate({marginLeft:"0"},{duration: 400, easing: "swing" });
+				del.animate({'right':'-60px'},{duration: 400, easing: "swing" });
+				//重置
+				lastLeftObj = null;
+			}
+		});
+	}
+}
+function listDel(e,cid){
+	var this_ = $(e );
+//	var id = this_.parents('.listbox').index() + 1;
+	var ww = this_.parents('.listbox').width()-this_.width();
+	//移到success
+	this_.animate({right:ww},{duration: 400, easing: "swing" });
+	this_.parents('.listbox').animate({marginLeft:-ww},function(){
+		this_.parents('.listbox' ).slideUp(600)
+	});
+	$.ajax({
+		type:"post",
+		url:"{:Url('User/collectdel')}",
+		data:{
+			id:cid
+		},
+		success:function(){
+
+		}
+	})
+}
+function loadScroll(){
+	$(window ).off("scroll" ).on("scroll",function(){
+		var dh = $(document).height();
+		var end = $(window).height() + $(window ).scrollTop();
+		var len = $(".list" ).length;
+		var tip = $(".tip");
+		var loading = $('.loading');
+		if(dh == end){
+			$.ajax({
+				type:"post",
+				url:"{:Url('User/morecollect')}",
+				data:{
+					length:len
+				},
+				beforeSend: function(XMLHttpRequest){
+					tip.hide();
+					loading.toggleClass('hidden');
+				},
+				success:function(data){
+					loading.toggleClass('hidden');
+					tip.show();
+					if(data.code == 1){
+						addLists(data);
+						var dataLen =data.data.length;
+						if(data.data.length == 5){
+							tip.text('上拉加载更多');
+						}
+						listMove();
+					}else{
+						tip.text('没有更多了');
+						$(window ).off("scroll");
+					}
+				}
+			})
+		}
+	})
+}
+function addLists(data){
+	var html = '';
+	var lists = data.data;
+	var len = lists.length;
+	for(var i = 0; i< len;i++){
+		var list = lists[i];
+		html +=
+				'<div class="listbox">';
+		if(list.type == 1 ){
+			html+= '<a href="/home/news/detail/id/'+list.news_id+'.html" class="list list_img clear">'+
+				   '<div class="fl">'+
+				   '<img src="'+list.path+'" alt="'+list.title+'">'+
+				   '</div>'+
+			       '<div class="fl lr">'+
+				   '<div class="title limit_">'+list.title+'</div>'+
+				   '<div class="clear">'+
+				   '<span class="fl">'+list.time+'</span>'+
+				   '<span class="fr">详情</span>'+
+				   '</div>'+
+			       '</div>'
+		}else if(list.type == 2){
+			if(list.class == 1){
+				html+= '<a href="/home/notice/relevant/id/'+list.notice_id+'.html" class="list list_des">'+
+					   '<div class="title limit">'+list.title+'</div>'+
+					   '<div class="content limit_">'+list.description+'</div>'+
+					   '<div class="note clear">'+
+					   '<span class="time fr">'+list.time+'</span>'+
+					   '</div>'
+			}else if(list.class == 2){
+				html+=  '<a href="/home/notice/meet/id/'+list.notice_id+'.html" class="list list_img clear">'+
+						'<div class="fl">'+
+						'<img src="'+list.path+'" alt="'+list.title+'">'+
+						'</div>'+
+						'<div class="fl lr">'+
+						'<div class="title limit_">'+list.title+'</div>'+
+						'<div class="clear">'+
+						'<span class="fl">'+list.time+'</span>'+
+						'<span class="fr">详情</span>'+
+						'</div>'+
+						'</div>'
+			}else if(list.class == 3){
+				html+= '<a href="/home/notice/party/id/'+list.notice_id+'.html" class="list list_img clear">'+
+					   '<div class="fl">'+
+					   '<img src="'+list.path+'" alt="'+list.title+'">'+
+					   '</div>'+
+					   '<div class="fl lr">'+
+					   '<div class="title limit_">'+list.title+'</div>'+
+					   '<div class="clear">'+
+					   '<span class="fl">'+list.time+'</span>'+
+					   '<span class="fr">详情</span>'+
+					   '</div>'+
+					   '</div>'
+			}else if(list.class == 4){
+				html+= '<a href="/home/notice/recruit/id/'+list.notice_id+'.html" class="list list_des">'+
+					   '<div class="title limit">'+list.title+'</div>'+
+					   '<div class="content limit_">'+list.description+'</div>'+
+					   '<div class="note clear">'+
+					   '<span class="time fr">'+list.time+'</span>'+
+					   '</div>'
+			}else if(list.class == 5){
+				html+= '<a href="/home/notice/activity/id/'+list.notice_id+'.html" class="list list_img clear">'+
+					   '<div class="fl">'+
+					   '<img src="'+list.path+'" alt="'+list.title+'">'+
+					   '</div>'+
+					   '<div class="fl lr">'+
+					   '<div class="title limit_">'+list.title+'</div>'+
+					   '<div class="clear">'+
+					   '<span class="fl">'+list.time+'</span>'+
+					   '<span class="fr">详情</span>'+
+					   '</div>'+
+					   '</div>'
+			}else if(list.class == 6){
+				html+= '<a href="/home/notice/volunteer/id/'+list.notice_id+'.html" class="list list_des">'+
+						'<div class="title limit">'+list.title+'</div>'+
+						'<div class="content limit_">'+list.description+'</div>'+
+						'<div class="note clear">'+
+						'<span class="time fr">'+list.time+'</span>'+
+						'</div>'
+			}else{
+				html+= '<a href="/home/notice/situation/id/'+list.notice_id+'.html" class="list list_img clear">'+
+						'<div class="fl">'+
+						'<img src="'+list.path+'" alt="'+list.title+'">'+
+						'</div>'+
+						'<div class="fl lr">'+
+						'<div class="title limit_">'+list.title+'</div>'+
+						'<div class="clear">'+
+						'<span class="fl">'+list.time+'</span>'+
+						'<span class="fr">详情</span>'+
+						'</div>'+
+						'</div>'
+			}
+
+		}else{
+			if(list.class == 1){
+				html+= '<a href="/home/learn/video/id/'+list.learn_id+'.html" class="list list_img clear">'+
+					   '<div class="fl">'+
+					   '<img src="" alt="'+list.title+'">'+
+					   '</div>'+
+					   '<div class="fl lr">'+
+					   '<div class="title limit_">'+list.title+'</div>'+
+					   '<div class="clear">'+
+					   '<span class="fl">'+list.time+'</span>'+
+					   '<span class="fr">详情</span>'+
+					   '</div>'+
+					   '</div>'
+			}else{
+				html+= '<a href="/home/news/article/id/'+list.learn_id+'.html" class="list list_img clear">'+
+					   '<div class="fl">'+
+					   '<img src="" alt="'+list.title+'">'+
+					   '</div>'+
+					   '<div class="fl lr">'+
+					   '<div class="title limit_">'+list.title+'</div>'+
+					   '<div class="clear">'+
+					   '<span class="fl">'+list.time+'</span>'+
+					   '<span class="fr">详情</span>'+
+					   '</div>'+
+					   '</div>'
+			}
+		}
+		html+=
+				'</a>'+
+				'<div class="delete" onclick="listDel(this,'+list.id+')">'+
+				'删除'+
+				'</div>'+
+				'</div>'
+
+	}
+	$(".lists" ).append(html);
+}
+</script>
+{/block}

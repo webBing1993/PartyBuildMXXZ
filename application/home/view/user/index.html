@@ -1,0 +1,135 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/user.css">
+{/block}
+
+{block name="body"}
+{eq name="visit" value="1"}
+<div class="banner">
+	<img src="/home/images/user/vistor.jpg" alt="个人头像" class="up">
+	<div class="name">游客</div>
+</div>
+{else/}
+<div class="banner">
+	{eq name="user.header" value=""}
+	<div class="up" data-tab="{$user.avatar}"></div>
+	{else/}
+	<div class="up" data-tab="{$user.header}"></div>
+	{/eq}
+	<div class="name">{$user.name}</div>
+	<input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
+	<input type="hidden" name="header"  value="" required="">
+</div>
+<div class="lists">
+	<a href="{:Url('User/personal')}" class="list clear">
+		<span>党员ID</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	<!--<a href="{:Url('User/history')}" class="list clear">-->
+		<!--<span>我的消息</span>-->
+		<!--<i class="fa fa-angle-right fr"></i>-->
+	<!--</a>-->
+	<a href="{:Url('Rank/personal')}" class="list clear">
+		<span>个人排行榜</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	<a href="{:Url('Rank/department')}" class="list clear">
+		<span>支部排行榜</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	<a href="{:Url('Exchange/index')}" class="list clear">
+		<span>积分商城</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	<a href="{:Url('User/feedback')}" class="list clear">
+		<span>意见反馈</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	{eq name="is" value="1"}
+	<a href="{:Url('User/mynotes')}" class="list clear">
+		<span>情况发布</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	<a href="{:Url('User/mypublish')}" class="list clear">
+		<span>通知发布</span>
+		<i class="fa fa-angle-right fr"></i>
+	</a>
+	{/eq}
+</div>
+{/eq}
+{/block}
+
+{block name="script"}
+<script>
+$(function(){
+	//模块标题
+	$('title' ).text('个人中心');
+	//头像大小
+	var up = $('.up' );
+	var path = up.attr('data-tab');
+	var image = new Image();
+	var ww = up.width();
+	image.src = path ;
+	up.css({"background-image":'url('+path+')'});
+	image.onload = function(){
+		if(image.width > image.height){
+			up.css({"background-size":'auto '+ww +'px'});
+		}else{
+			up.css({"background-size":ww +'px'+' auto '});
+		}
+	};
+	//触发上传按钮
+	up.off("click").on('click',function(){
+		$('#upload').click();
+	});
+
+	//上传图片并获取信息
+	$('#upload').off("change").on('change',function(){
+		var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+		if(size <= 2048){
+			var img = $(this)[0].files[0];
+			var formData = new FormData();
+			formData.append("picture",img);
+			$.ajax({
+				type:"post",
+				url:"{:Url('File/uploadPicture')}",
+				data:formData,
+				processData : false,
+				contentType : false,
+				success:function(data){
+					var msg = $.parseJSON(data);
+					if(msg.code == 1){
+						var image = new Image();
+						image.src = msg.data.path ;
+						up.css({"background-image":'url('+msg.data.path+')'});
+						image.onload = function(){
+							if(image.width > image.height){
+								up.css({"background-size":'auto '+ww +'px'});
+							}else{
+								up.css({"background-size":ww +'px'+' auto '});
+							}
+						};
+						$.ajax({
+							type:"post",
+							url:"{:Url('User/setHeader')}",
+							data:{header:msg.data.path},
+							dataType: "Json",
+							success:function(){
+
+							}
+						})
+					} else {
+						warning({msg:'上传失败'});
+						return;
+					}
+				}
+			});
+		} else {
+			warning({msg:"您选择的图片超过2mb，请重新选择"});
+			return;
+		}
+	});
+})
+</script>
+{/block}

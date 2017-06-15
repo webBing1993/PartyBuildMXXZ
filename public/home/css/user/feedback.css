@@ -1,0 +1,59 @@
+.top {
+  width: 100vw;
+}
+.top img {
+  width: 100vw;
+}
+.content {
+  width: 100vw;
+  height: 76vh;
+  padding: 0 6.4vw;
+  background: linear-gradient(rgba(232, 232, 232, 0.73), #ffffff);
+}
+.content .box {
+  position: relative;
+  top: 0;
+  width: 87.2vw;
+  padding: 0 3vw;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 1px 3px 4px #dddddd;
+}
+.content .box textarea {
+  width: 81.2vw;
+  height: 35vh;
+  padding: 3vw 0;
+}
+.content .box textarea::-webkit-input-placeholder {
+  font-size: 15px;
+  color: #cecece;
+}
+.content .box label,
+.content .box .submit {
+  display: inline-block;
+}
+.content .box label {
+  width: 73%;
+  color: #cecece;
+  font-size: 14px;
+  line-height: 50px;
+}
+.content .box .submit {
+  width: 25%;
+  height: 36px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 36px;
+  border-radius: 18px;
+  text-align: center;
+  background: -webkit-linear-gradient(left, #feba57, #f99300);
+  background: linear-gradient(left, #feba57, #f99300);
+}
+.content .box .submit:active {
+  background: #ce7400;
+}
+@media screen and (max-height: 480px) {
+  .content {
+    height: 70vh;
+  }
+}

@@ -1,0 +1,190 @@
+@charset "utf-8";
+.t_b {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+@-webkit-keyframes typing {
+  0% {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  25% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.8), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.8);
+  }
+}
+@keyframes typing {
+  0% {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  25% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.8), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.8);
+  }
+}
+a:active {
+  background-color: #ebebeb;
+}
+.lists {
+  width: 100vw;
+}
+.lists .listbox {
+  position: relative;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.lists .listbox .list {
+  display: block;
+  width: 100vw;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-bottom: 1px solid #f1f1f1;
+  color: #666666;
+  overflow: hidden;
+}
+.lists .listbox .list_img {
+  width: 100vw;
+  height: 90px;
+}
+.lists .listbox .list_img img {
+  width: 100px;
+  height: 55px;
+  margin-top: 17px;
+  margin-right: 10px;
+}
+.lists .listbox .list_img .lr {
+  width: calc( 100vw - 140px );
+}
+.lists .listbox .list_img .lr .title {
+  width: 100%;
+  height: 36px;
+  font-size: 1.4rem;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  color: #333333;
+}
+.lists .listbox .list_img .lr .clear {
+  font-size: 1.2rem;
+  color: #999999;
+}
+.lists .listbox .list_img .lr .clear .pass {
+  color: #3da53c;
+}
+.lists .listbox .list_img .lr .clear .delay {
+  color: #ff9c0b;
+}
+.lists .listbox .list_img .lr .clear .refer {
+  color: #e51e25;
+}
+.lists .listbox .list_img .lr .clear .draft {
+  color: #5a69be;
+}
+.lists .listbox .list_des {
+  height: 90px;
+}
+.lists .listbox .list_des .title {
+  color: #333333;
+  font-size: 1.4rem;
+  line-height: 30px;
+  height: 30px;
+  overflow: hidden;
+}
+.lists .listbox .list_des .title_ {
+  color: #333333;
+  font-size: 1.5rem;
+  line-height: 20px;
+  height: 55px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.lists .listbox .list_des .content {
+  font-size: 1.3rem;
+  height: 36px;
+  overflow: hidden;
+}
+.lists .listbox .list_des .content * {
+  margin: 0!important;
+  padding: 0!important;
+  font-size: 1.3rem;
+  line-height: 20px;
+}
+.lists .listbox .list_des .note {
+  font-size: 1.2rem;
+}
+.lists .listbox .list_des .note .pass {
+  color: #3da53c;
+}
+.lists .listbox .list_des .note .delay {
+  color: #ff9c0b;
+}
+.lists .listbox .list_des .note .refer {
+  color: #e51e25;
+}
+.lists .listbox .list_des .note .draft {
+  color: #5a69be;
+}
+.lists .listbox .list_des .note .time {
+  color: #999999;
+}
+.lists .listbox .delete {
+  position: absolute;
+  top: 0;
+  right: -60px;
+  width: 60px;
+  background: #ffa022;
+  border-bottom: 1px solid #f1f1f1;
+  color: #ffffff;
+  text-align: center;
+}
+.lists .listbox .edit {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: -120px;
+  width: 60px;
+  background: #b2b2b2;
+  border-bottom: 1px solid #f1f1f1;
+  color: #ffffff;
+  text-align: center;
+}
+.lists .listbox .list_des + .delete,
+.lists .listbox .list_des + .delete + .edit {
+  height: 90px;
+  line-height: 90px;
+}
+.lists .listbox .list_img + .delete,
+.lists .listbox .list_img + .delete + .edit {
+  height: 90px;
+  line-height: 90px;
+}
+/*加载动画*/
+.tip {
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #c1c1c1;
+}
+.loading {
+  width: 100%;
+  height: 40px;
+}
+.typing_loader {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  -webkit-animation: typing 1s linear infinite alternate;
+  -moz-animation: Typing 1s linear infinite alternate;
+  animation: typing 1s linear infinite alternate;
+  position: relative;
+  top: 17px;
+  left: calc( 50vw - 20px );
+}

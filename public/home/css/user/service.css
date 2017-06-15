@@ -1,0 +1,52 @@
+.box{
+	width: 100%;
+	height: 100vh;
+	text-align: center;
+	font-family: "Microsoft YaHei", sans-serif;
+	vertical-align: middle;
+}
+.banner{
+	width: 100%;
+	height: 180px;
+	margin-bottom: 90px;
+}
+@media screen and (max-height: 568px) {
+	.banner {
+		height: 160px;
+		margin-bottom: 50px;
+	}
+}
+.banner img{
+	width: 100%;
+	height: 100%;
+}
+span{
+	width: 100%;
+	display: inline-block;
+	font-size: 16px;
+	line-height: 32px;
+	font-weight: 500;
+}
+.grey{
+	color:#777777;
+}
+.orange{
+	color:#ff6f36;
+}
+.red{
+	color:#ff5555;
+}
+.gray{
+	color:#666666;
+	font-weight: 600;
+}
+@media screen and (max-height: 480px) {
+	.banner {
+		height: 160px;
+		margin-bottom: 36px;
+	}
+	span{
+		font-size: 14px;
+		line-height: 26px;
+	}
+}

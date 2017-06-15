@@ -1,0 +1,212 @@
+.page {
+  position: absolute;
+  top: 0;
+  left: 100vw;
+  width: 100vw;
+  overflow: hidden;
+}
+.first {
+  left: 0;
+}
+.second {
+  display: none;
+}
+.form {
+  margin-top: 10px;
+}
+.form .list {
+  height: 46px;
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-bottom: 1px solid #f1f1f1;
+  background: #ffffff;
+  line-height: 45px;
+  zoom: 1;
+}
+.form .list：after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.form .list:last-child {
+  border-bottom: none;
+}
+.form .list span {
+  float: left;
+  color: #333333;
+  font-size: 1.5rem;
+}
+.form .list input,
+.form .list .select,
+.form .list .time {
+  float: right;
+  width: calc( 100% - 70px );
+  color: #999999;
+  text-align: right;
+  font-size: 1.3rem;
+}
+.form .list input {
+  height: 20px;
+  margin-top: 13px;
+  line-height: 20px;
+}
+.form .list .time .date {
+  display: inline-block;
+  width: 207px;
+}
+.form .list .time input[name='start_time'],
+.form .list .time input[name='end_time'] {
+  float: none;
+  width: 207px;
+  text-align: right;
+  padding-right: 0;
+}
+.form .list .select {
+  color: #d9d9d9;
+}
+#text {
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 300px;
+  margin-top: 10px;
+  color: #999999;
+  font-size: 1.3rem;
+}
+.foot .check,
+.foot .save,
+.foot .next {
+  width: 60%;
+  height: 40px;
+  margin: 10px auto;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #73bdff;
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 40px;
+}
+.foot .next,
+.foot .save {
+  margin-top: 10vh;
+}
+.foot .next,
+.foot .check {
+  margin-bottom: 10vh;
+}
+.foot .check {
+  background: #ffffff;
+  color: #73bdff;
+}
+.foot .save,
+.foot .next {
+  background: #73bdff;
+  color: #ffffff;
+}
+.foot .atn {
+  width: 80%;
+  height: 40px;
+  margin: 10px 10%;
+  color: #d9d9d9;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+.typebg {
+  display: none;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.31);
+}
+.type {
+  display: none;
+  z-index: 3;
+  position: absolute;
+  right: 13px;
+  top: 40px;
+}
+.type li {
+  width: 100px;
+  height: 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+  color: #666666;
+  text-align: center;
+  line-height: 40px;
+}
+.type li:first-child {
+  -webkit-border-top-left-radius: 8px;
+  border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.type li:last-child {
+  -webkit-border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.tips {
+  display: none;
+  z-index: 3;
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  width: 70%;
+  background: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 60px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tocheck {
+  display: none;
+  z-index: 4;
+  position: absolute;
+  top: 25%;
+  left: 15%;
+  width: 70%;
+  background: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 30px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tocheck .text {
+  padding: 13px;
+}
+.tocheck .confirm {
+  width: calc( 100% );
+  border-top: 2px solid #f1f1f1;
+}
+.tocheck .confirm span {
+  display: inline-block;
+  width: calc( 50% - 4px);
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+}
+.tocheck .confirm span:nth-child(1) {
+  border-right: 2px solid #f1f1f1;
+}
+.dropdown-menu {
+  border: none;
+}
+.form-control {
+  border: none;
+  box-shadow: none;
+}
+.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu:after,
+.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu:before {
+  display: none;
+}

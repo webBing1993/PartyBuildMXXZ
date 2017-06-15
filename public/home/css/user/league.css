@@ -1,0 +1,349 @@
+a {
+  display: inline-block;
+}
+.modal-dialog {
+  width: 68vw;
+  margin: 40vh auto;
+}
+.modal-body div {
+  margin: 8vw auto!important;
+}
+.tabs_ {
+  z-index: 2;
+  position: fixed;
+  top: 50vw;
+  width: 100vw;
+  padding: 15px 0;
+  background: #f1f1f1;
+}
+.tabs {
+  position: relative;
+  top: 0;
+  width: 90vw;
+  height: 35px;
+  background: #ffffff;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+.tabs .tab {
+  display: inline-block;
+  width: 30vw;
+  height: 35px;
+  text-align: center;
+  color: #666666;
+  font-size: 1.5rem;
+  line-height: 35px;
+}
+.tabs .tab.active {
+  background: #fd4f43;
+  color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 1px 2px 6px rgba(253, 79, 67, 0.78);
+}
+.tabs .line {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  width: 1px;
+  height: 19px;
+  background: #f1f1f1;
+}
+.banner {
+  z-index: 9;
+  position: fixed;
+  width: 100vw;
+  height: 50vw;
+}
+.banner .banner-img {
+  width: 100%;
+  height: 100%;
+}
+.plan {
+  width: 100vw;
+  background: #ffffff;
+  margin-top: 12px;
+}
+.plan > .title {
+  width: 100%;
+  height: 35px;
+  padding: 0 4vw;
+}
+.plan > .title span,
+.plan > .title a {
+  display: inline-block;
+  width: 49%;
+  font-size: 1.3rem;
+  line-height: 35px;
+}
+.plan > .title span {
+  color: #f5874e;
+  font-weight: 600;
+}
+.plan > .title a {
+  color: #999999;
+  text-align: right;
+}
+.plan > .title a:active {
+  background: transparent;
+}
+.plan .list {
+  width: 100%;
+  padding: 0 4vw;
+  border-bottom: 1px solid #f1f1f1;
+}
+.plan .list .title {
+  color: #333333;
+  font-size: 1.5rem;
+  line-height: 30px;
+}
+.plan .list .content {
+  height: 36px;
+  color: #999999;
+  font-size: 1.3rem;
+  line-height: 18px;
+}
+.plan .list .note {
+  color: #999999;
+  font-size: 1.2rem;
+  line-height: 26px;
+}
+.plan .list .note span {
+  display: inline-block;
+  width: 49%;
+}
+.plan .list .note span:nth-child(2) {
+  font-size: 14px;
+  text-align: right;
+}
+.display {
+  width: 100vw;
+  background: #ffffff;
+}
+.display .title {
+  width: 100%;
+  height: 35px;
+  padding: 0 4vw;
+  color: #f5af46;
+  font-size: 1.3rem;
+  line-height: 35px;
+  font-weight: 600;
+}
+.display .tags {
+  width: 100vw;
+  padding: 2vw 1vw 4vw 5vw;
+}
+.display .tags a {
+  display: inline-block;
+  width: 22vw;
+  height: 22vw;
+}
+.display .tags a:nth-child(1) {
+  background: url('/home/images/league/t01.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.display .tags a:nth-child(2) {
+  background: url('/home/images/league/t02.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.display .tags a:nth-child(3) {
+  background: url('/home/images/league/t03.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.display .tags a:nth-child(4) {
+  background: url('/home/images/league/t04.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.blocks .block {
+  padding-top: 65vw;
+}
+.blocks .block .member {
+  padding: 4vw 4vw 0 4vw;
+  color: #666666;
+  font-size: 1.3rem;
+  line-height: 20px;
+}
+.blocks .block .member span {
+  font-size: #333333;
+  font-weight: 600;
+}
+.blocks .block .member .detail {
+  text-indent: 2em;
+  padding: 2vw;
+}
+.blocks .block.slist {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.blocks .block.slist .line {
+  position: absolute;
+  left: 20vw;
+  width: 2px;
+  height: 100%;
+  background: #fcc011;
+}
+.blocks .block.slist .ul {
+  padding: 0 4vw;
+  width: 60vw;
+  margin-left: 30vw;
+}
+.blocks .block.slist .ul .title {
+  position: relative;
+  top: 0;
+  color: #333333;
+  font-size: 1.6rem;
+  line-height: 17.6vw;
+  font-weight: 600;
+}
+.blocks .block.slist .ul .title:before {
+  position: absolute;
+  top: 3vw;
+  left: -19vw;
+  content: '';
+  width: 10vw;
+  height: 10vw;
+  background: #ffffff;
+  border: 4px solid #f1f1f1;
+  box-shadow: 1px 3px 2px rgba(153, 153, 153, 0.3);
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.blocks .block.slist .ul .li {
+  position: relative;
+  top: 0;
+  color: #666666;
+  font-size: 1.4rem;
+  line-height: 10vw;
+}
+.blocks .block.slist .ul .li:before {
+  position: absolute;
+  top: 2vw;
+  left: -16.4vw;
+  content: '';
+  width: 5vw;
+  height: 5vw;
+  background: #ffffff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 1px 3px 2px rgba(153, 153, 153, 0.3);
+}
+.yearbox .year {
+  width: 100%;
+  height: 30px;
+  padding: 0 4vw;
+  text-align: center;
+  color: #df4934;
+  font-size: 1.6rem;
+  line-height: 30px;
+  box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+}
+.yearbox .year span {
+  position: relative;
+}
+.yearbox .year span:before {
+  position: absolute;
+  top: 3px;
+  left: -20px;
+  content: '';
+  width: 10px ;
+  height: 10px;
+  background: url('/home/images/league/cir.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .year span:after {
+  position: absolute;
+  top: 3px;
+  right: -20px;
+  content: '';
+  width: 10px ;
+  height: 10px;
+  background: url('/home/images/league/cir.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  margin: 0 auto 10px auto;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+}
+.yearbox .quarter .box .tag {
+  position: relative;
+  top: 3vw;
+  left: -7px;
+  width: 83px;
+  height: 30px;
+  padding-left: 2px;
+  margin-bottom: 1vw;
+  color: #ffffff;
+  font-size: 1.2rem;
+  line-height: 20px;
+  text-align: center;
+}
+.yearbox .quarter .box .list {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  padding: 11px 4vw;
+  border-bottom: 1px solid #f1f1f1;
+}
+.yearbox .quarter .box .list:last-child {
+  border: none;
+}
+.yearbox .quarter .box .list.tag-mon:after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: 4vw;
+  width: 20px;
+  height: 20px;
+}
+.yearbox .quarter .box .list .title {
+  color: #333333;
+  font-size: 1.5rem;
+  line-height: 30px;
+}
+.yearbox .quarter .box .list .note {
+  color: #999999;
+  font-size: 1.2rem;
+  line-height: 18px;
+}
+.yearbox .quarter .box .list .note span {
+  display: inline-block;
+  width: 49%;
+}
+.yearbox .quarter .box .list .note span:nth-child(2) {
+  font-size: 14px;
+  text-align: right;
+}
+.yearbox .quarter .box:nth-child(1) .tag {
+  background: url('/home/images/league/tag00.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(2) .tag {
+  background: url('/home/images/league/tag01.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(2) .tag-mon:after {
+  background: url('/home/images/league/mon01.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(3) .tag {
+  background: url('/home/images/league/tag02.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(3) .tag-mon:after {
+  background: url('/home/images/league/mon02.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(4) .tag {
+  background: url('/home/images/league/tag03.png') 0 0 no-repeat;
+  background-size: contain;
+}
+.yearbox .quarter .box:nth-child(4) .tag-mon:after {
+  background: url('/home/images/league/mon02.png') 0 0 no-repeat;
+  background-size: contain;
+}

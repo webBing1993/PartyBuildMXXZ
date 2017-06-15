@@ -1,0 +1,97 @@
+@charset "utf-8";
+.t_b {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+a:active {
+  background: #eeeeee!important;
+}
+body {
+  background: #eeeeee;
+}
+/*头部*/
+.banner {
+  width: 100%;
+  height: 50vw;
+  background: url("/home/images/test/bg.png");
+  background-size: 100% 100%;
+  text-align: center;
+}
+.banner .up {
+  display: inline-block;
+  width: 18.7vw;
+  height: 18.7vw;
+  overflow: hidden;
+  margin-top: 12vw;
+  border: 2px solid #ffffff;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.31);
+  background: url("/home/images/test/1.jpg") center no-repeat;
+  background-size:70px auto;
+}
+.banner .name {
+  width: 60%;
+  margin: 6px auto;
+  color: #ffffff;
+  font-size: 1.7rem;
+}
+@media screen and (min-width: 1000px){
+  .banner .name{
+    line-height: 40px;
+  }
+}
+/*列表*/
+.lists {
+  margin-top: 2.7vw;
+}
+.lists .list {
+  display: block;
+  width: 100%;
+  padding-left: 4vw;
+  padding-right: 4vw;
+  height: 13.3vw;
+  background: #ffffff;
+  border-top: 1px solid #f1f1f1;
+  font-size: 15px;
+}
+.lists .list span {
+  display: inline-block;
+  padding-left: 9.3vw;
+  background-size: 7.5vw 7.5vw;
+  color: #333333;
+  line-height: 13.3vw;
+}
+.lists .list i {
+  color: #999999;
+  font-size: 20px;
+  line-height: 13.3vw;
+}
+.lists .list:nth-child(1) span {
+  background: url("/home/images/user/message.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(2) span {
+  background: url("/home/images/user/collect.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(3) span {
+  background: url("/home/images/user/join.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(4) span {
+  background: url("/home/images/user/score.jpg") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(5) span {
+  background: url("/home/images/user/feedback.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(6) span {
+  background: url("/home/images/user/notes.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}
+.lists .list:nth-child(7) span {
+  background: url("/home/images/user/publish.png") 0 3vw no-repeat;
+  background-size: 7.5vw 7.5vw;
+}

@@ -1,0 +1,113 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/feedback.css">
+{/block}
+
+{block name="body"}
+<div class="top">
+	<img src="/home/images/user/top.png" alt="顶部背景">
+</div>
+<div class="content">
+	<div class="box">
+		<textarea name="feedback" id="feedback" placeholder="在此留下您宝贵的意见，您的意见是我们前进的动力。"></textarea>
+		<label for="feedback"><span>000</span>/200</label>
+		<div class="submit">提交</div>
+	</div>
+
+</div>
+{/block}
+
+{block name="script"}
+<script>
+$(function(){
+	$('.submit' ).on('click',function(){
+		var content = $('#feedback' ).val();
+		var n = content.length;
+		if(n== 0){
+			swal({
+				title: ' ',
+				text: '您的意见为空',
+				type: 'warning',
+				showConfirmButton:false,
+				timer:1500
+			});
+		}else if(n>200){
+			swal({
+				title: ' ',
+				text: '字数超过限制',
+				type: 'warning',
+				showConfirmButton:false,
+				timer:1500
+			});
+		}else{
+			swal({
+				title: "提示",
+				text: "确认提交您的意见？",
+				showCancelButton: true,
+				confirmButtonColor: "#f99300",
+				confirmButtonText: "确定",
+				cancelButtonText: "取消",
+				closeOnConfirm: false,
+				closeOnCancel: false
+					},
+					function(isConfirm){
+						if (isConfirm) {
+							swal({
+								title: '评论成功',
+								text: '即将返回个人中心',
+								type: 'success',
+								confirmButtonText:'确定',
+								timer:2000
+							});
+							var data ={
+								content: content
+							};
+							$.ajax({
+								type:"post",
+								url:"{:Url('User/feedbackup')}",
+								data:data,
+								beforeSend: function(XMLHttpRequest){
+								},
+								success:function(e){
+									setTimeout(function(){
+										window.location.href = "{:Url('User/index')}";
+									},2000)
+								}
+							});
+						}else{
+							swal.close();
+						}
+					});
+
+		}
+
+	});
+	//字数监听
+	numChange($('#feedback'));
+});
+$('title' ).text('意见反馈');
+function numChange(ele){
+	var lock = false;
+	ele.on('compositionstart',function(){
+		lock = true;
+	});
+	ele.on('compositionend',function(){
+		lock = false;
+	});
+	ele.on('input',function(){
+		if(!lock){
+			var content = $('#feedback' ).val();
+			var len = content.length;
+			if(len < 100){
+				len = `0${len}`;
+			}
+			if(len < 10){
+				len = `0${len}`;
+			}
+			$('label span' ).text(len)
+		}
+	});
+}
+</script>
+{/block}

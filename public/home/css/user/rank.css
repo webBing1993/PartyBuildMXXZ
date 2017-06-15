@@ -1,0 +1,251 @@
+@charset "utf-8";
+
+/*reset*/
+
+body, div, hr, ul, ol, form, input, textarea, button, select { margin: 0; padding: 0; }
+body { font-size: 63%; font-family: "Microsoft YaHei", sans-serif;}
+a ,a:active,a:hover{ text-decoration: none; }
+li { list-style: none; }
+img { border: none; vertical-align: top; }
+input, textarea ,select{ outline: none;border:none;}
+textarea { resize: none; }
+table { border-collapse: collapse; background-color: #ffffff; }
+
+/*public*/
+.hidden{
+	display: none;
+}
+.clear {
+	zoom: 1;
+}
+.clear:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+
+/*layout*/
+/*个人信息*/
+.gra{
+	position: relative;
+	width: 100%;
+	height: 180px;
+	/*background:-webkit-gradient(linear, left bottom, right top, from(#e4672d), to(#e9ad2c));*/
+	background: url("/home/images/bg_rank.jpg") no-repeat;
+	background-size: 100% 100%;
+	color:#ffffff;
+}
+.gra .avatarbox{
+	position: absolute;
+	top:20px;
+	left: calc((100% - 72px)/2 )
+}
+.gra .avatarbox .avatar{
+	width: 70px;
+	height: 70px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	border:1px solid #ffffff;
+	display: block;
+	overflow: hidden;
+}
+.gra .avatarbox .name{
+	width: 70px;
+	text-align: center;
+	font-size: 1.4rem;
+	margin-top: 6px;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.gra .que{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top:15px;
+	right: 15px;
+}
+.ranking{
+	width: 100%;
+	position: absolute;
+	top:130px;
+}
+.ranking .tradtion,.ranking .game{
+	width: calc(50% - 1px );
+	text-align: center;
+	font-size: 1.3rem;
+}
+.ranking .line{
+	width: 2px;
+	height: 40px;
+	-webkit-border-radius:1px;
+	border-radius:1px;
+	background-color: #ffffff;
+}
+/*个人信息2*/
+.my{
+	position: relative;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 4px solid #efeff4;
+}
+.my img{
+	width: 40px;
+	height: 40px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	margin: 10px 15px auto 56px;
+	overflow: hidden;
+}
+.my .name_,.my .scores{
+	display: inline-block;
+	font-size: 1.3rem;
+}
+.name_ span{
+	display: block;
+	height: 36px;
+	width: 32vw;
+	margin-right:5vw;
+	line-height: 36px;
+}
+.my .name_ .n{
+	height: 12px;
+	line-height: 12px;
+	color:#999999;
+}
+.my .scores{
+	position: absolute;
+	top:20px;
+	right: 6vw;
+	width: 25vw;
+	height: 20px;
+	line-height: 20px;
+	text-align: right;
+ }
+/*排名列表*/
+@media (max-height: 568px) {
+	.listbox{
+		min-height: 328px;
+	}
+}
+@media (max-height: 480px) {
+	.listbox{
+		min-height: 240px;
+	}
+}
+.listbox{
+	width: 100%;
+	min-height: calc(100vh - 180px);
+	background: #ffffff;
+	/*padding-top: 10px;*/
+	/*padding-bottom: 20px;*/
+}
+.tabs{
+	width: 100%;
+	background: #ffffff;
+}
+.tabs .tab{
+	width: calc(50% - 40px);
+	height: 50px;
+	line-height: 50px;
+	font-size: 1.5rem;
+	text-align: center;
+	color: rgba(193, 193, 193, 0.51);
+	margin: auto 20px;
+	border-bottom: 2px solid rgba(237, 121, 25, 0.05);
+}
+.tabs .active {
+	color:#333333;
+	border-bottom: 2px solid #ed7919;
+}
+
+.ranklist{
+	background: #ffffff;
+}
+.list{
+	position: relative;
+	height: 60px;
+	line-height: 60px;
+	color:#333333;
+	border-bottom: 1px solid #efeff4;
+}
+.list:last-child{
+	border-bottom: none;
+}
+.list .num_ {
+	width: 30px;
+	font-size: 1.4rem;
+	margin-left: 25px;
+}
+.list .avatar_{
+	width: 40px;
+	height: 40px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	margin: 10px 15px auto 0;
+	overflow: hidden;
+}
+.list .name_,.list .scores{
+	font-size: 1.3rem;
+}
+.list .name_{
+	width: 32vw;
+	margin-right:5vw;
+}
+.list .scores{
+	position: absolute;
+	right: 6vw;
+	width: 25vw;
+	text-align: right;
+}
+.list .num_,.list .name_,.list .scores{
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+	/*排名颜色*/
+.list:nth-child(1) .num_{
+	color: #e6d841;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+.list:nth-child(2) .num_{
+	color:#c4c4c4;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+.list:nth-child(3) .num_{
+	color: #a67e3e;
+	font-size: 2.2rem;
+	font-weight: bold;
+}
+.list:nth-child(1) .avatar_{
+	border:1px solid #e6d841;
+}
+.list:nth-child(2) .avatar_{
+	border:1px solid #c4c4c4;
+}
+.list:nth-child(3) .avatar_{
+	border:1px solid #a67e3e;
+}
+.modal-body h5{
+	line-height: 26px;
+}
+.foot{
+	width: 100%;
+	height: 55px;
+	position: fixed;
+	z-index: 5;
+	bottom: 0;
+	background: url("/home/images/game3.png");
+	background-size: 100% 100%;
+}
