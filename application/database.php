@@ -18,7 +18,7 @@ return [
     // 服务器地址
     'hostname'    => '192.168.1.53',
     // 数据库名
-    'database'    => 'dypb',
+    'database'    => 'mxxzpb',
     // 数据库用户名
     'username'    => 'guest',
     // 数据库密码
