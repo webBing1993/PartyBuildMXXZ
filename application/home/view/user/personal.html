@@ -65,11 +65,7 @@
 			<div class="code">
 				<div id="qrcode"></div>
 			</div>
-			{eq name="user.header" value=""}
-			<img src="{$user.avatar}" alt="个人头像" class="header">
-			{else/}
-			<img src="{$user.header}" alt="个人头像" class="header">
-			{/eq}
+			<img src="{$user.headimgurl}" alt="个人头像" class="header">
 		</div>
 	</div>
 </div>
@@ -91,7 +87,7 @@ $(function(){
 	jQuery('#qrcode').qrcode({
 		width: ww,
 		height:hh,
-		text: 'http://dqpb.0571ztnet.com/home/user/eg/id/'+id
+		text: '{$request}/home/user/eg/id/'+id
 //		text: id
 	});
 	//隐藏手机号中间四位

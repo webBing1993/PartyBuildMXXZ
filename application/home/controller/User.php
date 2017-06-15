@@ -7,16 +7,12 @@
  */
 
 namespace app\home\controller;
-use app\home\model\Comment;
-use app\home\model\Learn;
 use app\home\model\WechatDepartment;
-use app\home\model\Picture;
-use app\home\model\Browse;
 use app\home\model\Feedback;
 use app\home\model\WechatUser;
-use app\home\model\WechatUserTag;
 use think\Controller;
 use think\Db;
+use think\Request;
 
 /**
  * Class User
@@ -57,7 +53,8 @@ class User extends Base {
                 break;
         }
         $this->assign('user',$user);
-
+        $request = Request::instance() ->domain();
+        $this ->assign('request',$request);
         return $this->fetch();
     }
 
