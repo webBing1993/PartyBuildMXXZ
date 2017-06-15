@@ -25,10 +25,8 @@ use think\Cookie;
 
 class Base extends Controller {
     public function _initialize(){
-
         //判断是不是微信打开
 //        $this ->oauth();
-
         if(!empty($_SERVER['REQUEST_URI'])){
             session('url',$_SERVER['REQUEST_URI']);
         }
@@ -133,35 +131,6 @@ class Base extends Controller {
         $this->assign('p3',$carousel_pic3);
 
     }
-    /**
-     * 用户登入获取信息(登陆方法在index控制器中)
-     */
-    public function login(){
-        // 获取用户信息
-//        $Wechat = new TPWechat(Config::get('party'));
-//        $result = $Wechat->getUserId(input('code'), Config::get('party.agentid'));
-//        if(isset($result['UserId'])) {
-//            $user = $Wechat->getUserInfo($result['UserId']);
-//
-//            // 添加本地数据
-//            $UserAPI = new Index();
-//            $localUser = $UserAPI->checkWechatUser($result['UserId']);
-//            if($localUser) {
-//                $UserAPI->updateWechatUser($user);
-//            } else {
-//                $UserAPI->addWechatUser($user);
-//            }
-//
-//            session("userId", $result['UserId']);
-//            session("nickname", isset($user['nickname'])?:"");
-//            session("header", isset($user['header'])?:"");
-//
-//            $this->redirect("News/index");
-//        } else {
-//            return $this->error("企业成员未授权");
-//        }
-    }
-
     /**
      * 点赞，$type,$aid
      * type值：

@@ -10,6 +10,7 @@ use think\Controller;
 use com\wechat\TPWechat;
 use think\Config;
 use app\home\model\News;
+use app\home\model\Learn;
 use app\home\model\Picture;
 
 class Push extends Controller{
@@ -28,26 +29,31 @@ class Push extends Controller{
         $list = $this ->pushlist();
         //没有需要推送的消息,就只推每日一课
         if(empty($list)){
-            $info['media_id'] = '65s5Dd8jcGNvhC9izswZtFEHs-SRAE-JxAqQCoP7g_g';
+//            $info['media_id'] = '65s5Dd8jcGNvhC9izswZtFEHs-SRAE-JxAqQCoP7g_g';
         }else{
 //            //先上传素材 media_id
             foreach($list as $k => $v){
-                //class 1新闻
-                if($v['class' == 1]){
+                //class 1新闻 2两学一做
+                $class = $v['class'];
+                if($class == 1 ||
+                   $class == 2 ){
                     $data = array(
                         "media" => '@.'.$v['img']
                     );
                     $img = $Wechat ->uploadForeverMedia($data,'thumb');
                     $v['thumb_media_id'] = $img['media_id'];
                     $id = $v['id'];
-                    $v['content_source_url'] = "$request/home/details/index/id/$id";
+                    if($class == 1){$link = 'details/index';}
+                    else if($class == 2){$link = 'learn/article';}
+                    $v['content_source_url'] = "$request/home/$link/id/$id";
                 }
             }
             //图文素材列表
             $article = array();
             foreach ($list as $k =>$v ){
                 //class 1新闻
-                if($v['class' == 1]) {
+                if($v['class'] == 1 ||
+                   $v['class'] == 2) {
                     $article['articles'][$k] = [
                         'thumb_media_id' => $v['thumb_media_id'],
                         'author' => $v['publisher'],
@@ -60,44 +66,46 @@ class Push extends Controller{
                 }
             }
             //最后一条加入每日一课
-            $article['articles'][count($article['articles'])] = [
-                    'thumb_media_id' => $image_id,
-                    'author' => $author,
-                    'title' =>'每日一课',
-                    'content_source_url' => "$request.$answer",
-                    "content" => "每日一课已经等候你多时了,点阅读全文开始答题!",
-                    "digest" => "休息一下,去答一下题吧",
-                    "show_cover_pic" => 1,
-                ];
+//            $article['articles'][count($article['articles'])] = [
+//                    'thumb_media_id' => $image_id,
+//                    'author' => $author,
+//                    'title' =>'每日一课',
+//                    'content_source_url' => "$request.$answer",
+//                    "content" => "每日一课已经等候你多时了,点阅读全文开始答题!",
+//                    "digest" => "休息一下,去答一下题吧",
+//                    "show_cover_pic" => 1,
+//                ];
             $lists =  $article;
             //上传多条图文素材
             $info = $Wechat ->uploadForeverArticles($lists);
-            //对应的修改状态
-            $news = new News();
-            if (!empty($info['media_id'])){
-                //class 1新闻
-                foreach ($list as $k => $v){
-                    if($v['class'] == 1){
-                        $news ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
+            //消息群发
+            $send = [
+                "filter" => [
+                    "is_to_all" =>true
+                ],
+                "mpnews" =>[
+                    "media_id" => $info['media_id']
+                ],
+                "msgtype" => "mpnews",
+                "send_ignore_reprint" => 0
+            ];
+            $res = $Wechat ->sendGroupMassMessage($send);
+            //发送成功 修改对应数据状态
+            if($res['errcode'] == 0){
+                $news = new News();
+                $learn = new Learn();
+                if (!empty($info['media_id'])){
+                    //class 1新闻 2两学一做
+                    foreach ($list as $k => $v){
+                        if($v['class'] == 1){
+                            $news ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
+                        }else if($v['class'] == 2){
+                            $learn ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
+                        }
                     }
                 }
             }
         }
-        //消息群发
-        $send = [
-            "filter" => [
-                    "is_to_all" =>true
-                ],
-           "mpnews" =>[
-                 "media_id" => $info['media_id']
-               ],
-            "msgtype" => "mpnews",
-            "send_ignore_reprint" => 0
-        ];
-        $result = $Wechat ->sendGroupMassMessage($send);
-        dump($result);
-
-
         //预览图文通知
 //        $notice = array(
 //            "touser" => $openid,
@@ -148,15 +156,22 @@ class Push extends Controller{
     }
 
     /**
+     * 每月一课推送
+     */
+    public function everyMonth(){
+
+    }
+    /**
      * 待推送的列表
      */
     public function pushlist(){
         //获取未推送的前7条数据
         $news =new News();
+        $learn = new Learn();
         //获取未推送的前7条数据
         $map = array('status' => 0,'push' => 1);
         $order = 'create_time desc';
-        $list = $news ->where($map) ->order($order) ->limit(7) ->select();
+        $list = $news ->where($map) ->order($order) ->limit(8) ->select();
         $all_list = array();
         foreach ($list as $k => $v){
             //图片地址转化
@@ -172,6 +187,27 @@ class Push extends Controller{
             );
             //压入数据
             array_push($all_list,$temp);
+        }
+        $count = count($all_list);
+        if($count < 8){
+            $limit = 8 - $count;
+            $map = array('status' => 0,'push' => 1,'type' => 2 );
+            $list = $learn ->where($map) ->order($order) ->limit($limit) ->select();
+            foreach ($list as $k => $v){
+                //图片地址转化
+                $img = Picture::get($v['front_cover']);
+                //class 1新闻
+                $temp = array(
+                    'id' => $v['id'],
+                    'publisher' => $v['publisher'],
+                    'title' => $v['title'],
+                    'content' => $v['content'],
+                    'img' => $img['path'],
+                    'class' => 2
+                );
+                //压入数据
+                array_push($all_list,$temp);
+            }
         }
         return $all_list;
     }
