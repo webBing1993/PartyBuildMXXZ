@@ -96,8 +96,6 @@ $(function(){
 		//上拉加载评论
 		loadScroll();
 	}
-	//ios fix兼容
-//	tofixed();
 });
 /**
  * 点赞
@@ -178,37 +176,6 @@ var send = function(e,type,id){
 	}
 
 };
-var tofixed = function(){
-	var u = navigator.userAgent;
-	var word = $('.myword input');
-	var bottom =$('.bottom');
-	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-	//var ua = window.navigator.appVersion;
-	//alert(u);
-	if(isiOS){
-		//兼容ios7
-		$(document).scrollTop(1);
-		word.focus(function(){
-			var noInputViewHeight = $(window).height() - bottom.height();
-			var contentHeight = $(document).height() - bottom.height();
-			contentHeight = contentHeight > noInputViewHeight ? contentHeight : noInputViewHeight;
-			setTimeout(function(){
-				var inputTopHeight = bottom.offset().top - $(window).scrollTop()+1;
-				var inputTopPos = bottom.offset().top + inputTopHeight+1;
-				inputTopPos = inputTopPos > contentHeight ? contentHeight : inputTopPos;
-				bottom.css({'position':'absolute', 'top':inputTopPos });
-				$(window).on('touchstart', function(){
-					word.blur();
-				});
-			}, 100);
-		});
-		word.on('blur',function(){
-			//输入框失焦后还原初始状态
-			var a =$(window).height()-45;
-			bottom.css({'position': 'fixed','top':'','bottom':'0'});
-		})
-	}
-};
 function loadScroll(){
 	$('.scrollDiy').off("scroll").on("scroll",function(){
 		var dh = $('.article').height() + $('.comment').height();
@@ -288,7 +255,7 @@ function addComment(data){
 	wx.config({
 		debug: false,
 		appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
-		timestamp: '{$jsSign['timestamp']}', // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+		timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
 		nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
 		signature: '{$jsSign.signature}', // 必填，签名，见附录1
 		jsApiList: [

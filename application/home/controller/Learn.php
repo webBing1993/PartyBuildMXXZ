@@ -314,13 +314,13 @@ class Learn extends Base{
 
         //获取 文章点赞
         $likeModel = new Like;
-        $like = $likeModel->getLike(1,$id,$userId);
+        $like = $likeModel->getLike(3,$id,$userId);
         $video['is_like'] = $like;
         $this->assign('video',$video);
 
         //获取 评论
         $commentModel = new Comment();
-        $comment = $commentModel->getComment(1,$id,$userId);
+        $comment = $commentModel->getComment(3,$id,$userId);
         $this->assign('comment',$comment);
         return $this->fetch();
     }
