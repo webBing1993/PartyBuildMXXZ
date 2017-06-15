@@ -61,7 +61,6 @@ class Learn extends Admin {
                 return $this->error($learnModel->getError());
             }
         }else{
-            $this->default_pic();
             $this->assign('msg','');
 
             return $this->fetch('edit');
@@ -87,7 +86,7 @@ class Learn extends Admin {
                 return $this->get_update_error_msg($learnModel->getError());
             }
         }else{
-            $this->default_pic();
+
             //根据id获取课程
             $id = input('id');
             if(empty($id)){
