@@ -9,14 +9,6 @@
 	<div class="list clear tag">
 		<span class="fl">党员信息</span>
 	</div>
-	<!--<div class="list clear">-->
-	<!--<span class="fl">头像</span>-->
-	<!--{eq name="user.header" value=""}-->
-	<!--<img src="{$user.avatar}" alt="个人头像" class="fr">-->
-	<!--{else/}-->
-	<!--<img src="{$user.header}" alt="个人头像" class="fr">-->
-	<!--{/eq}-->
-	<!--</div>-->
 	<div class="list clear">
 		<span class="fl">姓名</span>
 		<span class="fr">{$user.name}</span>
@@ -31,7 +23,7 @@
 	</div>
 	<div class="list clear">
 		<span class="fl">出生日期</span>
-		<span class="fr">{$user.birthday}</span>
+		<span class="fr">{$user.birthday|time_format="Y-m-d"}</span>
 	</div>
 	<div class="list clear">
 		<span class="fl">手机号</span>
@@ -43,28 +35,11 @@
 	</div>
 	<div class="list clear">
 		<span class="fl">入党时间</span>
-		<span class="fr">{$user.partytime}</span>
+		<span class="fr">{$user.partytime|time_format="Y-m-d"}</span>
 	</div>
 	<div class="list clear">
 		<span class="fl">所在支部</span>
-		<span class="fr">{$user.branch}</span>
-	</div>
-</div>
-<div class="lists">
-	<div class="list clear tag">
-		<span class="fl">参与度</span>
-	</div>
-	<div class="list clear">
-		<span class="fl">活动情况</span>
-		<span class="fr">{$user.activity['num']}/{$user.activity['all']}</span>
-	</div>
-	<div class="list clear">
-		<span class="fl">学习情况</span>
-		<span class="fr">{$user.party['num']}/{$user.party['all']}</span>
-	</div>
-	<div class="list clear">
-		<span class="fl">会议情况</span>
-		<span class="fr">{$user.meet['num']}/{$user.meet['all']}</span>
+		<span class="fr">{$user.department}</span>
 	</div>
 </div>
 <div class="lists">
