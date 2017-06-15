@@ -35,6 +35,7 @@
 /*课程列表*/
 .regularmore  .lists {
   background: #eeeeee;
+  border-bottom: 1px solid transparent;
 }
 .regularmore .lists .list {
   position: relative;
