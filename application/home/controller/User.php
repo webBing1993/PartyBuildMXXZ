@@ -10,7 +10,6 @@ namespace app\home\controller;
 use app\home\model\Comment;
 use app\home\model\Learn;
 use app\home\model\Years;
-use app\home\model\Notice;
 use app\home\model\Picture;
 use app\home\model\Browse;
 use app\home\model\Feedback;
@@ -67,61 +66,6 @@ class User extends Base {
             default:
                 break;
         }
-        $Notice = new Notice();
-        $map = array(
-            'type' => array('in',[4,5]), // 活动通知 活动情况
-            'status' =>1
-        );
-        $activityAll = $Notice->where($map)->count(); // 活动情况总数
-        $maps = array(
-            'type' => 3, // 党课情况
-            'status' =>1
-        );
-        $partyAll = $Notice->where($maps)->count(); // 党课情况总数
-        $mapss = array(
-            'type' => 2 , // 会议情况
-            'status' => 1
-        );
-        $meetAll = $Notice->where($mapss)->count(); // 会议情况 总数
-        $Brower = new Browse();
-        $map1 = array(
-            'user_id' => $userId,
-            'notice_id' => array('exp',"is not null")
-        );
-        $activity = $Brower->where($map1)->select(); // 浏览notice总记录
-        $num1 = 0; // 活动情况数
-        $num2 = 0; // 党课情况数
-        $num3 = 0; // 会议情况数
-        foreach($activity as $value){
-            $All = $Notice->where('id',$value['notice_id'])->find();
-            // 判断具体的类型  活动情况 党课情况  会议情况
-            switch($All['type']){
-                case 4 : // 活动通知
-                    $num1++;
-                    break;
-                case 5 : // 活动情况
-                    $num1++;
-                    break;
-                case 3 : // 党课情况
-                    $num2++;
-                    break;
-                case 2 : // 会议情况
-                    $num3++;
-                    break;
-            }
-        }
-        $user['activity'] = array(
-            'all' => $activityAll,
-            'num' => $num1,
-        );
-        $user['party'] = array(
-            'all' => $partyAll,
-            'num' => $num2
-        );
-        $user['meet'] =array(
-            'all' => $meetAll,
-            'num' =>$num3
-        );
         $this->assign('user',$user);
 
         return $this->fetch();
