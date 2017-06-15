@@ -1,0 +1,274 @@
+@keyframes bigger {
+  0% {
+    background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
+    background-size: 15px 15px;
+    padding-left: 16px;
+    opacity: 0.9;
+  }
+  10% {
+    background: url('/home/images/feedback/good_.png') 0 5px no-repeat;
+    background-size: 20px 20px;
+    padding-left: 21px;
+    opacity: 0.8;
+  }
+  50% {
+    background: url('/home/images/feedback/good_.png') 0 0 no-repeat;
+    background-size: 28px 28px;
+    padding-left: 29px;
+    opacity: 0.5;
+  }
+  70% {
+    background: url('/home/images/feedback/good_.png') 0 0 no-repeat;
+    background-size: 30px 30px;
+    padding-left: 31px;
+    opacity: 0.3;
+  }
+  100% {
+    background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
+    background-size: 15px 15px;
+    padding-left: 16px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes bigger {
+  0% {
+    background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
+    background-size: 15px 15px;
+    padding-left: 16px;
+    opacity: 0.9;
+  }
+  10% {
+    background: url('/home/images/feedback/good_.png') 0 5px no-repeat;
+    background-size: 20px 20px;
+    padding-left: 21px;
+    opacity: 0.8;
+  }
+  50% {
+    background: url('/home/images/feedback/good_.png') 0 0 no-repeat;
+    background-size: 28px 28px;
+    padding-left: 29px;
+    opacity: 0.5;
+  }
+  70% {
+    background: url('/home/images/feedback/good_.png') 0 0 no-repeat;
+    background-size: 30px 30px;
+    padding-left: 31px;
+    opacity: 0.3;
+  }
+  100% {
+    background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
+    background-size: 15px 15px;
+    padding-left: 16px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes typing {
+  0% {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  25% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.8), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.8);
+  }
+}
+@keyframes typing {
+  0% {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  25% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.8), 24px 0 0 0 rgba(0, 0, 0, 0.2);
+  }
+  75% {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 12px 0 0 0 rgba(0, 0, 0, 0.2), 24px 0 0 0 rgba(0, 0, 0, 0.8);
+  }
+}
+.banner {
+  width: 100vw;
+  height: 50vw;
+}
+.banner img {
+  width: 100%;
+  height: 100%;
+}
+.lists .list {
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+  margin-top: 5vw;
+  border-bottom: 1px solid #f7f7f7;
+}
+.lists .list .fl img {
+  height: 40px;
+  width: 40px;
+}
+.lists .list > .fr {
+  width: calc( 100% - 10px - 40px);
+}
+.lists .list > .fr .name {
+  color: #5a6883;
+  font-size: 1.4rem;
+  line-height: 26px;
+}
+.lists .list > .fr .content {
+  color: #333333;
+  font-size: 1.3rem;
+}
+.lists .list > .fr .imgs .img {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  display: inline-block;
+  margin: 5px 5px 5px 0;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+.lists .list > .fr .imgs .img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.lists .list > .fr .note {
+  color: #999999;
+  font-size: 1.2rem;
+}
+.lists .list > .fr .note span {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+}
+.lists .list > .fr .note .good {
+  background: url('/home/images/feedback/good.png') 0 7px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 16px;
+}
+.lists .list > .fr .note .good_ {
+  animation: bigger 300ms ease;
+  -webkit-animation: bigger 300ms ease;
+  background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 16px;
+}
+.lists .list > .fr .note .message {
+  background: url('/home/images/common/comment-grey.png') 0 7px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+  margin-left: 6px;
+}
+.lists .list > .fr .comments {
+  position: relative;
+  background: #f9f9f9;
+  padding: 5px;
+  margin-bottom: 10px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.lists .list > .fr .comments:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #f9f9f9;
+  position: absolute;
+  top: -6px;
+  left: 15px;
+}
+.lists .list > .fr .comments span {
+  font-size: 1.3rem;
+}
+.lists .list > .fr .comments .name {
+  color: #5a6883;
+}
+.lists .list > .fr .comments .comment {
+  color: #333333;
+}
+/*悬浮按钮*/
+#publish {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  width: 60px;
+  height: 60px;
+  background: url("/home/images/feedback/note.png") no-repeat;
+  background-size: 100% 100%;
+}
+/*底部*/
+.bottom {
+  position: fixed;
+  bottom: -45px;
+  width: 100vw;
+  height: 45px;
+  border-top: 1px solid #dadada;
+  padding: 0 4vw;
+  background: #ffffff;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+.bottom .myword input {
+  vertical-align: middle;
+  height: 30px;
+  width: 72vw;
+  margin: 7px 0;
+  padding-left: 10px;
+  background: #fafafa;
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.bottom .send {
+  width: 18vw;
+  line-height: 45px;
+  text-align: center;
+}
+.bottom .send:active {
+  background: #fafafa;
+}
+body {
+  overflow-x: hidden;
+}
+.imgblocks {
+  width: 100vw;
+  overflow: hidden;
+}
+.imgblocks .imgblock {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  overflow: hidden;
+}
+.imgblocks .imgblock img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.imgblocks .imgblock:nth-child(1) {
+  left: -100vw;
+}
+.imgblocks .imgblock:nth-child(3) {
+  left: 100vw;
+}
+/*加载动画*/
+.loading {
+  width: 100%;
+  height: 40px;
+}
+.typing_loader {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  -webkit-animation: typing 1s linear infinite alternate;
+  animation: typing 1s linear infinite alternate;
+  position: relative;
+  top: 17px;
+  left: calc( 50vw - 15px );
+}

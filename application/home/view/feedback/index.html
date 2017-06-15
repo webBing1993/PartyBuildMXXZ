@@ -1,0 +1,271 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>党员之声</title>
+<link rel="stylesheet" href="/static/viewer/viewer.min.css">
+<link rel="stylesheet" href="/home/css/feedback/feedback.css">
+{/block}
+
+{block name="body"}
+<div class="banner">
+	<img src="/home/images/feedback/1.jpg" alt="建言献策banner图">
+</div>
+<div class="lists">
+	{volist name="list" id="vo"}
+	<div class="list clear">
+		<div class="fl">
+			<img src="{$vo.header}" alt="用户头像">
+		</div>
+		<div class="fr">
+			<div class="name limit">{$vo.username}</div>
+			<div class="content">{$vo.content}</div>
+			<div class="imgs">
+				{volist name="$vo.images" id="img"}
+				<div class="img">
+					<img src="{$img|get_cover='path'}" alt="评论图" data-original="">
+				</div>
+				{/volist}
+			</div>
+			<div class="note clear">
+				<span class="fl">{$vo.department_name}/{$vo.create_time|time_format="Y.m.d"}发布</span>
+				<span class="fr message" onclick="tosend(this,{$vo.id})"></span>
+				<span class="fr goodnum">{$vo.likes}</span>
+				{eq name="vo.is_like" value="1"}
+				<span class="fr good_" onclick="isGood(this,{$vo.id},null,null,2)"></span>
+				{else/}
+				<span class="fr good" onclick="isGood(this,{$vo.id},null,null,2)"></span>
+				{/eq}
+			</div>
+			<ul class="comments">
+				{volist name="$vo.comment" id="com"}
+				<li>
+					<span class="name">{$com.username}：</span>
+					<span class="comment">{$com.content}</span>
+				</li>
+				{/volist}
+			</ul>
+		</div>
+	</div>
+	{/volist}
+</div>
+<a id="publish" href="{:Url('Feedback/publish')}"></a>
+<div class="bottom clear">
+	<div class="myword fl">
+		<input type="text" placeholder="说说你的感想！">
+	</div>
+	<div class="send fr" onclick="send(this)">发送</div>
+</div>
+<div class="tip"></div>
+<div class="loading hidden">
+	<div class="typing_loader"></div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/static/viewer/viewer-jquery.min.js"></script>
+<script>
+	var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+$(function(){
+	//reset
+	var len = $(".list" ).length;
+	if(len == 7){
+		$('.tip' ).text('上拉加载更多');
+		//上拉加载评论
+		loadScroll();
+	}
+	//ios fix兼容
+//	tofixed();
+	//悬浮框移动
+	moveanyway();
+	$('.imgs').viewer({
+		url: 'data-original',
+		toolbar:false,
+		title:false
+	});
+});
+//点赞
+var isGood = function(e,id,comment_id,userid,cla){
+	//样式变化，移到suc
+	var n = $(e).prev('.goodnum').text();
+	$(e).toggleClass('good' ).toggleClass('good_');
+	$(e ).hasClass('good')?n--:n++;
+	$(e ).prev('.goodnum').text(n);
+	$.ajax({
+		type:"post",
+		url:"{:Url('Base/like')}",
+		data:{
+			type:cla,
+			aid:id,
+			comment_id:comment_id
+		},
+		success:function(data){
+			console.log('点赞成功');
+		}
+	})
+};
+//发送评论
+var send = function(e){
+	var it = $(e ).prev().find('input');
+	var index = $('.bottom' ).attr('data-tab');
+	if(it.val() != ''){
+		$.ajax({
+			type:"post",
+			url:"{:Url('Base/comment')}",
+			data:{
+				type : 2,
+				aid:$('.send' ).attr('data-tab'),
+				content:it.val()
+			},
+			success:function(msg){
+				var data = msg.data;
+				var html = '';
+				html +=
+					'<li>'+
+						'<span class="name">'+data.nickname+'：</span>'+
+						'<span class="comment">'+data.content+'</span>'+
+					'</li>';
+
+				$('.list').eq(index).find('.comments').removeClass('hide').append(html);
+				$('.banner,.lists' ).click();
+			}
+		});
+	}else{
+		var not = $('.not');
+		not.fadeIn();
+		document.body.style.overflow='hidden';
+		$('.confirm,.not .bg' ).on('click',function(){
+			not.fadeOut();
+			document.body.style.overflow='scroll';
+			$('.banner,.lists' ).click();
+//			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
+//			$('.myword input' ).val('');
+		})
+	}
+};
+//上拉加载
+function loadScroll(){
+	$(window ).off("scroll" ).on("scroll",function(){
+		var dh = $(document).height();
+		var end = $(window).height() + $(window ).scrollTop();
+		var len = $(".list" ).length;
+		var tip = $(".tip");
+		var loading = $('.loading');
+		if(dh == end && scrollNow){
+			scrollNow = false;//请求执行中
+			$.ajax({
+				type:"post",
+				url:"{:Url('Feedback/more')}",
+				data:{
+					length:len
+				},
+				beforeSend: function(XMLHttpRequest){
+					tip.hide();
+					loading.toggleClass('hidden');
+				},
+				success:function(data){
+					loading.toggleClass('hidden');
+					tip.show();
+					if(data.code == 1){
+						addLists(data);
+						var dataLen =data.data.length;
+						if(data.data.length == 7){
+							tip.text('上拉加载更多');
+						}
+					}else{
+						tip.text('没有更多了');
+						$(window ).off("scroll");
+					}
+					scrollNow = true;//请求结束
+				}
+			})
+		}
+	})
+}
+function addLists(data){
+	var html = '';
+	var lists = data.data;
+	var len = lists.length;
+	for(var i = 0; i< len;i++){
+		var list = lists[i];
+		html +=
+				'<div class="list clear">'+
+				'<div class="fl">'+
+				'<img src="'+list.header+'" alt="用户头像">'+
+				'</div>'+
+				'<div class="fr">'+
+				'<div class="name limit">'+list.username+'</div>'+
+				'<div class="content limit_">'+list.content+'</div>'+
+				'<div class="imgs">';
+		var imglen = list.images.length;
+		for(var j = 0 ;j<imglen ;j++){
+			html+=
+					'<div class="img">'+
+					'<img src='+list.images[j]+' alt="评论图">'+
+					'</div>';
+		}
+		var good = list.is_like == 0?'good':'good_';
+		html +=
+				'</div>'+
+				'<div class="note clear">'+
+				'<span class="fl">'+list.department_name+'/'+list.time+'发布</span>'+
+				'<span class="fr message" onclick="tosend(this,'+list.id+')"></span>'+
+				'<span class="fr goodnum">'+list.likes+'</span>'+
+				'<span class="fr '+good+'" onclick="isGood(this,'+list.id+',null,null,4)"></span>'+
+				'</div>'+
+				'<ul class="comments">';
+		var commentlen = list.comment.length;
+		for(var x = 0 ;x <commentlen ;x++){
+			html+=
+					'<li>'+
+					'<span class="name">'+list.comment[x].username+'：</span>'+
+					'<span class="comment">'+list.comment[x].content+'</span>'+
+					'</li>'
+		}
+		html+=
+				'</ul>'+
+				'</div>'+
+				'</div>';
+	}
+	$(".lists" ).append(html);
+	//图片排版、评论框
+	layout();
+	imgresize();
+}
+
+
+var tosend = function(e,id){
+	var index = $(e).parents('.list' ).index();
+	$('.banner,.lists' ).off('click');
+	$('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
+		$('.banner,.lists' ).off('click').one('click',function(){
+			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
+			$('.myword input' ).val('');
+		})
+	}).attr('data-tab',index);
+	$('.send' ).attr('data-tab',id);
+};
+
+//--------------------------------------------------------------------------
+//
+//
+//--------------------------------------------------------------------------
+var layout = function(){
+	$('.list' ).each(function(){
+		var this_ = $(this);
+		var n_img = this_.find('.imgs .img' ).length;
+		var n_li = this_.find('.comments li' ).length;
+		if(n_img == 4){
+			this_.find('.imgs .img' ).eq(1).after('<br>')
+		}
+		if(n_li == 0){
+			this_.find('.comments').addClass('hide');
+		}
+	})
+};
+//图片排版、评论框
+layout();
+//图片裁剪
+imgresize();
+</script>
+{/block}
