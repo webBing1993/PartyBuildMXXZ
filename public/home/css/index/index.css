@@ -48,7 +48,7 @@ html,body{
 .banner>.rank{
     position: absolute;
     top:4vw;
-    right:-1vw;
+    right:-2vw;
 }
 .banner>.rank>img{
     width:16.3vw;
