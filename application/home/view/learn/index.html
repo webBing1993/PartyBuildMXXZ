@@ -22,8 +22,8 @@
     </div>
     <!--tab-->
     <div class="tabs clear">
-        <div class="tab"><span>两学一做</span></div>
-        <div class="tab"><span>每月一课</span></div>
+        <div class="tab"><span>手机党校</span></div>
+        <div class="tab"><span>练练身手</span></div>
         <!--<div class="tab"><span>党史学习</span></div>-->
     </div>
     <!--切换列表-->
@@ -61,7 +61,7 @@
                         {volist name="vo->Option" id="value" key="k"}
                         <label>{if condition="($k eq 1) AND ($value neq ' ') AND ($value neq '-')"}A{elseif condition="($k eq 2) AND ($value neq ' ') AND ($value neq '-')"}B{elseif condition="($k eq 3 )AND ($value neq ' ') AND ($value neq '-')"}C{elseif condition="($k eq 4 ) AND ($value neq ' ') AND ($value neq '-')"/}D{/if}.{$value|substr=###,'2'}</label>
                         {/volist}
-                        <div class="number">{$n} / 3</div>
+                        <div class="number">{$n} / 5</div>
                     </div>
                     {/volist}
                 </div>
@@ -94,7 +94,7 @@
                             {/volist}
                             <div class="note">
                                 <span class="true">正确答案：<i>{$vo->Right}</i></span>
-                                <span class="number">{$n} / 3</span>
+                                <span class="number">{$n} / 5</span>
                             </div>
                         </div>
                         {/volist}
@@ -274,8 +274,8 @@
                 data:{'data':data},
                 success:function(data){
                     $('.score').html(data.url.score);
-                    $('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]);
-                    var link='scan';
+                    $('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]+'，4.'+data.url.right[4]+'，5.'+data.url.right[5]);
+                    var link='{$request}/home/constitution/scan';
                     $('#link').attr('href',link+'/id/'+data.url.id);
                 }
             });
