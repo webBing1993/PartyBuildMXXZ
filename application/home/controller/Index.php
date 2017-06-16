@@ -18,8 +18,11 @@ use app\home\model\Learn as LearnModel;
  */
 class Index extends Base {
     public function index(){
+        $this ->anonymous();
+        $uid = session('userId');
         $len = array('news' => 0,'learn' => 0);
         $list2 = $this ->getDataList($len);
+        $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
         return $this->fetch();
     }

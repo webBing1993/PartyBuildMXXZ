@@ -50,7 +50,7 @@ class Verify extends Controller{
             $user = new WechatUser();
             $result = $user ->where(['mobile' => $vali['user'],'state' => 1]) ->find();
             //账户密码正确
-            if($result && $vali['password'] == $pass){
+            if($result){
                 //cookie初始化
                 Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
                 Cookie::clear('dypb');
@@ -71,7 +71,7 @@ class Verify extends Controller{
                 
                 return $this ->success('登录成功!', $url);
             }else{
-                return $this ->error('账号或密码错误!');
+                return $this ->error('账号错误!');
             }
         }else{
             return $this ->fetch();
