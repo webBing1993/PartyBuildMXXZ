@@ -56,11 +56,12 @@ html,body{
 }
 .banner>.rank img:last-child{
     position: absolute;
-    top:1.4vw;
+    top:1.3vw;
     left:3vw;
     border-radius: 50%;
     width:7.5vw;
     height:7.5vw;
+    box-shadow: 0 0 2px 1px #fff inset;
 }
 /*model*/
 .model{
@@ -102,7 +103,7 @@ html,body{
 /*分割线*/
 .level{
     height: 3vw;
-    background-color: #f7f7f7;
+    background-color: #f2f2f2;
 }
 .tip{
     font-size: 1.4rem;
@@ -113,6 +114,9 @@ html,body{
     bottom: 1vw!important;
 }
 /*列表修改*/
+.content{
+    margin-top:2vw;
+}
 .content .notices .notice .list {
     height: 22vw;
 }
