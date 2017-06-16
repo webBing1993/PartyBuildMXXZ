@@ -1,3 +1,7 @@
+html{
+    width: 100%;
+    overflow-x: hidden;
+}
 /*banner*/
 .banner {
     width: 100vw;
@@ -44,15 +48,23 @@
 .banner>.rank{
     position: absolute;
     top:4vw;
-    right:4vw;
+    right:-1vw;
 }
 .banner>.rank>img{
-    width:10.7vw;
+    width:16.3vw;
     height:10.7vw;
+}
+.banner>.rank img:last-child{
+    position: absolute;
+    top:1.4vw;
+    left:3vw;
+    border-radius: 50%;
+    width:7.5vw;
+    height:7.5vw;
 }
 /*model*/
 .model{
-    padding: 5.5vw 0;
+    padding: 5vw 0;
 }
 .model>li{
     float: left;
@@ -67,8 +79,8 @@
 }
 .model>li>a>img{
     display: block;
-    width: 13.3vw;
-    height: 13.3vw;
+    width: 14.7vw;
+    height: 14.7vw;
     margin: 0 auto;
     /*border-radius: 50%;*/
     overflow: hidden;
@@ -77,8 +89,9 @@
     display: block;
     text-align: center;
     font-size: 1.2rem;
-    margin-top: 2vw;
+    margin-top: 1vw;
     color: #333;
+    margin-bottom: 1vw;
 }
 .fl {
     float: left;
@@ -86,7 +99,6 @@
 .fr {
     float: right;
 }
-
 /*分割线*/
 .level{
     height: 3vw;

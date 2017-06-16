@@ -16,7 +16,8 @@
         <img src="/home/images/index/exit.png" alt="">
     </a>
     <a href="{:Url('Rank/index')}" class="rank">
-        <img src="/home/images/index/rank.png" alt="">
+        <img src="/home/images/index/usercenter.png" alt="">
+        <img src="/home/images/index/news.png" alt="">
     </a>
 </div>
 <!--图标轮播-->
@@ -26,23 +27,40 @@
             <ul class="model clearfix">
                 <li>
                     <a href="{:Url('News/index')}">
-                        <img src="/home/images/index/djzj.png" alt="党建之家">
+                        <img src="/home/images/index/news.png" alt="党建之家">
                         <span>新闻发布</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('partyhz/index')}">
-                        <img src="/home/images/index/hshj.png" alt="红色汇集">
-                        <span>红色矩阵</span>
+                        <img src="/home/images/index/organization.png" alt="红色汇集">
+                        <span>组织生活</span>
                     </a>
                 </li>
                 <li>
                     <a href="{:Url('Learn/index?c=1')}">
-                        <img src="/home/images/index/mryk.png" alt="每日一课">
+                        <img src="/home/images/index/learn.png" alt="每日一课">
                         <span>两学一做</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="{:Url('News/index')}">
+                        <img src="/home/images/index/profile.png" alt="组织概况">
+                        <span>组织概况</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('partyhz/index')}">
+                        <img src="/home/images/index/voice.png" alt="鸡毛传帖">
+                        <span>鸡毛传帖</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Learn/index?c=1')}">
+                        <img src="/home/images/index/star.png" alt="集赞晋星">
+                        <span>集赞晋星</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -83,6 +101,7 @@
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
+    !function(a,b){function c(){var b=f.getBoundingClientRect().width;b/i>540&&(b=540*i);var c=b/10;f.style.fontSize=c+"px",k.rem=a.rem=c}var d,e=a.document,f=e.documentElement,g=e.querySelector('meta[name="viewport"]'),h=e.querySelector('meta[name="flexible"]'),i=0,j=0,k=b.flexible||(b.flexible={});if(g){console.warn("灏嗘牴鎹凡鏈夌殑meta鏍囩鏉ヨ缃缉鏀炬瘮渚�");var l=g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);l&&(j=parseFloat(l[1]),i=parseInt(1/j))}else if(h){var m=h.getAttribute("content");if(m){var n=m.match(/initial\-dpr=([\d\.]+)/),o=m.match(/maximum\-dpr=([\d\.]+)/);n&&(i=parseFloat(n[1]),j=parseFloat((1/i).toFixed(2))),o&&(i=parseFloat(o[1]),j=parseFloat((1/i).toFixed(2)))}}if(!i&&!j){var p=a.navigator.userAgent,q=(!!p.match(/android/gi),!!p.match(/iphone/gi)),r=q&&!!p.match(/OS 9_3/),s=a.devicePixelRatio;i=q&&!r?s>=3&&(!i||i>=3)?3:s>=2&&(!i||i>=2)?2:1:1,j=1/i}if(f.setAttribute("data-dpr",i),!g)if(g=e.createElement("meta"),g.setAttribute("name","viewport"),g.setAttribute("content","initial-scale="+j+", maximum-scale="+j+", minimum-scale="+j+", user-scalable=no"),f.firstElementChild)f.firstElementChild.appendChild(g);else{var t=e.createElement("div");t.appendChild(g),e.write(t.innerHTML)}a.addEventListener("resize",function(){clearTimeout(d),d=setTimeout(c,300)},!1),a.addEventListener("pageshow",function(a){a.persisted&&(clearTimeout(d),d=setTimeout(c,300))},!1),"complete"===e.readyState?e.body.style.fontSize=12*i+"px":e.addEventListener("DOMContentLoaded",function(){e.body.style.fontSize=12*i+"px"},!1),c(),k.dpr=a.dpr=i,k.refreshRem=c,k.rem2px=function(a){var b=parseFloat(a)*this.rem;return"string"==typeof a&&a.match(/rem$/)&&(b+="px"),b},k.px2rem=function(a){var b=parseFloat(a)/this.rem;return"string"==typeof a&&a.match(/px$/)&&(b+="rem"),b}}(window,window.lib||(window.lib={}));
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var mySwiper = new Swiper('.swiper-container', {
 //        loop: true,
@@ -201,5 +220,6 @@
         }
         $('.notice').append(html);
     }
+
 </script>
 {/block}
