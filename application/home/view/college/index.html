@@ -79,7 +79,7 @@
         width:60px;height:60px;border-radius: 3px;margin-left:11px;margin-top:12px;
     }
     #tab3 ul li>a>span.limit_{
-        width:90%;font-size:14px;height:55px;margin-left:11px;line-height:22px;padding-top:10px;
+        width:100%;font-size:14px;height:55px;padding-left:11px;line-height:22px;padding-top:10px;
     }
     .tab_main{
         height:30px;line-height:30px;width:200px;;margin:0 auto;text-align: center;background:#f9f9f9;border-radius: 3px;margin-bottom:3px;
@@ -91,11 +91,11 @@
         background:#DF4934;color:#fff
     }
 
-    #tab3 #tab_main1>li>a>span:nth-child(2),#tab3 #tab_main2>li>a>span:nth-child(2){
-        margin-left:12px;font-size:12px;color:#999;
+    #tab3 #tab_main1>li>a>span.isEnd{
+        margin-left:12px;font-size:12px;color:#e4393a;
     }
-    #tab3 #tab_main1>li>a>img:nth-child(3),#tab3 #tab_main2>li>a>img:nth-child(3){
-        width:10px;height:10px;margin-top:7px;margin-right:10px;
+    #tab3 #tab_main1>li>a>span.time{
+        margin-right:12px;font-size:12px;color:#999;
     }
     a{
         display: inline-block;
@@ -140,8 +140,8 @@
                                     {volist name="fnotice" id="fno"}
                                     <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
                                         <span class="limit_ fl">{$fno['title']}</span>
-                                        <span>{$fno['create_time']|time_format='Y-m-d'}</span>
-                                        <img src="/home/images/right.png" alt="" class="fr">
+                                        <span class="isEnd">已结束</span>
+                                        <span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>
                                     </a>
                                     {/volist}
                                 </li>
@@ -229,10 +229,12 @@
             var list = lists[i];
             html +=
                     '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
-                        '<span class="limit_ fl">'+list.title+'</span>'+
-                        '<span>'+list.create_time+'</span>'+
-                        '<img src="/home/images/right.png" alt="" class="fr">'+
-                    '</a>'
+                        '<span class="limit_ fl">'+list.title+'</span>';
+            if(list.isEnd){
+                html+='<span class="isEnd">已结束</span>';
+            }
+            html+='<span class="time fr">'+list.create_time+'</span>'+
+                    '</a>';
         }
         $("#tab_main1>li" ).append(html);
     }
