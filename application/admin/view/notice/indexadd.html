@@ -1,0 +1,352 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/static/datepicker/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="/static/iCheck/custom.css">
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">
+<style>
+    textarea{
+        resize:none;
+    }
+    .imggroup{
+        position: relative;
+    }
+    .imgbox{
+        height: 100px;
+        width: 200px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    .imgfile{
+        height: 100px;
+        width: 200px;
+        position: absolute;
+        top:0;
+        opacity: 0;
+    }
+    .plus{
+        height: 100px;
+        width: 200px;
+        font-size: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: rgba(204, 204, 204, 0.51);
+    }
+    .plus:hover{
+        font-size: 150px;
+    }
+    .plus2{
+        display: none;
+    }
+    .plusimg{
+        display: none;
+    }
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>通知公告</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:Url('Notice/index')}">相关通知</a>
+            </li>
+            <li class="active">
+                <strong>新增</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight ">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>新增页面</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+                <div class="ibox-content all">
+                    <form id="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>顶部Banner:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    <input type="file" class="imgfile" accept="image/png , image/jpg ,image/jpeg ,image/gif">
+                                    <input type="hidden" name="front_cover" class="img"  value="" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>标题:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入标题..." class="form-control form_title" name="title" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>主题:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入主题...(可为空)" class="form-control form_title" name="topic" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>地址:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入详细地址...(可为空)" class="form-control form_title" name="address" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>联系方式:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入联系方式...(可为空)" class="form-control form_title" name="tel" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 control-label">
+                                <label>内容:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class=" float-e-margins">
+                                    <div class="ibox-content no-padding borders">
+                                        <script id="container" name="content" type="text/plain"></script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>发布人:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入发布人..." class="form-control form_title" name="publisher" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推荐:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="recommend">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="recommend">否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-11 col-lg-offset-1">
+                                <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal">发布</button>
+                                <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
+                            </div>
+                        </div>
+                        <div class="selblo"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/iCheck/icheck.min.js"></script>
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
+<script src="/admin/js/chosen.jquery.js"></script>
+<!--时间日历-->
+<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+<script>
+    //导航高亮
+    highlight_subnav("{:Url('Notice/index')}");
+
+    //上传图片
+    $(document ).ready(function () {
+        var plus = $('.plus');
+        var imgnum = 1;
+        plus.on('click',function(){
+            var it = $(this);
+            it.hide().next().fadeIn();
+            imgnum = 3;
+            if(!it.hasClass('plus2')){
+                plus.eq(1).fadeIn();
+                imgnum = 2
+            }
+        });
+        $(".imgfile").on("change",function(){
+            var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+            var imgBox = $(this);
+            if(size <= 2048){
+                var img = $(this)[0].files[0];
+                var formData = new FormData();
+                var pic=$(this);
+                formData.append("picture",img);
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('File/uploadPicture')}",
+                    data:formData,
+                    processData : false,
+                    contentType : false,
+                    success:function(m){
+                        var msg = $.parseJSON(m);
+                        var path = msg.data.path;
+
+                        if(msg['code'] == 1){
+                            imgBox.siblings(".img").val(msg.data["id"]);
+                            //显示图片缩略图
+                            pic.parent().find("img" ).attr({src:path});
+                        } else {
+                            warning({msg:msg['msg']});
+                            return;
+                        }
+                    }
+                });
+
+            } else {
+                warning({msg:"您选择的图片超过2mb，请重新选择"});
+                return;
+            }
+
+
+        });
+        var ue = UE.getEditor('container',{
+            initialFrameHeight:400
+        });
+        $(".post-add").off('click').on("click",function(){
+            var it = $(this);
+
+            var data = {
+                front_cover:$("input[name='front_cover']").val(),
+                title:$("input[name='title']").val(),
+                topic:$("input[name='topic']").val(),
+                telephone:$("input[name='tel']").val(),
+                content:ue.getContent(),
+                address:$("input[name='address']").val(),
+                publisher:$("input[name='publisher']").val(),
+                recommend:$("input[name='recommend']:checked").val(),
+                status:0,
+            };
+            $.ajax({
+                type:"post",
+                url:$("#form").attr("action"),
+                data:data,
+                success:function(data){
+                    console.log(data);
+                    if(data.code == 1){
+                        if (data.url) {
+                            updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                        }else{
+                            updateAlert(data.msg ,'success');
+                        }
+                        it.prop('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            if (data.url) {
+                                location.href=data.url;
+                            } else {
+                                location.reload();
+                            }
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    } else {
+                        updateAlert(data.msg, 'error');
+                        it.prop('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+<script>
+    $(function(){
+        //    时间日历
+        $( ".datetimepicker" ).datetimepicker( {
+            language:  'cn',
+            format: 'yyyy-mm-dd hh:ii',
+            minView: "hour",
+            forceParse: false,
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: 1,
+            minuteStep: 5
+
+        });
+        //    单选按钮
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+        //下拉菜单
+        $("select").chosen({
+            no_results_text: "没有找到该选项",
+            allow_single_de: true,
+            width:'100%',
+            max_selected_options:'100'
+        });
+        var selgp = $(".selgp");
+        var selgp2 = $(".selgp2");
+        selHeight(selgp);
+        selHeight(selgp2);
+        function selHeight(e){
+            e.find('ul').on('click',function(){
+                var results = $(this ).next().find('.chosen-results' );
+                var h= results.height();
+                h=h-100;
+                $('.selblo' ).animate({'height':h+'px'},100);
+                //切出页面
+                var hiddenProperty = 'hidden' in document ? 'hidden' :
+                        'webkitHidden' in document ? 'webkitHidden' :
+                                null;
+                var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+                var onVisibilityChange = function(){
+                    if (!document[hiddenProperty]) {
+                        //selgp.find('.search-field').find('input').on('blur');
+                    }else{
+                        e.find('.search-field').find('input').off('blur');
+                    }
+                };
+                $(document).on(visibilityChangeEvent, onVisibilityChange);
+            });
+            e.find('.search-field').find('input').on('blur',function(){
+                setTimeout(function(){
+                    $('.selblo' ).animate({'height':'0'});
+                },100)
+            });
+        }
+    })
+
+</script>
+
+
+
+{/block}
