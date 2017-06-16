@@ -232,7 +232,7 @@
 					type:"post",
 					url:"{:Url('Base/morecomment')}",
 					data:{
-						type:2,
+						type:4,
 						aid:id,
 						length:len
 					},
@@ -241,6 +241,7 @@
 						loading.toggleClass('hidden');
 					},
 					success:function(data){
+						console.log(data);
 						loading.toggleClass('hidden');
 						tip.show();
 						if(data.code == 1){
