@@ -166,9 +166,16 @@
     $('title').text('鸡毛传帖');
 
     $(function(){
+        var len = $("#tab_main1>li>a" ).length;
+        if(len >= 7){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载
+            loadScroll();
+        }
         $('a').off('click' ).on('click',function(){
             window.location.href  =$(this ).attr('href');
         });
+
         if($("#tab_main1").find("a").length > 0){
             $('#wuxiaoxi1').hide()
         }
@@ -181,7 +188,7 @@
         $(window ).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-            var len = $(".list" ).length;
+            var len = $("#tab_main1 a" ).length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end){
