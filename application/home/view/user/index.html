@@ -79,7 +79,7 @@ $(function(){
 			formData.append("picture",img);
 			$.ajax({
 				type:"post",
-				url:"{:Url('File/uploadPicture')}",
+				url:"{:Url('File/uploadHead')}",
 				data:formData,
 				processData : false,
 				contentType : false,
@@ -102,17 +102,35 @@ $(function(){
 							data:{header:msg.data.path},
 							dataType: "Json",
 							success:function(){
-
+								swal({
+									title: ' ',
+									text: '上传成功',
+									type: 'success',
+									confirmButtonText:'确定',
+									timer:2000
+								});
 							}
 						})
 					} else {
-						warning({msg:'上传失败'});
-						return;
+						swal({
+							title: ' ',
+							text: '上传失败',
+							type: 'error',
+							confirmButtonText:'确定',
+							timer:2000
+						});
+						return '';
 					}
 				}
 			});
 		} else {
-			warning({msg:"您选择的图片超过2mb，请重新选择"});
+			swal({
+				title: ' ',
+				text: '您选择的图片超过2mb，请重新选择',
+				type: 'error',
+				confirmButtonText:'确定',
+				timer:2000
+			});
 			return;
 		}
 	});
