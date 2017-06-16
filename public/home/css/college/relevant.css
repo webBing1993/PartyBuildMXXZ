@@ -1,0 +1,282 @@
+.title {
+  font-size: 1.4rem;
+  color: #333333;
+}
+.note {
+  color: #999999;
+  font-size: 1.2rem;
+  text-align: right;
+}
+.article p {
+  width: 100%;
+  word-break: break-all;
+}
+.banner {
+  width: 100vw;
+  height: 50vw;
+}
+.banner .banner-img {
+  width: 100%;
+  height: 100%;
+}
+.banner .arc {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  z-index: 2;
+}
+.content {
+  width: 100%;
+  overflow: hidden;
+}
+.content .top {
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+.content .top .title {
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+/*.content .top .note span {*/
+  /*height: 40px;*/
+  /*display: inline-block;*/
+  /*margin-right: 10px;*/
+  /*line-height: 40px;*/
+/*}*/
+.content .top .read {
+  background: url('/home/images/detail/scan_.png') 0 12px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+}
+.content .top .col {
+  background: url('/home/images/detail/star-border.png') 0 12px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+}
+.content .message {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+.content .message div {
+  width: 100%;
+  height: 40px;
+  padding-left: 50px;
+  line-height: 40px;
+}
+.content .message div span {
+  display: inline-block;
+  width: 100%;
+  padding-right: 15px;
+  border-bottom: 1px dashed #eeeeee;
+}
+.content .message div span:nth-child(5) {
+  border-bottom: none;
+}
+.content .message div:nth-child(3) span {
+  padding-right: 0!important;
+}
+.content .message div:nth-child(3) {
+  background: url("/home/images/detail/phone.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
+.content .message div:nth-child(3)>a{
+  color: #333;
+}
+.content .message div:nth-child(1) {
+  background: url("/home/images/detail/people.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
+.content .message div:nth-child(2) {
+  background: url("/home/images/detail/address.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
+.content .article {
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+  margin-bottom: 15px;
+  font-size: 1.6rem;
+  text-indent: 3.2rem;
+}
+.content .article * {
+  max-width: 100%!important;
+}
+/*评论*/
+.comment {
+  padding-bottom: 50px;
+}
+.comment .sum {
+  height: 30px;
+  padding-left: 10px;
+  background: #fbfbfb;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  font-size: 1.2rem;
+  line-height: 30px;
+}
+.comment .lists .list {
+  width: 100%;
+  padding-left: 13px;
+  padding-right: 13px;
+  min-height: 100px;
+  border-bottom: 1px solid #dadada;
+}
+.comment .lists .list .fl img {
+  width: 30px;
+  height: 30px;
+  margin-top: 13px;
+  margin-right: 10px;
+  overflow: hidden;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.comment .lists .list .mid {
+  width: 73%;
+}
+.comment .lists .list .mid .name {
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  color: #666666;
+}
+.comment .lists .list .mid .content {
+  width: 100%;
+  word-break: break-all;
+}
+.comment .lists .list .mid .time {
+  font-size: 1.2rem;
+  line-height: 20px;
+  color: #666666;
+}
+.comment .lists .list .fr {
+  margin-top: 15px;
+  color: #666666;
+}
+.comment .lists .list .good {
+  background: url('/home/images/detail/good.png') 0 2px no-repeat;
+}
+.comment .lists .list .good_ {
+  animation: shake 300ms ease;
+  -webkit-animation: shake 300ms ease;
+  background: url('/home/images/detail/good_.png') 0 2px no-repeat;
+}
+.comment .lists .list .isgood {
+  background-size: 15px 15px;
+  padding-left: 18px;
+}
+.comment .tip {
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #c1c1c1;
+}
+/*底部*/
+.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  border-top: 1px solid #dadada;
+  padding-left: 10px;
+  background: #ffffff;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+.bottom .star {
+  background: url('/home/images/detail/star-border.png') 20px 12px no-repeat;
+}
+.bottom .star_ {
+  animation: shake 300ms ease;
+  -webkit-animation: shake 300ms ease;
+  background: url('/home/images/detail/star-yellow.png') 20px 12px no-repeat;
+}
+.bottom .collect {
+  width: 60px;
+  height: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+  background-size: 20px 20px;
+  padding-top: 24px;
+}
+.bottom .myword input {
+  vertical-align: middle;
+  height: 30px;
+  width: 76vw;
+  margin: 7px 0;
+  padding-left: 10px;
+  background: #fafafa;
+  border: 1px solid #d8d8d8;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
+.bottom .send {
+  width: 19vw;
+  padding-left: 15px;
+  padding-right: 15px;
+  line-height: 45px;
+  text-align: center;
+}
+.bottom .send:active {
+  background: #fafafa;
+}
+@media (max-width: 320px) {
+  .myword input {
+    width: 200px;
+  }
+}
+/*加载动画*/
+.loading {
+  width: 100%;
+  height: 40px;
+}
+.typing_loader {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  -webkit-animation: typing 1s linear infinite alternate;
+  -moz-animation: Typing 1s linear infinite alternate;
+  animation: typing 1s linear infinite alternate;
+  position: relative;
+  top: 17px;
+  left: calc( 50vw - 15px );
+}
+
+.article  .note {
+  color: #999999;
+  font-size: 14px;
+  height: 40px;
+}
+.article  .note span {
+  height: 40px;
+  display: inline-block;
+  margin-right: 10px;
+  line-height: 40px;
+}
+.article  .note_ span{
+  margin-right: 0;
+}
+.article  .note .read {
+  background: url('/home/images/detail/scan_.png') 0 12px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+  float:right;
+}
+.article  .note .good {
+  background: url('/home/images/detail/good.png') 0 12px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+  float:right;
+}
+.article .note .good_ {
+  animation: shake 300ms ease;
+  -webkit-animation: shake 300ms ease;
+  background: url('/home/images/detail/good_.png') 0 12px no-repeat;
+  background-size: 15px 15px;
+  padding-left: 18px;
+  float:right;
+}

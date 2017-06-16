@@ -1,0 +1,243 @@
+{extend name="public/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+    /*reset*/
+    .page{
+        background:#fff;
+    }
+    .content-block,.list-block,.list-block .item-inner,.list-block .item-content{
+        padding:0;margin:0;
+    }
+
+    .navbar{
+        height:36px;min-height:36px;border:none;background:#f9f9f9;
+    }
+    .navbar:after{
+        height:0;
+    }
+    .button{
+        height:36px;line-height:36px;border:none;color:#999;font-size:16px;
+    }
+    .buttons-row .button:first-child,.buttons-row .button:last-child{
+        border-radius:0; border-left-width:0;
+    }
+
+
+    .list-block ul:before,.list-block ul:after{
+        height:0;
+    }
+    /*main*/
+    .banner img{
+        width:100%;
+    }
+
+    
+
+    .tongzhi img{
+        width:30px;position:absolute;right:12px;top:0;margin-top:5px;
+    }
+    .tongzhi>span>span{
+        color:#df4934;
+    }
+     .content-block ul{
+        margin:0 12px;border-radius: 3px;height:215px;background:#fff;box-shadow: 0px 0px 6px 1px rgba(196,196,196, .3);position:relative;
+    }
+
+    .left_{
+        height:91px;
+        position: absolute;
+        top: 17px;
+        left:16%;
+        width: 27px;
+        z-index: 10;
+    }
+    .right_{
+        height:91px;
+        position: absolute;
+        top: 17px;
+        width: 27px;
+
+        z-index: 10;
+        left:70%;
+    }
+
+
+    /*tab3*/
+    #tab3 ul{
+        margin-bottom:20px;
+    }
+    #tab3 ul li .list_img{
+        height:30px;
+    }
+
+    #tab3 ul li>div{
+        height:85px;width:100%;display: block;position:relative;border-bottom:1px solid #f1f1f1;
+    }
+    #tab3 ul li>div>img.fl{
+        width:60px;height:60px;border-radius: 3px;margin-left:11px;margin-top:12px;
+    }
+    #tab3 ul li>a>span.limit_{
+        width:90%;font-size:14px;height:55px;margin-left:11px;line-height:22px;padding-top:10px;
+    }
+    .tab_main{
+        height:30px;line-height:30px;width:200px;;margin:0 auto;text-align: center;background:#f9f9f9;border-radius: 3px;margin-bottom:3px;
+    }
+    .btn1{
+        width:96px;text-align: center;display: inline-block;;border-radius: 3px;color:#999;font-size:15px;
+    }
+    .tab_active{
+        background:#DF4934;color:#fff
+    }
+
+    #tab3 #tab_main1>li>a>span:nth-child(2),#tab3 #tab_main2>li>a>span:nth-child(2){
+        margin-left:12px;font-size:12px;color:#999;
+    }
+    #tab3 #tab_main1>li>a>img:nth-child(3),#tab3 #tab_main2>li>a>img:nth-child(3){
+        width:10px;height:10px;margin-top:7px;margin-right:10px;
+    }
+    a{
+        display: inline-block;
+        color:#666666;
+    }
+
+    /*加载动画*/
+    .tip {
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        color: #c1c1c1;
+    }
+    .loading {
+        width: 100%;
+        height: 40px;
+    }
+    .typing_loader {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        -webkit-animation: typing 1s linear infinite alternate;
+        -moz-animation: Typing 1s linear infinite alternate;
+        animation: typing 1s linear infinite alternate;
+        position: relative;
+        top: 17px;
+        left: calc( 50vw - 20px );
+    }
+
+</style>
+{/block}
+
+{block name="body"}
+
+
+        <div class="page">
+                    <!-- Tab 3 -->
+                    <div id="tab3" class="" >
+                        <div class="list-block" >
+                            <ul id="tab_main1">
+                                <li>
+                                    {volist name="fnotice" id="fno"}
+                                    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
+                                        <span class="limit_ fl">{$fno['title']}</span>
+                                        <span>{$fno['create_time']|time_format='Y-m-d'}</span>
+                                        <img src="/home/images/right.png" alt="" class="fr">
+                                    </a>
+                                    {/volist}
+                                </li>
+                                <li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">
+                                    <img src="/home/images/nomessage.png" alt="" style="width:120px;">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+        </div>
+
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
+{/block}
+
+{block name="script"}
+<script src="/static/framework7/framework7.js"></script>
+<script>
+    //模块标题
+    $('title').text('红领学院');
+
+    $(function(){
+        $('a').off('click' ).on('click',function(){
+            window.location.href  =$(this ).attr('href');
+        });
+        if($("#tab_main1").find("a").length > 0){
+            $('#wuxiaoxi1').hide()
+        }
+        else{
+            $('#wuxiaoxi1').show()
+        }
+        loadScroll()
+    });
+    function loadScroll(){
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+            var len = $(".list" ).length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var type =  parseInt(window.location.href.split("type/")[1]);
+            if(dh == end){
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('College/leadlistmore')}",
+                    data:{
+                        type:type,
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        console.log(data);
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            var list={
+                                data:[
+                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'},
+                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'},
+                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'}
+                                ]
+                        }
+                            addMeets(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                    }
+                })
+            }
+        })
+    }
+    function addMeets(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a href="'+list.url+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
+                        '<span class="limit_ fl">'+list.title+'</span>'+
+                        '<span>'+list.create_time+'</span>'+
+                        '<img src="/home/images/right.png" alt="" class="fr">'+
+                    '</a>'
+        }
+        $("#tab_main1>li" ).append(html);
+    }
+    //
+</script>
+{/block}
