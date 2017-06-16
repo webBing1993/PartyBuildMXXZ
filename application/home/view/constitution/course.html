@@ -9,7 +9,7 @@
 {block name="body"}
 <div class="banner">
 	<img src="/home/images/constitution/3.png" alt="每日一课banner" class="banner-img">
-	<span class="tag">每月一课</span>
+	<span class="tag">练练身手</span>
 </div>
 <div class="lists">
 	{volist name="question" id="vo" key="n"}
@@ -18,7 +18,7 @@
 		{volist name="vo->Option" id="value"}
 		<label>{$value}</label>
 		{/volist}
-		<div class="number">{$n} / 3</div>
+		<div class="number">{$n} / 5</div>
 	</div>
 	{/volist}
 </div>
@@ -56,7 +56,7 @@ $(function(){
 			data:{'data':data},
 			success:function(data){
 				$('.score').html(data.url.score);
-				$('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]);
+				$('#true1').html('<br>1.'+data.url.right[1]+'，2.'+data.url.right[2]+'，3.'+data.url.right[3]+'，4.'+data.url.right[4]+'，5.'+data.url.right[5]);
 				var link='scan';
 				$('#link').click(function(){window.location.replace(link+'/id/'+data.url.id);});
 			}

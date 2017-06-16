@@ -22,7 +22,7 @@ class Constitution extends Base {
      */
     public function course(){
         $userid = session('userId');
-        $day = date("j",time());  // 获取当天日期  没有前导0
+        $day = strtotime(date('Y-m-d', time()));;  // 获取当然凌晨时间戳
         $mon = date("n",time());  // 获取当天月份  没有前导0
         $year = date("Y",time());  // 获取当天年份
         $map = array(
@@ -36,35 +36,32 @@ class Constitution extends Base {
                 $ids[]=$value->id;
             }
             //随机获取单选的题目
-            $num=3;//题目数目
+            $num=5;//题目数目
             $data=array();
             while(true){
-                if(count($data) == $num){  // 满足题目数量   退出
+                if(count($data) == $num){
                     break;
                 }
-                $index = mt_rand(0,count($ids)-1);  // 获取一个随机数  即随机获取题库中题目数组的索引
-                $res = $ids[$index];  // 该索引下对应的题目
+                $index=mt_rand(0,count($ids)-1);
+                $res=$ids[$index];
                 if(!in_array($res,$data)){
-                    $data[] = $res;  //  不重复
+                    $data[]=$res;
                 }
             }
             foreach($data as $value){
-                $question[] = Question::get($value);
+                $question[]=Question::get($value);
             }
             $this->assign('question',$question);
             return $this->fetch();
         }else{  //  有数据
-            $user_day = date("j", $Answers['create_time']);  // 获取用户答题的日期
-            $user_mon = date("n", $Answers['create_time']);  // 获取用户答题的月份  无前导0
-            $user_year = date("Y", $Answers['create_time']);  // 获取用户答题的年
-            if($day != $user_day ){  // 当天 还未答题
+            if($day >= $Answers['create_time'] ){  // 当天 还未答题
                 //取单选
                 $arr=Question::all(['type'=>0]);
                 foreach($arr as $value){
                     $ids[]=$value->id;
                 }
                 //随机获取单选的题目
-                $num=3;//题目数目
+                $num=5;//题目数目
                 $data=array();
                 while(true){
                     if(count($data) == $num){
@@ -82,68 +79,21 @@ class Constitution extends Base {
                 $this->assign('question',$question);
                 return $this->fetch();
             }else{
-                if ($mon != $user_mon){
-                    //取单选
-                    $arr=Question::all(['type'=>0]);
-                    foreach($arr as $value){
-                        $ids[]=$value->id;
-                    }
-                    //随机获取单选的题目
-                    $num=3;//题目数目
-                    $data=array();
-                    while(true){
-                        if(count($data) == $num){
-                            break;
-                        }
-                        $index=mt_rand(0,count($ids)-1);
-                        $res=$ids[$index];
-                        if(!in_array($res,$data)){
-                            $data[]=$res;
-                        }
-                    }
-                    foreach($data as $value){
-                        $question[]=Question::get($value);
-                    }
-                    $this->assign('question',$question);
-                    return $this->fetch();
-                }else{
-                    if($year != $user_year){
-                        //取单选
-                        $arr=Question::all(['type'=>0]);
-                        foreach($arr as $value){
-                            $ids[]=$value->id;
-                        }
-                        //随机获取单选的题目
-                        $num=3;//题目数目
-                        $data=array();
-                        while(true){
-                            if(count($data) == $num){
-                                break;
-                            }
-                            $index=mt_rand(0,count($ids)-1);
-                            $res=$ids[$index];
-                            if(!in_array($res,$data)){
-                                $data[]=$res;
-                            }
-                        }
-                        foreach($data as $value){
-                            $question[]=Question::get($value);
-                        }
-                        $this->assign('question',$question);
-                        return $this->fetch();
-                    }else{
-                        // 当天已经答过题
-                        $Qid = json_decode($Answers->question_id);
-                        $rights=json_decode($Answers->value);
-                        $re = array();
-                        foreach($Qid as $key => $value){
-                            $re[$key] = Question::get($value);
-                            $re[$key]['right'] = $rights[$key];
-                        }
-                        $this->assign('question',$re);
-                        return $this->fetch('scan');
-                    }
+                // 当天已经答过题
+                $Answers = Answers::where(['create_time' => ['egt',$day],'userid' => $userid]) ->find();
+                if (empty($Answers)){
+                    return $this->error('系统错误,不存在该条数据');
                 }
+                $Qid = json_decode($Answers->question_id);
+                $rights=json_decode($Answers->value);
+                $re = array();
+                foreach($Qid as $key => $value){
+                    $re[$key] = Question::get($value);
+                    $re[$key]['right'] = $rights[$key];
+                }
+                $this->assign('question',$re);
+                $this->assign('check',1);//1为答过题
+                return $this->fetch('scan');
             }
         }
     }
