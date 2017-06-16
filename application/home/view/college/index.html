@@ -163,7 +163,7 @@
 <script src="/static/framework7/framework7.js"></script>
 <script>
     //模块标题
-    $('title').text('红领学院');
+    $('title').text('鸡毛传帖');
 
     $(function(){
         $('a').off('click' ).on('click',function(){
@@ -184,13 +184,11 @@
             var len = $(".list" ).length;
             var tip = $(".tip");
             var loading = $('.loading');
-            var type =  parseInt(window.location.href.split("type/")[1]);
             if(dh == end){
                 $.ajax({
                     type:"post",
                     url:"{:Url('College/leadlistmore')}",
                     data:{
-                        type:type,
                         length:len
                     },
                     beforeSend: function(XMLHttpRequest){
@@ -202,13 +200,6 @@
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
-                            var list={
-                                data:[
-                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'},
-                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'},
-                                {'url':'','title':'aaaaaaaaa','time':'2012-8-8'}
-                                ]
-                        }
                             addMeets(data);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
@@ -230,7 +221,7 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
             html +=
-                    '<a href="'+list.url+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
+                    '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
                         '<span class="limit_ fl">'+list.title+'</span>'+
                         '<span>'+list.create_time+'</span>'+
                         '<img src="/home/images/right.png" alt="" class="fr">'+

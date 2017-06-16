@@ -20,29 +20,29 @@
 {block name="body"}
 <div class="scrollDiy">
 	<div class="banner">
-		<img src="/home/images/test/1.jpg" alt="支部活动banner" class="banner-img">
+		<img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
 	</div>
 	<div class="content">
 		<div class="top">
 			<div class="title limit_" style="text-align: center">{$info.title}</div>
 			<div class="note">
-				<span class="fl">{$info.theme}</span>
-				{$info.time|time_format='Y-m-d'}
+				<span class="fl">{$info.publisher}</span>
+				{$info.create_time|time_format='Y-m-d'}
 			</div>
 		</div>
 		<div class="message">
-			<div class="name limit">{$info.theme}</div>
+			<div class="name limit">{$info.topic}</div>
 			<div class="content" >{$info.address}</div>
-			<div class="time"><a href="tel:{10086}">10086</a></div>
+			<div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>
 		</div>
 		<div class="article">{$info.content}</div>
 		<div class="article">
 			<div class="note">
 				{eq name="visit" value="0"}
 				{eq name="info.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,2,{$info.id})">{$info.likes}</span>
+				<span class="isgood good_" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,2,{$info.id})">{$info.likes}</span>
+				<span class="isgood good" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$info.likes}</span>
@@ -86,7 +86,7 @@
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想！">
 		</div>
-		<div class="send fr" onclick="send(this,2,{$info['id']})">发送</div>
+		<div class="send fr" onclick="send(this,4,{$info['id']})">发送</div>
 	</div>
 	{/eq}
 </div>
@@ -296,9 +296,9 @@
 	//---微信接口JS-SDK的调用
 	wx.config({
 		debug: false,
-		appId: '{$jsSign.appid}', // 必填，公众号的唯一标识
-		timestamp: {$jsSign['timestamp']}, // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
-		nonceStr: '{$jsSign.noncestr}', // 必填，生成签名的随机串
+		appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
+		timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+		nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
 		signature: '{$jsSign.signature}', // 必填，签名，见附录1
 		jsApiList: [
 			'checkJsApi',
