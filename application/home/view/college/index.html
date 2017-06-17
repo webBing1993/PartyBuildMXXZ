@@ -140,7 +140,9 @@
                                     {volist name="fnotice" id="fno"}
                                     <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
                                         <span class="limit_ fl">{$fno['title']}</span>
+                                        {eq name="fno['is_over']" value="1"}
                                         <span class="isEnd">已结束</span>
+                                        {/eq}
                                         <span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>
                                     </a>
                                     {/volist}
@@ -230,7 +232,7 @@
             html +=
                     '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
                         '<span class="limit_ fl">'+list.title+'</span>';
-            if(list.isEnd){
+            if(list.is_over == 1){
                 html+='<span class="isEnd">已结束</span>';
             }
             html+='<span class="time fr">'+list.create_time+'</span>'+

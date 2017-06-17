@@ -12,9 +12,6 @@ use app\home\model\Comment;
 use app\home\model\Like;
 use app\home\model\Picture;
 use app\home\model\WechatUser;
-use app\home\model\WechatUserTag;
-use com\wechat\TPQYWechat;
-use think\Config;
 use think\Controller;
 
 use app\home\model\Notice as NoticeModel;
@@ -22,7 +19,7 @@ use think\Db;
 
 /**
  * Class Notice
- * @package 支部动态
+ * @package  鸡毛传帖
  */
 class College extends Base {
     /**
@@ -35,6 +32,12 @@ class College extends Base {
             'status' => array('egt',0)
         );
         $list = NoticeModel::where($map)->order('id desc')->limit(10)->select();
+        foreach($list as $value){
+            $value['is_over'] = 0;  // 未结束
+            if (!empty($value['end_time']) && $value['end_time'] < time()){
+                $value['is_over'] = 1;  // 已结束
+            }
+        }
         $this->assign('fnotice',$list);
         return $this->fetch();
     }
@@ -47,9 +50,13 @@ class College extends Base {
         $map = array(
             'status' => array('egt',0),
         );
-        $list = NoticeModel::where($map)->order('id desc')->limit($len,5)->field('id,title,create_time')->select();
+        $list = NoticeModel::where($map)->order('id desc')->limit($len,5)->field('id,title,create_time,end_time')->select();
         foreach($list as $value){
             $value['create_time'] = date("Y-m-d",$value['create_time']);
+            $value['is_over'] = 0;  // 未结束
+            if (!empty($value['end_time']) && $value['end_time'] < time()){
+                $value['is_over'] = 1;  // 已结束
+            }
         }
         if($list){
             return $this->success("加载成功",'',$list);

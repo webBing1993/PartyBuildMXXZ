@@ -25,7 +25,6 @@ class Notice extends Admin {
         );
         $list = $this->lists('Notice',$map);
         int_to_string($list,array(
-            'status' => array(0=>"已发布"),
             'recommend' => array(0=>"否",1=>"是")
         ));
 
@@ -44,28 +43,16 @@ class Notice extends Admin {
                 return $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
-                if ($data['recommend'] == 1){
-                    $res = $noticeModel->save($data);
-                    if ($res){
-                        $map = array(
-                            'status' => 0,
-                            'id' => array("neq",$res)
-                        );
-                        $ree = $noticeModel->where($map)->count();
-                        if ($ree != 0){
-                            $noticeModel->where($map)->update(['recommend' => 0]);
-                        }
-                        return $this->success("新增通知成功",Url('Notice/index'));
-                    }else{
-                        return $this->error($noticeModel->getError());
-                    }
+                $data['start_time'] = strtotime($data['start_time']);
+                $data['end_time'] = strtotime($data['end_time']);
+                if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
+                    return $this->error('结束时间有错误');
+                }
+                $res = $noticeModel->save($data);
+                if ($res){
+                    return $this->success("新增通知成功",Url('Notice/index'));
                 }else{
-                    $res = $noticeModel->save($data);
-                    if ($res){
-                        return $this->success("新增通知成功",Url('Notice/index'));
-                    }else{
-                        return $this->error($noticeModel->getError());
-                    }
+                    return $this->error($noticeModel->getError());
                 }
             }
         }else {
@@ -84,28 +71,16 @@ class Notice extends Admin {
                 return $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
-                if ($data['recommend'] == 1){
-                    $res = $noticeModel->save($data,['id'=>$data['id']]);
-                    if ($res){
-                        $map = array(
-                            'status' => 0,
-                            'id' => array('neq',$data['id'])
-                        );
-                        $ree = $noticeModel->where($map)->count();
-                        if ($ree != 0){
-                            $noticeModel->where($map)->update(['recommend' => 0]);
-                        }
-                        return $this->success("修改通知成功",Url('Notice/index'));
-                    }else{
-                        return $this->error($noticeModel->getError());
-                    }
+                $data['start_time'] = strtotime($data['start_time']);
+                $data['end_time'] = strtotime($data['end_time']);
+                if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
+                    return $this->error('结束时间有错误');
+                }
+                $res = $noticeModel->save($data,['id'=>$data['id']]);
+                if ($res){
+                    return $this->success("修改通知成功",Url('Notice/index'));
                 }else{
-                    $res = $noticeModel->save($data,['id'=>$data['id']]);
-                    if ($res){
-                        return $this->success("修改通知成功",Url('Notice/index'));
-                    }else{
-                        return $this->error($noticeModel->getError());
-                    }
+                    return $this->error($noticeModel->getError());
                 }
             }
         }else{

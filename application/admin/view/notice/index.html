@@ -42,14 +42,14 @@
                             <tr>
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th>标题</th>
-                                <th>主题</th>
+                                <th>开始时间</th>
+                                <th>结束时间</th>
                                 <th>地址</th>
                                 <th>联系方式</th>
                                 <th>发布人</th>
                                 <th>创建人</th>
                                 <th>创建时间</th>
                                 <th>是否推荐</th>
-                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -58,14 +58,22 @@
                             <tr>
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo.title}</td>
-                                <td>{$vo.topic}</td>
+                                {empty name="vo.start_time"}
+                                <td></td>
+                                {else/}
+                                <td>{$vo.start_time|time_format='Y-m-d H:i'}</td>
+                                {/empty}
+                                {empty name="vo.end_time"}
+                                <td></td>
+                                {else/}
+                                <td>{$vo.end_time|time_format='Y-m-d H:i'}</td>
+                                {/empty}
                                 <td>{$vo.address}</td>
                                 <td>{$vo.telephone}</td>
                                 <td>{$vo->publisher}</td>
                                 <td>{$vo->user->nickname}</td>
                                 <td>{$vo.create_time|time_format='Y-m-d'}</td>
                                 <td>{$vo.recommend_text}</td>
-                                <td>{$vo.status_text}</td>
                                 <td>
                                     <a href="{:Url('Notice/indexedit?id='.$vo['id'])}">修改</a>
                                     <a href="{:Url('Notice/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
