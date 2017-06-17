@@ -192,6 +192,7 @@ body {
   font-size: 14px;
   line-height: 45px;
   border-bottom: 1px solid #f1f1f1;
+  padding-left: 1rem;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -215,20 +216,27 @@ body {
   top: 15px;
   left: 0;
   content: '';
-  height: 10px;
-  width: 10px;
+  height: 20px;
+  width: 20px;
   background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
-  background-size: 10px 10px;
+  background-size: 20px 20px;
+}
+.listbox .box .box_ .lists .party1 .tri-left.structure2{
+  background: url('/home/images/structure/structure2.png') 0 0 no-repeat;
+  background-size: 20px 20px;
+}
+.listbox .box .box_ .lists .party1 .tri-left.structure3{
+  background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
+  background-size: 20px 20px;
 }
 .listbox .box .box_ .lists .detail1 {
-  display: none;
   width: 100%;
 }
 .listbox .box .box_ .lists .detail1 .name2 {
   display: inline-block;
   width: 90%;
   height: 45px;
-  margin-left: 30px;
+  margin-left: 40px;
   font-size: 14px;
   color: #333333;
   line-height: 45px;

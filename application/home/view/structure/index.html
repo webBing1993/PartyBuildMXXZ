@@ -17,8 +17,8 @@
 				<!--第一层-->
 				<div class="list clear">
 					<div class="party1">
-						<div class="tri-left"></div>
-						<div class="tri"></div>
+						<div class="tri-left structure1"></div>
+						<div class="tri down"></div>
 						<div class="name1">单建党支部</div>
 					</div>
 					<!--第二层-->
@@ -40,8 +40,8 @@
 				<!--第一层-->
 				<div class="list clear">
 					<div class="party1">
-						<div class="tri-left"></div>
-						<div class="tri"></div>
+						<div class="tri-left structure2"></div>
+						<div class="tri down"></div>
 						<div class="name1">企业联合党支部</div>
 					</div>
 					<!--第二层-->
@@ -54,8 +54,8 @@
 				<!--第一层-->
 				<div class="list clear">
 					<div class="party1">
-						<div class="tri"></div>
-						<div class="tri-left"></div>
+						<div class="tri down"></div>
+						<div class="tri-left structure3"></div>
 						<div class="name1">党群服务中心党支部</div>
 					</div>
 					<!--第二层-->
@@ -98,28 +98,18 @@
 <script>
 $('title' ).text('组织架构');
 $(function(){
-	//tab值记录
-	tabRecord('.tab' ,'.box');
 	//组织架构切换
 	slide();
-	//tab切换
-	tabSwitch('.tab' ,'.box');
-	$('.name2' ).each(function(){
-		var t = $(this ).text();
-		var href = '/home/structure/detail?party='+t+'';
-		$(this ).attr('href', href);
-	})
-
 });
 function slide(){
 	$('.lists .party1' ).on('click',function(){
 		var it = $(this);
 		var detail = it.next('.detail1' );
 		if(detail.hasClass('down')){
-			detail.slideDown();
+			detail.slideUp();
 			it.find('.tri').removeClass('toup').addClass('todown');
 		}else{
-			detail.slideUp();
+			detail.slideDown();
 			it.find('.tri').removeClass('todown').addClass('toup');
 		}
 		detail.toggleClass('down');
