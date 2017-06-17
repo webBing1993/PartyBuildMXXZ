@@ -213,7 +213,7 @@ body {
 }
 .listbox .box .box_ .lists .party1 .tri-left{
   position: absolute;
-  top: 15px;
+  top: 10px;
   left: 0;
   content: '';
   height: 20px;
