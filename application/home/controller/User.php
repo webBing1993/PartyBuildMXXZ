@@ -23,7 +23,8 @@ class User extends Base {
      * 个人中心主页
      */
     public function index(){
-        //是否游客登录
+        //游客判断
+        $this ->checkAnonymous();
         $this->anonymous();
         $userId = session('userId');
         $user = WechatUser::where('userid',$userId)->find();

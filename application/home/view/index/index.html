@@ -15,14 +15,13 @@
     <a  class="exit">
         <img src="/home/images/index/exit.png" alt="">
     </a>
+    {eq name="visit" value="0"}
     <a href="{:Url('User/index')}" class="rank">
         <img src="/home/images/index/usercenter.png" alt="">
-        {eq name="visit" value="0"}
+
         <img src="{$user|get_header}" alt="">
-        {else/}
-        <img src="/home/images/common/vistor.jpg" alt="">
-        {/eq}
     </a>
+    {/eq}
 </div>
 <!--图标轮播-->
 <div class="swiper-container">
@@ -156,7 +155,7 @@
                             confirmButtonText:'确定'
                         });
                         setTimeout(function(){
-                            window.location.replace("{:Url('Verify/logout')}");
+                            window.location.replace("{:Url('Verify/memberslogin')}");
                         },1000)
                     });
         })

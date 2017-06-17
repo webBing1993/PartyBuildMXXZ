@@ -19,7 +19,7 @@
 
 </div>
 <div class="btn">登录</div>
-<a class="login" href="#">非小镇党员入口<img src="/home/images/verify/loginentrance.png"></a>
+<a class="login" href="{:Url('Verify/tourist')}">非小镇党员入口<img src="/home/images/verify/loginentrance.png"></a>
 <footer>
     <img src="/home/images/verify/footer.png">
 </footer>
@@ -36,14 +36,12 @@
     function login(){
         var re=reg();
         var uid=$('.uid>input').val();
-        var pwd=$('.upwd>input').val();
         if(re==true){
             $.ajax({
                 url: "{:Url('Verify/login')}",
                 type: 'post',
                 data: {
-                    user: uid,
-                    password: pwd
+                    user: uid
                 },
                 success:function(data){
                     //data.code  1为成功 0为失败
@@ -84,7 +82,6 @@
     /**表单验证**/
     function reg(){
         var uid=$('.uid>input').val();
-        var pwd=$('.upwd>input').val();
         if(uid==''||uid==null){
             return "请输入您的手机号码";
         }else{
@@ -92,8 +89,6 @@
             if(!myreg.test(uid)||uid.length<11)
             {
                 return '请输入有效的手机号码！';
-            }else if(pwd==''||pwd==null){
-                return '请输入密码';
             }else{
                 return true
             }

@@ -53,7 +53,7 @@ class Base extends Controller {
             if(empty($userId)) {
 //                $redirect_uri = Config::get("party.login");
 //                $url = $Wechat->getOauthRedirect($redirect_uri);
-                $this->redirect('Verify/login');//跳转登录页
+                $this->redirect('Verify/memberslogin');//跳转登录页
             }
 
             // 2获取jsapi_ticket
