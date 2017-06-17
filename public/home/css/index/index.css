@@ -51,16 +51,16 @@ html,body{
     right:-2vw;
 }
 .banner>.rank>img{
-    width:16.3vw;
+    width:13.7vw;
     height:11vw;
 }
 .banner>.rank img:last-child{
     position: absolute;
-    top:1.3vw;
+    top:1.7vw;
     left:3vw;
     border-radius: 50%;
-    width:7.5vw;
-    height:7.5vw;
+    width:7vw;
+    height:7vw;
     box-shadow: 0 0 2px 1px #fff inset;
 }
 /*model*/
