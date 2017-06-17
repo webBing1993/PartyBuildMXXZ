@@ -9,8 +9,8 @@ namespace app\home\controller;
 use think\Controller;
 use com\wechat\TPWechat;
 use think\Config;
-use app\home\model\News;
-use app\home\model\Learn;
+use app\home\model\News as NewsModel;
+use app\home\model\Learn as LearnModel;
 use app\home\model\Picture;
 
 class Push extends Controller{
@@ -26,7 +26,7 @@ class Push extends Controller{
         $image_id = "65s5Dd8jcGNvhC9izswZtFKnYGIP_Wp9OT1-3zUmyuQ";
         $openid = 'ome1gxJkdYt9Ji1LZjvl4d2d-6Fk';//王志超
         //获取需要推送的数据
-        $list = $this ->pushlist();
+        $list = $this ->pushList();
         //没有需要推送的消息,就只推每日一课
         if(empty($list)){
 //            $info['media_id'] = '65s5Dd8jcGNvhC9izswZtFEHs-SRAE-JxAqQCoP7g_g';
@@ -94,10 +94,13 @@ class Push extends Controller{
             if($res['errcode'] == 0){
                 $news = new News();
                 $learn = new Learn();
-                if (!empty($info['media_id'])){
+                if (!empty($info['media_id']))
+                {
                     //class 1新闻 2两学一做
-                    foreach ($list as $k => $v){
-                        if($v['class'] == 1){
+                    foreach ($list as $k => $v)
+                    {
+                        if($v['class'] == 1)
+                        {
                             $news ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
                         }else if($v['class'] == 2){
                             $learn ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
@@ -161,54 +164,68 @@ class Push extends Controller{
     public function everyMonth(){
 
     }
+
     /**
-     * 待推送的列表
+     * 获取待推送的8条数据
+     * @return array
      */
-    public function pushlist(){
-        //获取未推送的前7条数据
-        $news =new News();
-        $learn = new Learn();
-        //获取未推送的前7条数据
-        $map = array('status' => 0,'push' => 1);
-        $order = 'create_time desc';
-        $list = $news ->where($map) ->order($order) ->limit(8) ->select();
+    public function pushList(){
+        $count = 8; //总数据数量
+        $count1 = 0; //从第几条开始取数据
+        $count2 = 0;
+        $news = new NewsModel();
+        $learn = new LearnModel();
+        $news_check = false; //新闻数据状态 true为取空
+        $learn_check = false;
+        $notice_check = false;
         $all_list = array();
-        foreach ($list as $k => $v){
-            //图片地址转化
-            $img = Picture::get($v['front_cover']);
-            //class 1新闻
-            $temp = array(
-                'id' => $v['id'],
-                'publisher' => $v['publisher'],
-                'title' => $v['title'],
-                'content' => $v['content'],
-                'img' => $img['path'],
-                'class' => 1
-            );
-            //压入数据
-            array_push($all_list,$temp);
-        }
-        $count = count($all_list);
-        if($count < 8){
-            $limit = 8 - $count;
-            $map = array('status' => 0,'push' => 1,'type' => 2 );
-            $list = $learn ->where($map) ->order($order) ->limit($limit) ->select();
-            foreach ($list as $k => $v){
-                //图片地址转化
-                $img = Picture::get($v['front_cover']);
-                //class 1新闻
-                $temp = array(
-                    'id' => $v['id'],
-                    'publisher' => $v['publisher'],
-                    'title' => $v['title'],
-                    'content' => $v['content'],
-                    'img' => $img['path'],
-                    'class' => 2
-                );
-                //压入数据
-                array_push($all_list,$temp);
+        //获取数据  取满6条 或者取不出数据退出循环
+        while(true)
+        {
+            if(!$news_check &&
+                count($all_list) < $count)
+            {
+                $res = $news ->getDataList($count1); //获取一条数据
+                if(empty($res))
+                {
+                    $news_check = true;
+                }else {
+                    $count1 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,1); //给每条数据增加类别判断
+                }
+            }
+            if(!$learn_check &&
+                count($all_list) < $count)
+            {
+                $res = $learn ->getDataList($count2);
+                if(empty($res))
+                {
+                    $learn_check = true;
+                }else {
+                    $count2 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,2);
+                }
+            }
+            if(count($all_list) >= $count ||
+                ($news_check && $learn_check))
+            {
+                break;
             }
         }
         return $all_list;
+    }
+    /**
+     * 进行数据区分
+     * @param $list
+     * @param $type 1新闻  2两学一做 3通知
+     */
+    private function changeTpye($all,$list,$type){
+        //图片进行转化
+        $img = Picture::get($list['front_cover']);
+        $list['img'] = $img['path'];
+        //增加类别
+        $list['class'] = $type;
+        array_push($all,$list);
+        return $all;
     }
 }

@@ -7,6 +7,7 @@
  */
 
 namespace app\home\controller;
+use app\admin\model\Picture;
 use think\Controller;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
@@ -106,23 +107,10 @@ class Index extends Base {
      * @param $type 1新闻  2两学一做 3通知
      */
     private function changeTpye($all,$list,$type){
-        if(!isset($list['type']))
-        {
-            $list['type'] = null;
-        }
-        $res = array(
-            'class' => $type,
-            'id' => $list['id'],
-            'title' => $list['title'],
-            'publisher' => $list['publisher'],
-            'create_time' => $list['create_time'],
-            'front_cover' => $list['front_cover'],
-            'type' => $list['type']
-        );
-        array_push($all,$res);
+        $list['class'] = $type;
+        array_push($all,$list);
         return $all;
     }
-
     /**
      * 首页加载更多新闻列表
      * @return array
@@ -130,10 +118,12 @@ class Index extends Base {
     public function moreDataList(){
         $len = input('get.');
         $list = $this ->getDataList($len);
-        //转化时间戳
+        //转化图片路径 时间戳
         foreach ($list['data'] as $k => $v)
         {
+            $img_path = Picture::get($list['data'][$k]['front_cover']);
             $list['data'][$k]['time'] = date('Y-m-d',$v['create_time']);
+            $list['data'][$k]['path'] = $img_path['path'];
         }
         return $list;
     }
