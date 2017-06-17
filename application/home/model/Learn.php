@@ -12,9 +12,20 @@ namespace app\home\model;
 use think\Model;
 
 class Learn extends Model {
-    //首页获取已推送的数据
-    public function get_list($length,$len){
-        $details = $this ->where(['status' => 1]) ->order('create_time desc') ->limit($length,$len) ->select();
-        return $details;
+    //首页获取推荐的数据
+    public function getDataList($length){
+        $map = array(
+            'status' => ['egt',0],
+            'recommend' => 1
+        );
+        $order = 'create_time desc';
+        $limit = "$length,1";
+        $list = $this ->where($map) ->order($order) ->limit($limit) ->select();
+        if(!empty($list))
+        {
+            return $list[0] ->data;
+        }else{
+            return $list;
+        }
     }
 }

@@ -76,11 +76,31 @@
     <div class="notices">
         <div class="notice party">
             {volist name="list2" id="loo"}
-            <a href="{eq name='$loo.class' value='1'}{:Url('Details/index?id='.$loo['id'])}{else/}{eq name='$loo.type' value='1'}{:Url('Learn/video?id='.$loo['id'])}{else/}{:Url('Learn/article?id='.$loo['id'])}{/eq}{/eq}" class="list clear" data-type="{$loo.class}">
+            <a href="
+            {switch name='$loo.class'}
+            {case value='1'}{:Url('Details/index?id='.$loo['id'])}{/case}
+            {case value='2'}
+                {eq name='$loo.type' value='1'}
+                {:Url('Learn/video?id='.$loo['id'])}
+                {else/}
+                {:Url('Learn/article?id='.$loo['id'])}
+                {/eq}
+            {/case}
+            {case value='3'}
+                {:Url('College/forumnotice?id='.$loo['id'])}
+            {/case}
+            {default/}
+            {/switch}"
+               class="list clear" data-type="{$loo.class}">
                 <div class="fl">
                     <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
                     <span class="type">
-                    {eq name="$loo.class" value="1"}新闻发布{else/}两学一做{/eq}
+                    {switch name='$loo.class'}
+                    {case value='1'}红色足迹{/case}
+                    {case value='2'}两学一做{/case}
+                    {case value='3'}鸡毛传贴{/case}
+                    {default/}
+                    {/switch}
                    </span>
                 </div>
                 <div class="fr right">
@@ -149,6 +169,10 @@
             var end = $(window).height() + $(window).scrollTop();
             var news_len = $('.notice .list[data-type=1]').length;
             var learn_len = $('.notice .list[data-type=2]').length;
+            var notice_len = $('.notice .list[data-type=3]').length;
+            console.log(news_len);
+            console.log(learn_len);
+            console.log(notice_len);
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end && scrollNow){
@@ -158,7 +182,8 @@
                     url: "{:Url('Index/moreDataList')}",
                     data:{
                         news : news_len,
-                        learn : learn_len
+                        learn : learn_len,
+                        notice : notice_len
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -194,9 +219,9 @@
             var link = '';
             var type_name ='';
             if(list.class == 1){
-                class_name = '新闻发布';
+                class_name = '红色足迹';
                 link = '/home/details/index/id/'+list.id;
-            }else{
+            }else if(list.class == 2){
                 class_name = '两学一做';
                 //1视频 2文字
                 if(list.type == 2){
@@ -204,7 +229,9 @@
                 }else{
                     link = '/home/learn/video/id/'+list.id;
                 }
-
+            }else if(list.class == 3){
+                class_name = '鸡毛传贴';
+                link = '/home/college/forumnotice/id/'+list.id;
             }
             html +=
                     '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+

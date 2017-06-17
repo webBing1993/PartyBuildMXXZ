@@ -7,20 +7,24 @@
  */
 
 namespace app\home\controller;
-use app\home\model\Message;
 use think\Controller;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
+use app\home\model\Notice as NoticeModel;
 
 
 /**
  * 党建主页
  */
 class Index extends Base {
+    /**
+     * 首页
+     * @return mixed
+     */
     public function index(){
         $this ->anonymous();
         $uid = session('userId');
-        $len = array('news' => 0,'learn' => 0);
+        $len = array('news' => 1,'learn' => 0,'notice' => 0);
         $list2 = $this ->getDataList($len);
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
@@ -28,36 +32,68 @@ class Index extends Base {
     }
 
     /**
-     * 获取新闻发布 两学一做数据
+     * 获取数据列表 红色足记 两学一做 鸡毛传贴
      * @param $len
      */
-    public function getDataList($len){
-        $count1 = $len['news'];
+    public function getDataList($len)
+    {
+        $count1 = $len['news']; //从第几条开始取数据
         $count2 = $len['learn'];
-        $surplus = 0;
-        $all_list = array();
+        $count3 = $len['notice'];
         $news = new NewsModel();
         $learn = new LearnModel();
-        $map = array('status' => ['egt',0],'recommend' => 1);
-        //开始先取新闻三条
-        $list1 = $news ->where($map) ->order('create_time desc') ->limit($count1,3)->select();
-        //压入数据
-        $all_list = $this ->changTpye($all_list,$list1,1);
-        //记录数量
-        $count = count($all_list);
-        $surplus = 6 - $count;
-        $count1 += $count;
-        //再取两学一做数据
-        $list2 = $learn ->where($map) ->order('create_time desc') ->limit($count2,$surplus)->select();
-        $all_list = $this ->changTpye($all_list,$list2,2);
-        //最后再补一遍
-        if(count($all_list) < 6){
-            $count = count($all_list);
-            $surplus = 6 - $count;
-            $list1 = $news ->where($map) ->order('create_time desc') ->limit($count1,$surplus)->select();
-            $all_list = $this ->changTpye($all_list,$list1,1);
+        $notice = new NoticeModel();
+        $news_check = false; //新闻数据状态 true为取空
+        $learn_check = false;
+        $notice_check = false;
+        $all_list = array();
+        //获取数据  取满6条 或者取不出数据退出循环
+        while(true)
+        {
+            if(!$news_check &&
+                count($all_list) < 6)
+            {
+                $res = $news ->getDataList($count1); //获取一条数据
+                if(empty($res))
+                {
+                    $news_check = true;
+                }else {
+                    $count1 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,1); //给每条数据增加类别判断
+                }
+            }
+            if(!$learn_check &&
+                count($all_list) < 6)
+            {
+                $res = $learn ->getDataList($count2);
+                if(empty($res))
+                {
+                    $learn_check = true;
+                }else {
+                    $count2 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,2);
+                }
+            }
+            if(!$notice_check &&
+                count($all_list) < 6)
+            {
+                $res = $notice ->getDataList($count3);
+                if(empty($res))
+                {
+                    $notice_check = true;
+                }else {
+                    $count3 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,3);
+                }
+            }
+            if(count($all_list) >= 6 ||
+                ($news_check && $learn_check && $notice_check))
+            {
+                break;
+            }
         }
-        if (count($all_list) != 0){
+        if (count($all_list) != 0)
+        {
             return ['code' => 1,'msg' => '获取成功','data' => $all_list];
         }else{
             return ['code' => 0,'msg' => '获取失败','data' => $all_list];
@@ -67,27 +103,36 @@ class Index extends Base {
     /**
      * 进行数据区分
      * @param $list
-     * @param $type
+     * @param $type 1新闻  2两学一做 3通知
      */
-    private function changTpye($all,$list,$type){
-        foreach ($list as $k => $v){
-            $res = array(
-                'class' => $type,
-                'id' => $v['id'],
-                'title' => $v['title'],
-                'publisher' => $v['publisher'],
-                'create_time' => $v['create_time'],
-                'front_cover' => $v['front_cover'],
-                'type' => $v['type']
-            );
-            array_push($all,$res);
+    private function changeTpye($all,$list,$type){
+        if(!isset($list['type']))
+        {
+            $list['type'] = null;
         }
+        $res = array(
+            'class' => $type,
+            'id' => $list['id'],
+            'title' => $list['title'],
+            'publisher' => $list['publisher'],
+            'create_time' => $list['create_time'],
+            'front_cover' => $list['front_cover'],
+            'type' => $list['type']
+        );
+        array_push($all,$res);
         return $all;
     }
+
+    /**
+     * 首页加载更多新闻列表
+     * @return array
+     */
     public function moreDataList(){
         $len = input('get.');
         $list = $this ->getDataList($len);
-        foreach ($list['data'] as $k => $v){
+        //转化时间戳
+        foreach ($list['data'] as $k => $v)
+        {
             $list['data'][$k]['time'] = date('Y-m-d',$v['create_time']);
         }
         return $list;
