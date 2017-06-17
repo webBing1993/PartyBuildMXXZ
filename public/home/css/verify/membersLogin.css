@@ -1,0 +1,101 @@
+
+.banner{
+    width:100vw;
+    height:50vw;
+}
+.banner img{
+    width: 100%;
+}
+.banner p{
+    font-size:2.3rem;
+    color: #f2531f;
+    text-align: center;
+    margin-top: -36%;
+}
+.login-box{
+    width:80vw;
+    z-index:999;
+    margin: 0 auto;
+    height: 50vw;
+    padding-top: 35vw;
+}
+/*.login-box>.form{*/
+/*padding:0 8vw;*/
+/*}*/
+.login-box>.form input{
+    border:none;
+    border-bottom:1px solid #f1f1f1;
+    height:8vw;
+    width:61.6vw;
+    outline: none;
+    padding:0;
+    line-height: 8vw;
+    border-radius: 0;
+    font-size: 1.5rem;
+    padding-left: 3.66vw;
+}
+.login-box>.form input::-webkit-input-placeholder{
+    color: #ccc;
+    font-size: 1.5rem;
+}
+.login-box>.form input:-moz-placeholder{
+    color: #ccc;
+    font-size: 1.5rem;
+}
+.login-box>.form input:-ms-input-placeholder{
+    color: #ccc;
+    font-size: 1.5rem;
+}
+.login-box>.form>.uid>span{
+    float: left;
+    background:url('/home/images/verify/user.png') no-repeat;
+    background-size: 3.46vw 4vw;
+    position: relative;
+    top: 1.5vw;
+    left:9vw;
+}
+.login-box>.form>div>span{
+    display: inline-block;
+    width:7.1vw;
+    height:8vw;
+    margin-right: 2.85vw;
+}
+.btn{
+    width:61.6vw;
+    height:10.67vw;
+    background: url("/home/images/verify/loginbtn.png") no-repeat;
+    background-size: 100% 100%;
+    margin:0 auto;
+    text-align: center;
+    line-height: 10.67vw;
+    font-size: 2rem;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 5.3vw;
+    padding-left: 3.15vw;
+
+}
+.login{
+    text-align: center;
+    font-size: 1.4rem;
+    color: #ccc;
+    height: 24.5vw;
+    padding-top: 4vw;
+}
+.login img{
+    height: 3.3vw;
+    margin-left: 2.66vw;
+    vertical-align: middle;
+    position: relative;
+    top:-0.5vw;
+}
+footer{
+    height:26.5vw;
+    position: absolute;
+    bottom: 0;
+    overflow-y: hidden;
+}
+footer img{
+    width:100%;
+    height:100%;
+}

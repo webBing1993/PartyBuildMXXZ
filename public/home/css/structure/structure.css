@@ -203,11 +203,21 @@ body {
 .listbox .box .box_ .lists .party1 .tri {
   position: absolute;
   top: 15px;
-  left: 0;
+  right: 0;
   content: '';
   height: 10px;
   width: 10px;
   background: url('/home/images/structure/tri.png') 0 0 no-repeat;
+  background-size: 10px 10px;
+}
+.listbox .box .box_ .lists .party1 .tri-left{
+  position: absolute;
+  top: 15px;
+  left: 0;
+  content: '';
+  height: 10px;
+  width: 10px;
+  background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
   background-size: 10px 10px;
 }
 .listbox .box .box_ .lists .detail1 {

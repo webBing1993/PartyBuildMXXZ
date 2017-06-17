@@ -111,4 +111,8 @@ class Verify extends Controller{
         session('userId','visitor');
         return $this ->redirect(session('url'));
     }
+
+    public function memberslogin(){
+        return $this ->fetch();
+    }
 }
