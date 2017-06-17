@@ -10,6 +10,7 @@ use think\Controller;
 use app\home\model\WechatUser;
 use think\Cookie;
 use think\Session;
+
 class Verify extends Controller{
     /**
      * 用户登入获取信息
@@ -54,6 +55,7 @@ class Verify extends Controller{
                 //cookie初始化
                 Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
                 Cookie::clear('dypb');
+                session('userId',null);
                 if(empty($result['userid'])){
                     $id = md5(uniqid());//不重复随机id
                     Cookie::set('dypb',['user' =>$id]);
@@ -99,7 +101,7 @@ class Verify extends Controller{
         Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
         Cookie::delete('dypb');
         session('userId',null);
-        return $this ->fetch('login');
+        return $this ->fetch('memberslogin');
     }
     /**
      * 游客登录
@@ -112,6 +114,10 @@ class Verify extends Controller{
         return $this ->redirect(session('url'));
     }
 
+    /**
+     * 带游客模式的登录页
+     * @return mixed
+     */
     public function memberslogin(){
         return $this ->fetch();
     }
