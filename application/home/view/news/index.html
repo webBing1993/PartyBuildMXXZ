@@ -5,6 +5,18 @@
     <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
     <link rel="stylesheet" href="/home/css/common/tip.css">
     <link rel="stylesheet" href="/home/css/common/rem.css">
+    <style>
+        /*发布悬浮框*/
+        #publish {
+            position: fixed;
+            right: 5.3vw;
+            bottom: 10.6vw;
+            width: 16vw;
+            height: 16vw;
+            background: url(/home/images/feedback/note.png) no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
 {/block}
 {block name="body"}
     <!--banner-->
@@ -29,7 +41,11 @@
                 {volist name="list2" id="loo"}
                 <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
+                        {eq name="$loo.front_cover" value=""}
+                        <img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">
+                        {else/}
                         <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
+                        {/eq}
                     </div>
                     <div class="fr right">
                         <div class="title limit_">{$loo.title}</div>
@@ -48,6 +64,10 @@
     <div class="loading hidden">
         <div class="typing_loader"></div>
     </div>
+    <!--线上发布-->
+    {eq name="visit" value="0"}
+    <a id="publish" href="/home/news/publish.html"></a>
+    {/eq}
 {/block}
 {block name="script"}
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
@@ -66,6 +86,8 @@
           $('.tip' ).text('上拉加载更多');
       }
       loadScroll();
+      //悬浮框移动
+      moveanyway();
   });
    //上拉加载更多
   function loadScroll(){
@@ -131,6 +153,53 @@
       }
       $('.notice').append(html);
   }
+   //悬浮框移动
+  function moveanyway(){
+        var oW,oH,touch_start,touch_end;
+        var block = document.getElementById("publish");
+        block.addEventListener("touchstart", function(e) {
+            var touches = e.touches[0];
+            touch_start = touches.clientX;
+            oW = touches.clientX - block.offsetLeft;
+            oH = touches.clientY - block.offsetTop;
+            //阻止页面的滑动默认事件
+            document.addEventListener("touchmove",defaultEvent,false);
+        },false);
+        block.addEventListener("touchmove", function(e) {
+            var touches = e.touches[0];
+            var oLeft = touches.clientX - oW;
+            var oTop = touches.clientY - oH;
+            touch_end = touches.clientX;
+            if(oLeft < 0) {
+                oLeft = 0;
+            }else if(oLeft > document.documentElement.clientWidth - block.offsetWidth) {
+                oLeft = (document.documentElement.clientWidth - block.offsetWidth);
+            }
+            if(oTop < 0) {
+                oTop = 0;
+            }else if(oTop > document.documentElement.clientHeight - block.offsetHeight) {
+                oTop = (document.documentElement.clientHeight - block.offsetHeight);
+            }
+            block.style.left = oLeft+ "px";
+            block.style.top = oTop + "px";
+            e.preventDefault();
+        },false);
+        block.addEventListener("touchend",function() {
+            document.removeEventListener("touchmove",defaultEvent,false);
+            if(touch_start != touch_end && touch_end){
+                var d = document.documentElement.clientWidth - block.offsetWidth;
+                if(block.offsetLeft<(document.documentElement.clientWidth - block.offsetWidth)/2) {
+                    d = 0 ;
+                }
+                $(block).animate({
+                    left:d+'px'
+                },300)
+            }
+        },false);
+        function defaultEvent(e) {
+            e.preventDefault();
+        }
+    }
 
 </script>
 {/block}

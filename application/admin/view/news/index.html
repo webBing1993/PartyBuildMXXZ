@@ -63,7 +63,9 @@
                                 <td>{$vo.push_text}</td>
                                 <td>{$vo.status_text}</td>
                                 <td>
-                                    <a href="{:Url('News/edit?id='.$vo['id'])}">修改</a>
+                                    {neq name="$vo.front_cover" value=""}
+                                    &emsp;<a href="{:Url('News/edit?id='.$vo['id'])}">修改</a>
+                                    {/neq}
                                     &emsp;<a href="{:Url('News/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
                             </tr>

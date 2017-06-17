@@ -117,6 +117,7 @@
   display: block;
   max-width: 100%!important;
   margin-bottom: 13px;
+  margin-top: 13px;
 }
 .article .content .video {
   position: relative;

@@ -26,6 +26,9 @@
 		</div>
 		<div class="content">
 			{$new.content}
+			{volist name="$new.images" id="vo"}
+			<img src="{$vo|get_cover='path'}" alt="图片">
+			{/volist}
 			<div class="note">
 				<span class="read">{$new.views}</span>
 				{eq name="visit" value="0"}

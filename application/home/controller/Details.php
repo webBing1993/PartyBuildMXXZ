@@ -49,6 +49,8 @@ class Details extends Base{
 
         //新闻基本信息
         $list = $newsModel::get($id);
+        //党员发布的图片转化
+        $list['images'] = json_decode($list['images']);
         $list['user'] = session('userId');
         //分享图片及链接及描述
         $image = Picture::where('id',$list['front_cover'])->find();
