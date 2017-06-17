@@ -146,14 +146,14 @@
 
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>审核权限:</label>
+                                <label>权限:</label>
                             </div>
                             <div class="col-lg-11">
                                 <label class="i-checks">
-                                    <input type="radio" value="1" name="review" {eq name="$info.review|default='0'" value="1"}checked{/eq}>是
+                                    <input type="radio" value="1" name="review" {eq name="$info.review|default='0'" value="1"}checked{/eq}>管理员
                                 </label>
                                 <label class="i-checks">
-                                    <input type="radio"  value="0" name="review" {eq name="$info.review|default='0'" value="0"}checked{/eq}>否
+                                    <input type="radio"  value="0" name="review" {eq name="$info.review|default='0'" value="0"}checked{/eq}>普通党员
                                 </label>
                             </div>
                         </div>
