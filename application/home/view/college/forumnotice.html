@@ -31,9 +31,15 @@
 			</div>
 		</div>
 		<div class="message">
-			<div class="name limit">{empty name="info.start_time"}暂无{else/}{$info.start_time|time_format='Y/m/d H:i'}{/empty}--{empty name="info.end_time"}暂无{else/}{$info.end_time|time_format='Y/m/d H:i'}{/empty}</div>
+			{notempty name="info.start_time"}
+			<div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
+			{/notempty}
+			{notempty name="info.address"}
 			<div class="content" >{$info.address}</div>
+			{/notempty}
+			{notempty name="info.telephone"}
 			<div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>
+			{/notempty}
 		</div>
 		<div class="article">{$info.content}</div>
 		<div class="article">
