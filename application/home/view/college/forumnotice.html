@@ -104,6 +104,9 @@
 <script>
 	var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
 	$(function(){
+	    if($(".message").children().length==0){
+	        $(".message").css("border-top","none");
+		}
 		//reset
 		var len = $(".list" ).length;
 		if(len >= 7){
