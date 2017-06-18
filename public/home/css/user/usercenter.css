@@ -117,14 +117,13 @@ html,body{
     padding-bottom: 4vw;
 }
 .rule{
-    width: 10vw;
     position:absolute;
     top: 4vw;
     right: 5.7vw;
 }
 .rule>img{
-    width: 12.2vw;
-    height: 12.2vw;
+    width: 10.4vw;
+    height: 10.4vw;
     display:block;
     margin: 0 auto;
     margin-bottom: 0.5vw;
