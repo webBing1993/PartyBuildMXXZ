@@ -1,15 +1,24 @@
 {extend name="public/common"}
 {block name="style"}
-    <title>两学一做</title>
+    <title>活动发起</title>
     <link rel="stylesheet" href="/home/css/learn/index.css">
     <link rel="stylesheet" href="/home/css/common/rem.css">
-<style>
+    <style>
         .notice>.title{
             width: 100vw;
             font-size: 1.6rem;
             color: #333333;
             line-height: 60px;
             text-align: center;
+        }
+        #publish {
+            position: fixed;
+            right: 20px;
+            bottom: 40px;
+            width: 60px;
+            height: 60px;
+            background: url(/home/images/feedback/note.png) no-repeat;
+            background-size: 100% 100%;
         }
     </style>
 {/block}
@@ -40,6 +49,8 @@
             </div>
         </div>
     </div>
+    <!--线上活动发布-->
+    <a id="publish" href="{:Url('Ativity/publish')}"></a>
     <!--加载更多-->
     <div class="tip"></div>
     <div class="loading hidden">
@@ -102,6 +113,8 @@
             }
         }
         isOut();
+        //悬浮框移动
+        moveanyway();
     });
     function loadScroll(type){
         $(window ).off("scroll" ).on("scroll",function(){
