@@ -45,6 +45,12 @@ class Notice extends Admin {
                 $noticeModel = new NoticeModel();
                 $data['start_time'] = strtotime($data['start_time']);
                 $data['end_time'] = strtotime($data['end_time']);
+                if (!empty($data['start_time']) && empty($data['end_time'])){
+                    return $this->error('请添加结束时间');
+                }
+                if (empty($data['start_time']) && !empty($data['end_time'])){
+                    return $this->error('请添加开始时间');
+                }
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
                     return $this->error('结束时间有错误');
                 }
@@ -73,6 +79,12 @@ class Notice extends Admin {
                 $noticeModel = new NoticeModel();
                 $data['start_time'] = strtotime($data['start_time']);
                 $data['end_time'] = strtotime($data['end_time']);
+                if (!empty($data['start_time']) && empty($data['end_time'])){
+                    return $this->error('请添加结束时间');
+                }
+                if (empty($data['start_time']) && !empty($data['end_time'])){
+                    return $this->error('请添加开始时间');
+                }
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
                     return $this->error('结束时间有错误');
                 }
