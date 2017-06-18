@@ -9,9 +9,6 @@ namespace app\admin\controller;
 use app\admin\model\WechatDepartment;
 use app\admin\model\WechatUser;
 use app\admin\model\Wish;
-use com\wechat\TPQYWechat;
-use app\admin\model\Picture;
-use think\Config;
 use app\admin\model\WishReceive;
  /**
   * 活动发起  控制器
