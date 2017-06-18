@@ -15,7 +15,7 @@ class Activity extends Base{
      * 活动发起 主页 
      */
     public function index(){
-        
+        return $this ->fetch();
     }
     /*
      * 投票  发布
