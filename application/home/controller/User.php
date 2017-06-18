@@ -129,6 +129,14 @@ class User extends Base {
     }
 
     public function usercenter(){
+        //游客判断
+        $this ->checkAnonymous();
+        $this->anonymous();
+        $userId = session('userId');
+        $user = WechatUser::where('userid',$userId)->field('name,department,score,headimgurl')->find();
+        $Department = WechatDepartment::where('id',$user['department'])->field('name')->find();
+        $user['department'] = $Department['name'];
+        $this->assign('user',$user);
         return $this ->fetch();
     }
 }

@@ -20,18 +20,18 @@
     <div class="userImg">
         <div class="shadow"></div>
         <div class="userImgBox">
-            <img src="/home/images/common/vistor.jpg" alt="">
+            <img src="{$user.headimgurl}" alt="">
         </div>
     </div>
-        <div class="topName">白依婷</div>
-        <div class="topDepartment">企业联合党支部</div>
+        <div class="topName">{$user.name}</div>
+        <div class="topDepartment">{$user.department}</div>
     </div>
     <div class="rule">
         <img src="/home/images/user/rule.png" alt="">
         <!--<span>积分规则</span>-->
     </div>
     <div class="bottomRank">
-        <div>我的积分 ：1000</div>
+        <div>我的积分 ：{$user.score}</div>
         <div>我的排行 ：1000</div>
     </div>
 </div>
@@ -98,7 +98,7 @@
                         up.attr('src',msg.data.path);
                         $.ajax({
                             type:"post",
-                            url:"{:Url('Rank/setHeader')}",
+                            url:"{:Url('User/setHeader')}",
                             data:{header:msg.data.path},
                             success:function(data){
                                 swal({
