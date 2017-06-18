@@ -25,7 +25,7 @@ class Index extends Base {
     public function index(){
         $this ->anonymous();
         $uid = session('userId');
-        $len = array('news' => 1,'learn' => 0,'notice' => 0);
+        $len = array('news' => 0,'learn' => 0,'notice' => 0);
         $list2 = $this ->getDataList($len);
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
