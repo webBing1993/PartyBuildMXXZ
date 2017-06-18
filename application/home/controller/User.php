@@ -127,4 +127,8 @@ class User extends Base {
             return $this->error('提交失败');
         }
     }
+
+    public function usercenter(){
+        return $this ->fetch();
+    }
 }
