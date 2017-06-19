@@ -65,7 +65,7 @@ class Verify extends Controller{
                 {
                     $id = md5(uniqid());//不重复随机id
                     Cookie::set('dypb',['user' =>$id]);
-                    $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
+                    $user ->save( ['userid' => $id,'status' => 1] , ['mobile' => $vali['user'],'state' => 1]);
                 }else{
                     Cookie::set('dypb',['user' =>$result['userid']]);
                 }

@@ -26,7 +26,7 @@ class Wechat extends Admin{
     public function user() {
         $name = input('name');
         $map = ['name' => ['like', "%$name%"],'state' => 1];
-        $order = 'status and review desc';
+        $order = 'review desc,status';
         $list = $this->lists("WechatUser",$map,$order);
 
         //部门进行转换
