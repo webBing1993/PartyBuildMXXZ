@@ -34,7 +34,7 @@
     </div>
     <div class="bottomRank">
         <div>我的积分 ：{$user.score}</div>
-        <div>我的排行 ：1000</div>
+        <div>我的排行 ：{$user.rank}</div>
     </div>
 </div>
 
@@ -99,6 +99,8 @@
                 processData : false,
                 contentType : false,
                 success:function(data){
+                    console.log(data);
+                    return ;
                     var msg = $.parseJSON(data);
                     if(msg.code == 1){
                         var image = new Image();
