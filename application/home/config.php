@@ -50,5 +50,7 @@ return [
         'callback' => false, //检测文件是否存在回调函数，如果存在返回文件信息数组
     ),
     /*默认头像*/
-    'head_img' => '/home/images/common/vistor.jpg'
+    'head_img' => '/home/images/common/vistor.jpg',
+    /*cookie 初始化配置*/
+    'cookie' =>['prefix'=>'MXXZ_','expire'=>31533600,'path'=>'/']
 ];

@@ -10,8 +10,13 @@ use think\Controller;
 use app\home\model\WechatUser;
 use think\Cookie;
 use think\Session;
+use think\Config;
 
 class Verify extends Controller{
+    public function _initialize(){
+        //cookie初始化
+        Cookie::init(Config::get('cookie'));
+    }
     /**
      * 用户登入获取信息
      */
@@ -49,14 +54,15 @@ class Verify extends Controller{
         $vali = input('post.');
         if($vali){
             $user = new WechatUser();
-            $result = $user ->where(['mobile' => $vali['user'],'state' => 1]) ->find();
+            $map = ['mobile' => $vali['user'],'state' => 1];
+            $result = $user ->where($map) ->find();
             //账户密码正确
             if($result){
-                //cookie初始化
-                Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
                 Cookie::clear('dypb');
                 session('userId',null);
-                if(empty($result['userid'])){
+                //第一次登陆 初始userId
+                if(empty($result['userid']))
+                {
                     $id = md5(uniqid());//不重复随机id
                     Cookie::set('dypb',['user' =>$id]);
                     $user ->save( ['userid' => $id] , ['mobile' => $vali['user']]);
@@ -64,14 +70,14 @@ class Verify extends Controller{
                     Cookie::set('dypb',['user' =>$result['userid']]);
                 }
                 //登陆后跳转判断
-                if(Session::has('url')) {
+                if(Session::has('url'))
+                {
                     $url = session('url');
                     Session::delete('url');//跳转后清空
                 }else{
                     $url = '';
                 }
-                
-                return $this ->success('登录成功!', $url);
+                return $this ->success('登录成功!',$url);
             }else{
                 return $this ->error('账号错误!');
             }
@@ -84,7 +90,8 @@ class Verify extends Controller{
      */
     public function oauth(){
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
-        if (strpos($user_agent, 'MicroMessenger') === false) {
+        if (strpos($user_agent, 'MicroMessenger') === false) 
+        {
             // 非微信浏览器禁止浏览
             return $this ->error('请在微信打开!');
         } else {
@@ -98,7 +105,6 @@ class Verify extends Controller{
      */
     public function logout(){
         //cookie初始化 session 初始化
-        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
         Cookie::delete('dypb');
         session('userId',null);
         return $this ->fetch('memberslogin');
@@ -108,7 +114,6 @@ class Verify extends Controller{
      */
     public function tourist(){
         //cookie初始化 session 初始化
-        Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
         Cookie::delete('dypb');
         session('userId','visitor');
         return $this ->redirect(session('url'));

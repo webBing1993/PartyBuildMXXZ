@@ -33,7 +33,7 @@ class Base extends Controller {
         $userId = session('userId');
         //读取本地cookie
         if(empty($userId)){
-            Cookie::init(['prefix'=>'think_','expire'=>31533600,'path'=>'/']);
+            Cookie::init(Config::get('cookie'));
             session('userId',Cookie::get('dypb')['user']);
             $userId = session('userId');
         }
