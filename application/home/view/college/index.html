@@ -124,6 +124,12 @@
         top: 17px;
         left: calc( 50vw - 20px );
     }
+    .fa.fa-angle-right{
+        float: right;
+        margin-right:12px;
+        margin-top: -40px;
+        font-size: 1.4rem;
+    }
 
 </style>
 {/block}
@@ -140,6 +146,7 @@
                                     {volist name="fnotice" id="fno"}
                                     <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
                                         <span class="limit_ fl">{$fno['title']}</span>
+                                        <i class="fa fa-angle-right"></i>
                                         {eq name="fno['is_over']" value="1"}
                                         <span class="isEnd">已结束</span>
                                         {/eq}
@@ -231,7 +238,8 @@
             var list = lists[i];
             html +=
                     '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
-                        '<span class="limit_ fl">'+list.title+'</span>';
+                        '<span class="limit_ fl">'+list.title+'</span>'+
+                         '<i class="fa fa-angle-right"></i>';
             if(list.is_over == 1){
                 html+='<span class="isEnd">已结束</span>';
             }
