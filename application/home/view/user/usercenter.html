@@ -1,6 +1,6 @@
 {extend name="public/pure"}
 {block name="style"}
-<title>积分排行</title>
+<title>个人中心</title>
 <link rel="stylesheet" href="/home/css/user/usercenter.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
@@ -22,7 +22,6 @@
         <div class="userImgBox">
             <img src="{$user.headimgurl}" alt="" class="up">
             <input type="file" class="hide" id="upload" accept="image/jpg, image/png, image/gif, image/jpeg">
-            <input type="hidden" name="header"  value="" required="">
         </div>
     </div>
         <div class="topName">{$user.name}</div>
@@ -99,8 +98,6 @@
                 processData : false,
                 contentType : false,
                 success:function(data){
-                    console.log(data);
-                    return ;
                     var msg = $.parseJSON(data);
                     if(msg.code == 1){
                         var image = new Image();
@@ -108,7 +105,7 @@
                         up.attr('src',msg.data.path);
                         $.ajax({
                             type:"post",
-                            url:"{:Url('User/setHeader')}",
+                            url:"{:Url('Rank/setHeader')}",
                             data:{header:msg.data.path},
                             success:function(data){
                                 swal({

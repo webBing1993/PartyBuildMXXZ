@@ -5,7 +5,7 @@ namespace app\home\controller;
 use app\home\model\File as FileModel;
 use app\home\model\Picture;
 use think\Config;
-use think\Image;
+use org\Image;
 
 class File extends Base
 {
@@ -85,6 +85,10 @@ class File extends Base
         //获取 宽高
         $w = $image ->width();
         $h = $image ->height();
+        //判断当日的文件夹是否存在,不存在就创建
+        $root_path = Config::get('download_upload');
+        $pic_path = $root_path['rootPath'].date("Y-m-d").'/';
+        !file_exists($pic_path) && mkdir($pic_path, 0777);
         //设置保存路径
         $path =  substr(Config::get('download_upload')['rootPath'].''.date('Y-m-d',NOW_TIME).'/'.uniqid().'.'.$type,1);
         //居中裁剪
