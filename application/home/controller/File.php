@@ -89,9 +89,9 @@ class File extends Base
         $path =  substr(Config::get('download_upload')['rootPath'].''.date('Y-m-d',NOW_TIME).'/'.uniqid().'.'.$type,1);
         //居中裁剪
         if($w >= $h){
-            $result = $image ->crop($h,$h,($w-$h)/2 ,0) ->save($path);
+            $result = $image ->crop($h,$h,($w-$h)/2 ,0) ->save('.'.$path);
         }else{
-            $result = $image ->crop($w,$w,($h-$w)/2 ,0) ->save($path);
+            $result = $image ->crop($w,$w,($h-$w)/2 ,0) ->save('.'.$path);
         }
         $return['data']['path'] = $path;
         $return['code'] = 1;
