@@ -777,8 +777,10 @@ class Rank extends Base{
             'headimgurl' => $header,
         );
         $user = WechatUser::where('userid',$userId) ->find();
-        if($user['headimgurl'] !== Config::get('head_img')){
-            unlink('.'.$user['headimgurl']);//删除之前的头像
+        //非默认头像 删除前头像
+        if($user['headimgurl'] !== Config::get('head_img') &&
+           file_exists($user['headimgurl'])){
+            unlink('.'.$user['headimgurl']);
         }
         $info = $user ->where('userid',$userId)->update($map);
         if($info){
