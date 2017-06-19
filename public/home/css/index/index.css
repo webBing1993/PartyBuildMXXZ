@@ -56,12 +56,13 @@ html,body{
 }
 .banner>.rank img:last-child{
     position: absolute;
-    top:1.7vw;
+    top:1.4vw;
     left:3vw;
     border-radius: 50%;
-    width:7vw;
-    height:7vw;
-    box-shadow: 0 0 2px 1px #fff inset;
+    width:7.5vw;
+    height:7.5vw;
+    /*box-shadow: 0 0 2px 1px #fff inset;*/
+    border: 1px solid #fff;
 }
 /*model*/
 .model{
