@@ -140,10 +140,10 @@
             var len = ntc.eq(c-1 ).find('.notice .lists ul').length;
             if(len >= 5){
                 $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
+//                loadScroll(c);
+            }else{
+                $('.tip' ).hide();
             }
-        }else{
-            $('.tip' ).hide();
         }
         //投票列表上拉加载
         if(c == 2){
@@ -152,9 +152,9 @@
             if(len >= 5){
                 $('.tip' ).text('上拉加载更多');
                 loadScroll(c);
+            }else{
+                $('.tip' ).hide();
             }
-        }else{
-            $('.tip' ).hide();
         }
         //tab切换
         $('.tabs>.tab ').on('click',function(){
@@ -168,10 +168,10 @@
                 if(len >= 5){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
+                }else{
+                    $('.tip' ).hide();
+                    $(window ).off("scroll" );
                 }
-            }else{
-                $('.tip' ).hide();
-                $(window ).off("scroll" );
             }
             if(eq == 1){
                 $(".triangle-up").css("left","72vw");
@@ -179,10 +179,10 @@
                 if(len >= 5){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
+                }else{
+                    $('.tip' ).hide();
+                    $(window ).off("scroll" );
                 }
-            }else{
-                $('.tip' ).hide();
-                $(window ).off("scroll" );
             }
 
             //使用示例
@@ -214,11 +214,15 @@
             var ntc = $('.notices');
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-            var len = ntc.eq(type-1).find('.notice:last .list').length;
             var tip = $(".tip");
             var loading = $('.loading');
             var url;
             if(type == 1){
+                var len = ntc.eq(type-1).find('.notice .lists ul').length;
+                url = "{:Url('')}";
+            }
+            if(type== 2 ){
+                var len = ntc.eq(type-1).find('.lists ul').length;
                 url = "{:Url('')}";
             }
             if(dh == end && scrollNow){
@@ -253,7 +257,7 @@
             }
         })
     }
-    function addCourse(data){
+    function addCourse(data,type){
         var html = '';
         var lists = data.data;
         var len = lists.length;
@@ -289,7 +293,7 @@
     }
 
     var tosend = function(e,id){
-        var index = $(e).parents('.list' ).index();
+        var index = $(e).parents('.votes ul li' ).index();
         $('.banner,.lists' ).off('click');
         $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
             $('.tabs,.lists' ).off('click').one('click',function(){
@@ -304,6 +308,7 @@
     var send = function(e){
         var it = $(e ).prev().find('input');
         var index = $('.bottom' ).attr('data-tab');
+        console.log(index)
         if(it.val() != ''){
             $.ajax({
                 type:"post",
@@ -323,7 +328,7 @@
                         '</li>';
 
                     $('.votes ul li').eq(index).find('.comments').removeClass('hide').append(html);
-                    $('.banner,.lists' ).click();
+                    $('tabs,.lists' ).click();
                 }
             });
         }else{
