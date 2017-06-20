@@ -36,8 +36,7 @@ textarea::-webkit-input-placeholder {
 .form .list .time {
   float: right;
   width: 70vw;
-  color: #999999;
-  text-align: right;
+  color: #999;
   font-size: 1.3rem;
 }
 .form .list input {

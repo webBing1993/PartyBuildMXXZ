@@ -292,7 +292,7 @@
         var index = $(e).parents('.list' ).index();
         $('.banner,.lists' ).off('click');
         $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
-            $('.banner,.lists' ).off('click').one('click',function(){
+            $('.tabs,.lists' ).off('click').one('click',function(){
                 $('.bottom' ).animate({'bottom':'-45px'},500,'swing');
                 $('.myword input' ).val('');
             })
