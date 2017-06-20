@@ -261,24 +261,44 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
-        for(var i = 0; i< len;i++){
+        for(var i = 0; i< len;i++) {
             var list = lists[i];
-            if(list.type == 1){
-                html+=
-                        '<a href="/home/learn/video/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">视频</div>'
-            }else{
-                html+=
-                        '<a href="/home/learn/article/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">图文</div>'
+            if (type == 1) {
+                html +=
+                    '<li>'+
+                    '<p>你是我的次奥苹果</p>'+
+                    '<span>你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果</span>'+
+                    '<span class="lists time">2017-06-17</span>'+
+                    '<a href="/home/activity/activitydetails/id/2.html">进入认领<img src="/home/images/activity/arrow.png"></a>'+
+                    '</li>';
+            } else {
+                html +=
+                    '<li>' +
+                    '<img src="/uploads/download/2017-06-19/5947597d5b75b.PNG">' +
+                    '<p>白依婷</p>' +
+                    '<span>多多发表大大打卡了打卡东方大道多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多</span>' +
+                    '<div class="imgs">' +
+                    '	<div class="img">' +
+                    '		<img src="/uploads/download/2017-06-19/59476e459d351.jpg" alt="评论图" data-original="">' +
+                    '	</div>' +
+                    '</div>' +
+                    '<span class="votes-time">研发部/2017-06-20发布</span>' +
+                    '<div class="opinion">' +
+                    '	<i class="agree" onclick="agree(this,11,1)"></i>' +
+                    '	<span>0</span>' +
+                    '	<i class="disagree" onclick="disagree(this,11,2)"></i>' +
+                    '	<span>0</span><i class="comment-icon" onclick="tosend(this,11)"></i>' +
+                    '</div>' +
+                    '<ul class="comments hide">' +
+                    '</ul>' +
+                    '</li>';
             }
-            html +=
-                    '<img src="'+list.path+'" alt="图片" class="img">'+
-                    '<div class="title limit">'+ list.title+'</div>'+
-                    '<span class="study">'+ list.views+'人阅读过</span>'+
-                    '</a>'
+            if(type==1){
+                $(".regularmore .lists ul").append(html);
+            }else{
+                $(".votes ul").append(html);
+            }
         }
-        $(".regularmore .lists" ).append(html);
     }
 
     //退出清理tab缓存
