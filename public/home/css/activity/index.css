@@ -62,7 +62,7 @@
     font-size:1.2rem;
     color: #fff;
     line-height: 6.2vw;
-    padding-left: 2vw;
+   text-align: center;
     margin-top: -17px;
     background: -moz-linear-gradient(left, #f99300, #ff5c5c);
     background: -webkit-linear-gradient(left, #f99300, #ff5c5c);
@@ -71,7 +71,7 @@
 .lists>ul>li>a>img{
     height: 3vw;
     width: 4.8vw;
-    margin-top: 1.4vw;
+    margin-top: 1.5vw;
     margin-left: 2vw;
 }
 .votes>ul>li>img{
