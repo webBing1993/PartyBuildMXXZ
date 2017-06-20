@@ -43,14 +43,17 @@
                         <ul>
                             <li>
                                 <p>一月主题活动举办通知</p>
-                                <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈</span>
-                                <span class="lists time">2017-6-18</span>
-                                    <a href="">进入认领<img src="/home/images/activity/arrow.png"></a>
-                            </li>
-                            <li>
-                                <p>一月主题活动举办通知</p>
                                 <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈d大大大地方啥地方打算</span>
                                 <div class="imgs">
+                                    <div class="img">
+                                        <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                                    </div>
+                                    <div class="img">
+                                        <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                                    </div>
+                                    <div class="img">
+                                        <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                                    </div>
                                     <div class="img">
                                         <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
                                     </div>
@@ -74,6 +77,16 @@
                             <div class="img">
                                 <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
                             </div>
+                            <div class="img">
+                                <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                            </div>
+                            <div class="img">
+                                <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                            </div>
+                            <div class="img">
+                                <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                            </div>
+
                         </div>
                         <span class="votes-time">某某党支部/2017-6-19发布</span>
                         <div class="opinion">
@@ -108,6 +121,9 @@
                             <span>0</span>
                             <i class="comment-icon" onclick="tosend(this,1)"></i>
                         </div>
+                        <ul class="comments">
+
+                        </ul>
                     </li>
                 </ul>
 
@@ -333,7 +349,7 @@
                         '<span class="comment">'+data.content+'</span>'+
                         '</li>';
 
-                    $('.list').eq(index).find('.comments').removeClass('hide').append(html);
+                    $('.votes ul li').eq(index).find('.comments').removeClass('hide').append(html);
                     $('.banner,.lists' ).click();
                 }
             });
@@ -395,5 +411,23 @@
             }
         })
     };
+
+    var layout = function(){
+        $('.lists ul li' ).each(function(){
+            var this_ = $(this);
+            var n_img = this_.find('.imgs .img' ).length;
+            var n_li = this_.find('.comments li' ).length;
+            if(n_img == 4){
+                this_.find('.imgs .img' ).eq(1).after('<br>')
+            }
+            if(n_li == 0){
+                this_.find('.comments').addClass('hide');
+            }
+        })
+    };
+    //图片排版、评论框
+    layout();
+    //图片裁剪
+    imgresize();
 </script>
 {/block}

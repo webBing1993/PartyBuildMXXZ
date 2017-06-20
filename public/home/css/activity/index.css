@@ -42,7 +42,7 @@
 }
 .lists>ul>li>p{
     font-size: 1.4rem;
-    color: #5a6883;
+    color: #333;
     margin-bottom: 2vw;
 }
 .lists>ul>li>span{
@@ -99,7 +99,7 @@
     overflow: hidden;
     background: #d9d9d9;
 }
-.votes ul > li .imgs .img {
+.votes ul > li .imgs{
     margin-left: 12vw;
 }
 .votes .votes-time{
