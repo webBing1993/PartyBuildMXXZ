@@ -1,0 +1,107 @@
+
+.header {
+    width: 100vw;
+    padding: 4vw;
+}
+.header .title {
+    width: 100%;
+    color: #333;
+    font-size: 1.7rem;
+    line-height: 26px;
+}
+.header .time,.header .name {
+    display: inline-block;
+    color: #999;
+    font-size: 1.2rem;
+    line-height: 16px;
+    margin-top: 2.66vw;
+}
+.header .time {
+    float: right;
+}
+.line{
+    height:1px;
+    width: 100%;
+    background: #f1f1f1;
+}
+.content{
+    width: 100vw;
+    padding: 5.33vw 4vw;
+}
+.content img {
+    display: block;
+    max-width: 100%;
+    margin: 4vw auto;
+}
+.content .text{
+    font-size: 1.3rem;
+    color: #4f4f4f;
+}
+.content .get {
+    width: 87.2vw;
+    height: 9.4vw;
+    margin: 5.33vw auto;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.6rem;
+    line-height: 9.4vw;
+    -webkit-border-radius: 6px;
+    border-radius: 30px;
+}
+.content .get.yes {
+    background: -moz-linear-gradient(left, #f99300, #ff5c5c);
+    background: -webkit-linear-gradient(left, #f99300, #ff5c5c);
+    background: -o-linear-gradient(left, #f99300, #ff5c5c);
+}
+.content .get.no {
+    background: #9a9a9a;
+}
+.gray{
+    height:2.66vw;
+    width:100%;
+    background: #f7f7f7;
+}
+.enroll .title {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 9.33vw;
+    padding-left: 4vw;
+    color: #666;
+    font-size: 1.2rem;
+    line-height: 9.33vw;
+    border-bottom: 1px solid #f1f1f1;
+}
+.enroll .lists .list {
+    padding: 2.7vw 4vw;
+}
+.enroll .lists .list > * {
+    display: inline-block;
+    color: #666666;
+    font-size: 1.3rem;
+}
+.enroll .lists .list img {
+    width: 10.7vw;
+    height: 10.7vw;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.enroll .lists .list .name {
+    width: 18vw;
+    padding-left: 3.73vw;
+    font-size: 1.4rem;
+    color: #333;
+}
+.enroll .lists .list .publish {
+    width: 38vw;
+    position: absolute;
+    left: 19vw;
+    padding-top: 7vw;
+}
+.enroll .lists .list .time {
+    width: 22vw;
+   position: absolute;
+    padding-top: 7vw;
+    right: 0;
+}
