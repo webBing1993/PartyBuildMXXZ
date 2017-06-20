@@ -269,6 +269,7 @@ class Base extends Controller {
      * 3 learn
      * 4 notice
      * 5 pioneer
+     * 6 wish
      */
     public function comment(){
         if(IS_POST){
@@ -290,6 +291,9 @@ class Base extends Controller {
                     break;
                 case 5:
                     $table = "pioneer";
+                    break;
+                case 6:
+                    $table = "wish";
                     break;
                 default:
                     return $this->error("无该数据表");

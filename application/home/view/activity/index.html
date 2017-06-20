@@ -41,12 +41,14 @@
             <div class="notice regularmore">
                 <div class="lists">
                         <ul>
+                            {volist name="list" id="lo"}
                             <li>
-                                <p>一月主题活动举办通知</p>
-                                <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈d大大大地方啥地方打算</span>
-                                <span class="lists time">2017-6-18</span>
-                                <a href="{:Url('Activity/activitydetails')}">进入认领<img src="/home/images/activity/arrow.png"></a>
+                                <p>{$lo.title}</p>
+                                <span>{$lo.description}</span>
+                                <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
+                                <a href="{:Url('Activity/activitydetails?id='.$lo['id'])}">进入认领<img src="/home/images/activity/arrow.png"></a>
                             </li>
+                            {/volist}
                         </ul>
                 </div>
             </div>
@@ -55,52 +57,50 @@
         <div class="notices hidden">
             <div class="lists votes">
                 <ul>
+                    {volist name="lists" id="los"}
                     <li>
-                        <img src="/home/images/activity/tab.png">
-                        <p>滚滚长江东逝水</p>
-                        <span>阿里几点啦健身卡大家啊框架大富科技按揭贷款房间安利达付了款记啊考虑手机的李开复大是大非骄傲克鲁塞德金佛二甲基房间的 丹佛额啊文件发</span>
+                        <img src="{$los.head}">
+                        <p>{$los.publisher}</p>
+                        <span>{$los.content}</span>
                         <div class="imgs">
+                            {volist name="los.images" id="img"}
                             <div class="img">
-                                <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                                <img src="{$img|get_cover='path'}" alt="评论图" data-original="">
                             </div>
+                            {/volist}
                         </div>
-                        <span class="votes-time">某某党支部/2017-6-19发布</span>
+                        <span class="votes-time">{$los.department}/{$los.create_time|time_format='Y-m-d'}发布</span>
                         <div class="opinion">
-                        <i class="agree" onclick="agree(this)"></i>
-                            <span>0</span>
-                        <i class="disagree" onclick="disagree(this)"></i>
-                            <span>0</span>
-                        <i class="comment-icon" onclick="tosend(this,1)"></i>
+                            {switch name="los.is_like"}{case value="0"}
+                                    <i class="agree" onclick="agree(this,{$los.id},1)"></i>
+                                    <span>{$los.likes_yes}</span>
+                                    <i class="disagree" onclick="disagree(this,{$los.id},2)"></i>
+                                    <span>{$los.likes_no}</span>{/case}{case value="1"}
+                                    <i class="agree_" ></i>
+                                    <span>{$los.likes_yes}</span>
+                                    <i class="disagree"></i>
+                                    <span>{$los.likes_no}</span>
+                                {/case}{case value="2"}
+                                    <i class="agree" ></i>
+                                    <span>{$los.likes_yes}</span>
+                                    <i class="disagree_"></i>
+                                    <span>{$los.likes_no}</span>
+                                {/case}
+                                {default /}default
+                            {/switch}
+                            <i class="comment-icon" onclick="tosend(this,{$los.id})"></i>
                         </div>
 
                         <ul class="comments">
+                            {volist name="los.comment" id="co"}
                             <li>
-                                <span class="name">陈羽枭：</span>
-                                <span class="comment">来啊魁拔图咯嘛</span>
+                                <span class="name">{$co.nickname}：</span>
+                                <span class="comment">{$co.content}</span>
                             </li>
-                            <li>
-                                <span class="name">陈羽枭：</span>
-                                <span class="comment">来啊魁拔图咯嘛</span>
-                            </li>
+                            {/volist}
                         </ul>
                     </li>
-
-                    <li>
-                        <img src="/home/images/activity/tab.png">
-                        <p>滚滚长江东逝水</p>
-                        <span>阿里几点啦健身卡大家啊框架大富科技按揭贷款房间安利达付了款记啊考虑手机的李开复大是大非骄傲克鲁塞德金佛二甲基房间的 丹佛额啊文件发</span>
-                        <span class="votes-time">某某党支部/2017-6-19发布</span>
-                        <div class="opinion">
-                            <i class="agree" onclick="agree(this)"></i>
-                            <span>0</span>
-                            <i class="disagree" onclick="disagree(this)"></i>
-                            <span>0</span>
-                            <i class="comment-icon" onclick="tosend(this,1)"></i>
-                        </div>
-                        <ul class="comments">
-
-                        </ul>
-                    </li>
+                    {/volist}
                 </ul>
 
             </div>
@@ -309,7 +309,7 @@
                 type:"post",
                 url:"{:Url('Base/comment')}",
                 data:{
-                    type : 2,
+                    type : 6,
                     aid:$('.send' ).attr('data-tab'),
                     content:it.val()
                 },
@@ -341,7 +341,7 @@
     };
 
     //同意
-    var agree = function(e,id,comment_id,userid,cla){
+    var agree = function(e,id,status){
         //样式变化，移到suc
         var n = $(e).next('span').text();
         if($(e).hasClass('agree_')) return false;
@@ -351,11 +351,10 @@
         $(e ).next('span').text(n);
         $.ajax({
             type:"post",
-            url:"{:Url('Base/like')}",
+            url:"{:Url('Activity/vote')}",
             data:{
-                type:cla,
-                aid:id,
-                comment_id:comment_id
+                id:id,
+                status:status
             },
             success:function(data){
                 console.log('点赞成功');
@@ -363,7 +362,7 @@
         })
     };
 
-    var disagree = function(e,id,comment_id,userid,cla){
+    var disagree = function(e,id,status){
         //样式变化，移到suc
         var n = $(e).next('span').text();
         if($(e).hasClass('disagree_')) return false;
@@ -373,11 +372,10 @@
         $(e ).next('span').text(n);
         $.ajax({
             type:"post",
-            url:"{:Url('Base/like')}",
+            url:"{:Url('Activity/vote')}",
             data:{
-                type:cla,
-                aid:id,
-                comment_id:comment_id
+                id:id,
+                status:status
             },
             success:function(data){
                 console.log('点赞成功');
