@@ -57,7 +57,11 @@
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo.title|msubstr=0,20}</td>
                                 <td>{$vo.publisher}</td>
+                                {neq name="$vo.front_cover" value=""}
                                 <td>{$vo->user->nickname}</td>
+                                {else/}
+                                <td>移动端</td>
+                                {/neq}
                                 <td>{$vo.create_time|time_format='Y-m-d'}</td>
                                 <td>{$vo.recommend_text}</td>
                                 <td>{$vo.push_text}</td>
