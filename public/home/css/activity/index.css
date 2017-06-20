@@ -12,6 +12,9 @@
     width: 100vw;
     height: 14.7vw;
     background: #f1f1f1;
+    position: fixed;
+    top:0;
+    z-index:99;
 }
 .tabs .tab {
     display: inline-block;

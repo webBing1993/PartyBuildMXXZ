@@ -35,7 +35,7 @@
         <span class="triangle-up"></span>
     </div>
     <!--切换列表-->
-    <div class="content">
+    <div class="content" style="margin-top: 14.7vw;overflow-x: hidden">
         <!--活动列表-->
         <div class="notices hidden">
             <div class="notice regularmore">
@@ -137,10 +137,10 @@
        //活动列表上拉加载
         if(c == 1){
             $(".triangle-up").css("left","21.06vw");
-            var len = ntc.eq(c-1 ).find('.notice .lists ul').length;
+            var len = ntc.eq(c-1 ).find('.notice ul li').length;
             if(len >= 5){
                 $('.tip' ).text('上拉加载更多');
-//                loadScroll(c);
+                loadScroll(c);
             }else{
                 $('.tip' ).hide();
             }
@@ -218,7 +218,7 @@
             var loading = $('.loading');
             var url;
             if(type == 1){
-                var len = ntc.eq(type-1).find('.notice .lists ul').length;
+                var len = ntc.eq(type-1).find('.notice .lists ul li').length;
             }
             if(type== 2 ){
                 var len = ntc.eq(type-1).find('.lists ul').length;
