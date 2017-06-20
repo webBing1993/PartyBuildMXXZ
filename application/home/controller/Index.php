@@ -12,6 +12,7 @@ use think\Controller;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
 use app\home\model\Notice as NoticeModel;
+use app\home\model\Pioneer as PioneerModel;
 
 
 /**
@@ -25,7 +26,7 @@ class Index extends Base {
     public function index(){
         $this ->anonymous();
         $uid = session('userId');
-        $len = array('news' => 0,'learn' => 0,'notice' => 0);
+        $len = array('news' => 0,'learn' => 0,'notice' => 0,'pioneer' => 0);
         $list2 = $this ->getDataList($len);
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
@@ -41,12 +42,15 @@ class Index extends Base {
         $count1 = $len['news']; //从第几条开始取数据
         $count2 = $len['learn'];
         $count3 = $len['notice'];
+        $count4 = $len['pioneer'];
         $news = new NewsModel();
         $learn = new LearnModel();
         $notice = new NoticeModel();
+        $pioneer = new PioneerModel();
         $news_check = false; //新闻数据状态 true为取空
         $learn_check = false;
         $notice_check = false;
+        $pioneer_check = false;
         $all_list = array();
         //获取数据  取满6条 或者取不出数据退出循环
         while(true)
@@ -87,8 +91,22 @@ class Index extends Base {
                     $all_list = $this ->changeTpye($all_list,$res,3);
                 }
             }
+            
+            if(!$pioneer_check &&
+                count($all_list) < 6)
+            {
+                $res = $pioneer ->getDataList($count4);
+                if(empty($res))
+                {
+                    $pioneer_check = true;
+                }else {
+                    $count4 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,4);
+                }
+            }
+            
             if(count($all_list) >= 6 ||
-                ($news_check && $learn_check && $notice_check))
+                ($news_check && $learn_check && $notice_check && $pioneer_check))
             {
                 break;
             }

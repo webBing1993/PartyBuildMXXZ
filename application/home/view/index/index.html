@@ -88,6 +88,9 @@
             {case value='3'}
                 {:Url('College/forumnotice?id='.$loo['id'])}
             {/case}
+             {case value='4'}
+                {:Url('?id='.$loo['id'])}
+            {/case}
             {default/}
             {/switch}"
                class="list clear" data-type="{$loo.class}">
@@ -98,6 +101,7 @@
                     {case value='1'}红色足迹{/case}
                     {case value='2'}两学一做{/case}
                     {case value='3'}鸡毛传贴{/case}
+                    {case value='4'}先锋事迹{/case}
                     {default/}
                     {/switch}
                    </span>
@@ -169,6 +173,7 @@
             var news_len = $('.notice .list[data-type=1]').length;
             var learn_len = $('.notice .list[data-type=2]').length;
             var notice_len = $('.notice .list[data-type=3]').length;
+            var pioneer_len = $('.notice .list[data-type=4]').length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end && scrollNow){
@@ -177,9 +182,10 @@
                     type:"get",
                     url: "{:Url('Index/moreDataList')}",
                     data:{
-                        news : news_len,
-                        learn : learn_len,
-                        notice : notice_len
+                        news: news_len,
+                        learn: learn_len,
+                        notice: notice_len,
+                        pioneer: pioneer_len
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -228,6 +234,9 @@
             }else if(list.class == 3){
                 class_name = '鸡毛传贴';
                 link = '/home/college/forumnotice/id/'+list.id;
+            }else if(list.class == 4){
+                class_name = '先锋事迹';
+                link = ''+list.id;
             }
             html +=
                     '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
