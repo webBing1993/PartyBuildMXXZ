@@ -89,7 +89,7 @@
                 {:Url('College/forumnotice?id='.$loo['id'])}
             {/case}
              {case value='4'}
-                {:Url('?id='.$loo['id'])}
+                {:Url('Pioneer/detail?id='.$loo['id'])}
             {/case}
             {default/}
             {/switch}"
@@ -236,7 +236,7 @@
                 link = '/home/college/forumnotice/id/'+list.id;
             }else if(list.class == 4){
                 class_name = '先锋事迹';
-                link = ''+list.id;
+                link = '/home/pioneer/detail/id/'+list.id;
             }
             html +=
                     '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
