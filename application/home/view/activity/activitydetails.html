@@ -46,7 +46,8 @@
         $('.yes').off('click').on('click', function () {
             var this_ = $(this);
             var id =1;
-            if (this_.text() === "我已认领") return false;
+            console.log(this_.html() === "我&nbsp;已&nbsp;认&nbsp;领");
+            if (this_.html() === "我&nbsp;已&nbsp;认&nbsp;领") return false;
             this_.css('background', '#e0e0e0');
             this_.html('我&nbsp;已&nbsp;认&nbsp;领');
             $.ajax({
