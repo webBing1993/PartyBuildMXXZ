@@ -1,7 +1,8 @@
 
 .header {
     width: 100vw;
-    padding: 4vw;
+    height:18.8vw;
+    padding: 2vw;
 }
 .header .title {
     width: 100%;
@@ -98,10 +99,12 @@
     position: absolute;
     left: 19vw;
     padding-top: 7vw;
+    color: #999;
 }
 .enroll .lists .list .time {
     width: 22vw;
    position: absolute;
     padding-top: 7vw;
     right: 0;
+    color: #999;
 }
