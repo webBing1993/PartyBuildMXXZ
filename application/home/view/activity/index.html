@@ -219,19 +219,18 @@
             var url;
             if(type == 1){
                 var len = ntc.eq(type-1).find('.notice .lists ul').length;
-                url = "{:Url('')}";
             }
             if(type== 2 ){
                 var len = ntc.eq(type-1).find('.lists ul').length;
-                url = "{:Url('')}";
             }
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
                     type:"post",
-                    url: url,
+                    url: "{:Url('Activity/morelist')}",
                     data:{
-                        length:len
+                        length:len,
+                        type:type
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -261,15 +260,15 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
-        for(var i = 0; i< len;i++) {
+        for(var i = 0; i< len;i++){
             var list = lists[i];
             if (type == 1) {
                 html +=
                     '<li>'+
-                    '<p>你是我的次奥苹果</p>'+
-                    '<span>你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果你是我的次奥苹果</span>'+
-                    '<span class="lists time">2017-06-17</span>'+
-                    '<a href="/home/activity/activitydetails/id/2.html">进入认领<img src="/home/images/activity/arrow.png"></a>'+
+                    '<p>'+list.title+'</p>'+
+                    '<span>'+list.description+'</span>'+
+                    '<span class="lists time">'+list.time+'</span>'+
+                    '<a href="/home/activity/activitydetails/id/'+list.id+'">进入认领<img src="/home/images/activity/arrow.png"></a>'+
                     '</li>';
             } else {
                 html +=
@@ -299,6 +298,7 @@
                 $(".votes ul").append(html);
             }
         }
+        $(".regularmore .lists" ).append(html);
     }
 
     //退出清理tab缓存

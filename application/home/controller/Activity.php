@@ -46,7 +46,44 @@ class Activity extends Base{
         $this->assign('lists',$lists);
         return $this ->fetch();
     }
-
+    /*
+     * 活动  列表 更多
+     */
+    public function morelist(){
+        $this->checkAnonymous();
+        $userId = session('userId');
+        $Wish = new wishModel();
+        $type = input('post.type');
+        $len = input('post.length');
+        if ($type == 1){
+            // 活动  列表
+            $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit($len,5)->select();  // 活动列表
+            foreach($list as $value){
+                $value['time'] = date('Y-m-d',$value['create_time']);
+            }
+        }else{
+            // 投票  
+            $list = $Wish->where(['type' => 2,'status' => 0])->order('id desc')->limit($len,5)->select();  // 投票
+            foreach($list as $value){
+                $User = WechatUser::where('userid',$value['create_user'])->field('department,headimgurl')->find();
+                $Depart = WechatDepartment::where('id',$User['department'])->field('name')->find();
+                $value['head'] = $User['headimgurl'];
+                $value['department'] = $Depart['name'];
+                //  获取  图片
+                $value['images'] = json_decode($value['images']);
+                // 获取  赞成 或者  反对
+                $likeModel = new WishVote();
+                $like = $likeModel->getLike($value['id'],$userId);
+                $value['is_like'] = $like;  //  0 未投票    1  赞成  2 反对
+                // 获取评论
+                $commentModel = new Comment();
+                $comment = $commentModel->getComment(6,$value['id'],$userId);
+                $value['comment'] = $comment;
+            }
+        }
+        return $list;
+    }
+    /* 活动发起   详情 */
     public function activitydetails(){
         $userId = session('userId');
         $this->checkAnonymous();
@@ -60,13 +97,20 @@ class Activity extends Base{
         $list['review'] = $User['review'];
         // 已认领名单
         $Receive = db('wish_receive')->where(['rid' => $id,'status' => 0])->select();
-        foreach($Receive as $value){
+        foreach($Receive as $key => $value){
             $User = WechatUser::where('userid',$value['userid'])->field('name,department,headimgurl')->find();
-            $value['name'] = $User['name'];
-            $value['head'] = $User['headimgurl'];
-            $value['department'] = WechatDepartment::where('id',$User['department'])->value('name');
+            $Receive[$key]['name'] = $User['name'];
+            $Receive[$key]['head'] = $User['headimgurl'];
+            $Receive[$key]['department'] = WechatDepartment::where('id',$User['department'])->value('name');
         }
         $list['receive'] = $Receive;
+        // 判断自己是否已经认领
+        $info = db('wish_receive')->where(['rid' => $id,'userid' => $userId,'status' => 0])->find();
+        if ($info){
+            $list['is_receive'] = 1;  // 已经认领
+        }else{
+            $list['is_receive'] = 0;  // 未认领
+        }
         //活动基本信息
         $list['user'] = $userId;
         //分享图片及链接及描述
@@ -76,6 +120,28 @@ class Activity extends Base{
         
         $this->assign('info',$list);
         return $this ->fetch();
+    }
+    /*
+     * 活动 认领
+     */
+    public function enroll(){
+        $this->checkAnonymous();
+        $id = input('post.id/d');
+        $list = Wish::where(['id' => $id,'status' => 0])->find();
+        if (empty($list)){
+            return $this->error('系统错误,数据不存在');
+        }
+        $userId = session('userId');
+        $res = db('wish_receive')->insert(['rid' => $id,'userid' => $userId,'create_time' => time(),'status' => 0]);
+        if ($res){
+            // 返回 用户数据
+            $User = WechatUser::where('userid',$userId)->field('name,department,headimgurl')->find();
+            $User['department'] = WechatDepartment::where('id',$User['department'])->value('name');
+            $User['time'] = date('Y-m-d',db('wish_receive')->where(['rid' => $id,'userid' => $userId])->value('create_time'));
+            return $this->success('认领成功','',$User);
+        }else{
+            return $this->error('认领失败');
+        }
     }
     /*
      * 投票
