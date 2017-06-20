@@ -1,9 +1,14 @@
 {extend name="public/common"}
 {block name="style"}
     <title>活动发起</title>
-    <link rel="stylesheet" href="/home/css/learn/index.css">
+    <link rel="stylesheet" href="/static/viewer/viewer.min.css">
+    <link rel="stylesheet" href="/home/css/activity/index.css">
     <link rel="stylesheet" href="/home/css/common/rem.css">
     <style>
+        .tabs{
+            background: url(/home/images/activity/tab.png) no-repeat;
+            background-size: cover;
+        }
         .notice>.title{
             width: 100vw;
             font-size: 1.6rem;
@@ -23,14 +28,11 @@
     </style>
 {/block}
 {block name="body"}
-    <!--banner-->
-    <div class="banner">
-        <img src="/home/images/feedback/feedback.jpg" alt="建言献策banner图">
-    </div>
     <!--tab-->
     <div class="tabs clear">
         <div class="tab"><span>活动列表</span></div>
         <div class="tab"><span>发起投票</span></div>
+        <span class="triangle-up"></span>
     </div>
     <!--切换列表-->
     <div class="content">
@@ -38,26 +40,96 @@
         <div class="notices hidden">
             <div class="notice regularmore">
                 <div class="lists">
-                    活动列表
+                        <ul>
+                            <li>
+                                <p>一月主题活动举办通知</p>
+                                <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈</span>
+                                <span class="lists time">2017-6-18</span>
+                                    <a href="">进入认领<img src="/home/images/activity/arrow.png"></a>
+                            </li>
+                            <li>
+                                <p>一月主题活动举办通知</p>
+                                <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈d大大大地方啥地方打算</span>
+                                <div class="imgs">
+                                    <div class="img">
+                                        <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                                    </div>
+                                </div>
+                                <span class="lists time">2017-6-18</span>
+                                <a href="">进入认领<img src="/home/images/activity/arrow.png"></a>
+                            </li>
+                        </ul>
                 </div>
             </div>
         </div>
         <!--发起投票-->
         <div class="notices hidden">
-            <div class="lists">
-                发起投票
+            <div class="lists votes">
+                <ul>
+                    <li>
+                        <img src="/home/images/activity/tab.png">
+                        <p>滚滚长江东逝水</p>
+                        <span>阿里几点啦健身卡大家啊框架大富科技按揭贷款房间安利达付了款记啊考虑手机的李开复大是大非骄傲克鲁塞德金佛二甲基房间的 丹佛额啊文件发</span>
+                        <div class="imgs">
+                            <div class="img">
+                                <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
+                            </div>
+                        </div>
+                        <span class="votes-time">某某党支部/2017-6-19发布</span>
+                        <div class="opinion">
+                        <i class="agree" onclick="agree(this)"></i>
+                            <span>0</span>
+                        <i class="disagree" onclick="disagree(this)"></i>
+                            <span>0</span>
+                        <i class="comment-icon" onclick="tosend(this,1)"></i>
+                        </div>
+
+                        <ul class="comments">
+                            <li>
+                                <span class="name">陈羽枭：</span>
+                                <span class="comment">来啊魁拔图咯嘛</span>
+                            </li>
+                            <li>
+                                <span class="name">陈羽枭：</span>
+                                <span class="comment">来啊魁拔图咯嘛</span>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <img src="/home/images/activity/tab.png">
+                        <p>滚滚长江东逝水</p>
+                        <span>阿里几点啦健身卡大家啊框架大富科技按揭贷款房间安利达付了款记啊考虑手机的李开复大是大非骄傲克鲁塞德金佛二甲基房间的 丹佛额啊文件发</span>
+                        <span class="votes-time">某某党支部/2017-6-19发布</span>
+                        <div class="opinion">
+                            <i class="agree" onclick="agree(this)"></i>
+                            <span>0</span>
+                            <i class="disagree" onclick="disagree(this)"></i>
+                            <span>0</span>
+                            <i class="comment-icon" onclick="tosend(this,1)"></i>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
         </div>
     </div>
     <!--线上活动发布-->
-    <a id="publish" href="{:Url('Ativity/publish')}"></a>
+    <a id="publish" href="{:Url('Activity/publish')}"></a>
     <!--加载更多-->
+<div class="bottom clear">
+    <div class="myword fl">
+        <input type="text" placeholder="说说你的感想！">
+    </div>
+    <div class="send fr" onclick="send(this)">发送</div>
+</div>
     <div class="tip"></div>
     <div class="loading hidden">
         <div class="typing_loader"></div>
     </div>
 {/block}
 {block name="script"}
+<script src="/static/viewer/viewer-jquery.min.js"></script>
 <script src="/home/js/reset.js"></script>
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
@@ -73,7 +145,19 @@
         ntc.eq(c-1).removeClass('hidden');
        //活动列表上拉加载
         if(c == 1){
-            var len = ntc.eq(c-1 ).find('.notice:last .list').length;
+            $(".triangle-up").css("left","21.06vw");
+            var len = ntc.eq(c-1 ).find('.notice .lists ul').length;
+            if(len >= 5){
+                $('.tip' ).text('上拉加载更多');
+                loadScroll(c);
+            }
+        }else{
+            $('.tip' ).hide();
+        }
+        //投票列表上拉加载
+        if(c == 2){
+            $(".triangle-up").css("left","72vw");
+            var len = ntc.eq(c-1 ).find('.lists ul').length;
             if(len >= 5){
                 $('.tip' ).text('上拉加载更多');
                 loadScroll(c);
@@ -90,7 +174,8 @@
             ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
             ntc.eq(eq).removeClass('hidden');
             if(eq == 0){
-                var len = ntc.eq(eq ).find('.notice:last .list').length;
+                $(".triangle-up").css("left","21.06vw");
+                var len = ntc.eq(eq ).find('.notice .lists ul').length;
                 if(len >= 5){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
@@ -99,6 +184,18 @@
                 $('.tip' ).hide();
                 $(window ).off("scroll" );
             }
+            if(eq == 1){
+                $(".triangle-up").css("left","72vw");
+                var len = ntc.eq(eq ).find('.lists ul').length;
+                if(len >= 5){
+                    $('.tip' ).text('上拉加载更多');
+                    loadScroll(eq+1);
+                }
+            }else{
+                $('.tip' ).hide();
+                $(window ).off("scroll" );
+            }
+
             //使用示例
             setCookie("type",eq+11);
         });
@@ -115,7 +212,14 @@
         isOut();
         //悬浮框移动
         moveanyway();
+
+        $('.imgs').viewer({
+            url: 'data-original',
+            toolbar:false,
+            title:false
+        });
     });
+
     function loadScroll(type){
         $(window ).off("scroll" ).on("scroll",function(){
             var ntc = $('.notices');
@@ -194,5 +298,102 @@
             }, false);
         },200)
     }
+
+    var tosend = function(e,id){
+        var index = $(e).parents('.list' ).index();
+        $('.banner,.lists' ).off('click');
+        $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
+            $('.banner,.lists' ).off('click').one('click',function(){
+                $('.bottom' ).animate({'bottom':'-45px'},500,'swing');
+                $('.myword input' ).val('');
+            })
+        }).attr('data-tab',index);
+       $('.send' ).attr('data-tab',id);
+    };
+
+    //发送评论
+    var send = function(e){
+        var it = $(e ).prev().find('input');
+        var index = $('.bottom' ).attr('data-tab');
+        if(it.val() != ''){
+            $.ajax({
+                type:"post",
+                url:"{:Url('Base/comment')}",
+                data:{
+                    type : 2,
+                    aid:$('.send' ).attr('data-tab'),
+                    content:it.val()
+                },
+                success:function(msg){
+                    var data = msg.data;
+                    var html = '';
+                    html +=
+                        '<li>'+
+                        '<span class="name">'+data.nickname+'：</span>'+
+                        '<span class="comment">'+data.content+'</span>'+
+                        '</li>';
+
+                    $('.list').eq(index).find('.comments').removeClass('hide').append(html);
+                    $('.banner,.lists' ).click();
+                }
+            });
+        }else{
+            var not = $('.not');
+            not.fadeIn();
+            document.body.style.overflow='hidden';
+            $('.confirm,.not .bg' ).on('click',function(){
+                not.fadeOut();
+                document.body.style.overflow='scroll';
+                $('.banner,.lists' ).click();
+//			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
+//			$('.myword input' ).val('');
+            })
+        }
+    };
+
+    //同意
+    var agree = function(e,id,comment_id,userid,cla){
+        //样式变化，移到suc
+        var n = $(e).next('span').text();
+        if($(e).hasClass('agree_')) return false;
+        if($(e).nextAll('i').hasClass('disagree_')) return false;
+        $(e).toggleClass('agree' ).toggleClass('agree_');
+        $(e ).hasClass('agree')?n--:n++;
+        $(e ).next('span').text(n);
+        $.ajax({
+            type:"post",
+            url:"{:Url('Base/like')}",
+            data:{
+                type:cla,
+                aid:id,
+                comment_id:comment_id
+            },
+            success:function(data){
+                console.log('点赞成功');
+            }
+        })
+    };
+
+    var disagree = function(e,id,comment_id,userid,cla){
+        //样式变化，移到suc
+        var n = $(e).next('span').text();
+        if($(e).hasClass('disagree_')) return false;
+        if($(e).prevAll('i').hasClass('agree_')) return false;
+        $(e).toggleClass('disagree' ).toggleClass('disagree_');
+        $(e ).hasClass('disagree')?n--:n++;
+        $(e ).next('span').text(n);
+        $.ajax({
+            type:"post",
+            url:"{:Url('Base/like')}",
+            data:{
+                type:cla,
+                aid:id,
+                comment_id:comment_id
+            },
+            success:function(data){
+                console.log('点赞成功');
+            }
+        })
+    };
 </script>
 {/block}

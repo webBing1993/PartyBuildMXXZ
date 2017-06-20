@@ -1,0 +1,48 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>心愿认领</title>
+<link rel="stylesheet" href="/home/css/activity/activitydetails.css">
+{/block}
+{block name="body"}
+<div class="header">
+    <div class="title">一月主题举办活动通知</div>
+    <span class="name">我是活动方</span>
+    <span class="time">2017-8-7</span>
+</div>
+<div class="line"></div>
+<div class="content">
+    <img src="/home/images/feedback/feedback.jpg" alt="服务订单图">
+    <span class="text">打架了束带结发地方丢三落四的发生浪蝶狂蜂打打蜡的开发接我及诶见覅底价计算的机房基金大赛积分到就非得节后国家是否能活动费奥大家</span>
+    <div class="get yes">马&ensp;上&ensp;认&nbsp;领</div>
+</div>
+<div class="gray"></div>
+<div class="enroll">
+    <div class="title">认领名单</div>
+    <div class="lists">
+        <div class="list">
+            <img src="/home/images/feedback/feedback.jpg" alt="头像">
+            <span class="name limit">玩蛋蛋</span>
+            <span class="publish limit">蛋蛋蛋党支部</span>
+            <span class="time limit">2017-6-19</span>
+        </div>
+        <div class="list">
+            <!--<span class="fl no-claim" style="text-align: center;width: 100%;">还没有人认领~</span>-->
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script>
+    $(function() {
+        //报名
+        $('.yes').off('click').on('click', function () {
+            var this_ = $(this);
+            if (this_.text() === "我已认领") return false;
+            this_.css('background', '#ddd');
+            this_.text('我已认领');
+        });
+    })
+</script>
+{/block}
