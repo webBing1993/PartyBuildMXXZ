@@ -44,11 +44,6 @@
                             <li>
                                 <p>一月主题活动举办通知</p>
                                 <span>2017年6月21日上午9:30在会议中心二楼大会议室召开在“两学一做”教育中已建立“流动党校”的会议啊哈哈d大大大地方啥地方打算</span>
-                                <div class="imgs">
-                                    <div class="img">
-                                        <img src="/home/images/activity/tab.png" alt="评论图" data-original="">
-                                    </div>
-                                </div>
                                 <span class="lists time">2017-6-18</span>
                                 <a href="{:Url('Activity/activitydetails')}">进入认领<img src="/home/images/activity/arrow.png"></a>
                             </li>
@@ -138,7 +133,6 @@
         if(co == 11 || co == 12 || co == 13){
             c = co - 10;
         }
-        $('.tabs>.tab').eq(c-1).find('span').addClass('active');
         ntc.eq(c-1).removeClass('hidden');
        //活动列表上拉加载
         if(c == 1){
@@ -166,8 +160,6 @@
         $('.tabs>.tab ').on('click',function(){
             var ntc = $('.notices' );
             var eq = $(this ).index();
-            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
-            $(this ).find('span' ).addClass('active');
             ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
             ntc.eq(eq).removeClass('hidden');
             if(eq == 0){
