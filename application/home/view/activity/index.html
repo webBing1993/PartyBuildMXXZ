@@ -273,20 +273,36 @@
             } else {
                 html +=
                     '<li>' +
-                    '<img src="/uploads/download/2017-06-19/5947597d5b75b.PNG">' +
-                    '<p>白依婷</p>' +
-                    '<span>多多发表大大打卡了打卡东方大道多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多</span>' +
-                    '<div class="imgs">' +
-                    '	<div class="img">' +
-                    '		<img src="/uploads/download/2017-06-19/59476e459d351.jpg" alt="评论图" data-original="">' +
-                    '	</div>' +
-                    '</div>' +
-                    '<span class="votes-time">研发部/2017-06-20发布</span>' +
-                    '<div class="opinion">' +
-                    '	<i class="agree" onclick="agree(this,11,1)"></i>' +
-                    '	<span>0</span>' +
-                    '	<i class="disagree" onclick="disagree(this,11,2)"></i>' +
-                    '	<span>0</span><i class="comment-icon" onclick="tosend(this,11)"></i>' +
+                    '<img src="'+list.head+'">' +
+                    '<p>'+list.publisher+'</p>' +
+                    '<span>'+list.content+'</span>' +
+                    '<div class="imgs">'
+                var imglen = list.images.length;
+                for(var j = 0 ;j<imglen ;j++){
+                    html+='	<div class="img">' +
+                            '		<img src="'+list.images[j]+'" alt="评论图" data-original="">' +
+                            '	</div>' ;
+                }
+                   html+= '</div>' +
+                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span><div class="opinion">'
+                switch (list.is_like){
+                    case 0:
+                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
+                                '	<span>0</span>' +
+                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        break;
+                    case 1:
+                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
+                                '	<span>0</span>' +
+                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        break;
+                    case 2:
+                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
+                                '	<span>0</span>' +
+                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        break;
+                }
+                    html+='	<i class="comment-icon" onclick="tosend(this,11)"></i>' +
                     '</div>' +
                     '<ul class="comments hide">' +
                     '</ul>' +

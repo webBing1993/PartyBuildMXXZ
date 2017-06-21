@@ -10,6 +10,7 @@ use app\home\model\WechatDepartment;
 use app\home\model\Wish as  wishModel;
 use app\home\model\Comment;
 use app\home\model\Wish;
+use app\home\model\Picture;
 use app\home\model\WishVote;
 use app\user\model\WechatUser;
 
@@ -71,6 +72,13 @@ class Activity extends Base{
                 $value['department'] = $Depart['name'];
                 //  获取  图片
                 $value['images'] = json_decode($value['images']);
+                $image =array();
+                foreach ($value['images'] as $k=>$val){
+                    $img = Picture::get($val);
+                    $image[$k] = $img['path'];
+                }
+                $value['images'] = $image;
+                $value['create_time'] = date('Y-m-d',$value['create_time']);
                 // 获取  赞成 或者  反对
                 $likeModel = new WishVote();
                 $like = $likeModel->getLike($value['id'],$userId);
@@ -81,7 +89,7 @@ class Activity extends Base{
                 $value['comment'] = $comment;
             }
         }
-        return $list;
+        return $this->success('','',$list);
     }
     /* 活动发起   详情 */
     public function activitydetails(){
@@ -93,7 +101,7 @@ class Activity extends Base{
             return $this->error('系统错误,数据不存在');
         }
         // 认领权限
-        $User = WechatUser::where('userid',$userId)->field('review')->find();
+        $User = WechatUser::where('userid',$userId)->field('review,department')->find();
         $list['review'] = $User['review'];
         // 已认领名单
         $Receive = db('wish_receive')->where(['rid' => $id,'status' => 0])->select();
@@ -104,12 +112,20 @@ class Activity extends Base{
             $Receive[$key]['department'] = WechatDepartment::where('id',$User['department'])->value('name');
         }
         $list['receive'] = $Receive;
-        // 判断自己是否已经认领
-        $info = db('wish_receive')->where(['rid' => $id,'userid' => $userId,'status' => 0])->find();
+        // 判断自己所在部门     是否已经认领
+        $department = $User['department'];
+        $info = db('wish_receive')->where(['rid' => $id,'department' => $department,'status' => 0])->find();
         if ($info){
-            $list['is_receive'] = 1;  // 已经认领
+            $list['is_receive'] = 1;  //   同部门 其他管理员  已经认领
         }else{
-            $list['is_receive'] = 0;  // 未认领
+            //  判断自己是否 认领
+            $infoes = db('wish_receive')->where(['rid' => $id,'userid' => $userId,'status' => 0])->find();
+            if ($infoes){
+                // 自己已经认领
+                $list['is_receive'] = 1;
+            }else{
+                $list['is_receive'] = 0;  // 未认领
+            }
         }
         //活动基本信息
         $list['user'] = $userId;
@@ -132,7 +148,8 @@ class Activity extends Base{
             return $this->error('系统错误,数据不存在');
         }
         $userId = session('userId');
-        $res = db('wish_receive')->insert(['rid' => $id,'userid' => $userId,'create_time' => time(),'status' => 0]);
+        $department = WechatUser::where('userid',$userId)->value('department');
+        $res = db('wish_receive')->insert(['rid' => $id,'userid' => $userId,'department' => $department,'create_time' => time(),'status' => 0]);
         if ($res){
             // 返回 用户数据
             $User = WechatUser::where('userid',$userId)->field('name,department,headimgurl')->find();
