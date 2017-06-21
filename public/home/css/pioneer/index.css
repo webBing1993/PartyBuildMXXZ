@@ -90,30 +90,6 @@
     width: 5.4vw;
     height: 5.4vw;
 }
-
-/*banner*/
-.banner{
-    position: relative;
-    width: 100%;
-    height: 50vw;
-}
-.banner img{
-    width: 100%;
-    height: 50vw;
-}
-.banner .title_{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    padding-left: 13px;
-    padding-right: 13px;
-    background-color: rgba(0, 0, 0, 0.6);
-    line-height: 40px;
-    font-size: 1.6rem;
-    color: #ffffff;
-}
-
 .deeds .content .notices .notice .list {
     height: 22vw;
 }
