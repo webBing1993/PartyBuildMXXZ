@@ -134,13 +134,8 @@ class User extends Base {
         $this->anonymous();
         $userId = session('userId');
         $user = WechatUser::where('userid',$userId)->field('name,department,score,headimgurl')->find();
-        $all = WechatUser::where(['score' => ['neq',0]])->order('score desc')->select();
-        foreach ($all as $k => $value){
-            //当前用户排名
-            if($value['userid'] == $userId){
-                $user['rank'] = $k+1;
-            }
-        }
+        $count = WechatUser::where(['score' => ['gt',$user['score']]]) ->count();
+        $user['rank'] = $count+1;
         $Department = WechatDepartment::where('id',$user['department'])->field('name')->find();
         $user['department'] = $Department['name'];
         $this->assign('user',$user);
