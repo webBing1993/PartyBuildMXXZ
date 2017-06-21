@@ -1,7 +1,7 @@
 {extend name="public/common"}
 {block name="style"}
 <title>活动发起</title>
-<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="/admin/css/plugins/sweetalert/sweetalert.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/pioneer/index.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
@@ -114,8 +114,8 @@
 
 {/block}
 {block name="script"}
-<script src="/home/js/reset.js"></script>
-<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+    <script src="/home/js/reset.js"></script>
+    <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var c =  parseInt(window.location.href.split("index/c/")[1]);
@@ -125,12 +125,6 @@
             var index = $(this).index()+1;
             $(this).addClass('num').attr('data-content', index);
         })
-        //轮播
-        var mySwiper = new Swiper('.swiper-container', {
-            autoplay: 3000,
-            loop:true,
-            autoplayDisableOnInteraction:false
-        });
         var ntc = $('.notices');
         var co = getCookie("type");
         if(co == 11 || co == 12 || co == 13){
@@ -270,6 +264,13 @@
                if(data.code == 1){
                    $(e).children("em").text(n+1);
                    $(e).addClass("liked");
+               }else{
+                   swal({
+                       title: ' ',
+                       text: data.msg,
+                       type: 'error',
+                       confirmButtonText:'确定'
+                   });
                }
            }
        })
