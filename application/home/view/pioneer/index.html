@@ -137,6 +137,8 @@
 <script src="/home/js/reset.js"></script>
 <script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
         //轮播
         var mySwiper = new Swiper('.swiper-container', {
@@ -226,7 +228,7 @@
                         if(data.code == 1){
                             addCourse(data,type);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 6){
                                 tip.text('上拉加载更多');
                             }
                         }else{
