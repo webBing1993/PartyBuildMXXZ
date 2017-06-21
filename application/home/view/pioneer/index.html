@@ -53,18 +53,14 @@
             <div class="notice regularmore">
                 <div class="lists tutor">
                     <ul>
+                        {volist name="list1" id="vo"}
                         <li>
-                            <img src="/home/images/index/learn.png">
-                            <span>陈鲁冰</span>
-                            <span>第七空间（杭州）总经理</span>
-                            <span><i></i>(10089)</span>
+                            <img src="{$vo.front_cover|get_cover='path'}">
+                            <span>{$vo.name}</span>
+                            <span>{$vo.position}</span>
+                            <span><i></i>{$vo.likes}</span>
                         </li>
-                        <li>
-                            <img src="/home/images/index/learn.png">
-                            <span>陈鲁冰</span>
-                            <span>第七空间（杭州）总经理</span>
-                            <span><i></i>(10089)</span>
-                        </li>
+                        {/volist}
                     </ul>
                 </div>
             </div>

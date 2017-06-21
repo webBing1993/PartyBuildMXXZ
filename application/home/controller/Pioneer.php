@@ -79,6 +79,17 @@ class Pioneer extends Base {
         }
     }
     public function index(){
+        $pioneer = new PioneerModel();
+        //党建导师团
+        $list1 = $pioneer ->where(['type' => 1,'status' => ['egt',0]]) ->select();
+        //创业导师团
+        $list2 = $pioneer ->where(['type' => 2,'status' => ['egt',0]]) ->select();
+        //先进事迹展
+        $list3 = $pioneer ->where(['type' => 3,'status' => ['egt',0]]) ->select();
+        
+        $this ->assign('list1',$list1);
+        $this ->assign('list2',$list2);
+        $this ->assign('list3',$list3);
         return $this ->fetch();
     }
 }
