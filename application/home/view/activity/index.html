@@ -2,8 +2,9 @@
 {block name="style"}
     <title>活动发起</title>
     <link rel="stylesheet" href="/static/viewer/viewer.min.css">
-    <link rel="stylesheet" href="/home/css/activity/index.css">
     <link rel="stylesheet" href="/home/css/common/rem.css">
+    <link rel="stylesheet" href="/home/css/activity/index.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
     <style>
         .tabs{
             background: url(/home/images/activity/tab.png) no-repeat;
@@ -29,13 +30,14 @@
 {/block}
 {block name="body"}
     <!--tab-->
+<div>
     <div class="tabs clear">
         <div class="tab"><span>活动列表</span></div>
         <div class="tab"><span>发起投票</span></div>
         <span class="triangle-up"></span>
     </div>
     <!--切换列表-->
-    <div class="content" style="margin-top: 14.7vw;overflow-x: hidden">
+    <div class="content" style="overflow-x: hidden">
         <!--活动列表-->
         <div class="notices hidden">
             <div class="notice regularmore">
@@ -119,6 +121,7 @@
     <div class="loading hidden">
         <div class="typing_loader"></div>
     </div>
+</div>
 {/block}
 {block name="script"}
 <script src="/static/viewer/viewer-jquery.min.js"></script>
@@ -202,7 +205,7 @@
         //悬浮框移动
         moveanyway();
 
-        $('.imgs').viewer({
+        viewer = $('.imgs').viewer({
             url: 'data-original',
             toolbar:false,
             title:false
@@ -237,7 +240,6 @@
                         loading.toggleClass('hidden');
                     },
                     success:function(data){
-                        console.log(data);
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
@@ -311,8 +313,15 @@
             if(type==1){
                 $(".regularmore .lists ul").append(html);
             }else{
-                $(".votes ul").append(html);
+                $(".votes>ul").append(html);
             }
+        }
+        if(viewer) {
+            viewer = $('.imgs').viewer({
+                url: 'data-original',
+                toolbar:false,
+                title:false
+            });
         }
     }
 
@@ -343,7 +352,6 @@
     var send = function(e){
         var it = $(e ).prev().find('input');
         var index = $('.bottom' ).attr('data-tab');
-        console.log(index)
         if(it.val() != ''){
             $.ajax({
                 type:"post",
@@ -362,7 +370,7 @@
                         '<span class="comment">'+data.content+'</span>'+
                         '</li>';
 
-                    $('.votes ul li').eq(index).find('.comments').removeClass('hide').append(html);
+                    $('.votes>ul').children("li").eq(index).find('.comments').removeClass('hide').prepend(html);
                     $('tabs,.lists' ).click();
                 }
             });
