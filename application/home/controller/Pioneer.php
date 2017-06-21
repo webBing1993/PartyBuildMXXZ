@@ -104,4 +104,37 @@ class Pioneer extends Base {
         }
         return $data;
     }
+
+    public function like(){
+        $data = input('post.');
+        $like = new Like();
+        $uid = session('userId');
+        $dateStr = date('Y-m-d', time());
+        //获取当天0点的时间戳
+        $timestamp0=strtotime($dateStr);
+        $map = array(
+            'create_time' => ['egt',$timestamp0],
+            'type' => 5,
+            'aid' => $data['aid'],
+            'uid' => $uid
+        );
+        $res = $like ->where($map) ->find();
+       if(!empty($res))
+       {
+            return $this ->error('今日已点赞');
+       }else{
+           $data['table'] = 'pioneer';
+           $data['uid'] = $uid;
+           $res = $like ->data($data) ->save();
+           if($res) {
+               //点赞成功积分+1
+               WechatUser::where('userid',$uid)->setInc('score',1);
+               PioneerModel::where('id',$data['aid'])->setInc('likes',1);
+               return $this->success("点赞成功");
+           }else {
+               return $this->error("点赞失败");
+           }
+       }
+
+    }
 }
