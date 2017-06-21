@@ -228,7 +228,6 @@
             var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
             var tip = $(".tip");
             var loading = $('.loading');
-            var url;
             if(type == 1){
                 var len = ntc.eq(type-1).find('.notice .lists>ul>li').length;
             }
@@ -315,15 +314,23 @@
                 }
                     html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
                     '</div>' +
-                    '<ul class="comments hide">' +
-                    '</ul>' +
+                    '<ul class="comments ">'
+                var commentlen = list.comment.length;
+                for(var x = 0 ;x <commentlen ;x++){
+                    html+=
+                            '<li>'+
+                            '<span class="name">'+list.comment[x].nickname+'：</span>'+
+                            '<span class="comment">'+list.comment[x].content+'</span>'+
+                            '</li>'
+                }
+                    html+='</ul>'
                     '</li>';
             }
-            if(type==1){
-                $(".regularmore .lists ul").append(html);
-            }else{
-                $(".votes>ul").append(html);
-            }
+        }
+        if(type==1){
+            $(".regularmore .lists ul").append(html);
+        }else{
+            $(".votes>ul").append(html);
         }
         if(viewer) {
             viewer = $('.imgs').viewer({

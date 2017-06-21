@@ -72,12 +72,14 @@ class Activity extends Base{
                 $value['department'] = $Depart['name'];
                 //  获取  图片
                 $value['images'] = json_decode($value['images']);
-                $image =array();
-                foreach ($value['images'] as $k=>$val){
-                    $img = Picture::get($val);
-                    $image[$k] = $img['path'];
+                if (!empty($value['images'])){
+                    $image =array();
+                    foreach ($value['images'] as $k=>$val){
+                        $img = Picture::get($val);
+                        $image[$k] = $img['path'];
+                    }
+                    $value['images'] = $image;
                 }
-                $value['images'] = $image;
                 $value['create_time'] = date('Y-m-d',$value['create_time']);
                 // 获取  赞成 或者  反对
                 $likeModel = new WishVote();
