@@ -78,4 +78,7 @@ class Pioneer extends Base {
             return $this ->error('参数错误!');
         }
     }
+    public function index(){
+        return $this ->fetch();
+    }
 }

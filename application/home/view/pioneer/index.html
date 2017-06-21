@@ -1,0 +1,269 @@
+{extend name="public/common"}
+{block name="style"}
+<title>活动发起</title>
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/pioneer/index.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
+<style>
+    .tabs{
+        background: url(/home/images/activity/tab.png) no-repeat;
+        background-size: cover;
+    }
+    .notice>.title{
+        width: 100vw;
+        font-size: 1.6rem;
+        color: #333333;
+        line-height: 60px;
+        text-align: center;
+    }
+    #publish {
+        position: fixed;
+        right: 20px;
+        bottom: 40px;
+        width: 60px;
+        height: 60px;
+        background: url(/home/images/feedback/note.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .scrollDiy{
+        position: absolute;
+        top:0;
+        bottom:0;
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+        width:100%;
+    }
+</style>
+{/block}
+{block name="body"}
+<!--tab-->
+<div class="scrollDiy">
+    <div class="tabs clear">
+        <div class="tab"><span>创业导师团</span></div>
+        <div class="tab"><span>创客先锋队</span></div>
+        <div class="tab"><span>先进事迹展</span></div>
+        <span class="triangle-up"></span>
+    </div>
+    <!--切换列表-->
+    <div class="content" style="overflow-x: hidden">
+        <!--创业导师团-->
+        <div class="notices hidden">
+            <div class="notice regularmore">
+                <div class="lists tutor">
+                    <ul>
+                        <li>
+                            <img src="/home/images/index/learn.png">
+                            <span>陈鲁冰</span>
+                            <span>第七空间（杭州）总经理</span>
+                            <span><i></i>(10089)</span>
+                        </li>
+                        <li>
+                            <img src="/home/images/index/learn.png">
+                            <span>陈鲁冰</span>
+                            <span>第七空间（杭州）总经理</span>
+                            <span><i></i>(10089)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--创客先锋队-->
+        <div class="notices hidden">
+            <div class="lists pioneer">
+                <ul>
+                    <li>
+                        <img src="/home/images/index/learn.png">
+                        <span>嗯啊啊</span>
+                        <span>哦哦哦（杭州）总经理</span>
+                        <span><i></i>(10089)</span>
+                    </li>
+                    <li>
+                        <img src="/home/images/index/learn.png">
+                        <span>嗯嗯嗯</span>
+                        <span>嗯嗯嗯（杭州）总经理</span>
+                        <span><i></i>(10089)</span>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="notices hidden">
+            <div class="deeds">
+            <!--banner-->
+            <div class="banners">
+                <div class="swiper-container">
+                    <div class="imgs swiper-wrapper">
+                        <div class="banner swiper-slide">
+                            <a href="">
+                                <img src="" alt="">
+                                <div class="title_ limit"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="notices">
+                    <div class="notice party">
+                        <a href="" class="list clear">
+                            <div class="fl">
+                                <img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">
+                            </div>
+                            <div class="fr right">
+                                <div class="title limit_">还是很大会打电话很多话</div>
+                                <div class="clear time">
+                                    <span class="fl">等哈哈哈</span>
+                                    <span class="fr">2016-7-7</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--加载更多-->
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
+        </div>
+    </div>
+
+
+{/block}
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script>
+    $(function(){
+        //轮播
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 3000,
+            loop:true,
+            autoplayDisableOnInteraction:false
+        });
+        var ntc = $('.notices');
+        var co = getCookie("type");
+        if(co == 11 || co == 12 || co == 13){
+            c = co - 10;
+        }
+        ntc.eq(c-1).removeClass('hidden');
+        if(c == 1){
+            $(".triangle-up").css("left","13.06vw");
+        }
+        if(c == 2){
+            $(".triangle-up").css("left","46.06vw");
+        }
+        //先进事迹展
+        if(c == 3){
+            $(".triangle-up").css("left","79.06vw");
+            var len = ntc.eq(c-1 ).find('.deeds .content .party').length;
+            if(len >= 6){
+                $('.tip' ).text('上拉加载更多');
+                loadScroll(c);
+            }else{
+                $('.tip' ).hide();
+            }
+        }
+
+
+        //tab切换
+        $('.tabs>.tab ').on('click',function(){
+            var ntc = $('.notices' );
+            var eq = $(this ).index();
+            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
+            ntc.eq(eq).removeClass('hidden');
+            if(eq == 0){
+                $(".triangle-up").css("left","13.06vw");
+            }
+            if(eq == 1){
+                $(".triangle-up").css("left","46.06vw");
+            }
+            if(eq == 2){
+                $(".triangle-up").css("left","79.06vw");
+                var len = ntc.eq(eq ).find('.deeds .content .party').length;
+                if(len >= 6){
+                    $('.tip' ).text('上拉加载更多');
+                    loadScroll(eq+1);
+                }else{
+                    $('.tip' ).hide();
+                    $(window ).off("scroll" );
+                }
+            }
+            //使用示例
+            setCookie("type",eq+11);
+        });
+    })
+
+
+    //上拉加载
+    function loadScroll(type){
+        $(".scrollDiy").off("scroll" ).on("scroll",function(){
+            var ntc = $('.notices');
+            var dh = $(".content").height()+$(".tabs").height();
+            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+            var len = ntc.eq(type-1).find('.deeds .content .party').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            if(dh == end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: "{:Url('Activity/morelist')}",
+                    data:{
+                        length:len,
+                        type:type
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addCourse(data,type);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+
+
+    //数据循环
+    function addLists(data){
+        var type;
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            html +=
+                    '<a href="/home/details/index/id/20.html" class="list clear">'+
+                    '<div class="fl">'+
+                    '	<img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">'+
+                    '</div>'+
+                    '<div class="fr right">'+
+                    '	<div class="title limit_">驾驶人</div>'+
+                    '	<div class="clear time">'+
+                    '		<span class="fl">示例</span>'+
+                    '		<span class="fr">2017-06-20</span>'+
+                    '	</div>'+
+                    '</div>'+
+                    '</a>';
+        }
+        $('.notice').append(html);
+    }
+</script>
+{/block}
