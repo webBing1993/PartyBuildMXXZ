@@ -331,13 +331,14 @@
             $(".regularmore .lists ul").append(html);
         }else{
             $(".votes>ul").append(html);
-        }
-        if(viewer) {
-            viewer = $('.imgs').viewer({
-                url: 'data-original',
-                toolbar:false,
-                title:false
-            });
+            if(viewer) {
+                alert(33)
+                viewer = $('.imgs').viewer({
+                    url: 'data-original',
+                    toolbar:false,
+                    title:false
+                });
+            }
         }
     }
 
