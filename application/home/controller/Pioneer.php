@@ -148,9 +148,13 @@ class Pioneer extends Base {
             $data['table'] = 'pioneer';
             $data['uid'] = $uid;
             $res = $like->data($data)->save();
+            //点赞成功积分+1
             if ($res) {
-                //点赞成功积分+1
-                WechatUser::where('userid', $uid)->setInc('score', 1);
+                //判断今日积分是否超出
+                $check = $this ->score_up();
+                if($check){
+                    WechatUser::where('userid', $uid)->setInc('score', 1);
+                }
                 PioneerModel::where('id', $data['aid'])->setInc('likes', 1);
                 return $this->success("点赞成功");
             } else {
