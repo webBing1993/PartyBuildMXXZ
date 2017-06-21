@@ -120,6 +120,11 @@
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
+        //动态给序号赋值
+        $(".lists ul li").each(function(){
+            var index = $(this).index()+1;
+            $(this).addClass('num').attr('data-content', index);
+        })
         //轮播
         var mySwiper = new Swiper('.swiper-container', {
             autoplay: 3000,
@@ -253,9 +258,6 @@
        var n = parseInt($(e).children("em").text());
        if($(e).hasClass('liked')){
            return false;
-       } else{
-           $(e).children("em").text(n+1)
-           $(e).addClass("liked").css({"background":"#d3d3d3","box-shadow":"0px 2px 3px #d3d3d3"});
        }
        $.ajax({
            type:"post",
@@ -265,7 +267,10 @@
                aid:id,
            },
            success:function(data){
-                console.log('点赞成功!');
+               if(data.code == 1){
+                   $(e).children("em").text(n+1);
+                   $(e).addClass("liked");
+               }
            }
        })
    }

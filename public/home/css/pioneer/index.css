@@ -33,24 +33,22 @@ em{
 
 .lists>ul>li{
     padding:6vw 4vw;
+    height:28vw;
     border-bottom: 1px solid #f7f7f7;
 }
 .lists>ul>li:before{
     display: block;
-    content: "1";
+    content:  attr(data-content);
     background: url(/home/images/pioneer/hexagon.png);
     background-size: 5.4vw 6.2vw;
     width: 5.4vw;
     height: 6.2vw;
+    line-height: 6.2vw;
     float: left;
     margin-top: 4vw;
     margin-right: 3.2vw;
     text-align: center;
     color: #fff;
-    padding-top: 0.5vw;
-}
-.num:before{
-    content: attr(data-content);
 }
 .lists>ul>li img{
     float: left;
