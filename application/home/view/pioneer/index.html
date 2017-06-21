@@ -156,8 +156,8 @@
         //先进事迹展
         if(c == 3){
             $(".triangle-up").css("left","79.06vw");
-            var len = ntc.eq(c-1 ).find('.deeds .content .party').length;
-            if(len >= 6){
+            var len = ntc.eq(c-1 ).find('.deeds .content .party a').length;
+            if(len >= 8){
                 $('.tip' ).text('上拉加载更多');
                 loadScroll(c);
             }else{
@@ -181,7 +181,7 @@
             if(eq == 2){
                 $(".triangle-up").css("left","79.06vw");
                 var len = ntc.eq(eq ).find('.deeds .content .party').length;
-                if(len >= 6){
+                if(len >= 8){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
                 }else{
@@ -201,7 +201,7 @@
             var ntc = $('.notices');
             var dh = $(".content").height()+$(".tabs").height();
             var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
-            var len = ntc.eq(type-1).find('.deeds .content .party').length;
+            var len = ntc.eq(type-1).find('.deeds .content .party a').length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end && scrollNow){
@@ -218,12 +218,13 @@
                         loading.toggleClass('hidden');
                     },
                     success:function(data){
+                        console.log(data)
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
-                            addCourse(data,type);
+                            addLists(data,type);
                             var dataLen =data.data.length;
-                            if(data.data.length == 6){
+                            if(data.data.length == 8){
                                 tip.text('上拉加载更多');
                             }
                         }else{
@@ -247,20 +248,20 @@
         for(var i = 0; i< len;i++){
             var list = lists[i];
             html +=
-                    '<a href="/home/details/index/id/20.html" class="list clear">'+
+                    '<a href="/home/details/index/id/'+ list.id+'.html" class="list clear">'+
                     '<div class="fl">'+
-                    '	<img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">'+
+                    '<img src="'+list.path+'" alt="图片">'+
                     '</div>'+
                     '<div class="fr right">'+
-                    '	<div class="title limit_">驾驶人</div>'+
-                    '	<div class="clear time">'+
-                    '		<span class="fl">示例</span>'+
-                    '		<span class="fr">2017-06-20</span>'+
-                    '	</div>'+
+                    '<div class="title limit_">'+list.title+'</div>'+
+                    '<div class="clear time">'+
+                    '<span class="fl">'+list.publisher+'</span>'+
+                    '<span class="fr">'+list.create_time+'</span>'+
                     '</div>'+
-                    '</a>';
+                    '</div>'+
+                    '</a>'
         }
-        $('.notice').append(html);
+        $('.notices .party').append(html);
     }
 
     //点赞
