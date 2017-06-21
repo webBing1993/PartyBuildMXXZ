@@ -82,6 +82,7 @@ class Pioneer extends Base {
         $pioneer = new PioneerModel();
         //党建导师团
         $list1 = $pioneer ->where(['type' => 1,'status' => ['egt',0]]) ->select();
+        $list1 = $this ->checkLIke($list1);
         //创业导师团
         $list2 = $pioneer ->where(['type' => 2,'status' => ['egt',0]]) ->select();
         //先进事迹展
@@ -91,5 +92,16 @@ class Pioneer extends Base {
         $this ->assign('list2',$list2);
         $this ->assign('list3',$list3);
         return $this ->fetch();
+    }
+
+    public function checkLIke($data){
+        //获取点赞
+        $userId = session('userId');
+        $likeModel = new Like;
+        foreach($data as $v){
+            $like = $likeModel ->checkLike(5,$v['id'],$userId);
+            $v['is_like'] = $like;
+        }
+        return $data;
     }
 }

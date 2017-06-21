@@ -58,7 +58,11 @@
                             <img src="{$vo.front_cover|get_cover='path'}">
                             <span>{$vo.name}</span>
                             <span>{$vo.position}</span>
-                            <span onclick="like(this)"><i></i><em>{$vo.likes}</em></span>
+                            {eq name="$vo.is_like" value="0"}
+                                <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes}</em></span>
+                            {else/}
+                                <span class="liked"><i></i><em>{$vo.likes}</em></span>
+                            {/eq}
                         </li>
                         {/volist}
                     </ul>
@@ -245,30 +249,25 @@
     }
 
     //点赞
-   var like = function(e){
+   var like = function(e,id,type){
        var n = parseInt($(e).children("em").text());
        if($(e).hasClass('liked')){
            return false;
        } else{
            $(e).children("em").text(n+1)
-           $(e).addClass("liked");
+           $(e).addClass("liked").css({"background":"#d3d3d3","box-shadow":"0px 2px 3px #d3d3d3"});
        }
        $.ajax({
            type:"post",
-           url:"{:Url('Activity/vote')}",
+           url:"{:Url('Base/like')}",
            data:{
-               id:id,
-               status:status
+               type:type,
+               aid:id,
            },
            success:function(data){
-               console.log('点赞成功');
+                console.log('点赞成功!');
            }
        })
    }
-
-    $(".tutor ul li").each(function(e){
-        var index = $(this).index()+4;
-        $(this).addClass('num').attr('data-content', index);
-    })
 </script>
 {/block}
