@@ -58,10 +58,14 @@
                             <img src="{$vo.front_cover|get_cover='path'}">
                             <span>{$vo.name}</span>
                             <span>{$vo.position}</span>
-                            {eq name="$vo.is_like" value="0"}
-                                <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes}</em></span>
+                            {eq name="visit" value="0"}
+                                {eq name="$vo.is_like" value="0"}
+                                    <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes}</em></span>
+                                {else/}
+                                    <span class="liked"><i></i><em>{$vo.likes}</em></span>
+                                {/eq}
                             {else/}
-                                <span class="liked"><i></i><em>{$vo.likes}</em></span>
+                                <span><i></i><em>{$vo.likes}</em></span>
                             {/eq}
                         </li>
                         {/volist}
@@ -73,12 +77,22 @@
         <div class="notices hidden">
             <div class="lists pioneer">
                 <ul>
+                    {volist name="list2" id="vo"}
                     <li>
-                        <img src="/home/images/index/learn.png">
-                        <span>嗯啊啊</span>
-                        <span>哦哦哦（杭州）总经理</span>
-                        <span><i></i>(10089)</span>
+                        <img src="{$vo.front_cover|get_cover='path'}">
+                        <span>{$vo.name}</span>
+                        <span>{$vo.position}</span>
+                        {eq name="visit" value="0"}
+                        {eq name="$vo.is_like" value="0"}
+                        <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes}</em></span>
+                        {else/}
+                        <span class="liked"><i></i><em>{$vo.likes}</em></span>
+                        {/eq}
+                        {else/}
+                        <span><i></i><em>{$vo.likes}</em></span>
+                        {/eq}
                     </li>
+                    {/volist}
                 </ul>
             </div>
         </div>
