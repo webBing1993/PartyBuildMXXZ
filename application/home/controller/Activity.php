@@ -56,6 +56,7 @@ class Activity extends Base{
         $Wish = new wishModel();
         $type = input('post.type');
         $len = input('post.length');
+        return  $type.'/'.$len;
         if ($type == 1){
             // 活动  列表
             $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit($len,5)->select();  // 活动列表
@@ -89,7 +90,11 @@ class Activity extends Base{
                 $value['comment'] = $comment;
             }
         }
-        return $this->success('','',$list);
+        if ($list){
+            return $this->success('加载成功','',$list);
+        }else{
+            return $this->error('加载失败');
+        }
     }
     /* 活动发起   详情 */
     public function activitydetails(){

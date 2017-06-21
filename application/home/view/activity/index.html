@@ -240,6 +240,7 @@
                         loading.toggleClass('hidden');
                     },
                     success:function(data){
+                        console.log(data)
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
@@ -289,22 +290,22 @@
                     '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span><div class="opinion">'
                 switch (list.is_like){
                     case 0:
-                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
-                                '	<span>0</span>' +
-                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
+                                '	<span>'+list.likes_yes+'</span>' +
+                                '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
                         break;
                     case 1:
-                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
-                                '	<span>0</span>' +
-                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        html+='	<i class="agree_"></i>' +
+                                '	<span>'+list.likes_yes+'</span>' +
+                                '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
                         break;
                     case 2:
-                        html+='	<i class="agree" onclick="agree(this,11,1)"></i>' +
-                                '	<span>0</span>' +
-                                '	<i class="disagree" onclick="disagree(this,11,2)"></i><span>0</span>'
+                        html+='	<i class="agree" ></i>' +
+                                '	<span>'+list.likes_yes+'</span>' +
+                                '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
                         break;
                 }
-                    html+='	<i class="comment-icon" onclick="tosend(this,11)"></i>' +
+                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
                     '</div>' +
                     '<ul class="comments hide">' +
                     '</ul>' +
