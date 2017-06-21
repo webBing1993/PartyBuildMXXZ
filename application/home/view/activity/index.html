@@ -26,11 +26,20 @@
             background: url(/home/images/feedback/note.png) no-repeat;
             background-size: 100% 100%;
         }
+        .scrollDiy{
+            position: absolute;
+            top:0;
+            bottom:0;
+            overflow-y: scroll;
+            /* 增加该属性，可以增加弹性 */
+            -webkit-overflow-scrolling: touch;
+            width:100%;
+        }
     </style>
 {/block}
 {block name="body"}
     <!--tab-->
-<div>
+<div class="scrollDiy">
     <div class="tabs clear">
         <div class="tab"><span>活动列表</span></div>
         <div class="tab"><span>发起投票</span></div>
@@ -107,6 +116,10 @@
 
             </div>
         </div>
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
     </div>
     <!--线上活动发布-->
     <a id="publish" href="{:Url('Activity/publish')}"></a>
@@ -117,10 +130,6 @@
     </div>
     <div class="send fr" onclick="send(this)">发送</div>
 </div>
-    <div class="tip"></div>
-    <div class="loading hidden">
-        <div class="typing_loader"></div>
-    </div>
 </div>
 {/block}
 {block name="script"}
@@ -178,7 +187,7 @@
             }
             if(eq == 1){
                 $(".triangle-up").css("left","72vw");
-                var len = ntc.eq(eq ).find('.lists ul').length;
+                var len = ntc.eq(eq ).find('.lists>ul>li').length;
                 if(len >= 5){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
@@ -213,18 +222,18 @@
     });
 
     function loadScroll(type){
-        $(window ).off("scroll" ).on("scroll",function(){
+        $(".scrollDiy").off("scroll" ).on("scroll",function(){
             var ntc = $('.notices');
-            var dh = $(document).height();
-            var end = $(window).height() + $(window ).scrollTop();
+            var dh = $(".content").height()+$(".tabs").height();
+            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
             var tip = $(".tip");
             var loading = $('.loading');
             var url;
             if(type == 1){
-                var len = ntc.eq(type-1).find('.notice .lists ul li').length;
+                var len = ntc.eq(type-1).find('.notice .lists>ul>li').length;
             }
             if(type== 2 ){
-                var len = ntc.eq(type-1).find('.lists ul').length;
+                var len = ntc.eq(type-1).find('.lists>ul>li').length;
             }
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
