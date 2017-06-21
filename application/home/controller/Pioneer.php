@@ -126,37 +126,60 @@ class Pioneer extends Base {
      * 导师点赞
      * @return array|void
      */
-    public function like(){
+    public function like()
+    {
         $data = input('post.');
         $like = new Like();
         $uid = session('userId');
         $dateStr = date('Y-m-d', time());
         //获取当天0点的时间戳
-        $timestamp0=strtotime($dateStr);
+        $timestamp0 = strtotime($dateStr);
         $map = array(
-            'create_time' => ['egt',$timestamp0],
+            'create_time' => ['egt', $timestamp0],
             'type' => 5,
             'aid' => $data['aid'],
             'uid' => $uid
         );
-        $res = $like ->where($map) ->find();
+        $res = $like->where($map)->find();
         //今日已点赞
-       if(!empty($res))
-       {
-            return $this ->error('今日已点赞!');
-       }else{
-           $data['table'] = 'pioneer';
-           $data['uid'] = $uid;
-           $res = $like ->data($data) ->save();
-           if($res) {
-               //点赞成功积分+1
-               WechatUser::where('userid',$uid) ->setInc('score',1);
-               PioneerModel::where('id',$data['aid']) ->setInc('likes',1);
-               return $this ->success("点赞成功");
-           }else {
-               return $this->error("点赞失败!");
-           }
-       }
-
+        if (!empty($res)) {
+            return $this->error('今日已点赞!');
+        } else {
+            $data['table'] = 'pioneer';
+            $data['uid'] = $uid;
+            $res = $like->data($data)->save();
+            if ($res) {
+                //点赞成功积分+1
+                WechatUser::where('userid', $uid)->setInc('score', 1);
+                PioneerModel::where('id', $data['aid'])->setInc('likes', 1);
+                return $this->success("点赞成功");
+            } else {
+                return $this->error("点赞失败!");
+            }
+        }
     }
+        /**
+         * 加载更多
+         * @return array|void
+         */
+        public function moreList()
+        {
+            $len = input("length");
+            $news = new PioneerModel();
+            $map = array('status' => ['egt',0],'type' => 3);
+            $order = 'create_time desc';
+            $list = $news ->where($map) ->order($order) ->limit($len,5) ->select();
+            //图片跟时间戳转化
+            foreach($list as $value){
+                $img = Picture::get($value['front_cover']);
+                $value['path'] = $img['path'];
+                $value['time'] = date("Y-m-d",$value['create_time']);
+            }
+            if(!empty($list))
+            {
+                return $this->success("加载成功",Null,$list);
+            }else {
+                return $this->error("加载失败");
+            }
+        }
 }
