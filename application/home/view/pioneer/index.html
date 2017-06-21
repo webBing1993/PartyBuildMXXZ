@@ -251,7 +251,7 @@
            return false;
        } else{
            $(e).children("em").text(n+1)
-           $(e).addClass("liked").css({"background":"#d3d3d3","box-shadow":"0px 2px 3px #d3d3d3"});
+           $(e).addClass("liked");
        }
        $.ajax({
            type:"post",
@@ -265,5 +265,10 @@
            }
        })
    }
+
+    $(".tutor ul li").each(function(e){
+        var index = $(this).index()+4;
+        $(this).addClass('num').attr('data-content', index);
+    })
 </script>
 {/block}
