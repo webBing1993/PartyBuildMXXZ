@@ -26,8 +26,8 @@
     <div class="title">认领名单</div>
     <div class="lists">
         {empty name="$info.receive"}
-        <div class="list">
-            <span class="fl no-claim" style="text-align: center;width: 100%;">还没有人认领~</span>
+        <div class="list no-claim">
+            <span class="fl" style="text-align: center;width: 100%;">还没有人认领~</span>
         </div>
         {else/}
         {volist name="$info.receive" id="ro"}

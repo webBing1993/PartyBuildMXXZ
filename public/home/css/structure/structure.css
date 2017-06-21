@@ -1,4 +1,4 @@
-@keyframes todown {
+  @keyframes todown {
   0% {
     transform: rotate(0deg);
   }
@@ -284,13 +284,13 @@ body {
   width: 80vw;
 }
 .table .party {
-  width: 40vw;
+  width: 30vw;
 }
 .table .position {
   width: 30vw;
 }
 .table .name {
-  width: 30vw;
+  width: 40vw;
 }
 .table .thead .th {
   display: inline-block;
@@ -321,7 +321,7 @@ body {
 }
 .table .tbody .party {
   vertical-align: middle;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 500;
   text-align: center;
   overflow: hidden;
@@ -330,5 +330,4 @@ body {
   display: inline-block;
   height: auto;
   vertical-align: middle;
-  line-height: 20px;
 }

@@ -8,9 +8,9 @@
 
 <div class="table">
 	<div class="thead clear">
-		<div class="th fl party">党组织名称</div>
-		<div class="th fl position">党内职位</div>
-		<div class="th fl name">姓名</div>
+		<div class="th fl position">姓名</div>
+		<div class="th fl name">党内职位</div>
+		<div class="th fl party">联系方式</div>
 	</div>
 	<!--&lt;!&ndash;一组&ndash;&gt;-->
 	<!--<div class="tbody">-->
@@ -36,20 +36,21 @@
 <script>
 $('title' ).text('组织架构');
 var party3 = '{$party}';
-var data2 =[
+	var data2 =[
 	{
 		"party3":"浙江中测新图地理信息技术有限公司党支部",
 		"detail3":[
 			{
-				"party4":"浙江中测新图地理信息技术有限公司党支部",
 				"detail4":[
 					{
 						"position":"书记",
-						"name":"廖明"
+						"name":"廖明",
+						"phone":"13215547851"
 					},
 					{
 						"position":"党建指导员",
-						"name":"汤巍巍"
+						"name":"汤巍巍",
+						"phone":"13215547851"
 					},
 				]
 			}]
@@ -193,19 +194,21 @@ var data2 =[
 	{
 		"party3":"地信梦工场联合党支部",
 		"detail3":[{
-			"party4":"地信梦工场联合党支部",
 			"detail4":[
 				{
 					"position":"书记",
-					"name":"倪涵"
+					"name":"倪涵",
+					"phone":"12547854125"
 				},
 				{
 					"position":"副书记",
-					"name":"黎旻懿"
+					"name":"黎旻懿",
+					"phone":"18963254789"
 				},
 				{
 					"position":"党建指导员",
-					"name":"王杰"
+					"name":"王杰",
+					"phone":"13122884021"
 				},
 			]
 
@@ -230,7 +233,7 @@ var data2 =[
 	},
 ];
 var len = data2.length;
-console.log(party3);
+console.log(data2);
 for(var i = 0 ; i < len ;i++){
 	var party = data2[i];
 	if( party.party3 == party3){
@@ -241,22 +244,26 @@ for(var i = 0 ; i < len ;i++){
 			var party4 = detail3[j];
 			html+=
 					'<div class="tbody">'+
-					'<div class="tb fl party">'+
-					'<span>'+party4.party4+'</span>'+
-					'</div>'+
 					'<div class="tb fl position">';
 			var detail4 = party4.detail4;
 			var len4 = detail4.length;
 			for(var m = 0 ;m < len4 ;m++){
 				html+=
-						'<span>'+detail4[m ].position+'</span>';
+						'<span>'+detail4[m ].name+'</span>';
 			}
 			html+=
 					'</div>'+
 					'<div class="tb fl name">';
 			for(var n = 0 ;n < len4 ;n++){
 				html+=
-						'<span>'+detail4[n].name+'</span>';
+						'<span>'+detail4[n].position+'</span>';
+			}
+			html+=
+					'</div>'+
+					'<div class="tb fl party">';
+			for(var z = 0; z< len4; z++){
+				html +=
+						'<span>'+detail4[z ].phone+'</span>';
 			}
 			html+=
 					'</div>'+
@@ -268,14 +275,7 @@ for(var i = 0 ; i < len ;i++){
 		console.log('百分百名字错了'+ party3 + '后：'+ party.party3)
 	}
 }
-$('.tbody' ).each(function(){
-	var this_ = this;
-	var h = $(this ).find('.position' ).height();
-	var h_ = $(this ).find('.party>span' ).height();
-	$(this ).find('.party' ).height(h);
-	$(this ).find('.party>span').css('margin-top',h/2-h_/2+'px');
 
-});
 $(function(){
 
 });
