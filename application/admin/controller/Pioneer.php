@@ -11,7 +11,7 @@ use app\admin\model\Pioneer as PionnerModel;
 //先锋引领
 class Pioneer extends Admin{
     /**
-     * 党建指导团
+     * 创业导师团
      * @return mixed
      */
     public function partybuild(){
@@ -24,7 +24,7 @@ class Pioneer extends Admin{
         return $this ->fetch();
     }
     /**
-     * 创业导师团
+     * 创客先锋队
      */
     public function business(){
         $map = array(
@@ -55,7 +55,7 @@ class Pioneer extends Admin{
         return $this->fetch();
     }
     /**
-     * 党建导师 新增 修改
+     * 创业导师团 新增 修改
      */
     public function addpb(){
         $data = input('post.');
@@ -100,7 +100,7 @@ class Pioneer extends Admin{
 
     }
     /**
-     * 创业导师 新增 修改
+     * 创客先锋队 新增 修改
      */
     public function addbs(){
         $data = input('post.');
