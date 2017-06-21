@@ -11,6 +11,7 @@ use com\wechat\TPWechat;
 use think\Config;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
+use app\home\model\Pioneer as PioneerModel;
 use app\home\model\Picture;
 
 class Push extends Controller{
@@ -33,7 +34,7 @@ class Push extends Controller{
         }else{
 //            //先上传素材 media_id
             foreach($list as $k => $v){
-                //class 1新闻 2两学一做
+                //class 1红色足迹  2两学一做 3先锋事迹
                 $class = $v['class'];
                 if($class == 1 ||
                    $class == 2 ){
@@ -43,8 +44,14 @@ class Push extends Controller{
                     $img = $Wechat ->uploadForeverMedia($data,'thumb');
                     $v['thumb_media_id'] = $img['media_id'];
                     $id = $v['id'];
-                    if($class == 1){$link = 'details/index';}
-                    else if($class == 2){$link = 'learn/article';}
+                    if($class == 1)
+                    {
+                        $link = 'details/index';
+                    } else if($class == 2){
+                        $link = 'learn/article';
+                    }else if($class == 3){
+                        $link = 'pioneer/detail';
+                    }
                     $v['content_source_url'] = "$request/home/$link/id/$id";
                 }
             }
@@ -53,7 +60,8 @@ class Push extends Controller{
             foreach ($list as $k =>$v ){
                 //class 1新闻
                 if($v['class'] == 1 ||
-                   $v['class'] == 2) {
+                   $v['class'] == 2 ||
+                   $v['class'] == 3 ) {
                     $article['articles'][$k] = [
                         'thumb_media_id' => $v['thumb_media_id'],
                         'author' => $v['publisher'],
@@ -94,6 +102,7 @@ class Push extends Controller{
             if($res['errcode'] == 0){
                 $news = new News();
                 $learn = new Learn();
+                $pioneer = new PioneerModel();
                 if (!empty($info['media_id']))
                 {
                     //class 1新闻 2两学一做
@@ -104,6 +113,8 @@ class Push extends Controller{
                             $news ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
                         }else if($v['class'] == 2){
                             $learn ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
+                        }else if($v['class'] == 3){
+                            $pioneer ->where('id',$v['id']) ->update(['status' => 1]);//1为已推送
                         }
                     }
                 }
@@ -173,19 +184,21 @@ class Push extends Controller{
         $count = 8; //总数据数量
         $count1 = 0; //从第几条开始取数据
         $count2 = 0;
+        $count3 = 0;
         $news = new NewsModel();
         $learn = new LearnModel();
+        $pioneer = new PioneerModel();
         $news_check = false; //新闻数据状态 true为取空
         $learn_check = false;
-        $notice_check = false;
+        $pioneer_check = false;
         $all_list = array();
-        //获取数据  取满6条 或者取不出数据退出循环
+        //获取数据  取满8条 或者取不出数据退出循环
         while(true)
         {
             if(!$news_check &&
                 count($all_list) < $count)
             {
-                $res = $news ->getDataList($count1); //获取一条数据
+                $res = $news ->getDataList($count1,1); //获取一条数据
                 if(empty($res))
                 {
                     $news_check = true;
@@ -197,7 +210,7 @@ class Push extends Controller{
             if(!$learn_check &&
                 count($all_list) < $count)
             {
-                $res = $learn ->getDataList($count2);
+                $res = $learn ->getDataList($count2,1);
                 if(empty($res))
                 {
                     $learn_check = true;
@@ -206,8 +219,22 @@ class Push extends Controller{
                     $all_list = $this ->changeTpye($all_list,$res,2);
                 }
             }
+
+            if(!$pioneer_check &&
+                count($all_list) < $count)
+            {
+                $res = $pioneer ->getDataList($count3,1);
+                if(empty($res))
+                {
+                    $pioneer_check = true;
+                }else {
+                    $count3 ++;
+                    $all_list = $this ->changeTpye($all_list,$res,3);
+                }
+            }
+
             if(count($all_list) >= $count ||
-                ($news_check && $learn_check))
+                ($news_check && $learn_check && $pioneer_check))
             {
                 break;
             }

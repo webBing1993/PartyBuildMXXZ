@@ -101,18 +101,20 @@
             <div class="content">
                 <div class="notices">
                     <div class="notice party">
-                        <a href="" class="list clear">
+                        {volist name="list3" id="loo"}
+                        <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
                             <div class="fl">
-                                <img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">
+                                <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
                             </div>
                             <div class="fr right">
-                                <div class="title limit_">还是很大会打电话很多话</div>
+                                <div class="title limit_">{$loo.title}</div>
                                 <div class="clear time">
-                                    <span class="fl">等哈哈哈</span>
-                                    <span class="fr">2016-7-7</span>
+                                    <span class="fl">{$loo.publisher}</span>
+                                    <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
                                 </div>
                             </div>
                         </a>
+                        {/volist}
                     </div>
                 </div>
             </div>
