@@ -200,7 +200,6 @@
             //使用示例
             setCookie("type",eq+11);
         });
-        isOut();
         //悬浮框移动
         moveanyway();
         viewer = $('.imgs').viewer({
@@ -330,16 +329,7 @@
         }
     }
 
-    //退出清理tab缓存
-    function isOut(){
-        pushHistory();
-        setTimeout(function(){
-            window.addEventListener("popstate", function(e) {
-                delCookie("type");
-                window.history.go(-1);
-            }, false);
-        },200)
-    }
+
 
     var tosend = function(e,id){
         var index = $(e).parents('.votes ul li' ).index();

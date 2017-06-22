@@ -193,8 +193,8 @@
             var index = $(this).index()+1;
             $(this).addClass('num').attr('data-content', index);
         })
-        isOut();
-    })
+
+    });
 
 
     //上拉加载
@@ -294,16 +294,7 @@
        })
    }
 
-    //退出清理tab缓存
-    function isOut(){
-        pushHistory();
-        setTimeout(function(){
-            window.addEventListener("popstate", function(e) {
-                delCookie("type");
-                window.history.go(-1);
-            }, false);
-        },200)
-    }
+
 
 </script>
 {/block}

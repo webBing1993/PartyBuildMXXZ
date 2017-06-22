@@ -173,7 +173,6 @@
                 $('.tabs>.tab').width(tabw);
             }
         }
-        isOut();
     });
     function loadScroll(type){
         $(window ).off("scroll" ).on("scroll",function(){
@@ -243,16 +242,6 @@
         $(".regularmore .lists" ).append(html);
     }
 
-    //退出清理tab缓存
-    function isOut(){
-        pushHistory();
-        setTimeout(function(){
-            window.addEventListener("popstate", function(e) {
-                delCookie("type");
-                window.history.go(-1);
-            }, false);
-        },200)
-    }
 </script>
 <script>
     /**
