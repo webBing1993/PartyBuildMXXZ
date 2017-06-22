@@ -127,4 +127,7 @@ class Verify extends Controller{
     public function memberslogin(){
         return $this ->fetch();
     }
+    public function null(){
+        return $this ->fetch();
+    }
 }

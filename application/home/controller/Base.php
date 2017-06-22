@@ -99,7 +99,9 @@ class Base extends Controller {
         $userId = session('userId');
         //如果userId等于visitor  
         if($userId == 'visitor'){
-           return $this ->error('抱歉,游客暂无相关权限!');
+
+//           return $this ->error('抱歉,游客暂无相关权限!');
+            $this->redirect('Verify/null');
         }
     }
     
