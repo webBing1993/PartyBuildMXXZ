@@ -38,7 +38,13 @@ class News extends Base {
         $list = $news ->where($map) ->order($order) ->limit($len,5) ->select();
         //图片跟时间戳转化
         foreach($list as $value){
-            $img = Picture::get($value['front_cover']);
+            //手机端上传的给默认图
+            if(!empty($value['front_cover']))
+            {
+                $img = Picture::get($value['front_cover']);
+            }else{
+                $img['path'] = '';
+            }
             $value['path'] = $img['path'];
             $value['time'] = date("Y-m-d",$value['create_time']);
         }

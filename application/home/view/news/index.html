@@ -42,7 +42,7 @@
                 <a href="{:Url('Details/index?id='.$loo['id'])}" class="list clear">
                     <div class="fl">
                         {eq name="$loo.front_cover" value=""}
-                        <img src="/uploads/download/2017-06-15/5941ec6a38936.png" alt="图片">
+                        <img src="/home/images/banner/2.jpg" alt="图片">
                         {else/}
                         <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
                         {/eq}
@@ -137,6 +137,9 @@
       var len = lists.length;
       for(var i = 0; i< len;i++){
           var list = lists[i];
+          if(list.path  == ''){
+              list.path = '/home/images/banner/2.jpg';
+          };
           html +=
                   '<a href="/home/details/index/id/'+ list.id+'.html" class="list clear">'+
                   '<div class="fl">'+
