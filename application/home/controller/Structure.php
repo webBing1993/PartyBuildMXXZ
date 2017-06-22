@@ -20,6 +20,7 @@ class Structure extends Base{
      * 组织架构详情页
      */
     public function detail(){
+        $this ->checkAnonymous();
         $party = input('party');
         $this->assign('party',$party);
         return $this->fetch();
