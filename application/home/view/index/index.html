@@ -109,7 +109,7 @@
                 <div class="fr right">
                     <div class="title limit_">{$loo.title}</div>
                     <div class="clear time">
-                        <span class="fl">{$loo.publisher}</span>
+                        <span class="fl">{$loo.publisher|mb_substr=###,0,6}</span>
                         <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
                     </div>
                 </div>
@@ -237,6 +237,9 @@
             }else if(list.class == 4){
                 class_name = '先锋事迹';
                 link = '/home/pioneer/detail/id/'+list.id;
+            }
+            if(list.publisher.length >6){
+                list.publisher = list.publisher.substring(0,6);
             }
             html +=
                     '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
