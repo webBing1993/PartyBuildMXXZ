@@ -63,6 +63,14 @@ em{
     color: #999;
     margin-top: 2vw;
     margin-left: 3vw;
+    width: 43%;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
 }
 .lists>ul>li span:nth-child(2){
     display:block;
