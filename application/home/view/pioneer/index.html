@@ -81,7 +81,7 @@
                     <li>
                         <img src="{$vo.front_cover|get_cover='path'}">
                         <span>{$vo.name}</span>
-                        <span>{$vo.position}</span>
+                        <span class="position">{$vo.position}</span>
                         {eq name="visit" value="0"}
                         {eq name="$vo.is_like" value="0"}
                         <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes+2000}</em></span>
