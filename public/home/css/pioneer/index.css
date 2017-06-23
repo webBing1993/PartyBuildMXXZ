@@ -63,6 +63,9 @@ em{
     color: #999;
     margin-top: 2vw;
     margin-left: 3vw;
+
+}
+.position{
     width: 43%;
     word-wrap: break-word;
     overflow: hidden;
@@ -70,6 +73,8 @@ em{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    position: absolute;
+    left: 27vw;
 
 }
 .lists>ul>li span:nth-child(2){
@@ -86,7 +91,7 @@ em{
     color: #fff;
     line-height: 8vw;
     text-align: center;
-    margin-top: -10vw;
+    margin-top: -3vw;
     background: -moz-linear-gradient(left, #f99300, #ff5c5c);
     background: -webkit-linear-gradient(left, #f99300, #ff5c5c);
     background: -o-linear-gradient(left, #f99300, #ff5c5c);
