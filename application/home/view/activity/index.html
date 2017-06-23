@@ -26,15 +26,6 @@
             background: url(/home/images/feedback/note.png) no-repeat;
             background-size: 100% 100%;
         }
-        .scrollDiy{
-            position: absolute;
-            top:0;
-            bottom:0;
-            overflow-y: scroll;
-            /* 增加该属性，可以增加弹性 */
-            -webkit-overflow-scrolling: touch;
-            width:100%;
-        }
     </style>
 {/block}
 {block name="body"}
@@ -210,10 +201,10 @@
     });
 
     function loadScroll(type){
-        $(".scrollDiy").off("scroll" ).on("scroll",function(){
+        $(window).off("scroll" ).on("scroll",function(){
             var ntc = $('.notices');
-            var dh = $(".content").height()+$(".tabs").height();
-            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+            var dh = $(document).height();
+            var end = $(window).height() + $(window).scrollTop();
             var tip = $(".tip");
             var loading = $('.loading');
             if(type == 1){
