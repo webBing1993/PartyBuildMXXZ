@@ -229,6 +229,10 @@ body {
   background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
   background-size: 20px 20px;
 }
+  .listbox .box .box_ .lists .party1 .tri-left.structure4{
+    background: url('/home/images/structure/structure4.png') 0 0 no-repeat;
+    background-size: 20px 20px;
+  }
 .listbox .box .box_ .lists .detail1 {
   width: 100%;
 }
@@ -283,14 +287,14 @@ body {
   margin: 5vw 10vw;
   width: 80vw;
 }
-.table .party {
-  width: 30vw;
+.table .phone {
+  width: 40vw;
 }
 .table .position {
   width: 30vw;
 }
 .table .name {
-  width: 40vw;
+  width: 30vw;
 }
 .table .thead .th {
   display: inline-block;
@@ -312,21 +316,21 @@ body {
   border-right: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
 }
-.table .tbody .tb span {
+.table .tbody .tb span,.table .tbody .tb a {
   display: inline-block;
   width: 100%;
   height: 30px;
   line-height: 30px;
   text-align: center;
 }
-.table .tbody .party {
+.table .tbody .phone {
   vertical-align: middle;
   font-size: 1.3rem;
   font-weight: 500;
   text-align: center;
   overflow: hidden;
 }
-.table .tbody .party span {
+.table .tbody .phone span {
   display: inline-block;
   height: auto;
   vertical-align: middle;
