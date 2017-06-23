@@ -81,6 +81,10 @@ em{
     display:block;
     font-size: 1.4rem;
     color: #333;
+    width: 43%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .lists>ul>li span:last-child{
     width: 24vw;
