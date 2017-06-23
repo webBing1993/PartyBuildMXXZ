@@ -187,6 +187,7 @@ class Wechat extends Admin{
         $all = array();
         $update = array();//更新数据
         $new = array();//新增数据
+        $check = array();//检查新增是否存在相同数据
         foreach($data as $k => $v){
             //前4个字字段为必填字段 名称 性别 手机号码 所属部门
             if (empty($v[0]) || empty($v[1]) || empty($v[2]) || empty($v[3])) {
@@ -251,7 +252,11 @@ class Wechat extends Admin{
                 array_push($update, $all[$k]);
             } else {
                 $sum1++;
-                array_push($new, $all[$k]);
+                $tel = $all[$k]['mobile'];
+                if(!isset($check[$tel])){
+                    $check[$tel] = true;
+                    array_push($new, $all[$k]);
+                }
             }
         }
         //新增用户保存

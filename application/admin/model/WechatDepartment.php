@@ -31,7 +31,7 @@ class WechatDepartment extends Base
                 $this ->save(['name' => $data['name']],['id' => $data['id']]);
                 return ['code' => 1,'msg'=> '修改成功'];
             }else{
-                $info = $this ->data(['name' => $data['name']]) ->save();
+                $info = $this ->insert(['name' => $data['name']]);
                 return ['code' => 1,'msg'=> '添加成功','id' => $info];
             }
         }
