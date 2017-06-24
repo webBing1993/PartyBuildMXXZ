@@ -33,7 +33,7 @@
         width:100%;
     }
 
-    
+
 
     .tongzhi img{
         width:30px;position:absolute;right:12px;top:0;margin-top:5px;
@@ -41,7 +41,7 @@
     .tongzhi>span>span{
         color:#df4934;
     }
-     .content-block ul{
+    .content-block ul{
         margin:0 12px;border-radius: 3px;height:215px;background:#fff;box-shadow: 0px 0px 6px 1px rgba(196,196,196, .3);position:relative;
     }
 
@@ -66,36 +66,36 @@
 
     /*tab3*/
     #tab3 ul{
-        margin-bottom:20px;
+        margin-bottom:5.33vw;
     }
     #tab3 ul li .list_img{
-        height:30px;
+        height: 8vw;
     }
 
     #tab3 ul li>div{
-        height:85px;width:100%;display: block;position:relative;border-bottom:1px solid #f1f1f1;
+        height:22.67vw;width:100%;display: block;position:relative;border-bottom:1px solid #f1f1f1;
     }
     #tab3 ul li>div>img.fl{
-        width:60px;height:60px;border-radius: 3px;margin-left:11px;margin-top:12px;
+        width:16vw;height:16vw;border-radius: 3px;margin-left:2.93vw;margin-top:3.2vw;
     }
-    #tab3 ul li>a>span.limit_{
-        width:100%;font-size:14px;height:55px;padding-left:11px;line-height:22px;padding-top:10px;
+    #tab3 ul li>a>div.limit_{
+        width:100%;font-size:1.4rem;height:14.67vw;padding-left:2.93vw;padding-top:2.67vw;line-height: 2rem;
     }
     .tab_main{
-        height:30px;line-height:30px;width:200px;;margin:0 auto;text-align: center;background:#f9f9f9;border-radius: 3px;margin-bottom:3px;
+        height:8vw;line-height:8vw;width:53.33vw;margin:0 auto;text-align: center;background:#f9f9f9;border-radius: 3px;margin-bottom:0.8vw;
     }
     .btn1{
-        width:96px;text-align: center;display: inline-block;;border-radius: 3px;color:#999;font-size:15px;
+        width:25.6vw;text-align: center;display: inline-block;;border-radius: 3px;color:#999;font-size:1.5rem;
     }
     .tab_active{
         background:#DF4934;color:#fff
     }
 
     #tab3 #tab_main1>li>a>span.isEnd{
-        margin-left:12px;font-size:12px;color:#e4393a;
+        margin-left:3.2vw;font-size:1.2rem;color:#e4393a;
     }
     #tab3 #tab_main1>li>a>span.time{
-        margin-right:12px;font-size:12px;color:#999;
+        margin-right:3.2vw;font-size:1.2rem;color:#999;
     }
     a{
         display: inline-block;
@@ -104,30 +104,30 @@
 
     /*加载动画*/
     .tip {
-        height: 40px;
+        height: 10.67vw;
         text-align: center;
-        line-height: 40px;
+        line-height: 10.67vw;
         color: #c1c1c1;
     }
     .loading {
         width: 100%;
-        height: 40px;
+        height: 10.67vw;
     }
     .typing_loader {
-        width: 6px;
-        height: 6px;
+        width: 1.6vw;
+        height: 1.6vw;
         border-radius: 50%;
         -webkit-animation: typing 1s linear infinite alternate;
         -moz-animation: Typing 1s linear infinite alternate;
         animation: typing 1s linear infinite alternate;
         position: relative;
-        top: 17px;
-        left: calc( 50vw - 20px );
+        top: 4.53vw;
+        left: 44.667vw;
     }
     .fa.fa-angle-right{
         float: right;
-        margin-right:12px;
-        margin-top: -40px;
+        line-height: 2rem;
+        margin-right:3.2vw;
         font-size: 1.4rem;
     }
 
@@ -137,35 +137,35 @@
 {block name="body"}
 
 
-        <div class="page">
-                    <!-- Tab 3 -->
-                    <div id="tab3" class="" >
-                        <div class="list-block" >
-                            <ul id="tab_main1">
-                                <li>
-                                    {volist name="fnotice" id="fno"}
-                                    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
-                                        <span class="limit_ fl">{$fno['title']}</span>
-                                        <i class="fa fa-angle-right"></i>
-                                        {eq name="fno['is_over']" value="1"}
-                                        <span class="isEnd">已结束</span>
-                                        {/eq}
-                                        <span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>
-                                    </a>
-                                    {/volist}
-                                </li>
-                                <li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">
-                                    <img src="/home/images/common/nomessage.png" alt="" style="width:120px;">
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-        </div>
+<div class="page">
+    <!-- Tab 3 -->
+    <div id="tab3" class="" >
+        <div class="list-block" >
+            <ul id="tab_main1">
+                <li>
+                    {volist name="fnotice" id="fno"}
+                    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
+                        <div class="limit_ fl"><span>{$fno['title']}</span><i class="fa fa-angle-right"></i></div>
 
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
+                        {eq name="fno['is_over']" value="1"}
+                        <span class="isEnd">已结束</span>
+                        {/eq}
+                        <span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>
+                    </a>
+                    {/volist}
+                </li>
+                <li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">
+                    <img src="/home/images/nomessage.png" alt="" style="width:120px;">
+                </li>
+            </ul>
         </div>
+    </div>
+</div>
+
+<div class="tip"></div>
+<div class="loading hidden">
+    <div class="typing_loader"></div>
+</div>
 {/block}
 
 {block name="script"}
@@ -238,8 +238,7 @@
             var list = lists[i];
             html +=
                     '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
-                        '<span class="limit_ fl">'+list.title+'</span>'+
-                         '<i class="fa fa-angle-right"></i>';
+                    '<div class="limit_ fl"><span>'+list.title+'</span><i class="fa fa-angle-right"></i></div>';
             if(list.is_over == 1){
                 html+='<span class="isEnd">已结束</span>';
             }
