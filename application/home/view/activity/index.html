@@ -44,7 +44,7 @@
                 <div class="lists">
                         <ul>
                             {volist name="list" id="lo"}
-                            <li>
+                            <li class="clear">
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
                                 <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
@@ -253,7 +253,7 @@
             var list = lists[i];
             if (type == 1) {
                 html +=
-                    '<li>'+
+                    '<li class="clear">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.description+'</span>'+
                     '<span class="lists time">'+list.time+'</span>'+
@@ -327,7 +327,7 @@
         $('.banner,.lists' ).off('click');
         $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
             $('.tabs,.lists' ).off('click').one('click',function(){
-                $('.bottom' ).animate({'bottom':'-45px'},500,'swing');
+                $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
                 $('.myword input' ).val('');
             })
         }).attr('data-tab',index);

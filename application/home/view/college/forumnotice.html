@@ -4,6 +4,7 @@
 <title>鸡毛传贴</title>
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/common/comment.css">
 <style>
 	.scrollDiy{
 		position: absolute;
@@ -258,6 +259,8 @@
 							var dataLen =data.data.length;
 							if(data.data.length == 5){
 								tip.text('上拉加载更多');
+							}else{
+								tip.text('没有更多了');
 							}
 						}else{
 							tip.text('没有更多了');

@@ -10,17 +10,17 @@
 /*tab*/
 .tabs {
     width: 100vw;
-    height: 44px;
-    padding: 8px 0;
+    height: 11.7vw;
+    padding: 2.1vw 0;
     background: #f1f1f1;
 }
 .tabs .tab {
     display: inline-block;
-    width: 49vw;
-    height: 100%;
+    width: 49%;
+    height: 7.5vw;
     color: #333333;
     font-size: 1.5rem;
-    line-height: 28px;
+    line-height: 7.5vw;
     text-align: center;
 }
 .tabs .tab:first-child {

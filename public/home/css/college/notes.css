@@ -41,6 +41,7 @@ textarea::-webkit-input-placeholder {
 }
 .form .list input {
   height : 12vw;
+  font-size: 1.3rem;
 }
 .form .list .select {
   color: #d9d9d9;
@@ -66,6 +67,8 @@ textarea::-webkit-input-placeholder {
   margin-left: 2.6vw;
   overflow: hidden;
   background: #d9d9d9;
+  border: 2px solid #d9d9d9;
+  box-sizing: content-box;
 }
 .block .img img {
   position: absolute;
@@ -78,9 +81,10 @@ textarea::-webkit-input-placeholder {
   margin-left: 2.6vw;
   border: 2px solid #d9d9d9;
   text-align: center;
-  line-height: 100%;
+  line-height: 20vw;
   font-size: 6rem;
   color: #d9d9d9;
+  box-sizing: content-box;
 }
 .foot {
   margin-top: 10vw;

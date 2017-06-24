@@ -180,9 +180,9 @@ votes ul > li .comments .comment {
 
 .bottom {
     position: fixed;
-    bottom: -45px;
+    bottom: -12vw;
     width: 100vw;
-    height: 45px;
+    height: 12vw;
     border-top: 1px solid #dadada;
     padding: 0 4vw;
     background: #ffffff;
@@ -190,19 +190,21 @@ votes ul > li .comments .comment {
 }
 .bottom .myword input {
     vertical-align: middle;
-    height: 30px;
+    height: 8vw;
     width: 72vw;
-    margin: 7px 0;
-    padding-left: 10px;
+    margin: 2vw 0;
+    padding-left: 3vw;
     background: #fafafa;
     border: 1px solid #d8d8d8;
     -webkit-border-radius: 6px;
     border-radius: 6px;
+    font-size: 1.3rem;
 }
 .bottom .send {
     width: 18vw;
-    line-height: 45px;
+    line-height: 12vw;
     text-align: center;
+    font-size: 1.4rem;
 }
 .bottom .send:active {
     background: #fafafa;
