@@ -137,7 +137,7 @@ html,body{
 }
 .content .notices .notice .list .fl .type {
     position: absolute;
-    bottom: 15px;
+    bottom: 4vw;
     left: 3.2vw;
     width: 21.3vw;
     text-align: center;
