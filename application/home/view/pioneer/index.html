@@ -60,12 +60,12 @@
                             <span class="position">{$vo.position}</span>
                             {eq name="visit" value="0"}
                                 {eq name="$vo.is_like" value="0"}
-                                    <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes+2000}</em></span>
+                                    <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                                 {else/}
-                                    <span class="liked"><i></i><em>{$vo.likes+2000}</em></span>
+                                    <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                                 {/eq}
                             {else/}
-                                <span><i></i><em>{$vo.likes+2000}</em></span>
+                                <span><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                             {/eq}
                         </li>
                         {/volist}
@@ -84,12 +84,12 @@
                         <span class="position">{$vo.position}</span>
                         {eq name="visit" value="0"}
                         {eq name="$vo.is_like" value="0"}
-                        <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{$vo.likes+2000}</em></span>
+                        <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {else/}
-                        <span class="liked"><i></i><em>{$vo.likes+2000}</em></span>
+                        <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {/eq}
                         {else/}
-                        <span><i></i><em>{$vo.likes+2000}</em></span>
+                        <span><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {/eq}
                     </li>
                     {/volist}
