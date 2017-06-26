@@ -44,12 +44,12 @@
                 <div class="lists">
                         <ul>
                             {volist name="list" id="lo"}
-                            <li class="clear">
+                            <a class="clear"  href="{:Url('Activity/activitydetails?id='.$lo['id'])}">
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
                                 <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
-                                <a href="{:Url('Activity/activitydetails?id='.$lo['id'])}">进入认领<img src="/home/images/activity/arrow.png"></a>
-                            </li>
+                                <i>进入认领<img src="/home/images/activity/arrow.png"></i>
+                            </a>
                             {/volist}
                         </ul>
                 </div>

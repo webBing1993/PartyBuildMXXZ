@@ -36,16 +36,17 @@
     top: 11.5vw;
     left: 21.06vw;
 }
-.lists>ul>li{
+.lists>ul>a{
+    display: block;
     padding:4vw;
     border-bottom: 1px solid #f7f7f7;
 }
-.lists>ul>li>p{
+.lists>ul>a>p{
     font-size: 1.4rem;
     color: #333;
     margin-bottom: 2vw;
 }
-.lists>ul>li>span{
+.lists>ul>a>span{
     font-size: 1.3rem;
     color: #999;
     display: block;
@@ -54,7 +55,8 @@
     display: block;
     margin-top: 4vw;
 }
-.lists>ul>li>a{
+.lists>ul>a>i{
+    font-style: inherit;
     width: 24vw;
     height:6.2vw;
     float: right;
@@ -68,7 +70,7 @@
     background: -webkit-linear-gradient(left, #f99300, #ff5c5c);
     background: -o-linear-gradient(left, #f99300, #ff5c5c);
 }
-.lists>ul>li>a>img{
+.lists>ul>a>i>img{
     height: 3vw;
     width: 4.8vw;
     margin-top: 1.5vw;
