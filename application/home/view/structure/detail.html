@@ -2,16 +2,17 @@
 
 {block name="style"}
 <link rel="stylesheet" href="/home/css/structure/structure.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
 {/block}
 
 {block name="body"}
 
-<div class="table">
-	<div class="thead clear">
-		<div class="th fl name">姓名</div>
-		<div class="th fl position">党内职位</div>
-		<div class="th fl phone">联系方式</div>
-	</div>
+<!--<div class="table">-->
+	<!--<div class="thead clear">-->
+		<!--<div class="th fl name">姓名</div>-->
+		<!--<div class="th fl position">党内职位</div>-->
+		<!--<div class="th fl phone">联系方式</div>-->
+	<!--</div>-->
 	<!--&lt;!&ndash;一组&ndash;&gt;-->
 	<!--<div class="tbody">-->
 		<!--<div class="tb fl party">-->
@@ -29,13 +30,28 @@
 		<!--</div>-->
 	<!--</div>-->
 	<!--&lt;!&ndash;/一组&ndash;&gt;-->
-</div>
+<!--</div>-->
+<ul class="d_lists">
+	<!--<li class="d_list">-->
+		<!--<div class="d_img_box">-->
+			<!--<div class="d_img" style="background-color: #ef6776">-->
+				<!--陈-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="d_name">陈叔叔</div>-->
+		<!--<a class="d_tel" href="tel:15824167420" >-->
+			<!--<span class="d_tel_icon"></span>-->
+			<!--15824167420-->
+		<!--</a>-->
+	<!--</li>-->
+</ul>
 {/block}
 
 {block name="script"}
 <script>
 $('title' ).text('组织架构');
 var party3 = '{$party}';
+console.log(party3);
 	var data2 =[
 	{
 		"party3":"网络工程师联合党支部",
@@ -705,6 +721,7 @@ var party3 = '{$party}';
 		},]
 	},
 ];
+var bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
 var len = data2.length;
 console.log(data2);
 for(var i = 0 ; i < len ;i++){
@@ -714,35 +731,25 @@ for(var i = 0 ; i < len ;i++){
 		var len3 = detail3.length;
 		var html = '';
 		for(var j = 0; j < len3 ; j++){
+			console.log(len3)
 			var party4 = detail3[j];
-			html+=
-					'<div class="tbody">'+
-					'<div class="tb fl name">';
 			var detail4 = party4.detail4;
 			var len4 = detail4.length;
 			for(var m = 0 ;m < len4 ;m++){
-				html+=
-						'<span>'+detail4[m ].name+'</span>';
+				html+='<li class="d_list">'+
+						'<div class="d_img_box">'+
+						'<div class="d_img" style="background-color:'+bg_color[Math.floor(Math.random()*10)]+'">'+
+						detail4[m].name[0]+'</div>'+
+						'</div>'+
+						'<div class="d_name">'+detail4[m].name+'</div>'+
+						'<a class="d_tel" href="tel:'+detail4[m].phone+'" >'+
+							'<span class="d_tel_icon"></span>'+
+								detail4[m].phone+
+						'</a>'+
+						'</li>';
 			}
-			html+=
-					'</div>'+
-					'<div class="tb fl position">';
-			for(var n = 0 ;n < len4 ;n++){
-				html+=
-						'<span>'+detail4[n].position+'</span>';
-			}
-			html+=
-					'</div>'+
-					'<div class="tb fl phone">';
-			for(var z = 0; z< len4; z++){
-				html +=
-						'<a href=tel:'+detail4[z ].phone+'>'+detail4[z ].phone+'</a>';
-			}
-			html+=
-					'</div>'+
-					'</div>'
 		}
-		$('.table' ).append(html);
+		$('.d_lists' ).append(html);
 		break;
 	}else{
 		console.log('百分百名字错了'+ party3 + '后：'+ party.party3)
