@@ -36,7 +36,7 @@
     top: 11.5vw;
     left: 21.06vw;
 }
-.lists>ul>a{
+.lists>ul>a,.lists>ul>li{
     display: block;
     padding:4vw;
     border-bottom: 1px solid #f7f7f7;
