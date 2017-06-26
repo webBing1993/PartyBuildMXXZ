@@ -119,8 +119,8 @@ class Activity extends Base{
         }
         $list['receive'] = $Receive;
         // 判断自己所在部门     是否已经认领
-        $department = $User['department'];
-        $info = db('wish_receive')->where(['rid' => $id,'department' => $department,'status' => 0])->find();
+        $department = WechatUser::where('userid',$userId)->field('department')->find();
+        $info = db('wish_receive')->where(['rid' => $id,'department' => $department['department'],'status' => 0])->find();
         if ($info){
             $list['is_receive'] = 1;  //   同部门 其他管理员  已经认领
         }else{
