@@ -181,6 +181,14 @@ $("#content").on("input",function(){
     }
     $('.contentnum span').text(len);
 })
-
+function imgresize(){
+	setTimeout(function(){
+		var img = $('.img img' );
+		img.each(function(){
+			$(this).height('20.8vw');
+			$(this).width('20.8vw');
+		});
+	},100);
+}
 </script>
 {/block}
