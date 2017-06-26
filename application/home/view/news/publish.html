@@ -27,8 +27,7 @@
         <div class="add fl">
             +
         </div>
-        <input type="file" class="hide" id="upimg" accept="image/jpg,image/jpeg">
-    </div>
+        <input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">
     </div>
 </div>
 <input type="hidden" name="id" value="">
@@ -145,15 +144,15 @@
                         if(msg.code == 1){
                             if(this_.hasClass('add')){
                                 //图片添加
-                                if(imglen == 1){
+                                if(imglen == 3){
                                     $('.add' ).fadeOut();
                                 }
                                 $('.img').eq(imglen).removeClass('hide' )
-                                        .append('<img src='+msg.data.path+' alt="笔记图片" data-tab='+msg.data.id+'>');
+                                        .append('<img src='+msg.data.path+' alt="图片" data-tab='+msg.data.id+'>');
                             }else{
                                 //图片修改
                                 this_.find('img').remove();
-                                this_.append('<img src='+msg.data.path+' alt="笔记图片" data-tab='+msg.data.id+'>');
+                                this_.append('<img src='+msg.data.path+' alt="图片" data-tab='+msg.data.id+'>');
                             }
                             imgresize();
 
