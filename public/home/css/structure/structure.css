@@ -152,7 +152,7 @@ body {
   margin-bottom: 5vw;
 }
 .listbox .box .box_:before {
-  content: '党委介绍';
+  content: '';
   position: absolute;
   top: 3vw;
   left: -7px;
@@ -169,6 +169,12 @@ body {
   content: '';
   display: none;
 }
+  .listbox .box.summary .box_:before {
+    content: '组织简介';
+  }
+  .listbox .box.town .box_:before {
+    content: '组织架构';
+  }
 .listbox .box.summary .box_{
   padding: 11vw 3vw 6vw 3vw;
 }
