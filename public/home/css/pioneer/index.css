@@ -96,12 +96,8 @@ em{
     line-height: 8vw;
     text-align: center;
     margin-top: -3vw;
-    background: -moz-linear-gradient(left, #f99300, #ff5c5c);
-    background: -webkit-linear-gradient(left, #f99300, #ff5c5c);
-    background: -o-linear-gradient(left, #f99300, #ff5c5c);
-    -moz-box-shadow:0px 2px 3px #ff5c5c;
-    -webkit-box-shadow:0px 2px 3px #ff5c5c;
-    box-shadow:0px 2px 3px #ff5c5c;
+    background:#d3d3d3;
+    box-shadow:0px 2px 3px #d3d3d3;
 }
 .lists>ul>li span:last-child i{
     position: relative;
@@ -197,6 +193,10 @@ em{
 }
 
 .liked{
-    background:#d3d3d3!important;
-    box-shadow:0px 2px 3px #d3d3d3!important;
+    background: -moz-linear-gradient(left, #f99300, #ff5c5c)!important;
+    background: -webkit-linear-gradient(left, #f99300, #ff5c5c)!important;
+    background: -o-linear-gradient(left, #f99300, #ff5c5c)!important;
+    -moz-box-shadow:0px 2px 3px #ff5c5c!important;
+    -webkit-box-shadow:0px 2px 3px #ff5c5c!important;
+    box-shadow:0px 2px 3px #ff5c5c!important;
 }
