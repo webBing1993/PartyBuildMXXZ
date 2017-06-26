@@ -36,20 +36,6 @@ em{
     height:28vw;
     border-bottom: 1px solid #f7f7f7;
 }
-.lists>ul>li:before{
-    display: block;
-    content:  attr(data-content);
-    background: url(/home/images/pioneer/hexagon.png);
-    background-size: 5.4vw 6.2vw;
-    width: 5.4vw;
-    height: 6.2vw;
-    line-height: 6.2vw;
-    float: left;
-    margin-top: 4vw;
-    margin-right: 3.2vw;
-    text-align: center;
-    color: #fff;
-}
 .lists>ul>li img{
     float: left;
     width: 16vw;
@@ -61,12 +47,10 @@ em{
     display: block;
     font-size: 1.2rem;
     color: #999;
-    margin-top: 2vw;
-    margin-left: 3vw;
 
 }
 .position{
-    width: 43%;
+    width: 55%;
     word-wrap: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -74,14 +58,17 @@ em{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     position: absolute;
-    left: 27vw;
-
+    margin-top: 9vw;
+    left: 22vw;
 }
 .lists>ul>li span:nth-child(2){
     display:block;
     font-size: 1.4rem;
     color: #333;
     width: 43%;
+    position: absolute;
+    margin-top: 2vw;
+    left: 22vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -90,24 +77,20 @@ em{
     width: 24vw;
     height:8vw;
     float: right;
-    border-radius: 30px;
-    font-size:1.2rem;
-    color: #fff;
-    line-height: 8vw;
-    text-align: center;
-    margin-top: -3vw;
-    background:#d3d3d3;
-    box-shadow:0px 2px 3px #d3d3d3;
+    text-align: right;
+    margin-top: 4vw;
+    color:#ccc;
 }
-.lists>ul>li span:last-child i{
+.lists>ul>li span:last-child.like i{
     position: relative;
-    top:1vw;
     margin-right: 1.2vw;
+    top:3px;
     display: inline-block;
-    background: url("/home/images/pioneer/good.png");
-    background-size: 5.4vw 5.4vw;
-    width: 5.4vw;
-    height: 5.4vw;
+    background: url("/home/images/pioneer/vote.png");
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+
 }
 .deeds .content .notices .notice .list {
     height: 22vw;
@@ -193,10 +176,16 @@ em{
 }
 
 .liked{
-    background: -moz-linear-gradient(left, #f99300, #ff5c5c)!important;
-    background: -webkit-linear-gradient(left, #f99300, #ff5c5c)!important;
-    background: -o-linear-gradient(left, #f99300, #ff5c5c)!important;
-    -moz-box-shadow:0px 2px 3px #ff5c5c!important;
-    -webkit-box-shadow:0px 2px 3px #ff5c5c!important;
-    box-shadow:0px 2px 3px #ff5c5c!important;
+    color:#ffa52f!important;
+}
+.lists>ul>li span:last-child.liked i{
+    position: relative;
+    margin-right: 1.2vw;
+    top:3px;
+    display: inline-block;
+    background: url("/home/images/pioneer/voted.png");
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+
 }

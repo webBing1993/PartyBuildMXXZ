@@ -18,12 +18,11 @@
 				<div class="list clear">
 					<div class="party1">
 						<div class="tri-left structure1"></div>
-						<div class="tri down"></div>
 						<div class="name1">联建式支部</div>
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">网络工程师联合党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">网络工程师联合党支部<i></i></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -33,17 +32,16 @@
 				<div class="list clear">
 					<div class="party1">
 						<div class="tri-left structure2"></div>
-						<div class="tri down"></div>
 						<div class="name1">苗圃式支部</div>
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">蜂巢孵化器党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">原质资本党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">湾西加速器党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">海龟孵化器党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">良仓加速器党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">杭报第七空间党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">蜂巢孵化器党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">原质资本党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">湾西加速器党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">海龟孵化器党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">良仓加速器党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">杭报第七空间党支部<i></i></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -51,16 +49,15 @@
 				<!--第一层-->
 				<div class="list clear">
 					<div class="party1">
-						<div class="tri down"></div>
 						<div class="tri-left structure3"></div>
 						<div class="name1">单建式支部</div>
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江舞九信息科技有限公司党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州弧途科技有限公司党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州联线电子商务有限公司党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州美哒网络科技有限公司党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">浙江舞九信息科技有限公司党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州弧途科技有限公司党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州联线电子商务有限公司党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">杭州美哒网络科技有限公司党支部<i></i></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -70,13 +67,12 @@
 				<div class="list clear">
 					<div class="party1">
 						<div class="tri-left structure4"></div>
-						<div class="tri down"></div>
 						<div class="name1">联动式支部</div>
 					</div>
 					<!--第二层-->
 					<div class="down detail1">
-						<a class="name2 limit" href="{:Url('Structure/detail')}">流动党员第一党支部</a>
-						<a class="name2 limit" href="{:Url('Structure/detail')}">流动党员第二党支部</a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">流动党员第一党支部<i></i></a>
+						<a class="name2 limit" href="{:Url('Structure/detail')}">流动党员第二党支部<i></i></a>
 					</div>
 					<!--/第二层-->
 				</div>
@@ -114,28 +110,11 @@
 <script>
 $('title' ).text('组织架构');
 $(function(){
-	//组织架构切换
-	slide();
 	$('.name2' ).each(function(){
 		var t = $(this ).text();
 		var href = '/home/structure/detail?party='+t+'';
 		$(this ).attr('href', href);
 	})
 });
-function slide(){
-	$('.lists .party1' ).on('click',function(){
-		var it = $(this);
-		var detail = it.next('.detail1' );
-		if(detail.hasClass('down')){
-			detail.slideUp();
-			it.find('.tri').removeClass('toup').addClass('todown');
-		}else{
-			detail.slideDown();
-			it.find('.tri').removeClass('todown').addClass('toup');
-		}
-		detail.toggleClass('down');
-	});
-}
-
 </script>
 {/block}

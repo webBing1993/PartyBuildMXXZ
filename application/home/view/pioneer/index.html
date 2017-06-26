@@ -60,7 +60,7 @@
                             <span class="position">{$vo.position}</span>
                             {eq name="visit" value="0"}
                                 {eq name="$vo.is_like" value="0"}
-                                    <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                                    <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                                 {else/}
                                     <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                                 {/eq}
@@ -84,7 +84,7 @@
                         <span class="position">{$vo.position}</span>
                         {eq name="visit" value="0"}
                         {eq name="$vo.is_like" value="0"}
-                        <span onclick="like(this,'{$vo.id}',5)"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                        <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {else/}
                         <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {/eq}
@@ -187,13 +187,6 @@
             //使用示例
             setCookie("type",eq+11);
         });
-
-        //动态给序号赋值
-        $(".lists ul li").each(function(){
-            var index = $(this).index()+1;
-            $(this).addClass('num').attr('data-content', index);
-        })
-
     });
 
 
@@ -281,7 +274,7 @@
            success:function(data){
                if(data.code == 1){
                    $(e).children("em").text(n+1);
-                   $(e).addClass("liked");
+                   $(e).removeClass("like").addClass("liked");
                }else{
                    swal({
                        title: ' ',
