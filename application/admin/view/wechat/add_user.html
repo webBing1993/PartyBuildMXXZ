@@ -205,7 +205,7 @@
         data.check = "{$info.id|default=''}"; //判断是否新增还是修改
         data.review = $("input[name='review']:checked").val();
         //验证判断
-        var patrn=/0?(13|14|15|18)[0-9]{9}/;
+        var patrn=/0?(13|14|15|17|18)[0-9]{9}/;
         if(!data.name){
             warning({msg: "名称不能为空"});
             return '';
