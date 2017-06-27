@@ -115,6 +115,9 @@ em{
     margin-left: 3vw;
     position: relative;
 }
+/*.lide{*/
+    /**/
+/*}*/
 .deeds .content .notices .notice .list .right .title {
     float: left;
     color: #111;
@@ -187,5 +190,4 @@ em{
     background-size: 20px 20px;
     width: 20px;
     height: 20px;
-
 }
