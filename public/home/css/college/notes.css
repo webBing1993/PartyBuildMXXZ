@@ -43,6 +43,9 @@ textarea::-webkit-input-placeholder {
   height : 12vw;
   font-size: 1.3rem;
 }
+.form .list input::-webkit-input-placeholder{
+  line-height: 12vw;
+}
 .form .list .select {
   color: #d9d9d9;
 }
