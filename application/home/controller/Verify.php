@@ -14,6 +14,8 @@ use think\Config;
 
 class Verify extends Controller{
     public function _initialize(){
+        //判断是否味微信打开
+//        $this ->oauth();
         //cookie初始化
         Cookie::init(Config::get('cookie'));
     }
