@@ -84,7 +84,7 @@
                         <span class="position">{$vo.position}</span>
                         {eq name="visit" value="0"}
                         {eq name="$vo.is_like" value="0"}
-                        <span onclick="like(this,'{$vo.id}',5)" class="like"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
+                        <span  class="like" onclick="like(this,'{$vo.id}',5)"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {else/}
                         <span class="liked"><i></i><em>{:rand($vo.likes+2000,$vo.likes+2500)}</em></span>
                         {/eq}
@@ -133,6 +133,7 @@
     <script src="/home/js/reset.js"></script>
     <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
+//    var index;
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
@@ -286,8 +287,5 @@
            }
        })
    }
-
-
-
 </script>
 {/block}
