@@ -1,6 +1,6 @@
 {extend name="public/pure"}
 {block name="style"}
-<title>之图红盟</title>
+<title>梦想小镇红色驿站</title>
 <link rel="stylesheet" href="/home/css/verify/memberslogin.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/admin/css/plugins/sweetalert/sweetalert.css">
@@ -14,17 +14,18 @@
 <div class="login-box">
     <div class="form">
         <div class="uid">
-            <span></span><input type="text" maxlength="11" placeholder="小镇党员请输入手机号">
+            <span></span><input type="text" maxlength="11" placeholder="小镇党员请输入手机号" id="phone">
         </div>
     </div>
 
 </div>
 <div class="btn">登&emsp;录</div>
 <a class="login" href="{:Url('Verify/tourist')}">非小镇党员入口<img src="/home/images/verify/loginentrance.png"></a>
+</div>
 <footer>
     <img src="/home/images/verify/footer.png">
 </footer>
-</div>
+
 {/block}
 {block name="script"}
 <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
@@ -32,7 +33,16 @@
     $(function(){
         $('.btn').on("click",function(){
             login()
-        })
+        });
+        //绝对定位bug
+        var vh =$(window).height() - $(window).width()*0.265 - $('.banner').height() - $('.box').height();
+        if(vh < 0){
+            vh = 0;
+        }
+        $('footer').css({
+            'position': 'relative',
+            'margin-top': vh
+        });
     });
     /**登陆**/
     function login(){
