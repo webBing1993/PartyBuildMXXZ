@@ -47,7 +47,7 @@ class Birth extends Controller {
         $id = input('get.id');
         $res = BirthModel::where('id',$id)->find();
         $str1 = date('Y年m月d日',$res['content']);
-        $str2 = $this ->datediffage(strtotime('1921-07-01'),$res['content']);
+        $str2 = $this ->datediffage($res['content'],time());
         $this->assign(['name' => $res['name'],'num' => $res['num'],'str1' => $str1,'str2' => $str2]);
         return $this->fetch();
     }
