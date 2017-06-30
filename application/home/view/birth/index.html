@@ -220,9 +220,7 @@ $(function(){
 })
 $(".submit").click(function(){
     var name = $("#name").val();
-    var year = $("#year").val();
-    var mouth = $("#mouth").val();
-    var day = $("#day").val();
+    var date  =$("#date").val();
     if(name==""){
         swal({
             title: ' ',
@@ -233,10 +231,10 @@ $(".submit").click(function(){
         });
         return false;
     }
-    if(year==""||mouth==""||day==""){
+    if(date==""){
         swal({
             title: ' ',
-            text: '请完善入党日期',
+            text: '请选择入党日期',
             type: 'warning',
             showConfirmButton:false,
             timer:1500
