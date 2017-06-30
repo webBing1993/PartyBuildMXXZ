@@ -1,14 +1,236 @@
 {extend name="public/common"}
 
 {block name="style"}
+<link rel="stylesheet" href="/static/sweetalert/sweetalert2.min.css">
+<style>
+    body{
+        background: url("/home/images/birth/bg.jpg");
+        background-size: 100% ;
+        width: 100%;
+        height: 100%;
+    }
+     ::-webkit-input-placeholder{
+              color: red;
+            font-size: 1.4rem;
+         color: #cecece;
+         text-align: center;
+           }
+    /*mask*/
+    .content .main img:first-child{
+        width: 8vw;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+    }
+    .content .main img:last-child{
+        width:67vw;
+        margin-top: 50px;
+    }
+    .content .main{
+        text-align: center;
 
+    }
+    .text{
+        text-align: center;
+        margin-top: 20px;
+    }
+    .text p{
+        padding: 1.2vw 0;
+        font-size: 1.6rem;
+        color: #cc0000;
+    }
+    .bottom{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: -1;
+    }
+    .bottom img{
+        width:100%;
+    }
+    @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
+        .text p{
+            font-size: 1.2rem;
+        }
+    }
+
+    /*homepage*/
+    .homepage .main{
+        text-align: center;
+
+    }
+    .homepage .main img:first-child{
+        width: 8vw;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+    }
+    .homepage .main img:last-child{
+        width:77vw;
+        margin-top: 50px;
+    }
+    .hometext{
+        text-align: center;
+        margin-top: 40px;
+    }
+    .hometext p{
+        font-size: 1.6rem;
+        color: #f12b2c;
+        margin-bottom: 10px;
+    }
+    .hometext .input input{
+        background: #fff;
+        box-shadow: 1px 1px 2px #eee;
+        border-radius: 5px;
+        border: 1px solid #f1f1f1;
+        text-align: center;
+        color: #ccc;
+    }
+    .hometext .input input:first-child{
+        width: 16vw;
+        height: 10vw;
+        margin-right: 10px;
+    }
+    .hometext .input input:nth-child(2){
+        width: 13.5vw;
+        height: 10vw;
+        margin-right: 10px;
+    }
+    .hometext .input input:nth-child(3){
+         width: 10.5vw;
+         height: 10vw;
+        margin-right: 10px;
+     }
+    .hometext .input input:nth-child(4){
+          width: 10.5vw;
+          height: 10vw;
+      }
+    .submit{
+        width:100%;
+        margin-top: 30px;
+        text-align: center;
+    }
+    .submit span{
+        display: inline-block;
+        width: 42vw;
+        height: 10vw;
+        font-size: 1.5rem;
+        background: #f00;
+        border-radius: 30px;
+        line-height: 10vw;
+        color: #fff;
+        -webkit-box-shadow:1px 4px 4px rgba(255, 61, 23, 0.4);
+        box-shadow:1px 4px 4px rgba(255, 61, 23, 0.4);
+        background: -moz-linear-gradient(left, #ff8710, #ff3d17);
+        background: -webkit-linear-gradient(left, #ff8710, #ff3d17);
+        background: -o-linear-gradient(left, #ff8710, #ff3d17);
+    }
+
+</style>
 {/block}
 
 {block name="body"}
+<div class="mask"  style="display: none;">
+<div class="content">
+<div class="main">
+    <img src="/home/images/birth/index_seal.png">
+    <img src="/home/images/birth/index_main.png">
+</div>
+    <div class="text">
+        <p>中国共产党于1921年7月23日成立</p>
+         <p>1938年5月毛泽东在《论持久战》一文中</p>
+           <p>提出把7月1日作为中国共产党的</p>
+            <p>诞辰纪念日</p>
+    </div>
+<div class="bottom">
+    <img src="/home/images/birth/index_bottom.jpg">
+</div>
+</div>
+</div>
 
-
+<div class="homepage">
+    <div class="main">
+        <img src="/home/images/birth/index_seal.png">
+        <img src="/home/images/birth/homepage.png">
+    </div>
+    <div class="hometext">
+        <p>请输入您的入党日期</p>
+        <div class="input">
+        <input style="text"  placeholder="姓名" id="name">
+        <input style="text"  placeholder="年" id="year">
+        <input style="text"  placeholder="月" id="mouth">
+        <input style="text"  placeholder="日" id="day">
+        </div>
+    </div>
+    <div class="submit"><span>确认上传</span></div>
+</div>
 {/block}
 
 {block name="script"}
+<script src="/static/sweetalert/sweetalert2.min.js"></script>
+<script>
+//    setTimeout(function(){
+//        $(".mask").hide();
+//        $(".homepage").show();
+//    },3000)
 
+
+$(".submit").click(function(){
+    var name = $("#name").val();
+    var year = $("#year").val();
+    var mouth = $("#mouth").val();
+    var day = $("#day").val();
+    if(name==""){
+        swal({
+            title: ' ',
+            text: '请输入姓名',
+            type: 'warning',
+            showConfirmButton:false,
+            timer:1500
+        });
+        return false;
+    }
+    if(year==""||mouth==""||day==""){
+        swal({
+            title: ' ',
+            text: '请完善入党日期',
+            type: 'warning',
+            showConfirmButton:false,
+            timer:1500
+        });
+        return false;
+    }
+    $.ajax({
+        type:"get",
+        url: "{:Url('Index/moreDataList')}",
+        data:{
+            news: news_len,
+            learn: learn_len,
+            notice: notice_len,
+            pioneer: pioneer_len
+        },
+        beforeSend: function(XMLHttpRequest){
+            tip.hide();
+            loading.toggleClass('hidden');
+        },
+        success:function(data){
+            loading.toggleClass('hidden');
+            tip.show();
+            if(data.code == 1){
+                addLists(data);
+                var dataLen =data.data.length;
+                if(data.data.length == 6){
+                    tip.text('上拉加载更多');
+                }
+            }else{
+                tip.text('没有更多了');
+                $(window ).off("scroll");
+            }
+            scrollNow = true;//请求结束
+        }
+    })
+})
+
+
+</script>
 {/block}
