@@ -54,11 +54,6 @@
     .bottom img{
         width:100%;
     }
-    @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
-        .text p{
-            font-size: 1.2rem;
-        }
-    }
 
     /*homepage*/
     .homepage{
@@ -161,12 +156,20 @@
         color:#cecece;
     }
 
-
+    @media screen and (device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2){
+        .text p{
+            font-size: 1.2rem;
+        }
+        .homepage .main img:last-child {
+            width: 68vw;
+            margin-top: 50px;
+        }
+    }
 </style>
 {/block}
 
 {block name="body"}
-<div class="mask" style="display: none;">
+<div class="mask">
 <div class="content">
 <div class="main">
     <img src="/home/images/birth/index_seal.png">
@@ -184,13 +187,13 @@
 </div>
 </div>
 
-<div class="homepage">
+<div class="homepage"  style="display: none;">
     <div class="main">
         <img src="/home/images/birth/index_seal.png">
         <img src="/home/images/birth/homepage.png">
     </div>
     <div class="hometext">
-        <p>请输入您的入党日期</p>
+        <p>请选择您的入党日期</p>
         <div class="name">
             <span class="username"></span>
         <input type="text"  placeholder="请输入姓名" id="name">
@@ -208,7 +211,10 @@
 <script src="/static/sweetalert/sweetalert2.min.js"></script>
 <script>
 $(function(){
-
+    setTimeout(function(){
+        $(".mask").hide();
+        $(".homepage").show();
+    },3000)
     var o = document.getElementById('date');
     o.onfocus = function(){
         this.removeAttribute('placeholder');
