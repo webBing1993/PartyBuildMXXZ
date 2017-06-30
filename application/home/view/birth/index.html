@@ -249,32 +249,14 @@ $(".submit span").click(function(){
         return false;
     }
     $.ajax({
-        type:"get",
-        url: "{:Url('Index/moreDataList')}",
+        type:"post",
+        url: "{:Url('Birth/detail')}",
         data:{
-            news: news_len,
-            learn: learn_len,
-            notice: notice_len,
-            pioneer: pioneer_len
-        },
-        beforeSend: function(XMLHttpRequest){
-            tip.hide();
-            loading.toggleClass('hidden');
+            name:name,
+            data:date
         },
         success:function(data){
-            loading.toggleClass('hidden');
-            tip.show();
-            if(data.code == 1){
-                addLists(data);
-                var dataLen =data.data.length;
-                if(data.data.length == 6){
-                    tip.text('上拉加载更多');
-                }
-            }else{
-                tip.text('没有更多了');
-                $(window ).off("scroll");
-            }
-            scrollNow = true;//请求结束
+
         }
     })
 })
