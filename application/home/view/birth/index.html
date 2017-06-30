@@ -13,7 +13,7 @@
               color: red;
             font-size: 1.4rem;
          color: #cecece;
-         text-align: center;
+         text-align: left;
            }
     /*mask*/
     .mask{
@@ -95,27 +95,34 @@
     .name,.date{
         background: #fff;
     }
-
+    .name:after,.date:after{
+        display: block;
+        content: "";
+        height: 1px;
+        background: #eee;
+        width: 67vw;
+        position: absolute;
+        left: 18vw;
+    }
     .username{
         background: url(/home/images/birth/username.png);
-        background-size: 13px 15px;
-        width: 13px;
-        height: 15px;
+        background-size: 15px 17px;
+        width: 15px;
+        height: 17px;
         display: inline-block;
         position: relative;
-        top:10px;
+        top:5px;
     }
     .userdate{
         background: url(/home/images/birth/userdate.png);
-        background-size: 13px 15px;
-        width: 13px;
-        height: 15px;
+        background-size: 15px 17px;
+        width: 15px;
+        height: 17px;
         display: inline-block;
         position: relative;
-        top:10px;
+        top:5px;
     }
     #name,#date{
-        border-bottom: 1px solid #eee;
         height:10vw;
         width: 57vw;
         padding-left: 10px;
@@ -181,7 +188,7 @@
         </div>
         <div class="date">
             <span class="userdate"></span>
-            <input type="date"  placeholder="请选择入党日期" id="date">
+            <input placeholder="请选择入党日期" type="text" onfocus="(this.type='date')"  id="date">
         </div>
     </div>
     <div class="submit"><span>确认上传</span></div>
