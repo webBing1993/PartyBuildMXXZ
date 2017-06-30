@@ -260,7 +260,17 @@ $(".submit span").click(function(){
             data:date
         },
         success:function(data){
-
+                if(data===0){
+                    swal({
+                        title: ' ',
+                        text: '选择的入党日期有误',
+                        type: 'warning',
+                        showConfirmButton:false,
+                        timer:1500
+                    });
+                }else{
+                    window.location.href="/home/birth/detail/id/"+data;
+                }
         }
     })
 })
