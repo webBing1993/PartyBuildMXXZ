@@ -212,9 +212,9 @@
 <script>
 $(function(){
     setTimeout(function(){
-        $(".mask").hide();
-        $(".homepage").show();
-    },3000)
+        $(".mask").fadeOut();
+        $(".homepage").fadeIn();
+    },5000)
     var o = document.getElementById('date');
     o.onfocus = function(){
         this.removeAttribute('placeholder');
@@ -222,8 +222,12 @@ $(function(){
     o.onblur = function(){
         if(this.value == '') this.setAttribute('placeholder','请选择入党日期');
     };
-
 })
+
+$(".mask").click(function(){
+    $(this).fadeOut();
+    $(".homepage").fadeIn();
+});
 
 $(".submit span").click(function(){
     var name = $("#name").val();
