@@ -1,7 +1,6 @@
 <?php
 
 namespace app\home\controller;
-
 /**
  * Class Birth
  * @package  入党那一天
