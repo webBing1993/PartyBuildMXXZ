@@ -6,43 +6,49 @@ namespace app\home\controller;
  * @package  入党那一天
  */
 use app\home\model\Birth as BirthModel;
-class Birth extends Base {
+use think\Controller;
+
+class Birth extends Controller {
     /**
      * 主页
      */
     public function index(){
-
+    
         return $this->fetch();
     }
-
-    /**
-     *  详细页
+    /*
+     * 提交
      */
-    public function detail(){
+    public function push(){
         $name = input('post.name');
         $data = input('post.data');  // 2017-07-07
         if (strtotime($data) > time()){
             return 0;
         }
-        $str1 = date('y年m月d日',time());
         $res = BirthModel::where('name',$name)->find();
-        $str2 = $this ->datediffage(strtotime('1921-07-01'),strtotime($data));
         $Birth = new BirthModel();
         if ($res){
             // 有数据  修改
-            $results = $Birth -> where(['name' => $name])->save(['name' => $name,'content' => $str1,'create_time' => time()]);
-            if ($results){
-                $num = BirthModel::count();  // 添加 人数
-                $this->assign(['name' => $name,'num' => 500+$num,'str1' => $str1,'str2' => $str2]);
-            }
+            $Birth->save(['name' => $name,'content' => strtotime($data),'create_time' => time()],['name' => $name]);
+            return $res['id'];
         }else{
             // 无数据  添加
-            $result = $Birth -> save(['name' => $name,'content' => $str1,'create_time' => time()]);
+            $num = BirthModel::count();  // 添加 人数
+            $result = $Birth -> save(['name' => $name,'num' => $num+500+1,'content' => strtotime($data),'create_time' => time()]);
             if ($result){
-                $num = BirthModel::count();  // 添加 人数
-                $this->assign(['name' => $name,'num' => 500+$num,'str1' => $str1,'str2' => $str2]);
+                return $result;
             }
         }
+    }
+    /**
+     *  详细页
+     */
+    public function detail(){
+        $id = input('get.id');
+        $res = BirthModel::where('id',$id)->find();
+        $str1 = date('Y年m月d日',$res['content']);
+        $str2 = $this ->datediffage(strtotime('1921-07-01'),$res['content']);
+        $this->assign(['name' => $res['name'],'num' => $res['num'],'str1' => $str1,'str2' => $str2]);
         return $this->fetch();
     }
     function datediffage($before, $after) {

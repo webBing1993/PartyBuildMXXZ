@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<title>为党庆生</title>
 <link rel="stylesheet" href="/static/sweetalert/sweetalert2.min.css">
 <style>
     body{
@@ -254,7 +255,7 @@ $(".submit span").click(function(){
     }
     $.ajax({
         type:"post",
-        url: "{:Url('Birth/detail')}",
+        url: "{:Url('Birth/push')}",
         data:{
             name:name,
             data:date
