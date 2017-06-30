@@ -1,6 +1,25 @@
 {extend name="public/common"}
 
 {block name="style"}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+function autoPlayAudio() {
+	wx.config({
+		debug: false,
+		appId: 'wx89994ef58b069d2b',
+		timestamp: 1,
+		nonceStr: '',
+		signature: '',
+		jsApiList: []
+	});
+	wx.ready(function() {
+		var globalAudio=document.getElementById("music");
+		globalAudio.play();
+	});
+}
+// 解决ios音乐不自动播放的问题
+autoPlayAudio();
+</script>
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/birth/detail.css">
 {/block}
@@ -8,6 +27,10 @@
 {block name="body"}
 <div class="bg">
 	<img src="/home/images/birth/logo.png" alt="logo" class="logo">
+	<div class="music">
+		<audio src="/home/images/birth/music.mp3" id="music"  autoplay loop></audio>
+		<img src="/home/images/birth/play.png" alt="播放" id="birthplay" class="rotate">
+	</div>
 	<div class="citation">
 		<img src="/home/images/birth/citation.png" alt="奖状" >
 		<div class="note">
@@ -26,4 +49,21 @@
 
 {block name="script"}
 
+<script>
+$(function() {
+	var img = $('#birthplay');
+	img.off('click').on('click',function(){
+		if($(this).attr('src')=='/home/images/birth/play.png'){
+			$(this).attr('src','/home/images/birth/pause.png');
+			$('#music')[0].pause();
+		}
+		else{
+			$(this).attr('src','/home/images/birth/play.png');
+			$('#music')[0].play();
+		}
+		img.toggleClass('rotate');
+	});
+
+});
+</script>
 {/block}
