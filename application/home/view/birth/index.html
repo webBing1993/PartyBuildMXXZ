@@ -10,8 +10,7 @@
         height: 100%;
     }
      ::-webkit-input-placeholder{
-              color: red;
-            font-size: 1.4rem;
+         font-size: 1.4rem;
          color: #cecece;
          text-align: left;
            }
@@ -153,6 +152,16 @@
         background: -o-linear-gradient(left, #ff8710, #ff3d17);
     }
 
+    input[type="date"]:before{
+        content: attr(placeholder);
+        color: #cecece;
+    }
+
+    ::-webkit-input-placeholder {
+        color:#cecece;
+    }
+
+
 </style>
 {/block}
 
@@ -188,7 +197,7 @@
         </div>
         <div class="date">
             <span class="userdate"></span>
-            <input placeholder="请选择入党日期" type="text" onfocus="(this.type='date')"  id="date">
+            <input placeholder="请选择入党日期" type="date"  id="date">
         </div>
     </div>
     <div class="submit"><span>确认上传</span></div>
@@ -198,7 +207,17 @@
 {block name="script"}
 <script src="/static/sweetalert/sweetalert2.min.js"></script>
 <script>
+$(function(){
 
+    var o = document.getElementById('date');
+    o.onfocus = function(){
+        this.removeAttribute('placeholder');
+    };
+    o.onblur = function(){
+        if(this.value == '') this.setAttribute('placeholder','请选择入党日期');
+    };
+
+})
 $(".submit").click(function(){
     var name = $("#name").val();
     var year = $("#year").val();
