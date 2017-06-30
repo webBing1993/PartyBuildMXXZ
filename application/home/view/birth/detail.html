@@ -1,12 +1,27 @@
 {extend name="public/common"}
 
 {block name="style"}
-
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/birth/detail.css">
 {/block}
 
 {block name="body"}
-
-
+<div class="bg">
+	<img src="/home/images/birth/logo.png" alt="logo" class="logo">
+	<div class="citation">
+		<img src="/home/images/birth/citation.png" alt="奖状" >
+		<div class="note">
+			<div class="name"><span>王丹丹</span>同志:</div>
+			<div class="time">您的入党日期为<span>2016年5月29日</span>，截止到活动参与时，您已入党<span>1年1月1天</span>。</div>
+		</div>
+	</div>
+	<div class="content">
+		<div>我为党庆生！您是第<span>20</span>位</div>
+		<div>祝福中国共产党96岁生日的小镇创客</div>
+		<div>转发微信参与祝福传递。  </div>
+	</div>
+	<img src="/home/images/birth/code.png" alt="二维码" class="code">
+</div>
 {/block}
 
 {block name="script"}

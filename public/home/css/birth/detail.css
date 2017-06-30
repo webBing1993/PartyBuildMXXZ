@@ -1,0 +1,80 @@
+.bg{
+	width: 100vw;
+	height:100vh;
+	background: url("/home/images/birth/bg.jpg") no-repeat;
+	background-size:100vw 100vh;
+}
+.logo{
+	width: 3rem;
+	height: 3rem;
+	margin: 1rem 0 0 1rem;
+}
+.citation{
+	position: relative;
+	margin: 1rem auto;
+	width: 92.3vw;
+	height: 61.3vw;
+}
+.citation img{
+	width: 100%;
+	height:100%;
+	opacity: 0.9;
+}
+.citation .note{
+	position: absolute;
+	top:6.5rem;
+	left:14.15vw;
+	width: 64vw;
+	font-size: 1.2rem;
+	line-height: 2rem;
+}
+.citation .note .name{
+	font-size: 1.4rem;
+}
+.citation .note .time{
+	text-indent: 2em;
+}
+.citation .note .time span{
+	color:red;
+}
+.content{
+	color:#333333;
+	text-align: center;
+	font-size: 1.5rem;
+	line-height: 2.6rem;
+	margin-bottom: 1rem;
+}
+.content span{
+	color: #af0000;
+}
+.code{
+	display: block;
+	width: 10rem;
+	height:14.3rem;
+	margin: 0 auto;
+}
+@media screen and (max-width: 320px) {
+	.logo{
+		margin: 0.5rem 0 0 0.5rem;
+	}
+	.citation{
+		margin: 0.5rem auto;
+	}
+	.citation .note{
+		top:4.5rem;
+		left:14.15vw;
+		width: 64vw;
+		font-size: 1.2rem;
+		line-height: 1.6rem;
+	}
+	.content{
+		font-size: 1.5rem;
+		line-height: 2rem;
+		margin-bottom: 1rem;
+	}
+	.code{
+		width: 8rem;
+		height:11.44rem;
+		margin: 0 auto;
+	}
+}
