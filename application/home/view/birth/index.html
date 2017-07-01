@@ -2,6 +2,25 @@
 
 {block name="style"}
 <title>为党庆生</title>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+function autoPlayAudio() {
+	wx.config({
+		debug: false,
+		appId: 'wx89994ef58b069d2b',
+		timestamp: 1,
+		nonceStr: '',
+		signature: '',
+		jsApiList: []
+	});
+	wx.ready(function() {
+		var globalAudio=document.getElementById("music");
+		globalAudio.play();
+	});
+}
+// 解决ios音乐不自动播放的问题
+autoPlayAudio();
+</script>
 <link rel="stylesheet" href="/static/sweetalert/sweetalert2.min.css">
 <style>
     body{
@@ -166,10 +185,52 @@
             margin-top: 50px;
         }
     }
+    #birthplay{
+        position:absolute;
+        top:1rem;
+        right:1rem;
+        width:3rem;
+        height:3rem;
+        display: block;
+        -webkit-transform-origin: 1.5rem 1.5rem;
+        z-index:1000000;
+    }
+    #birthplay.rotate{
+        animation:rotate 5s 0.1s infinite linear;
+        -webkit-animation:rotate 5s 0.1s infinite linear;
+    }
+    @-moz-keyframes rotate{
+        0%{
+            -moz-transform:rotate(0deg);
+        }
+        100%{
+            -moz-transform:rotate(360deg);
+        }
+    }
+    @-webkit-keyframes rotate{
+        0%{
+            -webkit-transform:rotate(0deg);
+        }
+        100%{
+            -webkit-transform:rotate(360deg);
+        }
+    }
+    @keyframes rotate{
+        0%{
+            transform:rotate(0deg);
+        }
+        100%{
+            transform:rotate(360deg);
+        }
+    }
 </style>
 {/block}
 
 {block name="body"}
+<div class="music">
+    <audio src="/home/images/birth/music.mp3" id="music"  autoplay loop></audio>
+    <img src="/home/images/birth/play.png" alt="播放" id="birthplay" class="rotate">
+</div>
 <div class="mask">
 <div class="content">
 <div class="main">
@@ -209,13 +270,14 @@
 {/block}
 
 {block name="script"}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="/static/sweetalert/sweetalert2.min.js"></script>
 <script>
 $(function(){
     setTimeout(function(){
         $(".mask").fadeOut();
         $(".homepage").fadeIn();
-    },8000)
+    },8000);
     var o = document.getElementById('date');
     o.onfocus = function(){
         this.removeAttribute('placeholder');
@@ -223,7 +285,20 @@ $(function(){
     o.onblur = function(){
         if(this.value == '') this.setAttribute('placeholder','请选择入党日期');
     };
-})
+	//音乐
+	var img = $('#birthplay');
+	img.off('click').on('click',function(){
+		if($(this).attr('src')=='/home/images/birth/play.png'){
+			$(this).attr('src','/home/images/birth/pause.png');
+			$('#music')[0].pause();
+		}
+		else{
+			$(this).attr('src','/home/images/birth/play.png');
+			$('#music')[0].play();
+		}
+		img.toggleClass('rotate');
+	});
+});
 
 $(".mask").click(function(){
     $(this).fadeOut();

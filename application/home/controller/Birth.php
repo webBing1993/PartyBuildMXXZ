@@ -67,6 +67,14 @@ class Birth extends Controller {
         $str1 = date('Y年m月d日',$res['content']);
         $str2 = $this ->datediffage($res['content'],time());
         $this->assign(['name' => $res['name'],'num' => $res['num'],'str1' => $str1,'str2' => $str2]);
+		$this->jssdk();
+		//分享图片及链接及描述
+		$list = array();
+		$list['title'] = '我为党庆生！';
+		$list['share_image'] = "http://".$_SERVER['SERVER_NAME'].'/home/images/birth/index_bottom.jpg';
+		$list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
+		$list['desc'] = "您是第几位祝福中国共产党96岁生日的小镇创客。转发微信参与祝福传递。";
+		$this->assign('info',$list);
         return $this->fetch();
     }
     function datediffage($before, $after) {
