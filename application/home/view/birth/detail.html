@@ -66,5 +66,56 @@ $(function() {
 		img.toggleClass('rotate');
 	});
 });
+//---微信接口JS-SDK的调用
+wx.config({
+	debug: false,
+	appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
+	timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+	nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
+	signature: '{$jsSign.signature}', // 必填，签名，见附录1
+	jsApiList: [
+		'checkJsApi',
+		'chooseImage',
+		'previewImage',
+		'uploadImage',
+		'downloadImage',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+	]
+});
+
+wx.ready(function () {
+	//分享到朋友圈
+	wx.onMenuShareTimeline({
+		title: '{$info.title}',
+		link: '{$info.link}',
+		imgUrl: '{$info.share_image}',
+		success: function () {
+			// 用户确认分享后执行的回调函数
+		},
+		cancel: function () {
+			// 用户取消分享后执行的回调函数
+		}
+	});
+	//分享给朋友
+	wx.onMenuShareAppMessage({
+		title: '{$info.title}', // 分享标题
+		desc: '{$info.desc}', // 分享描述
+		link: '{$info.link}', // 分享链接
+		imgUrl: '{$info.share_image}', // 分享图标
+		type: '', // 分享类型,music、video或link，不填默认为link
+		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+		success: function () {
+			// 用户确认分享后执行的回调函数
+		},
+		cancel: function () {
+			// 用户取消分享后执行的回调函数
+		}
+	});
+
+});
+//	wx.error(function (res) {
+//		alert('wx.error: '+JSON.stringify(res));
+//	});
 </script>
 {/block}

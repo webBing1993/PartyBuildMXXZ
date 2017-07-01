@@ -6,14 +6,32 @@ namespace app\home\controller;
  * @package  入党那一天
  */
 use app\home\model\Birth as BirthModel;
+use com\wechat\TPWechat;
+use think\Config;
 use think\Controller;
 
 class Birth extends Controller {
     /**
+     * 获取公众号签名
+     */
+    public function jssdk(){
+        $Wechat = new TPWechat(Config::get('party'));
+        $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $jsSign = $Wechat->getJsSign($url);
+        $this->assign("jsSign", $jsSign);
+    }
+    /**
      * 主页
      */
     public function index(){
-    
+        $this->jssdk();
+        //分享图片及链接及描述
+        $list = array();
+        $list['title'] = '我为党庆生！';
+        $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].'/home/images/birth/index_bottom.jpg';
+        $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
+        $list['desc'] = "您是第几位祝福中国共产党96岁生日的小镇创客。转发微信参与祝福传递。";
+        $this->assign('info',$list);
         return $this->fetch();
     }
     /*
