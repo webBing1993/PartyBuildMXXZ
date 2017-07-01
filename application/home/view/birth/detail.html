@@ -4,22 +4,6 @@
 <title>为党庆生</title>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-function autoPlayAudio() {
-	wx.config({
-		debug: false,
-		appId: 'wx89994ef58b069d2b',
-		timestamp: 1,
-		nonceStr: '',
-		signature: '',
-		jsApiList: []
-	});
-	wx.ready(function() {
-		var globalAudio=document.getElementById("music");
-		globalAudio.play();
-	});
-}
-// 解决ios音乐不自动播放的问题
-autoPlayAudio();
 //---微信接口JS-SDK的调用
 wx.config({
 	debug: false,
@@ -39,6 +23,9 @@ wx.config({
 });
 
 wx.ready(function () {
+	//ios音乐播放
+	var globalAudio=document.getElementById("music");
+	globalAudio.play();
 	//分享到朋友圈
 	wx.onMenuShareTimeline({
 		title: '{$info.title}',
