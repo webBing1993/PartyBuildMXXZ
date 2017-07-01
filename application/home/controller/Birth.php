@@ -16,6 +16,7 @@ class Birth extends Controller {
      */
     public function jssdk(){
         $Wechat = new TPWechat(Config::get('party'));
+        session('jsapiticket', $Wechat->getJsTicket()); // 官方7200,设置7000防止误差
         $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
         $jsSign = $Wechat->getJsSign($url);
         $this->assign("jsSign", $jsSign);
@@ -73,7 +74,7 @@ class Birth extends Controller {
 		$list['title'] = '我为党庆生！';
 		$list['share_image'] = "http://".$_SERVER['SERVER_NAME'].'/home/images/birth/index_bottom.jpg';
 		$list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-		$list['desc'] = "您是第几位祝福中国共产党96岁生日的小镇创客。转发微信参与祝福传递。";
+		$list['desc'] = $res['name'];
 		$this->assign('info',$list);
         return $this->fetch();
     }

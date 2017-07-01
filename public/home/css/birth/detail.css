@@ -60,7 +60,7 @@
 }
 .citation .note{
 	position: absolute;
-	top:6.5rem;
+	top:20vw;
 	left:14.15vw;
 	width: 64vw;
 	font-size: 1.2rem;
@@ -100,7 +100,7 @@
 		margin: 0.5rem auto;
 	}
 	.citation .note{
-		top:4.5rem;
+		top:60px;
 		left:14.15vw;
 		width: 64vw;
 		font-size: 1.2rem;
