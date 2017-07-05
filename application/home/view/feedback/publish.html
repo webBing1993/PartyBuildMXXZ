@@ -91,7 +91,7 @@ $(function(){
 						success:function(e){
 							if(e.code == 1){
 								setTimeout(function(){
-									window.location.href = "{:Url('Feedback/index')}";
+									history.go(-1);
 								},1000)
 							}else{
 								swal({
