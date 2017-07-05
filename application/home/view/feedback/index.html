@@ -1,14 +1,49 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>党员之声</title>
+<title>红色足迹</title>
 <link rel="stylesheet" href="/static/viewer/viewer.min.css">
 <link rel="stylesheet" href="/home/css/feedback/feedback.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
+<style>
+	.bottom {
+	position: fixed;
+	bottom: -12vw;
+	width: 100vw;
+	height: 12vw;
+	border-top: 1px solid #dadada;
+	padding: 0 4vw;
+	background: #ffffff;
+	font-family: "Microsoft YaHei", sans-serif;
+	}
+	.bottom .myword input {
+	vertical-align: middle;
+	height: 8vw;
+	width: 72vw;
+	margin: 2vw 0;
+	padding-left: 3vw;
+	background: #fafafa;
+	border: 1px solid #d8d8d8;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	font-size: 1.3rem;
+	}
+	.bottom .send {
+	width: 18vw;
+	line-height: 12vw;
+	text-align: center;
+	font-size: 1.4rem;
+	}
+	.bottom .send:active {
+	background: #fafafa;
+	}
+</style>
 {/block}
 
 {block name="body"}
 <div class="banner">
-	<img src="/home/images/feedback/1.jpg" alt="建言献策banner图">
+	<img src="/home/images/common/2.jpg" alt="建言献策banner图">
 </div>
 <div class="lists">
 	{volist name="list" id="vo"}
@@ -17,7 +52,7 @@
 			<img src="{$vo.header}" alt="用户头像">
 		</div>
 		<div class="fr">
-			<div class="name limit">{$vo.username}</div>
+			<div class="name limit">{$vo.username|| default="官方发布"}</div>
 			<div class="content">{$vo.content}</div>
 			<div class="imgs">
 				{volist name="$vo.images" id="img"}
@@ -27,7 +62,7 @@
 				{/volist}
 			</div>
 			<div class="note clear">
-				<span class="fl">{$vo.department_name}/{$vo.create_time|time_format="Y.m.d"}发布</span>
+				<span class="fl">{$vo.department_name || default="梦想小镇"}/{$vo.create_time|time_format="Y.m.d"}发布</span>
 				<span class="fr message" onclick="tosend(this,{$vo.id})"></span>
 				<span class="fr goodnum">{$vo.likes}</span>
 				{eq name="vo.is_like" value="1"}
@@ -48,7 +83,10 @@
 	</div>
 	{/volist}
 </div>
-<a id="publish" href="{:Url('Feedback/publish')}"></a>
+<!--游客不能发布-->
+{eq name="visit" value="0"}
+	<a id="publish" href="{:Url('Feedback/publish')}"></a>
+{/eq}
 <div class="bottom clear">
 	<div class="myword fl">
 		<input type="text" placeholder="说说你的感想！">
@@ -76,14 +114,16 @@ $(function(){
 	}
 	//ios fix兼容
 //	tofixed();
-	//悬浮框移动
-	moveanyway();
+
 	$('.imgs').viewer({
 		url: 'data-original',
 		toolbar:false,
 		title:false
 	});
 });
+{eq name="visit" value="0"}
+//悬浮框移动
+moveanyway();
 //点赞
 var isGood = function(e,id,comment_id,userid,cla){
 	//样式变化，移到suc
@@ -143,6 +183,18 @@ var send = function(e){
 		})
 	}
 };
+var tosend = function(e,id){
+		var index = $(e).parents('.list' ).index();
+		$('.banner,.lists' ).off('click');
+		$('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
+			$('.banner,.lists' ).off('click').one('click',function(){
+				$('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
+				$('.myword input' ).val('');
+			})
+		}).attr('data-tab',index);
+		$('.send' ).attr('data-tab',id);
+	};
+{/eq}
 //上拉加载
 function loadScroll(){
 	$(window ).off("scroll" ).on("scroll",function(){
@@ -167,6 +219,7 @@ function loadScroll(){
 					loading.toggleClass('hidden');
 					tip.show();
 					if(data.code == 1){
+						console.log(data);
 						addLists(data);
 						var dataLen =data.data.length;
 						if(data.data.length == 7){
@@ -201,7 +254,7 @@ function addLists(data){
 		for(var j = 0 ;j<imglen ;j++){
 			html+=
 					'<div class="img">'+
-					'<img src='+list.images[j]+' alt="评论图">'+
+					'<img src='+list.images[j]+' alt="评论图"  data-original=""> '+
 					'</div>';
 		}
 		var good = list.is_like == 0?'good':'good_';
@@ -228,23 +281,18 @@ function addLists(data){
 				'</div>';
 	}
 	$(".lists" ).append(html);
+	$('.imgs').viewer({
+		url: 'data-original',
+		toolbar:false,
+		title:false
+	});
 	//图片排版、评论框
 	layout();
 	imgresize();
 }
 
 
-var tosend = function(e,id){
-	var index = $(e).parents('.list' ).index();
-	$('.banner,.lists' ).off('click');
-	$('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
-		$('.banner,.lists' ).off('click').one('click',function(){
-			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
-			$('.myword input' ).val('');
-		})
-	}).attr('data-tab',index);
-	$('.send' ).attr('data-tab',id);
-};
+
 
 //--------------------------------------------------------------------------
 //
@@ -267,5 +315,14 @@ var layout = function(){
 layout();
 //图片裁剪
 imgresize();
+	function imgresize(){
+		setTimeout(function(){
+			var img = $('.img img' );
+			img.each(function(){
+				$(this).height('20.8vw');
+				$(this).width('20.8vw');
+			});
+		},100);
+	}
 </script>
 {/block}

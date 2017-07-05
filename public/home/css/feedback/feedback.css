@@ -100,22 +100,22 @@
 }
 .lists .list {
   width: 100%;
-  padding-left: 13px;
-  padding-right: 13px;
+  padding-left: 3.4vw;
+  padding-right: 3.4vw;
   margin-top: 5vw;
   border-bottom: 1px solid #f7f7f7;
 }
 .lists .list .fl img {
-  height: 40px;
-  width: 40px;
+  height: 11vw;
+  width: 11vw;
 }
 .lists .list > .fr {
-  width: calc( 100% - 10px - 40px);
+  width: 78.5vw;
 }
 .lists .list > .fr .name {
   color: #5a6883;
   font-size: 1.4rem;
-  line-height: 26px;
+  line-height: 7vw;
 }
 .lists .list > .fr .content {
   color: #333333;
@@ -123,10 +123,10 @@
 }
 .lists .list > .fr .imgs .img {
   position: relative;
-  width: 78px;
-  height: 78px;
+  width: 20.8vw;
+  height: 20.8vw;
   display: inline-block;
-  margin: 5px 5px 5px 0;
+  margin: 1.3vw 1.3vw 1.3vw 0;
   overflow: hidden;
   background: #d9d9d9;
 }
@@ -141,32 +141,32 @@
 }
 .lists .list > .fr .note span {
   display: inline-block;
-  height: 30px;
-  line-height: 30px;
+  height: 8vw;
+  line-height: 8vw;
 }
 .lists .list > .fr .note .good {
-  background: url('/home/images/feedback/good.png') 0 7px no-repeat;
-  background-size: 15px 15px;
-  padding-left: 16px;
+  background: url('/home/images/feedback/good.png') 0 center no-repeat;
+  background-size: 1.5rem 1.5rem;
+  padding-left: 1.8rem;
 }
 .lists .list > .fr .note .good_ {
   animation: bigger 300ms ease;
   -webkit-animation: bigger 300ms ease;
-  background: url('/home/images/feedback/good_.png') 0 7px no-repeat;
-  background-size: 15px 15px;
-  padding-left: 16px;
+  background: url('/home/images/feedback/good_.png') 0 center no-repeat;
+  background-size: 1.5rem 1.5rem;
+  padding-left: 1.8rem;
 }
 .lists .list > .fr .note .message {
-  background: url('/home/images/common/comment-grey.png') 0 7px no-repeat;
-  background-size: 15px 15px;
-  padding-left: 18px;
-  margin-left: 6px;
+  background: url('/home/images/common/comment-grey.png') 0 center no-repeat;
+  background-size: 1.5rem 1.5rem;
+  padding-left: 1.8rem;
+  margin-left: 2.5vw;
 }
 .lists .list > .fr .comments {
   position: relative;
   background: #f9f9f9;
-  padding: 5px;
-  margin-bottom: 10px;
+  padding: 1.3vw;
+  margin-bottom: 2.6vw;
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
@@ -193,10 +193,10 @@
 /*悬浮按钮*/
 #publish {
   position: fixed;
-  right: 20px;
-  bottom: 40px;
-  width: 60px;
-  height: 60px;
+  right: 5.3vw;
+  bottom: 10.6vw;
+  width: 16vw;
+  height: 16vw;
   background: url("/home/images/feedback/note.png") no-repeat;
   background-size: 100% 100%;
 }

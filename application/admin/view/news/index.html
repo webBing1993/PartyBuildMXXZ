@@ -41,13 +41,11 @@
                             <thead>
                             <tr>
                                 <th><input class="i-checks check-all" type="checkbox"></th>
-                                <th>新闻标题</th>
+                                <th>新闻内容</th>
+                                <th>图片</th>
                                 <th>发布人</th>
-                                <th>创建人 </th>
+                                <th>部门</th>
                                 <th>创建时间</th>
-                                <th>是否推荐</th>
-                                <th>是否推送</th>
-                                <th>状态</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -55,21 +53,26 @@
                             {volist name="list" id="vo"}
                             <tr>
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
-                                <td>{$vo.title|msubstr=0,20}</td>
-                                <td>{$vo.publisher}</td>
-                                {neq name="$vo.front_cover" value=""}
-                                <td>{$vo->user->nickname}</td>
-                                {else/}
-                                <td>移动端</td>
-                                {/neq}
-                                <td>{$vo.create_time|time_format='Y-m-d'}</td>
-                                <td>{$vo.recommend_text}</td>
-                                <td>{$vo.push_text}</td>
-                                <td>{$vo.status_text}</td>
+                                <td>{$vo.content|msubstr=0,20}</td>
                                 <td>
-                                    {neq name="$vo.front_cover" value=""}
-                                    &emsp;<a href="{:Url('News/edit?id='.$vo['id'])}">修改</a>
-                                    {/neq}
+                                    {volist name="$vo.images|json_decode" id="img"}
+                                        <img src="{$img|get_cover='path'}" alt="" width="20px" height="20px">
+                                    {/volist}
+                                </td>
+                                {eq name="$vo.create_user" value=""}
+                                <td>官方发布</td>
+                                {else/}
+                                <td>{$vo.create_user|get_name}</td>
+                                {/eq}
+
+                                {eq name="$vo.department_name" value=""}
+                                <td>梦想小镇</td>
+                                {else/}
+                                <td>{$vo.department_name}</td>
+                                {/eq}
+                                <td>{$vo.create_time|date='Y-m-d',###}</td>
+                                <td>
+                                    <a href="{:Url('News/edit?id='.$vo['id'])}">修改</a>
                                     &emsp;<a href="{:Url('News/del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>
                                 </td>
                             </tr>

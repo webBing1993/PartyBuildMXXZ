@@ -1477,3 +1477,21 @@ function array_to_string($array, $field='id', $separator=',') {
     return implode($separator, $data);
 }
 
+/**
+ * 获取用户名称
+ */
+function get_name($userid){
+    if(empty($userid)){
+        return false;
+    }
+    $map = array(
+        'userid' => $userid,
+    );
+    $user = \app\home\model\WechatUser::where($map)->find();
+    if(empty($user['name'])){
+        $name = '未定义';
+    }else{
+        $name = $user['name'];
+    }
+    return $name;
+}

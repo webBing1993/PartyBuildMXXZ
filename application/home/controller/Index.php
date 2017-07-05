@@ -55,18 +55,6 @@ class Index extends Base {
         //获取数据  取满6条 或者取不出数据退出循环
         while(true)
         {
-            if(!$news_check &&
-                count($all_list) < 6)
-            {
-                $res = $news ->getDataList($count1); //获取一条数据
-                if(empty($res))
-                {
-                    $news_check = true;
-                }else {
-                    $count1 ++;
-                    $all_list = $this ->changeTpye($all_list,$res,1); //给每条数据增加类别判断
-                }
-            }
             if(!$learn_check &&
                 count($all_list) < 6)
             {
@@ -106,7 +94,7 @@ class Index extends Base {
             }
             
             if(count($all_list) >= 6 ||
-                ($news_check && $learn_check && $notice_check && $pioneer_check))
+                ($learn_check && $notice_check && $pioneer_check))
             {
                 break;
             }

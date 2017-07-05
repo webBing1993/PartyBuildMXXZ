@@ -12,7 +12,7 @@ use app\home\model\Like;
 use app\home\model\Opinion;
 use app\home\model\Picture;
 use think\Db;
-
+use think\Config;
 /**
  * Class Feedback
  * @package app\home\controller
@@ -23,6 +23,7 @@ class Feedback extends Base {
      * 主页..
      */
     public function index() {
+        $this ->anonymous();
         $userId = session('userId');
         $map = array(
             'status' => array('eq',0),
@@ -32,8 +33,15 @@ class Feedback extends Base {
         foreach ($list as $value) {
             //获取用户信息
             $value['images'] = json_decode($value['images']);
-            $value['username'] = get_name($userId);
-            $value['header'] = get_header($userId);
+            if(empty($value['create_user']))
+            {
+                $value['username'] = '官方发布';
+                $value['header'] = Config::get('head_img');
+            }else{
+                $value['username'] = get_name($value['create_user']);
+                $value['header'] = get_header($value['create_user']);
+            }
+
             //获取相关意见反馈评论
             $map1 = array(
                 'aid' => $value['id'],
@@ -46,18 +54,24 @@ class Feedback extends Base {
             }
             $value['comment'] = $comment;
             //是否点赞
-            $map2 = array(
-                'aid' => $value['id'],
-                'status' => 0,
-                'type' => 2,
-                'uid' => $userId
-            );
-            $msg = Like::where($map2)->find();
-            if($msg) {
-                $value['is_like'] = 1;
+            if($userId !== 'visitor')
+            {
+                $map2 = array(
+                    'aid' => $value['id'],
+                    'status' => 0,
+                    'type' => 2,
+                    'uid' => $userId
+                );
+                $msg = Like::where($map2)->find();
+                if($msg) {
+                    $value['is_like'] = 1;
+                }else{
+                    $value['is_like'] = 0;
+                }
             }else{
                 $value['is_like'] = 0;
             }
+
         }
         $this->assign('list',$list);
         return $this->fetch();
@@ -67,6 +81,7 @@ class Feedback extends Base {
      * 反馈提交页
      */
     public function publish() {
+        $this ->checkAnonymous();
         if(IS_POST) {
             $userId = session('userId');
             $data = input('post.');
@@ -96,7 +111,7 @@ class Feedback extends Base {
      * 加载更多
      */
     public function more(){
-
+        $userId = session('userId');
         $len = input('length');
         $map = array(
             'status' => array('eq',0)
@@ -111,8 +126,15 @@ class Feedback extends Base {
                 $image[$k] = $img['path'];
             }
             $value['images'] = $image;
-            $value['username'] = get_name($value['create_user']);
-            $value['header'] = get_header($value['create_user']);
+            if(empty($value['create_user']))
+            {
+                $value['username'] = '官方发布';
+                $value['header'] = Config::get('head_img');
+                $value['department_name'] = '梦想小镇';
+            }else{
+                $value['username'] = get_name($value['create_user']);
+                $value['header'] = get_header($value['create_user']);
+            }
             //获取相关意见反馈评论
             $map1 = array(
                 'aid' => $value['id'],
@@ -126,14 +148,20 @@ class Feedback extends Base {
             $value['comment'] = $comment;
 
             //是否点赞
-            $map2 = array(
-                'aid' => $value['id'],
-                'status' => 0,
-                'type' => 2,
-            );
-            $msg = Like::where($map2)->find();
-            if($msg) {
-                $value['is_like'] = 1;
+            if($userId !== 'visitor')
+            {
+                $map2 = array(
+                    'aid' => $value['id'],
+                    'status' => 0,
+                    'type' => 2,
+                    'uid' => $userId
+                );
+                $msg = Like::where($map2)->find();
+                if($msg) {
+                    $value['is_like'] = 1;
+                }else{
+                    $value['is_like'] = 0;
+                }
             }else{
                 $value['is_like'] = 0;
             }

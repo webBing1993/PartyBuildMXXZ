@@ -13,6 +13,7 @@ use app\admin\model\Push;
 use com\wechat\TPWechat;
 use app\admin\model\News as NewsModel;
 use think\Config;
+use app\admin\model\Opinion as OpinionModel;
 /**
  * Class News
  * @package 新闻动态 控制器
@@ -26,15 +27,8 @@ class News extends Admin {
         $map = array(
             'status' => array('egt',0),
         );
-        $list = $this->lists('News',$map);
-        int_to_string($list,array(
-            'status' => array(0 =>"已发布",1=>"已发布"),
-            'recommend' => array( 1=>"是" , 0=>"否"),
-            'push' => array( 1=>"是" , 0=>"否"),
-        ));
-
+        $list = $this->lists('Opinion',$map);
         $this->assign('list',$list);
-
         return $this->fetch();
     }
 
@@ -44,12 +38,16 @@ class News extends Admin {
     public function add(){
         if(IS_POST) {
             $data = input('post.');
-            $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            if(empty($data['id'])) {
+            if(empty($data['id']))
+            {
                 unset($data['id']);
             }
-            $newModel = new NewsModel();
-            $info = $newModel->validate('news')->save($data);
+            $data['images'] = json_encode($data['images']);
+            $data['create_time'] = time();
+            $data['comments'] = 0;
+            $data['likes'] = 0;
+            $newModel = new OpinionModel();
+            $info = $newModel->validate('opinion')->save($data);
             if($info) {
                 return $this->success("新增成功",Url('News/index'));
             }else{
@@ -69,9 +67,8 @@ class News extends Admin {
     public function edit(){
         if(IS_POST) {
             $data = input('post.');
-            $data['create_time'] = time();
-            $newModel = new NewsModel();
-            $info = $newModel->validate('news')->save($data,['id'=>input('id')]);
+            $newModel = new OpinionModel();
+            $info = $newModel->validate('opinion')->save($data,['id'=>input('id')]);
             if($info){
                 return $this->success("修改成功",Url("News/index"));
             }else{
@@ -80,7 +77,8 @@ class News extends Admin {
         }else{
             $this->default_pic();
             $id = input('id');
-            $msg = NewsModel::get($id);
+            $msg = OpinionModel::get($id);
+            $msg['images'] = json_decode($msg['images'])[0];
             $this->assign('msg',$msg);
             
             return $this->fetch();
@@ -93,7 +91,7 @@ class News extends Admin {
     public function del(){
         $id = input('id');
         $data['status'] = '-1';
-        $info = NewsModel::where('id',$id)->update($data);
+        $info = OpinionModel::where('id',$id)->update($data);
         if($info) {
             return $this->success("删除成功");
         }else{
