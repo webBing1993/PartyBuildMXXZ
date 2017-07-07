@@ -25,7 +25,7 @@ class Activity extends Base{
         $this->checkAnonymous();
         $userId = session('userId');
         $Wish = new wishModel();
-        $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit(5)->select();  // 活动列表
+        $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit(7)->select();  // 活动列表
         $lists = $Wish->where(['type' => 2 ,'status' => 0])->order('id desc')->limit(5)->select(); // 投票
         foreach($lists as $value){
             $User = WechatUser::where('userid',$value['create_user'])->field('department,headimgurl')->find();

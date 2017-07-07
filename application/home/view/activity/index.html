@@ -140,8 +140,9 @@
        //活动列表上拉加载
         if(c == 1){
             $(".triangle-up").css("left","21.06vw");
-            var len = ntc.eq(c-1 ).find('.notice>.lists>ul>li').length;
-            if(len >= 5){
+            var len = ntc.eq(c-1 ).find('.regularmore>.lists>ul>a').length;
+            console.log(len);
+            if(len >= 7){
                 $('.tip' ).text('上拉加载更多');
                 loadScroll(c);
             }else{
@@ -167,8 +168,8 @@
             ntc.eq(eq).removeClass('hidden');
             if(eq == 0){
                 $(".triangle-up").css("left","21.06vw");
-                var len = ntc.eq(eq ).find('.notice .lists ul li').length;
-                if(len >= 5){
+                var len = ntc.eq(eq ).find('.regularmore>.lists>ul>a').length;
+                if(len >= 6){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
                 }else{
@@ -208,7 +209,7 @@
             var tip = $(".tip");
             var loading = $('.loading');
             if(type == 1){
-                var len = ntc.eq(type-1).find('.notice .lists>ul>li').length;
+                var len = ntc.eq(type-1).find('.regularmore>.lists>ul>a').length;
             }
             if(type== 2 ){
                 var len = ntc.eq(type-1).find('.lists>ul>li').length;
@@ -253,12 +254,12 @@
             var list = lists[i];
             if (type == 1) {
                 html +=
-                    '<li class="clear">'+
+                    '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.description+'</span>'+
                     '<span class="lists time">'+list.time+'</span>'+
-                    '<a href="/home/activity/activitydetails/id/'+list.id+'">进入认领<img src="/home/images/activity/arrow.png"></a>'+
-                    '</li>';
+                    '<i >进入认领<img src="/home/images/activity/arrow.png"></i>'+
+                    '</a>';
             } else {
                 html +=
                     '<li>' +
