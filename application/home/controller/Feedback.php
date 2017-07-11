@@ -117,13 +117,15 @@ class Feedback extends Base {
             'status' => array('eq',0)
         );
         $list = Opinion::where($map)->order('id desc')->limit($len,7)->select();
+
         foreach($list as $value){
             //获取用户信息
             $value['images'] = json_decode($value['images']);
             $image =array();
-            foreach ($value['images'] as $k=>$val){
-                $img = Picture::get($val);
-                $image[$k] = $img['path'];
+            if(!empty($value['images']))
+            {
+                $img = Picture::get($value['images']);
+                $image[0] = $img['path'];
             }
             $value['images'] = $image;
             if(empty($value['create_user']))
@@ -167,6 +169,7 @@ class Feedback extends Base {
             }
             $value['time'] = date("Y.m.d",$value['create_time']);
         }
+
         if($list){
             return $this->success("加载成功","",$list);
         }else{
