@@ -62,7 +62,9 @@
 				{/volist}
 			</div>
 			<div class="note clear">
+				<div class="clear">
 				<span class="fl">{$vo.department_name || default="梦想小镇"}/{$vo.create_time|time_format="Y.m.d"}发布</span>
+				</div>
 				<span class="fr message" onclick="tosend(this,{$vo.id})"></span>
 				<span class="fr goodnum">{$vo.likes}</span>
 				{eq name="vo.is_like" value="1"}
@@ -261,7 +263,9 @@ function addLists(data){
 		html +=
 				'</div>'+
 				'<div class="note clear">'+
+						'<div>'+
 				'<span class="fl">'+list.department_name+'/'+list.time+'发布</span>'+
+						'</div>'+
 				'<span class="fr message" onclick="tosend(this,'+list.id+')"></span>'+
 				'<span class="fr goodnum">'+list.likes+'</span>'+
 				'<span class="fr '+good+'" onclick="isGood(this,'+list.id+',null,null,4)"></span>'+

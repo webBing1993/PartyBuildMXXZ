@@ -293,18 +293,21 @@
                         break;
                 }
                     html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
-                    '</div>' +
-                    '<ul class="comments ">'
+                    '</div>'
                 var commentlen = list.comment.length;
-                for(var x = 0 ;x <commentlen ;x++){
-                    html+=
-                            '<li>'+
-                            '<span class="name">'+list.comment[x].nickname+'：</span>'+
-                            '<span class="comment">'+list.comment[x].content+'</span>'+
-                            '</li>'
-                }
+                if(commentlen)
+                {
+                    html += '<ul class="comments ">'
+                    for(var x = 0 ;x <commentlen ;x++){
+                        html+=
+                                '<li>'+
+                                '<span class="name">'+list.comment[x].nickname+'：</span>'+
+                                '<span class="comment">'+list.comment[x].content+'</span>'+
+                                '</li>'
+                    }
                     html+='</ul>'
-                    '</li>';
+                }
+                html+= '</li>';
             }
         }
         if(type==1){
@@ -319,6 +322,8 @@
                 });
             }
         }
+        //图片裁剪
+        imgresize();
     }
 
 
