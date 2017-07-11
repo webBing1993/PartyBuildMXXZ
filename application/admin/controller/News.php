@@ -78,7 +78,11 @@ class News extends Admin {
             $this->default_pic();
             $id = input('id');
             $msg = OpinionModel::get($id);
-            $msg['images'] = json_decode($msg['images'])[0];
+            dump($msg['images']);
+            if(empty($msg['images']))
+            {
+                $msg['images'] = json_decode($msg['images'])[0];
+            }
             $this->assign('msg',$msg);
             
             return $this->fetch();
