@@ -30,11 +30,11 @@ return [
     
     /* 公众号配置 */
     'party' => array(
-        'login' => 'http://zthm.0571ztnet.com/home/verify/index',
-        'token' => 'N3mIjNX',
-        'encodingaeskey' => 'RxanruTaFxW7X5r5Cx2xRrI91dhRgNUx77KM3paUfS7',
-        'appid' => 'wxd4e86a2f4f1e299b',
-        'appsecret' => 'c1a2250667aae7d6898517343b0270f1'
+        'login' =>'http://zthm.0571ztnet.com/home/verify/index',
+        'token' =>'mxxzdj',
+        'encodingaeskey' =>'8Bzq5oDfWQJSWAgvOsHbOmmUOP54lcCGokJ2tXsaGrN',
+        'appid' =>'wxd4e86a2f4f1e299b',
+        'appsecret' =>'f76e392e80496e81f8244115f823143e',
     ),
     
 

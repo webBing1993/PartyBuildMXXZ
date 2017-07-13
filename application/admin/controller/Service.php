@@ -8,61 +8,40 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\WechatLog;
-use com\wechat\QYWechat;
-use com\wechat\TPQYWechat;
+use com\wechat\Wechat;
 use com\wechat\TPWechat;
 use think\Config;
 use think\Controller;
-use think\Log;
 
 class Service extends Controller
 {
 
     // 服务号接收的应用
     public function event() {
-        $Wechat = new TPQYWechat(Config::get('party'));
+        $Wechat = new TPWechat(Config::get('party'));
         $Wechat->valid();
-
         $type = $Wechat->getRev()->getRevType();
         switch ($type) {
-            case QYWechat::MSGTYPE_TEXT:
+            case Wechat::MSGTYPE_TEXT:
                 $Wechat->text("您好！感谢关注！")->reply();
                 break;
-            case QYWechat::MSGTYPE_EVENT:
+            case Wechat::MSGTYPE_EVENT:
                 $event = $Wechat->getRev()->getRevEvent();
                 switch ($event['event']) {
                     case 'subscribe':
-//                        $replyText = "您好！欢迎关注香市党建！";
-//                        $Wechat->text($replyText)->reply();
                         $newsData = array(
                             '0'=> array(
-                                'Title' => "欢迎您关注“香市机关党建”",
-                                'Description' => "内含企业二维码，可转发给同事关注",
-                                'PicUrl' => "http://xspb.0571ztnet.com/home/images/special/music_2.jpg",
-                                'Url' => "http://u3665579.viewer.maka.im/pcviewer/WRZ0GJFA",
+                                'Title' => "欢迎您关注“梦想小镇红色驿站”",
+                                'Description' => "梦想，源自对未来的向往；小镇，是历史浓缩的印记。",
+                                'PicUrl' => "http://mxxz.0571ztnet.com/home/images/birth/pic.jpg",
+                                'Url' => "http://v.xiumi.us/board/v5/2FAmS/49855733",
                             ),
                         );
                         $Wechat->news($newsData)->reply();
                         break;
-                    case 'enter_agent':
-                        $data = array(
-                            'event' => $event['event'],
-                            'msgtype' => $type,
-                            'agentid' => $Wechat->getRev()->getRevAgentID(),
-                            'create_time' => $Wechat->getRev()->getRevCtime(),
-                            'event_key' => isset($event['key']) ? $event['key'] : '',
-                            'userid' => $Wechat->getRev()->getRevFrom()
-                        );
-//                        Log::record("进入事件：".json_encode($data));
-                        $id  = WechatLog::create($data);
-//                        Log::record("创建记录：".$id);
-                        //$Wechat->text(json_encode($data))->reply();
-                        save_log($Wechat->getRev()->getRevFrom(), 'WechatLog');
-                        break;
                 }
                 break;
-            case QYWechat::MSGTYPE_IMAGE:
+            case Wechat::MSGTYPE_IMAGE:
                 break;
             default:
                 $Wechat->text("您好！感谢关注！")->reply();
@@ -72,7 +51,7 @@ class Service extends Controller
 
     // 企业号验证
     public function oauth() {
-        $weObj = new TPQYWechat(Config::get('party'));
+        $weObj = new TPWechat(Config::get('party'));
         $weObj->valid();
     }
 
@@ -87,28 +66,22 @@ class Service extends Controller
         $menu["button"] = array(
             array(
                 "type"=>"view",
-                "name"=>"第一聚焦",
-                "url"=>"http://party.0571ztnet.com/home/focus/index"
+                "name"=>"进入驿站",
+                "url"=>"http://mxxz.0571ztnet.com/home/index/index"
             ),
             array(
                 "type"=>"view",
-                "name"=>"活动通知",
-                "url"=>"http://party.0571ztnet.com/home/activity/index"
-            ),
-            array(
-                "type"=>"view",
-                "name"=>"品牌特色",
-                "url"=>"http://party.0571ztnet.com/home/special/index"
+                "name"=>"为党庆生",
+                "url"=>"http://mxxz.0571ztnet.com/home/birth/index"
             ),
         );
-
-        $Wechat = new TPWechat(Config::get('news'));
+        $Wechat = new TPWechat(Config::get('party'));
         $result = $Wechat->createMenu($menu);
 
         if($result) {
             return $this->success('提交成功');
         } else {
-            return $this->error('错误代码：'.$result['errcode'].'，消息：'.$result['errmsg']);
+            return $this->error('错误代码：'.$Wechat->errCode.'，消息：'.$Wechat->errMsg);
         }
     }
 
