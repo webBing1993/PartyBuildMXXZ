@@ -38,6 +38,9 @@
 	.bottom .send:active {
 	background: #fafafa;
 	}
+	.lists .list > .fr .note .clear span{
+		height: auto;
+	}
 </style>
 {/block}
 
@@ -263,7 +266,7 @@ function addLists(data){
 		html +=
 				'</div>'+
 				'<div class="note clear">'+
-						'<div>'+
+						'<div  class="clear">'+
 				'<span class="fl">'+list.department_name+'/'+list.time+'发布</span>'+
 						'</div>'+
 				'<span class="fr message" onclick="tosend(this,'+list.id+')"></span>'+
