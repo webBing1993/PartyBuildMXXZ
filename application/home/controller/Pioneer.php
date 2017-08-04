@@ -88,12 +88,13 @@ class Pioneer extends Base {
         $userId = session('userId');
         $pioneer = new PioneerModel();
         $order = 'likes desc';
+        $order1 = 'create_time desc';
         //创业导师团
         $list1 = $pioneer ->where(['type' => 1,'status' => ['egt',0]]) ->order($order) ->select();
         //创客先锋队
         $list2 = $pioneer ->where(['type' => 2,'status' => ['egt',0]]) ->order($order) ->select();
         //先进事迹展
-        $list3 = $pioneer ->where(['type' => 3,'status' => ['egt',0]]) ->limit(0,8) ->select();
+        $list3 = $pioneer ->where(['type' => 3,'status' => ['egt',0]]) ->limit(0,8) ->order($order1) ->select();
         //非游客判断是否点赞
         if($userId != 'visitor'){
             $list1 = $this ->checkLIke($list1);

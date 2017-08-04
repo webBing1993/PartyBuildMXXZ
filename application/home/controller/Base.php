@@ -71,7 +71,7 @@ class Base extends Controller {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         if (strpos($user_agent, 'MicroMessenger') === false) {
             // 非微信浏览器禁止浏览
-            return $this ->error('请在微信打开!');
+//            return $this ->error('请在微信打开!');
         } else {
             // 微信浏览器，允许访问
             // 获取版本号
