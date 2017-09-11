@@ -66,8 +66,26 @@
                 </li>
             </ul>
         </div>
+        <div class="swiper-slide">
+            <ul class="model">
+                <li>
+                    <a href="{:Url('Live/index')}">
+                        <img src="/home/images/index/news.png" alt="观看直播">
+                        <span>观看直播</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Feedback/index')}">
+                        <img src="/home/images/index/news.png" alt="人脸识别">
+                        <span>人脸识别</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
+    <div class="swiper-pagination"></div>
 </div>
+
 <!--分割线-->
 <div class="level"></div>
 <!--新闻通知-->
@@ -132,8 +150,8 @@
     var mySwiper = new Swiper('.swiper-container', {
 //        loop: true,
         autoplayDisableOnInteraction: false,
-//        pagination : '.swiper-pagination',
-//        paginationClickable :true
+        pagination : '.swiper-pagination',
+        paginationClickable :true
     });
     $(function(){
         var len = $('.notice .list').length;
