@@ -36,14 +36,17 @@
             login()
         });
         //绝对定位bug
-        var vh =$(window).height() - $(window).width()*0.265 - $('.banner').height() - $('.box').height();
+        var vh =$(window).height() - $('footer').height() - $('.banner').height() - $('.box').height();
         if(vh < 0){
-            vh = 0;
+            vh = '10vw';
         }
+
         $('footer').css({
             'position': 'relative',
             'margin-top': vh
         });
+
+
     });
     /**登陆**/
     function login(){
