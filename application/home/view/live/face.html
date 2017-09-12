@@ -4,14 +4,14 @@
 <title>人脸识别</title>
 <style>
     #takePhoto {
-        font-size: 25px;
+        font-size: 2.6rem;
         position: fixed;
         left: 50%;
         bottom: 10vw;
         border: 3px solid rgb(69,201,208);
         color: rgb(69,201,208);
-        border-radius: 30px;
-        line-height: 30px;
+        border-radius: 8vw;
+        line-height: 8vw;
         padding: 2vw 3vw;
     }
     body {
@@ -36,6 +36,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $('#takePhoto').css("marginLeft",-$('#takePhoto').width()/2);
     $('#takePhoto').click(function(){
         $('#imgTest').click()
     });
