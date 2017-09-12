@@ -1,0 +1,35 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>人脸识别</title>
+<style>
+
+</style>
+{/block}
+
+{block name="body"}
+<input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)">
+<img src="" id="showImage" alt="" style="display:none;">
+<div id="test"></div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    function imgChange(e) {
+        var dom = $("input[id^='imgTest']")[0];
+        var reader = new FileReader();
+        reader.onload = (function (file) {
+            return function (e) {
+                console.log(this.result);
+                $('#test').html(this.result); //这个就是base64的数据了
+                var sss = $("#showImage");
+                $("#showImage")[0].src = this.result;
+            };
+        })(e.target.files[0]);
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+</script>
+
+{/block}
