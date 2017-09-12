@@ -3,28 +3,53 @@
 {block name="style"}
 <title>人脸识别</title>
 <style>
-
+    #takePhoto {
+        font-size: 40px;
+    }
 </style>
 {/block}
 
 {block name="body"}
-<input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)">
-<img src="" id="showImage" alt="" style="display:none;">
-<div id="test"></div>
+<input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)" style="display:none">
+<div id="takePhoto">人脸识别</div>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    $('div').click(function(){
+        $('#imgTest').click()
+    });
+
     function imgChange(e) {
         var dom = $("input[id^='imgTest']")[0];
+        swal({
+            title: ' ',
+            text: '人脸识别中,请稍等...',
+            showConfirmButton:false
+        });
         var reader = new FileReader();
         reader.onload = (function (file) {
             return function (e) {
-                console.log(this.result);
-                $('#test').html(this.result); //这个就是base64的数据了
-                var sss = $("#showImage");
-                $("#showImage")[0].src = this.result;
+                var base64 = this.result.replace(/^(data:).*(;base64,)/, "")
+                $.ajax({
+                    type: 'post',
+                    url: "{:Url('Live/face')}",
+                    data: {'imgBase': base64},
+                    success: function(data){
+                        console.log(data);
+                        var m = data.match(/{.*}/);
+                        m = JSON.parse(m[0]);
+                        if (m.confidence < 70) {
+
+                            swal("", "人脸匹配失败", "error")
+                        } else {
+
+                            swal("", "人脸匹配完成"+m.confidence, "success")
+                        }
+
+                    }
+                });
             };
         })(e.target.files[0]);
         reader.readAsDataURL(e.target.files[0]);
