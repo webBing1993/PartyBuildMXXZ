@@ -2,6 +2,7 @@
 
 {block name="style"}
 <title>党建直播</title>
+<link rel="stylesheet" href="/static/sweetalert/sweetalert1.css">
 <script src="/static/sweetalert/sweetalert1.min.js"></script>
 <style>
     .scrollDiy{
@@ -252,7 +253,7 @@
 <div id="videoBox">
     <p id="loading">加载中...</p>
     <p id="total"><p class="totalnum">在线人数：<em style="color: #ff480f;font-style: normal" >0</em>/282</p></p>
-    <video id="videoLive" preload="auto" poster=""  x5-video-player-type="h5" x5-video-player-fullscreen="true" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true">
+    <video id="videoLive" preload="auto" poster=""   webkit-playsinline="true" x-webkit-airplay="true" playsinline="true">
         <source src="{$live_path}">
     </video>
     <input id="playBtn" type="button" value="">
@@ -324,7 +325,7 @@
     //播放按钮呗点击
     oPlayBtn.onclick = function () {
         myPlayer.play();
-        this.style.display = oPoster.style.display =  "none";
+//        this.style.display = oPoster.style.display =  "none";
         loading.style.display = "block";
     };
     //监听播放

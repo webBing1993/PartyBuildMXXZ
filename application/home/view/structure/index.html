@@ -249,7 +249,7 @@
 <script src="/home/js/jquery.lazyload.min.js"></script>
 <script>
 
-$('title' ).text('组织架构');
+
 $(function(){
 	//组织架构切换
 	slide();
@@ -259,11 +259,9 @@ $(function(){
 		$(this ).attr('href', href);
 	})
 	$(function(){
-		//标题
-		$('title' ).text('服务团队');
-		//tab值记录
+//		//tab值记录
 		tabRecord('.tab' ,'.box');
-		//tab切换
+//		//tab切换
 		tabSwitch('.tab' ,'.box');
 		//上拉加载
 	});
@@ -284,6 +282,45 @@ function slide(){
 		}
 		detail.toggleClass('down');
 	});
+}
+
+function tabSwitch(a,b,fn,url){
+	$(a).off('click').on('click',function(){
+		var this_ = this ;
+		var box = $(b ).parent();
+		var index = $(this_ ).index();
+		var ww = $(b ).parent().width();
+		$(this_ ).addClass('active' );
+		$(this_ ).siblings(a).removeClass('active');
+		$(b).removeClass('hidden');
+		ww = ww * index;
+		box.stop().animate({left: -ww +'px'},300,function(){
+			$(b).eq(index).siblings(b).addClass('hidden');
+			setCookie( 'tab', index );
+			if(fn){
+				var tab = $('.active' ).index() + 1;
+				fn(tab,url,7,5);
+			}
+		});
+
+	})
+}
+function tabRecord(a,b){
+	var tab = getCookie('tab');
+	if(tab){
+		var index = tab;
+		var box = $(b).parent();
+		var ww = $(b).parent().width();
+		$(a).eq(index).addClass('active');
+		$(a).eq(index).siblings(a).removeClass('active');
+		$(b).removeClass('hidden');
+		ww = ww * index;
+		box.css({left: -ww +'px'});
+		setTimeout(function(){
+			$(b).eq(index).siblings(b).addClass('hidden');
+		},100)
+	}
+
 }
 </script>
 {/block}

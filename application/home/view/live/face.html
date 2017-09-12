@@ -11,8 +11,10 @@
         border: 3px solid rgb(69,201,208);
         color: rgb(69,201,208);
         border-radius: 8vw;
-        line-height: 8vw;
+        line-height: 4vw;
         padding: 2vw 3vw;
+        -webkit-transform:  translateX(-50%);
+
     }
     body {
         width: 100vw;
@@ -36,7 +38,6 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    $('#takePhoto').css("marginLeft",-$('#takePhoto').width()/2);
     $('#takePhoto').click(function(){
         $('#imgTest').click()
     });
@@ -67,7 +68,7 @@
                             swal("", "人脸匹配失败", "error")
                         } else {
 
-                            swal("", "人脸匹配完成"+m.confidence, "success")
+                            swal("", "人脸匹配完成", "success")
                         }
 
                     }

@@ -42,5 +42,6 @@ return [
     'uc_auth_key' => '(.t!)=JTb_OPCkrD:-i"QEz6KLGq5glnf^[{p;je',
 
      /*直播地址*/
-    'live_path' => 'http://pullhls36734237.live.126.net/live/6cb0985ea48d4af6876a397c0858f3d4/playlist.m3u8'
+    'live_path' => 'https://pullhls36734237.live.126.net/live/4f2e1cac3a694f9ba9c0ed4397c42a2d/playlist.m3u8'
+
 ];
