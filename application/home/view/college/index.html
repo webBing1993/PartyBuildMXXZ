@@ -1,6 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
+<title>鸡毛传帖</title>
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
@@ -173,7 +174,7 @@
 <script src="/static/framework7/framework7.js"></script>
 <script>
     //模块标题
-    $('title').text('鸡毛传帖');
+    $('title').html('鸡毛传帖');
 
     $(function(){
         var len = $("#tab_main1>li>a" ).length;
