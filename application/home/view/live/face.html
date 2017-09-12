@@ -4,20 +4,39 @@
 <title>人脸识别</title>
 <style>
     #takePhoto {
-        font-size: 40px;
+        font-size: 25px;
+        position: fixed;
+        left: 50%;
+        bottom: 10vw;
+        border: 3px solid rgb(69,201,208);
+        color: rgb(69,201,208);
+        border-radius: 30px;
+        line-height: 30px;
+        padding: 2vw 3vw;
+    }
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: #000 url('/home/images/live/face.jpg') no-repeat 0 0;
+        background-size: cover;
+        position: fixed;
+        top: 0;
     }
 </style>
 {/block}
 
 {block name="body"}
-<input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)" style="display:none">
+<div id="file">
+    <input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)" style="display:none">
+</div>
+
 <div id="takePhoto">人脸识别</div>
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    $('div').click(function(){
+    $('#takePhoto').click(function(){
         $('#imgTest').click()
     });
 
@@ -31,7 +50,9 @@
         var reader = new FileReader();
         reader.onload = (function (file) {
             return function (e) {
-                var base64 = this.result.replace(/^(data:).*(;base64,)/, "")
+                var base64 = this.result.replace(/^(data:).*(;base64,)/, "");
+                $('#file').html('');
+                $('#file').html('<input type="file" id="imgTest" accept="image/*" capture="camera" onchange="imgChange(event)" style="display:none">');
                 $.ajax({
                     type: 'post',
                     url: "{:Url('Live/face')}",
