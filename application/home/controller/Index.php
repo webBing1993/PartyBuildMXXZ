@@ -28,8 +28,16 @@ class Index extends Base {
         $uid = session('userId');
         $len = array('news' => 0,'learn' => 0,'notice' => 0,'pioneer' => 0);
         $list2 = $this ->getDataList($len);
+        // 展示功能只对之图科技一体机开发
+        if ($uid == '175781beb0ce2e96c082bb7327340ad0') {
+            $test = 1;
+        } else {
+            $test = 0;
+        }
+
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
+        $this->assign('test',$test);
         return $this->fetch();
     }
 

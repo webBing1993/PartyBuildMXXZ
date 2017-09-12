@@ -23,7 +23,6 @@ class Live extends Base
         $this->anonymous();
 
         $userId = session('userId');
-
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(
