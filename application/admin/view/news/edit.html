@@ -73,12 +73,12 @@
                 </div>
                 <div class="ibox-content all">
                     <form id="form" class="form-horizontal" method="post">
-                        <div class="form-group">
+                        <div class="form-group" id="frontCovers">
                             <div class="col-lg-1 text-right control-label">
                                 <label>图片:</label>
                             </div>
                             {eq name="msg" value=""}
-                            <div class="col-lg-5">
+                            <div class="col-lg-1">
                                 <div class="imggroup">
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
@@ -87,20 +87,33 @@
                                 <b>推荐尺寸：750*400px</b>
                             </div>
                             {else/}
-                            <div class="col-lg-5">
+                            {volist name="$msg.images" id="vo"}
+                            <div class="col-lg-1">
                                 <div class="imggroup">
-                                    <img src="{$msg.images|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.images}" required="">
+                                    <img src="{$vo|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg" onchange="addImg(this)">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$vo}" required="">
                                 </div>
                                 <b>推荐尺寸：750*400px</b>
                             </div>
+                            {/volist}
+                            {neq name="$msg.images|count" value="5"}
+                            <div class="col-lg-1">
+                                <div class="imggroup">
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg" onchange="addImg(this)">
+                                    <input type="hidden" name="front_cover" class="img"  value="" required="">
+                                </div>
+                                <b>推荐尺寸：750*400px</b>
+                            </div>
+                            {/neq}
                             {/eq}
                        </div>
                         <div class="form-group">
                             <div class="col-lg-1 control-label">
                                 <label>内容:</label>
                             </div>
+
                             <div class="col-lg-11">
                                 <div class=" float-e-margins">
                                     <div class="ibox-content no-padding borders">
@@ -171,46 +184,26 @@
                 imgnum = 2
             }
         });
-        $(".imgfile").on("change",function(){
-            var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-            var imgBox = $(this);
-            if(size <= 2048){
-                var img = $(this)[0].files[0];
-                var formData = new FormData();
-                var pic=$(this);
-                formData.append("picture",img);
-                $.ajax({
-                    type:"post",
-                    url:"{:Url('File/uploadPicture')}",
-                    data:formData,
-                    processData : false,
-                    contentType : false,
-                    success:function(msg){
-                        var msg = $.parseJSON(msg);
-                        var path = msg.data.path;
-                        if(msg['code'] == 1){
-                            imgBox.siblings(".img").val(msg.data["id"]);
-                            //显示图片缩略图
-                            pic.parent().find("img" ).attr({src:path});
-                        } else {
-                            warning({msg:msg['msg']});
-                            return;
-                        }
-                    }
-                });
-            } else {
-                warning({msg:"您选择的图片超过2mb，请重新选择"});
-                return;
-            }
-        });
+//        $(".imgfile").on("change",function(){
+//            addImg(this);
+//        });
 
 
         //发布
         $(".post-put").off('click').on("click",function(){
+
+            var length = $('input[name=front_cover]').length;
+            var images = [];
+            for (var i=0;i<length;i++) {
+                if ($('input[name=front_cover]')[i].value) {
+                    images[i] = $('input[name=front_cover]')[i].value;
+                }
+            }
+
             var it=$(this);
             var data = {
                 id: $("input[name='id']").val(),
-                images: [$("input[name='front_cover']").val()],
+                images: JSON.stringify(images),
                 content: $("textarea[name='content']").val(),
                 create_user: "{$msg.create_user|default=''}",
                 department_name: "{$msg.department_name|default=''}",
@@ -254,5 +247,65 @@
         });
     })
 
+
+    function addImg(a) {
+        var size = ($(a)[0].files[0].size / 1024).toFixed(2);
+        var imgBox = $(a);
+        if(size <= 5120){
+            var img = $(a)[0].files[0];
+            var formData = new FormData();
+            var pic=$(a);
+            formData.append("picture",img);
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/uploadPicture')}",
+                data:formData,
+                processData : false,
+                contentType : false,
+                success:function(msg){
+                    var msg = $.parseJSON(msg);
+                    var path = msg.data.path;
+                    if(msg['code'] == 1){
+                        console.log(msg);
+                        imgBox.siblings(".img").val(msg.data["id"]);
+                        //显示图片缩略图
+                        pic.parent().find("img" ).attr({src:path});
+
+                        var length = $('input[name=front_cover]').length;
+                        var check = false;
+                        if (length < 9) {
+                            for (var i=0;i<length;i++) {
+                                if (!$('input[name=front_cover]')[i].value) {
+                                    check = true;
+                                }
+                            }
+                            if (!check) {
+                                var html =
+                                        '<div class="'+'col-lg-1">'+
+                                        '<div class="'+'imggroup">'+
+                                        '<img src="'+'" alt='+'"图片'+'" class='+'"thumbnail imgbox'+'">'+
+                                        '<input type="'+'file"'+ 'class="'+'imgfile" accept='+'"image/jpg, image/png, image/gif, image/jpeg'+'" onchange='+'"addImg(this)'+'">'+
+                                        '<input type="'+'hidden" name='+'"front_cover'+'" class="'+'img"  value='+'"'+'" >'+
+                                        '</div>'+
+                                        '<b>推荐尺寸：750*400px</b>'+
+                                        '</div>'
+                                $('#frontCovers').append(html);
+                            }
+                        }
+
+
+
+                    } else {
+                        warning({msg:msg['msg']});
+                        return;
+                    }
+                }
+            });
+
+        } else {
+            warning({msg:"您选择的图片超过5mb，请重新选择"});
+            return;
+        }
+    }
 </script>
 {/block}

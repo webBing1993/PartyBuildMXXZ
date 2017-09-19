@@ -9,11 +9,16 @@
 
 {block name="body"}
 <div class="content">
-	<textarea name="content" id="content" placeholder="这一刻的新闻（图片选填，最多一张，字数最多400）" maxlength="400"></textarea>
+	<textarea name="content" id="content" placeholder="这一刻的新闻（图片选填，最多九张，字数最多400）" maxlength="400"></textarea>
 	<!--<div class="contentnum">-->
 		<!--<span>0</span>/400-->
 	<!--</div>-->
 	<div class="imgs clear">
+		<div class="img fl hide"></div>
+		<div class="img fl hide"></div>
+		<div class="img fl hide"></div>
+		<div class="img fl hide"></div>
+		<div class="img fl hide"></div>
 		<div class="img fl hide"></div>
 		<div class="img fl hide"></div>
 		<div class="img fl hide"></div>
@@ -121,7 +126,7 @@ $(function(){
 		var this_ = $(this );
 		$('#upimg').click().off("change").on('change',function(){
 				var size = ($(this)[0].files[0].size / 1024).toFixed(2);
-				if(size <= 2048){
+				if(size <= 5120){
 					var img = $(this)[0].files[0];
 					var formData = new FormData();
 					formData.append("picture",img);
@@ -142,7 +147,7 @@ $(function(){
 							if(msg.code == 1){
 								if(this_.hasClass('add')){
 									//图片添加
-									if(imglen == 0){
+									if(imglen == 8){
 										$('.add' ).fadeOut();
 									}
 									$('.img').eq(imglen).removeClass('hide' )
@@ -162,7 +167,7 @@ $(function(){
 				} else {
 					swal({
 						title: ' ',
-						text: '您的图片超过2M',
+						text: '您的图片超过5M',
 						type: 'warning',
 						showConfirmButton:false,
 						timer:1500
@@ -173,5 +178,14 @@ $(function(){
 	});
 });
 
+function imgresize(){
+	setTimeout(function(){
+		var img = $('.img img' );
+		img.each(function(){
+			$(this).height('20.8vw');
+			$(this).width('20.8vw');
+		});
+	},100);
+}
 </script>
 {/block}

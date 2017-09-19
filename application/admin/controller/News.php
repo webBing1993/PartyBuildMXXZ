@@ -75,16 +75,16 @@ class News extends Admin {
                 return $this->get_update_error_msg($newModel->getError());
             }
         }else{
-            $this->default_pic();
+//            $this->default_pic();
             $id = input('id');
             $msg = OpinionModel::get($id);
-            dump($msg['images']);
-            if(empty($msg['images']))
+
+            if(!empty($msg['images']))
             {
-                $msg['images'] = json_decode($msg['images'])[0];
+                $msg['images'] = json_decode($msg['images']);
             }
             $this->assign('msg',$msg);
-            
+
             return $this->fetch();
         }
     }
