@@ -73,11 +73,11 @@
                 </div>
                 <div class="ibox-content all">
                     <form id="form" class="form-horizontal" method="post">
-                        <div class="form-group" id="frontCovers">
+                        <div class="form-group" >
                             <div class="col-lg-1 text-right control-label">
                                 <label>图片:</label>
                             </div>
-                            <div class="col-lg-11">
+                            <div class="col-lg-11" id="frontCovers">
                             {eq name="msg" value=""}
                             <div class="col-lg-3">
                                 <div class="imggroup">
@@ -98,7 +98,7 @@
                                 <b>推荐尺寸：750*400px</b>
                             </div>
                             {/volist}
-                            {neq name="$msg.images|count" value="5"}
+                            {neq name="$msg.images|count" value="9"}
                             <div class="col-lg-3">
                                 <div class="imggroup">
                                     <img src="" alt='图片' class='thumbnail imgbox'>
@@ -283,7 +283,7 @@
                             }
                             if (!check) {
                                 var html =
-                                        '<div class="'+'col-lg-1">'+
+                                        '<div class="'+'col-lg-3">'+
                                         '<div class="'+'imggroup">'+
                                         '<img src="'+'" alt='+'"图片'+'" class='+'"thumbnail imgbox'+'">'+
                                         '<input type="'+'file"'+ 'class="'+'imgfile" accept='+'"image/jpg, image/png, image/gif, image/jpeg'+'" onchange='+'"addImg(this)'+'">'+
