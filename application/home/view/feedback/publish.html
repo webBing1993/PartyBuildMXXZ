@@ -118,6 +118,15 @@ $(function(){
 	});
 	//--------------------------------------------------------------------------
 	//
+	// 清除同一张图片再次上传bug
+	function clearImg() {
+		$("input[type = 'file']").remove();
+	}
+
+	function addImg() {
+		var addImg = '<input type="file" class="hide" id="upimg" accept="image/jpg, image/png, image/gif, image/jpeg">';
+		$(".imgs").append(addImg);
+	}
 	//
 	//--------------------------------------------------------------------------
 	//图片预览
@@ -142,6 +151,7 @@ $(function(){
 							$('.swal2-confirm' ).css({'background-color':'#c1c1c1','border-left-color':'#c1c1c1','border-right-color':'#c1c1c1'})
 						},
 						success:function(data){
+							clearImg();
 							swal.close();
 							var msg = $.parseJSON(data);
 							if(msg.code == 1){
@@ -162,9 +172,11 @@ $(function(){
 							} else {
 								return;
 							}
+							addImg();
 						}
 					});
 				} else {
+					clearImg();
 					swal({
 						title: ' ',
 						text: '您的图片超过5M',
@@ -172,9 +184,9 @@ $(function(){
 						showConfirmButton:false,
 						timer:1500
 					});
+					addImg();
 				}
 			});
-
 	});
 });
 
