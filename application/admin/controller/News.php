@@ -42,7 +42,7 @@ class News extends Admin {
             {
                 unset($data['id']);
             }
-            $data['images'] = json_encode($data['images']);
+//            $data['images'] = json_encode($data['images']);
             $data['create_time'] = time();
             $data['comments'] = 0;
             $data['likes'] = 0;
