@@ -72,6 +72,7 @@
                             {/volist}
                         </div>
                         <span class="votes-time">{$los.department}/{$los.create_time|time_format='Y-m-d'}发布</span>
+                        {eq name="visit" value="0"}
                         <div class="opinion">
                             {switch name="los.is_like"}{case value="0"}
                                     <i class="agree" onclick="agree(this,{$los.id},1)"></i>
@@ -92,7 +93,15 @@
                             {/switch}
                             <i class="comment-icon" onclick="tosend(this,{$los.id})"></i>
                         </div>
-
+                        {else/}
+                        <div class="opinion">
+                            <i class="agree"></i>
+                            <span>{$los.likes_yes}</span>
+                            <i class="disagree"></i>
+                            <span>{$los.likes_no}</span>
+                            <i class="comment-icon"></i>
+                        </div>
+                        {/eq}
                         <ul class="comments">
                             {volist name="los.comment" id="co"}
                             <li>
@@ -113,7 +122,9 @@
         </div>
     </div>
     <!--线上活动发布-->
+    {eq name="visit" value="0"}
     <a id="publish" href="{:Url('Activity/publish')}"></a>
+    {/eq}
     <!--加载更多-->
 <div class="bottom clear">
     <div class="myword fl">
@@ -192,8 +203,10 @@
             //使用示例
             setCookie("type",eq+11);
         });
-        //悬浮框移动
-        moveanyway();
+        if ("{$visit}"== 0){
+            //悬浮框移动
+            moveanyway();
+        }
         viewer = $('.imgs').viewer({
             url: 'data-original',
             toolbar:false,
@@ -274,26 +287,33 @@
                             '	</div>' ;
                 }
                    html+= '</div>' +
-                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span><div class="opinion">'
-                switch (list.is_like){
-                    case 0:
-                        html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
-                                '	<span>'+list.likes_yes+'</span>' +
-                                '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
-                        break;
-                    case 1:
-                        html+='	<i class="agree_"></i>' +
-                                '	<span>'+list.likes_yes+'</span>' +
-                                '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
-                        break;
-                    case 2:
-                        html+='	<i class="agree" ></i>' +
-                                '	<span>'+list.likes_yes+'</span>' +
-                                '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
-                        break;
-                }
+                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>'
+                if ("{$visit}" == 0){
+                    html+='<div class="opinion">'
+                    switch (list.is_like){
+                        case 0:
+                            html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
+                                    '	<span>'+list.likes_yes+'</span>' +
+                                    '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
+                            break;
+                        case 1:
+                            html+='	<i class="agree_"></i>' +
+                                    '	<span>'+list.likes_yes+'</span>' +
+                                    '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
+                            break;
+                        case 2:
+                            html+='	<i class="agree" ></i>' +
+                                    '	<span>'+list.likes_yes+'</span>' +
+                                    '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
+                            break;
+                    }
                     html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
-                    '</div>'
+                            '</div>'
+                }else{
+                    html+='<div class="opinion"><i class="agree"></i><span>'+list.likes_yes+'</span>' +
+                        '<i class="disagree"></i><span>'+list.likes_no+'</span><i class="comment-icon"></i>' +
+                            '</div>'
+                }
                 var commentlen = list.comment.length;
                 if(commentlen)
                 {

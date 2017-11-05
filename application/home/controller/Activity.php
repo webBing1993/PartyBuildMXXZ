@@ -22,7 +22,8 @@ class Activity extends Base{
      * 活动发起 主页 
      */
     public function index(){
-        $this->checkAnonymous();
+//        $this->checkAnonymous();
+        $this->anonymous();
         $userId = session('userId');
         $Wish = new wishModel();
         $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit(7)->select();  // 活动列表
@@ -51,7 +52,8 @@ class Activity extends Base{
      * 活动  列表 更多
      */
     public function morelist(){
-        $this->checkAnonymous();
+//        $this->checkAnonymous();
+        $this->anonymous();
         $userId = session('userId');
         $Wish = new wishModel();
         $type = input('post.type');
@@ -100,7 +102,8 @@ class Activity extends Base{
     /* 活动发起   详情 */
     public function activitydetails(){
         $userId = session('userId');
-        $this->checkAnonymous();
+//        $this->checkAnonymous();
+        $this->anonymous();
         $id = input('get.id/d');
         $list = Wish::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){

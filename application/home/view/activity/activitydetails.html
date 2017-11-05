@@ -13,34 +13,34 @@
 <div class="line"></div>
 <div class="content">
     <span class="text">{$info.content}</span>
-    {eq name="$info.review" value="1"}
-    {eq name="$info.is_receive" value="1"}
-    <div class="get" style="background: #e0e0e0">我&ensp;已&ensp;认&nbsp;领</div>
-    {else/}
-    <div class="get yes">马&ensp;上&ensp;认&nbsp;领</div>
-    {/eq}
-    {/eq}
+    <!--{eq name="$info.review" value="1"}-->
+    <!--{eq name="$info.is_receive" value="1"}-->
+    <!--<div class="get" style="background: #e0e0e0">我&ensp;已&ensp;认&nbsp;领</div>-->
+    <!--{else/}-->
+    <!--<div class="get yes">马&ensp;上&ensp;认&nbsp;领</div>-->
+    <!--{/eq}-->
+    <!--{/eq}-->
 </div>
-<div class="gray"></div>
-<div class="enroll">
-    <div class="title">认领名单</div>
-    <div class="lists">
-        {empty name="$info.receive"}
-        <div class="list no-claim">
-            <span class="fl" style="text-align: center;width: 100%;">还没有人认领~</span>
-        </div>
-        {else/}
-        {volist name="$info.receive" id="ro"}
-            <div class="list">
-                <img src="{$ro.head}" alt="头像">
-                <span class="name limit">{$ro.name}</span>
-                <span class="publish limit">{$ro.department}</span>
-                <span class="time limit">{$ro.create_time|time_format='Y-m-d'}</span>
-            </div>
-        {/volist}
-        {/empty}
-    </div>
-</div>
+<!--<div class="gray"></div>-->
+<!--<div class="enroll">-->
+    <!--<div class="title">认领名单</div>-->
+    <!--<div class="lists">-->
+        <!--{empty name="$info.receive"}-->
+        <!--<div class="list no-claim">-->
+            <!--<span class="fl" style="text-align: center;width: 100%;">还没有人认领~</span>-->
+        <!--</div>-->
+        <!--{else/}-->
+        <!--{volist name="$info.receive" id="ro"}-->
+            <!--<div class="list">-->
+                <!--<img src="{$ro.head}" alt="头像">-->
+                <!--<span class="name limit">{$ro.name}</span>-->
+                <!--<span class="publish limit">{$ro.department}</span>-->
+                <!--<span class="time limit">{$ro.create_time|time_format='Y-m-d'}</span>-->
+            <!--</div>-->
+        <!--{/volist}-->
+        <!--{/empty}-->
+    <!--</div>-->
+<!--</div>-->
 {/block}
 
 {block name="script"}
