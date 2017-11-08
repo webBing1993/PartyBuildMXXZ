@@ -111,6 +111,9 @@
              {case value='4'}
                 {:Url('Pioneer/detail?id='.$loo['id'])}
             {/case}
+             {case value='5'}
+                {:Url('Activity/activitydetails?id='.$loo['id'])}
+            {/case}
             {default/}
             {/switch}"
                class="list clear" data-type="{$loo.class}">
@@ -122,6 +125,7 @@
                     {case value='2'}两学一做{/case}
                     {case value='3'}鸡毛传贴{/case}
                     {case value='4'}先锋事迹{/case}
+                    {case value='5'}活动发起{/case}
                     {default/}
                     {/switch}
                    </span>
@@ -194,6 +198,7 @@
             var learn_len = $('.notice .list[data-type=2]').length;
             var notice_len = $('.notice .list[data-type=3]').length;
             var pioneer_len = $('.notice .list[data-type=4]').length;
+            var wish_len = $('.notice .list[data-type=5]').length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end && scrollNow){
@@ -205,7 +210,8 @@
                         news: news_len,
                         learn: learn_len,
                         notice: notice_len,
-                        pioneer: pioneer_len
+                        pioneer: pioneer_len,
+                        wish: wish_len
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -257,6 +263,9 @@
             }else if(list.class == 4){
                 class_name = '先锋事迹';
                 link = '/home/pioneer/detail/id/'+list.id;
+            }else if(list.class == 5){
+                class_name = '活动发起';
+                link = '/home/activity/activitydetails/id/'+list.id;
             }
             if(list.publisher.length >9){
                 list.publisher = list.publisher.substring(0,9)+'...';
