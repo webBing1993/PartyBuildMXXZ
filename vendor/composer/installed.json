@@ -1,0 +1,220 @@
+[
+    {
+        "name": "topthink/think-installer",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-installer.git",
+            "reference": "4a656d354dfa542fe21d963832149a6cc3968836"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/think-installer/zipball/4a656d354dfa542fe21d963832149a6cc3968836",
+            "reference": "4a656d354dfa542fe21d963832149a6cc3968836",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev"
+        },
+        "time": "2016-05-04 04:32:26",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "think\\composer\\Plugin"
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "think\\composer\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ]
+    },
+    {
+        "name": "nette/utils",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/utils.git",
+            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/utils/zipball/c455ade9f24a1f99aa81772516764045296b8ca0",
+            "reference": "c455ade9f24a1f99aa81772516764045296b8ca0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/tester": "~2.0",
+            "tracy/tracy": "^2.3"
+        },
+        "suggest": {
+            "ext-gd": "to use Image",
+            "ext-iconv": "to use Strings::webalize() and toAscii()",
+            "ext-intl": "for script transliteration in Strings::webalize() and toAscii()",
+            "ext-mbstring": "to use Strings::lower() etc..."
+        },
+        "time": "2016-06-17 13:15:10",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "https://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "https://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Utility Classes",
+        "homepage": "https://nette.org"
+    },
+    {
+        "name": "nette/mail",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/mail.git",
+            "reference": "c15fc20d3434c138c7de8586ef2e1db51267827f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/mail/zipball/c15fc20d3434c138c7de8586ef2e1db51267827f",
+            "reference": "c15fc20d3434c138c7de8586ef2e1db51267827f",
+            "shasum": ""
+        },
+        "require": {
+            "ext-iconv": "*",
+            "nette/utils": "~2.4",
+            "php": ">=5.6.0"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/di": "~2.3",
+            "nette/tester": "~2.0",
+            "tracy/tracy": "^2.3"
+        },
+        "suggest": {
+            "ext-fileinfo": "to detect type of attached files"
+        },
+        "time": "2016-06-13 20:03:24",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.4-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "https://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "https://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Mail: Sending E-mails",
+        "homepage": "https://nette.org"
+    },
+    {
+        "name": "topthink/framework",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/framework.git",
+            "reference": "c654eab7e9db84df3fc4bb7bb3c9f3cbfa0fca53"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/framework/zipball/c654eab7e9db84df3fc4bb7bb3c9f3cbfa0fca53",
+            "reference": "c654eab7e9db84df3fc4bb7bb3c9f3cbfa0fca53",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0",
+            "topthink/think-installer": "*"
+        },
+        "require-dev": {
+            "johnkary/phpunit-speedtrap": "^1.0",
+            "mikey179/vfsstream": "~1.6",
+            "phpdocumentor/reflection-docblock": "^2.0",
+            "phploc/phploc": "2.*",
+            "phpunit/phpunit": "4.8.*",
+            "sebastian/phpcpd": "2.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2016-06-22 08:23:23",
+        "type": "think-framework",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "liu21st",
+                "email": "liu21st@gmail.com"
+            }
+        ],
+        "description": "the new thinkphp framework",
+        "homepage": "http://thinkphp.cn/",
+        "keywords": [
+            "framework",
+            "orm",
+            "thinkphp"
+        ]
+    }
+]
