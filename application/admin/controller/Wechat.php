@@ -165,8 +165,14 @@ class Wechat extends Admin{
         $info = $file ->move(ROOT_PATH . 'public' . DS . 'uploads');//上传之后移动地址
         if ($info) {
             $exclePath = $info->getPathName();  //上传文件的地址
-            $objReader = \PHPExcel_IOFactory::createReader('Excel5');
-            $obj_PHPExcel = $objReader ->load($exclePath, $encode = 'utf-8');  //加载文件内容,编码utf-8
+            $ext = strtolower(pathinfo($exclePath,PATHINFO_EXTENSION));
+            if($ext == 'xlsx'){
+                $objReader=\PHPExcel_IOFactory::createReader('Excel2007');
+                $obj_PHPExcel = $objReader->load($exclePath,'utf-8');
+            }elseif($ext == 'xls'){
+                $objReader=\PHPExcel_IOFactory::createReader('Excel5');
+                $obj_PHPExcel = $objReader->load($exclePath,'utf-8');
+            }
             $excel_array = $obj_PHPExcel ->getsheet(0) ->toArray();   //转换为数组格式
             array_shift($excel_array);  //删除第一个数组(标题);
             $result = $this ->add_excel($excel_array);
@@ -219,6 +225,111 @@ class Wechat extends Admin{
                 'nation' => $v[7], //民族
                 'partytime' => $v[8],  //入党时间
                 'address' => $v[9] //籍贯
+            );
+            array_push($all, $info);
+        }
+
+        //转换部门
+        foreach ($all as $k =>$v) {
+            //数据转化
+            $result = WechatDepartment::where(['name' => $all[$k]['department'], 'status' => 1])->find();
+            //部门数据转化 对应部门不存在就增加部门
+            if ($result) {
+                //部门id
+                $all[$k]['department'] = $result['id'];
+            } else {
+                $dp = array(
+                    'name' => $all[$k]['department'],
+                    'id' => null
+                );
+                $record = $wp->add($dp);
+                $all[$k]['department'] = $record['id'];
+            }
+        }
+        //数据储存
+        foreach ($all as $k =>$v) {
+            // 同手机号进行覆盖
+            $map = ['mobile' => $all[$k]['mobile'], 'state' => 1];
+            $tel = WechatUser::where($map)->find();
+            //存在更新 不存在新增
+            if ($tel) {
+                $sum2++;
+                $all[$k]['id'] = $tel['id'];
+                array_push($update, $all[$k]);
+            } else {
+                $sum1++;
+                $tel = $all[$k]['mobile'];
+                if(!isset($check[$tel])){
+                    $check[$tel] = true;
+                    array_push($new, $all[$k]);
+                }
+            }
+        }
+        //新增用户保存
+        $user ->saveAll($new);
+        //更新用户保存
+        foreach($update as $data){
+            $id = $data['id'];
+            unset($data['id']);
+            $user ->where('id',$id) ->update($data);
+        }
+        return  $this ->success("导入成功,新增数据{$sum1}条,修改数据{$sum2}条!");
+    }
+    /**
+     * 通讯录excel导入部门
+     */
+    public function departmentExcel(){
+        //引用PHPExcel
+        vendor("PHPExcel.Classes.PHPExcel.IOFactory.PHPExcel_IOFactory");
+        vendor('PHPExcel.Classes.PHPExcel');
+        vendor('PHPExcel.Classes.PHPExcel.Reader.Excel5');
+        //获取表单上传文件
+        $file = request() ->file('excel');
+        $result = $file ->getInfo()['name'];
+        $info = $file ->move(ROOT_PATH . 'public' . DS . 'uploads');//上传之后移动地址
+        if ($info) {
+            $exclePath = $info->getPathName();  //上传文件的地址
+            $ext = strtolower(pathinfo($exclePath,PATHINFO_EXTENSION));
+            if($ext == 'xlsx'){
+                $objReader=\PHPExcel_IOFactory::createReader('Excel2007');
+                $obj_PHPExcel = $objReader->load($exclePath,'utf-8');
+            }elseif($ext == 'xls'){
+                $objReader=\PHPExcel_IOFactory::createReader('Excel5');
+                $obj_PHPExcel = $objReader->load($exclePath,'utf-8');
+            }
+            $excel_array = $obj_PHPExcel ->getsheet(0) ->toArray();   //转换为数组格式
+            array_shift($excel_array);  //删除第一个数组(标题);
+            array_shift($excel_array);  //删除第二个数组(标题);
+            $result = $this ->add_department_excel($excel_array);
+            unlink($exclePath);//完成后删除该文件
+            return $result;
+        } else {
+            return $file ->getError();
+        }
+    }
+
+    /**
+     * 通讯录导入处理函数
+     */
+    public function add_department_excel($data){
+        $user = new WechatUser();
+        $wp = new WechatDepartment();
+        $sum1 = 0;//记录新增用户记录
+        $sum2 = 0;//记录修改用户记录
+        $all = array();
+        $update = array();//更新数据
+        $new = array();//新增数据
+        $check = array();//检查新增是否存在相同数据
+        foreach($data as $k => $v){
+            //前2个字字段为必填字段 部门 上级部门
+            if (empty($v[0]) || empty($v[1])) {
+                return ['code' => 0, 'msg' => '第' . ($k + 2) . '行必填字段没有填写'];
+            }
+
+            //整理数据
+            $info = array(
+                'name' => $v[0],   //名称
+                'parentid' => $v[1], //性别
             );
             array_push($all, $info);
         }

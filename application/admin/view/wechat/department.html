@@ -35,6 +35,10 @@
                 <div class="ibox-title">
                     <h5>部门列表</h5>
                     <div class="ibox-tools">
+                        <div class="ladda-button ladda-button-user btn btn-sm btn-primary" >
+                            <input type="file" name="excel" id="excel" style="width:100%;height:100%;position: absolute; opacity: 0"/>
+                            Excel导入
+                        </div>
                         <a data-toggle="modal" class="btn btn-sm btn-primary" href="/admin/wechat/add_department">添加</a>
                     </div>
                 </div>
@@ -92,6 +96,30 @@
         });
         $(".check-all").on("ifChanged",function(){
             $("tbody").find(".ids").iCheck("toggle");
+        });
+    });
+
+    $('#excel').change(function(){
+        var l = $( '.ladda-button-user' ).ladda();
+        l.ladda( 'start' );
+        var formData = new FormData();
+        formData.append('excel', $(this)[0].files[0]);
+        $.ajax({
+            type: "post",
+            url: "{:Url('Wechat/departmentExcel')}",
+            data:formData,
+            processData : false,
+            contentType : false,
+            success: function (data) {
+                if(data.code == 1){
+                    updateAlert(data.msg, 'success');
+                }else{
+                    updateAlert(data.msg, 'error');
+                }
+                /*setTimeout(function(){
+                    location.reload();
+                },2000);*/
+            }
         });
     });
 </script>
