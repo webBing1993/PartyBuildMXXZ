@@ -78,6 +78,7 @@ itme_last_la  {
     text-align: center;
     border-radius: 1vw;
     box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+    font-size: 1.4rem;
 }
 .obligation .info{
     font-size: 1.4rem;
