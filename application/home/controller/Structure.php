@@ -46,7 +46,9 @@ class Structure extends Base{
     */
     public function communication(){
         $pid = input('id');
+        $name = WechatDepartment::where(['id' => $pid])->value('name');
         $modelAll = WechatDepartment::where(['parentid' => $pid,'status' => 1])->order('id')->select();
+        $this->assign('name',$name);
         $this->assign('modelAll',$modelAll);
         return $this->fetch();
     }
@@ -54,6 +56,17 @@ class Structure extends Base{
     *领导通讯简介页面
     */
     public function pilot(){
+        $userId = session('userId');
+        $tag = WechatUser::getTag($userId);
+        $pid = input('id');
+        $modelAll = WechatUser::where(['department' => $pid,'tag' => 3])->order('id')->select();
+        foreach ($modelAll as $model){
+            $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+            if($tag!=3){
+                $model['mobile'] = hide_mobile($model['mobile']);
+            }
+        }
+        $this->assign('modelAll',$modelAll);
         return $this->fetch();
     }
     /*

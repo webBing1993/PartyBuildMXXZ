@@ -8,45 +8,27 @@
 
 {block name="body"}
 <!--领导信息-->
+{volist name="modelAll" id="vo"}
 <a class="lists">
     <div class="picture">
         <img src="/home/images/structure/tx.jpg" alt="图片无法加载">
     </div>
     <div class="list_info">
          <!--姓名  职务-->
-        <h4 class="name">文静  <span>(中心主任)</span></h4>
+        <h4 class="name">{$vo.name}  <span>({$vo.position})</span></h4>
         <!--政治面貌-->
-        <p class="status"><img src="/home/images/structure/woman.png" alt="">  <span>党员</span></p>
+        <p class="status">
+            {eq name="$vo.gender" value="2"}
+            <img src="/home/images/structure/woman.png" alt="">
+            {else/}
+            <img src="/home/images/structure/man.png" alt="">
+            {/eq}
+            <span>{$vo.politics_status}</span></p>
         <!--联系电话-->
-        <p class="phone"><span>13105695215</span></p>
+        <p class="phone"><span>{$vo.mobile}</span></p>
     </div>
 </a>
-<a class="lists">
-    <div class="picture">
-        <img src="/home/images/structure/tx.jpg" alt="图片无法加载">
-    </div>
-    <div class="list_info">
-        <!--姓名  职务-->
-        <h4 class="name">文静  <span>(中心主任)</span></h4>
-        <!--政治面貌-->
-        <p class="status"><img src="/home/images/structure/woman.png" alt="">  <span>党员</span></p>
-        <!--联系电话-->
-        <p class="phone"><span>13105695215</span></p>
-    </div>
-</a>
-<a class="lists">
-    <div class="picture">
-        <img src="/home/images/structure/tx.jpg" alt="图片无法加载">
-    </div>
-    <div class="list_info">
-        <!--姓名  职务-->
-        <h4 class="name">文静  <span>(中心主任)</span></h4>
-        <!--政治面貌-->
-        <p class="status"><img src="/home/images/structure/woman.png" alt="">  <span>党员</span></p>
-        <!--联系电话-->
-        <p class="phone"><span>13105695215</span></p>
-    </div>
-</a>
+{/volist}
 
 {/block}
 
