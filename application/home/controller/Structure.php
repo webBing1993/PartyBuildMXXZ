@@ -6,6 +6,7 @@
  * Time: 13:21
  */
 namespace app\home\controller;
+use app\home\model\LeaderIntro;
 use app\home\model\WechatTest;
 use app\home\model\WechatUser;
 use app\home\model\WechatDepartment;
@@ -49,6 +50,7 @@ class Structure extends Base{
         $name = WechatDepartment::where(['id' => $pid])->value('name');
         $modelAll = WechatDepartment::where(['parentid' => $pid,'status' => 1])->order('id')->select();
         $this->assign('name',$name);
+        $this->assign('pid',$pid);
         $this->assign('modelAll',$modelAll);
         return $this->fetch();
     }
@@ -73,6 +75,17 @@ class Structure extends Base{
    *领导通讯简介页面
    */
     public function pilotInfo(){
+        $userId = session('userId');
+        $tag = WechatUser::getTag($userId);
+        $pid = input('id');
+        $model = WechatUser::where(['id' => $pid])->find();
+        $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+        if($tag!=3){
+            $model['mobile'] = hide_mobile($model['mobile']);
+        }
+        $info = LeaderIntro::where(['uid' => $model['id']])->find();
+        $this->assign('info',$info);
+        $this->assign('model',$model);
         return $this->fetch();
     }
 }

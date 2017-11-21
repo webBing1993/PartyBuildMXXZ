@@ -13,25 +13,31 @@
     </div>
     <div class="list_info">
         <!--姓名  职务-->
-        <h4 class="name">文静  <span>(中心主任)</span></h4>
+        <h4 class="name">{$model.name}  <span>({$model.position})</span></h4>
         <!--政治面貌-->
-        <p class="status"><img src="/home/images/structure/woman.png" alt="">  <span>党员</span></p>
+        <p class="status">
+            {eq name="$model.gender" value="2"}
+            <img src="/home/images/structure/woman.png" alt="">
+            {else/}
+            <img src="/home/images/structure/man.png" alt="">
+            {/eq}
+            <span>{$model.politics_status}</span></p>
         <!--联系电话-->
-        <p class="phone"><span>13105695215</span></p>
+        <p class="phone"><span>{$model.mobile}</span></p>
     </div>
 </div >
 <!--工作职责-->
 <div class="obligation">
      <div class="ob_ico">工作职责</div>
      <div class="info">
-         在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。
+         {$info.duty}
      </div>
 </div>
 <!--个人简介-->
 <div class="obligation">
     <div class="ob_ico">个人简介</div>
     <div class="info">
-        在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。在windows的操作系统中显示在屏幕上用于代表一个应用软件的图形。
+        {$info.description}
     </div>
 </div>
 
