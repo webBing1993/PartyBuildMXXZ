@@ -81,13 +81,13 @@
                                     <!--<span>{$los.likes_no}</span>{/case}{case value="1"}-->
                                     <i class="agree_" ></i>
                                     <span>{$los.likes_yes}</span>
-                                    <i class="disagree"></i>
-                                    <span>{$los.likes_no}</span>
+                                    <!--<i class="disagree"></i>-->
+                                    <!--<span>{$los.likes_no}</span>-->
                                 {/case}{case value="2"}
                                     <i class="agree" ></i>
                                     <span>{$los.likes_yes}</span>
-                                    <i class="disagree_"></i>
-                                    <span>{$los.likes_no}</span>
+                                    <!--<i class="disagree_"></i>-->
+                                    <!--<span>{$los.likes_no}</span>-->
                                 {/case}
                                 {default /}default
                             {/switch}
@@ -97,8 +97,8 @@
                         <div class="opinion">
                             <i class="agree"></i>
                             <span>{$los.likes_yes}</span>
-                            <i class="disagree"></i>
-                            <span>{$los.likes_no}</span>
+                            <!--<i class="disagree"></i>-->
+                            <!--<span>{$los.likes_no}</span>-->
                             <i class="comment-icon"></i>
                         </div>
                         {/eq}
@@ -288,7 +288,7 @@
                 }
                    html+= '</div>' +
                     '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>'
-                if ("{$visit}" == 0){
+//                if ("{$visit}" == 0){
 //                    html+='<div class="opinion">'
 //                    switch (list.is_like){
 //                        case 0:
@@ -309,11 +309,11 @@
 //                    }
 //                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
 //                            '</div>'
-                }else{
-                    html+='<div class="opinion"><i class="agree"></i><span>'+list.likes_yes+'</span>' +
-                        '<i class="disagree"></i><span>'+list.likes_no+'</span><i class="comment-icon"></i>' +
-                            '</div>'
-                }
+//                }else{
+////                    html+='<div class="opinion"><i class="agree"></i><span>'+list.likes_yes+'</span>' +
+////                        '<i class="disagree"></i><span>'+list.likes_no+'</span><i class="comment-icon"></i>' +
+////                            '</div>'
+//                }
                 var commentlen = list.comment.length;
                 if(commentlen)
                 {
@@ -422,26 +422,26 @@
         })
     };
 
-//    var disagree = function(e,id,status){
-//        //样式变化，移到suc
-//        var n = $(e).next('span').text();
-//        if($(e).hasClass('disagree_')) return false;
-//        if($(e).prevAll('i').hasClass('agree_')) return false;
-//        $(e).toggleClass('disagree' ).toggleClass('disagree_');
-//        $(e ).hasClass('disagree')?n--:n++;
-//        $(e ).next('span').text(n);
-//        $.ajax({
-//            type:"post",
-//            url:"{:Url('Activity/vote')}",
-//            data:{
-//                id:id,
-//                status:status
-//            },
-//            success:function(data){
-//                console.log('点赞成功');
-//            }
-//        })
-//    };
+    var disagree = function(e,id,status){
+        //样式变化，移到suc
+        var n = $(e).next('span').text();
+        if($(e).hasClass('disagree_')) return false;
+        if($(e).prevAll('i').hasClass('agree_')) return false;
+        $(e).toggleClass('disagree' ).toggleClass('disagree_');
+        $(e ).hasClass('disagree')?n--:n++;
+        $(e ).next('span').text(n);
+        $.ajax({
+            type:"post",
+            url:"{:Url('Activity/vote')}",
+            data:{
+                id:id,
+                status:status
+            },
+            success:function(data){
+                console.log('点赞成功');
+            }
+        })
+    };
 
     var layout = function(){
         $('.lists ul li' ).each(function(){

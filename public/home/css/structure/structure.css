@@ -153,20 +153,20 @@ body {
 .listbox .box .box_:last-child {
   margin-bottom: 5vw;
 }
-.listbox .box .box_:before {
-  content: '';
-  position: absolute;
-  top: 3vw;
-  left: -1.8vw;
-  width: 23.2vw;
-  height: 8vw;
-  background: url('/home/images/structure/tag.png') 0 0 no-repeat;
-  background-size: 23.2vw 8vw;
-  color: #ffffff;
-  text-align: center;
-  font-size: 1.2rem;
-  line-height: 5.8vw;
-}
+/*.listbox .box .box_:before {*/
+  /*content: '';*/
+  /*position: absolute;*/
+  /*top: 3vw;*/
+  /*left: -1.8vw;*/
+  /*width: 28.2vw;*/
+  /*height: 11vw;*/
+  /*background: url(/home/images/structure/tag.png) 0 0 no-repeat;*/
+  /*background-size: 28.2vw 11vw;*/
+  /*color: #ffffff;*/
+  /*text-align: center;*/
+  /*font-size: 1.4rem;*/
+  /*line-height: 6.8vw;*/
+/*}*/
 .listbox .box.shouldKnow .box_:before {
   content: '本月微党课';
 }
@@ -176,9 +176,9 @@ body {
   .listbox .box.summary .box_1:before {
     content: '党工青妇科简介';
   }
-  .listbox .box.town .box_:before {
-    content: '梦想小镇';
-  }
+  /*.listbox .box.town .box_:before {*/
+    /*content: '梦想小镇';*/
+  /*}*/
 .listbox .box.summary .box_{
   padding: 11vw 3vw 6vw 3vw;
 }
@@ -186,7 +186,7 @@ body {
   padding: 11vw 3vw;
 }
   .listbox .box.summary .box_1:before {
-    background-size: 30.2vw 8vw;
+    background-size: 30.2vw 11vw;
     width: 30.2vw;
   }
 
@@ -247,24 +247,24 @@ body {
 .listbox .box .box_ .lists .party1 .tri-left{
   position: absolute;
   top: 2.66vw;
-  left: 5.33vw;
+  left: 6.33vw;
   content: '';
-  height: 5.33vw;
-  width: 5.33vw;
-  background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
-  background-size: 5.33vw 5.33vw;
+  height: 6.33vw;
+  width: 6.33vw;
+  background: url('/home/images/structure/hlw.png') 0 0 no-repeat;
+  background-size: 6.33vw 6.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure2{
-  background: url('/home/images/structure/structure2.png') 0 0 no-repeat;
-  background-size: 5.33vw 5.33vw;
+  background: url('/home/images/structure/tsc.png') 0 0 no-repeat;
+  background-size: 6.33vw 6.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure3{
-  background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
-  background-size: 5.33vw 5.33vw;
+  background: url('/home/images/structure/cydj.png') 0 0 no-repeat;
+  background-size: 6.33vw 6.33vw;
 }
   .listbox .box .box_ .lists .party1 .tri-left.structure4{
-    background: url('/home/images/structure/structure4.png') 0 0 no-repeat;
-    background-size:5.33vw 5.33vw;
+    background: url('/home/images/structure/cyjs.png') 0 0 no-repeat;
+    background-size:6.33vw 6.33vw;
   }
 .listbox .box .box_ .lists .detail1 {
   width: 100%;

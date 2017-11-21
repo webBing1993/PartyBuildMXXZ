@@ -50,4 +50,16 @@ class Structure extends Base{
         $this->assign('modelAll',$modelAll);
         return $this->fetch();
     }
+    /*
+    *领导通讯简介页面
+    */
+    public function pilot(){
+        return $this->fetch();
+    }
+    /*
+   *领导通讯简介页面
+   */
+    public function pilotInfo(){
+        return $this->fetch();
+    }
 }

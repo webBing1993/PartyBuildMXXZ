@@ -4,6 +4,21 @@
 <title>云上组织</title>
 <link rel="stylesheet" href="/home/css/structure/structure.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+	.listbox .box .box_  .bor_ls {
+		position: absolute;
+		top: 3vw;
+		left: -1.8vw;
+		width: 28.2vw;
+		height: 11vw;
+		background: url(/home/images/structure/tag.png) 0 0 no-repeat;
+		background-size: 28.2vw 11vw;
+		color: #ffffff;
+		text-align: center;
+		font-size: 1.4rem;
+		line-height: 6.8vw;
+	}
+</style>
 
 {/block}
 
@@ -14,6 +29,7 @@
 <div class="tabs">
 	<span class="tab active"><span>组织领导</span></span>
 	<span class="tab"><span>组织架构</span></span>
+
 </div>
 <div class="listbox">
 	<!--组织领导   小镇介绍   党工青妇联介绍-->
@@ -34,6 +50,7 @@
 	<div class="town box hidden">
 
 		<div class="box_ or">
+			<a href="/home/structure/pilot.html" class="bor_ls" >梦想小镇</a>
 			<div class="lists">
 				{volist name="modelAll" id="vo"}
 				<a href="{:Url('structure/communication?id='.$vo['id'])}">
@@ -132,5 +149,6 @@ function tabRecord(a,b){
 	}
 
 }
+
 </script>
 {/block}

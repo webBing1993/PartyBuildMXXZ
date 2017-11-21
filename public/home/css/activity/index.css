@@ -111,7 +111,7 @@
     display: block;
 }
 .votes .opinion{
-    text-align: center;
+    text-align: right;
     margin-top: 4vw;
 }
 .votes .agree {
@@ -174,7 +174,7 @@ votes ul > li .comments .comment {
     color: #333333;
 }
 .votes .opinion span{
-    margin-right: 23vw;
+    margin-right: 10vw;
     font-size: 1.2rem;
     color: #999;
     padding-left: 1vw;
