@@ -48,6 +48,7 @@
     background: url(/home/images/structure/tel.png) 0% 46% no-repeat;
     -webkit-background-size: 3.47vw 4.53vw;
     background-size: 3.47vw 4.53vw;
+    color: #666;
 }
 .list_info .phone span{
     margin-left: 3vw;
