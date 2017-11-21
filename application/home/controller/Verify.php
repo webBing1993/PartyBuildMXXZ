@@ -118,7 +118,7 @@ class Verify extends Controller{
         //cookie初始化 session 初始化
         Cookie::delete('dypb');
         session('userId','visitor');
-        session('url','/home/index/index');
+        session('url','/home/index/newindex');
         return $this ->redirect(session('url'));
     }
 
