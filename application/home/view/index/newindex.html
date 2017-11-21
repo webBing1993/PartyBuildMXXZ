@@ -10,6 +10,9 @@
 <!--banner-->
 <div class="banners ">
     <div class="swiper-container swiper-container-horizontal">
+        <a  class="exit">
+            <img src="/home/images/index/exit.png" alt="">
+        </a>
             <div class="banner swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 375px;">
                 <img src="/home/images/index/banner20170609154838.png" alt="">
             </div>
@@ -91,7 +94,35 @@
         autoplayDisableOnInteraction:false
     });
 
-
+    $(function(){
+        /*var len = $('.notice .list').length;
+        if(len >= 6){
+            $('.tip' ).text('上拉加载更多');
+        }
+        loadScroll();*/
+        $(".exit").on("click",function(){
+            swal({
+                    title:"",
+                    text: "是否确认退出",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "确认",
+                    closeOnConfirm: false,
+                    cancelButtonText:"取消"
+                },
+                function(){
+                    swal({
+                        title: ' ',
+                        text: '退出成功！',
+                        type: 'success',
+                        confirmButtonText:'确定'
+                    });
+                    setTimeout(function(){
+                        window.location.replace("{:Url('Verify/logout')}");
+                    },1000)
+                });
+        })
+    });
 
 
 </script>
