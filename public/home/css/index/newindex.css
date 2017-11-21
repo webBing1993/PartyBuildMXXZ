@@ -37,10 +37,10 @@ ul {
     background-color:#ffa401;
 }
 .itme_last >a>img{
-    width: 12vw;
-    height: 12vw;
+    width: 15vw;
+    height: 15vw;
     display: block;
-    margin: 4vw auto;
+    margin:2vw auto;
 }
 .itme_last_la{
     height: 32.8vw;
@@ -53,23 +53,42 @@ ul {
 
 }
 .itme_last_la a img{
-    width: 12vw;
-    height: 12vw;
+    width: 15vw;
+    height: 15vw;
     display: block;
-    margin: 4vw auto;
+    margin: 2vw auto;
+}
+.itme_last .ys_ls{
+    background-color:#ffa300 ;
+}
+
+.itme_last .hd_ls{
+    background-color:#e95400 ;
+}
+.itme_last_la .fw_ls{
+    background-color:#ffc53f ;
 }
 .itme_last_la .mx_ls{
-    background-color:#216c43 ;
+     background-color:#206b42 ;
+ }
+.itme_last_la .tz_ls{
+      background-color:#003cc0 ;
+  }
+.itme_last_ .st_ls{
+    background-color:#43caa2 ;
 }
-.itme_last_la .pp_ls{
+.itme_last_ .pp_ls{
     background-color:#019295 ;
 }
-.itme_last_la .ly_ls{
-    background-color:#00C2FF ;
+.itme_last_la .zd_ls{
+    background-color:#5d13fe ;
 }
-.itme_last .jm_ls{
-    background-color:#033cc1 ;
+
+.itme_last_la .zx_ls{
+    background-color:#156cff ;
 }
-.itme_last .zd_ls{
-    background-color:#5d13fe ;!important;
+
+.itme_last_la .sz_ls{
+    background-color:#00c2ff ;
 }
+
