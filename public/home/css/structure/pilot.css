@@ -29,6 +29,9 @@
     font-size: 1.8rem;
     font-weight: bold;
 }
+ .lists  .list_info  .name>span{
+    font-size: 1.2rem;!important;
+}
 .list_info .status{
     line-height: 6vw;
 }
