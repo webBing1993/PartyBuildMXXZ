@@ -450,8 +450,9 @@ body {
   }
   .d_list .d_name>a>.d_lst>i{
     font-style: normal;
-    margin-left:6vw;
+    margin-left:1vw;
   }
   .d_list .d_name>a>.d_lst>b{
     font-weight: 100;
+
   }
