@@ -143,6 +143,36 @@
                                 <input type="text" placeholder="籍贯" class="form-control form_title" name="address" value="{$info.address|default=''}">
                             </div>
                         </div>
+                        <!--政治面貌-->
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>政治面貌:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="politics_status">
+                                    <option value="1" {eq name="$info.politics_status|default='1'" value="1"}selected{/eq}>群众</option>
+                                    <option value="2" {eq name="$info.politics_status|default='1'" value="2"}selected{/eq}>团员</option>
+                                    <option value="3" {eq name="$info.politics_status|default='1'" value="3"}selected{/eq}>党员</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>成员类型:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="3" name="tag" {eq name="$info.tag|default='1'" value="3"}checked{/eq}>领导
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="2" name="tag" {eq name="$info.tag|default='1'" value="2"}checked{/eq}>联系人
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="1" name="tag" {eq name="$info.tag|default='1'" value="1"}checked{/eq}>普通注册用户
+                                </label>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
@@ -202,8 +232,10 @@
         data.nation = $("input[name='nation']").val().trim(); //学历
         data.partytime = $("input[name='partytime']").val(); //入党时间
         data.address = $("input[name='address']").val().trim(); //籍贯
+        data.politics_status = $("select[name='politics_status']").val(); //政治面貌
         data.check = "{$info.id|default=''}"; //判断是否新增还是修改
         data.review = $("input[name='review']:checked").val();
+        data.tag = $("input[name='tag']:checked").val();
         //验证判断
         var patrn=/0?(13|14|15|17|18)[0-9]{9}/;
         if(!data.name){
@@ -216,7 +248,6 @@
             warning({msg: "手机号码格式有问题!"});
             return '';
         }
-
         var it = $(this);
         $.ajax({
             type: 'post',

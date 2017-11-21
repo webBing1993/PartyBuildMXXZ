@@ -27,81 +27,22 @@
     <div class="town box">
         <div class="box_  box_tp  or">
             <div class="lists">
-                <!--公司名称。循环-->
-                <a href="/home/structure/detail.html">
+                {volist name="modelAll" id="vo"}
+                <a href="{:Url('structure/detail?party='.$vo['id'])}">
                     <div class="list clear">
                         <div class="party1">
                             <!--前缀图片-->
                             <div class="tri-left structure2"></div>
                             <!--有党徽标记的公司-->
-                            <div class="name1">菜根科技 <span><img src="\home\images\structure\dh.png" alt=""></span></div>
+                            <div class="name1">{$vo.name}
+                                {eq name="$vo.mark" value="1"}
+                                <span><img src="\home\images\structure\dh.png" alt=""></span>
+                                {/eq}
+                            </div>
                         </div>
                     </div>
                 </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">第七空间孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                <div class="list clear">
-                    <div class="party1">
-                        <div class="tri-left structure2"></div>
-                        <div class="name1">极客孵化器</div>
-                    </div>
-                </div>
-            </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">新势力孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">湾西孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">马达加加孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">1897X创业孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">蜂巢孵化器</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="list clear">
-                        <div class="party1">
-                            <div class="tri-left structure2"></div>
-                            <div class="name1">纵贯会孵化器</div>
-                        </div>
-                    </div>
-                </a>
+                {/volist}
             </div>
         </div>
     </div>

@@ -10,5 +10,12 @@ namespace app\home\model;
 use think\Model;
 
 class WechatUser extends Model {
-
+    const POLITICS_STATUS_MASSES = 1;
+    const POLITICS_STATUS_LEAGUE = 2;
+    const POLITICS_STATUS_PARTY = 3;
+    const POLITICS_ARRAY = [
+        self::POLITICS_STATUS_MASSES  => '群众',
+        self::POLITICS_STATUS_LEAGUE  => '团员',
+        self::POLITICS_STATUS_PARTY  => '党员',
+    ];
 }

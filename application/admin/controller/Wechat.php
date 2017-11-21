@@ -69,11 +69,13 @@ class Wechat extends Admin{
             //$type 1为修改 0为新增
             if($id){
                 $type = 1;
-                $record = WechatDepartment::where('id',$id) ->field('name') ->find();
-                $this ->assign('name',$record['name']);
+                $record = WechatDepartment::where('id',$id) ->field('name,parentid,mark') ->find();
+                $this ->assign('info',$record);
             }else{
                 $type = 0;
             }
+            $departmentList = WechatDepartment::where('parentid',1) ->select();
+            $this ->assign('departmentList',$departmentList);
             $this ->assign('id',$id);
             $this ->assign('type',$type);
             return $this->fetch();
@@ -155,6 +157,7 @@ class Wechat extends Admin{
      * 通讯录excel导入
      */
     public function inserExcel(){
+        ini_set("memory_limit","-1");
         //引用PHPExcel
         vendor("PHPExcel.Classes.PHPExcel.IOFactory.PHPExcel_IOFactory");
         vendor('PHPExcel.Classes.PHPExcel');
@@ -213,6 +216,14 @@ class Wechat extends Admin{
             if ($v[8]) {
                 $v[8] = strtotime($v[8]);
             }
+            //面貌数据转化
+            if ($v[10] == '党员') {
+                $v[10] = 3;
+            } elseif ($v[10] == '团员')  {
+                $v[10] = 2;
+            } else {
+                $v[10] = 1;
+            }
             //整理数据
             $info = array(
                 'name' => $v[0],   //名称
@@ -224,7 +235,8 @@ class Wechat extends Admin{
                 'education' => $v[6],  //学历
                 'nation' => $v[7], //民族
                 'partytime' => $v[8],  //入党时间
-                'address' => $v[9] //籍贯
+                'address' => $v[9], //籍贯
+                'politics_status' => $v[10] //面貌
             );
             array_push($all, $info);
         }
@@ -299,7 +311,6 @@ class Wechat extends Admin{
             }
             $excel_array = $obj_PHPExcel ->getsheet(0) ->toArray();   //转换为数组格式
             array_shift($excel_array);  //删除第一个数组(标题);
-            array_shift($excel_array);  //删除第二个数组(标题);
             $result = $this ->add_department_excel($excel_array);
             unlink($exclePath);//完成后删除该文件
             return $result;
@@ -312,73 +323,46 @@ class Wechat extends Admin{
      * 通讯录导入处理函数
      */
     public function add_department_excel($data){
-        $user = new WechatUser();
-        $wp = new WechatDepartment();
-        $sum1 = 0;//记录新增用户记录
-        $sum2 = 0;//记录修改用户记录
-        $all = array();
-        $update = array();//更新数据
-        $new = array();//新增数据
-        $check = array();//检查新增是否存在相同数据
+        /* 同步部门 */
+        $msg = '';
+        $i = 0;
         foreach($data as $k => $v){
             //前2个字字段为必填字段 部门 上级部门
-            if (empty($v[0]) || empty($v[1])) {
-                return ['code' => 0, 'msg' => '第' . ($k + 2) . '行必填字段没有填写'];
+            if($k != 0){
+                if (empty($v[0]) || empty($v[1])) {
+                   $msg = $msg. "第" . ($k + 2) . "行必填字段没有填写<br>";
+                   continue;
+                }
+                $v[1] = WechatDepartment::where(['name' => $v[1]])->value('id');
+                $v[1] = $v[1] ? $v[1] : null;
+            }else{
+                $v[1] = 0;
             }
-
+            if($v[2] == '有'){
+                $v[2] = 1;
+            }else{
+                $v[2] = 0;
+            }
             //整理数据
             $info = array(
-                'name' => $v[0],   //名称
-                'parentid' => $v[1], //性别
+                'name' => $v[0],   //部门
+                'parentid' => $v[1], //上级部门
+                'mark' => $v[2], //党徽
+                'status' => 1,
             );
-            array_push($all, $info);
+            if(!empty(WechatDepartment::where(['name'=>$info['name']])->find())){
+                WechatDepartment::where(['name'=>$info['name']])->update($info);
+            } else {
+                WechatDepartment::create($info);
+            }
+            $i++;
+        }
+        if($msg){
+            return ['code' => 0, 'msg' => $msg];
+        }else{
+            return $this ->success("导入成功,导入部门数:".$i."!");
         }
 
-        //转换部门
-        foreach ($all as $k =>$v) {
-            //数据转化
-            $result = WechatDepartment::where(['name' => $all[$k]['department'], 'status' => 1])->find();
-            //部门数据转化 对应部门不存在就增加部门
-            if ($result) {
-                //部门id
-                $all[$k]['department'] = $result['id'];
-            } else {
-                $dp = array(
-                    'name' => $all[$k]['department'],
-                    'id' => null
-                );
-                $record = $wp->add($dp);
-                $all[$k]['department'] = $record['id'];
-            }
-        }
-        //数据储存
-        foreach ($all as $k =>$v) {
-            // 同手机号进行覆盖
-            $map = ['mobile' => $all[$k]['mobile'], 'state' => 1];
-            $tel = WechatUser::where($map)->find();
-            //存在更新 不存在新增
-            if ($tel) {
-                $sum2++;
-                $all[$k]['id'] = $tel['id'];
-                array_push($update, $all[$k]);
-            } else {
-                $sum1++;
-                $tel = $all[$k]['mobile'];
-                if(!isset($check[$tel])){
-                    $check[$tel] = true;
-                    array_push($new, $all[$k]);
-                }
-            }
-        }
-        //新增用户保存
-        $user ->saveAll($new);
-        //更新用户保存
-        foreach($update as $data){
-            $id = $data['id'];
-            unset($data['id']);
-            $user ->where('id',$id) ->update($data);
-        }
-        return  $this ->success("导入成功,新增数据{$sum1}条,修改数据{$sum2}条!");
     }
 
 }

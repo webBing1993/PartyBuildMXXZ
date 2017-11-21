@@ -21,17 +21,20 @@ class WechatDepartment extends Base
         $result = $this ->where(['name' => $data['name'],'status' => 1]) ->find();
         if($result){
             if(!empty($data['id'])){
-                $this ->save(['name' => $data['name']],['id' => $data['id']]);
+                $this ->save($data,['id'=> $data['id']]);
                 return ['code' => 1,'msg'=> '修改成功'];
             }else{
                 return ['code' => 0,'msg'=> '新增失败,已存在同名称部门!'];
             }
         }else{
             if(!empty($data['id'])){
-                $this ->save(['name' => $data['name']],['id' => $data['id']]);
+                $this ->save($data,['id'=> $data['id']]);
+                //$this ->save(['name' => $data['name']],['id' => $data['id']]);
                 return ['code' => 1,'msg'=> '修改成功'];
             }else{
-                $info = $this ->insert(['name' => $data['name']]);
+                unset($data['id']);
+                $info = $this ->save($data);
+                //$info = $this ->insert(['name' => $data['name']]);
                 return ['code' => 1,'msg'=> '添加成功','id' => $info];
             }
         }

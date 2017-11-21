@@ -41,7 +41,7 @@ class WechatUser extends Base
         //修改用户
         if(!empty($data['check'])){
             $this ->allowField([
-                'mobile','name','department','gender','position','birthday','education','nation','partytime','address','review'
+                'mobile','name','department','gender','position','birthday','education','nation','partytime','address','review','politics_status','tag'
             ]) ->save($data, ['id' => $data['check']]);
             return ['code' => 1,'msg'=> '修改成功'];
         }else{
@@ -53,7 +53,7 @@ class WechatUser extends Base
             }else{
 //                    $user ->data($data) ->allowField(true) ->save();
                 $this ->data($data) ->allowField([
-                    'mobile','name','department','gender','position','birthday','education','nation','partytime','address','review'
+                    'mobile','name','department','gender','position','birthday','education','nation','partytime','address','review','politics_status','tag'
                 ]) ->save();
                 return['code' => 1,'msg'=> '新增成功'];
             }

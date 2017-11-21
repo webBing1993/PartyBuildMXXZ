@@ -48,10 +48,35 @@
                     <form id="form" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
+                                <label>上级部门:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="parentid">
+                                    {volist name="departmentList" id="vo"}
+                                    <option value="{$vo.id}" {eq name="$vo.id" value="$info.parentid|default='2'"}selected{/eq}>{$vo.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
                                 <label>部门名称:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="部门名称" class="form-control form_title" name="department" value="{$name|default=''}">
+                                <input type="text" placeholder="部门名称" class="form-control form_title" name="department" value="{$info.name|default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>党徽:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="mark" {eq name="$info.mark|default='0'" value="0"}checked{/eq}>无党徽
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio"  value="1" name="mark" {eq name="$info.mark|default='0'" value="1"}checked{/eq}>有党徽
+                                </label>
                             </div>
                         </div>
 
@@ -83,6 +108,8 @@
     //数据提交
     $('.post-add').click(function(){
         var name = $("input[name='department']").val().trim();
+        var parentid = $("select[name='parentid']").val();
+        var mark = $("input[name='mark']:checked").val();
         var it = $(this);
         if(!name){
             warning({msg: "部门名称不能为空"});
@@ -92,6 +119,8 @@
             url: "{:Url('Wechat/add_department')}",
             data: {
                 'name' : name,
+                'parentid' : parentid,
+                'mark' : mark,
                 'id' : "{$id}"
             },
             success: function(data){

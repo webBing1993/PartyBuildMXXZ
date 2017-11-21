@@ -9,60 +9,37 @@
 {block name="body"}
 </div>
 <ul class="d_lists">
-	<!--党工青妇科负责人-->
+	{volist name="modelAll" id="vo"}
 	<li class="d_list">
 		<div class="d_img_box">
-			<div class="d_img" style="background-color: #ef6776">
-				陈
+			<div class="d_img" style="background-color: {$vo.color}">
+				{$vo.surname}
 			</div>
 		</div>
-		<div class="d_name ">陈山
+		<div class="d_name ">{$vo.name}
+			{eq name="$vo.tag" value="2"}
 			<img src="/home/images/structure/xx.jpg" alt="">
-			<a class="d_tel" href="tel:15824167420" >
-				<span class="d_lst"><img src="/home/images/structure/woman.png" alt="">    <i>党员</i> </span>
+			{/eq}
+			<a class="d_tel" href="tel:{$vo.mobile}" >
+				<span class="d_lst">
+					{eq name="$vo.gender" value="2"}
+					<img src="/home/images/structure/woman.png" alt="">
+					{else/}
+					<img src="/home/images/structure/man.png" alt="">
+					{/eq}
+					<i>{$vo.politics_status}</i> </span>
 				<span class="d_tel_icon"></span>
-				15824167420
+				{$vo.mobile}
 			</a>
 		</div>
 	</li>
-	<!--党工青妇科负责人-->
-	<li class="d_list">
-		<div class="d_img_box">
-			<div class="d_img" style="background-color: #ef6776">
-				李
-			</div>
-		</div>
-		<div class="d_name ">李四
-			<img src="/home/images/structure/xx.jpg" alt="">
-			<a class="d_tel" href="tel:15824167420" >
-				<span class="d_lst"><img src="/home/images/structure/man.png" alt="">    <i>党员</i> </span>
-				<span class="d_tel_icon"></span>
-				15824167420
-			</a>
-		</div>
-	</li>
-	<!--大众普通联系人-->
-	<li class="d_list">
-		<div class="d_img_box">
-			<div class="d_img" style="background-color: #ef6776">
-              张
-			</div>
-		</div>
-		<div class="d_name ">张三
-			<a class="d_tel" href="tel:15824167420" >
-				<span class="d_lst"><img src="/home/images/structure/man.png" alt="">    <i>党员</i> </span>
-				<span class="d_tel_icon"></span>
-				15824167420
-			</a>
-		</div>
-	</li>
+	{/volist}
 </ul>
 {/block}
 
 {block name="script"}
 <script>
-$('title' ).text('组织架构');
-var party3 = '{$party}';
+/*var party3 = '{$party}';
 console.log(party3);
 	var data2 =[
 	{
@@ -748,8 +725,8 @@ console.log(party3);
 
 		},]
 	}
-];
-var bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
+];*/
+//var bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
 //var len = data2.length;
 //console.log(data2);
 //for(var i = 0 ; i < len ;i++){
