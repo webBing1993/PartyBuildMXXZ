@@ -174,3 +174,10 @@ function getDay($time){
         return substr($time,$num1+1);
     }
 }
+/**
+ * 隐藏手机号码中间部分内容
+ */
+function hide_mobile($mobile) {
+    return mb_substr($mobile, 0, 3)."****".mb_substr($mobile, 7, 4);
+
+}

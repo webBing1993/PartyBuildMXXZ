@@ -18,4 +18,10 @@ class WechatUser extends Model {
         self::POLITICS_STATUS_LEAGUE  => '团员',
         self::POLITICS_STATUS_PARTY  => '党员',
     ];
+    public static function getName($userId) {
+        return self::where('userId', $userId)->value('name');
+    }
+    public static function getTag($userId) {
+        return self::where('userId', $userId)->value('tag');
+    }
 }
