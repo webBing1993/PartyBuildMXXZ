@@ -1,0 +1,108 @@
+{extend name="public/pure"}
+
+{block name="style"}
+<title>梦想小镇红色驿站</title>
+<link rel="stylesheet" href="/home/css/index/newindex.css">
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+{/block}
+
+{block name="body"}
+<!--banner-->
+<div class="banners ">
+    <div class="swiper-container swiper-container-horizontal">
+            <div class="banner swiper-slide swiper-slide-prev" data-swiper-slide-index="0" style="width: 375px;">
+                <img src="/home/images/index/banner20170609154838.png" alt="">
+            </div>
+            <!--<div class="banner swiper-slide swiper-slide-active" data-swiper-slide-index="1" style="width: 375px;">-->
+                <!--<img src="/home/images/index/banner20170609154838.png" alt="">-->
+            <!--</div>-->
+            <!--<div class="banner swiper-slide swiper-slide-next" data-swiper-slide-index="2" style="width: 375px;">-->
+                <!--<img src="/home/images/index/banner20170609154838.png" alt="">-->
+            <!--</div>-->
+            <!--<div class="banner swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="width: 375px;">-->
+                <!--<img src="/home/images/index/banner20170609154838.png" alt="">-->
+            <!--</div>-->
+    </div>
+</div>
+<!--nav-->
+<div class="nav">
+     <ul class="list">
+         <li class="item itme_last">
+             <a href="#">
+                 <img src="/home/images/newindex/hdfq.png" alt="">
+                 <span>活动发起</span>
+             </a>
+             <a href="#" class="ys_ls">
+                 <img src="/home/images/newindex/yszz.png" alt="">
+                 <span>云上组织</span>
+             </a>
+         </li>
+         <li class="item  itme_last_la ">
+             <a href="#" class="mx_ls">
+                 <img src="/home/images/newindex/mxkx.png" alt="">
+                 <span>梦想快讯</span>
+             </a>
+             <a href="#" class="pp_ls">
+                 <img src="/home/images/newindex/pplx.png" alt="">
+                 <span>品牌项目</span>
+             </a>
+             <a href="#" class="ly_ls">
+                 <img src="/home/images/newindex/lyqd.png" alt="">
+                 <span>留影签到</span>
+             </a>
+         </li>
+         <li class="item itme_last">
+             <a href="#" class="jm_ls">
+                 <img src="/home/images/newindex/jmct.png" alt="">
+                 <span>鸡毛传贴</span>
+             </a>
+             <a href="#" class="zd_ls">
+                 <img src="/home/images/newindex/fdzd.png" alt="">
+                 <span>活动阵地</span>
+             </a>
+         </li>
+         <li class="item  itme_last_la ">
+             <a href="#" class="mx_ls">
+                 <img src="/home/images/newindex/mxkx.png" alt="">
+                 <span>梦想快讯</span>
+             </a>
+             <a href="#" class="pp_ls">
+                 <img src="/home/images/newindex/pplx.png" alt="">
+                 <span>品牌项目</span>
+             </a>
+             <a href="#" class="ly_ls">
+                 <img src="/home/images/newindex/lyqd.png" alt="">
+                 <span>留影签到</span>
+             </a>
+         </li>
+         <li class="item itme_last">
+             <a href="#" class="jm_ls">
+                 <img src="/home/images/newindex/jmct.png" alt="">
+                 <span>鸡毛传贴</span>
+             </a>
+             <a href="#" class="zd_ls">
+                 <img src="/home/images/newindex/fdzd.png" alt="">
+                 <span>活动阵地</span>
+             </a>
+         </li>
+     </ul>
+
+
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script>
+    //轮播
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop:true,
+        autoplayDisableOnInteraction:false
+    });
+
+
+
+
+</script>
+{/block}

@@ -1,0 +1,63 @@
+a{
+    text-decoration:none;
+}
+
+
+.menu{
+    margin-top: 8vw;
+}
+.menu_lists{
+
+    width: 90vw;
+    margin:5vw auto 0 ;
+    border: 1px solid #eee;
+    padding: 3vw;
+    border-radius:2vw;
+     box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+    -webkit-border-radius: 8px;
+    border-radius: 8px
+
+}
+.menu_lists .list_name{
+    font-size: 1.6rem;
+    color: #333;
+    line-height: 12vw;
+    border-bottom: 1px solid #eeeeee;
+    padding-left:3vw ;
+}
+
+.menu_lists a{
+    display: block;
+    font-size: 1.4rem;
+    color: #333;
+    line-height: 12vw;
+    border-bottom: 1px solid #eee;
+    padding: 0vw 3vw ;
+    display: flex;
+    justify-content: space-between;
+}
+.menu_lists a .fa{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    float: right;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 11.4vw;
+}
+.fa:before {
+    content: "\f105";
+}
+.tip {
+    height: 7.4vw;
+    line-height: 7.4vw;
+    text-align: center;
+    color: #c1c1c1;
+    font-size: 1.4rem;
+}
+.tip img{
+    width:5vw;
+    height:5vw;
+    margin-top: 1.2vw;
+}

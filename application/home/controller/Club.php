@@ -22,6 +22,12 @@ class Club extends Base{
         return $this->fetch();
     }
     /*
+    * 志愿服务详情页
+    */
+    public function volunteer(){
+        return $this->fetch();
+    }
+    /*
      * 活动列表
      */
     public function activity(){

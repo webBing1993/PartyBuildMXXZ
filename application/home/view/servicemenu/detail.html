@@ -1,0 +1,92 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>服务菜单</title>
+<link rel="stylesheet" href="/home/css/servicemenu/details.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+{/block}
+
+{block name="body"}
+<div class="de_main">
+     <div class="title_name ">一.&nbsp&nbsp适用对象</div>
+     <div class="detail">
+         适用于梦想小镇及周边单位所有青年
+     </div>
+
+    <div class="title_name ">二.&nbsp&nbsp服务内容</div>
+    <div class="detail">
+       受理服务于小镇公益活动，或大型会议,活动现场的志愿者报名登记
+    </div>
+    <div class="title_name">三.&nbsp&nbsp申领程序</div>
+    <div class="detail">
+        申请-系统预审-受理-登记
+    </div>
+
+    <div class="hotline">咨询电话: <span>0571-85111525 85119460</span></div>
+    <div class="serv_time">服务时间:工作日   上午8:30-12:00
+        <span>下午13:30-17:00</span>
+    </div>
+</div>
+<div class="note">
+    <span class="read">0</span>
+    <span class="collect star " onclick="isCollect(this,1,57)">&nbsp; </span>
+
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+  <script>
+//      //收藏
+//      function isCollect(e,type,id){
+//          $.ajax({
+//              type:"post",
+//              url:"{:Url('Base/collect')}",
+//              data:{
+//                  type:type,
+//                  aid:id,
+//              },
+//              success:function(data){
+//                  $(e).toggleClass('star' ).toggleClass('star_');
+//                  if($(e).hasClass('star')){
+//                      swal({
+//                          title: '提示',
+//                          text: '即将取消收藏',
+//                          type: 'error',
+//                          confirmButtonText:'确定',
+//                          timer:3000
+//                      });
+//                  }else{
+//                      swal({
+//                          title: ' ',
+//                          text: '收藏成功',
+//                          type: 'success',
+//                          confirmButtonText:'确定',
+//                          timer:3000
+//                      });
+//                  }
+//              }
+//          })
+//      }
+//      //点赞
+//      function isGood(e,type,id){
+//          var n = $(e ).text();
+//          $(e).toggleClass('good' ).toggleClass('good_');
+//          $(e ).hasClass('good')?n--:n++;
+//          $(e ).text(n);
+//          //type：1文章，2评论
+//          //	var type = $(e ).hasClass('fr')?2:1;
+//          $.ajax({
+//              type:"post",
+//              url:"{:Url('Base/like')}",
+//              data:{
+//                  type:type,
+//                  aid:id,
+//              },
+//              success:function(data){
+//
+//              }
+//          })
+//      }
+  </script>
+{/block}

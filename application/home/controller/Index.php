@@ -41,6 +41,15 @@ class Index extends Base {
         $this->assign('test',$test);
         return $this->fetch();
     }
+    /**
+     * 新首页
+     * @return mixed
+     */
+    public function newindex(){
+        $this ->anonymous();
+        $uid = session('userId');
+        return $this->fetch();
+    }
 
     /**
      * 获取数据列表 红色足记 两学一做 鸡毛传贴

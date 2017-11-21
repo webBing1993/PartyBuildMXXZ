@@ -1,0 +1,167 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>云上组织</title>
+<link rel="stylesheet" href="/home/css/structure/communication.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+
+    .listbox{
+        margin-top: 3vw;
+    }
+    .listbox .box .box_ .lists {
+        padding: 2.4vw;
+    }
+
+</style>
+
+{/block}
+
+{block name="body"}
+<!--banner-->
+<div class="banner">
+    <img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
+</div>
+<!--公司名录-->
+<div class="llistbox" style="left: -412px;">
+    <div class="town box">
+        <div class="box_  box_tp  or">
+            <div class="lists">
+                <a href="/home/structure/detail.html">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">菜根科技 <span><img src="\home\images\structure\DH.jpg" alt=""></span></div>
+                            
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">第七空间孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                <div class="list clear">
+                    <div class="party1">
+                        <div class="tri-left structure2"></div>
+                        <div class="name1">极客孵化器</div>
+                    </div>
+                </div>
+            </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">新势力孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">湾西孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">马达加加孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">1897X创业孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">蜂巢孵化器</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="list clear">
+                        <div class="party1">
+                            <div class="tri-left structure2"></div>
+                            <div class="name1">纵贯会孵化器</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/home/js/jquery.lazyload.min.js"></script>
+<script>
+   $(function(){
+        //组织架构切换
+    //    slide();
+        $(function(){
+//		//tab值记录
+            tabRecord('.tab' ,'.box');
+//		//tab切换
+            tabSwitch('.tab' ,'.box');
+            //上拉加载
+        });
+        $(function() {
+            $("img.lazy").lazyload({effect: "fadeIn"});
+        });
+    });
+    function slide(){
+        $('.lists .party1' ).on('click',function(){
+            var it = $(this);
+            var detail = it.next('.detail1' );
+            if(detail.hasClass('down')){
+                detail.slideUp();
+                it.find('.tri').removeClass('toup').addClass('todown');
+            }else{
+                detail.slideDown();
+                it.find('.tri').removeClass('todown').addClass('toup');
+            }
+            detail.toggleClass('down');
+        });
+    }
+
+    function tabSwitch(a,b,fn,url){
+        $(a).off('click').on('click',function(){
+            var this_ = this ;
+            var box = $(b ).parent();
+            var index = $(this_ ).index();
+            var ww = $(b ).parent().width();
+            $(this_ ).addClass('active' );
+            $(this_ ).siblings(a).removeClass('active');
+            $(b).removeClass('hidden');
+            ww = ww * index;
+            box.stop().animate({left: -ww +'px'},300,function(){
+                $(b).eq(index).siblings(b).addClass('hidden');
+                setCookie( 'tab', index );
+                if(fn){
+                    var tab = $('.active' ).index() + 1;
+                    fn(tab,url,7,5);
+                }
+            });
+
+        })
+    }
+
+</script>
+{/block}

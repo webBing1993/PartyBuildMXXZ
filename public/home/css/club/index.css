@@ -1,0 +1,142 @@
+.tabs {
+    background: url(/home/images/activity/tab.png) no-repeat;
+    background-size: cover;
+}
+.tabs {
+    width: 100vw;
+    height: 11vw;
+}
+.clear {
+    zoom: 1;
+}
+.tabs .tab {
+    display: inline-block;
+    width: 49vw;
+    height: 100%;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 11vw;
+    text-align: center;
+}
+.triangle-up {
+    border-left: 2.66vw solid transparent;
+    border-right: 2.66vw solid transparent;
+    border-bottom: 3.46vw solid #fff;
+    position: absolute;
+    top: 8.5vw;
+    left: 21.06vw;
+}
+.clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.mass{
+    width: 90vw;
+    margin:5vw auto 0 ;
+    border: 1px solid #eee;
+    padding: 3vw;
+    border-radius:2vw;
+    box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+    -webkit-border-radius: 8px;
+    border-radius: 8px
+}
+.mass .title{
+    font-size: 1.4rem;
+    color: #333;
+    padding: 2vw;
+    border-bottom: 1px solid #eee;
+    line-height: 12vw;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mass .title img{
+    width: 15vw;
+    height: 15vw;
+    float: left;
+}
+.mass .title .title_list{
+    width: 60vw;
+    line-height: 8vw;
+}
+.mass .title .title_list span i{
+    font-style: normal;
+}
+
+.mass .title .fa{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    float: right;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 14vw;
+}
+.fa:before {
+    content: "\f105";
+}
+
+.list{
+    ont-size: 1.4rem;
+    color: #333;
+    padding: 2vw;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+.list  img{
+    width: 12vw;
+    height: 12vw ;
+    border-radius: 3vw;
+}
+.list .info_text, .site, .time{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 5vw;
+    font-size: 1.4rem;
+    color: #666;
+    margin-left: 2vw;
+}
+.tip {
+    height: 7.4vw;
+    line-height: 7.4vw;
+    text-align: center;
+    color: #c1c1c1;
+    font-size: 1.4rem;
+}
+.tip img{
+    width:5vw;
+    height:5vw;
+    margin-top: 1.2vw;
+}
+
+ .mass .simple_info{
+    padding: 4vw;
+     font-size: 1.4rem;
+ }
+ .mass .simple_info p{
+     overflow:hidden;
+     text-overflow:ellipsis;
+     display:-webkit-box;
+     -webkit-box-orient:vertical;
+     -webkit-line-clamp:3;
+     color:#666;
+ }
+  .volunt  .tip {
+    display: block;
+    height: 7.4vw;
+    line-height: 7.4vw;
+    text-align: center;
+    color:#666;
+    font-size: 1.4rem;
+}
+ .volunt  .tip img{
+    width:5vw;
+    height:5vw;
+    margin-top: 1.2vw;
+}

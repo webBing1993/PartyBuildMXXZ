@@ -115,7 +115,7 @@ body {
 }
 .tabs .tab {
   display: block;
-  width: 33.3vw;
+  width: 50vw;
   line-height: 9.1vw;
   color: #999999;
   font-size: 1.5rem;
@@ -158,10 +158,10 @@ body {
   position: absolute;
   top: 3vw;
   left: -1.8vw;
-  width: 20.2vw;
+  width: 23.2vw;
   height: 8vw;
   background: url('/home/images/structure/tag.png') 0 0 no-repeat;
-  background-size: 20.2vw 8vw;
+  background-size: 23.2vw 8vw;
   color: #ffffff;
   text-align: center;
   font-size: 1.2rem;
@@ -171,10 +171,13 @@ body {
   content: '本月微党课';
 }
   .listbox .box.summary .box_:before {
-    content: '组织简介';
+    content: '小镇介绍';
+  }
+  .listbox .box.summary .box_1:before {
+    content: '党工青妇科简介';
   }
   .listbox .box.town .box_:before {
-    content: '组织架构';
+    content: '梦想小镇';
   }
 .listbox .box.summary .box_{
   padding: 11vw 3vw 6vw 3vw;
@@ -182,7 +185,10 @@ body {
 .listbox .box.shouldKnow .box_{
   padding: 11vw 3vw;
 }
-
+  .listbox .box.summary .box_1:before {
+    background-size: 30.2vw 8vw;
+    width: 30.2vw;
+  }
 
  .listbox .box.shouldKnow .box_ img{
   width: 100%;
@@ -204,57 +210,61 @@ body {
     /*background: #fafafa;*/
   }
 .listbox .box .box_ .lists {
-  padding: 13px;
+  padding:6.4vw;
   color: #333333;
   font-size: 14px;
 }
 .listbox .box .box_ .lists .name1 {
   display: inline-block;
   width: 100%;
-  height: 45px;
-  font-size: 14px;
-  line-height: 45px;
-  border-bottom: 1px solid #f1f1f1;
-  padding-left: 1rem;
+  height: 12vw;
+  font-size: 1.4rem;
+  line-height: 12vw;
+  padding-left: 3vw;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
   top: 0;
   font-size: 1.6rem;
-  padding-left: 15px;
-  line-height: 30px;
+  padding-left:10.6vw;
+  line-height: 8vw;
+}
+.lists a{
+  display: block;
+  border-bottom: 1px solid #f1f1f1;
+  color: #333;
 }
 .listbox .box .box_ .lists .party1 .tri {
   position: absolute;
-  top: 15px;
+  top: 4vw;
   right: 0;
   content: '';
-  height: 10px;
-  width: 10px;
+  height: 2.5vw;
+  width: 2.5vw;
   background: url('/home/images/structure/tri.png') 0 0 no-repeat;
-  background-size: 10px 10px;
+  background-size: 2.5vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left{
   position: absolute;
-  top: 10px;
-  left: 0;
+  top: 2.66vw;
+  left: 5.33vw;
   content: '';
-  height: 20px;
-  width: 20px;
+  height: 5.33vw;
+  width: 5.33vw;
   background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
-  background-size: 20px 20px;
+  background-size: 5.33vw 5.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure2{
   background: url('/home/images/structure/structure2.png') 0 0 no-repeat;
-  background-size: 20px 20px;
+  background-size: 5.33vw 5.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure3{
   background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
-  background-size: 20px 20px;
+  background-size: 5.33vw 5.33vw;
 }
   .listbox .box .box_ .lists .party1 .tri-left.structure4{
     background: url('/home/images/structure/structure4.png') 0 0 no-repeat;
-    background-size: 20px 20px;
+    background-size:5.33vw 5.33vw;
   }
 .listbox .box .box_ .lists .detail1 {
   width: 100%;
@@ -376,8 +386,7 @@ body {
   }
   .d_list{
     display: flex;
-    align-items: center;
-    padding:4vw;
+    padding:2vw 4vw;
     border-bottom:1px solid #f7f7f7;
   }
   .d_list .d_img{
@@ -393,10 +402,10 @@ body {
     margin-right: 3.2vw;
   }
   .d_list>.d_name{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #333;
-    width:53.3vw;
+    width:100vw;
   }
   .d_list>.d_tel{
     color: #29adf0;
@@ -409,4 +418,41 @@ body {
     background: url("/home/images/structure/tel.png") 50% 50% no-repeat;
     -webkit-background-size:3.47vw 4.53vw;
     background-size:3.47vw 4.53vw;
+  }
+  .d_list .d_name>img{
+    width: 3.5vw;
+    height: 3.5vw;
+    margin-top: 1.2vw;
+  }
+
+  .d_list .d_name>a{
+    display: block;
+    font-size:1.4rem;
+    line-height: 10vw;
+    font-weight: 100;
+  }
+  .d_list .d_name>a img{
+    width: 3.5vw;
+    height: 3.5vw;
+    margin-top: 3.5vw;
+  }
+ .d_tel>.d_tel_icon {
+    width: 26.67vw;
+    padding: 0.4vw 2.13vw;
+    margin-right: 1.33vw;
+    background: url(/home/images/structure/tel.png) 50% 50% no-repeat;
+    -webkit-background-size: 3.47vw 4.53vw;
+    background-size: 3.47vw 4.53vw;
+   margin-left: 20vw;
+  }
+  .d_list .d_name>a>.d_lst{
+    color: #333;
+
+  }
+  .d_list .d_name>a>.d_lst>i{
+    font-style: normal;
+    margin-left: 1vw;
+  }
+  .d_list .d_name>a>.d_lst>b{
+    font-weight: 100;
   }

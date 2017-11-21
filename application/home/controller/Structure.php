@@ -25,4 +25,10 @@ class Structure extends Base{
         $this->assign('party',$party);
         return $this->fetch();
     }
+    /*
+    * 组织架构通讯公司页面
+    */
+    public function communication(){
+        return $this->fetch();
+    }
 }
