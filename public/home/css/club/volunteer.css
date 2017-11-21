@@ -1,0 +1,71 @@
+.banner {
+    width: 100vw;
+    height: 50vw;
+}
+.banner .banner-img {
+    width: 100%;
+    height: 100%;
+}
+.detail_info{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 130vw;
+}
+.detail_info  .box {
+    position: absolute;
+    top:8vw;
+    width: 99vw;
+}
+.detail_info .box .box_{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 90vw;
+    margin: 8vw 5vw 0 5vw;
+    padding-top: 11vw;
+    box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+.detail_info .box .box_:before {
+    content: '';
+    position: absolute;
+    top: 3vw;
+    left: -1.8vw;
+    width: 23.2vw;
+    height: 8vw;
+    background: url(/home/images/structure/tag.png) 0 0 no-repeat;
+    background-size: 23.2vw 8vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 5.8vw;
+}
+.detail_info .box.town .box_:before {
+    content: '活动简介';
+}
+.detail_info  .box  .box_info{
+    padding: 6vw;
+    font-size: 1.4rem;
+    color: #333;
+}
+.detail_info  .box  .box_info p{
+    line-height: 6vw;
+    text-indent: 2em;
+}
+.box  .box_info .contact{
+    margin-top: 10vw;
+}
+.box  .box_info .contact, .apply , .site{
+    line-height: 7vw;
+
+}
+
+.detail_info .activityTitle{
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 15vw;
+    text-align: center;
+}

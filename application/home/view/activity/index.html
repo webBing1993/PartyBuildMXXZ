@@ -77,8 +77,8 @@
                             {switch name="los.is_like"}{case value="0"}
                                     <i class="agree" onclick="agree(this,{$los.id},1)"></i>
                                     <span>{$los.likes_yes}</span>
-                                    <i class="disagree" onclick="disagree(this,{$los.id},2)"></i>
-                                    <span>{$los.likes_no}</span>{/case}{case value="1"}
+                                    <!--<i class="disagree" onclick="disagree(this,{$los.id},2)"></i>-->
+                                    <!--<span>{$los.likes_no}</span>{/case}{case value="1"}-->
                                     <i class="agree_" ></i>
                                     <span>{$los.likes_yes}</span>
                                     <i class="disagree"></i>
@@ -289,26 +289,26 @@
                    html+= '</div>' +
                     '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>'
                 if ("{$visit}" == 0){
-                    html+='<div class="opinion">'
-                    switch (list.is_like){
-                        case 0:
-                            html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
-                                    '	<span>'+list.likes_yes+'</span>' +
-                                    '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
-                            break;
-                        case 1:
-                            html+='	<i class="agree_"></i>' +
-                                    '	<span>'+list.likes_yes+'</span>' +
-                                    '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
-                            break;
-                        case 2:
-                            html+='	<i class="agree" ></i>' +
-                                    '	<span>'+list.likes_yes+'</span>' +
-                                    '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
-                            break;
-                    }
-                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
-                            '</div>'
+//                    html+='<div class="opinion">'
+//                    switch (list.is_like){
+//                        case 0:
+//                            html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
+//                                    '	<span>'+list.likes_yes+'</span>' +
+//                                    '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
+//                            break;
+//                        case 1:
+//                            html+='	<i class="agree_"></i>' +
+//                                    '	<span>'+list.likes_yes+'</span>' +
+//                                    '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
+//                            break;
+//                        case 2:
+//                            html+='	<i class="agree" ></i>' +
+//                                    '	<span>'+list.likes_yes+'</span>' +
+//                                    '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
+//                            break;
+//                    }
+//                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
+//                            '</div>'
                 }else{
                     html+='<div class="opinion"><i class="agree"></i><span>'+list.likes_yes+'</span>' +
                         '<i class="disagree"></i><span>'+list.likes_no+'</span><i class="comment-icon"></i>' +
@@ -422,26 +422,26 @@
         })
     };
 
-    var disagree = function(e,id,status){
-        //样式变化，移到suc
-        var n = $(e).next('span').text();
-        if($(e).hasClass('disagree_')) return false;
-        if($(e).prevAll('i').hasClass('agree_')) return false;
-        $(e).toggleClass('disagree' ).toggleClass('disagree_');
-        $(e ).hasClass('disagree')?n--:n++;
-        $(e ).next('span').text(n);
-        $.ajax({
-            type:"post",
-            url:"{:Url('Activity/vote')}",
-            data:{
-                id:id,
-                status:status
-            },
-            success:function(data){
-                console.log('点赞成功');
-            }
-        })
-    };
+//    var disagree = function(e,id,status){
+//        //样式变化，移到suc
+//        var n = $(e).next('span').text();
+//        if($(e).hasClass('disagree_')) return false;
+//        if($(e).prevAll('i').hasClass('agree_')) return false;
+//        $(e).toggleClass('disagree' ).toggleClass('disagree_');
+//        $(e ).hasClass('disagree')?n--:n++;
+//        $(e ).next('span').text(n);
+//        $.ajax({
+//            type:"post",
+//            url:"{:Url('Activity/vote')}",
+//            data:{
+//                id:id,
+//                status:status
+//            },
+//            success:function(data){
+//                console.log('点赞成功');
+//            }
+//        })
+//    };
 
     var layout = function(){
         $('.lists ul li' ).each(function(){

@@ -13,7 +13,7 @@
     <span class="triangle-up"></span>
 </div>
  <!--社团活动-->
-<div class="notices hidden  ">
+<div class="notices ">
     <div class="mass">
        <a class="title">
           <img src="/home/images/club/Snap.jpg" alt="">
@@ -47,7 +47,7 @@
                <div class="time">时间: <span>2017-10-12</span></div>
            </div>
        </a>
-       <div class="tip">更多活动<img src="/home/images/servicemenu/xl.png" alt=""></div>
+       <div class="tip">更多活动>></div>
    </div>
     <div class="mass">
         <a class="title">
@@ -82,7 +82,7 @@
                 <div class="time">时间: <span>2017-10-12</span></div>
             </div>
         </a>
-        <div class="tip">更多活动<img src="/home/images/servicemenu/xl.png" alt=""></div>
+        <div class="tip">更多活动>></div>
     </div>
 </div>
 <!--志愿服务-->
@@ -96,10 +96,10 @@
             </div>
             <span class="fa"></span>
         </a>
-        <div class="simple_info">
-                <p> 简介:在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。
-                    在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。</p>
-        </div>
+        <a class="simple_info">
+            <p> 简介:在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。
+                在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。</p>
+        </a>
         <a class="tip">查看更多>> </a>
     </div>
     <div class="mass  volunt">
@@ -111,10 +111,10 @@
             </div>
             <span class="fa"></span>
         </a>
-        <div class="simple_info">
+        <a class="simple_info">
             <p> 简介:在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。
                 在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。</p>
-        </div>
+        </a>
         <a class="tip">查看更多>> </a>
     </div>
     <div class="mass  volunt">
@@ -126,10 +126,10 @@
             </div>
             <span class="fa"></span>
         </a>
-        <div class="simple_info">
+        <a  class="simple_info">
             <p> 简介:在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。
                 在梦想小镇团委、菜根科技、铜掌柜的组织下，来自慧灵公益、未来科技城双语幼儿园的大朋友小朋友将欢聚在一起，庆祝六一，推广公益，传递“无差别对待”理念。</p>
-        </div>
+        </a>
         <a class="tip">查看更多>> </a>
     </div>
 </div>
@@ -137,6 +137,8 @@
 
 {block name="script"}
 <script>
+    //初始化
+    var ntc = $('.notices');
     //tab切换
     $('.tabs>.tab ').on('click',function() {
         var ntc = $('.notices');

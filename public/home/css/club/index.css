@@ -118,6 +118,7 @@
  .mass .simple_info{
     padding: 4vw;
      font-size: 1.4rem;
+     display: block;
  }
  .mass .simple_info p{
      overflow:hidden;
