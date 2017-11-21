@@ -158,23 +158,19 @@ body {
 .llistbox .box .box_:last-child {
     margin-bottom: 5vw;
 }
-.llistbox .box .box_:before {
-    content: '';
+.llistbox .box .box_ >.bor_ls {
+    display: block;
     position: absolute;
     top: 3vw;
     left: -1.8vw;
-    width: 23.2vw;
-    height: 8vw;
-    background: url('/home/images/structure/tag.png') 0 0 no-repeat;
-    background-size: 23.2vw 8vw;
+    width: 28.2vw;
+    height: 11vw;
+    background: url(/home/images/structure/tag.png) 0 0 no-repeat;
+    background-size: 28.2vw 11vw;
     color: #ffffff;
     text-align: center;
-    font-size: 1.2rem;
-    line-height: 5.8vw;
-}
-
-.llistbox .box.town .box_:before {
-    content: '互联网村';
+    font-size: 1.4rem;
+    line-height: 6.8vw;
 }
 
 .llistbox .box.shouldKnow .box_ p.q{

@@ -153,20 +153,20 @@ body {
 .listbox .box .box_:last-child {
   margin-bottom: 5vw;
 }
-/*.listbox .box .box_:before {*/
-  /*content: '';*/
-  /*position: absolute;*/
-  /*top: 3vw;*/
-  /*left: -1.8vw;*/
-  /*width: 28.2vw;*/
-  /*height: 11vw;*/
-  /*background: url(/home/images/structure/tag.png) 0 0 no-repeat;*/
-  /*background-size: 28.2vw 11vw;*/
-  /*color: #ffffff;*/
-  /*text-align: center;*/
-  /*font-size: 1.4rem;*/
-  /*line-height: 6.8vw;*/
-/*}*/
+.listbox .box .box_:before {
+  content: '';
+  position: absolute;
+  top: 3vw;
+  left: -1.8vw;
+  width: 28.2vw;
+  height: 11vw;
+  background: url(/home/images/structure/tag.png) 0 0 no-repeat;
+  background-size: 28.2vw 11vw;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.4rem;
+  line-height: 6.8vw;
+}
 .listbox .box.shouldKnow .box_:before {
   content: '本月微党课';
 }
@@ -220,7 +220,6 @@ body {
   height: 12vw;
   font-size: 1.4rem;
   line-height: 12vw;
-  padding-left: 3vw;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -247,7 +246,7 @@ body {
 .listbox .box .box_ .lists .party1 .tri-left{
   position: absolute;
   top: 2.66vw;
-  left: 6.33vw;
+  left: 2.33vw;
   content: '';
   height: 6.33vw;
   width: 6.33vw;
