@@ -30,6 +30,11 @@ class Servicemenu extends Base{
     public function detail(){
         $pid = input('id');
         $model = ServiceItems::where(['id' => $pid])->find();
+        if($model['tel2']){
+            $model['tel'] = explode('-', $model['tel2'])[1];
+        }else{
+            $model['tel'] = '';
+        }
         $this->assign('model',$model);
         return $this->fetch();
     }
