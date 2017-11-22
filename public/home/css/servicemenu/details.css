@@ -1,31 +1,28 @@
 .de_main{
     width: 90vw;
+    margin: 3vw auto 0;
     margin-bottom: 8vw;
-    margin:10vw  auto 0 ;
-    border: 1px solid #eee;
-    padding: 5vw;
-    border-radius:2vw;
-    box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
-    -webkit-border-radius: 8px;
-    border-radius: 8px
 }
 .de_main  .title_name{
     font-size:1.6rem;
     color: red;
-    line-height: 10vw;
+    line-height: 4vw;
     margin-top: 5vw;
 }
 .de_main  .detail{
     font-size: 1.4rem;
     line-height: 8vw;
-    text-indent:2em;
-    margin-left: 5vw;
+    margin-left: 8vw;
 }
 .de_main .hotline{
-    margin-top: 10vw;
+    margin-top: 6vw;
     font-size: 1.4rem;
     color: #333;
-    line-height: 15vw;
+    line-height:4vw;
+}
+.de_main .hotline a{
+    color: #1c50bf;
+    font-weight: bold;
 }
 .de_main  .serv_time{
     font-size: 1.4rem;
@@ -99,4 +96,39 @@
 
 .article .content * {
     max-width: 100%!important;
+}
+
+
+.header {
+    width: 100vw;
+
+    padding: 2vw 5vw;
+}
+.header .title {
+    width: 100%;
+    color: #333;
+    font-size: 1.7rem;
+    line-height: 26px;
+    text-align: center;
+    font-weight:600;
+}
+.header .time,.header .name {
+    display: inline-block;
+    color: #999;
+    font-size: 1.2rem;
+    line-height: 16px;
+    margin-top: 2.66vw;
+
+}
+.header .time {
+    float: right;
+}
+
+.header .time {
+    float: right;
+}
+.line {
+    height: 1px;
+    width: 100%;
+    background: #f1f1f1;
 }

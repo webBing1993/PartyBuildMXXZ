@@ -6,12 +6,23 @@
 <link rel="stylesheet" href="/home/css/common/rem.css">
 {/block}
 <style>
-
+.de_list{
+    margin-bottom: 8vw;!important;
+}
 
 </style>
 
 {block name="body"}
-<div class="de_main  ">
+<div class="header">
+    <div class="title">组织关系转接</div>
+    <span class="name">梦想小镇</span>
+    <span class="time">2017-06-25</span>
+</div>
+<div class="line"></div>
+<div class="content">
+
+</div>
+<div class="de_main de_list ">
      <div class="title_name ">一.&nbsp&nbsp适用对象</div>
      <div class="detail">
          {$model.object}
@@ -30,8 +41,8 @@
         {$model.flow}
     </div>
 
-    <div class="hotline">咨询电话: <span>{$model.tel1}{notempty name="$model.tel2"} &nbsp {$model.tel2}{/notempty}</span></div>
-    <div class="serv_time">服务时间:工作日  上午 {$model.am}<span>下午{$model.pm}</span>
+    <div class="hotline">咨询电话: <a href="tel:{$model.tel1}">{$model.tel1}{notempty name="$model.tel2"}</a><a href="tel:{$model.tel2}">&nbsp {$model.tel}{/notempty}</a> </div>
+    <div class="serv_time">服务时间:工作日 {$model.am}<span>{$model.pm}</span>
     </div>
 </div>
 <!--<div class="note">-->
@@ -39,6 +50,9 @@
     <!--<span class="collect star " onclick="isCollect(this,1,57)">&nbsp; </span>-->
 
 <!--</div>-->
+
+
+
 {/block}
 
 {block name="script"}

@@ -2,19 +2,26 @@ a{
     text-decoration:none;
 }
 
-
+.banner{
+  width: 100vw;
+    height: 50vw;
+}
+.banner img{
+    width: 100%;
+    height: 100%;
+}
 .menu{
     margin: 8vw 0vw;
 
 }
 .menu_lists{
-
+    position: relative;
     width: 90vw;
     margin:5vw auto 0 ;
     border: 1px solid #eee;
-    padding: 3vw;
+    padding: 2vw;
     border-radius:2vw;
-     box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+     box-shadow: 1px 3px 3px rgba(102, 102, 102, 0.2);
     -webkit-border-radius: 8px;
     border-radius: 8px
 
@@ -22,9 +29,73 @@ a{
 .menu_lists .list_name{
     font-size: 1.6rem;
     color: #333;
-    line-height: 12vw;
-    border-bottom: 1px solid #eeeeee;
+    height: 9.3vw;
     padding-left:3vw ;
+}
+.menu_lists  .list_iocn_1{
+    position: absolute;
+    top: 3.2vw;
+    left: -1.8vw;
+    width: 16vw;
+    height: 7.4vw;
+    background: url(/home/images/structure/dw.png) 0 0 no-repeat;
+    background-size: 16vw  7.4vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 5.4vw;
+}
+.menu_lists .list_iocn_2{
+    position: absolute;
+    top: 3.2vw;
+    left: -1.8vw;
+    width: 16vw;
+    height: 7.4vw;
+    background: url(/home/images/structure/gh.png) 0 0 no-repeat;
+    background-size: 16vw  7.4vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 5.4vw;
+}
+.menu_lists .list_iocn_3{
+    position: absolute;
+    top: 3.2vw;
+    left: -1.8vw;
+    width: 16vw;
+    height: 7.4vw;
+    background: url(/home/images/structure/gh.png) 0 0 no-repeat;
+    background-size: 16vw  7.4vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 5.4vw;
+}
+.menu_lists .list_iocn_4{
+    position: absolute;
+    top: 3.2vw;
+    left: -1.8vw;
+    width: 16vw;
+    height: 7.4vw;
+    background: url(/home/images/structure/tw.png) 0 0 no-repeat;
+    background-size: 16vw  7.4vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 5.4vw;
+}
+.menu_lists .list_iocn_5{
+    position: absolute;
+    top: 3.2vw;
+    left: -1.8vw;
+    width: 16vw;
+    height: 7.4vw;
+    background: url(/home/images/structure/fl.png) 0 0 no-repeat;
+    background-size: 16vw  7.4vw;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 5.4vw;
 }
 
 .menu_lists a{
@@ -33,10 +104,14 @@ a{
     color: #333;
     line-height: 12vw;
     border-bottom: 1px solid #eee;
-    padding: 0vw 6vw ;
+    padding: 0vw 3vw ;
     display: flex;
     justify-content: space-between;
 }
+.menu_lists a:last-child{
+   border-bottom: none;
+}
+
 .menu_lists a .fa{
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;

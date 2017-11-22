@@ -21,16 +21,15 @@
 </style>
 {/block}
 {block name="body"}
-<!--banner-->
+
 <div class="banner">
     <img src="/home/images/common/1.jpg" alt="建言献策banner图">
 </div>
-<!--tab-->
-<div class="tabs clear">
-    <div class="tab"><span>手机党校</span></div>
-    <div class="tab"><span>练练身手</span></div>
-    <!--<div class="tab"><span>党史学习</span></div>-->
-</div>
+<!--<div class="tabs clear">-->
+    <!--<div class="tab"><span>手机党校</span></div>-->
+    <!--<div class="tab"><span>练练身手</span></div>-->
+    <!--&lt;!&ndash;<div class="tab"><span>党史学习</span></div>&ndash;&gt;-->
+<!--</div>-->
 <!--切换列表-->
 <div class="content">
     <div class="notices">
@@ -76,36 +75,36 @@
         $('.tabs>.tab').eq(c-1).find('span').addClass('active');
         ntc.eq(c-1).removeClass('hidden');
         //两学一做上拉加载
-        if(c == 1){
+      if(c == 1){
             var len = ntc.eq(c-1 ).find('.notice:last .list').length;
-            if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
+           if(len >= 5){
+               $('.tip' ).text('上拉加载更多');
+               loadScroll(c);
             }
         }else{
-            $('.tip' ).hide();
-        }
-        //tab切换
-        $('.tabs>.tab ').on('click',function(){
-            var ntc = $('.notices' );
-            var eq = $(this ).index();
-            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
-            $(this ).find('span' ).addClass('active');
-            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
-            ntc.eq(eq).removeClass('hidden');
-            if(eq == 0){
-                var len = ntc.eq(eq ).find('.notice:last .list').length;
-                if(len >= 5){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }
-            }else{
-                $('.tip' ).hide();
-                $(window ).off("scroll" );
-            }
-            //使用示例
-            setCookie("type",eq+11);
-        });
+          $('.tip' ).hide();
+       }
+//        //tab切换
+//        $('.tabs>.tab ').on('click',function(){
+//            var ntc = $('.notices' );
+//            var eq = $(this ).index();
+//            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
+//            $(this ).find('span' ).addClass('active');
+//            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
+//            ntc.eq(eq).removeClass('hidden');
+//            if(eq == 0){
+//                var len = ntc.eq(eq ).find('.notice:last .list').length;
+//                if(len >= 5){
+//                    $('.tip' ).text('上拉加载更多');
+//                    loadScroll(eq+1);
+//                }
+//            }else{
+//                $('.tip' ).hide();
+//                $(window ).off("scroll" );
+//            }
+//            //使用示例
+//            setCookie("type",eq+11);
+//        });
         //安卓4.4tab兼容
         var u = navigator.userAgent;
         var isAnd = !u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);

@@ -7,11 +7,14 @@
 {/block}
 
 {block name="body"}
-<div class="menu">
+<div class="banner">
+    <img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
+</div>
+<!--<div class="menu">
     {volist name="modelAll" id="vo"}
     <div class="menu_lists">
         <div class="list_name">
-           {$vo.name}服务事项
+           {$vo.name}
         </div>
         {volist name="vo.data" id="v"}
         <a href="{:Url('servicemenu/detail?id='.$key)}">
@@ -20,8 +23,21 @@
         {/volist}
     </div>
     {/volist}
+</div>-->
+<div class="menu_lists  ">
+    <div class="list_name ">
+        <div class=" list_iocn_1">党委</div>
+    </div>
+    <a href="/home/servicemenu/detail/id/1.html">
+        <span>组织关系转接 </span> <span class="fa"></span>
+    </a>
+    <a href="/home/servicemenu/detail/id/2.html">
+        <span>活动场地预定</span> <span class="fa"></span>
+    </a>
+    <a href="/home/servicemenu/detail/id/3.html">
+        <span>党务咨询</span> <span class="fa"></span>
+    </a>
 </div>
-
 
 {/block}
 
