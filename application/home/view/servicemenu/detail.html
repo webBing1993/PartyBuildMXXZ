@@ -10,25 +10,25 @@
 <div class="de_main">
      <div class="title_name ">一.&nbsp&nbsp适用对象</div>
      <div class="detail">
-         适用于梦想小镇及周边单位所有青年
+         {$model.object}
      </div>
 
     <div class="title_name ">二.&nbsp&nbsp服务内容</div>
     <div class="detail">
-       受理服务于小镇公益活动，或大型会议,活动现场的志愿者报名登记
+        {$model.content}
     </div>
-    <div class="title_name">三.&nbsp&nbsp申领程序</div>
+    <div class="title_name">三.&nbsp&nbsp申领材料</div>
     <div class="detail">
-        申请表
+        {$model.materials}
     </div>
-    <div class="title_name">四.&nbsp&nbsp申领程序</div>
+    <div class="title_name">四.&nbsp&nbsp服务流程</div>
     <div class="detail">
-        申请-系统预审-受理-登记
+        {$model.flow}
     </div>
 
-    <div class="hotline">咨询电话: <span>0571-85111525 85119460</span></div>
-    <div class="serv_time">服务时间:工作日   上午 8:30-12:00
-        <span>下午13:30-17:00</span>
+    <div class="hotline">咨询电话: <span>{$model.tel1}{notempty name="$model.tel2"} &nbsp {$model.tel2}{/notempty}</span></div>
+    <div class="serv_time">服务时间:工作日   上午 {$model.am}
+        <span>下午{$model.pm}</span>
     </div>
 </div>
 <!--<div class="note">-->
