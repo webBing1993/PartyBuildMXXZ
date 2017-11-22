@@ -5,9 +5,13 @@
 <link rel="stylesheet" href="/home/css/servicemenu/details.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 {/block}
+<style>
+
+
+</style>
 
 {block name="body"}
-<div class="de_main">
+<div class="de_main  ">
      <div class="title_name ">一.&nbsp&nbsp适用对象</div>
      <div class="detail">
          {$model.object}
@@ -27,8 +31,7 @@
     </div>
 
     <div class="hotline">咨询电话: <span>{$model.tel1}{notempty name="$model.tel2"} &nbsp {$model.tel2}{/notempty}</span></div>
-    <div class="serv_time">服务时间:工作日   上午 {$model.am}
-        <span>下午{$model.pm}</span>
+    <div class="serv_time">服务时间:工作日  上午 {$model.am}<span>下午{$model.pm}</span>
     </div>
 </div>
 <!--<div class="note">-->
