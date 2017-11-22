@@ -1,0 +1,539 @@
+{extend name="base/common"}
+
+{block name="style"}
+<style>
+    .videofile{
+        display: none;
+    }
+    .audiofile{
+        display: none;
+    }
+    audio{
+        margin-top:10px;
+    }
+    textarea{
+        resize:none;
+    }
+    .imggroup{
+        position: relative;
+    }
+    .imgbox{
+        height: 100px;
+        width: 200px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    .imgfile{
+        height: 100px;
+        width: 200px;
+        position: absolute;
+        top:0;
+        opacity: 0;
+    }
+    .plus{
+        height: 100px;
+        width: 200px;
+        font-size: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: rgba(204, 204, 204, 0.51);
+    }
+    .plus:hover{
+        font-size: 150px;
+    }
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>梦想快讯</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:Url('Learn/index')}">主页</a>
+            </li>
+            <li class="active">
+                <strong>{$msg['id'] ? "编辑":"新增"}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{$msg['id'] ? "编辑":"新增"}快讯</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form id="form" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>类型:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="type">
+                                    {neq name="msg" value=""}
+                                    {if condition="$msg['type'] eq 1"}
+                                    <option value="1" >视频</option>
+                                    {elseif condition="$msg['type'] eq 2"}
+                                    <option value="2" >图文</option>
+                                    {else /}
+                                    <!--<option value="3" >音乐</option>-->
+                                    {/if}
+                                    {else/}
+                                    <option value="1" >视频</option>
+                                    <option value="2" >图文</option>
+                                    <!--<option value="3" >音乐</option>-->
+                                    {/neq}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>封面图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="one">
+                            <div class="form-group">
+                                <div class="col-lg-1 text-right control-label">
+                                    <label>视频:</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <select name="videoway" id="videoway"  class="form-control" >
+                                        <option value="0"> — 上传视频本地文件（小于20M，MP4格式）— </option>
+                                        <option value="1"> —— 输入视频链接地址 —— </option>
+                                        <!--<option value="2"> —— 上传音频本地文件（.mp3格式） —— </option>-->
+                                    </select>
+                                </div>
+                                <div class="col-lg-1 text-right control-label">
+                                    <label for="video">视频链接地址:</label>
+                                </div>
+                                <div class="videogroup">
+                                    <div class="col-lg-3 videofile">
+                                        <input type="file" id="video" accept="video/mp4">
+                                        <input type="hidden" name="video_path" class="img localpath"  value="{$msg.video_path||default=''}" required="">
+                                    </div>
+                                    <div class="col-lg-7 videoaddr">
+                                        <div class="col-lg-3">
+                                            <input type="text" id="videoaddr" name="net_path" class="form-control netpath" value="{$msg.net_path||default=''}">
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <button class="btn btn-primary submit-btn" type="button" value="" id="preview">预览</button>
+                                            <button class="btn btn-default submit-btn" type="button" value="" id="clear">清空</button>
+                                            (例：优酷、土豆、腾讯视频选择分享——>选择通用代码中的src地址.)
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 audiofile">
+                                        <input type="file" id="audio"  accept="audio/mp3, audio/ogg, audio/mp4">
+                                        <input type="hidden" name="music_path" class="img"  value="{$msg.music_path||default=''}" required="">
+                                        <!--<audio src="/admin/huluwa.mp3" controls></audio>-->
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>标题:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value='{$msg.title || default=""}'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 control-label">
+                                <label>内容:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class=" float-e-margins">
+                                    <div class="ibox-content no-padding borders">
+                                        <script id="container" name="content" type="text/plain">{$msg.content||default=''}</script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>发布人:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
+                            </div>
+                        </div>
+                        {eq name="msg" value=""}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推荐:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="recommend">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="recommend">否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="push">否
+                                </label>
+                            </div>
+                        </div>
+                        {else/}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推荐:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="recommend" {eq name="msg.recommend" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="recommend" {eq name="msg.recommend" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
+                        {/eq}
+                        <input type="hidden" name="id" value="{$msg.id||default=''}">
+
+                        <div class="form-group">
+                            <div class="col-lg-11 col-lg-offset-1">
+                                <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal" >发布</button>
+                                <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/iCheck/icheck.min.js"></script>
+<script>
+    highlight_subnav("{:Url('Learn/index')}");
+
+    $(function() {
+        //    单选按钮
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+        var videoway = $("#videoway" );
+        var audio = $(".audiofile");
+        var file = $(".videofile");
+        var sel = $("select[name = 'type']");
+        var val = sel.val();
+        var label = videoway.parent().next().find('label');
+        if(val == 1){
+            $(".two").hide();
+            videoway.find('option[value="2"]' ).prop('disabled','true');
+        }else{
+            $(".one").hide();
+        }
+        sel.on("change",function(){
+            var val = $(this).val();
+            if(val == 1 ){
+                $(".one").show();
+                videoway.find('option[value="2"]' ).prop('disabled','true')
+                        .siblings().removeAttr('disabled','true' );
+                videoway.find('option[value="0"]' ).prop('selected','true');
+                label.text('视频本地文件:');
+                file.show();
+                file.siblings().hide();
+            }else if(val == 2){
+                $(".one").hide();
+            }else{
+                $(".one").show();
+                videoway.find('option[value="2"]' ).removeAttr('disabled','true' ).prop('selected','true')
+                        .siblings().prop('disabled','true');
+                label.text('音频本地文件:');
+                audio.siblings().hide();
+                audio.show();
+            }
+        });
+
+        //上传图片
+        var plus = $('.plus');
+        var imgnum  = $('[n]' ).attr('n');
+        plus.on('click',function(){
+            var it = $(this);
+            it.hide().next().fadeIn();
+            imgnum = 3;
+            if(!it.hasClass('plus2')){
+                plus.eq(1).fadeIn();
+                imgnum = 2
+            }
+        });
+        $(".imgfile").on("change",function(){
+            var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+            var imgBox = $(this);
+            if(size <= 2048){
+                var img = $(this)[0].files[0];
+                var formData = new FormData();
+                var pic=$(this);
+                formData.append("picture",img);
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('File/uploadPicture')}",
+                    data:formData,
+                    processData : false,
+                    contentType : false,
+                    success:function(m){
+                        var msg = $.parseJSON(m);
+                        var path = msg.data.path;
+                        if(msg['code'] == 1){
+                            imgBox.siblings(".img").val(msg.data["id"]);
+                            //显示图片缩略图
+                            pic.parent().find("img").remove();
+                            pic.after("<img alt='图片' class='thumbnail imgbox'>");
+                            pic.parent().find("img").attr({src:path});
+                        } else {
+                            warning({msg:msg['msg']});
+                            return;
+                        }
+                    }
+                });
+            } else {
+                warning({msg:"您选择的图片超过2mb，请重新选择"});
+                return;
+            }
+        });
+        //切换选择视频音频方式
+        videoway.on("change",function(){
+            var video = $(this);
+            var file = $(".videofile");
+            var addr = $(".videoaddr");
+            var audio = $(".audiofile");
+            var it =video.children('option:selected');
+            var label = video.parent().next().find('label');
+            video.parent().find("iframe").remove();
+            if(it.attr("value") == 0){
+                //视频本地
+                label.text('视频本地文件:');
+                file.show();
+                file.siblings().hide();
+
+            }else if(it.attr("value") == 1){
+                //视频网址
+                label.text('视频链接地址:');
+                addr.show();
+                addr.siblings().hide();
+            }else{
+                //音频本地
+                label.text('音频本地文件:');
+                audio.show();
+                audio.siblings().hide();
+            }
+            //清除视频音频
+            video.parent().find("iframe").remove();
+            video.parent().find("audio").remove();
+        });
+
+        //上传本地视频
+        $("#video").on("change",function(){
+            var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+            if(size <= 204800){
+                var movie = $(this)[0].files[0];
+                var formData = new FormData();
+                formData.append("download",movie);
+                //console.log(formData)
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('File/upload')}",
+                    data:formData,
+                    processData : false,
+                    contentType : false,
+                    success:function(d){
+                        var data = $.parseJSON(d);
+                        //var video = $("#video" );
+                        var video = $("#videoway");
+                        if(data.status == 1){
+                            $("input[name='video_path']").val(data.path);
+                            //显示视频
+                            video.parent().find("iframe").remove();
+                            video.after("<iframe allowfullscreen ></iframe>");
+                            video.next().attr({src:data.path,height:225,frameborder:0}).css({"margin-top":5});
+                            video.prop('disabled','true');
+                        }else {
+                            warning({msg:"上传失败"});
+                            video.removeAttr('disabled');
+                        }
+                    }
+                });
+            } else {
+                warning({msg:"您选择的视频超过10mb，请重新选择"});
+                return;
+            }
+        });
+        //禁用本地视频
+        setInterval(function(){
+            $('#videoaddr' ).on('input',function(){
+                var val = $(this ).val();
+                if( val != ''){
+                    $("#videoway").prop('disabled','true')
+                }
+            });
+        },200);
+        //预览视频
+        $("#preview" ).on("click",function(){
+            var addr = $("#videoaddr" );
+            var video = $("#videoway");
+            var clear = $("#clear");
+            var path = addr.val();
+            //显示视频
+            video.parent().find("iframe").remove();
+            video.after("<iframe allowfullscreen ></iframe>");
+            video.next().attr({src:path,height:225,frameborder:0}).css({"margin-top":5});
+        });
+        //清空
+        $("#clear").on("click",function(){
+            var video = $("#videoway");
+            $("#videoaddr" ).val("");
+            video.parent().find("iframe").remove();
+            video.removeAttr('disabled');
+        });
+
+        //上传本地音频
+        $("#audio" ).on("change",function(){
+            var audio = $(this)[0].files[0];
+            var formData = new FormData();
+            formData.append("download",audio);
+            //console.log(formData);
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/upload')}",
+                data:formData,
+                processData : false,
+                contentType : false,
+                success:function(d){
+                    //console.log('1');
+                    var data = $.parseJSON(d);
+                    var video = $("#videoway");
+                    if(data.status == 1){
+                        $("input[name='music_path']").val(data.path);
+                        //显示音频
+                        video.parent().find("audio").remove();
+                        video.after("<audio controls></audio>");
+                        video.next().attr({"src":data.path}).css({"margin-top":5});
+                        //video.next().attr({"src":"/admin/huluwa.mp3"}).css({"margin-top":5});
+                        video.prop('disabled','true');
+                    }else {
+                        warning({msg:"上传失败"});
+                        video.removeAttr('disabled');
+                    }
+                }
+            });
+        });
+        $(".post-add").on("click",function(){
+            var it=$(this);
+            var data = {
+                id:$("input[name='id']").val(),
+                type:$("select[name='type']").val(),
+                front_cover:$("input[name='front_cover']").val(),
+                video_path:$("input[name='video_path']").val(),
+                net_path:$("input[name='net_path']").val(),
+                title:$("input[name='title']").val(),
+                content:ue.getContent(),
+                publisher:$("input[name='publisher']").val(),
+                recommend:$("input[name='recommend']:checked").val(),
+                push:$("input[name='push']:checked").val(),
+                status:0,
+            };
+            $.ajax({
+                type:"post",
+                url:$("#form").attr("action"),
+                data:data,
+                success:function(data){
+                    if(data.code == 1){
+                        if (data.url) {
+                            updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                        }else{
+                            updateAlert(data.msg ,'success');
+                        }
+                        it.prop('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            if (data.url) {
+                                location.href=data.url;
+                            } else {
+                                location.reload();
+                            }
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    } else {
+                        updateAlert(data.msg, 'error');
+                        it.attr('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    }
+                }
+            });
+            return false;
+        });
+
+
+    });
+</script>
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+    var ue = UE.getEditor('container',{
+        initialFrameHeight:400
+    });
+
+</script>
+{/block}
