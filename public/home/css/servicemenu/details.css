@@ -1,6 +1,7 @@
 .de_main{
     width: 90vw;
-    margin:10vw auto 0 ;
+    margin-bottom: 8vw;
+    margin:10vw  auto 0 ;
     border: 1px solid #eee;
     padding: 5vw;
     border-radius:2vw;
@@ -32,9 +33,7 @@
     line-height: 10vw;
 }
 .de_main  .serv_time span{
-    display: block;
-    text-align: right;
-    margin-right: 14vw;
+   margin-left: 4vw;
 }
 .article .content .note {
     color: #999999;
