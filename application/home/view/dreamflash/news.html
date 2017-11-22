@@ -1,0 +1,286 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>梦想快讯</title>
+<link rel="stylesheet" href="/home/css/dreamflash/news.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+    .scrollDiy{
+        position: absolute;
+        top:0;
+        bottom:0;
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+        width:100%;
+    }
+</style>
+{/block}
+{block name="body"}
+<div class="scrollDiy">
+    <div class="article">
+        <!--标题-->
+        <div class="title limit_">习近平对基层党组织提出这些要求</div>
+        <div class="note clear">
+            <!--信息发布署名-->
+            <span class="fl">梦想小镇</span>
+            <!--时间-->
+            <span class="fr">2017-11-08</span>
+        </div>
+        <div class="content">
+            <!--内容区域-->
+            <div class="uecontent">
+                此处是内容 内容请放这里
+            <div class="note">
+                <!--查看人数-->
+                <span class="read">19</span>
+                <!--点赞-->
+                <span class="isgood good" onclick="isGood(this,3,27)">0</span>
+            </div>
+        </div>
+    </div>
+    <div class="comment">
+        <!--评论数量-->
+        <div class="sum">共<span>0</span>条评论</div>
+        <div class="lists">
+        </div>
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
+    </div>
+    <div class="bottom clear">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！">
+        </div>
+        <div class="send fr" onclick="send(this,3,27)">发送</div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    $(function(){
+        $(".uecontent p span").css("font-size","14px");
+        //reset
+        var len = $(".list" ).length;
+        if(len >= 7){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载评论
+            loadScroll();
+        }
+    });
+    /**
+     * 点赞
+     * @param e
+     */
+    var isGood = function(e,type,id){
+        //样式变化，移到suc
+        var n = $(e ).text();
+        $(e).toggleClass('good' ).toggleClass('good_');
+        $(e ).hasClass('good')?n--:n++;
+        $(e ).text(n);
+
+//	var type = $(e ).hasClass('fr')?2:1;
+        $.ajax({
+            type:"post",
+            url:"/home/base/like.html",
+            data:{
+                type:type,
+                aid:id,
+            },
+            success:function(data){
+
+            }
+        })
+    };
+    /**
+     * 发送评论
+     * @param e
+     */
+    var send = function(e,type,id){
+        var it = $(e ).prev().find('input');
+        if(it.val() != '' && it.val().length > 4){
+            $.ajax({
+                type:"post",
+                url:"/home/base/comment.html",
+                data:{
+                    type:type,
+                    aid:id,
+                    content:it.val()
+                },
+                beforeSend:function(){
+                    swal({
+                        title: ' ',
+                        text: '评论提交中...',
+                        showConfirmButton:false
+                    });
+                },
+                success:function(data){
+                    var data = data.data;
+                    var userid = "'"+data.create_user+"'";
+                    var html = '';
+                    html += '<div class="list clear">'+
+                        '<div class="fl">'+
+                        '<img src="'+data.header+'" alt="用户头像" class="user">'+
+                        '</div>'+
+                        '<div class="fl mid">'+
+                        '<div class="name limit">'+data.nickname+'</div>'+
+                        '<div class="content" >'+it.val()+'</div>'+
+                        '<div class="time">'+data.time+'</div>'+
+                        '</div>'+
+                        '<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
+                        '</div>';
+                    $('.lists' ).append(html);
+                    it.val('');
+                    var sum = $('.sum span' );
+                    sum.text(parseInt(sum.text())+1);
+                    swal({
+                        title: ' ',
+                        text: '评论成功',
+                        type: 'success',
+                        confirmButtonText:'确定',
+                        timer:3000
+                    });
+                }
+            });
+        }else{
+            wAlert('您的评论少于5个字');
+        }
+
+    };
+    function loadScroll(){
+        $('.scrollDiy').off("scroll").on("scroll",function(){
+            var dh = $('.article').height() + $('.comment').height();
+            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+            var len = $(".list" ).length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var id = 27;
+            if(dh <= end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url:"/home/base/morecomment.html",
+                    data:{
+                        type:1,
+                        aid:id,
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addComment(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $('.scrollDiy').off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+    function addComment(data){
+        //is_like : 1为已点赞 0为未点赞
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            var userid = "'"+list.create_user+"'";
+            html += '<div class="list clear">'+
+                '<div class="fl">'+
+                '<img src="'+list.header+'" alt="用户" class="user">'+
+                '</div>'+
+                '<div class="fl mid">'+
+                '<div class="name limit">'+ list.nickname+'</div>'+
+                '<div class="content" >'+ list.content+'</div>'+
+                '<div class="time">'+ list.time+'</div>'+
+                '</div>';
+            if (0 == 0){
+                if(list.is_like == 0){
+                    html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+                }else{
+                    html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+                }
+            }else {
+                html+='<div class="fr isgood good">'+list.likes+'</div>'
+            }
+            html+=
+                '</div>';
+        }
+        $(".lists" ).append(html);
+    }
+
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+
+    //---微信接口JS-SDK的调用
+    wx.config({
+        debug: false,
+        appId: '', // 必填，公众号的唯一标识
+        timestamp: "", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+        nonceStr: '', // 必填，生成签名的随机串
+        signature: '', // 必填，签名，见附录1
+        jsApiList: [
+            'checkJsApi',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+        ]
+    });
+
+    wx.ready(function () {
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '习近平对基层党组织提出这些要求',
+            link: "http://zh.zt.cn/home/learn/article/id/27.html",
+            imgUrl: 'http://zh.zt.cn/uploads/download/2017-11-08/5a02dc8be461f.png',
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '习近平对基层党组织提出这些要求', // 分享标题
+            desc: 'a基层是党的执政之基、力量之源。十九大报告中，明确提出要把基层党组织建设成为宣传党的主张、贯彻党的决定、领导基层治理、团结动员群众、推动改革发展的坚强战斗堡垒。小编综合整理了习近平总书记关于基层党组织建设的相关论述，邀您一起学习。基层是党的执政之基、力量之源基层是党的执政之基、力量之源。只有基层党组织坚强有力，党员发挥应有作用，党的根基才能牢固，党才能有战斗力。——2016年4月6日，习近平在“两学一做”学习教育工作座谈会上强调贯彻党要管党、从严治党方针，必须扎实做好抓基层、打基础的工作，使每个基层党组织都成为坚强战斗堡垒。——2013年6月28日，习近平在全国组织工作会议的讲话强调党的工作最坚实的力量支撑在基层，经济社会发展和民生最突出的矛盾和问题也在基层，必须把抓基层打基础作为长远之计和固本之策，丝毫不能放松。要重点加强基层党组织建设，全面提高基层党组织凝聚力和战斗力。——2015年6月18日，习近平在贵州调研时强调要站在服务群众的最前沿干部要深入基层、深入实际、深入群众，在改革发展的主战场、维护稳定的第一线、服务群众的最前沿砥砺品质、提高本领。——2013年6月28日，习近平在全国组织工作会议的讲话强调各级都要重视基层、关心基层、支持基层，加强带头人队伍建设，确保基层党组织有资源、有能力为群众服务。对广大基层干部要充分理解、充分信任，格外关心、格外爱护，多为他们办一些雪中送炭的事情。——2013年6月28日，习近平在全国组织工作会议的讲话强调基层干部是加强基层基础工作的关键。要关心和爱护广大基层干部，为他们创造良好工作和成长条件，保障他们的合理待遇，帮助他们深入改进作风，提高发展经济能力、改革创新能力、依法办事能力、化解矛盾能力、带领群众能力，引导他们扎根基层、爱岗敬业、争创一流。对基层干部中的先进典型，要大力宣传表彰。——2015年6月18日，习近平在贵州调研时强调具体化、精准化抓好基层党组织建设坚持分类指导，具体化、精准化地抓好学习教育，调动好基层党组织的主动性创造性；坚持把学习教育同做好改革发展稳定工作结合起来，做到两手抓两促进。——2016年4月6日，习近平在“两学一做”学习教育工作座谈会上强调创新基层党建工作，扩大组织覆盖和工作覆盖，深入推进基层服务型党组织建设。——2013年6月28日，习近平在全国组织工作会议的讲话强调要整顿不合格基层党组织，坚持和落实行之有效的制度。要针对新情况新问题严肃党内政治生活，以改革创新精神补齐制度短板，真正使党的组织生活、党员教育管理严起来、实起来。——2016年4月6日，习近平在“两学一做”学习教育工作座谈会上强调要高度关注基层政权组织、经济组织、自治组织、群团组织、社会组织发展变化的特点，加强指导和管理，使各类基层组织按需设置、按职履责、有人办事、有章理事，既种好自留地、管好责任田，又唱好群英会、打好合力牌。——2015年6月18日，习近平在贵州调研时强调必须解决发生在群众身边的腐败问题要着力解决发生在群众身边的腐败问题，严肃查处损害群众利益的各类案件，切实维护人民合法权益，努力做到干部清正、政府清廉、政治清明。——2013年4月19日，习近平在十八届中央政治局第五次集体学习时强调紧紧扭住反对“四风”，从群众最关心、最迫切的问题入手，着力解决关系群众切身利益的问题，解决群众身边的不正之风问题，把改进作风成效落实到基层，真正让群众受益，努力取得人民群众满意的实效。——2014年1月20日，习近平在党的群众路线教育实践活动第一批总结暨第二批部署会议上强调对基层贪腐以及执法不公等问题，要认真纠正和严肃查处，维护群众切身利益，让群众更多感受到反腐倡廉的实际成果。——2016年1月12日，习近平在十八届中央纪委六次全会上的讲话强调', // 分享描述
+            link: 'http://zh.zt.cn/home/learn/article/id/27.html', // 分享链接
+            imgUrl: 'http://zh.zt.cn/uploads/download/2017-11-08/5a02dc8be461f.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+    });
+    //	wx.error(function (res) {
+    //		alert('wx.error: '+JSON.stringify(res));
+    //	});
+
+</script>
+
+{/block}

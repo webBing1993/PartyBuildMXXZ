@@ -1,0 +1,326 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>梦想快讯</title>
+<link rel="stylesheet" href="/home/css/dreamflash/video.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+{/block}
+{block name="body"}
+<div class="scrollDiy">
+    <div class="article">
+        <div class="title limit_">一图|十八届六中全会公报看点有哪些？全部干货在这里</div>
+        <div class="note clear">
+            <span class="fl">中国共产党</span>
+            <span class="fr">2016-11-01</span>
+        </div>
+        <div class="content">
+            <div class="video">
+                <!--本地视频-->
+                <!--链接视频-->
+                <iframe class="videocon" frameborder="0" src="" allowfullscreen=""></iframe>
+            </div>
+            <p><img title="1499307326618695.jpg" alt="222_万能看图王.jpg" src="http://mxxz.0571ztnet.com/ueditor/php/upload/image/20170706/1499307326618695.jpg" style="white-space: normal;"></p>			<div class="note">
+            <span class="read">20</span>
+            <span class="isgood good" onclick="isGood(this,3,1)">1</span>
+        </div>
+        </div>
+    </div>
+    <div class="comment">
+        <div class="sum">共<span>2</span>条评论</div>
+        <div class="lists">
+        </div>
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
+    </div>
+    <div class="bottom clear">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！">
+        </div>
+        <div class="send fr" onclick="send(this,3,1)">发送</div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+    $(function(){
+        //reset
+        var len = $(".list" ).length;
+        if(len >= 7){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载评论
+            loadScroll();
+        }
+        //播放视频
+        hideplay();
+        videoPlay();
+        //ios fix兼容
+//	tofixed();
+        //ue限定
+//	ueLimit();
+    });
+    /**
+     * 点赞
+     * @param e
+     */
+    var isGood = function(e,type,id){
+        //样式变化，移到suc
+        var n = $(e ).text();
+        $(e).toggleClass('good' ).toggleClass('good_');
+        $(e ).hasClass('good')?n--:n++;
+        $(e ).text(n);
+        //type：1文章，2评论
+//	var type = $(e ).hasClass('fr')?2:1;
+        $.ajax({
+            type:"post",
+            url:"/home/base/like.html",
+            data:{
+                type:type,
+                aid:id,
+            },
+            success:function(data){
+
+            }
+        })
+    };
+
+    /**
+     * 发送评论
+     * @param e
+     */
+    var send = function(e,type,id){
+        var it = $(e ).prev().find('input');
+        if(it.val() != ''&& it.val().length > 4){
+            $.ajax({
+                type:"post",
+                url:"/home/base/comment.html",
+                data:{
+                    type:type,
+                    aid:id,
+                    content:it.val()
+                },
+                beforeSend:function(){
+                    swal({
+                        title: ' ',
+                        text: '评论提交中...',
+                        showConfirmButton:false
+                    });
+                },
+                success:function(data){
+                    var data = data.data;
+                    var userid = "'"+data.create_user+"'";
+                    var html = '';
+                    html += '<div class="list clear">'+
+                        '<div class="fl">'+
+                        '<img src="'+data.header+'" alt="用户头像" class="user">'+
+                        '</div>'+
+                        '<div class="fl mid">'+
+                        '<div class="name limit">'+data.nickname+'</div>'+
+                        '<div class="content" >'+it.val()+'</div>'+
+                        '<div class="time">'+data.time+'</div>'+
+                        '</div>'+
+                        '<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
+                        '</div>';
+                    $('.lists' ).append(html);
+                    it.val('');
+                    var sum = $('.sum span' );
+                    sum.text(parseInt(sum.text())+1);
+                    swal({
+                        title: ' ',
+                        text: '评论成功',
+                        type: 'success',
+                        confirmButtonText:'确定',
+                        timer:3000
+                    });
+                }
+            });
+        }else{
+            wAlert('您的评论少于5个字');
+        }
+    };
+    var hideplay = function(){
+        var u = navigator.userAgent;
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if(!isiOS){
+            $('.play' ).show();
+        }
+    };
+    var tofixed = function(){
+        var u = navigator.userAgent;
+        var word = $('.myword input');
+        var bottom =$('.bottom');
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        //var ua = window.navigator.appVersion;
+        //alert(u);
+        if(isiOS){
+            //兼容ios7
+            $(document).scrollTop(1);
+            word.focus(function(){
+                var noInputViewHeight = $(window).height() - bottom.height();
+                var contentHeight = $(document).height() - bottom.height();
+                contentHeight = contentHeight > noInputViewHeight ? contentHeight : noInputViewHeight;
+                setTimeout(function(){
+                    var inputTopHeight = bottom.offset().top - $(window).scrollTop()+1;
+                    var inputTopPos = bottom.offset().top + inputTopHeight+1;
+                    inputTopPos = inputTopPos > contentHeight ? contentHeight : inputTopPos;
+                    bottom.css({'position':'absolute', 'top':inputTopPos });
+                    $(window).on('touchstart', function(){
+                        word.blur();
+                    });
+                }, 100);
+            });
+            word.on('blur',function(){
+                //输入框失焦后还原初始状态
+                var a =$(window).height()-45;
+                bottom.css({'position': 'fixed','top':'','bottom':'0'});
+            })
+        }
+    };
+    var videoPlay =function(){
+        $(".play" ).click(function(){
+            var video=$(".video video");
+            $(this).hide();
+            video[0].play();
+            video.attr({controls:"controls"});
+        });
+    };
+    function loadScroll(){
+        $('.scrollDiy').off("scroll").on("scroll",function(){
+            var dh = $('.article').height() + $('.comment').height();
+            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+            var len = $(".list" ).length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var id = 1;
+            if(dh <= end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url:"/home/base/morecomment.html",
+                    data:{
+                        type:3,
+                        aid:id,
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addComment(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $('.scrollDiy').off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+    function addComment(data){
+        //is_like : 1为已点赞 0为未点赞
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            var userid = "'"+list.create_user+"'";
+            html += '<div class="list clear">'+
+                '<div class="fl">'+
+                '<img src="'+list.header+'" alt="用户" class="user">'+
+                '</div>'+
+                '<div class="fl mid">'+
+                '<div class="name limit">'+ list.nickname+'</div>'+
+                '<div class="content" >'+ list.content+'</div>'+
+                '<div class="time">'+ list.time+'</div>'+
+                '</div>';
+            if (0 == 0){
+                if(list.is_like == 0){
+                    html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+                }else{
+                    html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+                }
+            }else {
+                html+='<div class="fr isgood good">'+list.likes+'</div>'
+            }
+            html+=
+                '</div>';
+        }
+        $(".lists" ).append(html);
+    }
+    function ueLimit(){
+        var imgs = $('.content img');
+        var ww = $('.content').width();
+        imgs.each(function(){
+            if($(this ).width() > ww){
+                $(this ).width(ww)
+            }
+        });
+    }
+</script>
+<script>
+    //---微信接口JS-SDK的调用
+    wx.config({
+        debug: false,
+        appId: '', // 必填，公众号的唯一标识
+        timestamp: "", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+        nonceStr: '', // 必填，生成签名的随机串
+        signature: '', // 必填，签名，见附录1
+        jsApiList: [
+            'checkJsApi',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+        ]
+    });
+
+    wx.ready(function () {
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '一图|十八届六中全会公报看点有哪些？全部干货在这里',
+            link: 'http://zh.zt.cn/home/learn/video.html',
+            imgUrl: 'http://zh.zt.cn/uploads/download/2017-06-23/594c7dd9781a2.png',
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        //分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '一图|十八届六中全会公报看点有哪些？全部干货在这里', // 分享标题
+            desc: '', // 分享描述
+            link: 'http://zh.zt.cn/home/learn/video.html', // 分享链接
+            imgUrl: 'http://zh.zt.cn/uploads/download/2017-06-23/594c7dd9781a2.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+    });
+    //	wx.error(function (res) {
+    //		alert('wx.error: '+JSON.stringify(res));
+    //	});
+</script>
+{/block}
