@@ -1,34 +1,57 @@
 {extend name="public/common"}
-
 {block name="style"}
 <title>梦想快讯</title>
-<link rel="stylesheet" href="/home/css/dreamflash/index.css">
+<link rel="stylesheet" href="/home/css/learn/index.css">
 <link rel="stylesheet" href="/home/css/learn/course.css">
 <link rel="stylesheet" href="/home/css/learn/learn.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
+<style>
+    .notice>.title{
+        width: 100vw;
+        font-size: 1.6rem;
+        color: #333333;
+        line-height: 60px;
+        text-align: center;
+    }
+    .modal-dialog {
+        width: 600px;
+        margin: 0;!important;
+    }
+</style>
 {/block}
 {block name="body"}
-<div class="notices">
-    <div class="notice regularmore">
-        <!--课程列表-->
-        <div class="lists">
-            <!--图文列表-->
-            <a href="/home/dreamflash/news.html" class="list">
-                <div class="tab">图文</div>
-                <img src="/home/images/dreamflash/
-tw.png" alt="图片" class="img">
-                <div class="title limit">习近平对基层党组织提出这些要求</div>
-                <span class="study">14人阅读过</span>
-            </a>
-                <!--视频列表-->
-            <a href="/home/dreamflash/video.html" class="list">
-                <div class="tab">视频</div>
-                <img src="/home/images/dreamflash/
-tw.png" alt="图片" class="img">
-                <div class="title limit">习近平对基层党组织提出这些要求</div>
-                <span class="study">22人阅读过</span>
-            </a>
+<!--banner-->
+<div class="banner">
+    <img src="/home/images/common/1.jpg" alt="建言献策banner图">
+</div>
+<!--tab-->
+<div class="tabs clear">
+    <div class="tab"><span>手机党校</span></div>
+    <div class="tab"><span>练练身手</span></div>
+    <!--<div class="tab"><span>党史学习</span></div>-->
+</div>
+<!--切换列表-->
+<div class="content">
+    <div class="notices">
+        <div class="notice regularmore">
+            <!--课程列表-->
+            <div class="lists">
+                <!--图文课程-->
+                {volist name="list2" id="vo"}
+                {eq name="vo.type" value="2"}
+                <a href="{:Url('dreamflash/article?id='.$vo['id'])}" class="list">
+                    <div class="tab">图文</div>
+                    {else/}
+                    <a href="{:Url('dreamflash/video?id='.$vo['id'])}" class="list">
+                        <div class="tab">视频</div>
+                        {/eq}
+                        <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                        <div class="title limit">{$vo.title}</div>
+                        <span class="study">{$vo.views}人阅读过</span>
+                    </a>
+                    {/volist}
+            </div>
         </div>
     </div>
 </div>
@@ -38,11 +61,9 @@ tw.png" alt="图片" class="img">
     <div class="typing_loader"></div>
 </div>
 {/block}
-
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
@@ -106,7 +127,7 @@ tw.png" alt="图片" class="img">
             var loading = $('.loading');
             var url;
             if(type == 1){
-                url = "/home/learn/indexmore.html"; //数据请求接口地址
+                url = "{:Url('dreamflash/indexmore')}";
             }
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
@@ -148,11 +169,11 @@ tw.png" alt="图片" class="img">
             var list = lists[i];
             if(list.type == 1){
                 html+=
-                    '<a href="/home/learn/video/id/'+list.id+'.html" class="list">'+
+                    '<a href="/home/dreamflash/video/id/'+list.id+'.html" class="list">'+
                     '<div class="tab">视频</div>'
             }else{
                 html+=
-                    '<a href="/home/learn/article/id/'+list.id+'.html" class="list">'+
+                    '<a href="/home/dreamflash/article/id/'+list.id+'.html" class="list">'+
                     '<div class="tab">图文</div>'
             }
             html +=
@@ -164,11 +185,5 @@ tw.png" alt="图片" class="img">
         $(".regularmore .lists" ).append(html);
     }
 
-
-
-
-
-
 </script>
-
 {/block}
