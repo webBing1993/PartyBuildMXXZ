@@ -33,8 +33,8 @@
 <div class="scrollDiy">
     <div class="tabs clear">
         <div class="tab"><span>组织倡议</span></div>
-        <div class="tab"><span>群众建议</span></div>
-        <span class="triangle-up"></span>
+        <!--<div class="tab"><span>群众建议</span></div>-->
+        <!--<span class="triangle-up"></span>-->
     </div>
     <!--切换列表-->
     <div class="content" style="overflow-x: hidden">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <!--发起投票-->
+       <!-- &lt;!&ndash;发起投票&ndash;&gt;
         <div class="notices hidden">
             <div class="lists votes">
                 <ul>
@@ -77,17 +77,17 @@
                             {switch name="los.is_like"}{case value="0"}
                                     <i class="agree" onclick="agree(this,{$los.id},1)"></i>
                                     <span>{$los.likes_yes}</span>
-                                    <!--<i class="disagree" onclick="disagree(this,{$los.id},2)"></i>-->
-                                    <!--<span>{$los.likes_no}</span>{/case}{case value="1"}-->
+                                    &lt;!&ndash;<i class="disagree" onclick="disagree(this,{$los.id},2)"></i>&ndash;&gt;
+                                    &lt;!&ndash;<span>{$los.likes_no}</span>{/case}{case value="1"}&ndash;&gt;
                                     <i class="agree_" ></i>
                                     <span>{$los.likes_yes}</span>
-                                    <!--<i class="disagree"></i>-->
-                                    <!--<span>{$los.likes_no}</span>-->
+                                    &lt;!&ndash;<i class="disagree"></i>&ndash;&gt;
+                                    &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
                                 {/case}{case value="2"}
                                     <i class="agree" ></i>
                                     <span>{$los.likes_yes}</span>
-                                    <!--<i class="disagree_"></i>-->
-                                    <!--<span>{$los.likes_no}</span>-->
+                                    &lt;!&ndash;<i class="disagree_"></i>&ndash;&gt;
+                                    &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
                                 {/case}
                                 {default /}default
                             {/switch}
@@ -97,8 +97,8 @@
                         <div class="opinion">
                             <i class="agree"></i>
                             <span>{$los.likes_yes}</span>
-                            <!--<i class="disagree"></i>-->
-                            <!--<span>{$los.likes_no}</span>-->
+                            &lt;!&ndash;<i class="disagree"></i>&ndash;&gt;
+                            &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
                             <i class="comment-icon"></i>
                         </div>
                         {/eq}
@@ -119,12 +119,12 @@
         <div class="tip"></div>
         <div class="loading hidden">
             <div class="typing_loader"></div>
-        </div>
+        </div>-->
     </div>
     <!--线上活动发布-->
-    {eq name="visit" value="0"}
-    <a id="publish" href="{:Url('Activity/publish')}"></a>
-    {/eq}
+    <!--{eq name="visit" value="0"}-->
+    <!--<a id="publish" href="{:Url('Activity/publish')}"></a>-->
+    <!--{/eq}-->
     <!--加载更多-->
 <div class="bottom clear">
     <div class="myword fl">
@@ -204,8 +204,8 @@
             setCookie("type",eq+11);
         });
         if ("{$visit}"== 0){
-            //悬浮框移动
-            moveanyway();
+//            //悬浮框移动
+//            moveanyway();
         }
         viewer = $('.imgs').viewer({
             url: 'data-original',
