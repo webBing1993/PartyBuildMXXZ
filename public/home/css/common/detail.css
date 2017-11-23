@@ -303,6 +303,32 @@
 .bottom .send:active {
   background: #fafafa;
 }
+.content .time{
+  line-height: 6vw;
+  color: #333;
+  margin-top: 10vw;
+  margin-left: 2vw;
+}
+.content .site{
+  line-height: 6vw;
+  color: #333;
+  margin-left: 2vw;
+}
+.content .si_tp{
+  line-height: 6vw;
+  color: #333;
+  margin-left: 2vw;
+}
+.content .cont_img{
+  width: 90vw;
+  margin: 0 auto;
+  height: 50vw;
+}
+.content .cont_img img{
+  width: 100%;
+}
+
+
 
 @keyframes bigger
 {

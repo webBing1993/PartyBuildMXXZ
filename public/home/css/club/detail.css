@@ -130,14 +130,19 @@
     display: flex;
     justify-content: space-between;
 }
-.fa {
+.mass .title .fa{
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
+    float: right;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 14vw;
 }
-.fa {
+.fa:before {
+    content: "\f105";
+}
+.fa{
     line-height: 6vw;
 }
