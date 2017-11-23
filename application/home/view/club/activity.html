@@ -8,13 +8,15 @@
 
 {block name="body"}
 <div class="mass">
-    <a href="/home/club/volunteer.html" class="list">
-        <img src="" alt="图片">
+    {volist name="list" id="vo"}
+    <a href="{:Url('club/activitydetail?id='.$vo.id)}" class="list">
+        <img src="{$vo.front_cover|get_cover='path'}" alt="图片">
         <div class="list_info">
-            <div class="info_text">校园党史建立</div>
-            <div class="time"> <span >活动时间: 2017-10-10</span><span class="fa"></span></div>
+            <div class="info_text">{$vo.title}</div>
+            <div class="time"> <span >活动时间 : {$vo.start_time|time_format='Y-m-d'}</span><span class="fa"></span></div>
         </div>
     </a>
+    {/volist}
 </div>
 <div class="tip"></div>
 {/block}

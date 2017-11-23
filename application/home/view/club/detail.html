@@ -11,32 +11,27 @@
 </div>
 
 <div class="detail_info">
-    <div class="activityTitle">校园会联盟户外俱乐部</div>
-    <div class="info">海外网11月23日电 因地震推迟一周的韩国高考今天(23日)举行,就在考生们认真答题时,不久前曾发生5.4级强震的浦项市再次遭到余震“袭击”。由于这次地震级别较低(1.7级),未造成伤亡,考试照常进行。当天,该市某考场内还出现惊魂一幕:灯光突然灭了又亮。有关部门表示,推测是线路故障引起,并不严重。</div>
+    <div class="activityTitle">{$model.title}</div>
+    <div class="info">{$model.content}</div>
     <div class="contact_info">
-        <a class="contact">联系方式 : 0571-2564225 <i></i></a>
-        <a class="reg">报名方式 : 0571-2286868 <i></i></a>
-        <div class="site">详细地址 : 余杭梦想小镇888号</div>
+        <a class="contact">联系方式 : {$model.telephone} <i></i></a>
+        <a class="reg">报名方式 : {$model.apply_tel} <i></i></a>
+        <div class="site">详细地址 : {$model.address}</div>
     </div>
     <div class="club_activity">
         <div class="title">
-            <span class="hd_ls"><i></i>社团活动</span><a class="more">更多 <img src="/home/images/club/moer.png" alt=""></a>
+            <span class="hd_ls"><i></i>社团活动</span><a href="{:Url('club/activity?id='.$model.id)}" class="more">更多 <img src="/home/images/club/moer.png" alt=""></a>
         </div>
         <div class="mass">
-            <a href="/home/club/volunteer.html" class="list">
-                <img src="" alt="图片">
+            {volist name="list" id="vo"}
+            <a href="{:Url('club/activitydetail?id='.$vo.id)}" class="list">
+                <img src="{$vo.front_cover|get_cover='path'}" alt="图片">
                 <div class="list_info">
-                    <div class="info_text">校园党史建立</div>
-                    <div class="time"> <span >建立时间 : 2017-10-10</span><span class="fa"></span></div>
+                    <div class="info_text">{$vo.title}</div>
+                    <div class="time"> <span >活动时间 : {$vo.start_time|time_format='Y-m-d'}</span><span class="fa"></span></div>
                 </div>
             </a>
-            <a href="/home/club/volunteer.html" class="list">
-                <img src="" alt="图片">
-                <div class="list_info">
-                    <div class="info_text">校园党史建立</div>
-                    <div class="time"> <span >建立时间 : 2017-10-10</span><span class="fa"></span></div>
-                </div>
-            </a>
+            {/volist}
         </div>
         <div class="tip"></div>
     </div>

@@ -32,9 +32,9 @@
                 <span class="read">{$article.views}</span>
                 {eq name="visit" value="0"}
                 {eq name="article.is_like" value="1"}
-                <span class="isgood good_" onclick="isGood(this,8,{$article.id})">{$article.likes}</span>
+                <span class="isgood good_" onclick="isGood(this,9,{$article.id})">{$article.likes}</span>
                 {else/}
-                <span class="isgood good" onclick="isGood(this,8,{$article.id})">{$article.likes}</span>
+                <span class="isgood good" onclick="isGood(this,9,{$article.id})">{$article.likes}</span>
                 {/eq}
                 {else/}
                 <span class="isgood good">{$article.likes}</span>
@@ -57,9 +57,9 @@
                 </div>
                 {eq name="visit" value="0"}
                 {eq name="co.is_like" value="1"}
-                <div class="fr isgood good_" onclick="isGood(this,8,{$co.id})">{$co.likes}</div>
+                <div class="fr isgood good_" onclick="isGood(this,9,{$co.id})">{$co.likes}</div>
                 {else/}
-                <div class="fr isgood good" onclick="isGood(this,8,{$co.id})">{$co.likes}</div>
+                <div class="fr isgood good" onclick="isGood(this,9,{$co.id})">{$co.likes}</div>
                 {/eq}
                 {else/}
                 <div class="fr isgood good" >{$co.likes}</div>
@@ -77,7 +77,7 @@
         <div class="myword fl">
             <input type="text" placeholder="说说你的感想！">
         </div>
-        <div class="send fr" onclick="send(this,8,{$article['id']})">发送</div>
+        <div class="send fr" onclick="send(this,9,{$article['id']})">发送</div>
     </div>
     {/eq}
 </div>
@@ -156,7 +156,7 @@
                         '<div class="content" >'+it.val()+'</div>'+
                         '<div class="time">'+data.time+'</div>'+
                         '</div>'+
-                        '<div class="fr isgood good" onclick="isGood(this,8,'+data.id+')">'+data.likes+'</div>'+
+                        '<div class="fr isgood good" onclick="isGood(this,9,'+data.id+')">'+data.likes+'</div>'+
                         '</div>';
                     $('.lists' ).append(html);
                     it.val('');
@@ -236,9 +236,9 @@
                 '</div>';
             if ({$visit} == 0){
                 if(list.is_like == 0){
-                    html+='<div class="fr isgood good" onclick="isGood(this,8,'+list.id+')">'+list.likes+'</div>'
+                    html+='<div class="fr isgood good" onclick="isGood(this,9,'+list.id+')">'+list.likes+'</div>'
                 }else{
-                    html+='<div class="fr isgood good_" onclick="isGood(this,8,'+list.id+')">'+list.likes+'</div>'
+                    html+='<div class="fr isgood good_" onclick="isGood(this,9,'+list.id+')">'+list.likes+'</div>'
                 }
             }else {
                 html+='<div class="fr isgood good">'+list.likes+'</div>'

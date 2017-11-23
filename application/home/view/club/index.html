@@ -47,9 +47,8 @@
  <!--社团活动-->
 <div class="notices ">
     <div class="mass">
-
         {volist name="clublist" id="vo"}
-       <a href="/home/club/detail.html" class="list">
+        <a href="{:Url('club/detail?id='.$vo.id)}" class="list">
             <img src="{$vo.front_cover|get_cover='path'}" alt="">
             <div class="list_info">
                 <div class="info_text">{$vo.title}</div>
@@ -73,7 +72,7 @@
                       <div class="info">
                           {$vo.content}
                       </div>
-                      <a href="/home/club/volunteer.html">查看详情</a>
+                      <a href="{:Url('club/volunteer?id='.$vo.id)}">查看详情</a>
                   </div>
             </div>
             {/volist}

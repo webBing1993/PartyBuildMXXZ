@@ -98,6 +98,12 @@ class Club extends Base{
         $model['desc'] = str_replace(" ",'',$model['desc']);
         $model['desc'] = str_replace("\n",'',$model['desc']);
 
+        $map = array(
+            'status' => ['egt',0],
+            'pid' => $id,
+        );
+        $list = ClubActivityModel::where($map)->order('id desc')->limit(3)->select();
+        $this->assign('list',$list);
         $this->assign('model',$model);
         return $this->fetch();
     }
@@ -142,14 +148,14 @@ class Club extends Base{
 
         //获取 文章点赞
         $likeModel = new Like;
-        $like = $likeModel->getLike(9,$id,$userId);
+        $like = $likeModel->getLike(10,$id,$userId);
         $article['is_like'] = $like;
         $this->assign('article',$article);
 
         //获取 评论
-        $commentModel = new Comment();
-        $comment = $commentModel->getComment(9,$id,$userId);
-        $this->assign('comment',$comment);
+        /*$commentModel = new Comment();
+        $comment = $commentModel->getComment(10,$id,$userId);
+        $this->assign('comment',$comment);*/
 
         return $this->fetch();
     }
@@ -158,8 +164,10 @@ class Club extends Base{
      */
     public function activity(){
 //        $this->anonymous();
+        $id = input('id');
         $map = array(
             'status' => ['egt',0],
+            'pid' => $id,
         );
         $list = ClubActivityModel::where($map)->order('id desc')->limit(5)->select();
         $this->assign('list',$list);
@@ -170,8 +178,10 @@ class Club extends Base{
      */
     public function activitymore(){
         $len = input('length');
+        $id = input('id');
         $map = array(
             'status' => ['egt',0],
+            'pid' => $id,
         );
         $list = ClubActivityModel::where($map)->order('id desc')->limit($len,5)->select();
 //        foreach($list as $value){
