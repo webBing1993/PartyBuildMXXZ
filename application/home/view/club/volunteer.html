@@ -22,7 +22,22 @@
         <div class="title">
             <span>社团活动</span><span>更多</span>
         </div>
+        <div class="mass">
+            {volist name="clublist" id="vo"}
+            <a href="/home/club/volunteer.html" class="list">
+                <img src="{$vo.front_cover|get_cover='path'}" alt="">
+                <div class="list_info">
+                    <div class="info_text">{$vo.title}</div>
+                    <div class="time"> <span>建立时间 : {$vo.set_date|time_format='Y-m-d'}</span><span class="fa"></span></div>
+                </div>
+            </a>
 
+            <a href="" class="list">
+                <img src="{$vo.front_cover|get_cover='path'}" alt="">
+                <div class="info_text">{$vo.title}</div>
+                <div class="time">建立时间: <span>{$vo.set_date|time_format='Y-m-d'}</span><i></i> </div>
+            </a>
+        </div>
     </div>
 </div>
 

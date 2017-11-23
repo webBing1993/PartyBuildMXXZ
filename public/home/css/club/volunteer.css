@@ -71,6 +71,8 @@
     justify-content: space-between;
     padding: 3vw ;
 }
-.clud_activity .title span{
-
+.clud_activity>.title>span:before{
+    width: 2vw;
+    height: 5vw;
+    background-color: #ff7043;
 }
