@@ -26,7 +26,15 @@
     color: #333;
     border-bottom:1px solid #eee;
 }
-.detail_info .contact, .reg{
+.detail_info .contact{
+    display: block;
+    color: #333;
+    font-size:1.3rem;
+    line-height: 11vw;
+    border-bottom:  1px dashed #eee;
+    margin-left: 6.5vw;
+}
+.detail_info .reg{
     display: block;
     color: #333;
     font-size:1.3rem;

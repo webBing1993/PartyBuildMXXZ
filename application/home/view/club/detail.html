@@ -14,8 +14,8 @@
     <div class="activityTitle">{$model.title}</div>
     <div class="info">{$model.content}</div>
     <div class="contact_info">
-        <a class="contact">联系方式 : {$model.telephone} <i></i></a>
-        <a class="reg">报名方式 : {$model.apply_tel} <i></i></a>
+        <a href="tel:{$model.telephone}" class="contact">联系方式 : {$model.telephone} <i></i></a>
+        <a  href="tel:{$model.apply_tel} " class="reg">报名方式 : {$model.apply_tel} <i></i></a>
         <div class="site">详细地址 : {$model.address}</div>
     </div>
     <div class="club_activity">

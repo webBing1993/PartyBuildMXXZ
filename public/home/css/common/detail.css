@@ -318,6 +318,7 @@
   line-height: 6vw;
   color: #333;
   margin-left: 2vw;
+  display: block;
 }
 .content .cont_img{
   width: 90vw;
