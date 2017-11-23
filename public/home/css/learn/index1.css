@@ -1,0 +1,103 @@
+#refreshContainer {
+    margin-top: 14vw;
+}
+.mui-pull-bottom-pocket {
+    height: 10.8vw;
+}
+.mui-content {
+    background: #eeeeee !important;
+}
+/*banner*/
+.banner {
+    width: 100vw;
+    height: 50vw;
+}
+.banner img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+/*tab*/
+#tab {
+    background: url("/home/images/learn/topback.png") center top no-repeat;
+    width: 100vw;
+    height: 14vw;
+    background-size: 100vw 14vw;
+}
+.mui-slider-indicator.mui-segmented-control {
+    padding: 0 3.2vw;
+    line-height: 13.7vw;
+    height: 13.7vw;
+}
+.mui-slider-indicator.mui-segmented-control a {
+    font-size: 1.6rem;
+    position: relative;
+    line-height: 13.7vw;
+    height: 100%;
+    background-color: inherit !important;
+    color: #999 !important;
+}
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+    color: #fff !important;
+    font-weight: 600;
+    background-color: inherit !important;
+}
+/*lists1*/
+.lists1 .list {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 2.7vw;
+    margin-bottom: 2.7vw;
+    background: #ffffff;
+    text-align: center;
+    overflow: hidden;
+}
+.lists1 .list .tab {
+    position: absolute;
+    top: 3vw;
+    left: 1.6vw;
+    width: 10.8vw;
+    height: 8vw;
+    background: url(/home/images/learn/bg_blue.png) no-repeat;
+    background-size: 10.8vw 8vw;
+    color: #ffffff;
+    font-size: 1.2rem;
+    text-align: center;
+    /*line-height: 8vw;*/
+}
+.lists1 .list .img {
+    width: 100%;
+    height: 48vw;
+    -webkit-border-radius: 2.2vw;
+    border-radius: 2.2vw;
+}
+.lists1 .list .title {
+    margin-top: 1.6vw;
+    margin-bottom: 1.6vw;
+    color: #333333;
+    font-size: 1.4rem;
+    line-height: 4vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.lists1 .list .study {
+    display: inline-block;
+    background: url(/home/images/learn/people.png) 0 0 no-repeat;
+    background-size: 4.2vw 4.2vw;
+    padding-left: 4.8vw;
+    color: #999999;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 4.2vw;
+}
+.lists1 .default img{
+    width: 16vw;
+    position: absolute;
+    left: 50%;
+    margin-top: 50%;
+    margin-left: -8vw;
+}
