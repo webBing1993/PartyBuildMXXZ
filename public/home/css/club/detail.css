@@ -11,57 +11,133 @@
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 64vw;
+    min-height: 130vw;
 }
-.detail_info  .box {
-    position: absolute;
-    top: 0;
-    width: 99vw;
-}
-.detail_info .box .box_{
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 90vw;
-    margin: 8vw 5vw 0 5vw;
-    padding-top: 11vw;
-    box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
-}
-.detail_info .box .box_:before {
-    content: '';
-    position: absolute;
-    top: 3vw;
-    left: -1.8vw;
-    width: 23.2vw;
-    height: 8vw;
-    background: url(/home/images/structure/tag.png) 0 0 no-repeat;
-    background-size: 23.2vw 8vw;
-    color: #ffffff;
+.detail_info .activityTitle{
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 15vw;
     text-align: center;
-    font-size: 1.2rem;
-    line-height: 5.8vw;
-}
-.detail_info .box.town .box_:before {
-    content: '社团简介';
-}
-.detail_info  .box  .box_info{
-    padding: 6vw;
-    font-size: 1.4rem;
     color: #333;
 }
-.detail_info  .box  .box_info p{
-    line-height: 6vw;
-    text-indent: 2em;
+.detail_info .info{
+    font-size:1.3rem;
+    padding: 3vw;
+    color: #333;
+    border-bottom:1px solid #eee;
 }
-.box  .box_info .contact{
-    margin-top: 10vw;
+.detail_info .contact, .reg{
+    display: block;
+    color: #333;
+    font-size:1.3rem;
+    line-height: 11vw;
+    border-bottom:  1px dashed #eee;
+    margin-left: 6.5vw;
 }
-.box  .box_info .contact, .apply , .site{
-    line-height: 7vw;
+.site{
+    color: #333;
+    font-size:1.3rem;
+    line-height: 11vw;
+    margin-left: 6.5vw;
+}
+.contact_info{
+    border-bottom: 1px solid #eee;
+}
 
+.detail_info .contact i{
+    display: inline-block;
+    width: 3.75vw;
+    height: 4.53vw;
+    background: url("/home/images/club/tp.png") center no-repeat;
+    -webkit-background-size: 3.73vw;
+    background-size: 3.73vw 4.53vw ;
+    position: relative;
+    top:1.2vw;
+    left: 2vw;
 }
-.box  .box_info .contact>span, .apply>span{
-    color: #0e9aef;
+.detail_info .reg i{
+    display: inline-block;
+    width: 3.75vw;
+    height: 4.53vw;
+    background: url("/home/images/club/bm.png") center no-repeat;
+    -webkit-background-size: 3.73vw;
+    background-size: 3.73vw 4.53vw ;
+    position: relative;
+    top:1.2vw;
+    left: 2vw;
+}
+.club_activity .title {
+    display:flex;
+    justify-content: space-between;
+    padding: 4vw;
+}
+.title>.hd_ls>i{
+    width: 1vw;
+    height: 5vw;
+    background-color: #ff7043;
+    display:inline-block;
+    position: relative;
+    left: -4vw;
+    top:1vw;
+}
+.title>.hd_ls{
+    width: 20vw;
+    font-size: 1.6rem;
+}
+.title>.more{
+    color: #333;
+    line-height: 6vw;
+    width: 20vw;
+    text-align: center;
+    font-size: 1.6rem;
+}
+.title>.more img{
+    width: 5vw;
+    height: 3vw;
+    margin-top:1.5vw;
+}
+
+
+.list {
+    ont-size: 1.4rem;
+    color: #333;
+    padding: 3vw;
+    border-bottom: 1px solid #eee;
+    display: flex;
+}
+.list img {
+    width: 24vw;
+    height: 16vw;
+    border-radius: 1vw;
+}
+.list .list_info {
+    margin-left: 3vw;
+    width: 64vw;
+}
+.list .info_text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 8vw;
+    font-size: 1.6rem;
+    color: #333;
+}
+.list .time {
+    line-height: 6vw;
+    color: #999;
+    margin-top: 2vw;
+    display: flex;
+    justify-content: space-between;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa {
+    line-height: 6vw;
 }
