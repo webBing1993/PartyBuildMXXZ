@@ -41,41 +41,15 @@
  <!--社团活动-->
 <div class="notices ">
     <div class="mass">
-       <a href="" class="list">
-            <img src="/home/images/club/wdst.jpg" alt="">
-            <div class="list_info">
-                <div class="info_text">校友会联盟户外俱</div>
-                <div class="time">建立时间: <span>2017-10-12</span><i></i> </div>
-            </div>
-        </a>
-       <a href="" class="list">
-            <img src="/home/images/club/wdst.jpg" alt="">
-            <div class="list_info">
-                <div class="info_text">校友会联盟户外俱</div>
-                <div class="time">建立时间: <span>2017-10-12</span> </div>
-            </div>
-        </a>
+        {volist name="clublist" id="vo"}
         <a href="" class="list">
-            <img src="/home/images/club/wdst.jpg" alt="">
+            <img src="{$vo.front_cover|get_cover='path'}" alt="">
             <div class="list_info">
-                <div class="info_text">校友会联盟户外俱</div>
-                <div class="time">建立时间: <span>2017-10-12</span> </div>
+                <div class="info_text">{$vo.title}</div>
+                <div class="time">建立时间: <span>{$vo.set_date|time_format='Y-m-d'}</span><i></i> </div>
             </div>
         </a>
-        <a href="" class="list">
-            <img src="/home/images/club/wdst.jpg" alt="">
-            <div class="list_info">
-                <div class="info_text">校友会联盟户外俱</div>
-                <div class="time">建立时间: <span>2017-10-12</span> </div>
-            </div>
-        </a>
-        <a href="" class="list">
-            <img src="/home/images/club/wdst.jpg" alt="">
-            <div class="list_info">
-                <div class="info_text">校友会联盟户外俱</div>
-                <div class="time">建立时间: <span>2017-10-12</span> </div>
-            </div>
-        </a>
+        {/volist}
        <div class="tip"></div>
    </div>
 </div>
@@ -84,20 +58,29 @@
     <!-- Swiper -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
+            {volist name="volunteerlist" id="vo"}
             <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
                   <div class="tm_info">
                       <i></i>
-                      <div class="tm_name">创业导师团</div>
+                      <div class="tm_name">{$vo.title}</div>
                       <div class="info">
-                          选择了正确的团队，就是完成了80%的工作。”这是很多风险投家投资企业时的经验之谈
-                          这是很多风险投家投资企业时的经验之谈
-                          这是很多风险投家投资企业时的经验之谈
+                          {$vo.content}
                       </div>
                       <a href="#">查看详情</a>
                   </div>
-
-
-
+            </div>
+            {/volist}
+            <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
+                <div class="tm_info">
+                    <i></i>
+                    <div class="tm_name">创业导师团</div>
+                    <div class="info">
+                        选择了正确的团队，就是完成了80%的工作。”这是很多风险投家投资企业时的经验之谈
+                        这是很多风险投家投资企业时的经验之谈
+                        这是很多风险投家投资企业时的经验之谈
+                    </div>
+                    <a href="#">查看详情</a>
+                </div>
             </div>
             <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
                 <div class="tm_info">
@@ -110,54 +93,6 @@
                     </div>
                     <a href="#">查看详情</a>
                 </div>
-
-
-
-            </div>
-            <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
-            <div class="tm_info">
-                <i></i>
-                <div class="tm_name">创业导师团</div>
-                <div class="info">
-                    选择了正确的团队，就是完成了80%的工作。”这是很多风险投家投资企业时的经验之谈
-                    这是很多风险投家投资企业时的经验之谈
-                    这是很多风险投家投资企业时的经验之谈
-                </div>
-                <a href="#">查看详情</a>
-            </div>
-
-
-
-        </div>
-            <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
-                <div class="tm_info">
-                    <i></i>
-                    <div class="tm_name">创业导师团</div>
-                    <div class="info">
-                        选择了正确的团队，就是完成了80%的工作。”这是很多风险投家投资企业时的经验之谈
-                        这是很多风险投家投资企业时的经验之谈
-                        这是很多风险投家投资企业时的经验之谈
-                    </div>
-                    <a href="#">查看详情</a>
-                </div>
-
-
-
-            </div>
-            <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
-                <div class="tm_info">
-                    <i></i>
-                    <div class="tm_name">创业导师团</div>
-                    <div class="info">
-                        选择了正确的团队，就是完成了80%的工作。”这是很多风险投家投资企业时的经验之谈
-                        这是很多风险投家投资企业时的经验之谈
-                        这是很多风险投家投资企业时的经验之谈
-                    </div>
-                    <a href="#">查看详情</a>
-                </div>
-
-
-
             </div>
         </div>
         <!-- Add Pagination -->
