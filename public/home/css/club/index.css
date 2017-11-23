@@ -51,14 +51,14 @@
 }
 .list .list_info{
     margin-left: 3vw ;
+    width: 64vw;
 }
 .list .time{
     line-height: 6vw;
     color: #999;
     margin-top: 2vw;
-}
-.list .time i{
-
+    display: flex;
+    justify-content: space-between;
 }
 .list{
     ont-size: 1.4rem;
@@ -125,7 +125,7 @@
  }
 .swiper-slide .tm_info{
   position: absolute;
-    top:13vw;
+    top:9vw;
     left: 7vw;
     width: 56vw;
     height:100vw;
@@ -137,9 +137,10 @@
 }
 .swiper-slide .tm_info  i{
     display: block;
-    width:0.5vw;
+    width:1.2vw;
     height: 14vw;
-    border:0.5vw solid #fff ;
+    background-color: #fff;
+    border:0.8vw solid #fff ;
     border-radius: 1vw;
     position: absolute;
     top:7vw;
@@ -158,19 +159,19 @@
     display: -webkit-box;
     -webkit-line-clamp:4;
     -webkit-box-orient: vertical;
-    line-height: 8vw;
+    line-height: 6vw;
     margin-left: 2vw;
 }
 .swiper-slide .tm_info  a{
     display: block;
     text-align: center;
     color: #fff;
-    width:54vw;
+    width:57vw;
     line-height:9.5vw;
     font-size: 1.8rem;
     margin: 0 auto;
-    border: 1px solid;
+    border: 1px solid #FFF;
     position: absolute;
-    bottom: 5vw;
-    border-radius: 3vw;
+    bottom:12vw;
+    border-radius: 6vw;
 }

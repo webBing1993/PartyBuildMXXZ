@@ -17,16 +17,22 @@
 
     .swiper-container {
         width: 100%;
-        padding-top: 12vw;
+        padding-top: 16vw;
         padding-bottom: 15vw;
     }
     .swiper-slide {
         background-position: center;
         background-size: cover;
-        width: 70vw;
-        height: 120vw;
+        width: 72vw;
+        height: 107vw;
         border-radius:3vw ;
         position: relative;
+    }
+    .swiper-pagination-bullet{
+        background-color: #f1f1f1;!important;
+    }
+    .swiper-pagination-bullet{
+        background-color: #999999; !important;
     }
 
 </style>
@@ -41,12 +47,13 @@
  <!--社团活动-->
 <div class="notices ">
     <div class="mass">
+
         {volist name="clublist" id="vo"}
-        <a href="" class="list">
+       <a href="/home/club/volunteer.html" class="list">
             <img src="{$vo.front_cover|get_cover='path'}" alt="">
             <div class="list_info">
                 <div class="info_text">{$vo.title}</div>
-                <div class="time">建立时间: <span>{$vo.set_date|time_format='Y-m-d'}</span><i></i> </div>
+                <div class="time"> <span>建立时间 : {$vo.set_date|time_format='Y-m-d'}</span><span class="fa"></span></div>
             </div>
         </a>
         {/volist}
@@ -66,7 +73,7 @@
                       <div class="info">
                           {$vo.content}
                       </div>
-                      <a href="#">查看详情</a>
+                      <a href="/home/club/volunteer.html">查看详情</a>
                   </div>
             </div>
             {/volist}
@@ -119,14 +126,14 @@
         ntc.eq(eq).removeClass('hidden');
         if(eq == 0){
             $(".triangle-up").css("left","0.06vw");
-//            var len = ntc.eq(eq ).find('.regularmore>.lists>ul>a').length;
-//            if(len >= 6){
-//                $('.tip' ).text('上拉加载更多');
-//               loadScroll(eq+1);
-//           }else{
-//               $('.tip' ).hide();
-//               $(window ).off("scroll" );
-//           }
+            var len = ntc.eq(eq ).find('.mass>.list').length;
+            if(len >= 7){
+                $('.tip' ).text('上拉加载更多');
+               loadScroll(eq+1);
+           }else{
+               $('.tip' ).hide();
+               $(window ).off("scroll" );
+           }
      }
         if(eq == 1) {
             $(".triangle-up").css("left", "50.06vw");
