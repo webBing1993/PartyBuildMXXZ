@@ -1,0 +1,44 @@
+
+.list {
+    ont-size: 1.4rem;
+    color: #333;
+    padding: 3vw;
+    border-bottom: 1px solid #eee;
+    display: flex;
+}
+.list img {
+    width: 24vw;
+    height: 16vw;
+    border-radius: 1vw;
+}
+.list .list_info {
+    margin-left: 3vw;
+    width: 64vw;
+}
+.list .info_text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 8vw;
+    font-size: 1.6rem;
+    color: #333;
+}
+.list .time {
+    line-height: 6vw;
+    color: #999;
+    margin-top: 2vw;
+    display: flex;
+    justify-content: space-between;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa {
+    line-height: 6vw;
+}
