@@ -6,18 +6,64 @@
 {/block}
 {block name="body"}
 <div class="volunteer">
-    <div class="volu_title">创业导师团简介</div>
+    <div class="volu_title">{$article.title}简介</div>
     <div class="volu_img">
         <img src="" alt="加载中">
     </div>
-    <div class="info_text"></div>
-    <a href="#">联系方式:0571-86525625</a>
-    <a href="#">报名方式:0571-62325523</a>
-    <div class="">地址:余杭梦想小镇</div>
+    <div class="info_text">{$article.content}</div>
+    <a href="#">联系方式:{$article.telephone}</a>
+    <a href="#">报名方式:{$article.apply_tel}</a>
+    <div class="">地址:{$article.address}</div>
     <div class="note">
-        <span class="read">165</span>
-        <span class="isgood good" onclick="isGood(this,8,23)">1</span>
+        <span class="read">{$article.views}</span>
+        {eq name="visit" value="0"}
+        {eq name="article.is_like" value="1"}
+        <span class="isgood good_" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
+        {else/}
+        <span class="isgood good" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
+        {/eq}
+        {else/}
+        <span class="isgood good">{$article.likes}</span>
+        {/eq}
     </div>
+    <div class="comment">
+        <div class="sum">共<span>{$article.comments}</span>条评论</div>
+        <div class="lists">
+            {volist name="comment" id="co"}
+            <div class="list clear">
+                <div class="fl">
+                    <img src="{$co.header}" alt="用户" class="user">
+                </div>
+                <div class="fl mid">
+                    <div class="name limit">{$co.nickname}</div>
+                    <div class="content" >{$co.content}</div>
+                    <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
+                </div>
+                {eq name="visit" value="0"}
+                {eq name="co.is_like" value="1"}
+                <div class="fr isgood good_" onclick="isGood(this,10,{$co.id})">{$co.likes}</div>
+                {else/}
+                <div class="fr isgood good" onclick="isGood(this,10,{$co.id})">{$co.likes}</div>
+                {/eq}
+                {else/}
+                <div class="fr isgood good" >{$co.likes}</div>
+                {/eq}
+            </div>
+            {/volist}
+        </div>
+        <div class="tip"></div>
+        <div class="loading hidden">
+            <div class="typing_loader"></div>
+        </div>
+    </div>
+    {eq name="visit" value="0"}
+    <div class="bottom clear">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！">
+        </div>
+        <div class="send fr" onclick="send(this,10,{$article['id']})">发送</div>
+    </div>
+    {/eq}
 </div>
 {/block}
 

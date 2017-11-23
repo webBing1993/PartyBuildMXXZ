@@ -153,9 +153,9 @@ class Club extends Base{
         $this->assign('article',$article);
 
         //获取 评论
-        /*$commentModel = new Comment();
+        $commentModel = new Comment();
         $comment = $commentModel->getComment(10,$id,$userId);
-        $this->assign('comment',$comment);*/
+        $this->assign('comment',$comment);
 
         return $this->fetch();
     }
