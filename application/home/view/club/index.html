@@ -41,8 +41,8 @@
 {block name="body"}
     <!--tab-->
 <div class="tabs clear">
-    <div class="tab"><span>社团活动</span></div>
-    <div class="tab"><span>志愿服务</span></div>
+    <div class="tab" data-index="0"><span>社团活动</span></div>
+    <div class="tab" data-index="1"><span>志愿服务</span></div>
     <span class="triangle-up"></span>
 </div>
  <!--社团活动-->
@@ -89,27 +89,30 @@
 {block name="script"}
 <script src="/home/js/swiper.min.js"></script>
 <script src="/home/js/reset.js"></script>
-<script>
 
-</script>
 <script>
+    var scrollNow = true;
     $(function(){
-        var index = getCookie("type")?getCookie("type"):0;
+        c = getCookie("c")?getCookie("c"):0;
+       /* $(".tabs .tab ").eq(index).*/
+      // console.log(index)
+        $(".triangle-up").eq(c).css("left","0.06vw");
     })
     //tab切换
     $('.tabs>.tab ').on('click',function() {
         var ntc = $('.notices');
         var eq = $(this).index();
+        c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');
         ntc.eq(eq).removeClass('hidden');
-//        console.log(eq);
+      // console.log(eq);
         if(eq == 0){
             $(".triangle-up").css("left","0.06vw");
             var len = ntc.eq(eq ).find('.mass>.list').length;
 //            console.log(len);
-            if(len >= 5){
+            if(len >= 12){
                 $('.tip' ).text('上拉加载更多');
-               loadScroll(eq+1);
+               loadScroll(index);
            }else{
                $('.tip' ).hide();
                $(window ).off("scroll" );
@@ -143,7 +146,8 @@
                 },
             });
         }
-        setCookie("type",eq);
+        setCookie("c",c);
+        console.log(setCookie("c",c))
     });
     function loadScroll(type){
         $(window ).off("scroll" ).on("scroll",function(){
@@ -154,8 +158,8 @@
             var tip = $(".tip");
             var loading = $('.loading');
             var url;
-            if(type == 1){
-                url = "{:Url('dreamflash/indexmore')}";
+            if(type == 0){
+                url = "{:Url('club/indexmore')}";
             }
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
@@ -174,9 +178,10 @@
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
+                            console.log(data)
                             addCourse(data,type);
                             var dataLen =data.data.length;
-                            if(data.data.length == 5){
+                            if(data.data.length == 12){
                                 tip.text('上拉加载更多');
                             }
                         }else{
@@ -189,28 +194,24 @@
             }
         })
     }
-//    function addCourse(data){
-//        var html = '';
-//        var lists = data.data;
-//        var len = lists.length;
-//        for(var i = 0; i< len;i++){
-//            var list = lists[i];
-//            if(list.type == 1){
-//                html+=
-//                    '<a href="/home/dreamflash/video/id/'+list.id+'.html" class="list">'+
-//                    '<div class="tab">视频</div>'
-//            }else{
-//                html+=
-//                    '<a href="/home/dreamflash/article/id/'+list.id+'.html" class="list">'+
-//                    '<div class="tab">图文</div>'
-//            }
-//            html +=
-//                '<img src="'+list.path+'" alt="图片" class="img">'+
-//                '<div class="title limit">'+ list.title+'</div>'+
-//                '<span class="study">'+ list.views+'人阅读过</span>'+
-//                '</a>'
-//        }
-//        $(".regularmore .lists" ).append(html);
-//    }
+    function addCourse(data,type){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++) {
+            var list = lists[i];
+            if (type == 0) {
+                html +=
+            '<a href="/home/club/detail/'+list.id+'" class="list">' +
+                    '<img src="'+list.front_cover+'" alt="">' +
+                    '<div class="list_info">' +
+                    '<div class="info_text">'+list.title+'</div>' +
+                    '<div class="time"> <span>建立时间 :'+list.set_date+'</span><span class="fa"></span></div> ' +
+                '</div> ' +
+                '</a>';
+            }
+        }
+        $(".regularmore .lists" ).append(html);
+    }
 </script>
 {/block}

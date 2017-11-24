@@ -9,7 +9,7 @@
 namespace app\home\controller;
 
 
-class Brand{
+class Brand extends Base{
     /*
      * 主页
      */

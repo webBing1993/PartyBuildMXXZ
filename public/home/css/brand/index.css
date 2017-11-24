@@ -1,0 +1,57 @@
+.brand_main .list{
+  width: 90vw;
+  margin: 0 auto;
+  height:34.6vw;
+  display: block;
+    background-color: #333333;
+    position: relative;
+    -moz-opacity:0.8;
+    opacity: 0.8;
+    margin-top: 4vw;
+}
+.brand_main  .list img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1vw;
+}
+.br_info{
+      width: 90vw;
+      height: 34vw;
+      position: absolute;
+      top:0vw;
+      left: 0vw;
+      z-index: 1;
+      color: #fff;
+}
+.br_info .hd_title{
+    width:26.6vw;
+    line-height: 5.33vw;
+    height: 5.33vw;
+    background-color: #333333;
+    opacity: 0.8;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius: 4vw;
+    text-align: center;
+    position: absolute;
+    right: 2vw;
+    top:2vw;
+}
+
+
+.br_info .info{
+    text-align: center;
+    padding: 3vw;
+    margin-top: 5vw;
+}
+.br_info .info .info_title{
+    font-size: 2.0rem;
+    line-height:8vw ;
+}
+.br_info .info  .info_text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 1.4rem;
+}

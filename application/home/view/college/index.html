@@ -110,36 +110,7 @@
 {/block}
 
 {block name="body"}
-
-
 <div class="page">
-    <!--&lt;!&ndash;banner&ndash;&gt;-->
-    <!--<div class="banner">-->
-        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
-    <!--</div>-->
-    <!-- Tab 3 -->
-
-    <!--<div id="tab3" class="" >-->
-        <!--<div class="list-block" >-->
-            <!--<ul id="tab_main1">-->
-                <!--<li>-->
-
-                    <!--<a href="{://Url('College/forumnotice?id=')}" style="width: 100%;border-bottom: 1px solid #f1f1f1">-->
-                        <!--<div class="limit_ fl"><span>{//$fno['title']}</span><i class="fa fa-angle-right"></i></div>-->
-
-                        <!--{eq name="fno['is_over']" value="1"}-->
-                        <!--<span class="isEnd">已结束</span>-->
-                        <!--{/eq}-->
-                        <!--<span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>-->
-                    <!--</a>-->
-                    <!--{/volist}-->
-                <!--</li>-->
-                <!--<li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">-->
-                    <!--<img src="/home/images/nomessage.png" alt="" style="width:120px;">-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
     {volist name="fnotice" id="fno"}
     <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
         <img src="" alt="">
