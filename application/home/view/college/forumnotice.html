@@ -61,7 +61,7 @@
 			<div class="sum">共<span>{$info.comments}</span>条评论</div>
 			<div class="lists">
 				{volist name="comment" id="co"}
-				<div class="list clear">
+				<div class="list clear zbhd">
 					<div class="fl">
 						<img src="{$co.header}" alt="用户" class="user">
 					</div>
@@ -280,7 +280,7 @@
 		for(var i = 0; i< len;i++){
 			var list = lists[i];
 			var userid = "'"+list.create_user+"'";
-			html += '<div class="list clear">'+
+			html += '<div class="list clear zbhd">'+
 					'<div class="fl">'+
 					'<img src="'+list.header+'" alt="用户" class="user">'+
 					'</div>'+
