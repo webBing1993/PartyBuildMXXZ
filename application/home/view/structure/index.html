@@ -3,7 +3,7 @@
 {block name="style"}
 <title>云上组织</title>
 <link rel="stylesheet" href="/home/css/structure/structure.css">
-<link rel="stylesheet" href="/home/css/common/rem.css">
+<!--<link rel="stylesheet" href="/home/css/common/rem.css">-->
 <style>
 	.listbox .box .box_  .bor_ls {
 		position: absolute;
@@ -76,6 +76,11 @@
 
 
 $(function(){
+    $('.tabs .tab').each(function(){
+        if($(this).index()==1 || $(this).hasClass('.active')){
+            $('.listbox .town').show();
+		}
+	})
 	//组织架构切换
 	slide();
 	$('.name2' ).each(function(){
@@ -112,6 +117,9 @@ function slide(){
 function tabSwitch(a,b,fn,url){
 	$(a).off('click').on('click',function(){
 		var this_ = this ;
+		if($(this).index() == 1){
+		    $('.listbox .town').show();
+		}
 		var box = $(b ).parent();
 		var index = $(this_ ).index();
 		var ww = $(b ).parent().width();

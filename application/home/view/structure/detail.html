@@ -8,781 +8,117 @@
 
 {block name="body"}
 </div>
-<ul class="d_lists">
-	{volist name="modelAll" id="vo"}
-	<li class="d_list">
-		<div class="d_img_box">
-			<div class="d_img" style="background-color: {$vo.color}">
-				{$vo.surname}
-			</div>
-		</div>
-		<div class="d_name ">{$vo.name}
-			{eq name="$vo.tag" value="2"}
-			<img src="/home/images/structure/xx.jpg" alt="">
-			{/eq}
-			<a class="d_tel" href="tel:{$vo.mobile}" >
-				<span class="d_lst">
+<div class="list-t-wrap">
+	<div id="refreshContainer" class="mui-scroll-wrapper">
+		<div class="mui-scroll">
+			<div class="list-wrapper">
+				<!--列表一定要放到容器内,因为会有一个div append到mui-scroll中,需要在底部才能起作用-->
+				<ul class="d_lists" id="refreshContainers">
+					{volist name="modelAll" id="vo"}
+					<li class="d_list">
+						<div class="d_img_box">
+							<div class="d_img" style="background-color: {$vo.color}">
+								{$vo.surname}
+							</div>
+						</div>
+						<div class="d_name ">{$vo.name}
+							{eq name="$vo.tag" value="2"}
+							<img src="/home/images/structure/xx.jpg" alt="">
+							{/eq}
+							<a class="d_tel" href="tel:{$vo.mobile}">
+				<span class="d_lst fl">
 					{eq name="$vo.gender" value="2"}
 					<img src="/home/images/structure/woman.png" alt="">
 					{else/}
 					<img src="/home/images/structure/man.png" alt="">
 					{/eq}
 					<i>{$vo.politics_status}</i> </span>
-				<span class="d_tel_icon"></span>
-				{$vo.mobile}
-			</a>
+								<span class="fr d_tel_img">
+					<img src="/home/images/structure/tel.png" alt="">
+					{$vo.mobile}
+				</span>
+								<!--<span class="d_tel_icon fr"></span>-->
+							</a>
+						</div>
+					</li>
+					{/volist}
+				</ul>
+			</div>
 		</div>
-	</li>
-	{/volist}
-</ul>
+	</div>
+</div>
 {/block}
 
 {block name="script"}
 <script>
-/*var party3 = '{$party}';
-console.log(party3);
-	var data2 =[
-	{
-		"party3":"网络工程师联合党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"徐方",
-						"phone":"13777220784"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"白丽叶",
-						"phone":"18069827017"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"谢洁莉",
-						"phone":"15268623176"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"文国章",
-						"phone":"18202799185"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王金龙",
-						"phone":"13588230057"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"祝振宇",
-						"phone":"15924667134"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"上官形形",
-						"phone":"18768184967"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"周莹",
-						"phone":"15757121183"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"徐凌佳",
-						"phone":"13666620226"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"戴富伟",
-						"phone":"15158838470"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王伟",
-						"phone":"15158132245"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"徐娜",
-						"phone":"13675887077"
-					}
-				]
-			}]
-	},
-	{
-		"party3":"蜂巢孵化器党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"田羽轩",
-						"phone":"13738199704"
-				},
-				{
-					"position":"&nbsp;",
-						"name":"蒋梦丹",
-						"phone":"13738068738"
-				},
-				{
-					"position":"&nbsp;",
-						"name":"吴杨君",
-						"phone":"15801710467"
-				},
-				{
-					"position":"&nbsp;",
-						"name":"鲍海霞",
-						"phone":"13819114670"
-				},
-				]
-			}]
-	},	
-	{
-		"party3":"原质资本党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"董建刚",
-						"phone":"13777485816"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"阮旭健",
-						"phone":"13656688396"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"陈艳",
-						"phone":"18989451661"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"叶浩文",
-						"phone":"18668053508"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"徐丹",
-						"phone":"13777839063"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"余梦洁",
-						"phone":"15757160579"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"黄玉婷",
-						"phone":"15757116309"
-					},
-				]
-			}]
-	},	
-	{
-		"party3":"湾西加速器党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"黄佳佳",
-						"phone":"13221062585"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王艳光",
-						"phone":"15954858818"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"彭明君",
-						"phone":"18702726138"
-					},
-				]
-			}]
-	},	
-	{
-		"party3":"海龟孵化器党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"余清泉",
-						"phone":"18767153043"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王梓迪",
-						"phone":"15057144777"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"储巧",
-						"phone":"18268133432"
-					},
-				]
-			}]
-	},
-	{
-		"party3":"良仓加速器党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"赵晶",
-						"phone":"13958106506"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"俞志刚",
-						"phone":"18069783113"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"余登超",
-						"phone":"13777804682"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"刘玉蓉",
-						"phone":"15990096804"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"李迪雅",
-						"phone":"18757106914"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"姚洪涛",
-						"phone":"15968585625"
-					},
-				]
-			}]
-	},
-	{
-		"party3":"杭报第七空间党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"钱水军",
-						"phone":"13958129111"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"李敏明",
-						"phone":"15605883561"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"许露梅",
-						"phone":"15068729759"
-					},
-				]
-			}]
-	},
-	{
-		"party3":"浙江舞九信息科技有限公司党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"曹李发",
-						"phone":"18806508808"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王丹璐",
-						"phone":"18767106166"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"张炜",
-						"phone":"15558026826"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"方凯",
-						"phone":"15961732350"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"姜昱璇",
-						"phone":"18868831977"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"陈冠廷",
-						"phone":"13262985537"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"代雪",
-						"phone":"15158134778"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"刘泽琦",
-						"phone":"18767167626"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"施万海",
-						"phone":"18668028689"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"伍晓君",
-						"phone":"13732223052"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"叶宇球",
-						"phone":"15657475049"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"蒋伟男",
-						"phone":"17099293012"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"李文超",
-						"phone":"18867103519"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"楼梦诗",
-						"phone":"18858203655"
-					},{
-						"position":"&nbsp;",
-						"name":"郭禹成",
-						"phone":"15088639209"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王凯未",
-						"phone":"15088703625"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"戴思愉",
-						"phone":"15088646576"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"徐伟绩",
-						"phone":"18868829854"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王馨悦",
-						"phone":"15869024990"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"张苗苗",
-						"phone":"18883287371"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"闫冬",
-						"phone":"18367117144"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"周敏淼",
-						"phone":"15757108874"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"朱金明",
-						"phone":"15757129912"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"潘逸",
-						"phone":"18258834681"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"陶鹏飞",
-						"phone":"18868765411"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"姜冬",
-						"phone":"17099915135"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"毛姣姣",
-						"phone":"15088636706"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"陶琳",
-						"phone":"15088731621"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"袁赵雪青",
-						"phone":"18958112653"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"赵袆铭",
-						"phone":"15958152724"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"冯星",
-						"phone":"&nbsp;"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"陈聪",
-						"phone":"15158056336"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"曹丽莉",
-						"phone":"18767158024"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"冯彦景",
-						"phone":"15195951007"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"张小甫",
-						"phone":"13157109723"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"徐佳雯",
-						"phone":"18267830997"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"王园园",
-						"phone":"15757116901"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"余贞",
-						"phone":"15757129460"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"吴杨君",
-						"phone":"15801710407"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"劳梓衡",
-						"phone":"18767101390"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"杨济运",
-						"phone":"17005688110"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"罗学焕",
-						"phone":"18868825313"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"毛子通",
-						"phone":"15088633583"
-					},
+    var _party = '{$party}';
+    //    var len = 2;
+    //	上啦加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                contentrefresh : "正在加载...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
+                contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
+                callback: loadScroll
+            }
+        }
+    });
+    function loadScroll(){
+        var len = $("#refreshContainer li").length;
+        $.ajax({
+            type:"post",
+            url:"{:Url('Structure/detailmore')}",
+            data:{
+                party:_party,
+                length:len
+            },
+            beforeSend: function(XMLHttpRequest){
+            },
+            success:function(data){
+                console.log(data);
+//				len++;
+                addCourse(data);
+                if(data.code == 1){
+                    var dataLen =data.data.length;
+                    if(data.data.length == 6){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    }
 
-				]
-			}]
-	},
-	{
-		"party3":"杭州弧途科技有限公司党支部",
-		"detail3":[
-			{
-				"detail4":[
-					{
-						"position":"支部书记",
-						"name":"谢欢笑",
-						"phone":"18761118183"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"彭艳",
-						"phone":"13628496407"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"毛大山",
-						"phone":"15067151194"
-					},	{
-						"position":"&nbsp;",
-						"name":"叶威涛",
-						"phone":"15067845135"
-					},
-					{
-						"position":"&nbsp;",
-						"name":"孙庆峰",
-						"phone":"15840370192"
-					},
-
-				]
-			}]
-	},
-	{
-		"party3":"杭州联线电子商务有限公司党支部",
-		"detail3":[{
-			"detail4":[
-				{
-					"position":"支部书记",
-					"name":"林浩军",
-					"phone":"13777864743"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"陈聪",
-					"phone":"15957129979"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"张锦盼",
-					"phone":"13567138628"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"沈奕冰",
-					"phone":"15658006616"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"倪开怀",
-					"phone":"15158005786"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"张文娟",
-					"phone":"18658121360"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"朱嘉俊",
-					"phone":"13429600517"
-				},
-			]
-
-		},]
-	},
-	{
-		"party3":"杭州美哒网络科技有限公司党支部",
-		"detail3":[{
-			"detail4":[
-				{
-					"position":"支部书记",
-					"name":"孙亚君",
-					"phone":"13858058228"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"姚尧",
-					"phone":"15557163880"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"杨永保",
-					"phone":"18737128705"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"项琳",
-					"phone":"15700078956"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"郭倩红",
-					"phone":"18868814781"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"张晓晓",
-					"phone":"13777880797"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"韩璐",
-					"phone":""
-				},
-				{
-					"position":"&nbsp;",
-					"name":"胡晋维",
-					"phone":"15868101916"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"项叶苗",
-					"phone":"15757132623"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"谢鹏飞",
-					"phone":"15757129940"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"高晓飞",
-					"phone":"13758270401"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"徐文涛",
-					"phone":"15257114817"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"王勇",
-					"phone":"15191849350"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"郑旭红",
-					"phone":"13260588302"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"徐讳",
-					"phone":"15068862296"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"何欣蓉",
-					"phone":"15757120701"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"马莉雅",
-					"phone":"18108616009"
-				},
-			]
-		},]
-	},
-	{
-		"party3":"流动党员第一党支部",
-		"detail3":[{
-			"detail4":[
-				{
-					"position":"&nbsp;",
-					"name":"杨红闯",
-					"phone":"18058432877"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"王益南",
-					"phone":"18968158629"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"姚春蕾",
-					"phone":"18768105177"
-				}
-			]
-
-		},]
-	},
-	{
-		"party3":"流动党员第二党支部",
-		"detail3":[{
-			"detail4":[
-				{
-					"position":"&nbsp;",
-					"name":"胡鹏",
-					"phone":"18667863550"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"郭民",
-					"phone":"13588424444"
-				},
-				{
-					"position":"&nbsp;",
-					"name":"郭虹",
-					"phone":"13732294675"
-				}
-			]
-
-		},]
-	}
-];*/
-//var bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
-//var len = data2.length;
-//console.log(data2);
-//for(var i = 0 ; i < len ;i++){
-//	var party = data2[i];
-//	if( party.party3 == party3){
-//		var detail3 = party.detail3;
-//		var len3 = detail3.length;
-//		var html = '';
-//		for(var j = 0; j < len3 ; j++){
-//			console.log(len3)
-//			var party4 = detail3[j];
-//			var detail4 = party4.detail4;
-//			var len4 = detail4.length;
-//			for(var m = 0 ;m < len4 ;m++){
-//				html+='<li class="d_list">'+
-//						'<div class="d_img_box">'+
-//						'<div class="d_img" style="background-color:'+bg_color[Math.floor(Math.random()*10)]+'">'+
-//						detail4[m].name[0]+'</div>'+
-//						'</div>'+
-//						'<div class="d_name">'+detail4[m].name +' '+detail4[m].position+'</div>'+
-//						'<a class="d_tel" href="tel:'+detail4[m].phone+'" >'+
-//							'<span class="d_tel_icon"></span>'+
-//								detail4[m].phone+
-//						'</a>'+
-//						'</li>';
-//			}
-//		}
-//		$('.d_lists' ).append(html);
-//		break;
-//	}else{
-//		console.log('百分百名字错了'+ party3 + '后：'+ party.party3)
-//	}
-//}
-//
-//$(function(){
-//	getHistory();
-//	var flag=false;
-//	setTimeout(function(){
-//		flag=true
-//	},1000);
-//	window.addEventListener('popstate',function(e){
-//		//监听到返回事件
-//		if(flag){
-//			window.location.href = "/home//home/structure/communication.html";
-//		}
-//		getHistory();
-//	},false);
-//	function getHistory(){
-//		var state={
-//			title:'',
-//			url:window.location.href
-//		} ;
-//		window.history.pushState(state,'title',state.url);
-//	}
-//})
-
+    function addCourse(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        console.log(lists);
+        var str='';
+        for (var i=0;i<len;i++){
+            var img = '';
+            if(lists[i].gender == 1){
+                img = '/home/images/structure/man.png'
+            }else {
+                img = '/home/images/structure/woman.png'
+            }
+            str += '<li class="d_list">'
+                +'<div class="d_img_box"><div class="d_img" style="background-color:'+lists[i].color+'">'+lists[i].surname+'</div></div>'
+                +'<div class="d_name ">'
+                +'<span>'+lists[i].name+'</span>'
+                +'<a class="d_tel" href="'+lists[i].mobile+'">'
+                +'<span class="d_lst fl"><img src="'+img+'" alt=""><i>'+lists[i].politics_status+'</i></span>'
+                +'<span class="fr d_tel_img"><img src="/home/images/structure/tel.png" alt=""><span>'+lists[i].mobile+'</span></span>'
+                +'</a>'
+                +'</div>'
+                +'</li>'
+        }
+        $('#refreshContainers').append(str);
+    }
 
 </script>
 {/block}

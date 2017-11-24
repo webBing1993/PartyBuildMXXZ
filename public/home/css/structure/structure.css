@@ -94,11 +94,14 @@ a:active {
   background-color: #f7f7f7;
 }
 body {
+
   overflow-x: hidden;
+  /*position: fixed;*/
 }
 .banner {
   width: 100vw;
   height: 50vw;
+
 }
 .banner .banner-img {
   width: 100%;
@@ -131,7 +134,7 @@ body {
   position: relative;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   min-height: 64vw;
 }
 .listbox .box {
@@ -309,6 +312,7 @@ body {
   }
 .listbox .town {
   left: 100vw;
+  display: none;
 }
 
 .listbox .shouldKnow {
@@ -423,6 +427,8 @@ body {
     height: 3.5vw;
     margin-top: 1.2vw;
   }
+  /*.d_list .d_name>a .d_tel_img img {width:5.33vw;}*/
+  .d_list .d_tel_img  {font-size: 1.6rem;}
 
   .d_list .d_name>a{
     display: block;
