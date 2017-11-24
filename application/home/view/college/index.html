@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>鸡毛传帖</title>
+<title>通知公告</title>
 <link rel="stylesheet" href="/home/css/college/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
@@ -110,15 +110,24 @@
 {/block}
 
 {block name="body"}
+
+
 <div class="page">
+    <!--&lt;!&ndash;banner&ndash;&gt;-->
+    <!--<div class="banner">-->
+        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
+    <!--</div>-->
+
     {volist name="fnotice" id="fno"}
     <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
-        <img src="" alt="">
+        <img src="{$fno.front_cover|get_cover='path'}" alt="">
         <div class="list_info">
             <div class="info_text">{$fno['title']}</div>
             <div class="time">
                 {eq name="fno['is_over']" value="1"}
                 <span class="end">已结束</span>
+                {else/}
+                <span class="end">进行中</span>
                 {/eq}
                 <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
                 <i class="fa"></i>
@@ -137,8 +146,6 @@
 {block name="script"}
 <script src="/static/framework7/framework7.js"></script>
 <script>
-    //模块标题
-    $('title').html('通知公告');
 
     $(function(){
         var len = $(".page>a" ).length;
@@ -207,6 +214,8 @@
                     '<div class="limit_ fl"><span>'+list.title+'</span><i class="fa fa-angle-right"></i></div>';
             if(list.is_over == 1){
                 html+='<span class="isEnd">已结束</span>';
+            }else{
+                html+='<span class="isEnd">进行中</span>';
             }
             html+='<span class="time fr">'+list.create_time+'</span>'+
                     '</a>';

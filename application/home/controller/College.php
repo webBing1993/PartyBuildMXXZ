@@ -19,7 +19,7 @@ use think\Db;
 
 /**
  * Class Notice
- * @package  鸡毛传帖
+ * @package  通知公告
  */
 class College extends Base {
     /**
