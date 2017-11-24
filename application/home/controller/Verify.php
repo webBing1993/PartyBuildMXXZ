@@ -132,4 +132,11 @@ class Verify extends Controller{
     public function null(){
         return $this ->fetch();
     }
+        /**
+     * 注册页面
+     * @return mixed
+     */
+    public function sign(){
+        return $this ->fetch();
+    }
 }

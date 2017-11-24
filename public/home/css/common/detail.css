@@ -114,6 +114,7 @@
   overflow: hidden;
 }
 .article .content * {
+  text-align: justify;
   max-width: 100%!important;
 }
 .article .content img {
@@ -224,6 +225,7 @@
   width: 100%;
   word-break: break-all;
   font-size: 1.4rem;
+  text-align: justify;
 }
 .comment .lists .list .mid .time {
   font-size: 1.2rem;

@@ -151,7 +151,7 @@ body {
     width: 90vw;
     margin: 4vw 5vw 0 5vw;
     padding-top: 11vw;
-    box-shadow: 1px 3px 8px rgba(102, 102, 102, 0.2);
+    box-shadow: 0 0 8px rgba(102, 102, 102, 0.2);
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
@@ -192,7 +192,7 @@ body {
     width: 100%;
     height: 12vw;
     font-size: 1.4rem;
-    line-height: 15vw;
+    line-height: 16vw;
     padding-left:3vw;
 }
 .llistbox .box .box_ .lists .party1 {
@@ -286,6 +286,7 @@ body {
 }
 .llistbox  .party1 .name1 span img{
     width:5vw;
-   height:5vw;
-    margin-top:5vw;
+    height:5vw;
+    position: relative;
+    vertical-align: middle;
 }

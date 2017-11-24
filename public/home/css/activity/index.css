@@ -45,11 +45,13 @@
     font-size: 1.4rem;
     color: #333;
     margin-bottom: 2vw;
+    text-align: justify;
 }
 .lists>ul>a>span{
     font-size: 1.3rem;
     color: #999;
     display: block;
+    text-align: justify;
 }
 .lists.time{
     display: block;

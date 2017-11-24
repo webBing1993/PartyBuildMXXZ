@@ -102,3 +102,32 @@ footer img{
     width:100%;
     height:100%;
 }
+
+
+
+
+/*2017.11.22 Tony 新增注册页面*/
+.register {position: relative;margin: auto;width:100%;}
+.register .rAccount {position: relative;margin:20% auto 0;}
+.register .rAccount  input {position: relative;margin: auto;width:53.33vw;border: 1px solid #f1f1f1;padding: 2.7vw;color: #999;height:8vw;line-height: 8vw;display: block;outline: none;font-size: 1.2rem;}
+.register .verification {position: relative;margin:9px auto 0;text-align: center;}
+.register .verification input {display: inline-block;vertical-align:middle;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
+.register #yan {width:27.5vw;border: 1px solid #f1f1f1;padding: 2.7vw;color: #999;}
+.register #verify_code {width:24.8vw;background: #feb0a9;outline: none;border: transparent;border-radius: 4px;color: #000;}
+.register .btns {position: relative;margin:19.47vw auto 0;width:53.33vw;height:8vw;line-height: 8vw;border-radius: 14px;background: #e51c23;text-align: center;color: #fff;font-size: 1.6rem;}
+.footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;max-height: 120px;}
+.footer img {width:100%;height:100%;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

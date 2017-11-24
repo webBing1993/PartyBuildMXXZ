@@ -3,7 +3,7 @@
 {block name="style"}
 <title>云上组织</title>
 <link rel="stylesheet" href="/home/css/structure/communication.css">
-<link rel="stylesheet" href="/home/css/common/rem.css">
+<!--<link rel="stylesheet" href="/home/css/common/rem.css">-->
 <style>
 
     .listbox{
@@ -29,7 +29,7 @@
             <a href="{:Url('structure/pilot?id='.$pid)}" class="bor_ls" >{$name}</a>
             <div class="lists">
                 {volist name="modelAll" id="vo"}
-                <a href="{:Url('structure/detail?party='.$vo['id'])}">
+                <a href="{:Url('structure/detail?id='.$_GET['id'].'&party='.$vo['id'])}">
                     <div class="list clear">
                         <div class="party1">
                             <!--前缀图片-->
@@ -106,6 +106,7 @@
 
         })
     }
+
 
 </script>
 {/block}

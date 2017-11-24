@@ -1,0 +1,145 @@
+{extend name="public/pure"}
+{block name="style"}
+<title>梦想小镇红色驿站</title>
+<link rel="stylesheet" href="/home/css/verify/memberslogin.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/admin/css/plugins/sweetalert/sweetalert.css">
+{/block}
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/verify/loginbanner.png">
+</div>
+
+<!--注册-->
+<div class="register">
+    <div class="rAccount">
+        <input type="text" placeholder="请输入你的手机号/邮箱" id="account"/>
+    </div>
+    <div class="verification">
+        <input type="text" placeholder="请输入验证码" id="yan"/>
+        <input type="button" class="verificationBtn" value="发送验证码" id="verify_code">
+    </div>
+    <div class="btns">提交</div>
+</div>
+<div class="footer">
+    <img src="/home/images/verify/footer.png">
+</div>
+
+{/block}
+{block name="script"}
+<script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(function(){
+        $('.btns').on("click",function(){
+            login()
+        });
+        $('.verificationBtn').on("click",function(){
+            yans()
+        });
+        //绝对定位bug
+//        var vh =$(window).height() - $('footer').height() - $('.banner').height() - $('.box').height();
+//        if(vh < 0){
+//            vh = '10vw';
+//        }
+//
+//        $('footer').css({
+//            'position': 'relative',
+//            'margin-top': vh
+//        });
+
+
+    });
+    /**登陆**/
+    function login(){
+        reg();
+//        var data = {mobileEmail: mobileEmail};
+//        var url = ''; //url
+//        $.ajax({
+//            type: "POST", //用POST方式传输
+//            dataType: "json", //数据格式:JSON
+//            url: url,
+//            data: JSON.stringify(data),
+//            contentType: 'application/json;charset=utf-8',
+//            error: function (XMLHttpRequest, textStatus, errorThrown) {
+//            },
+//            success: function (data) {
+//            }
+//        });
+    }
+    /**表单验证**/
+    function reg(){
+        var uid=$('#account').val();
+        if(uid==''||uid==null){
+            swal({
+                title: ' ',
+                text: '手机号不能为空',
+                type: 'error',
+                confirmButtonText: '确定'
+            });
+        }else{
+            var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
+            if(!myreg.test(uid)||uid.length<11)
+            {
+                swal({
+                    title: ' ',
+                    text: '请输入有效的手机号码',
+                    type: 'error',
+                    confirmButtonText: '确定'
+                });
+            }else{
+                return true
+            }
+        }
+
+    }
+//    发送验证码
+    function yans(){
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+        var code = ""; //验证码
+        var codeLength = 6;//验证码长度
+        curCount = count;
+        var mobileEmail = $('#account').val();
+        var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
+        if(!myreg.test(mobileEmail)||mobileEmail.length<11){
+            $("#verify_code").attr("disabled", true);
+            $("#verify_code").val("重发(" + curCount+')');
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+//            var data = {mobileEmail:mobileEmail};
+//            var url  = ''; //url
+//            $.ajax({
+//                type: "POST", //用POST方式传输
+//                dataType: "json", //数据格式:JSON
+//                url: url,
+//                data: JSON.stringify(data),
+//                contentType: 'application/json;charset=utf-8',
+//                error: function (XMLHttpRequest, textStatus, errorThrown) {},
+//                success: function (data) {
+//                }
+//            });
+        }
+        else {
+            swal({
+                title: ' ',
+                text: '手机号不能为空',
+                type: 'error',
+                confirmButtonText:'确定'
+            });
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#verify_code").removeAttr("disabled");//启用按钮
+                $("#verify_code").val("重新发送验证码");
+                code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
+            }
+            else {
+                curCount--;
+                $("#verify_code").val("重发(" + curCount+')');
+            }
+        }
+    }
+</script>
+{/block}
