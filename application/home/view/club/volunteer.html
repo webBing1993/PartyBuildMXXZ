@@ -83,7 +83,7 @@
         <div class="myword fl">
             <input type="text" placeholder="说说你的感想！">
         </div>
-        <div class="send fr" onclick="send(this,10,{$article['id']})">发送</div>
+        <div class="send fr" onclick="send(this,0,{$article['id']})">发送</div>
     </div>
     {/eq}
 </div>
@@ -197,7 +197,7 @@
                     type:"post",
                     url:"{:Url('Base/morecomment')}",
                     data:{
-                        type:1,
+                        type:10,
                         aid:id,
                         length:len
                     },
