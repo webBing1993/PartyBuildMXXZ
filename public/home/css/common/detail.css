@@ -304,18 +304,20 @@
   background: #fafafa;
 }
 .content .time{
-  line-height: 6vw;
+  line-height: 7vw;
   color: #333;
   margin-top: 10vw;
   margin-left: 2vw;
+  display: block;
 }
 .content .site{
-  line-height: 6vw;
+  line-height: 7vw;
   color: #333;
   margin-left: 2vw;
+  display: block;
 }
 .content .si_tp{
-  line-height: 6vw;
+  line-height: 7vw;
   color: #333;
   margin-left: 2vw;
   display: block;

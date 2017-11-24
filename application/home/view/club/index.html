@@ -57,6 +57,7 @@
             </div>
         </a>
         {/volist}
+
        <div class="tip"></div>
    </div>
 </div>
@@ -87,23 +88,26 @@
 
 {block name="script"}
 <script src="/home/js/swiper.min.js"></script>
-
+<script src="/home/js/reset.js"></script>
 <script>
 
 </script>
 <script>
-    //初始化
-    var ntc = $('.notices');
+    $(function(){
+        var index = getCookie("type")?getCookie("type"):0;
+    })
     //tab切换
     $('.tabs>.tab ').on('click',function() {
         var ntc = $('.notices');
         var eq = $(this).index();
         ntc.eq(eq).siblings('.notices').addClass('hidden');
         ntc.eq(eq).removeClass('hidden');
+//        console.log(eq);
         if(eq == 0){
             $(".triangle-up").css("left","0.06vw");
             var len = ntc.eq(eq ).find('.mass>.list').length;
-            if(len >= 7){
+//            console.log(len);
+            if(len >= 5){
                 $('.tip' ).text('上拉加载更多');
                loadScroll(eq+1);
            }else{
@@ -139,7 +143,74 @@
                 },
             });
         }
+        setCookie("type",eq);
     });
-
+    function loadScroll(type){
+        $(window ).off("scroll" ).on("scroll",function(){
+            var ntc = $('.notices');
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+            var len = ntc.eq(type-1).find('.notice:last .list').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var url;
+            if(type == 1){
+                url = "{:Url('dreamflash/indexmore')}";
+            }
+            if(dh == end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: url,
+                    data:{
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        console.log(data);
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addCourse(data,type);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+//    function addCourse(data){
+//        var html = '';
+//        var lists = data.data;
+//        var len = lists.length;
+//        for(var i = 0; i< len;i++){
+//            var list = lists[i];
+//            if(list.type == 1){
+//                html+=
+//                    '<a href="/home/dreamflash/video/id/'+list.id+'.html" class="list">'+
+//                    '<div class="tab">视频</div>'
+//            }else{
+//                html+=
+//                    '<a href="/home/dreamflash/article/id/'+list.id+'.html" class="list">'+
+//                    '<div class="tab">图文</div>'
+//            }
+//            html +=
+//                '<img src="'+list.path+'" alt="图片" class="img">'+
+//                '<div class="title limit">'+ list.title+'</div>'+
+//                '<span class="study">'+ list.views+'人阅读过</span>'+
+//                '</a>'
+//        }
+//        $(".regularmore .lists" ).append(html);
+//    }
 </script>
 {/block}
