@@ -26,7 +26,7 @@ class Club extends Base{
             'type' => 1,
             'status' => ['egt',0],
         );
-        $clublist = ClubModel::where($map)->order('id desc')->limit(5)->select();
+        $clublist = ClubModel::where($map)->order('id desc')->limit(10)->select();
 //        var_dump($clublist);die;
         $map2 = array(
             'type' => 2,
@@ -46,10 +46,10 @@ class Club extends Base{
             'type' => 1,
             'status' => ['egt',0],
         );
-        $list = ClubModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = ClubModel::where($map)->order('id desc')->limit($len,6)->select();
         foreach($list as $value){
-//            $img = Picture::get($value['front_cover']);
-//            $value['path'] = $img['path'];
+            $img = Picture::get($value['front_cover']);
+            $value['path'] = $img['path'];
             $value['set_date'] = date("Y-m-d",$value['set_date']);
         }
         if($list){
