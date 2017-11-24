@@ -43,7 +43,7 @@ class Notice extends Admin {
                 return $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
-                $data['start_time'] = strtotime($data['start_time']);
+                /*$data['start_time'] = strtotime($data['start_time']);
                 $data['end_time'] = strtotime($data['end_time']);
                 if (!empty($data['start_time']) && empty($data['end_time'])){
                     return $this->error('请添加结束时间');
@@ -53,7 +53,7 @@ class Notice extends Admin {
                 }
                 if (!empty($data['start_time']) && !empty($data['end_time']) && $data['end_time'] <= $data['start_time']){
                     return $this->error('结束时间有错误');
-                }
+                }*/
                 $res = $noticeModel->save($data);
                 if ($res){
                     return $this->success("新增通知成功",Url('Notice/index'));
@@ -77,7 +77,7 @@ class Notice extends Admin {
                 return $this->error($result);
             }else{
                 $noticeModel = new NoticeModel();
-                if (!empty($data['start_time']) && empty($data['end_time'])){
+                /*if (!empty($data['start_time']) && empty($data['end_time'])){
                     return $this->error('请添加结束时间');
                 }
                 if (empty($data['start_time']) && !empty($data['end_time'])){
@@ -87,7 +87,7 @@ class Notice extends Admin {
                     return $this->error('结束时间有错误');
                 }
                 $data['start_time'] = strtotime($data['start_time']);
-                $data['end_time'] = strtotime($data['end_time']);
+                $data['end_time'] = strtotime($data['end_time']);*/
                 $res = $noticeModel->save($data,['id'=>$data['id']]);
                 if ($res){
                     return $this->success("修改通知成功",Url('Notice/index'));
