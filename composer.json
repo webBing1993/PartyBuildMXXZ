@@ -18,7 +18,8 @@
   "require": {
     "php": ">=5.4.0",
     "topthink/framework": "5.0.0RC4",
-    "phpoffice/phpexcel": "dev-master"
+    "phpoffice/phpexcel": "dev-master",
+    "yunpian/yunpian-php-sdk" : "~1.0"
   },
   "require-dev": {
     "nette/mail":"*"
