@@ -20,93 +20,36 @@
             <!--十九大专题-->
             <div class="mui-slider-item mui-control-content lists1">
                 <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
+                {volist name="list" id="vo"}
+                {eq name="$vo.type" value="1"}
+                <a href="{:Url('special/video?id='.$vo['id'])}" class="list lesson">
+                    <div class="tab">视频</div>
+                {else/}
+                <a href="{:Url('special/article?id='.$vo['id'])}" class="list lesson">
                     <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
+                {/eq}
+                    <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                    <div class="title limit">{$vo.title}</div>
+                    <span class="study">{$vo.views}人阅读过</span>
                 </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
-                    <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
-                    <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
-                    <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
-                    <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
-                    <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
-                    <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
+                {/volist}
             </div>
             <!--两学一做-->
             <div class="mui-slider-item mui-control-content lists1">
                 <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
-                    <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">90人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
+                 {volist name="list2" id="vo"}
+                 {eq name="$vo.type" value="1"}
+                 <a href="{:Url('learn/video?id='.$vo['id'])}" class="list lesson">
                     <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">90人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/video.html" class="list lesson">
-                    <div class="tab">视频</div>
-                    <img src="/home/images/learn/banner.png" alt="视频" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">80人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
-                    <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-                <!-- 手机党校循环体-->
-                <a href="/home/learn/article.html" class="list lesson">
-                    <div class="tab">图文</div>
-                    <img src="/home/images/learn/banner.png" alt="图片" class="img">
-                    <div class="title limit">这里是标题区域</div>
-                    <span class="study">100人阅读过</span>
-                </a>
-
+                 {else/}
+                 <a href="{:Url('learn/article?id='.$vo['id'])}" class="list lesson">
+                     <div class="tab">图文</div>
+                 {/eq}
+                     <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                     <div class="title limit">{$vo.title}</div>
+                     <span class="study">{$vo.views}人阅读过</span>
+                 </a>
+                 {/volist}
             </div>
         </div>
     </div>

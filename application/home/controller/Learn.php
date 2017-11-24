@@ -15,6 +15,7 @@ use app\home\model\Browse;
 use app\home\model\Comment;
 use app\admin\model\Picture;
 use app\home\model\Learn as LearnModel;
+use app\home\model\Special as SpecialModel;
 use app\home\model\Like;
 use think\Request;
 
@@ -23,6 +24,19 @@ class Learn extends Base{
      * 两学一做
      */
     public function index(){
+        $this->anonymous();
+        //数据列表
+        $map = array(
+            'type' => array('in',[1,2]),
+            'status' => array('egt',0),
+        );
+        $list = SpecialModel::where($map)->limit(10)->order('id desc')->select();
+        $list2 = LearnModel::where($map)->limit(10)->order('id desc')->select();
+        $this->assign('list',$list);
+        $this->assign('list2',$list2);
+        return $this->fetch();
+    }
+    /*public function index(){
         $this->anonymous();
         //每日一课数据
         $request = Request::instance() ->domain();
@@ -109,7 +123,7 @@ class Learn extends Base{
                     return $this->fetch();
             }
         }
-    }
+    }*/
     /**
      * 党史学习
      */
@@ -208,7 +222,7 @@ class Learn extends Base{
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list = LearnModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = LearnModel::where($map)->order('id desc')->limit($len,6)->select();
         foreach($list as $value){
             $img = Picture::get($value['front_cover']);
             $value['path'] = $img['path'];
@@ -256,6 +270,8 @@ class Learn extends Base{
         $video['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
         $video['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
         $video['desc'] = str_replace('&nbsp;','',strip_tags($video['content']));
+        $video['desc'] = str_replace(" ",'',$video['desc']);
+        $video['desc'] = str_replace("\n",'',$video['desc']);
 
         //获取 文章点赞
         $likeModel = new Like;
@@ -306,6 +322,8 @@ class Learn extends Base{
         $article['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
         $article['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
         $article['desc'] = str_replace('&nbsp;','',strip_tags($article['content']));
+        $article['desc'] = str_replace(" ",'',$article['desc']);
+        $article['desc'] = str_replace("\n",'',$article['desc']);
 
         //获取 文章点赞
         $likeModel = new Like;
