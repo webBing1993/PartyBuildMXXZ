@@ -114,5 +114,4 @@ class College extends Base {
         $this->assign('comment',$comment);
         return $this->fetch();
     }
-
 }

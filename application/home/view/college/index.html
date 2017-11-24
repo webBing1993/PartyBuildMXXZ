@@ -2,6 +2,7 @@
 
 {block name="style"}
 <title>鸡毛传帖</title>
+<link rel="stylesheet" href="/home/css/college/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
@@ -97,41 +98,13 @@
         margin-left:3.2vw;font-size:1.2rem;color:#e4393a;
     }
     #tab3 #tab_main1>li>a>span.time{
-        margin-right:3.2vw;font-size:1.2rem;color:#999;
+        margin-right:5.2vw;font-size:1.2rem;color:#999;
     }
     a{
         display: inline-block;
         color:#666666;
     }
 
-    /*加载动画*/
-    .tip {
-        height: 10.67vw;
-        text-align: center;
-        line-height: 10.67vw;
-        color: #c1c1c1;
-    }
-    .loading {
-        width: 100%;
-        height: 10.67vw;
-    }
-    .typing_loader {
-        width: 1.6vw;
-        height: 1.6vw;
-        border-radius: 50%;
-        -webkit-animation: typing 1s linear infinite alternate;
-        -moz-animation: Typing 1s linear infinite alternate;
-        animation: typing 1s linear infinite alternate;
-        position: relative;
-        top: 4.53vw;
-        left: 44.667vw;
-    }
-    .fa.fa-angle-right{
-        float: right;
-        line-height: 2rem;
-        margin-right:3.2vw;
-        font-size: 1.4rem;
-    }
 
 </style>
 {/block}
@@ -140,28 +113,48 @@
 
 
 <div class="page">
+    <!--&lt;!&ndash;banner&ndash;&gt;-->
+    <!--<div class="banner">-->
+        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
+    <!--</div>-->
     <!-- Tab 3 -->
-    <div id="tab3" class="" >
-        <div class="list-block" >
-            <ul id="tab_main1">
-                <li>
-                    {volist name="fnotice" id="fno"}
-                    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" style="width: 100%;border-bottom: 1px solid #f1f1f1">
-                        <div class="limit_ fl"><span>{$fno['title']}</span><i class="fa fa-angle-right"></i></div>
 
-                        {eq name="fno['is_over']" value="1"}
-                        <span class="isEnd">已结束</span>
-                        {/eq}
-                        <span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>
-                    </a>
-                    {/volist}
-                </li>
-                <li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">
-                    <img src="/home/images/nomessage.png" alt="" style="width:120px;">
-                </li>
-            </ul>
+    <!--<div id="tab3" class="" >-->
+        <!--<div class="list-block" >-->
+            <!--<ul id="tab_main1">-->
+                <!--<li>-->
+
+                    <!--<a href="{://Url('College/forumnotice?id=')}" style="width: 100%;border-bottom: 1px solid #f1f1f1">-->
+                        <!--<div class="limit_ fl"><span>{//$fno['title']}</span><i class="fa fa-angle-right"></i></div>-->
+
+                        <!--{eq name="fno['is_over']" value="1"}-->
+                        <!--<span class="isEnd">已结束</span>-->
+                        <!--{/eq}-->
+                        <!--<span class="time fr">{$fno['create_time']|time_format='Y-m-d'}</span>-->
+                    <!--</a>-->
+                    <!--{/volist}-->
+                <!--</li>-->
+                <!--<li style="margin-top:75px;margin-left:calc(50% - 60px)" id="wuxiaoxi1">-->
+                    <!--<img src="/home/images/nomessage.png" alt="" style="width:120px;">-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+    {volist name="fnotice" id="fno"}
+    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
+        <img src="" alt="">
+        <div class="list_info">
+            <div class="info_text">{$fno['title']}</div>
+            <div class="time">
+                {eq name="fno['is_over']" value="1"}
+                <span class="end">已结束</span>
+                {/eq}
+                <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
+                <i class="fa"></i>
+            </div>
         </div>
-    </div>
+        {/volist}
+    </a>
 </div>
 
 <div class="tip"></div>
@@ -174,10 +167,10 @@
 <script src="/static/framework7/framework7.js"></script>
 <script>
     //模块标题
-    $('title').html('鸡毛传帖');
+    $('title').html('通知公告');
 
     $(function(){
-        var len = $("#tab_main1>li>a" ).length;
+        var len = $(".page>a" ).length;
         if(len >= 10){
             $('.tip' ).text('上拉加载更多');
             //上拉加载
@@ -187,7 +180,7 @@
             window.location.href  =$(this ).attr('href');
         });
 
-        if($("#tab_main1").find("a").length > 0){
+        if($(".page>a").find("a").length > 0){
             $('#wuxiaoxi1').hide()
         }
         else{
@@ -199,7 +192,7 @@
         $(window ).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-            var len = $("#tab_main1 a" ).length;
+            var len = $(".page>a" ).length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end){

@@ -1,0 +1,176 @@
+
+.mass .title .fa{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    float: right;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 14vw;
+}
+.fa:before {
+    content: "\f105";
+}
+.list .list_info{
+    margin-left: 3vw ;
+    width: 64vw;
+}
+.list .time{
+    line-height: 6vw;
+    color: #999;
+    margin-top: 2vw;
+    display: flex;
+    justify-content: space-between;
+}
+.list .time .end{
+    color: red;
+    width: 15vw;
+}
+.time .time_ls {
+    margin-left: 20vw;
+}
+.list{
+    ont-size: 1.4rem;
+    color: #333;
+    padding: 3vw;
+    border-bottom: 1px solid #eee;
+    display: flex;
+}
+.list  img{
+    width: 24vw;
+    height: 18vw ;
+    border-radius: 1vw;
+}
+.list .info_text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    overflow: hidden;
+    line-height: 6vw;
+    font-size: 1.6rem;
+    color: #333;
+}
+.mass .simple_info{
+    padding: 4vw;
+    font-size: 1.4rem;
+    display: block;
+}
+.mass .simple_info p{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+    color:#666;
+}
+.volunt  .tip {
+    display: block;
+    height: 7.4vw;
+    line-height: 7.4vw;
+    text-align: center;
+    color:#666;
+    font-size: 1.4rem;
+}
+.volunt  .tip img{
+    width:5vw;
+    height:5vw;
+    margin-top: 1.2vw;
+}
+.notices{
+    margin-bottom: 5vw;
+}
+.swiper-slide .tm_info{
+    position: absolute;
+    top:9vw;
+    left: 7vw;
+    width: 56vw;
+    height:100vw;
+}
+.swiper-slide .tm_info .tm_name{
+    font-size:2rem;
+    color: #fff;
+    margin: 4vw 0vw 0vw 7vw;
+}
+.swiper-slide .tm_info  i{
+    display: block;
+    width:1.2vw;
+    height: 14vw;
+    background-color: #fff;
+    border:0.8vw solid #fff ;
+    border-radius: 1vw;
+    position: absolute;
+    top:7vw;
+    left:3vw;
+}
+.swiper-slide .tm_info  .info{
+    color: #fff;
+    position: absolute;
+    top:13vw;
+    left: 5vw;
+    font-size: 1.5rem;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient: vertical;
+    line-height: 6vw;
+    margin-left: 2vw;
+}
+.swiper-slide .tm_info  a{
+    display: block;
+    text-align: center;
+    color: #fff;
+    width:57vw;
+    line-height:9.5vw;
+    font-size: 1.8rem;
+    margin: 0 auto;
+    border: 1px solid #FFF;
+    position: absolute;
+    bottom:12vw;
+    border-radius: 6vw;
+}
+.fa{
+    line-height: 6vw;
+}
+
+
+/*加载动画*/
+.tip {
+    height: 10.67vw;
+    text-align: center;
+    line-height: 10.67vw;
+    color: #c1c1c1;
+}
+.loading {
+    width: 100%;
+    height: 10.67vw;
+}
+.typing_loader {
+    width: 1.6vw;
+    height: 1.6vw;
+    border-radius: 50%;
+    -webkit-animation: typing 1s linear infinite alternate;
+    -moz-animation: Typing 1s linear infinite alternate;
+    animation: typing 1s linear infinite alternate;
+    position: relative;
+    top: 4.53vw;
+    left: 44.667vw;
+}
+.fa.fa-angle-right{
+    float: right;
+    line-height: 2rem;
+    margin-right:3.2vw;
+    font-size: 1.4rem;
+}
+
+.banner{
+    width: 100vw;
+    height: 50vw;
+}
+.banner img{
+    width: 100%;
+    height: 100%;
+}
