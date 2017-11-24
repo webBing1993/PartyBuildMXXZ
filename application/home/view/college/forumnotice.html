@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>鸡毛传贴</title>
+<title>通知公告</title>
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/comment.css">
@@ -26,10 +26,10 @@
 	<div class="content">
 		<div class="top">
 			<div class="title limit_" style="text-align: center">{$info.title}</div>
-			<div class="note">
-				<span class="fl">{$info.publisher}</span>
-				{$info.create_time|time_format='Y-m-d'}
-			</div>
+			<!--<div class="note">-->
+				<!--<span class="fl">{$info.publisher}</span>-->
+				<!--{$info.create_time|time_format='Y-m-d'}-->
+			<!--</div>-->
 		</div>
 		<div class="message">
 			{notempty name="info.start_time"}
