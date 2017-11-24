@@ -109,6 +109,7 @@
 .content .article * {
   max-width: 100%!important;
 }
+.content .article p {text-align: justify;}
 /*评论*/
 .comment {
   padding-bottom: 50px;
@@ -155,6 +156,7 @@
   font-size: 1.2rem;
   line-height: 20px;
   color: #666666;
+  margin-bottom: 5px;
 }
 .comment .lists .list .fr {
   margin-top: 15px;
@@ -285,3 +287,7 @@
   float: right;
   text-indent: 0;
 }
+
+.zbhd img {min-height: 8vw;min-width:8vw;}
+.zbhd .fl , #zbhd .fr {float:inherit;}
+.zbhd>div {display: inline-block;vertical-align: top;}
