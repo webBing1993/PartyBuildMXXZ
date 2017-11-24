@@ -27,7 +27,6 @@ class Dreamflash extends Base {
      */
     public function index(){
         $this->anonymous();
-        //每日一课数据
         $request = Request::instance() ->domain();
         $this ->assign('request',$request);
         //数据列表

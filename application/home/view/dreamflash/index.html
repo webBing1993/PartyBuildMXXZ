@@ -43,12 +43,11 @@
                     <div class="tab">图文</div>
                     {else/}
                     <a href="{:Url('dreamflash/video?id='.$vo['id'])}" class="list">
-                        <div class="tab">视频</div>
-                        {/eq}
-                        <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
-                        <div class="title limit">{$vo.title}</div>
-                        <span class="study">{$vo.views}人阅读过</span>
-                    </a>
+                     <div class="tab">视频</div>
+                     {/eq}
+                     <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                     <div class="title limit">{$vo.title}</div>
+                     <span class="study">{$vo.views}人阅读过</span>
                 </a>
                {/volist}
             </div>
