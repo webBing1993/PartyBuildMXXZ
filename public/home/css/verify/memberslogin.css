@@ -77,12 +77,14 @@ body{
 
 }
 .login{
-    display: block;
+    /*display: block;*/
     text-align: center;
     font-size: 1.4rem;
     color: #ccc;
     padding-top: 4vw;
+    margin: 0 6vw;
 }
+.links {text-align: center;margin-top: 4vw;}
 .login img{
     height: 3.3vw;
     margin-left: 2.66vw;
@@ -109,19 +111,46 @@ footer img{
 /*2017.11.22 Tony 新增注册页面*/
 .register {position: relative;margin: auto;width:100%;}
 .register .rAccount {position: relative;margin:20% auto 0;}
-.register .rAccount  input {position: relative;margin: auto;width:53.33vw;border: 1px solid #f1f1f1;padding: 2.7vw;color: #999;height:8vw;line-height: 8vw;display: block;outline: none;font-size: 1.2rem;}
-.register .verification {position: relative;margin:9px auto 0;text-align: center;}
-.register .verification input {display: inline-block;vertical-align:middle;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
-.register #yan {width:27.5vw;border: 1px solid #f1f1f1;padding: 2.7vw;color: #999;}
-.register #verify_code {width:24.8vw;background: #feb0a9;outline: none;border: transparent;border-radius: 4px;color: #000;}
-.register .btns {position: relative;margin:19.47vw auto 0;width:53.33vw;height:8vw;line-height: 8vw;border-radius: 14px;background: #e51c23;text-align: center;color: #fff;font-size: 1.6rem;}
+.register .rAccount  input {position: relative;margin: auto;width:53.33vw;border: 1px solid #f1f1f1;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
+.register .verification {position: relative;margin:5.33vw auto 0;text-align: center;}
+.register .verification input {height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
+.register #yan {position: relative;margin: auto;width:53.33vw;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
+.register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #e51c23;text-align: center;color: #fff;font-size: 1.6rem;}
 .footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;max-height: 120px;}
 .footer img {width:100%;height:100%;}
+.rAccount {text-align: center;}
+.rAccount span ,.rAccount input {display: inline-block;vertical-align: middle;}
+.rAccount span {
+    position: relative;
+    background: url(/home/images/verify/phone.png) no-repeat;
+    background-size: 7.1vw 8vw;
+    width: 7.1vw;
+    height: 8vw;
+    margin-right: 4vw;
+}
+#account {border-top:transparent;border-left:transparent;border-right:transparent;border-bottom:2px solid #eee;font-size: 1.4rem;}
+#yan {border-top:transparent;border-left:transparent;border-right:transparent;border-bottom:2px solid #eee;font-size: 1.4rem;}
+.verification span {
+    position: relative;
+    background: url('/home/images/verify/password.png') no-repeat;
+    background-size: 7.1vw 8vw;
+    width: 7.1vw;
+    height: 8vw;
+    margin-right: 4vw;
+}
+.verification span ,.verification input {display: inline-block;vertical-align: middle;}
 
-
-
-
-
+.register #verify_code {
+    position: absolute;
+    top:-4px;
+    right:18vw;
+    width: 20vw;
+    background: #eee;
+    outline: none;
+    border: transparent;
+    border-radius: 4px;
+    color: #999;
+}
 
 
 

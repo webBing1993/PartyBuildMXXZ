@@ -94,6 +94,32 @@
 
 <script>
     var scrollNow = true;
+    var club = localStorage.getItem('club');
+    if(club ==0 ){
+        $('.triangle-up').css('left','0.06vw');
+        $('.notices').eq(club).siblings('.notices').addClass('hidden');
+        $('.notices').eq(club).removeClass('hidden');
+    }else {
+        $('.triangle-up').css('left','50.06vw');
+        $('.notices').eq(club).siblings('.notices').addClass('hidden');
+        $('.notices').eq(club).removeClass('hidden');
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows : true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+    }
     $(function(){
         c = getCookie("c")?getCookie("c"):0;
        /* $(".tabs .tab ").eq(index).*/
@@ -104,6 +130,8 @@
     $('.tabs>.tab ').on('click',function() {
         var ntc = $('.notices');
         var eq = $(this).index();
+        console.log(eq)
+        localStorage.setItem('club',eq);
         c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');
         ntc.eq(eq).removeClass('hidden');
@@ -120,7 +148,7 @@
 //            console.log(len);
             if(len >= 10){
                 $('.tip' ).text('上拉加载更多');
-               loadScroll(index);
+               loadScroll();
            }else{
                $('.tip' ).hide();
                $(window ).off("scroll" );
@@ -155,7 +183,6 @@
             });
         }
         setCookie("c",c);
-        console.log(setCookie("c",c))
     });
     function loadScroll(type){
         $(window ).off("scroll" ).on("scroll",function(){
