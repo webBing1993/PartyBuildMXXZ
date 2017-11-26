@@ -44,7 +44,7 @@
              </a>
          </li>
          <li class="item itme_last">
-             <a href="{:Url('club/index')}" class="st_ls">
+             <a href="{:Url('club/index?c=1')}" class="st_ls">
                  <img src="/home/images/index/wdst.png" alt="">
                  <span>我的社团</span>
              </a>
@@ -62,7 +62,7 @@
                  <img src="/home/images/index/zxdk.png" alt="">
                  <span>在线党课</span>
              </a>
-             <a href="#" class="sz_ls">
+             <a href="/home/report/index.html" class="sz_ls">
                  <img src="/home/images/index/wssz.png" alt="">
                  <span>网上述职</span>
              </a>
@@ -84,11 +84,6 @@
     });
 
     $(function(){
-        /*var len = $('.notice .list').length;
-        if(len >= 6){
-            $('.tip' ).text('上拉加载更多');
-        }
-        loadScroll();*/
         $(".exit").on("click",function(){
             swal({
                     title:"",
