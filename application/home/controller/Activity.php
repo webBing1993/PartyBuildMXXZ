@@ -104,7 +104,7 @@ class Activity extends Base{
         $userId = session('userId');
 //        $this->checkAnonymous();
         $this->anonymous();
-        $id = input('get.id/d');
+        $id = input('id');
         $list = Wish::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
             return $this->error('系统错误,数据不存在');

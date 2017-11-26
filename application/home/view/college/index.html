@@ -122,9 +122,14 @@
     <div class="banner">
         <div class="swiper-container1">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                {volist name="top_notice" id="ta"}
+                <div class="swiper-slide">
+                    <a href="{:Url('forumnotice?id='.$ta['id'])}">
+                        <img src="{$ta.front_cover|get_cover='path'}" alt="">
+                        <div class="title limit">{$ta.title}</div>
+                    </a>
+                </div>
+                {/volist}
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
