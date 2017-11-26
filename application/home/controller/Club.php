@@ -229,6 +229,8 @@ class Club extends Base{
         $article['share_image'] = "http://".$_SERVER['SERVER_NAME'].$image['path'];
         $article['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
         $article['desc'] = str_replace('&nbsp;','',strip_tags($article['content']));
+        $article['desc'] = str_replace(" ",'',$article['desc']);
+        $article['desc'] = str_replace("\n",'',$article['desc']);
 
         //获取 文章点赞
         $likeModel = new Like;

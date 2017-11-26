@@ -136,7 +136,7 @@
         <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
         <!--</div>-->
 
-        {volist name="fnotice" id="fno"}
+        {volist name="list" id="fno"}
         <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
             <img src="{$fno.front_cover|get_cover='path'}" alt="">
             <div class="list_info">
@@ -166,7 +166,7 @@
         <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
         <!--</div>-->
 
-        {volist name="fnotice" id="fno"}
+        {volist name="list2" id="fno"}
         <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
             <div class="list_info">
                 <div class="info_text">{$fno['title']}</div>

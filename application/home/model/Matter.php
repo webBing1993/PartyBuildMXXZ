@@ -11,12 +11,11 @@ namespace app\home\model;
 
 use think\Model;
 
-class Notice extends Model {
+class Matter extends Model {
     //首页获取推荐的数据
     public function getDataList($length){
         $map = array(
             'status' => ['egt',0],
-//            'end_time' => ['gt',time()],
             'recommend' => 1
         );
         $order = 'create_time desc';
@@ -28,17 +27,5 @@ class Notice extends Model {
         }else{
             return $list;
         }
-    }
-    /**
-     * 获取活动顶部轮播
-     */
-    public static function getThreeNotice() {
-        $map = array(
-            'status' => array('egt',0),
-            'recommend' =>1,
-        );
-        $order = 'create_time desc';
-        $list = self::where($map) ->order($order) ->limit(3) ->select();
-        return $list;
     }
 }
