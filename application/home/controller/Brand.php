@@ -22,6 +22,9 @@ class Brand extends Base{
     public function detail(){
         return $this->fetch();
     }
+    /*
+    * 详情页
+    */
     public function brandDetail(){
         return $this->fetch();
     }
