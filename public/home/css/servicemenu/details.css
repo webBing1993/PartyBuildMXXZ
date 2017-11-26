@@ -1,34 +1,53 @@
+body{
+    background:#f7f7f7;
+}
 .de_main{
-    width: 90vw;
-    margin: 3vw auto 0;
-    margin-bottom: 8vw;
+    width: 100vw;
 }
 .de_main  .title_name{
-    font-size:1.6rem;
-    color: red;
-    line-height: 4vw;
-    margin-top: 5vw;
+    font-size:1.4rem;
+    color: #ffffff;
+    line-height: 6.67vw;
+    width:24vw;
+    height:6.67vw;
+    background:#ff7043;
+    position:absolute;
+    top:-3vw;
+    left:0;
+    text-align:center;
+    border-radius:0 5vw 5vw 0;
+    box-shadow: 0 3px 3px rgba(255,93,67,0.3);
+
 }
 .de_main  .detail{
-    font-size: 1.4rem;
-    line-height: 8vw;
-    margin-left: 8vw;
+    margin: 7vw 0;
+    width:100%;
+    font-size: 1.3rem;
+    line-height: 5vw;
     text-align: justify;
+    background:#ffffff;
+    padding:6.6vw 6.4vw;
+    position:relative;
+    color: #333;
 }
 .de_main .hotline{
+    width:100%;
     margin-top: 6vw;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #333;
     line-height:4vw;
+    text-align:center;
 }
 .de_main .hotline a{
-    color: #1c50bf;
-    font-weight: bold;
+    color: #333;
+
 }
 .de_main  .serv_time{
-    font-size: 1.4rem;
+    width:100%;
+    font-size: 1.3rem;
     color: #333;
     line-height: 10vw;
+    text-align:center;
 }
 .de_main  .serv_time span{
    margin-left: 4vw;
@@ -102,7 +121,6 @@
 
 .header {
     width: 100vw;
-
     padding: 2vw 5vw;
 }
 .header .title {

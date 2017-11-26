@@ -1,8 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>服务菜单
-</title>
+<title>服务菜单</title>
 <link rel="stylesheet" href="/home/css/servicemenu/details.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 {/block}
@@ -14,36 +13,33 @@
 </style>
 
 {block name="body"}
-<div class="header">
-    <div class="title">{$model.name}</div>
-    <span class="name">梦想小镇</span>
-    <span class="time">2017-06-25</span>
-</div>
-<div class="line"></div>
-<div class="content">
+<div class="title" style="display: none">{$model.name}</div>
 
-</div>
+
 <div class="de_main de_list ">
-     <div class="title_name ">一.&nbsp&nbsp适用对象</div>
+
      <div class="detail">
          {$model.object}
-     </div>
+         <div class="title_name ">适用对象</div>
 
-    <div class="title_name ">二.&nbsp&nbsp服务内容</div>
+     </div>
     <div class="detail">
         {$model.content}
-    </div>
-    <div class="title_name">三.&nbsp&nbsp申领材料</div>
-    <div class="detail">
-        {$model.materials}
-    </div>
-    <div class="title_name">四.&nbsp&nbsp服务流程</div>
-    <div class="detail">
-        {$model.flow}
+        <div class="title_name ">服务内容</div>
     </div>
 
-    <div class="hotline">咨询电话: <a href="tel:{$model.tel1}">{$model.tel1}{notempty name="$model.tel2"}</a><a href="tel:{$model.tel2}">&nbsp {$model.tel}{/notempty}</a> </div>
-    <div class="serv_time">服务时间:工作日 {$model.am}<span>{$model.pm}</span>
+    <div class="detail">
+        {$model.materials}
+        <div class="title_name">申领材料</div>
+    </div>
+
+    <div class="detail">
+        {$model.flow}
+        <div class="title_name">服务流程</div>
+    </div>
+
+    <div class="hotline">咨询电话 : <a href="tel:{$model.tel1}">{$model.tel1}{notempty name="$model.tel2"}</a><a href="tel:{$model.tel2}">&nbsp {$model.tel}{/notempty}</a> </div>
+    <div class="serv_time">服务时间 : {$model.am}<span>{$model.pm}</span>
     </div>
 </div>
 <!--<div class="note">-->
@@ -59,6 +55,8 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
   <script>
+      var Title = $(".title").text();
+      $("title").text(Title)
 //      //收藏
 //      function isCollect(e,type,id){
 //          $.ajax({
