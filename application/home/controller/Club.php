@@ -13,6 +13,7 @@ use app\home\model\Comment;
 use app\admin\model\Picture;
 use app\home\model\Club as ClubModel;
 use app\home\model\ClubActivity as ClubActivityModel;
+use app\home\model\Volunteer as VolunteerModel;
 use app\home\model\Like;
 use think\Request;
 
@@ -23,16 +24,14 @@ class Club extends Base{
     public function index(){
 //        $this->anonymous();
         $map = array(
-            'type' => 1,
             'status' => ['egt',0],
         );
         $clublist = ClubModel::where($map)->order('id desc')->limit(10)->select();
 //        var_dump($clublist);die;
         $map2 = array(
-            'type' => 2,
             'status' => ['egt',0],
         );
-        $volunteerlist = ClubModel::where($map2)->order('id desc')->select();
+        $volunteerlist = VolunteerModel::where($map2)->order('id desc')->select();
         $this->assign('clublist',$clublist);
         $this->assign('volunteerlist',$volunteerlist);
         return $this->fetch();
@@ -43,7 +42,6 @@ class Club extends Base{
     public function indexmore(){
         $len = input('length');
         $map = array(
-            'type' => 1,
             'status' => ['egt',0],
         );
         $list = ClubModel::where($map)->order('id desc')->limit($len,6)->select();
@@ -116,7 +114,7 @@ class Club extends Base{
 
         $userId = session('userId');
         $id = input('id');
-        $model = new ClubModel();
+        $model = new VolunteerModel();
         //浏览加一
         /*$info['views'] = array('exp','`views`+1');
         $model::where('id',$id)->update($info);
