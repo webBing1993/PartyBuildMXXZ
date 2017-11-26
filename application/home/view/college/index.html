@@ -108,8 +108,27 @@
     .limit{
         position: absolute;
         bottom:0vw;
+        width: 100vw;
+         height: 12vw;
+        line-height: 12vw;
         z-index: 1;
-        background-color: #eeeeee;
+        background-color: #999;
+        opacity: 0.5;
+        color: #fff;
+        font-size: 1.4rem;
+
+    }
+    .swiper-pagination-bullet-active {
+        /*background-color: #999999;*/
+    }
+
+
+    .swiper-pagination-bullet{
+        /*background-color: #f1f1f1;*/
+
+    }
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+   bottom: 0vw;
     }
 
 
@@ -218,7 +237,7 @@
 //            dynamicBullets: true,
             autoplayDisableOnInteraction : false,
             autoplay:3000,
-            loop:true
+//            loop:true
         });
     });
 </script>
