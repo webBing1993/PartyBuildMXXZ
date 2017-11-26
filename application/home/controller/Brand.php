@@ -22,5 +22,8 @@ class Brand extends Base{
     public function detail(){
         return $this->fetch();
     }
+    public function brandDetail(){
+        return $this->fetch();
+    }
 
 }
