@@ -244,7 +244,7 @@ body {
   content: '';
   height: 2.5vw;
   width: 2.5vw;
-  background: url('/home/images/structure/tri.png') 0 0 no-repeat;
+  background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
   background-size: 2.5vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left{
@@ -254,19 +254,19 @@ body {
   content: '';
   height: 6.33vw;
   width: 6.33vw;
-  background: url('/home/images/structure/hlw.png') 0 0 no-repeat;
+  background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
   background-size: 6.33vw 6.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure2{
-  background: url('/home/images/structure/tsc.png') 0 0 no-repeat;
+  background: url('/home/images/structure/structure2.png') 0 0 no-repeat;
   background-size: 6.33vw 6.33vw;
 }
 .listbox .box .box_ .lists .party1 .tri-left.structure3{
-  background: url('/home/images/structure/cydj.png') 0 0 no-repeat;
+  background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
   background-size: 6.33vw 6.33vw;
 }
   .listbox .box .box_ .lists .party1 .tri-left.structure4{
-    background: url('/home/images/structure/cyjs.png') 0 0 no-repeat;
+    background: url('/home/images/structure/structure4.png') 0 0 no-repeat;
     background-size:6.33vw 6.33vw;
   }
 .listbox .box .box_ .lists .detail1 {

@@ -32,14 +32,17 @@
     <!--tab-->
 <div class="scrollDiy">
     <!--<div class="tabs clear">-->
-        <!--<div class="tab"><span>组织倡议</span></div>-->
-        <!--&lt;!&ndash;<div class="tab"><span>群众建议</span></div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<span class="triangle-up"></span>&ndash;&gt;-->
+    <!--<div class="tab"><span>组织倡议</span></div>-->
+    <!--&lt;!&ndash;<div class="tab"><span>群众建议</span></div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<span class="triangle-up"></span>&ndash;&gt;-->
     <!--</div>-->
     <!--切换列表-->
     <div class="content" style="overflow-x: hidden">
         <!--活动列表-->
         <div class="notices hidden">
+            <div class="banner">
+                <img src="/home/images/activity/hdfb.jpg" alt="">
+            </div>
             <div class="notice regularmore">
                 <div class="lists">
                         <ul>
@@ -48,84 +51,14 @@
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
                                 <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
-                                <!--<i>进入认领<img src="/home/images/activity/arrow.png"></i>-->
                             </a>
                             {/volist}
                         </ul>
                 </div>
             </div>
         </div>
-       <!-- &lt;!&ndash;发起投票&ndash;&gt;
-        <div class="notices hidden">
-            <div class="lists votes">
-                <ul>
-                    {volist name="lists" id="los"}
-                    <li>
-                        <img src="{$los.head}">
-                        <p>{$los.publisher}</p>
-                        <span>{$los.content}</span>
-                        <div class="imgs">
-                            {volist name="los.images" id="img"}
-                            <div class="img">
-                                <img src="{$img|get_cover='path'}" alt="评论图" data-original="">
-                            </div>
-                            {/volist}
-                        </div>
-                        <span class="votes-time">{$los.department}/{$los.create_time|time_format='Y-m-d'}发布</span>
-                        {eq name="visit" value="0"}
-                        <div class="opinion">
-                            {switch name="los.is_like"}{case value="0"}
-                                    <i class="agree" onclick="agree(this,{$los.id},1)"></i>
-                                    <span>{$los.likes_yes}</span>
-                                    &lt;!&ndash;<i class="disagree" onclick="disagree(this,{$los.id},2)"></i>&ndash;&gt;
-                                    &lt;!&ndash;<span>{$los.likes_no}</span>{/case}{case value="1"}&ndash;&gt;
-                                    <i class="agree_" ></i>
-                                    <span>{$los.likes_yes}</span>
-                                    &lt;!&ndash;<i class="disagree"></i>&ndash;&gt;
-                                    &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
-                                {/case}{case value="2"}
-                                    <i class="agree" ></i>
-                                    <span>{$los.likes_yes}</span>
-                                    &lt;!&ndash;<i class="disagree_"></i>&ndash;&gt;
-                                    &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
-                                {/case}
-                                {default /}default
-                            {/switch}
-                            <i class="comment-icon" onclick="tosend(this,{$los.id})"></i>
-                        </div>
-                        {else/}
-                        <div class="opinion">
-                            <i class="agree"></i>
-                            <span>{$los.likes_yes}</span>
-                            &lt;!&ndash;<i class="disagree"></i>&ndash;&gt;
-                            &lt;!&ndash;<span>{$los.likes_no}</span>&ndash;&gt;
-                            <i class="comment-icon"></i>
-                        </div>
-                        {/eq}
-                        <ul class="comments">
-                            {volist name="los.comment" id="co"}
-                            <li>
-                                <span class="name">{$co.nickname}：</span>
-                                <span class="comment">{$co.content}</span>
-                            </li>
-                            {/volist}
-                        </ul>
-                    </li>
-                    {/volist}
-                </ul>
 
-            </div>
-        </div>
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
-        </div>-->
     </div>
-    <!--线上活动发布-->
-    <!--{eq name="visit" value="0"}-->
-    <!--<a id="publish" href="{:Url('Activity/publish')}"></a>-->
-    <!--{/eq}-->
-    <!--加载更多-->
 <div class="bottom clear">
     <div class="myword fl">
         <input type="text" placeholder="说说你的感想！">

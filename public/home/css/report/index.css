@@ -1,0 +1,72 @@
+.banner {
+    width: 100vw;
+    height: 50vw;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+}
+.main{
+    border-bottom: 10vw;
+}
+.re_list{
+    display: block;
+    width: 95vw;
+    margin: 5vw auto 0;
+    border: 1px solid #eee;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 2vw 3vw;
+    box-shadow: 0 0 8px rgba(102, 102, 102, 0.2);
+}
+.re_list  .re_time{
+    width: 30vw;
+    border: 1px solid #eee;
+    position:relative;
+
+}
+.re_list  .re_time span{
+    display: block;
+}
+ .re_time  .month{
+    line-height:  3.7rem;
+     text-align: center;
+     display: block;
+     background-color: #fafafa;
+}
+.re_time  .month b{
+    font-size: 1.8rem;
+    color: #1ed3ff;
+}
+.re_time  .year{
+    text-align: center;
+    color: #fff;
+    background-color: #1ed3ff;
+    font-size: 1.4rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 1.8rem;
+}
+  .re_info{
+    margin-left: 3vw;
+      width: 65vw;
+}
+.re_info .title{
+    font-size: 1.6rem;
+    color: #333;
+    line-height:5vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.re_info  .rep_text{
+    font-size: 1.3rem;
+    color: #999;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+}
