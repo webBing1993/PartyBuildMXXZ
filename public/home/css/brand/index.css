@@ -1,12 +1,12 @@
 .brand_main .list{
   width: 90vw;
   margin: 0 auto;
-  height:34.6vw;
+  height:42.6vw;
   display: block;
     background-color: #333333;
     position: relative;
-    -moz-opacity:1;
-    opacity:1;
+    -moz-opacity:0.8;
+    opacity:0.8;
     margin-top: 4vw;
     border-radius: 1vw;
 }
@@ -17,7 +17,7 @@
 }
 .br_info{
       width: 90vw;
-      height: 34vw;
+      height: 43vw;
       position: absolute;
       top:0vw;
       left: 0vw;
@@ -47,7 +47,8 @@
 }
 .br_info .info .info_title{
     font-size: 2.0rem;
-    line-height:8vw ;
+    line-height:26.3vw ;
+    color: #fff;
 }
 .br_info .info  .info_text{
     display: -webkit-box;
