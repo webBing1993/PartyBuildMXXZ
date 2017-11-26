@@ -209,7 +209,7 @@
   padding-right: 0!important;
 }
 .content .message div:nth-child(3) {
-  background: url("/home/images/detail/phone.png") 15px 10px no-repeat;
+  background: url("/home/images/detail/phone.png") 18px 10px no-repeat;
   background-size: 20px 20px ;
 }
 .content .message div:nth-child(3)>a{
@@ -369,7 +369,6 @@
 .content .time{
   line-height: 7vw;
   color: #333;
-  margin-left: 2vw;
   display: block;
 }
 .content .site{
