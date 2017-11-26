@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/home/css/college/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
+<link rel="stylesheet" href="/home/css/swiper-3.4.2.min.css">
 <style>
     /*reset*/
     .page{
@@ -111,31 +112,75 @@
 
 {block name="body"}
 
-
-<div class="page">
-    <!--&lt;!&ndash;banner&ndash;&gt;-->
-    <!--<div class="banner">-->
-        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
-    <!--</div>-->
-
-    {volist name="fnotice" id="fno"}
-    <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
-        <img src="{$fno.front_cover|get_cover='path'}" alt="">
-        <div class="list_info">
-            <div class="info_text">{$fno['title']}</div>
-            <div class="time">
-                {eq name="fno['is_over']" value="1"}
-                <span class="end">已结束</span>
-                {else/}
-                <span class="end">进行中</span>
-                {/eq}
-                <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
-                <i class="fa"></i>
-            </div>
-        </div>
-        {/volist}
-    </a>
+<div class="tabs clear">
+    <div class="tab active" data-side="0"><span>通知公告</span></div>
+    <div class="tab" data-side="1"><span>重要文件</span></div>
+    <!--<span class="triangle-up"></span>-->
 </div>
+
+<div class="bulletin" id="side0" style="display: block">
+    <div class="banner">
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="page">
+        <!--&lt;!&ndash;banner&ndash;&gt;-->
+        <!--<div class="banner">-->
+        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
+        <!--</div>-->
+
+        {volist name="fnotice" id="fno"}
+        <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
+            <img src="{$fno.front_cover|get_cover='path'}" alt="">
+            <div class="list_info">
+                <div class="info_text">{$fno['title']}</div>
+                <div class="time">
+                    <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
+                    <i class="fa"></i>
+                </div>
+            </div>
+            {/volist}
+        </a>
+    </div>
+</div>
+<div class="bulletin" id="side1" >
+    <div class="banner">
+        <div class="swiper-container2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+            </div>
+            <!-- Add Pagination -->
+            <!--<div class="swiper-pagination"></div>-->
+        </div>
+    </div>
+    <div class="page" >
+        <!--&lt;!&ndash;banner&ndash;&gt;-->
+        <!--<div class="banner">-->
+        <!--<img src="/home/images/banner/1.jpg" alt="图片无法加载">-->
+        <!--</div>-->
+
+        {volist name="fnotice" id="fno"}
+        <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
+            <div class="list_info">
+                <div class="info_text">{$fno['title']}</div>
+                <div class="time">
+                    <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
+                    <i class="fa"></i>
+                </div>
+            </div>
+            {/volist}
+        </a>
+    </div>
+</div>
+
+
 
 <div class="tip"></div>
 <div class="loading hidden">
@@ -145,32 +190,64 @@
 
 {block name="script"}
 <script src="/static/framework7/framework7.js"></script>
+<script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
 <script>
-
     $(function(){
-        var len = $(".page>a" ).length;
-        if(len >= 10){
-            $('.tip' ).text('上拉加载更多');
-            //上拉加载
-            loadScroll();
+        for(var i=0;i<$('.tabs .tab').length;i++){
+            $('.tabs .tab')[i].onclick=function(){
+                $('.tabs .tab').removeClass('active');
+                $(this).addClass('active');
+                var side = $(this).data('side');
+                $('.bulletin').hide();
+                $('#side'+side).show();
+            }
         }
-        $('a').off('click' ).on('click',function(){
-            window.location.href  =$(this ).attr('href');
+        var swiper = new Swiper('.swiper-container1', {
+            pagination: '.swiper-pagination',
+//            dynamicBullets: true,
+            autoplayDisableOnInteraction : false,
+            autoplay:3000,
+            loop:true
         });
-
-        if($(".page>a").find("a").length > 0){
-            $('#wuxiaoxi1').hide()
-        }
-        else{
-            $('#wuxiaoxi1').show()
-        }
-        loadScroll()
     });
+</script>
+
+<script>
+    var num = 0;
+    $(function(){
+        $('.bulletin').each(function(){
+            if($(this).css('display')=='block'){
+                var len =$(this).find('.page>a').length;
+                if(len >= 10){
+                    $('.tip' ).text('上拉加载更多');
+                    //上拉加载
+                    loadScroll();
+                }
+                $('a').off('click' ).on('click',function(){
+                    window.location.href  =$(this ).attr('href');
+                });
+
+                if($(this).find('.page>a').find("a").length > 0){
+                    $('#wuxiaoxi1').hide()
+                }
+                else{
+                    $('#wuxiaoxi1').show()
+                }
+                loadScroll()
+            }
+        })
+
+    });
+    $('.tabs .tab').on('click',function(){
+        var _side = $(this).data('side');
+
+    })
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-            var len = $(".page>a" ).length;
+//            var len = $(".page>a" ).length;
+            var len = $('#side'+num).find('.page>a').length;
             var tip = $(".tip");
             var loading = $('.loading');
             if(dh == end){
@@ -207,20 +284,15 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
+        console.log(data)
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            html +=
-                    '<a href="/home/college/forumnotice/id/'+list.id+'" style="width: 100%;border-bottom: 1px solid #f1f1f1">'+
-                    '<div class="limit_ fl"><span>'+list.title+'</span><i class="fa fa-angle-right"></i></div>';
-            if(list.is_over == 1){
-                html+='<span class="isEnd">已结束</span>';
-            }else{
-                html+='<span class="isEnd">进行中</span>';
-            }
-            html+='<span class="time fr">'+list.create_time+'</span>'+
-                    '</a>';
+            html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
+                    +'<img src="'+list.path+'" alt="">'
+                    +'<div class="list_info"><div class="info_text">'+list.title+'</div><div class="time"><span class="time_ls">'+list.create_time+'</span></div></div>'
+                    +'</a>'
         }
-        $("#tab_main1>li" ).append(html);
+        $('#side'+num).find('.page').append(html)
     }
     //
 </script>
