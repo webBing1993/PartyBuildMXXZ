@@ -19,9 +19,9 @@
 
 {block name="body"}
 <div class="scrollDiy">
-	<div class="banner">
+	<!--<div class="banner">
 		<img src="{$info.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
-	</div>
+	</div>-->
 	<div class="content">
 		<div class="top">
 			<div class="title limit_" style="text-align: center">{$info.title}</div>
@@ -71,9 +71,9 @@
 					</div>
 					{eq name="visit" value="0"}
 					{eq name="co.is_like" value="1"}
-					<div class="fr isgood good_" onclick="isGood(this,12,{$co.id})">{$co.likes}</div>
+					<div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
 					{else/}
-					<div class="fr isgood good" onclick="isGood(this,12,{$co.id})">{$co.likes}</div>
+					<div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
 					{/eq}
 					{else/}
 					<div class="fr isgood good">{$co.likes}</div>
@@ -92,7 +92,7 @@
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想！">
 		</div>
-		<div class="send fr" onclick="send(this,0,{$info['id']})">发送</div>
+		<div class="send fr" onclick="send(this,12,{$info['id']})">发送</div>
 	</div>
 	{/eq}
 </div>

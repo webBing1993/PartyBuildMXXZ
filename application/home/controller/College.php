@@ -130,7 +130,7 @@ class College extends Base {
     /**
      *  重要文件 详细页m
      */
-    public function forumatter(){
+    public function forummatter(){
         //判断是否是游客
         $this->anonymous();
         $this->jssdk();

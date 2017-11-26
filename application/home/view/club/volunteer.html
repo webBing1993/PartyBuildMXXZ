@@ -45,9 +45,9 @@
             <div class="note">
                 {eq name="visit" value="0"}
                 {eq name="article.is_like" value="1"}
-                <span class="isgood good_" onclick="isGood(this,4,{$article.id})">{$article.likes}</span>
+                <span class="isgood good_" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
                 {else/}
-                <span class="isgood good" onclick="isGood(this,4,{$article.id})">{$article.likes}</span>
+                <span class="isgood good" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
                 {/eq}
                 {else/}
                 <span class="isgood good">{$article.likes}</span>
@@ -91,7 +91,7 @@
         <div class="myword fl">
             <input type="text" placeholder="说说你的感想！">
         </div>
-        <div class="send fr" onclick="send(this,4,{$article['id']})">发送</div>
+        <div class="send fr" onclick="send(this,10,{$article['id']})">发送</div>
     </div>
     {/eq}
 </div>
@@ -171,7 +171,7 @@
                         '<div class="content" >'+it.val()+'</div>'+
                         '<div class="time">'+data.time+'</div>'+
                         '</div>'+
-                        '<div class="fr isgood good" onclick="isGood(this,10,'+data.id+')">'+data.likes+'</div>'+
+                        '<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
                         '</div>';
                     $('.lists' ).append(html);
                     it.val('');
@@ -251,9 +251,9 @@
                 '</div>';
             if ({$visit} == 0){
                 if(list.is_like == 0){
-                    html+='<div class="fr isgood good" onclick="isGood(this,10,'+list.id+')">'+list.likes+'</div>'
+                    html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
                 }else{
-                    html+='<div class="fr isgood good_" onclick="isGood(this,10,'+list.id+')">'+list.likes+'</div>'
+                    html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
                 }
             }else {
                 html+='<div class="fr isgood good">'+list.likes+'</div>'
