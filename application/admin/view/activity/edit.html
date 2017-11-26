@@ -9,17 +9,28 @@
         position: relative;
     }
     .imgbox{
-        height: 120px;
-        width: 160px;
+        height: 100px;
+        width: 200px;
         margin-top: 5px;
         margin-bottom: 0;
     }
     .imgfile{
-        height: 120px;
-        width: 160px;
+        height: 100px;
+        width: 200px;
         position: absolute;
         top:0;
         opacity: 0;
+    }
+    .plus{
+         height: 100px;
+         width: 200px;
+         font-size: 100px;
+         line-height: 100px;
+         text-align: center;
+         color: rgba(204, 204, 204, 0.51);
+     }
+    .plus:hover{
+        font-size: 150px;
     }
 </style>
 {/block}
@@ -27,7 +38,7 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>活动发起</h2>
+        <h2>活动发布</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="{:Url('Activity/index')}">主页</a>
@@ -56,6 +67,24 @@
                 </div>
                 <div class="ibox-content all">
                     <form id="form" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>封面图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
@@ -139,6 +168,54 @@
 
         highlight_subnav("{:Url('Activity/index')}");
 
+        //上传图片
+        var plus = $('.plus');
+        var imgnum  = $('[n]' ).attr('n');
+        plus.on('click',function(){
+            var it = $(this);
+            it.hide().next().fadeIn();
+            imgnum = 3;
+            if(!it.hasClass('plus2')){
+                plus.eq(1).fadeIn();
+                imgnum = 2
+            }
+        });
+        $(document).ready(function () {
+            $(".imgfile").on("change",function(){
+                var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+                var imgBox = $(this);
+                if(size <= 2048){
+                    var img = $(this)[0].files[0];
+                    var formData = new FormData();
+                    var pic=$(this);
+                    formData.append("picture",img);
+                    $.ajax({
+                        type:"post",
+                        url:"{:Url('File/uploadPicture')}",
+                        data: formData,
+                        processData : false,
+                        contentType : false,
+                        success:function(m){
+                            var msg = $.parseJSON(m);
+                            var path = msg.data.path;
+                            if(msg['code'] == 1){
+                                imgBox.siblings(".img").val(msg.data["id"]);
+                                //显示图片缩略图
+                                pic.parent().find("img" ).attr({src:path});
+                            } else
+                            {
+                                warning( { msg: msg[ 'msg' ] } );
+                                return;
+                            }
+                        }
+                    });
+                } else {
+                    warning({msg:"您选择的图片超过2mb，请重新选择"});
+                    return;
+                }
+            });
+        });
+
         var ue = UE.getEditor('container',{
             initialFrameHeight:400
         });
@@ -148,6 +225,7 @@
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
+                front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
                 description:$("textarea[name='description']").val(),
                 content:ue.getContent(),

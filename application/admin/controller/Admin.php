@@ -79,7 +79,7 @@ class Admin extends Controller {
 
         $this->assign('__MENU__', $this->getMenus());
         // 判断二级菜单位置
-        $menu = Menu::where('url', 'like', '%'.$this->controllerName.'/'.$this->actionName.'%')->order('id desc')->find();
+        $menu = Menu::where('url', 'like', '%'.$this->controllerName.'/'.$this->actionName.'%')->order('id')->find();
         $this->assign('subMenu', $menu);
 
         //后台用户名头像用户组显示

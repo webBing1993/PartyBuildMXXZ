@@ -31,12 +31,12 @@ use app\admin\model\WishReceive;
                  'rid' => $value['id'],
                  'status' => 0,
              );
-             $info = WishReceive::where($msg)->select();
+             /*$info = WishReceive::where($msg)->select();
              if($info) {
                  $value['is_enroll'] = 1;
              }else{
                  $value['is_enroll'] = 0;
-             }
+             }*/
          }
          $this->assign('list',$list);
          return $this->fetch();
