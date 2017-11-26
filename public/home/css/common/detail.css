@@ -112,9 +112,13 @@
 .article .content {
   width: 100%;
   overflow: hidden;
+  margin-top:2vw;
+}
+.article .content2 {
+  width: 100%;
+  overflow: hidden;
 }
 .article .content * {
-  text-align: justify;
   max-width: 100%!important;
 }
 .article .content img {
@@ -180,82 +184,139 @@
   background-size: 1.5rem 1.5rem;
   padding-left: 1.8rem;
 }
-
+.content .message {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+.content .message div {
+  width: 100%;
+  height: 40px;
+  padding-left: 50px;
+  line-height: 40px;
+}
+.content .message div span {
+  display: inline-block;
+  width: 100%;
+  padding-right: 15px;
+  border-bottom: 1px dashed #eeeeee;
+}
+.content .message div span:nth-child(5) {
+  border-bottom: none;
+}
+.content .message div:nth-child(3) span {
+  padding-right: 0!important;
+}
+.content .message div:nth-child(3) {
+  background: url("/home/images/detail/phone.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
+.content .message div:nth-child(3)>a{
+  color: #333;
+}
+.content .message div:nth-child(1) {
+  background: url("/home/images/detail/time.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
+.content .message div:nth-child(2) {
+  background: url("/home/images/detail/address.png") 15px 10px no-repeat;
+  background-size: 20px 20px ;
+}
 
 /*评论*/
 .comment {
-  padding-bottom: 13vw;
+  padding-left:0.3rem;
+  padding-right: 0.3rem;
 }
 .comment .sum {
-  height: 8vw;
-  padding-left: 3.4vw;
-  background: #fcfcfc;
-  border-top: 1px solid #f1f1f1;
-  border-bottom: 1px solid #f1f1f1;
+  height: 30px;
+  padding-left: 10px;
+  background: #fbfbfb;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
   font-size: 1.2rem;
-  line-height: 8vw;
+  line-height: 30px;
 }
 .comment .lists .list {
   width: 100%;
-  padding-left: 3.4vw;
-  padding-right: 3.4vw;
-  min-height: 100px;
-  border-bottom: 1px solid #f1f1f1;
+  min-height: 90px;
+  border-bottom: 1px solid #dadada;
+  position: relative;
+  overflow: hidden;
+}
+@media screen and (device-width: 320px){
+
+  .comment .lists .list {
+    min-height: 75px;
+  }
+
 }
 .comment .lists .list .fl img {
-  width: 8vw;
-  height: 8vw;
-  margin-top: 3.4vw;
-  margin-right: 3vw;
+  float:left;
+  width: 4rem;
+  height: 4rem;
+  margin-top: 13px;
+  margin-right: 10px;
+  margin-bottom: 13px;
   overflow: hidden;
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
 .comment .lists .list .mid {
-  width: 73%;
+  width: 84%;
+  margin-top: 10px;
 }
 .comment .lists .list .mid .name {
-  width: 100%;
-  height: 14.9vw;
-  line-height: 14.9vw;
-  color: #999999;
-  font-size: 1.4rem;
+  font-size:1.4rem;
+  width: 80%;
+  margin-top: 0.8rem;
+  margin-bottom: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #666666;
 }
 .comment .lists .list .mid .content {
   width: 100%;
   word-break: break-all;
-  font-size: 1.4rem;
-  text-align: justify;
+  font-size:1.4rem;
+  margin-top: 2vw;
+  margin-bottom: 6vw;
+  line-height:1.5rem;
+
 }
 .comment .lists .list .mid .time {
   font-size: 1.2rem;
-  line-height: 5.3vw;
-  color: #999999;
+  line-height: 20px;
+  color: #666666;
+  position:absolute;
+  bottom:5px;
 }
 .comment .lists .list .fr {
-  margin-top: 4vw;
-  color: #999999;
-  line-height: 6vw;
-  font-size: 1.2rem;
+  margin-top: 15px;
+  color: #666666;
 }
 .comment .lists .list .good {
-  background: url('/home/images/detail/good.png') 0 center no-repeat;
+  background: url('/home/images/detail/good.png') 0 2px no-repeat;
 }
 .comment .lists .list .good_ {
   animation: shake 300ms ease;
   -webkit-animation: shake 300ms ease;
-  background: url('/home/images/detail/good_.png') 0 center no-repeat;
+  background: url('/home/images/detail/good_.png') 0 2px no-repeat;
 }
 .comment .lists .list .isgood {
-  background-size: 1.3rem 1.3rem;
-  padding-left: 1.8rem;
+  background-size: 15px 15px;
+  padding-left: 18px;
+  position: absolute;
+  top: 5px;
+  right:0;
 }
 .comment .tip {
-  height: 10.6vw;
+  height: 40px;
   text-align: center;
-  line-height: 10.6vw;
+  line-height: 40px;
   color: #c1c1c1;
-  font-size: 1.5rem;
 }
 /*底部*/
 .bottom {
@@ -308,7 +369,6 @@
 .content .time{
   line-height: 7vw;
   color: #333;
-  margin-top: 10vw;
   margin-left: 2vw;
   display: block;
 }

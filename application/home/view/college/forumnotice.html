@@ -4,7 +4,6 @@
 <title>通知公告</title>
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
-<link rel="stylesheet" href="/home/css/common/comment.css">
 <style>
 	.scrollDiy{
 		position: absolute;
@@ -26,14 +25,14 @@
 	<div class="content">
 		<div class="top">
 			<div class="title limit_" style="text-align: center">{$info.title}</div>
-			<!--<div class="note">-->
-				<!--<span class="fl">{$info.publisher}</span>-->
-				<!--{$info.create_time|time_format='Y-m-d'}-->
-			<!--</div>-->
+			<div class="note">
+				<span class="fl">{$info.publisher}</span>
+				{$info.create_time|time_format='Y-m-d'}
+			</div>
 		</div>
-		<!--<div class="message">
+		<div class="message">
 			{notempty name="info.start_time"}
-			<div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}&#45;&#45;{$info.end_time|time_format='Y/m/d H:i'}</div>
+			<div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}--{$info.end_time|time_format='Y/m/d H:i'}</div>
 			{/notempty}
 			{notempty name="info.address"}
 			<div class="content" >{$info.address}</div>
@@ -41,7 +40,7 @@
 			{notempty name="info.telephone"}
 			<div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>
 			{/notempty}
-		</div>-->
+		</div>
 		<div class="article">{$info.content}</div>
 		<div class="article">
 			<div class="note">

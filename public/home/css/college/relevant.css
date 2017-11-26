@@ -102,7 +102,6 @@
   width: 100%;
   padding-left: 3.4vw;
   padding-right: 3.4vw;
-  margin-bottom: 15px;
   /*font-size: 1.6rem;*/
   /*text-indent: 3.2rem;*/
 }
@@ -112,7 +111,8 @@
 .content .article p {text-align: justify;}
 /*评论*/
 .comment {
-  padding-bottom: 50px;
+  padding-left:0.3rem;
+  padding-right: 0.3rem;
 }
 .comment .sum {
   height: 30px;
@@ -125,38 +125,58 @@
 }
 .comment .lists .list {
   width: 100%;
-  padding-left: 13px;
-  padding-right: 13px;
-  min-height: 100px;
+  min-height: 90px;
   border-bottom: 1px solid #dadada;
+  position: relative;
+  overflow: hidden;
+}
+@media screen and (device-width: 320px){
+
+  .comment .lists .list {
+    min-height: 75px;
+  }
+
 }
 .comment .lists .list .fl img {
-  width: 30px;
-  height: 30px;
+  float:left;
+  width: 4rem;
+  height: 4rem;
   margin-top: 13px;
   margin-right: 10px;
+  margin-bottom: 13px;
   overflow: hidden;
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
 .comment .lists .list .mid {
-  width: 73%;
+  width: 84%;
+  margin-top: 10px;
 }
 .comment .lists .list .mid .name {
-  width: 100%;
-  height: 56px;
-  line-height: 56px;
+  font-size:1.4rem;
+  width: 80%;
+  margin-top: 0.8rem;
+  margin-bottom: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: #666666;
 }
 .comment .lists .list .mid .content {
   width: 100%;
   word-break: break-all;
+  font-size:1.4rem;
+  margin-top: 2vw;
+  margin-bottom: 6vw;
+  line-height:1.5rem;
+
 }
 .comment .lists .list .mid .time {
   font-size: 1.2rem;
   line-height: 20px;
   color: #666666;
-  margin-bottom: 5px;
+  position:absolute;
+  bottom:5px;
 }
 .comment .lists .list .fr {
   margin-top: 15px;
@@ -173,6 +193,9 @@
 .comment .lists .list .isgood {
   background-size: 15px 15px;
   padding-left: 18px;
+  position: absolute;
+  top: 5px;
+  right:0;
 }
 .comment .tip {
   height: 40px;
@@ -287,7 +310,8 @@
   float: right;
   text-indent: 0;
 }
+/*
 
 .zbhd img {min-height: 8vw;min-width:8vw;}
 .zbhd .fl , #zbhd .fr {float:inherit;}
-.zbhd>div {display: inline-block;vertical-align: top;}
+.zbhd>div {display: inline-block;vertical-align: top;}*/

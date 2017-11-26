@@ -19,19 +19,22 @@
 <div class="volunteer">
     <div class="article">
         <div class="title limit_">{$article.title}简介</div>
-        <div class="note clear">
-           <span class="fl">{$article.publisher}</span>
-           <span class="fr">{$article.create_time|time_format="Y-m-d"}</span>
-        </div>
+
         <div class="content">
             <div class="uecontent">
                 {$article.content}
             </div>
-
-
-            <a href="tel:{$article.telephone}" class="time">联系方式 :  {$article.telephone}</a>
-            <a href="tel:{$article.apply_tel}" class="si_tp">报名方式 :  {$article.apply_tel}</a>
-            <div class="site">地址:{$article.address}</div>
+            <div class="message">
+                {notempty name="article.start_time"}
+                <div class="name limit">{$article.start_time|time_format='Y/m/d H:i'}--{$article.end_time|time_format='Y/m/d H:i'}</div>
+                {/notempty}
+                {notempty name="article.address"}
+                <div class="content2" >{$article.address}</div>
+                {/notempty}
+                {notempty name="article.telephone"}
+                <div class="time"><a href="tel:{$article.telephone}">{$article.telephone}</a></div>
+                {/notempty}
+            </div>
             <div class="note">
                 <span class="read">{$article.views}</span>
                 {eq name="visit" value="0"}
@@ -161,7 +164,7 @@
                         '<div class="fl mid">'+
                         '<div class="name limit">'+data.nickname+'</div>'+
                         '<div class="content" >'+it.val()+'</div>'+
-                        '<div class="time">'+data.time+'</div>'+
+                        '<div class="time">'+data.create_time+'</div>'+
                         '</div>'+
                         '<div class="fr isgood good" onclick="isGood(this,9,'+data.id+')">'+data.likes+'</div>'+
                         '</div>';

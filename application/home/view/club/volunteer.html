@@ -2,7 +2,8 @@
 
 {block name="style"}
 <title>志愿服务</title>
-<link rel="stylesheet" href="/home/css/common/detail.css">
+<link rel="stylesheet" href="/home/css/college/relevant.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
     .scrollDiy{
         position: absolute;
@@ -16,66 +17,73 @@
 </style>
 {/block}
 {block name="body"}
-<div class="volunteer">
-    <div class="article">
-        <div class="title limit_">{$article.title}简介</div>
-        <div class="note clear">
-            <span class="fl">{$article.publisher}</span>
-            <span class="fr">{$article.create_time|time_format="Y-m-d"}</span>
-        </div>
-        <div class="content">
-            <div class="uecontent">
-                {$article.content}
-            </div>
-
-
-            <a href="tel:{$article.telephone}" class="time">联系方式:{$article.telephone}</a>
-            <a href="tel:{$article.apply_tel}" class="si_tp">报名方式:{$article.apply_tel}</a>
-            <div class="site">地址:{$article.address}</div>
+<div class="scrollDiy">
+    <div class="banner">
+        <img src="{$article.front_cover|get_cover='path'}" alt="支部活动banner" class="banner-img">
+    </div>
+    <div class="content">
+        <div class="top">
+            <div class="title limit_" style="text-align: center">{$article.title}</div>
             <div class="note">
-                <span class="read">{$article.views}</span>
+                <span class="fl">{$article.publisher}</span>
+                {$article.create_time|time_format='Y-m-d'}
+            </div>
+        </div>
+        <div class="message">
+            {notempty name="article.start_time"}
+            <div class="name limit">{$article.start_time|time_format='Y/m/d H:i'}--{$article.end_time|time_format='Y/m/d H:i'}</div>
+            {/notempty}
+            {notempty name="article.address"}
+            <div class="content" >{$article.address}</div>
+            {/notempty}
+            {notempty name="article.telephone"}
+            <div class="time"><a href="tel:{$article.telephone}">{$article.telephone}</a></div>
+            {/notempty}
+        </div>
+        <div class="article">{$article.content}</div>
+        <div class="article">
+            <div class="note">
                 {eq name="visit" value="0"}
                 {eq name="article.is_like" value="1"}
-                <span class="isgood good_" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
+                <span class="isgood good_" onclick="isGood(this,4,{$article.id})">{$article.likes}</span>
                 {else/}
-                <span class="isgood good" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
+                <span class="isgood good" onclick="isGood(this,4,{$article.id})">{$article.likes}</span>
                 {/eq}
                 {else/}
                 <span class="isgood good">{$article.likes}</span>
                 {/eq}
+                <span class="read">{$article.views}</span>
             </div>
         </div>
-    </div>
-    
-    
-    <div class="comment">
-        <div class="sum">共<span>{$article.comments}</span>条评论</div>
-        <div class="lists">
-            {volist name="comment" id="co"}
-            <div class="list clear">
-                <div class="fl">
-                    <img src="{$co.header}" alt="用户" class="user">
+        <div class="comment">
+            <div class="sum">共<span>{$article.comments}</span>条评论</div>
+            <div class="lists">
+                {volist name="comment" id="co"}
+                <div class="list clear zbhd">
+                    <div class="fl">
+                        <img src="{$co.header}" alt="用户" class="user">
+                    </div>
+                    <div class="fl mid">
+                        <div class="name limit">{$co.nickname}</div>
+                        <div class="content" >{$co.content}</div>
+                        <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
+                    </div>
+                    {eq name="visit" value="0"}
+                    {eq name="co.is_like" value="1"}
+                    <div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {else/}
+                    <div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {/eq}
+                    {else/}
+                    <div class="fr isgood good">{$co.likes}</div>
+                    {/eq}
                 </div>
-                <div class="fl mid">
-                    <div class="name limit">{$co.nickname}</div>
-                    <div class="content" >{$co.content}</div>
-                    <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
-                </div>
-                {eq name="visit" value="0"}
-                {eq name="co.is_like" value="1"}
-                <div class="fr isgood good_" onclick="isGood(this,10,{$co.id})">{$co.likes}</div>
-                {else/}
-                <div class="fr isgood good" onclick="isGood(this,10,{$co.id})">{$co.likes}</div>
-                {/eq}
-                {else/}
-                <div class="fr isgood good" >{$co.likes}</div>
-                {/eq}
+                {/volist}
             </div>
-            {/volist}
-        </div>
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
+            <div class="tip"></div>
+            <div class="loading hidden">
+                <div class="typing_loader"></div>
+            </div>
         </div>
     </div>
     {eq name="visit" value="0"}
@@ -83,7 +91,7 @@
         <div class="myword fl">
             <input type="text" placeholder="说说你的感想！">
         </div>
-        <div class="send fr" onclick="send(this,0,{$article['id']})">发送</div>
+        <div class="send fr" onclick="send(this,4,{$article['id']})">发送</div>
     </div>
     {/eq}
 </div>
