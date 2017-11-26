@@ -1,0 +1,128 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>网上述职</title>
+<link rel="stylesheet" href="/home/css/report/index.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/all.css">
+{/block}
+{block name="body"}
+<!--banner-->
+
+<!--列表-->
+<div id="refreshContainer" class="mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="banner">
+            <img src="/home/images/banner/1.jpg" alt="网上述职" class="banner-img">
+        </div>
+        <div class="main">
+            <a href="/hone/report/detail.html"  class="re_list">
+                <!--时间-->
+                <div class="re_time">
+                    <span class="month"><b>09</b>/09</span>
+                    <span class="year">2017</span>
+                </div>
+                <div class="re_info">
+                    <!--title-->
+                    <h4 class=" title">梦想小镇罗某某的述职报告电脑就能长电科技能看到的述职报告电脑就能长电科技能看到的述职报告电脑就能长电科技能看到</h4>
+                    <!--内容-->
+                    <div class="rep_text">
+                        大家好我是罗某某 今天见看不见安徽科技到时候宝宝第三你看就是把看见 看空间
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+    </div>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    //首页加载是否需要上拉加载
+    window.onload = function() {
+        if ($(".main .re_list").length < 7) {
+            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        } else {
+            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+        }
+    };
+
+    //初始化下拉加载
+    mui.init({
+        pullRefresh: {
+            container: '#refreshContainer',
+            up: {
+                callback: loadScroll
+            }
+        }
+    });
+
+    function loadScroll(){
+        var len = $(".main .re_list").length;
+        $.ajax({
+            type:"post",
+            url:"{:Url('Activity/more')}",
+            data:{
+                length:len,
+                type:3
+            },
+            beforeSend: function(XMLHttpRequest){
+            },
+            success:function(data){
+                addCourse(data);
+                if(data.code == 1){
+                    if(data.data.length == 7){
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                    }
+                }else{
+                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+                }
+            }
+        })
+    };
+
+    function addCourse(data) {
+        console.log(data)
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for (var i = 0; i < len; i++) {
+            var list = lists[i];
+            html += '<a  href="/hone/report/detail/type/1/id'+list.id+'" class="re_list">'+
+                    '<div class="re_time">'+
+                    ' <span class="month"><b>09</b>/09</span>'+
+                    ' <span class="year">2017</span>'+
+                    '</div>'+
+                    ' <a class="re_info">'+
+                    ' <h4 class=" title"></h4>'+
+                    ' <div class="rep_text"> </div>'+
+                    ' </a>'
+        }
+        $(".main").append(html);
+    };
+
+    //点击背景触发active
+    mui("#refreshContainer").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+
+    //页面点击事件
+    mui("#refreshContainer").on("tap","a",function(){
+        var url = this.getAttribute("href");
+        window.location.href = url;
+    })
+
+
+
+
+
+
+
+</script>
+{/block}

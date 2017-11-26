@@ -5,9 +5,10 @@
   display: block;
     background-color: #333333;
     position: relative;
-    -moz-opacity:0.8;
-    opacity: 0.8;
+    -moz-opacity:1;
+    opacity:1;
     margin-top: 4vw;
+    border-radius: 1vw;
 }
 .brand_main  .list img{
     width: 100%;
@@ -41,7 +42,7 @@
 
 .br_info .info{
     text-align: center;
-    padding: 3vw;
+    padding: 3vw 10vw;
     margin-top: 5vw;
 }
 .br_info .info .info_title{
