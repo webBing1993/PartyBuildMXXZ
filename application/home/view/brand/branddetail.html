@@ -14,7 +14,7 @@
         overflow: hidden;}
     .serverBanner {margin-top: -1vw;}
     .banner {position: relative;width:100%;height:100%;margin:2.7vw auto 0;overflow: hidden;}
-    .banner .swiper-container1 {  width: 240%;  height: 100%;  }
+    .banner .swiper-container1 {  width: 100%;  height: 100%;  }
     .banner .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -32,10 +32,10 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
-        margin-left: 10px;
     }
-    .banner img {width:100%;height:40vw;position: relative;border-radius: 8px;}
-    .banner .swiper-pagination {width:10.7vw;height:4.8vw;line-height:4.8vw;background: #fff;right:13.33vw;left:inherit;bottom:inherit;top:4vw;border-radius: 8px;color: #ff7041;font-size: 1.2rem;box-shadow: 0 0 2px rgba(0,0,0,.2) }
+    .banner img {width:92%;height:40vw;position: relative;border-radius: 8px;}
+    .banner .swiper-pagination {width:10.7vw;height:4.8vw;line-height:4.8vw;background: #fff;right:13.33vw;left:inherit;bottom:inherit;top:4vw;border-radius: 20px;color: #ff7041;font-size: 1.2rem;box-shadow: 0 0 2px rgba(0,0,0,.2) }
+    .num {position: absolute;top:0;right:0;}
 </style>
 {/block}
 {block name="body"}
@@ -52,9 +52,13 @@
                     <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
                     <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
                     <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
+                <!--<div class="swiper-button-next"></div>-->
+                <!--<div class="swiper-button-prev"></div>-->
             </div>
         </div>
     </div>
@@ -66,14 +70,29 @@
 <script src="/home/js/swiper.min.js"></script>
 <script>
     var swiper = new Swiper('.swiper-container1', {
-        slidesPerView:3,
-        spaceBetween: 5,
         loop:true,
         pagination: {
             el: '.swiper-pagination',
             type: 'fraction'
 //            clickable: true,
         },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
     });
+//    var arr = [];
+//    var max = arr[0];
+//    for(var i=1;i<arr.length;i++){
+//        if(max<arr[i])
+//            max=arr[i];
+//    }
+//
+//    for(var j=0;j<$('.swiper-wrapper .swiper-slide').length;j++){
+//
+//    }
+//
+//
+//    $('.numSun').html(max);
 </script>
 {/block}

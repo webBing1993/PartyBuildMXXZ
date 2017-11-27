@@ -19,10 +19,11 @@
 }
 /*tab*/
 #tab {
-    background: url("/home/images/learn/topback.png") center top no-repeat;
+    /*background: url("/home/images/learn/topback.png") center top no-repeat;*/
     width: 100vw;
     height: 14vw;
     background-size: 100vw 14vw;
+    border-bottom: 2px solid #eee;
 }
 .mui-slider-indicator.mui-segmented-control {
     padding: 0 3.2vw;
@@ -32,15 +33,15 @@
 .mui-slider-indicator.mui-segmented-control a {
     font-size: 1.6rem;
     position: relative;
-    line-height: 13.7vw;
+    line-height: 13.5vw;
     height: 100%;
     background-color: inherit !important;
-    color: #999 !important;
+    color: #333 !important;
 }
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
-    color: #fff !important;
-    font-weight: 600;
+    color: #ff7f24 !important;
     background-color: inherit !important;
+    border-bottom: 2px solid #ff7f24;
 }
 /*lists1*/
 .lists1 .list {

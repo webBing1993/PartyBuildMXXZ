@@ -43,7 +43,7 @@
 {block name="body"}
     <!--tab-->
 <div class="tabs clear">
-    <div class="tab" data-index="0" id="active"><span>社团活动</span></div>
+    <div class="tab" data-index="0" id="active"><span style="color:#ff7f24;">社团活动</span></div>
     <div class="tab" data-index="1"><span>志愿服务</span></div>
     <span class="triangle-up"></span>
 </div>
@@ -96,10 +96,14 @@
     var scrollNow = true;
     var club = localStorage.getItem('club');
     if(club ==0 ){
+        $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
+        $('.tabs>.tab ').eq(1).find('span').css('color','#333')
         $('.triangle-up').css('left','0.06vw');
         $('.notices').eq(club).siblings('.notices').addClass('hidden');
         $('.notices').eq(club).removeClass('hidden');
     }else {
+        $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
+        $('.tabs>.tab ').eq(0).find('span').css('color','#333')
         $('.triangle-up').css('left','50.06vw');
         $('.notices').eq(club).siblings('.notices').addClass('hidden');
         $('.notices').eq(club).removeClass('hidden');
@@ -130,13 +134,16 @@
     $('.tabs>.tab ').on('click',function() {
         var ntc = $('.notices');
         var eq = $(this).index();
-        console.log(eq)
+//        $('.tabs>.tab ').find('span').css('color','#333')
+        console.log()
         localStorage.setItem('club',eq);
         c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');
         ntc.eq(eq).removeClass('hidden');
       // console.log(eq);
         if(eq == 0){
+            $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(1).find('span').css('color','#333')
             var _length = '';
             $('.notices').each(function(){
                 if(!$(this).hasClass('hidden')){
@@ -155,6 +162,8 @@
            }
      }
         if(eq == 1) {
+            $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(0).find('span').css('color','#333')
             $(".triangle-up").css("left", "50.06vw");
 //            var len = ntc.eq(eq).find('.lists>ul>li').length;
 //            if (len >= 5) {
