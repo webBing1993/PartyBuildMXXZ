@@ -110,4 +110,20 @@ class Report extends Base{
         $this->assign('comment',$comment);
         return $this->fetch();
     }
+    /*
+     * 投票
+     */
+    public function vote(){
+        $this->checkAnonymous();
+        $userId = session('userId');
+        $id = input('id');
+        $Vote = new ReportVote();
+        $res = $Vote->save(['userid' => $userId,'pid' => $id]);
+        if ($res){
+            ReportModel::where(['id' => $id,'status' => 0])->setInc('votes');
+            return $this->success('成功');
+        }else{
+            return $this->error('失败');
+        }
+    }
 }

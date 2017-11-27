@@ -12,20 +12,20 @@ namespace app\home\model;
 use think\Model;
 
 class ReportVote extends Model {
-    //首页获取推荐的数据
-    public function getDataList($length){
+    protected $insert = [
+        'status' => 1,
+        'create_time' => NOW_TIME,
+    ];
+    //  获取 是否 同意
+    public function getLike($pid,$uid) {
         $map = array(
-            'status' => ['egt',0],
-            'recommend' => 1
+            'pid' => $pid,
+            'userid' => $uid,
         );
-        $order = 'create_time desc';
-        $limit = "$length,1";
-        $list = $this ->where($map) ->order($order) ->limit($limit) ->select();
-        if(!empty($list))
-        {
-            return $list[0] ->data;
-        }else{
-            return $list;
+        $res = WishVote::where($map)->field('status')->find();  // 0 是未投票 1 是赞成 2 反对
+        if (empty($res)){
+            $res['status'] = 0;
         }
+        return $res['status'];
     }
 }
