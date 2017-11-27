@@ -138,13 +138,13 @@ class College extends Base {
         $id = input('id');
         $noticeModel = new MatterModel();
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
+        $info['views'] = array('exp','`views`+1');
         $noticeModel::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(
                 'user_id' => $userId,
-                'notice_id' => $id,
+                'matter_id' => $id,
             );
             $history = Browse::get($con);
             if(!$history && $id != 0){
@@ -155,7 +155,7 @@ class College extends Base {
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         //活动基本信息
         $list = $noticeModel::get($id);
         $list['user'] = session('userId');

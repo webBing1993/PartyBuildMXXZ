@@ -66,25 +66,6 @@ class Club extends Base{
         $userId = session('userId');
         $id = input('id');
         $model = new ClubModel();
-        //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
-        $model::where('id',$id)->update($info);
-        if($userId != "visitor"){
-            //浏览不存在则存入pb_browse表
-            $con = array(
-                'user_id' => $userId,
-                'learn_id' => $id,
-            );
-            $history = Browse::get($con);
-            if(!$history && $id != 0){
-                $s['score'] = array('exp','`score`+1');
-                if ($this->score_up()){
-                    // 未满 15 分
-                    Browse::create($con);
-                    WechatUser::where('userid',$userId)->update($s);
-                }
-            }
-        }*/
 
         $model = $model::get($id);
         $model['user'] = session('userId');
@@ -116,13 +97,13 @@ class Club extends Base{
         $id = input('id');
         $model = new VolunteerModel();
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
+        $info['views'] = array('exp','`views`+1');
         $model::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(
                 'user_id' => $userId,
-                'learn_id' => $id,
+                'volunteer_id' => $id,
             );
             $history = Browse::get($con);
             if(!$history && $id != 0){
@@ -133,7 +114,7 @@ class Club extends Base{
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         $article = $model::get($id);
         $article['user'] = session('userId');
         //分享图片及链接及描述
@@ -204,13 +185,13 @@ class Club extends Base{
         $id = input('id');
         $model = new ClubActivityModel();
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
+        $info['views'] = array('exp','`views`+1');
         $model::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(
                 'user_id' => $userId,
-                'learn_id' => $id,
+                'club_activity_id' => $id,
             );
             $history = Browse::get($con);
             if(!$history && $id != 0){
@@ -221,7 +202,7 @@ class Club extends Base{
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         $article = $model::get($id);
         $article['user'] = session('userId');
         //分享图片及链接及描述

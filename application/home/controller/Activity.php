@@ -6,6 +6,8 @@
  * Time: 17:40
  */
 namespace app\home\controller;
+use app\home\model\Browse;
+use app\home\model\Like;
 use app\home\model\WechatDepartment;
 use app\home\model\Wish as  wishModel;
 use app\home\model\Comment;
@@ -106,13 +108,13 @@ class Activity extends Base{
         $this->anonymous();
         $id = input('id');
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
-        $learnModel::where('id',$id)->update($info);
+        $info['views'] = array('exp','`views`+1');
+        wishModel::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
             $con = array(
                 'user_id' => $userId,
-                'learn_id' => $id,
+                'wish_id' => $id,
             );
             $history = Browse::get($con);
             if(!$history && $id != 0){
@@ -123,7 +125,7 @@ class Activity extends Base{
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         $list = Wish::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
             return $this->error('系统错误,数据不存在');
@@ -160,7 +162,21 @@ class Activity extends Base{
         //分享图片及链接及描述
         $list['share_image'] = "http://".$_SERVER['SERVER_NAME'].'/home/images/feedback/feedback.jpg';
         $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
-        $list['desc'] = $list['description'];
+        $list['link'] = "http://".$_SERVER['SERVER_NAME'].$_SERVER['REDIRECT_URL'];
+        $list['desc'] = str_replace('&nbsp;','',strip_tags($list['description']));
+        $list['desc'] = str_replace(" ",'',$list['desc']);
+        $list['desc'] = str_replace("\n",'',$list['desc']);
+
+        //获取 文章点赞
+        $likeModel = new Like;
+        $like = $likeModel->getLike(6,$id,$userId);
+        $article['is_like'] = $like;
+        $this->assign('article',$article);
+
+        //获取 评论
+        $commentModel = new Comment();
+        $comment = $commentModel->getComment(6,$id,$userId);
+        $this->assign('comment',$comment);
         
         $this->assign('info',$list);
         return $this ->fetch();
