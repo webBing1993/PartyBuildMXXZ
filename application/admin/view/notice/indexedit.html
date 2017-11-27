@@ -189,6 +189,19 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
                         <input type="hidden" name="id" value="{$msg.id}">
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">

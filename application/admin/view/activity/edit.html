@@ -69,24 +69,6 @@
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>封面图片:</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="imggroup">
-                                    {eq name="$msg" value=""}
-                                    <img src="" alt='图片' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    {/eq}
-                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
-                                </div>
-                                <b>推荐尺寸：500*400px</b>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
                             </div>
                             <div class="col-lg-11">
@@ -125,6 +107,35 @@
                                 <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher || default=''}">
                             </div>
                         </div>
+                        {eq name="msg" value=""}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="push">否
+                                </label>
+                            </div>
+                        </div>
+                        {else/}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
+                        {/eq}
                         <input type="hidden" name="id" value="{$msg.id || default=''}">
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">

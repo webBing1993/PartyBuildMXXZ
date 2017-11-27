@@ -46,6 +46,7 @@
                                 <th>发布人</th>
                                 <th>创建人</th>
                                 <th>创建时间</th>
+                                <th>是否推送</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
@@ -59,6 +60,7 @@
                                 <td>{$vo.publisher}</td>
                                 <td>{$vo->user->nickname}</td>
                                 <td>{$vo.create_time|time_format='Y-m-d H:i'}</td>
+                                <td>{$vo.push_text}</td>
                                 <td>{$vo.status_text}</td>
                                 <td>
                                     <a href="{:Url('Activity/edit?id='.$vo['id'])}">修改</a>

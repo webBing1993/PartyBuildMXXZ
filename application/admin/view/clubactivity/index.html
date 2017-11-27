@@ -9,7 +9,7 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>我的社团</h2>
+        <h2>社团活动</h2>
         <ol class="breadcrumb">
             <li>
                 社团活动
@@ -48,7 +48,7 @@
                                 <th>联系方式</th>
                                 <th>发布人</th>
                                 <th>创建时间</th>
-                                <th>是否推荐</th>
+                                <th>是否推送</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -71,7 +71,7 @@
                                 <td>{$vo.telephone}</td>
                                 <td>{$vo->publisher}</td>
                                 <td>{$vo.create_time|time_format='Y-m-d'}</td>
-                                <td>{$vo.recommend_text}</td>
+                                <td>{$vo.push_text}</td>
                                 <td>
                                     <a href="{:Url('edit?id='.$vo['id'])}">修改</a>
                                     <a href="{:Url('del?id='.$vo['id'])}" class="confirm ajax-del">删除</a>

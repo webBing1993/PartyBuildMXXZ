@@ -58,7 +58,6 @@ class Clubactivity extends Admin {
         }else{
             $map = array(
                 'status' => array('egt',0),
-                'type' => 1,
             );
             $clubList = ClubModel::where($map)->order('id')->column('id,title');
             $this->assign('clubList',$clubList);
@@ -90,7 +89,6 @@ class Clubactivity extends Admin {
             }else{
                 $msg = ClubActivityModel::get($id);
                 $map = array(
-                    'type' => 1,
                     'id' => $msg['pid'],
                 );
                 $club = ClubModel::where($map)->field('id,title')->find();

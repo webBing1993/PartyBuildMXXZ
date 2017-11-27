@@ -25,19 +25,21 @@ use app\admin\model\WishReceive;
          $list = $this->lists('Wish',$map);
          int_to_string($list,array(
              'status' => array(0=>"已发布",1=>"已发布"),
+             'recommend' => array(0=>"否",1=>"是"),
+             'push' => array(0=>"否",1=>"是"),
          ));
-         foreach ($list as $key => $value) {
+         /*foreach ($list as $key => $value) {
              $msg = array(
                  'rid' => $value['id'],
                  'status' => 0,
              );
-             /*$info = WishReceive::where($msg)->select();
+             $info = WishReceive::where($msg)->select();
              if($info) {
                  $value['is_enroll'] = 1;
              }else{
                  $value['is_enroll'] = 0;
-             }*/
-         }
+             }
+         }*/
          $this->assign('list',$list);
          return $this->fetch();
      }
