@@ -36,7 +36,7 @@
     line-height: 13.5vw;
     height: 100%;
     background-color: inherit !important;
-    color: #333 !important;
+    color: #999 !important;
 }
 .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
     color: #ff7f24 !important;
