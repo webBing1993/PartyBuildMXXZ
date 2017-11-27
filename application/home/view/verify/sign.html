@@ -104,21 +104,29 @@
         var mobileEmail = $('#account').val();
         var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
         if(mobileEmail !==''&& mobileEmail.length==11){
-            $("#verify_code").attr("disabled", true);
-            $("#verify_code").val("重发(" + curCount+')');
-            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-//            var data = {mobileEmail:mobileEmail};
-//            var url  = ''; //url
-//            $.ajax({
-//                type: "POST", //用POST方式传输
-//                dataType: "json", //数据格式:JSON
-//                url: url,
-//                data: JSON.stringify(data),
-//                contentType: 'application/json;charset=utf-8',
-//                error: function (XMLHttpRequest, textStatus, errorThrown) {},
-//                success: function (data) {
-//                }
-//            });
+            var data = {
+                tel: mobileEmail
+            };
+            var url  = "{:Url('Sms/register')}"; //url
+            $.ajax({
+                type: "POST", //用POST方式传输
+                url: url,
+                data: data,
+                success: function (data) {
+                    console.log(data);
+                    if (data.code == 1) {
+                        $("#verify_code").attr("disabled", true);
+                        $("#verify_code").val("重发(" + curCount+')');
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        // 发送成功
+
+                    } else {
+                        // 失败直接返回弹出是数据
+
+                    }
+
+                }
+            });
         }
         else {
             swal({
@@ -142,5 +150,7 @@
             }
         }
     }
+
+
 </script>
 {/block}
