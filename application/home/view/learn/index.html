@@ -1,189 +1,173 @@
 {extend name="public/common"}
 {block name="style"}
     <title>两学一做</title>
-    <link rel="stylesheet" href="/home/css/learn/index1.css">
+    <!--<link rel="stylesheet" href="/home/css/learn/index1.css">-->
+    <link rel="stylesheet" href="/home/css/common/tip.css">
+    <style>
+        .tabs {
+            width: 100vw;
+            height: 11vw;
+        }
+        .clear {
+            zoom: 1;
+        }
+        .tabs .tab {
+            display: block;
+            float:left;
+            width: 50vw;
+            height: 100%;
+            color: #999;
+            font-size: 1.6rem;
+            line-height: 12.3vw;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .tabs .active {
+            border-bottom: 2px solid #ff7f24;
+            color: orangered;
+        }
+        .tabs .tab:nth-child(1)::after {
+            content: '';
+            display: block;
+            width: 1px;
+            height: 6vw;
+            float: right;
+            margin-top: 3vw;
+            background-color: #999;
+        }
+        .list {
+            background: #eeeeee;
+            border-bottom: 1px solid transparent;
+        }
+        .list {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 2.67vw;
+            margin-bottom: 2.67vw;
+            background: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+        .list .tab {
+            position: absolute;
+            top: 5.53vw;
+            left: 1.13vw;
+            width: 12vw;
+            height: 8vw;
+            background: url("/home/images/learn/bg_blue.png") no-repeat;
+            background-size: 12vw 8vw;
+            color: #ffffff;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height:5.33vw;
+        }
+        .list .img {
+            width: 100%;
+            height: 48vw;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+        }
+        .list .title {
+            color: #333333;
+            font-size: 1.4rem;
+            line-height: 9.6vw
+        }
+        .list .study {
+            display: inline-block;
+            background: url("/home/images/learn/people.png") 0 0 no-repeat;
+            background-size: 15px 15px;
+            padding-left: 18px;
+            color: #999999;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .bulletin {
+            background: #eeeeee;
+            border-bottom: 1px solid transparent;
+        }
+    </style>
 {/block}
 {block name="body"}
-<!--tab-->
-<div id="tab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-    <a class="mui-control-item" href="javascript:;" data-index="0">
-        <span>十九大专题</span>
-    </a>
-    <a class="mui-control-item" href="javascript:;" data-index="1">
-        <span>两学一做</span>
-    </a>
+<div class="tabs clear">
+    <div class="tab active" data-side="0"><span>十九大专题</span></div>
+    <div class="tab" data-side="1"><span>两学一做</span></div>
 </div>
-<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
-    <div class="mui-scroll">
-        <div class="mui-slider-group">
-            <!--切换列表-->
-            <!--十九大专题-->
-            <div class="mui-slider-item mui-control-content lists1">
-                <!-- 手机党校循环体-->
-                {volist name="list" id="vo"}
-                {eq name="$vo.type" value="1"}
-                <a href="{:Url('special/video?id='.$vo['id'])}" class="list lesson">
-                    <div class="tab">视频</div>
-                {else/}
-                <a href="{:Url('special/article?id='.$vo['id'])}" class="list lesson">
-                    <div class="tab">图文</div>
+<div class="bulletin"  style="display: block" id="side0">
+    <div class="page">
+        {volist name="list" id="vo"}
+        {eq name="$vo.type" value="1"}
+        <a href=" 'special/video?id='.$vo['id'])}" class="list lesson">
+            <div class="tab">视频</div>
+            {else/}
+            <a href="{:Url('special/article?id='.$vo['id'])}" class="list lesson">
+                <div class="tab">图文</div>
                 {/eq}
-                    <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
-                    <div class="title limit">{$vo.title}</div>
-                    <span class="study">{$vo.views}人阅读过</span>
-                </a>
-                {/volist}
-            </div>
-            <!--两学一做-->
-            <div class="mui-slider-item mui-control-content lists1">
-                <!-- 手机党校循环体-->
-                 {volist name="list2" id="vo"}
-                 {eq name="$vo.type" value="1"}
-                 <a href="{:Url('learn/video?id='.$vo['id'])}" class="list lesson">
-                    <div class="tab">视频</div>
-                 {else/}
-                 <a href="{:Url('learn/article?id='.$vo['id'])}" class="list lesson">
-                     <div class="tab">图文</div>
-                 {/eq}
-                     <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
-                     <div class="title limit">{$vo.title}</div>
-                     <span class="study">{$vo.views}人阅读过</span>
-                 </a>
-                 {/volist}
-            </div>
-        </div>
+                <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                <div class="title limit">{$vo.title}</div>
+                <span class="study">{$vo.views}人阅读过</span>
+            </a >
+            {/volist}
     </div>
+</div>
+<div class="bulletin" style="display: none;" id="side1">
+    <div class="page" >
+        {volist name="list2" id="vo"}
+        {eq name="$vo.type" value="1"}
+        <a href="{:Url('learn/video?id='.$vo['id'])}" class="list lesson">
+            <div class="tab">视频</div>
+            {else/}
+            <a href="{:Url('learn/article?id='.$vo['id'])}" class="list lesson">
+                <div class="tab">图文</div>
+                {/eq}
+                <img src="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                <div class="title limit">{$vo.title}</div>
+                <span class="study">{$vo.views}人阅读过</span>
+            </a >
+            {/volist}
+    </div>
+</div>
+
+
+
+<div class="tip"></div>
+<div class="loading hidden">
+    <div class="typing_loader"></div>
 </div>
 
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    $(function(){
-        $("title").text("两学一做");
-        // 初始化显示
-        c = getCookie("c")?getCookie("c"):0;
-        $("#tab a").eq(c).addClass('mui-active');
-        $(".mui-slider-group>div").eq(c).addClass('mui-active');
-        $(".mui-control-content").eq(c).show().siblings(".mui-control-content").hide();
-        $("#tab1 a").eq(c).addClass("mui-active");
-    });
+    $(function() {
 
-    //首页加载是否需要上拉加载
-    window.onload = function() {
-        if(c == 0){
-            if ($(".lists1 .list").length < 7) {
-                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+        for (var i = 0; i < $('.tabs .tab').length; i++) {
+            $('.tabs .tab')[i].onclick = function () {
+                $('.tabs .tab').removeClass('active');
+                $(this).addClass('active');
+                var side = $(this).data('side');
+                $('.bulletin').hide();
+                $('#side' + side).show();
+            }
+        }
+
+        $('.tabs .tab').on('click', function () {
+            var num = $(this).index();
+            var len = $('.bulletin').eq(num).find('.page>a').length;
+            console.log(len);
+            if (len >= 10) {
+                $('.tip').text('上拉加载更多');
+                //上拉加载
+                loadScroll();
             } else {
-                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+                $('.tip').text('没有更多了');
             }
-        }else {
-            if ($(".lists2 .list").length < 7) {
-                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-            } else {
-                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-            }
-        }
-    };
-
-    // tab点击事件
-    mui('#tab').on('tap', 'a', function(e) {
-        mui('#refreshContainer').pullRefresh().scrollTo(0,0);
-        mui('#refreshContainer').scroll().scrollTo(0,0);
-        mui('#refreshContainer').pullRefresh().refresh(true);
-        c = this.getAttribute("data-index");
-        $(".mui-control-content").eq(c).show().siblings(".mui-control-content").hide();
-        if(c == 0){
-            if($(".lists1 a").length < 6){
-                mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-            }else{
-                mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-            }
-        }else if(c == 1){
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-        }else {
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-        }
-        setCookie("c",c)
-    });
-    //初始化下拉加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                callback: loadScroll
-            }
-        }
-    });
-
-    function loadScroll(){
-        var len = $(".lists1 .list").length;
-        $.ajax({
-            type:"post",
-            url:"{:Url('Learn/more')}",
-            data:{
-                length:len,
-                type:c
-            },
-            beforeSend: function(XMLHttpRequest){
-            },
-            success:function(data){
-                addCourse(data,c);
-                if(data.code == 1){
-                    var dataLen =data.data.length;
-                    if(data.data.length == 6){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                    }
-                }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                }
-            }
+            loadScroll()
         })
-    }
 
-    function addCourse(data,type){
-        var html = '';
-        var lists = data.data;
-        var len = lists.length;
-        console.log(lists)
-        for(var i = 0; i< len;i++){
-            var list = lists[i];
-            if(list.type == 1){
-                html+=
-                        '<a href="/home/learn/video/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">视频</div>'
-            }else{
-                html+=
-                        '<a href="/home/learn/article/id/'+list.id+'.html" class="list">'+
-                        '<div class="tab">图文</div>'
-            }
-            html +=
-                    '<img src="'+list.path+'" alt="图片" class="img">'+
-                    '<div class="title limit">'+ list.title+'</div>'+
-                    '<span class="study">'+ list.views+'人阅读过</span>'+
-                    '</a>'
-        }
-        if (type == 0) {
-            $(".lists1" ).append(html);
-        }else {
-            $(".lists2" ).append(html);
-        }
-    }
+    })
 
-    mui("#refreshContainer").on("touchstart","a",function(){
-        $(this).css("backgroundColor","rgba(0,0,0,.1)");
-    }).on("touchend","a", function () {
-        $(this).css("backgroundColor","#fff");
-    });
-
-    mui("#refreshContainer").on("tap","a",function(){
-        var url = this.getAttribute("href");
-        window.location.href = url;
-    });
 
 
 </script>
-{/eq}
 {/block}

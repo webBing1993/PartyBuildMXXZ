@@ -291,45 +291,6 @@
         loadScroll()
     })
 
-    function loadScroll(){
-        $(window ).off("scroll" ).on("scroll",function(){
-            var dh = $(document).height();
-            var end = $(window).height() + $(window ).scrollTop();
-//            var len = $(".page>a" ).length;
-            var len = $('#side'+num).find('.page>a').length;
-            var tip = $(".tip");
-            var loading = $('.loading');
-            if(dh == end){
-                $.ajax({
-                    type:"post",
-                    url:"{:Url('College/leadlistmore')}",
-                    data:{
-                        length:len
-                    },
-                    beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
-                    },
-                    success:function(data){
-                        console.log(data);
-                        loading.toggleClass('hidden');
-                        tip.show();
-                        if(data.code == 1){
-                            addMeets(data);
-                            var dataLen =data.data.length;
-                            if(data.data.length == 5){
-                                tip.text('上拉加载更多');
-                            }
-                        }else{
-                            tip.text('没有更多了');
-                            $(window ).off("scroll");
-                        }
-                    }
-                })
-            }
-        })
-    }
-
     function addMeets(data){
         var html = '';
         var lists = data.data;
