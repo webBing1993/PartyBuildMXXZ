@@ -106,8 +106,6 @@
   padding-left: 3.4vw;
   padding-right: 3.4vw;
   text-align: justify;
-  /*font-size: 1.6rem;*/
-  /*text-indent: 3.2rem;*/
 }
 .content .article * {
   max-width: 100%!important;
@@ -117,7 +115,6 @@
 .comment {
   padding-left:0.3rem;
   padding-right: 0.3rem;
-  margin-bottom: 6vw;
 }
 .comment .sum {
   height: 30px;
