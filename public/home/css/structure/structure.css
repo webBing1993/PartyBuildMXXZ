@@ -125,9 +125,17 @@ body {
   line-height: 9.1vw;
   text-align: center;
   float: left;
-  border-right: 1px solid #eeeeee;
-
+  /*border-right: 1px solid #eeeeee;*/
 }
+  .tabs .tab:nth-child(1)::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 5vw;
+    float: right;
+    margin-top: 2vw;
+    background-color: #eee;
+  }
 
 
   .tabs .tab{
