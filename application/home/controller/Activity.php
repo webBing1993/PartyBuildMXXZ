@@ -170,8 +170,7 @@ class Activity extends Base{
         //获取 文章点赞
         $likeModel = new Like;
         $like = $likeModel->getLike(6,$id,$userId);
-        $article['is_like'] = $like;
-        $this->assign('article',$article);
+        $list['is_like'] = $like;
 
         //获取 评论
         $commentModel = new Comment();
