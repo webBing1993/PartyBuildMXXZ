@@ -4,6 +4,10 @@
 <title>梦想小镇党群驿站智慧党建微平台</title>
 <link rel="stylesheet" href="/home/css/index/newindex.css">
 <link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+
+<style>
+    a:active {background: red;}
+</style>
 {/block}
 
 {block name="body"}
@@ -60,7 +64,7 @@
              </a>
          </li>
          <li class="item  itme_last_la ">
-             <a href="#" class="zd_ls">
+             <a onclick="dataProject()" class="zd_ls">
                  <img src="/home/images/index/hdzd.png" alt="">
                  <span>活动阵地</span>
              </a>
@@ -114,6 +118,16 @@
         })
     });
 
+
+    //正在调试开发项目
+    function dataProject () {
+        swal({
+            title: ' ',
+            text: '该模块正在开发！',
+            type: 'warning',
+            confirmButtonText:'确定'
+        });
+    }
 
 </script>
 {/block}
