@@ -15,6 +15,10 @@ use app\home\model\Brand as BrandModel;
 use app\home\model\BrandDetail as BrandDetailModel;
 use app\home\model\Like;
 
+/**
+ * Class Brand
+ * @package 品牌项目
+ */
 class Brand extends Base{
     /*
      * 主页

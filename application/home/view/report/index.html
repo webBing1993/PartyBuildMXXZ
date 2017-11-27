@@ -16,21 +16,23 @@
             <img src="/home/images/banner/1.jpg" alt="网上述职" class="banner-img">
         </div>
         <div class="main">
+            {volist name="list" id="vo"}
             <a href="/home/report/detail.html"  class="re_list">
                 <!--时间-->
                 <div class="re_time">
-                    <span class="month"><b>09</b>/09</span>
-                    <span class="year">2017</span>
+                    <span class="month"><b>{$vo.month}</b>/{$vo.day}</span>
+                    <span class="year">{$vo.year}</span>
                 </div>
                 <div class="re_info">
                     <!--title-->
-                    <div   class=" title">梦想小镇罗某某的述职报告电脑就能长电科技能看到的述职报告电脑就能长电科技能看到的述职报告电脑就能长电科技能看到</div>
+                    <div   class=" title">{$vo.title}</div>
                     <!--内容-->
                     <div class="rep_text">
-                        大家好我是罗某某 今天见看不见安徽科技到时候宝宝第三你看就是把看见 看空间
+                        {$vo.content}
                     </div>
                 </div>
             </a>
+            {/volist}
         </div>
 
 
