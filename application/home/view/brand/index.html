@@ -11,19 +11,21 @@
 
           <div class="brand_main">
               <!--循环体-->
-              <a href="/home/brand/brandDetail.html" class="list">
-                  <img src="/home/images/banner/brand.jpg">
+              {volist name="list" id="vo"}
+              <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
+                  <img src="{$vo.front_cover|get_cover='path'}">
                   <div class="br_info">
                       <!--系列标题-->
                     <!--<div class="hd_title">工匠系列</div>-->
                         <!--内容-->
                         <div class="info">
                             <!--标题-->
-                            <p class="info_title">小镇宝鼎科技空间不可</p>
-                            <!--<div class="info_text">女哪里的女生看了快乐的时刻懒得理课程的你代课的时刻懒得理课程的你代课的时刻懒得理课程的你代课</div>-->
+                            <p class="info_title">{$vo.title}</p>
+                            <!--<div class="info_text">{$vo.content}</div>-->
                         </div>
                   </div>
               </a>
+              {/volist}
           </div>
      <div>
 </div>

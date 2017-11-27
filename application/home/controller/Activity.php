@@ -105,6 +105,25 @@ class Activity extends Base{
 //        $this->checkAnonymous();
         $this->anonymous();
         $id = input('id');
+        //浏览加一
+        /*$info['views'] = array('exp','`views`+1');
+        $learnModel::where('id',$id)->update($info);
+        if($userId != "visitor"){
+            //浏览不存在则存入pb_browse表
+            $con = array(
+                'user_id' => $userId,
+                'learn_id' => $id,
+            );
+            $history = Browse::get($con);
+            if(!$history && $id != 0){
+                $s['score'] = array('exp','`score`+1');
+                if ($this->score_up()){
+                    // 未满 15分
+                    Browse::create($con);
+                    WechatUser::where('userid',$userId)->update($s);
+                }
+            }
+        }*/
         $list = Wish::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
             return $this->error('系统错误,数据不存在');
