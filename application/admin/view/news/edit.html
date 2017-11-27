@@ -21,6 +21,16 @@
         top:0;
         opacity: 0;
     }
+    .imggroup > span{
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: -4px;
+        left: 186px;
+        background: url("/admin/images/close.png") no-repeat center center;
+        background-size: cover;
+    }
+
     .plus{
         height: 100px;
         width: 200px;
@@ -84,6 +94,7 @@
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="front_cover" class="img"  value="" required="">
+                                    <span></span>
                                 </div>
                                 <b>推荐尺寸：750*400px</b>
                             </div>
@@ -94,6 +105,7 @@
                                     <img src="{$vo|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg" onchange="addImg(this)">
                                     <input type="hidden" name="front_cover" class="img"  value="{$vo}" required="">
+                                    <span></span>
                                 </div>
                                 <b>推荐尺寸：750*400px</b>
                             </div>
@@ -104,6 +116,7 @@
                                     <img src="" alt='图片' class='thumbnail imgbox'>
                                     <input type="file" class="imgfile" accept="image/jpg, image/png, image/gif, image/jpeg" onchange="addImg(this)">
                                     <input type="hidden" name="front_cover" class="img"  value="" required="">
+                                    <span></span>
                                 </div>
                                 <b>推荐尺寸：750*400px</b>
                             </div>
@@ -166,6 +179,8 @@
 <!--<script src="/static/ueditor/ueditor.all.min.js"></script>-->
 <script src="/admin/js/chosen.jquery.js"></script>
 <script>
+    var imgSum = 9; // 图片可上传总数
+
     $(function(){
         //    单选按钮
         $('.i-checks').iCheck({
@@ -249,8 +264,59 @@
         });
     })
 
+    // 删除图片
+    delImg();
+    function delImg() {
+        $('.imggroup > span').click(function(){
+
+            if ($('.imggroup').length >= 1) {
+                if ($(this).parent().parent().index() < $('.imggroup').length || $('.imggroup').length == imgSum) {
+                    $(this).parent().parent().remove();
+
+                    var length = $('input[name=front_cover]').length;
+                    var images = [];
+                    for (var i=0;i<length;i++) {
+                        if ($('input[name=front_cover]')[i].value) {
+                            images[i] = $('input[name=front_cover]')[i].value;
+                        }
+                    }
+
+
+                    if ($('.imggroup').length == (imgSum - 1) && images.length == (imgSum - 1) ) {
+                        var html =
+                            '<div class="'+'col-lg-3">'+
+                            '<div class="'+'imggroup">'+
+                            '<img src="'+'" alt='+'"图片'+'" class='+'"thumbnail imgbox'+'">'+
+                            '<input type="'+'file"'+ 'class="'+'imgfile" accept='+'"image/jpg, image/png, image/gif, image/jpeg'+'" onchange='+'"addImg(this)'+'">'+
+                            '<input type="'+'hidden" name='+'"front_cover'+'" class="'+'img"  value='+'"'+'" >'+
+                            '<span></span>'+
+                            '</div>'+
+                            '<b>推荐尺寸：750*400px</b>'+
+                            '</div>'
+                        $('#frontCovers').append(html);
+                    }
+                }
+            } else {
+                $(this).parent().parent().remove();
+                var html =
+                    '<div class="'+'col-lg-3">'+
+                    '<div class="'+'imggroup">'+
+                    '<img src="'+'" alt='+'"图片'+'" class='+'"thumbnail imgbox'+'">'+
+                    '<input type="'+'file"'+ 'class="'+'imgfile" accept='+'"image/jpg, image/png, image/gif, image/jpeg'+'" onchange='+'"addImg(this)'+'">'+
+                    '<input type="'+'hidden" name='+'"front_cover'+'" class="'+'img"  value='+'"'+'" >'+
+                    '<span></span>'+
+                    '</div>'+
+                    '<b>推荐尺寸：750*400px</b>'+
+                    '</div>'
+                $('#frontCovers').append(html);
+            }
+
+            changState();
+        })
+    }
 
     function addImg(a) {
+        delImg();
         var size = ($(a)[0].files[0].size / 1024).toFixed(2);
         var imgBox = $(a);
         if(size <= 5120){
@@ -275,7 +341,7 @@
 
                         var length = $('input[name=front_cover]').length;
                         var check = false;
-                        if (length < 9) {
+                        if (length < imgSum) {
                             for (var i=0;i<length;i++) {
                                 if (!$('input[name=front_cover]')[i].value) {
                                     check = true;
@@ -288,13 +354,16 @@
                                         '<img src="'+'" alt='+'"图片'+'" class='+'"thumbnail imgbox'+'">'+
                                         '<input type="'+'file"'+ 'class="'+'imgfile" accept='+'"image/jpg, image/png, image/gif, image/jpeg'+'" onchange='+'"addImg(this)'+'">'+
                                         '<input type="'+'hidden" name='+'"front_cover'+'" class="'+'img"  value='+'"'+'" >'+
+                                        '<span></span>'+
                                         '</div>'+
                                         '<b>推荐尺寸：750*400px</b>'+
                                         '</div>'
                                 $('#frontCovers').append(html);
+                                delImg();
+                                changState();
                             }
                         }
-
+                        changState();
 
 
                     } else {
@@ -307,6 +376,21 @@
         } else {
             warning({msg:"您选择的图片超过5mb，请重新选择"});
             return;
+        }
+        changState();
+    }
+
+    changState();
+    function changState() {
+        var length = $('input[name=front_cover]').length;
+        var images = [];
+        for (var i=0;i<length;i++) {
+            if ($('input[name=front_cover]')[i].value) {
+                images[i] = $('input[name=front_cover]')[i].value;
+                $($('input[name=front_cover]')[i]).next().show();
+            } else {
+                $($('input[name=front_cover]')[i]).next().hide();
+            }
         }
     }
 </script>
