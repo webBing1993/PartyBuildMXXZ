@@ -145,12 +145,12 @@
 {block name="body"}
 
 <div class="tabs clear">
-    <div class="tab active" data-side="0"><span>通知公告</span></div>
-    <div class="tab" data-side="1"><span>重要文件</span></div>
+    <div class="tab active" data-side="1"><span>通知公告</span></div>
+    <div class="tab" data-side="2"><span>重要文件</span></div>
     <!--<span class="triangle-up"></span>-->
 </div>
 
-<div class="bulletin" id="side0" style="display: block">
+<div class="bulletin" id="side1" style="display: block">
     <div class="banner">
         <div class="swiper-container1">
             <div class="swiper-wrapper">
@@ -187,7 +187,7 @@
         </a>
     </div>
 </div>
-<div class="bulletin" id="side1" >
+<div class="bulletin" id="side2" >
     <div class="banner">
         <div class="swiper-container2">
             <div class="swiper-wrapper">
@@ -251,10 +251,12 @@
 
 <script>
     var num = 0;
+    var type = 1;
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
                 var len =$(this).find('.page>a').length;
+                console.log(len)
                 if(len >= 10){
                     $('.tip' ).text('上拉加载更多');
                     //上拉加载
@@ -277,19 +279,72 @@
     });
 
     $('.tabs .tab').on('click',function(){
-        console.log(1);
         var num = $(this).index();
         var len =$('.bulletin').eq(num).find('.page>a').length;
-        console.log(len);
-        if(len >= 10){
-            $('.tip' ).text('上拉加载更多');
-            //上拉加载
-            loadScroll();
-        } else {
-            $('.tip' ).text('没有更多了');
+        console.log(len)
+        var type = $(this).data('side');
+        console.log($(this).data('side'));
+        if(type == 1){
+            if(len >= 10){
+                $('.tip' ).text('上拉加载更多');
+                //上拉加载
+                loadScroll();
+            } else {
+                $('.tip' ).text('没有更多了');
+            }
+            loadScroll()
+        }else if (type == 2){
+            if(len >= 10){
+                $('.tip' ).text('上拉加载更多');
+                //上拉加载
+                loadScroll();
+            } else {
+                $('.tip' ).text('没有更多了');
+            }
+            loadScroll()
         }
-        loadScroll()
+
     })
+
+    function loadScroll(){
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+//            var len = $(".page>a" ).length;
+            var len = $('#side'+type).find('.page>a').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            if(dh == end){
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('College/leadlistmore')}",
+                    data:{
+                        length:len,
+                        type:1
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        console.log(data);
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addMeets(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                    }
+                })
+            }
+        })
+    }
 
     function addMeets(data){
         var html = '';
@@ -303,7 +358,7 @@
                     +'<div class="list_info"><div class="info_text">'+list.title+'</div><div class="time"><span class="time_ls">'+list.create_time+'</span></div></div>'
                     +'</a>'
         }
-        $('#side'+num).find('.page').append(html)
+        $('#side'+type).find('.page').append(html)
     }
     //
 </script>
