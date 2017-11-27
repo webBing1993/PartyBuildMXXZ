@@ -227,3 +227,12 @@ input[type="button"], input[type="submit"], input[type="reset"] {
 /*margin-left: .6rem;*/
 /*margin-right: .5rem;*/
 /*}*/
+.clearfix:before{
+    display:table;
+    content:'';
+}
+.clearfix:after{
+    display:table;
+    content:'';
+    clear:both;
+}

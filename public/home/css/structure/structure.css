@@ -403,9 +403,10 @@ body {
     background: #ffffff;
   }
   .d_list{
-    display: flex;
+    display: block;
     padding:2vw 4vw;
     border-bottom:1px solid #f7f7f7;
+    position: relative;
   }
   .d_list .d_img{
     width:13.33vw;
@@ -414,7 +415,7 @@ body {
     -moz-border-radius:1.6vw;
     border-radius:1.6vw;
     color: #ffffff;
-    font-size: 9.33vw;
+    font-size: 3.5rem;
     text-align: center;
     line-height: 13.333vw;
     margin-right: 3.2vw;
@@ -423,7 +424,8 @@ body {
     font-size: 1.6rem;
     font-weight: bold;
     color: #333;
-    width:100vw;
+    width:90vw;
+    line-height: 7.3vw;
   }
   .d_list>.d_tel{
     color: #29adf0;
@@ -442,8 +444,21 @@ body {
     height: 3.5vw;
     margin-top: 1.2vw;
   }
-  /*.d_list .d_name>a .d_tel_img img {width:5.33vw;}*/
-  .d_list .d_tel_img  {font-size: 1.6rem;}
+  .d_list .d_name>a .d_tel_img img {
+    width: 4.56vw;
+    height: 6vw;
+    margin-top: 5.66vw;
+    float: left;
+    margin-right: 2vw;
+  }
+  .d_list .d_tel_img  {
+    font-size: 1.6rem;
+    position: absolute;
+    right: 4vw;
+    top: 0;
+    height: 17.33vw;
+    line-height: 17.33vw;
+  }
 
   .d_list .d_name>a{
     display: block;
@@ -451,10 +466,13 @@ body {
     line-height: 10vw;
     font-weight: 100;
   }
-  .d_list .d_name>a img{
-    width: 3.5vw;
-    height: 3.5vw;
-    margin-top: 3.5vw;
+  .d_list .d_name>a .d_lst img{
+    width: 3vw;
+    height: 3vw;
+    display: block;
+    float: left;
+    margin-top: 1.5vw;
+    /*margin-top: 3.5vw;*/
   }
  .d_tel>.d_tel_icon {
     width: 26.67vw;
@@ -467,7 +485,8 @@ body {
   }
   .d_list .d_name>a>.d_lst{
     color: #333;
-
+    line-height: 6vw;
+    height: 6vw;
   }
   .d_list .d_name>a>.d_lst>i{
     font-style: normal;

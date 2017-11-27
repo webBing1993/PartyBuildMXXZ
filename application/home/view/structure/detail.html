@@ -8,6 +8,9 @@
 	.mui-pull-bottom-pocket {
 		height:3.06rem;
 	}
+	.d_img_box {
+		float: left;
+	}
 </style>
 {/block}
 
@@ -20,7 +23,7 @@
 				<!--列表一定要放到容器内,因为会有一个div append到mui-scroll中,需要在底部才能起作用-->
 				<ul class="d_lists" id="refreshContainers">
 					{volist name="modelAll" id="vo"}
-					<li class="d_list">
+					<li class="d_list clearfix">
 						<div class="d_img_box">
 							<div class="d_img" style="background-color: {$vo.color}">
 								{$vo.surname}
