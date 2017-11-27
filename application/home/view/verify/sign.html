@@ -53,19 +53,24 @@
     /**登陆**/
     function login(){
         reg();
-//        var data = {mobileEmail: mobileEmail};
-//        var url = ''; //url
-//        $.ajax({
-//            type: "POST", //用POST方式传输
-//            dataType: "json", //数据格式:JSON
-//            url: url,
-//            data: JSON.stringify(data),
-//            contentType: 'application/json;charset=utf-8',
-//            error: function (XMLHttpRequest, textStatus, errorThrown) {
-//            },
-//            success: function (data) {
-//            }
-//        });
+        var data = {
+            code: $('#yan').val(),
+            tel: $('#account').val()
+        };
+        var url = "{:Url('Sms/checkRegister')}"; //url
+        $.ajax({
+            type: "POST", //用POST方式传输
+            url: url,
+            data: data,
+            success: function (data) {
+                if (data.code == 1) {
+                    alert('注册成功！');
+
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
     }
     /**表单验证**/
     function reg(){
@@ -122,7 +127,7 @@
 
                     } else {
                         // 失败直接返回弹出是数据
-
+                        alert(data.msg);
                     }
 
                 }
