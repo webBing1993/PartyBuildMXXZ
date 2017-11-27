@@ -32,9 +32,9 @@
 				<span class="read">{$article.views}</span>
 				{eq name="visit" value="0"}
 				{eq name="article.is_like" value="1"}
-				<span class="isgood good_" onclick="isGood(this,3,{$article.id})">{$article.likes}</span>
+				<span class="isgood good_" onclick="isGood(this,11,{$article.id})">{$article.likes}</span>
 				{else/}
-				<span class="isgood good" onclick="isGood(this,3,{$article.id})">{$article.likes}</span>
+				<span class="isgood good" onclick="isGood(this,11,{$article.id})">{$article.likes}</span>
 				{/eq}
 				{else/}
 				<span class="isgood good">{$article.likes}</span>
@@ -77,7 +77,7 @@
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想！">
 		</div>
-		<div class="send fr" onclick="send(this,3,{$article['id']})">发送</div>
+		<div class="send fr" onclick="send(this,11,{$article['id']})">发送</div>
 	</div>
 	{/eq}
 </div>
@@ -190,7 +190,7 @@ function loadScroll(){
 				type:"post",
 				url:"{:Url('Base/morecomment')}",
 				data:{
-					type:1,
+					type:11,
 					aid:id,
 					length:len
 				},
