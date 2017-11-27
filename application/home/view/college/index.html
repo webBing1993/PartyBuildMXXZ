@@ -320,7 +320,7 @@
                     url:"{:Url('College/leadlistmore')}",
                     data:{
                         length:len,
-                        type:1
+                        type:type
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -351,13 +351,23 @@
         var lists = data.data;
         var len = lists.length;
         console.log(data)
-        for(var i = 0; i< len;i++){
-            var list = lists[i];
-            html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
+        if(type==1){
+            for(var i = 0; i< len;i++){
+                var list = lists[i];
+                html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
                     +'<img src="'+list.path+'" alt="">'
                     +'<div class="list_info"><div class="info_text">'+list.title+'</div><div class="time"><span class="time_ls">'+list.create_time+'</span></div></div>'
                     +'</a>'
+            }
+        }else {
+            for(var j = 0; j< len;j++){
+                var list = lists[j];
+                html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
+                    +'<div class="list_info"><div class="info_text">'+list.title+'</div><div class="time"><span class="time_ls">'+list.create_time+'</span></div></div>'
+                    +'</a>'
+            }
         }
+
         $('#side'+type).find('.page').append(html)
     }
     //
