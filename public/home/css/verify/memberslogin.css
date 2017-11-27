@@ -81,8 +81,8 @@ body{
     text-align: center;
     font-size: 1.4rem;
     color: #ccc;
-    padding-top: 4vw;
     margin: 0 6vw;
+    margin-top: 4vw;
 }
 .links {text-align: center;margin-top: 4vw;}
 .login img{

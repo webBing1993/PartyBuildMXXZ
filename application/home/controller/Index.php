@@ -48,6 +48,8 @@ class Index extends Base {
     public function newindex(){
         $this ->anonymous();
         $uid = session('userId');
+        $this ->assign('user',$uid);
+
         return $this->fetch();
     }
 
