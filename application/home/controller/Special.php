@@ -65,7 +65,7 @@ class Special extends Base{
         $id = input('id');
         $SpecialModel = new SpecialModel();
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
+        $info['views'] = array('exp','`views`+1');
         $SpecialModel::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
@@ -82,7 +82,7 @@ class Special extends Base{
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         $video = $SpecialModel::get($id);
         $video['user'] = session('userId');
         //分享图片及链接及描述
@@ -117,7 +117,7 @@ class Special extends Base{
         $id = input('id');
         $SpecialModel = new SpecialModel();
         //浏览加一
-        /*$info['views'] = array('exp','`views`+1');
+        $info['views'] = array('exp','`views`+1');
         $SpecialModel::where('id',$id)->update($info);
         if($userId != "visitor"){
             //浏览不存在则存入pb_browse表
@@ -134,7 +134,7 @@ class Special extends Base{
                     WechatUser::where('userid',$userId)->update($s);
                 }
             }
-        }*/
+        }
         $article = $SpecialModel::get($id);
         $article['user'] = session('userId');
         //分享图片及链接及描述
