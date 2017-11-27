@@ -267,10 +267,22 @@
         })
 
     });
-    $('.tabs .tab').on('click',function(){
-        var _side = $(this).data('side');
 
+    $('.tabs .tab').on('click',function(){
+        console.log(1);
+        var num = $(this).index();
+        var len =$('.bulletin').eq(num).find('.page>a').length;
+        console.log(len);
+        if(len >= 10){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载
+            loadScroll();
+        } else {
+            $('.tip' ).text('没有更多了');
+        }
+        loadScroll()
     })
+
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
@@ -309,6 +321,7 @@
             }
         })
     }
+
     function addMeets(data){
         var html = '';
         var lists = data.data;
