@@ -17,7 +17,7 @@
         </div>
         <div class="main">
             {volist name="list" id="vo"}
-            <a href="/home/report/detail.html"  class="re_list">
+            <a href="{:Url('report/detail?id='.$vo['id'])}"  class="re_list">
                 <!--时间-->
                 <div class="re_time">
                     <span class="month"><b>{$vo.month}</b>/{$vo.day}</span>

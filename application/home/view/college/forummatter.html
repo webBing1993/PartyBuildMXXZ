@@ -127,8 +127,7 @@
 		$(e).toggleClass('good' ).toggleClass('good_');
 		$(e ).hasClass('good')?n--:n++;
 		$(e ).text(n);
-		//type：1文章，2评论
-//		var type = $(e ).hasClass('fr')?2:1;
+
 		$.ajax({
 			type:"post",
 			url:"{:Url('Base/like')}",

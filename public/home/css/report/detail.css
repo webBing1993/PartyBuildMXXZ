@@ -77,5 +77,19 @@
     text-align: center;
     color: #fff;
 }
+.scrollDiy .area{
+    position: fixed;
+    bottom: 0vw;
+    background-color: #eeeeee;
+    line-height: 10vw;
+    width: 100vw;
+    color:#111;
+    text-align: center;
+}
 
+.scrollDiy .area a {
+    display: block;
+    text-align: center;
+    color:#111;
+}
 
