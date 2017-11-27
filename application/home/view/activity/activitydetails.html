@@ -43,9 +43,9 @@
             <div class="note">
                 {eq name="visit" value="0"}
                 {eq name="info.is_like" value="1"}
-                <span class="isgood good_" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+                <span class="isgood good_" onclick="isGood(this,6,{$info.id})">{$info.likes}</span>
                 {else/}
-                <span class="isgood good" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+                <span class="isgood good" onclick="isGood(this,6,{$info.id})">{$info.likes}</span>
                 {/eq}
                 {else/}
                 <span class="isgood good">{$info.likes}</span>
@@ -89,7 +89,7 @@
         <div class="myword fl">
             <input type="text" placeholder="说说你的感想！">
         </div>
-        <div class="send fr" onclick="send(this,4,{$info['id']})">发送</div>
+        <div class="send fr" onclick="send(this,6,{$info['id']})">发送</div>
     </div>
     {/eq}
 </div>
@@ -238,7 +238,7 @@
                     type:"post",
                     url:"{:Url('Base/morecomment')}",
                     data:{
-                        type:4,
+                        type:6,
                         aid:id,
                         length:len
                     },

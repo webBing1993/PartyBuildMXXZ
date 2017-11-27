@@ -142,6 +142,7 @@ class Base extends Controller {
      * 3 learn
      * 4 notice
      * 5 pioneer
+     * 6 wish
      * 8 dream_flash
      * 9 club_activity
      * 10 volunteer
@@ -171,6 +172,9 @@ class Base extends Controller {
                 break;
             case 5:
                 $table = "pioneer";
+                break;
+            case 6:
+                $table = "wish";
                 break;
             case 8:
                 $table = "dream_flash";
