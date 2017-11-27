@@ -3,6 +3,7 @@
 {block name="style"}
 <title>梦想快讯</title>
 <link rel="stylesheet" href="/home/css/common/detail.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
     .scrollDiy{
         position: absolute;
@@ -12,6 +13,7 @@
         /* 增加该属性，可以增加弹性 */
         -webkit-overflow-scrolling: touch;
         width:100%;
+        padding-bottom: 40px;
     }
 </style>
 {/block}
@@ -94,6 +96,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+    var scrollNow = true;
     $(function(){
         //reset
         var len = $(".list" ).length;
