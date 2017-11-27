@@ -64,59 +64,22 @@
 <script src="/home/js/reset.js"></script>
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
     $(function(){
+
         //tab初始化和数据存储
         var ntc = $('.notices');
-        var co = getCookie("type");
-        if(co == 11 || co == 12 || co == 13){
-            c = co - 10;
-        }
-        $('.tabs>.tab').eq(c-1).find('span').addClass('active');
-        ntc.eq(c-1).removeClass('hidden');
+        $('.tabs>.tab').find('span').addClass('active');
+
         //两学一做上拉加载
-      if(c == 1){
-            var len = ntc.eq(c-1 ).find('.notice:last .list').length;
-           if(len >= 5){
-               $('.tip' ).text('上拉加载更多');
-               loadScroll(c);
-            }
-        }else{
-          $('.tip' ).hide();
-       }
-//        //tab切换
-//        $('.tabs>.tab ').on('click',function(){
-//            var ntc = $('.notices' );
-//            var eq = $(this ).index();
-//            $(this ).siblings('.tab' ).find('span' ).removeClass('active');
-//            $(this ).find('span' ).addClass('active');
-//            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
-//            ntc.eq(eq).removeClass('hidden');
-//            if(eq == 0){
-//                var len = ntc.eq(eq ).find('.notice:last .list').length;
-//                if(len >= 5){
-//                    $('.tip' ).text('上拉加载更多');
-//                    loadScroll(eq+1);
-//                }
-//            }else{
-//                $('.tip' ).hide();
-//                $(window ).off("scroll" );
-//            }
-//            //使用示例
-//            setCookie("type",eq+11);
-//        });
-        //安卓4.4tab兼容
-        var u = navigator.userAgent;
-        var isAnd = !u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-        if(isAnd){
-            var num = u.substr(u.indexOf('Android') + 8, 3);
-            if(num <= 4.4){
-                var tabw = $('.tabs').width()/3 -2;
-                $('.tabs>.tab').width(tabw);
-            }
+        var len = ntc.find('.notice:last .list').length;
+        if(len >= 5){
+           $('.tip' ).text('上拉加载更多');
         }
+        loadScroll(1);
+
     });
     function loadScroll(type){
+
         $(window ).off("scroll" ).on("scroll",function(){
             var ntc = $('.notices');
             var dh = $(document).height();
