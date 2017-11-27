@@ -127,6 +127,7 @@ class Verify extends Controller{
      * @return mixed
      */
     public function memberslogin(){
+//        Cookie::set('dypb',['user' =>'39ac30f6e906a9b3cb3a5164af11b549']);
         return $this ->fetch();
     }
     public function null(){

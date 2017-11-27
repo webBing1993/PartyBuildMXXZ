@@ -13,9 +13,14 @@ use Yunpian\Sdk\YunpianClient;
 use app\home\model\SmsCode;
 use app\home\model\WechatUser;
 use think\Cookie;
+use think\Config;
 
 class Sms extends Controller
 {
+    public function _initialize(){
+        Cookie::init(Config::get('cookie'));
+    }
+
     static $ACTIVETIME = 300;// 验证码有效时间(秒)
     static $INTERVAL = 90;// 验证码间隔时间(秒)
 
@@ -198,6 +203,5 @@ class Sms extends Controller
             'active_time' => time() + $this::$ACTIVETIME,
         ])->save();
     }
-
 
 }
