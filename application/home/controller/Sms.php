@@ -12,6 +12,7 @@ use think\Controller;
 use Yunpian\Sdk\YunpianClient;
 use app\home\model\SmsCode;
 use app\home\model\WechatUser;
+use think\Cookie;
 
 class Sms extends Controller
 {
@@ -78,6 +79,19 @@ class Sms extends Controller
                 $this->error($checkRes);
             }
 
+            $uid = md5(uniqid());//不重复随机id
+            Cookie::set('dypb',['user' =>$uid]);
+            $user = [
+                'userid' => $uid,
+                'name' => $data['tel'],
+                'mobile' => $data['tel'],
+                'department'=> 1,
+                'gender' => 1,
+                'tag' => 1,
+                'status' => 1,
+            ];
+            WechatUser::create($user);
+
             // 写入注册成功后对应代码
             return $this->success('恭喜您，注册成功！');
 
@@ -131,6 +145,7 @@ class Sms extends Controller
         } else if ($res['code'] == $data['code']) {
             // 已验证成功
             $smsCodeModel->save(['status'  => 1,],['id' => $res['id']]);
+
         }
     }
 

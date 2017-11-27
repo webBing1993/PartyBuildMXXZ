@@ -90,10 +90,10 @@
 {/block}
 {block name="body"}
 <div class="tabs clear">
-    <div class="tab active" data-side="0"><span>十九大专题</span></div>
-    <div class="tab" data-side="1"><span>两学一做</span></div>
+    <div class="tab active" data-side="1"><span>十九大专题</span></div>
+    <div class="tab" data-side="2"><span>两学一做</span></div>
 </div>
-<div class="bulletin"  style="display: block" id="side0">
+<div class="bulletin"  style="display: block" id="side1">
     <div class="page">
         {volist name="list" id="vo"}
         {eq name="$vo.type" value="1"}
@@ -110,7 +110,7 @@
             {/volist}
     </div>
 </div>
-<div class="bulletin" style="display: none;" id="side1">
+<div class="bulletin" style="display: none;" id="side2">
     <div class="page" >
         {volist name="list2" id="vo"}
         {eq name="$vo.type" value="1"}
@@ -125,6 +125,7 @@
                 <span class="study">{$vo.views}人阅读过</span>
             </a >
             {/volist}
+        </a>
     </div>
 </div>
 
@@ -139,35 +140,189 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
-    $(function() {
-
-        for (var i = 0; i < $('.tabs .tab').length; i++) {
-            $('.tabs .tab')[i].onclick = function () {
-                $('.tabs .tab').removeClass('active');
-                $(this).addClass('active');
-                var side = $(this).data('side');
-                $('.bulletin').hide();
-                $('#side' + side).show();
-            }
+    for(var i=0;i<$('.tabs .tab').length;i++){
+        $('.tabs .tab')[i].onclick=function(){
+            $('.tabs .tab').removeClass('active');
+            $(this).addClass('active');
+            var side = $(this).data('side');
+            $('.bulletin').hide();
+            $('#side'+side).show();
         }
+    }
+    var num = 0;
+    var type = 1;
+    $(function(){
+        $('.bulletin').each(function(){
+            if($(this).css('display')=='block'){
+                var len =$(this).find('.page>a').length;
+                console.log(len)
+                if(len >= 10){
+                    $('.tip' ).text('上拉加载更多');
+                    //上拉加载
+                    loadScroll();
+                }
+                $('a').off('click' ).on('click',function(){
+                    window.location.href  =$(this ).attr('href');
+                });
 
-        $('.tabs .tab').on('click', function () {
-            var num = $(this).index();
-            var len = $('.bulletin').eq(num).find('.page>a').length;
-            console.log(len);
-            if (len >= 10) {
-                $('.tip').text('上拉加载更多');
+                if($(this).find('.page>a').find("a").length > 0){
+                    $('#wuxiaoxi1').hide()
+                }
+                else{
+                    $('#wuxiaoxi1').show()
+                }
+                loadScroll()
+            }
+        })
+
+    });
+
+    $('.tabs .tab').on('click',function(){
+        var num = $(this).index();
+        var len =$('.bulletin').eq(num).find('.page>a').length;
+         type = $(this).data('side');
+        console.log($(this).data('side'));
+        if(type == 1){
+            if(len >= 10){
+                $('.tip' ).text('上拉加载更多');
                 //上拉加载
                 loadScroll();
             } else {
-                $('.tip').text('没有更多了');
+                $('.tip' ).text('没有更多了');
             }
             loadScroll()
-        })
+        }else if (type == 2){
+            if(len >= 10){
+                $('.tip' ).text('上拉加载更多');
+                //上拉加载
+                loadScroll();
+            } else {
+                $('.tip' ).text('没有更多了');
+            }
+            loadScroll()
+        }
 
     })
 
+    function loadScroll(){
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+//            var len = $(".page>a" ).length;
+            var len = $('#side'+type).find('.page>a').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            console.log(type)
+            if(dh == end){
+                if(type==1){
+                    $.ajax({
+                        type:"post",
+                        url:"{:Url('special/indexmore')}",
+                        data:{
+                            length:len
+                        },
+                        beforeSend: function(XMLHttpRequest){
+                            tip.hide();
+                            loading.toggleClass('hidden');
+                        },
+                        success:function(data){
+                            console.log(data);
+                            loading.toggleClass('hidden');
+                            tip.show();
+                            if(data.code == 1){
+                                addMeets(data);
+                                var dataLen =data.data.length;
+                                if(data.data.length == 5){
+                                    tip.text('上拉加载更多');
+                                }
+                            }else{
+                                tip.text('没有更多了');
+                                $(window ).off("scroll");
+                            }
+                        }
+                    })
+                }
+                else {
+                    $.ajax({
+                        type:"post",
+                        url:"{:Url('learn/indexmore')}",
+                        data:{
+                            length:len
+                        },
+                        beforeSend: function(XMLHttpRequest){
+                            tip.hide();
+                            loading.toggleClass('hidden');
+                        },
+                        success:function(data){
+                            console.log(data);
+                            loading.toggleClass('hidden');
+                            tip.show();
+                            if(data.code == 1){
+                                addMeets(data);
+                                var dataLen =data.data.length;
+                                if(data.data.length == 5){
+                                    tip.text('上拉加载更多');
+                                }
+                            }else{
+                                tip.text('没有更多了');
+                                $(window ).off("scroll");
+                            }
+                        }
+                    })
+                }
 
+            }
+        })
+    }
+
+    function addMeets(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        console.log(data)
+        if(type==1){
+            for(var i = 0; i< len;i++){
+                var str  = '';
+                var _str = '';
+                var list = lists[i];
+                if(list.type==1){
+                    str  = '/home/special/article/id/';
+                    _str ='视频'
+                }else {
+                    str  = '/home/special/article/id/';
+                    _str ='图文'
+                }
+                html +='<a href="'+str+list.id+'" class="list lesson">'
+                    +'<div class="tab">'+_str+'</div>'
+                    +'<img src="'+list.path+'" alt="图片" class="img">'
+                    +'<div class="title limit">'+list.title+'</div>'
+                    +'<span class="study">'+list.views+'人阅读过</span>'
+                    +'</a>'
+            }
+        }else {
+            for(var j = 0; j< len;j++){
+                var str  = '';
+                var _str = '';
+                var list = lists[j];
+                if(list.type==1){
+                    str  = '/home/special/article/id/';
+                    _str ='视频'
+                }else {
+                    str  = '/home/special/article/id/';
+                    _str ='图文'
+                }
+                html +='<a href="'+str+list.id+'" class="list lesson">'
+                    +'<div class="tab">'+_str+'</div>'
+                    +'<img src="'+list.path+'" alt="图片" class="img">'
+                    +'<div class="title limit">'+list.title+'</div>'
+                    +'<span class="study">'+list.views+'人阅读过</span>'
+                    +'</a>'
+            }
+        }
+
+        $('#side'+type).find('.page').append(html)
+    }
+    //
 
 </script>
 {/block}
