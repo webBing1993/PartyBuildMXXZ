@@ -36,7 +36,11 @@
         </div>
 
     </div>
+    {notempty name="is_vote"}
     <div class="vote_btn"><a href="javaScript:;">投票</a></div>
+    {else/}
+    <div class="area"><a href="javaScript:;">已投票</a></div>
+    {/notempty}
 
 </div>
 {/block}
@@ -48,14 +52,13 @@
 
      //获取现在投票人数
      var aa = parseInt($(".vote").find("b").text());
-     var  id = parseInt(window.location.href.split("report/detail/id/")[1]);
      //点击投票按钮
     $('.vote_btn').on("click",function () {
         $.ajax({
             type:"post",
             url:"{:Url('Report/vote')}",
             data:{
-                id:id,
+                id:{$pid},
             },
             success:function(data){
             }

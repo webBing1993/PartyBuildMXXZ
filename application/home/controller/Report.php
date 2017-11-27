@@ -117,6 +117,7 @@ class Report extends Base{
             $is_vote = false;
         }
         $this->assign('is_vote',$is_vote);
+        $this->assign('pid',$id);
         return $this->fetch();
     }
     /*
