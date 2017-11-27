@@ -43,21 +43,20 @@
 </style>
 {/block}
 {block name="body"}
+{volist name="list" id="vo"}
 <div class="serveries">
     <div class="serverContent">
         <span class="border"></span>
-        <p class="serverTitle">创客学员</p>
-        <p class="serverText">每月开展两次活动，提供公益性创业培训，解读创业政策，指导创客解决创业中的各种问题。</p>
+        <p class="serverTitle">{$vo.title}</p>
+        <p class="serverText">{$vo.content}</p>
     </div>
     <div class="serverBanner">
         <div class="banner">
             <div class="swiper-container1">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>
+                    {volist name="vo.images" id='v'}
+                    <div class="swiper-slide"><img src="{$v|get_cover='path'}" alt=""></div>
+                    {/volist}
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
@@ -67,6 +66,39 @@
         </div>
     </div>
 </div>
+{/volist}
+
+
+
+
+
+
+
+<!--<div class="serveries">-->
+    <!--<div class="serverContent">-->
+        <!--<span class="border"></span>-->
+        <!--<p class="serverTitle">创客学员</p>-->
+        <!--<p class="serverText">每月开展两次活动，提供公益性创业培训，解读创业政策，指导创客解决创业中的各种问题。</p>-->
+    <!--</div>-->
+    <!---->
+    <!--<div class="serverBanner">-->
+        <!--<div class="banner">-->
+            <!--<div class="swiper-container1">-->
+                <!--<div class="swiper-wrapper">-->
+                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
+                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
+                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
+                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
+                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
+                <!--<div class="swiper-pagination"></div>-->
+                <!--<div class="swiper-button-next"><img src="/home/images/feedback/right.png" alt=""></div>-->
+                <!--<div class="swiper-button-prev"><img src="/home/images/feedback/left.png" alt=""></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 {/block}
 
 

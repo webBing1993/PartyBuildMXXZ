@@ -127,4 +127,7 @@ class Structure extends Base{
     public function index1(){
         return $this->fetch();
     }
+    public function newIndex(){
+        return $this->fetch();
+    }
 }
