@@ -22,17 +22,17 @@
         <img src="/home/images/banner/sz.jpg" alt="支部活动banner" class="banner-img">
     </div>
     <div class="rep_main">
-        <div class="title">{article.title}</div>
+        <div class="title">{$article.title}</div>
         <div class="note clear">
-            <span class="fls">{article.publisher}</span>
-            <span class="frs">{article.create_time|time_format="Y-m-d"}</span>
+            <span class="fls">{$article.publisher}</span>
+            <span class="frs">{$article.create_time|time_format="Y-m-d"}</span>
         </div>
         <div class="info">
             　{$article.content}
         </div>
         <div class=" cont ">
-            <span class="vote">已投票 <b>{article.votes}</b>人</span>
-            <span class="read">{article.views}</span>
+            <span class="vote">已投票 <b>{$article.votes}</b>人</span>
+            <span class="read">{$article.views}</span>
         </div>
 
     </div>
