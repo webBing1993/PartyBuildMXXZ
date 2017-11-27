@@ -108,3 +108,220 @@
     right: 0;
     color: #999;
 }
+
+
+
+
+.content .article {
+    width: 100%;
+    padding-left: 3.4vw;
+    padding-right: 3.4vw;
+    /*font-size: 1.6rem;*/
+    /*text-indent: 3.2rem;*/
+}
+.content .article * {
+    max-width: 100%!important;
+}
+.content .article p {text-align: justify;}
+/*评论*/
+.comment {
+    padding-left:0.3rem;
+    padding-right: 0.3rem;
+}
+.comment .sum {
+    height: 30px;
+    padding-left: 10px;
+    background: #fbfbfb;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    font-size: 1.2rem;
+    line-height: 30px;
+}
+.comment .lists .list {
+    width: 100%;
+    min-height: 90px;
+    border-bottom: 1px solid #dadada;
+    position: relative;
+    overflow: hidden;
+}
+@media screen and (device-width: 320px){
+
+    .comment .lists .list {
+        min-height: 75px;
+    }
+
+}
+.comment .lists .list .fl img {
+    float:left;
+    width: 4rem;
+    height: 4rem;
+    margin-top: 13px;
+    margin-right: 10px;
+    margin-bottom: 13px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.comment .lists .list .mid {
+    width: 84%;
+    margin-top: 10px;
+}
+.comment .lists .list .mid .name {
+    font-size:1.4rem;
+    width: 80%;
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666666;
+}
+.comment .lists .list .mid .content {
+    width: 100%;
+    word-break: break-all;
+    font-size:1.4rem;
+    margin-top: 2vw;
+    margin-bottom: 6vw;
+    line-height:1.5rem;
+
+}
+.comment .lists .list .mid .time {
+    font-size: 1.2rem;
+    line-height: 20px;
+    color: #666666;
+    position:absolute;
+    bottom:5px;
+}
+.comment .lists .list .fr {
+    margin-top: 15px;
+    color: #666666;
+}
+.comment .lists .list .good {
+    background: url('/home/images/detail/good.png') 0 2px no-repeat;
+}
+.comment .lists .list .good_ {
+    animation: shake 300ms ease;
+    -webkit-animation: shake 300ms ease;
+    background: url('/home/images/detail/good_.png') 0 2px no-repeat;
+}
+.comment .lists .list .isgood {
+    background-size: 15px 15px;
+    padding-left: 18px;
+    position: absolute;
+    top: 5px;
+    right:0;
+}
+.comment .tip {
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    color: #c1c1c1;
+}
+/*底部*/
+.bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 12vw;
+    padding-left: 2.6vw;
+    border-top: 1px solid #f1f1f1;
+    background: #ffffff;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+.bottom .star {
+    background: url('/home/images/detail/star-border.png') 20px 12px no-repeat;
+}
+.bottom .star_ {
+    animation: shake 300ms ease;
+    -webkit-animation: shake 300ms ease;
+    background: url('/home/images/detail/star-yellow.png') 20px 12px no-repeat;
+}
+.bottom .collect {
+    width: 60px;
+    height: 100%;
+    font-size: 1.2rem;
+    text-align: center;
+    background-size: 20px 20px;
+    padding-top: 24px;
+}
+.bottom .myword input {
+    vertical-align: middle;
+    height: 8vw;
+    width: 76vw;
+    margin: 1.8vw 0;
+    padding-left: 2.6vw;
+    background: #fafafa;
+    border: 1px solid #d8d8d8;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    font-size: 1.3rem;
+}
+.bottom .send {
+    width: 20.5vw;
+    line-height: 12vw;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.bottom .send:active {
+    background: #fafafa;
+}
+@media (max-width: 320px) {
+    .myword input {
+        width: 200px;
+    }
+}
+/*加载动画*/
+.loading {
+    width: 100%;
+    height: 40px;
+}
+.typing_loader {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    -webkit-animation: typing 1s linear infinite alternate;
+    -moz-animation: Typing 1s linear infinite alternate;
+    animation: typing 1s linear infinite alternate;
+    position: relative;
+    top: 17px;
+    left: calc( 50vw - 15px );
+}
+
+.article  .note {
+    color: #999999;
+    font-size: 14px;
+    height: 40px;
+}
+.article  .note span {
+    height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 40px;
+}
+.article  .note_ span{
+    margin-right: 0;
+}
+.article  .note .read {
+    background: url('/home/images/detail/scan_.png') 0 center no-repeat;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 1.8rem;
+    float: right;
+    text-indent: 0;
+}
+.article  .note .good {
+    background: url('/home/images/detail/good.png') 0 center no-repeat;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 1.8rem;
+    float: right;
+    text-indent: 0;
+}
+.article .note .good_ {
+    animation: shake 300ms ease;
+    -webkit-animation: shake 300ms ease;
+    background: url('/home/images/detail/good_.png') 0 center no-repeat;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 1.8rem;
+    float: right;
+    text-indent: 0;
+}
+

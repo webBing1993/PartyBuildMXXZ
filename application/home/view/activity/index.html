@@ -20,7 +20,7 @@
                 <div class="lists">
                         <ul>
                             {volist name="list" id="lo"}
-                            <a class="clear"  href="{:Url('Activity/activitydetails?id='.$lo['id'])}">
+                            <a  href="{:Url('Activity/activitydetails?id='.$lo['id'])}" class="clear" >
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
                                 <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
@@ -66,7 +66,13 @@
             $('.tip' ).hide();
         }
 
-        //投票列表上拉加载
+        //点击背景触发active
+        $(".lists").on("touchstart","a",function(){
+            $(this).css("backgroundColor","rgba(0,0,0,.1)");
+        }).on("touchend","a", function () {
+            $(this).css("backgroundColor","#fff");
+        });
+
 
         //tab切换
         $('.tabs>.tab ').on('click',function(){
