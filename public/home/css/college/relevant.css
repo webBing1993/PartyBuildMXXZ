@@ -91,11 +91,11 @@
   color: #333;
 }
 .content .message div:nth-child(1) {
-  background: url("/home/images/detail/time.png") 15px 10px no-repeat;
+  background: url("/home/images/detail/address.png") 15px 10px no-repeat;
   background-size: 20px 20px ;
 }
 .content .message div:nth-child(2) {
-  background: url("/home/images/detail/address.png") 15px 10px no-repeat;
+  background: url("/home/images/detail/phone.png") 15px 10px no-repeat;
   background-size: 20px 20px ;
 }
 .content .article {

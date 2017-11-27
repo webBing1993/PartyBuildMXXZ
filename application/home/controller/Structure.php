@@ -117,4 +117,14 @@ class Structure extends Base{
         $this->assign('model',$model);
         return $this->fetch();
     }
+
+
+
+
+    /**
+     * 新版本首页
+     */
+    public function index1(){
+        return $this->fetch();
+    }
 }

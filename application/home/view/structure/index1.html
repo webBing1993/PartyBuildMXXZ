@@ -1,0 +1,139 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>云上组织</title>
+<link rel="stylesheet" href="/home/css/structure/structure.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+
+{/block}
+
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/banner/1.jpg" alt="组织架构banner" class="banner-img">
+</div>
+<div class="tabs">
+    <span class="tab active"><span>组织领导</span></span>
+    <span class="tab"><span>组织架构</span></span>
+    <!--<span class="tab"><span>党员须知</span></span>-->
+</div>
+<div class="listbox">
+    <div class="box summary active">
+        <!--<div class="box_ ">-->
+            <!--<p>	梦想小镇是一个专为年轻人打造的互联网创业平台。2014年8月，在省市区谋篇布局特色小镇、大力培育信息经济的大背景下，梦想小镇扬帆起航。</p>-->
+            <!--<p>	抓住“大众创业、万众创新”的时代浪潮，瞄准互联网创业的台风口，充分发挥区域资源禀赋，梦想小镇大胆探索，大力构筑创新创业生态系统，快速吸引了一大批年轻创客。他们在这里将各种奇思妙想付诸实践，把创意变成产品，将智慧变成财富。</p>-->
+            <!--<p>经过两年多的发展，梦想小镇创新创业成效初显，为区域经济升级注入了全新动力，同时推动了基层党建和社会治理的创新。小镇虽小，但内涵丰富。这正是特色小镇的魅力所在。</p>-->
+            <!--&lt;!&ndash;<p>	随着特色小镇的发展，小镇党建已成为基层党建工作一个新的重要领域。2016年6月，梦想小镇党委成立。针对小镇企业规模小、员工流动快的特点，梦想小镇采用生态化的理念，探索“固沙型”党建。通过“五创”工作法（创新组织设置、创意组织生活、创客先锋引领、创优帮扶服务、创设基础环境），让党建融入创业生态、让党建成为一种生态。</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;<p>梦想小镇党委依托孵化器、行业、社团为主体，以更加灵活的方式设立党组织，形成较为稳定的组织格局。建立了一套“四联”党群工作互融机制，以小镇党委和各党支部为核心，以公会、妇联、团委、商会等组织为依托，全面推行“工作联动、队伍联盟、组建联手、资源联动”的“四联”运作方式，实现党群工作一体化。目前，梦想小镇党委下设13个党支部，其中联建式支部1个，苗圃式支部6个，单建式支部4个，联动式支部2个。</p>&ndash;&gt;-->
+        <!--</div>-->
+        <div class="box_ box_1  ">
+            <p>	梦想小镇是一个专为年轻人打造的互联网创业平台。2014年8月，在省市区谋篇布局特色小镇、大力培育信息经济的大背景下，梦想小镇扬帆起航。</p>
+            <p>	抓住“大众创业、万众创新”的时代浪潮，瞄准互联网创业的台风口，充分发挥区域资源禀赋，梦想小镇大胆探索，大力构筑创新创业生态系统，快速吸引了一大批年轻创客。他们在这里将各种奇思妙想付诸实践，把创意变成产品，将智慧变成财富。</p>
+        </div>
+    </div>
+    <div class="town box hidden">
+
+        <div class="box_ or">
+            <!--梦想小镇-->
+            <div class="lists">
+                <!--领导层     村部层-->
+             <div class="boss">
+
+             </div>
+                <!--村 列如：天使村-->
+              <div class="second">
+                  <!--村级联络人 公司名称 -->
+                  <div class="company">
+                      <div class=""></div>
+                      <div class=""></div>
+
+                  </div>
+
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}
+
+{block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/home/js/jquery.lazyload.min.js"></script>
+<script>
+
+
+    $(function(){
+        //组织架构切换
+        slide();
+        $('.name2' ).each(function(){
+            var t = $(this ).text();
+            var href = '/home/structure/detail?party='+t+'';
+            $(this ).attr('href', href);
+        })
+        $(function(){
+//		//tab值记录
+            tabRecord('.tab' ,'.box');
+//		//tab切换
+            tabSwitch('.tab' ,'.box');
+            //上拉加载
+        });
+        $(function() {
+            $("img.lazy").lazyload({effect: "fadeIn"});
+        });
+    });
+    function slide(){
+        $('.lists .party1' ).on('click',function(){
+            var it = $(this);
+            var detail = it.next('.detail1' );
+            if(detail.hasClass('down')){
+                detail.slideUp();
+                it.find('.tri').removeClass('toup').addClass('todown');
+            }else{
+                detail.slideDown();
+                it.find('.tri').removeClass('todown').addClass('toup');
+            }
+            detail.toggleClass('down');
+        });
+    }
+
+    function tabSwitch(a,b,fn,url){
+        $(a).off('click').on('click',function(){
+            var this_ = this ;
+            var box = $(b ).parent();
+            var index = $(this_ ).index();
+            var ww = $(b ).parent().width();
+            $(this_ ).addClass('active' );
+            $(this_ ).siblings(a).removeClass('active');
+            $(b).removeClass('hidden');
+            ww = ww * index;
+            box.stop().animate({left: -ww +'px'},300,function(){
+                $(b).eq(index).siblings(b).addClass('hidden');
+                setCookie( 'tab', index );
+                if(fn){
+                    var tab = $('.active' ).index() + 1;
+                    fn(tab,url,7,5);
+                }
+            });
+
+        })
+    }
+    function tabRecord(a,b){
+        var tab = getCookie('tab');
+        if(tab){
+            var index = tab;
+            var box = $(b).parent();
+            var ww = $(b).parent().width();
+            $(a).eq(index).addClass('active');
+            $(a).eq(index).siblings(a).removeClass('active');
+            $(b).removeClass('hidden');
+            ww = ww * index;
+            box.css({left: -ww +'px'});
+            setTimeout(function(){
+                $(b).eq(index).siblings(b).addClass('hidden');
+            },100)
+        }
+
+    }
+</script>
+{/block}

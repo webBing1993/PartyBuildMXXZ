@@ -5,41 +5,14 @@
     <link rel="stylesheet" href="/home/css/common/rem.css">
     <link rel="stylesheet" href="/home/css/activity/index.css">
     <link rel="stylesheet" href="/home/css/common/tip.css">
-    <style>
-        .tabs{
-            background: url(/home/images/activity/tab.png) no-repeat;
-            background-size: cover;
-        }
-        .notice>.title{
-            width: 100vw;
-            font-size: 1.6rem;
-            color: #333333;
-            line-height: 60px;
-            text-align: center;
-        }
-        #publish {
-            position: fixed;
-            right: 5.3vw;
-            bottom: 10.6vw;
-            width: 16vw;
-            height: 16vw;
-            background: url(/home/images/feedback/note.png) no-repeat;
-            background-size: 100% 100%;
-        }
-    </style>
 {/block}
 {block name="body"}
     <!--tab-->
 <div class="scrollDiy">
-    <!--<div class="tabs clear">-->
-    <!--<div class="tab"><span>组织倡议</span></div>-->
-    <!--&lt;!&ndash;<div class="tab"><span>群众建议</span></div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<span class="triangle-up"></span>&ndash;&gt;-->
-    <!--</div>-->
     <!--切换列表-->
     <div class="content" style="overflow-x: hidden">
         <!--活动列表-->
-        <div class="notices hidden">
+        <div class="notices">
             <div class="banner">
                 <img src="/home/images/activity/hdfb.jpg" alt="">
             </div>
@@ -57,7 +30,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 <div class="bottom clear">
@@ -78,38 +50,24 @@
 <script src="/static/viewer/viewer-jquery.min.js"></script>
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
-    var c =  parseInt(window.location.href.split("index/c/")[1]);
+
     $(function(){
         //tab初始化和数据存储
         var ntc = $('.notices');
-        var co = getCookie("type");
-        if(co == 11 || co == 12 || co == 13){
-            c = co - 10;
-        }
-        ntc.eq(c-1).removeClass('hidden');
+
        //活动列表上拉加载
-        if(c == 1){
-            $(".triangle-up").css("left","21.06vw");
-            var len = ntc.eq(c-1 ).find('.regularmore>.lists>ul>a').length;
-            console.log(len);
-            if(len >= 7){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
-            }else{
-                $('.tip' ).hide();
-            }
+        $(".triangle-up").css("left","21.06vw");
+        var len = ntc.find('.regularmore>.lists>ul>a').length;
+
+        if (len >= 6) {
+            $('.tip' ).text('上拉加载更多');
+            loadScroll();
+        } else {
+            $('.tip' ).hide();
         }
+
         //投票列表上拉加载
-        if(c == 2){
-            $(".triangle-up").css("left","72vw");
-            var len = ntc.eq(c-1 ).find('.votes>ul>li').length;
-            if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
-                loadScroll(c);
-            }else{
-                $('.tip' ).hide();
-            }
-        }
+
         //tab切换
         $('.tabs>.tab ').on('click',function(){
             var ntc = $('.notices' );
@@ -139,33 +97,20 @@
                 }
             }
 
-            //使用示例
-            setCookie("type",eq+11);
+
         });
-        if ("{$visit}"== 0){
-//            //悬浮框移动
-//            moveanyway();
-        }
-        viewer = $('.imgs').viewer({
-            url: 'data-original',
-            toolbar:false,
-            title:false
-        });
+
     });
 
-    function loadScroll(type){
+    function loadScroll () {
         $(window).off("scroll" ).on("scroll",function(){
             var ntc = $('.notices');
             var dh = $(document).height();
             var end = $(window).height() + $(window).scrollTop();
             var tip = $(".tip");
             var loading = $('.loading');
-            if(type == 1){
-                var len = ntc.eq(type-1).find('.regularmore>.lists>ul>a').length;
-            }
-            if(type== 2 ){
-                var len = ntc.eq(type-1).find('.lists>ul>li').length;
-            }
+            var len = ntc.eq(0).find('.regularmore>.lists>ul>a').length;
+
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
@@ -173,7 +118,7 @@
                     url: "{:Url('Activity/morelist')}",
                     data:{
                         length:len,
-                        type:type
+                        type:1
                     },
                     beforeSend: function(XMLHttpRequest){
                         tip.hide();
@@ -183,7 +128,7 @@
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
-                            addCourse(data,type);
+                            addCourse(data);
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
                                 tip.text('上拉加载更多');
@@ -198,13 +143,14 @@
             }
         })
     }
-    function addCourse(data,type){
+    function addCourse(data){
+        var type = 1;
         var html = '';
         var lists = data.data;
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];
-            if (type == 1) {
+            if (true) {
                 html +=
                     '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
                     '<p>'+list.title+'</p>'+
@@ -227,32 +173,6 @@
                 }
                    html+= '</div>' +
                     '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>'
-//                if ("{$visit}" == 0){
-//                    html+='<div class="opinion">'
-//                    switch (list.is_like){
-//                        case 0:
-//                            html+='	<i class="agree" onclick="agree(this,'+list.id+',1)"></i>' +
-//                                    '	<span>'+list.likes_yes+'</span>' +
-//                                    '	<i class="disagree" onclick="disagree(this,'+list.id+',2)"></i><span>'+list.likes_no+'</span>'
-//                            break;
-//                        case 1:
-//                            html+='	<i class="agree_"></i>' +
-//                                    '	<span>'+list.likes_yes+'</span>' +
-//                                    '	<i class="disagree" "></i><span>'+list.likes_no+'</span>'
-//                            break;
-//                        case 2:
-//                            html+='	<i class="agree" ></i>' +
-//                                    '	<span>'+list.likes_yes+'</span>' +
-//                                    '	<i class="disagree_" ></i><span>'+list.likes_no+'</span>'
-//                            break;
-//                    }
-//                    html+='	<i class="comment-icon" onclick="tosend(this,'+list.id+')"></i>' +
-//                            '</div>'
-//                }else{
-////                    html+='<div class="opinion"><i class="agree"></i><span>'+list.likes_yes+'</span>' +
-////                        '<i class="disagree"></i><span>'+list.likes_no+'</span><i class="comment-icon"></i>' +
-////                            '</div>'
-//                }
                 var commentlen = list.comment.length;
                 if(commentlen)
                 {
@@ -281,23 +201,10 @@
                 });
             }
         }
-        //图片裁剪
-        imgresize();
+
     }
 
 
-
-    var tosend = function(e,id){
-        var index = $(e).parents('.votes ul li' ).index();
-        $('.banner,.lists' ).off('click');
-        $('.bottom' ).animate({'bottom':'0'},500,'swing',function(){
-            $('.tabs,.lists' ).off('click').one('click',function(){
-                $('.bottom' ).animate({'bottom':'-12vw'},500,'swing');
-                $('.myword input' ).val('');
-            })
-        }).attr('data-tab',index);
-       $('.send' ).attr('data-tab',id);
-    };
 
     //发送评论
     var send = function(e){
@@ -397,7 +304,5 @@
     };
     //图片排版、评论框
     layout();
-    //图片裁剪
-    imgresize();
 </script>
 {/block}
