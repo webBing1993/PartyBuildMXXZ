@@ -76,34 +76,39 @@
     left: 2vw;
 }
 .club_activity .title {
-    display:flex;
-    justify-content: space-between;
+    /*display:flex;*/
+    /*justify-content: space-between;*/
     padding: 4vw;
 }
 .title>.hd_ls>i{
     width: 1vw;
-    height: 5vw;
+    height: 6vw;
     background-color: #ff7043;
-    display:inline-block;
+    display:block;
     position: relative;
     left: -4vw;
-    top:1vw;
+    top:0;
+    float: left;
 }
 .title>.hd_ls{
     width: 20vw;
     font-size: 1.6rem;
+    line-height: 6vw;
 }
 .title>.more{
     color: #333;
     line-height: 6vw;
-    width: 20vw;
     text-align: center;
     font-size: 1.6rem;
+    float: right;
 }
 .title>.more img{
     width: 5vw;
     height: 3vw;
     margin-top:1.5vw;
+    display: block;
+    float: right;
+    margin-left: 2vw;
 }
 
 .list {
