@@ -128,9 +128,17 @@
 
     }
     .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
-   bottom: 0vw  ;
+   bottom: 0  ;
     }
-
+    .tabs .tab:nth-child(1)::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 6vw;
+        float: right;
+        margin-top: 3vw;
+        background-color: #999;
+    }
 </style>
 {/block}
 

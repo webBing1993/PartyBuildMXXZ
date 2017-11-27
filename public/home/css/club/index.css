@@ -10,13 +10,23 @@
     zoom: 1;
 }
 .tabs .tab {
-    display: inline-block;
-    width: 49vw;
+    display: block;
+    float:left;
+    width: 50vw;
     height: 100%;
     color: #333;
     font-size: 1.6rem;
     line-height: 12.3vw;
     text-align: center;
+}
+.tabs .tab:nth-child(1)::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 6vw;
+    float: right;
+    margin-top: 3vw;
+    background-color: #999;
 }
 .triangle-up {
     /*border-left: 2.66vw solid transparent;*/
@@ -178,3 +188,4 @@
 .fa{
     line-height: 6vw;
 }
+a:active {background: #eee;}

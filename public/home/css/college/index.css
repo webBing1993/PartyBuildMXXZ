@@ -188,8 +188,9 @@
     zoom: 1;
 }
 .tabs .tab {
-    display: inline-block;
-    width: 49vw;
+    display: block;
+    float:left;
+    width: 50vw;
     height: 100%;
     color: #333;
     font-size: 1.6rem;
