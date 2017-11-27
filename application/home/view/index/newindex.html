@@ -1,19 +1,20 @@
 {extend name="public/pure"}
 
 {block name="style"}
-<title>梦想小镇党群驿站智慧党建微平台</title>
-<link rel="stylesheet" href="/home/css/index/newindex.css">
-<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
-
-<style>
-    /*a:active {background: red;}*/
-</style>
+<title>梦想小镇红色驿站</title>
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/index/index1.css">
+<link rel="stylesheet" href="/home/css/all.css">
+  <style>
+      a:active{
+          opacity: .6;
+      }
+  </style>
 {/block}
-
 {block name="body"}
 <!--banner-->
-<div class="banners ">
-    <img src="/home/images/index/banner20170609154838.png" alt="">
+<div class="banners">
+    <img src="/home/images/banner/banner.jpg" alt="banner">
     <a  class="exit">
         <img src="/home/images/index/exit.png" alt="">
     </a>
@@ -24,75 +25,32 @@
         <img src="{$user|get_header}" alt="">
     </a>
     {/eq}
+</div>
+<div class="main">
+    <div class="itme">
+        <a href="{:Url('structure/index')}" class="fl  yszz"><span>云上组织</span></a>
+        <a href="{:Url('Activity/index')}" class="fr hdfb"><span>活动发布</span></a>
+    </div>
+    <div  class="itme">
+        <a href="{:Url('servicemenu/index')}" class="fl  fwcd"><span>服务菜单</span></a>
+        <a href="{:Url('dreamflash/index')}" class="fr mxkx"><span>梦想快讯</span></a>
+    </div>
+    <div class="itme">
+        <a href="{:Url('college/index?c=1')}" class="fl  tzgg"><span>通知公告</span></a>
+        <a  href="{:Url('club/index?c=1')}" class="fr wdst"><span>我的社团</span></a>
+    </div>
+    <div  class="itme">
+        <a href="{:Url('brand/index')}" class="fl  ppxm"><span>品牌项目</span></a>
+        <a onclick="dataProject()" class="fr hdzd"><span>活动阵地</span></a>
+    </div>
+    <div  class="itme">
+        <a href="{:Url('learn/index?c=1')}" class="fl  zxdk"><span>在线党课</span></a>
+        <a href="{:Url('report/index')}" class="fr wssz"><span>网上述职</span></a>
     </div>
 </div>
-<!--nav-->
-<div class="nav">
-     <ul class="list">
-         <li class="item itme_last">
-             <a href="{:Url('structure/index')}" class="ys_ls">
-                 <img src="/home/images/index/yszz.png" alt="">
-                 <span>云上组织</span>
-             </a>
-             <a href="{:Url('Activity/index')}" class="hd_ls">
-                 <img src="/home/images/index/hdfb.png" alt="">
-                 <span>活动发布</span>
-             </a>
-         </li>
-         <li class="item  itme_last_la ">
-             <a href="{:Url('servicemenu/index')}" class="fw_ls">
-                 <img src="/home/images/index/fwcd.png" alt="">
-                 <span>服务菜单</span>
-             </a>
-             <a href="{:Url('dreamflash/index')}" class="mx_ls">
-                 <img src="/home/images/index/mxkx.png" alt="">
-                 <span>梦想快讯</span>
-             </a>
-             <a href="{:Url('college/index')}" class="tz_ls">
-                 <img src="/home/images/index/tzgg.png" alt="">
-                 <span>通知公告</span>
-             </a>
-         </li>
-         <li class="item itme_last">
-             <a href="{:Url('club/index?c=1')}" class="st_ls">
-                 <img src="/home/images/index/wdst.png" alt="">
-                 <span>我的社团</span>
-             </a>
-             <a href="/home/brand/index.html" class="pp_ls">
-                 <img src="/home/images/index/ppxm.png" alt="">
-                 <span>品牌项目</span>
-             </a>
-         </li>
-         <li class="item  itme_last_la ">
-             <a onclick="dataProject()" class="zd_ls">
-                 <img src="/home/images/index/hdzd.png" alt="">
-                 <span>活动阵地</span>
-             </a>
-             <a href="/home/learn/index.html" class="zx_ls">
-                 <img src="/home/images/index/zxdk.png" alt="">
-                 <span>在线党课</span>
-             </a>
-             <a href="/home/report/index.html" class="sz_ls">
-                 <img src="/home/images/index/wssz.png" alt="">
-                 <span>网上述职</span>
-             </a>
-         </li>
-     </ul>
-
-
-</div>
 {/block}
-
 {block name="script"}
-<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
-    //轮播
-    var mySwiper = new Swiper('.swiper-container', {
-        autoplay: 3000,
-        loop:true,
-        autoplayDisableOnInteraction:false
-    });
-
     $(function(){
         $(".exit").on("click",function(){
             swal({
@@ -118,7 +76,6 @@
         })
     });
 
-
     //正在调试开发项目
     function dataProject () {
         swal({
@@ -128,6 +85,8 @@
             confirmButtonText:'确定'
         });
     }
+
+
 
 </script>
 {/block}

@@ -29,11 +29,8 @@
     background-color: #999;
 }
 .triangle-up {
-    /*border-left: 2.66vw solid transparent;*/
-    /*border-right: 2.66vw solid transparent;*/
-    /*border-bottom: 3.46vw solid #e3cf7a;*/
     position: absolute;
-    top: 10.5vw;
+    top: 10.7vw;
     left:0.06vw;
     border-bottom: 2px solid #ff7f24;
     width: 50vw;
@@ -143,12 +140,12 @@
 .swiper-slide .tm_info .tm_name{
     font-size:2rem;
     color: #fff;
-    margin: 4vw 0vw 0vw 7vw;
+    margin: 7vw 0vw 0vw 7vw;
 }
 .swiper-slide .tm_info  i{
     display: block;
     width:1.2vw;
-    height: 14vw;
+    height: 16vw;
     background-color: #fff;
     border:0.8vw solid #fff ;
     border-radius: 1vw;
@@ -159,7 +156,7 @@
 .swiper-slide .tm_info  .info{
     color: #fff;
     position: absolute;
-    top:13vw;
+    top:16vw;
     left: 5vw;
     font-size: 1.5rem;
     display: -webkit-box;

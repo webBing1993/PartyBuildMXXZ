@@ -1,0 +1,132 @@
+{extend name="public/pure"}
+
+{block name="style"}
+<title>梦想小镇党群驿站智慧党建微平台</title>
+<link rel="stylesheet" href="/home/css/index/newindex.css">
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+
+<style>
+    /*a:active {background: red;}*/
+</style>
+{/block}
+
+{block name="body"}
+<!--banner-->
+<div class="banners ">
+    <img src="/home/images/index/banner20170609154838.png" alt="">
+    <a  class="exit">
+        <img src="/home/images/index/exit.png" alt="">
+    </a>
+    <a href="/home/user/usercenter.html" class="rank">
+        <img src="/home/images/index/usercenter.png" alt="">
+
+        <img src="/home/images/common/vistor.jpg" alt="">
+    </a>
+    {/eq}
+    </div>
+</div>
+<!--nav-->
+<div class="nav">
+     <ul class="list">
+         <li class="item itme_last">
+             <a href="{:Url('structure/index')}" class="ys_ls">
+                 <img src="/home/images/index/yszz.png" alt="">
+                 <span>云上组织</span>
+             </a>
+             <a href="{:Url('Activity/index')}" class="hd_ls">
+                 <img src="/home/images/index/hdfb.png" alt="">
+                 <span>活动发布</span>
+             </a>
+         </li>
+         <li class="item  itme_last_la ">
+             <a href="{:Url('servicemenu/index')}" class="fw_ls">
+                 <img src="/home/images/index/fwcd.png" alt="">
+                 <span>服务菜单</span>
+             </a>
+             <a href="{:Url('dreamflash/index')}" class="mx_ls">
+                 <img src="/home/images/index/mxkx.png" alt="">
+                 <span>梦想快讯</span>
+             </a>
+             <a href="{:Url('college/index')}" class="tz_ls">
+                 <img src="/home/images/index/tzgg.png" alt="">
+                 <span>通知公告</span>
+             </a>
+         </li>
+         <li class="item itme_last">
+             <a href="{:Url('club/index?c=1')}" class="st_ls">
+                 <img src="/home/images/index/wdst.png" alt="">
+                 <span>我的社团</span>
+             </a>
+             <a href="/home/brand/index.html" class="pp_ls">
+                 <img src="/home/images/index/ppxm.png" alt="">
+                 <span>品牌项目</span>
+             </a>
+         </li>
+         <li class="item  itme_last_la ">
+             <a onclick="dataProject()" class="zd_ls">
+                 <img src="/home/images/index/hdzd.png" alt="">
+                 <span>活动阵地</span>
+             </a>
+             <a href="/home/learn/index.html" class="zx_ls">
+                 <img src="/home/images/index/zxdk.png" alt="">
+                 <span>在线党课</span>
+             </a>
+             <a href="/home/report/index.html" class="sz_ls">
+                 <img src="/home/images/index/wssz.png" alt="">
+                 <span>网上述职</span>
+             </a>
+         </li>
+     </ul>
+
+
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script>
+    //轮播
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop:true,
+        autoplayDisableOnInteraction:false
+    });
+
+    $(function(){
+        $(".exit").on("click",function(){
+            swal({
+                    title:"",
+                    text: "是否确认退出",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "确认",
+                    closeOnConfirm: false,
+                    cancelButtonText:"取消"
+                },
+                function(){
+                    swal({
+                        title: ' ',
+                        text: '退出成功！',
+                        type: 'success',
+                        confirmButtonText:'确定'
+                    });
+                    setTimeout(function(){
+                        window.location.replace("{:Url('Verify/logout')}");
+                    },1000)
+                });
+        })
+    });
+
+
+    //正在调试开发项目
+    function dataProject () {
+        swal({
+            title: ' ',
+            text: '该模块正在开发！',
+            type: 'warning',
+            confirmButtonText:'确定'
+        });
+    }
+
+</script>
+{/block}
