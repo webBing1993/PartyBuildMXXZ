@@ -23,6 +23,48 @@ ul {
     width: 10.7vw;
     height: 10.7vw;
 }
+/*个人中心按钮*/
+.banner .user{
+    position: absolute;
+    display: block;
+    float: left;
+    width: 14vw;
+    height: 14vw;
+    left: 0vw;
+    top: 6.2vw;
+    overflow: hidden;
+    background: url("/home/images/user/3.png") no-repeat 0 center;
+    background-size: cover;
+}
+.banners .user>img{
+    width: 10vw;
+    height: 10vw;
+    display: block;
+    margin-top: 2vw;
+    float: right;
+    margin-right: 3vw;
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+.banners>.rank{
+    position: absolute;
+    top:4vw;
+    right:-2vw;
+}
+.banners>.rank>img{
+    width:13.7vw;
+    height:11vw;
+}
+.banners>.rank img:last-child{
+    position: absolute;
+    top:1.4vw;
+    left:3vw;
+    border-radius: 50%;
+    width:7.5vw;
+    height:7.5vw;
+    /*box-shadow: 0 0 2px 1px #fff inset;*/
+    border: 1px solid #fff;
+}
 .list{
    padding-top:2vw ;
 }
