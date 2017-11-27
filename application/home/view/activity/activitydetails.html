@@ -1,76 +1,118 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>活动发布</title>
-<link rel="stylesheet" href="/home/css/activity/activitydetails.css">
+<title>通知公告</title>
+<link rel="stylesheet" href="/home/css/college/relevant.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+    .scrollDiy{
+        position: absolute;
+        top:0;
+        bottom:0;
+        overflow-y: scroll;
+        /* 增加该属性，可以增加弹性 */
+        -webkit-overflow-scrolling: touch;
+        width:100%;
+    }
+</style>
 {/block}
+
 {block name="body"}
-<div class="header">
-    <div class="title">{$info.title}</div>
-    <span class="name">{$info.publisher}</span>
-    <span class="time">{$info.create_time|time_format='Y-m-d'}</span>
-</div>
-<div class="line"></div>
-<div class="content">
-    <span class="text">{$info.content}</span>
-    <div class="article">
-        <div class="note">
-            {eq name="visit" value="0"}
-            {eq name="info.is_like" value="1"}
-            <span class="isgood good_" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
-            {else/}
-            <span class="isgood good" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
-            {/eq}
-            {else/}
-            <span class="isgood good">{$info.likes}</span>
-            {/eq}
-            <span class="read">{$info.views}</span>
-        </div>
-    </div>
-    <div class="comment">
-        <div class="sum">共<span>{$info.comments}</span>条评论</div>
-        <div class="lists">
-            {volist name="comment" id="co"}
-            <div class="list clear zbhd">
-                <div class="fl">
-                    <img src="{$co.header}" alt="用户" class="user">
-                </div>
-                <div class="fl mid">
-                    <div class="name limit">{$co.nickname}</div>
-                    <div class="content" >{$co.content}</div>
-                    <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
-                </div>
-                {eq name="visit" value="0"}
-                {eq name="co.is_like" value="1"}
-                <div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
-                {else/}
-                <div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
-                {/eq}
-                {else/}
-                <div class="fr isgood good">{$co.likes}</div>
-                {/eq}
+<div class="scrollDiy">
+    <div class="content">
+        <div class="top">
+            <div class="title limit_" style="text-align: center">{$info.title}</div>
+            <div class="note">
+                <span class="fl">{$info.publisher}</span>
+                {$info.create_time|time_format='Y-m-d'}
             </div>
-            {/volist}
         </div>
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
+        <div class="message">
+            <!--{notempty name="info.start_time"}-->
+            <!--<div class="name limit">{$info.start_time|time_format='Y/m/d H:i'}&#45;&#45;{$info.end_time|time_format='Y/m/d H:i'}</div>-->
+            <!--{/notempty}-->
+            <!--{notempty name="info.address"}-->
+            <!--<div class="content" >{$info.address}</div>-->
+            <!--{/notempty}-->
+            <!--{notempty name="info.telephone"}-->
+            <!--<div class="time"><a href="tel:{$info.telephone}">{$info.telephone}</a></div>-->
+            <!--{/notempty}-->
+        </div>
+        <div class="article">{$info.content}</div>
+        <div class="article">
+            <div class="note">
+                {eq name="visit" value="0"}
+                {eq name="info.is_like" value="1"}
+                <span class="isgood good_" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+                {else/}
+                <span class="isgood good" onclick="isGood(this,4,{$info.id})">{$info.likes}</span>
+                {/eq}
+                {else/}
+                <span class="isgood good">{$info.likes}</span>
+                {/eq}
+                <span class="read">{$info.views}</span>
+            </div>
+        </div>
+        <div class="comment">
+            <div class="sum">共<span>{$info.comments}</span>条评论</div>
+            <div class="lists">
+                {volist name="comment" id="co"}
+                <div class="list clear zbhd">
+                    <div class="fl">
+                        <img src="{$co.header}" alt="用户" class="user">
+                    </div>
+                    <div class="fl mid">
+                        <div class="name limit">{$co.nickname}</div>
+                        <div class="content" >{$co.content}</div>
+                        <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
+                    </div>
+                    {eq name="visit" value="0"}
+                    {eq name="co.is_like" value="1"}
+                    <div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {else/}
+                    <div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {/eq}
+                    {else/}
+                    <div class="fr isgood good">{$co.likes}</div>
+                    {/eq}
+                </div>
+                {/volist}
+            </div>
+            <div class="tip"></div>
+            <div class="loading hidden">
+                <div class="typing_loader"></div>
+            </div>
         </div>
     </div>
+    {eq name="visit" value="0"}
+    <div class="bottom clear">
+        <div class="myword fl">
+            <input type="text" placeholder="说说你的感想！">
+        </div>
+        <div class="send fr" onclick="send(this,4,{$info['id']})">发送</div>
+    </div>
+    {/eq}
 </div>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     $(function(){
-
+        if($(".message").children().length==0){
+            $(".message").css("border-top","none");
+        }
+        //reset
         var len = $(".list" ).length;
         if(len >= 7){
             $('.tip' ).text('上拉加载更多');
             //上拉加载评论
             loadScroll();
         }
+        //ios fix兼容
+//		tofixed();
     });
     /**
      * 点赞
@@ -257,9 +299,5 @@
         }
         $(".lists" ).append(html);
     }
-
-
-
-
 </script>
 {/block}

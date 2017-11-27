@@ -53,6 +53,13 @@ class Index extends Base {
         return $this->fetch();
     }
 
+    /*
+     * 二次首页
+     */
+    public  function index1(){
+        return $this->fetch();
+    }
+
     /**
      * 获取数据列表 红色足记 两学一做 鸡毛传贴
      * @param $len
