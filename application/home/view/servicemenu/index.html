@@ -29,5 +29,12 @@
 {block name="script"}
 <!--<script src="/home/js/reset.js"></script>-->
 <script>
+
+    //点击背景触发active
+    $(".menu_lists").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
 </script>
 {/block}
