@@ -108,6 +108,15 @@ class Report extends Base{
         $commentModel = new Comment();
         $comment = $commentModel->getComment(13,$id,$userId);
         $this->assign('comment',$comment);
+
+        $Vote = new ReportVote();
+        $data = ['userid' => $userId, 'pid' => $id];
+        if(empty($Vote->where($data)->find())){
+            $is_vote = true;
+        }else{
+            $is_vote = false;
+        }
+        $this->assign('is_vote',$is_vote);
         return $this->fetch();
     }
     /*
@@ -118,12 +127,19 @@ class Report extends Base{
         $userId = session('userId');
         $id = input('id');
         $Vote = new ReportVote();
-        $res = $Vote->save(['userid' => $userId,'pid' => $id]);
-        if ($res){
-            ReportModel::where(['id' => $id,'status' => 0])->setInc('votes');
-            return $this->success('成功');
+        $data = ['userid' => $userId, 'pid' => $id];
+        if(empty($Vote->where($data)->find())){
+            $res = $Vote->save($data);
+            if ($res){
+                ReportModel::where(['id' => $id,'status' => 0])->setInc('votes');
+                return $this->success('成功');
+            }else{
+                return $this->error('失败');
+            }
         }else{
-            return $this->error('失败');
+            return $this->error('已投票');
         }
+
+
     }
 }
