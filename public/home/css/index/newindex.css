@@ -78,7 +78,7 @@ ul {
       position: relative;
   }
 a:active {
-    opacity: 0.2;
+    opacity: 0.8;
 }
 .itme_last{
    display: flex;

@@ -224,3 +224,4 @@
 .banner .swiper-slide a {display: block;width:100%;height:50vw;}
 .banner img {width:100%;height:50vw;position: relative;}
 #side1 .list .list_info {width:100%;}
+a:active {background: #eee;}
