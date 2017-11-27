@@ -6,6 +6,8 @@ ul {
 .banners {
     width: 100vw;
     height: 50vw;
+    position: relative;
+    overflow: hidden;
 }
 
 .banners img {
@@ -49,7 +51,7 @@ ul {
 .banners>.rank{
     position: absolute;
     top:4vw;
-    right:-2vw;
+    right:-1vw;
 }
 .banners>.rank>img{
     width:13.7vw;
@@ -71,6 +73,12 @@ ul {
   .list>.item{
     padding-bottom: 1vw;
 
+}
+  .list a {
+      position: relative;
+  }
+a:active {
+    opacity: 0.2;
 }
 .itme_last{
    display: flex;
