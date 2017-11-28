@@ -42,6 +42,7 @@
                             <tr>
                                 <th><input class="i-checks check-all" type="checkbox"></th>
                                 <th>标题</th>
+                                <th>系列</th>
                                 <th>发布人</th>
                                 <th>创建时间</th>
                                 <th>操作</th>
@@ -52,6 +53,7 @@
                             <tr>
                                 <td><input type="checkbox" class="i-checks" name="input[]"></td>
                                 <td>{$vo.title|msubstr=0,20}</td>
+                                <td>{$vo->brand}</td>
                                 <td>{$vo->publisher}</td>
                                 <td>{$vo.create_time|time_format='Y-m-d'}</td>
                                 <td>
