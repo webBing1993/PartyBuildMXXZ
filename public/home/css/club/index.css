@@ -137,11 +137,13 @@
     width: 72vw;
     height: 107vw;
     border-radius: 3vw;
+    z-index: 1;
 }
 .swiper-slide .tm_info .tm_name{
     font-size:2rem;
     color: #fff;
     margin: 7vw 0vw 0vw 7vw;
+    z-index: 1000;
 }
 .swiper-slide .tm_info  i{
     display: block;
@@ -153,6 +155,7 @@
     position: absolute;
     top:7vw;
     left:3vw;
+    z-index: 1;
 }
 .swiper-slide .tm_info  .info{
     color: #fff;

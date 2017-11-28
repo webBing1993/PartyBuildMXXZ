@@ -50,6 +50,16 @@
     .hidden {display: none;}
     .swiper-container-3d .swiper-slide-shadow-left {background: transparent;}
     .swiper-container-3d .swiper-slide-shadow-right {background: transparent;}
+    .bg {
+        background-color: #000;
+        position: absolute;
+        top: 0vw;
+        left: 0vw;
+        width: 72vw;
+        height: 107vw;
+        border-radius: 3vw;
+        opacity: 0.5;
+    }
 </style>
 {/block}
 {block name="body"}
@@ -85,14 +95,16 @@
         <div class="swiper-wrapper">
             {volist name="volunteerlist" id="vo"}
             <div class="swiper-slide" style="background-image:url({$vo.front_cover|get_cover='path'})">
-                  <div class="tm_info">
+                <div class="tm_info">
                       <i></i>
                       <div class="tm_name">{$vo.title}</div>
                       <div class="info">
                           {$vo.content}
                       </div>
                       <a href="{:Url('club/volunteer?id='.$vo.id)}">查看详情</a>
-                  </div>
+                </div>
+                <div class="bg">
+                </div>
             </div>
             {/volist}
         </div>
