@@ -25,7 +25,7 @@
       color: #fff;
       border-radius:3vw;
 }
-.br_info>div {border: 2px solid #fff;text-align: center;  font-size: 2rem;position: relative;margin: -5vw auto 0;width:50%;top:50%;height:10vw;line-height: 9vw;border-radius: 8px;}
+.br_info>div {border: 2px solid #fff;text-align: center;  font-size: 2rem;position: relative;margin: -5vw auto 0;width:50%;top:50%;height:10vw;line-height: 9vw;border-radius: 12px;}
 .br_info .hd_title{
     width:26.6vw;
     line-height: 5.33vw;
