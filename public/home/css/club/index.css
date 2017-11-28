@@ -131,11 +131,14 @@
      margin-bottom: 5vw;
  }
 .swiper-slide .tm_info{
-  position: absolute;
-    top:9vw;
-    left: 7vw;
-    width: 56vw;
-    height:100vw;
+    position: absolute;
+    top: 0vw;
+    left: 0vw;
+    width: 72vw;
+    height: 107vw;
+    background-color: #333;
+    opacity: 0.6;
+    border-radius: 3vw;
 }
 .swiper-slide .tm_info .tm_name{
     font-size:2rem;
@@ -164,10 +167,16 @@
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp:4;
+    -webkit-line-clamp:5;
     -webkit-box-orient: vertical;
     line-height: 6vw;
     margin-left: 2vw;
+    padding: 0vw 3vw;
+    border-radius: 3vw;
+    z-index: 1000;
+}
+.swiper-slide .tm_info  .info p{
+    color: #fff;
 }
 .swiper-slide .tm_info  a{
     display: block;
@@ -181,6 +190,7 @@
     position: absolute;
     bottom:12vw;
     border-radius: 6vw;
+    margin-left: 7vw;
 }
 .fa{
     line-height: 6vw;
