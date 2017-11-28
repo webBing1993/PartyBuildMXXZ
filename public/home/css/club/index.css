@@ -86,7 +86,7 @@
     overflow: hidden;
     line-height: 8vw;
     font-size: 1.6rem;
-    color: #333;
+    color: #a3a3a3;
 }
 .tip {
     height: 7.4vw;
@@ -136,8 +136,8 @@
     left: 0vw;
     width: 72vw;
     height: 107vw;
-    background-color: #333;
-    opacity: 0.6;
+    background: #eeeeee;
+    opacity: .3;
     border-radius: 3vw;
 }
 .swiper-slide .tm_info .tm_name{
