@@ -96,7 +96,7 @@ a:active {
 body {
 
   overflow-x: hidden;
-  position: fixed;
+  /*position: fixed;*/
 }
 .banner {
   width: 100vw;
