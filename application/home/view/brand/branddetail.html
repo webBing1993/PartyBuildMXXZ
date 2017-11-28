@@ -8,10 +8,13 @@
     .serverContent {width:90%;position: relative;margin: auto;}
     .border {display: block;width:2vw;height:6vw;background: #ff7043;position: absolute;top:0;left:-5vw;border-bottom-right-radius:4px;border-top-right-radius:4px }
     .serverContent .serverTitle {font-size: 1.8rem;margin: 5.33vw  0 1.67vw 0;padding-left: 4vw;color: #333;}
-    .serverContent .serverText {text-align: justify;font-size: 1.3rem;color: #999;display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;}
+    .serverContent .serverText {text-align: justify;font-size: 1.3rem;color: #999;
+        line-height: 24px;
+    }
+    .serverContent .serverText span {
+        font-family: "Microsoft yahei" !important;
+        font-size: 1.8rem !important;
+    }
     .serverBanner {margin-top: -1vw;}
     .banner {position: relative;width:100%;height:100%;margin:2.7vw auto 0;overflow: hidden;}
     .banner .swiper-container1 {  width: 100%;  height: 100%;  }
@@ -47,8 +50,8 @@
 <div class="serveries">
     <div class="serverContent">
         <span class="border"></span>
-        <p class="serverTitle">{$vo.title}</p>
-        <p class="serverText">{$vo.content}</p>
+        <div class="serverTitle">{$vo.title}</div>
+        <div class="serverText">{$vo.content}</div>
     </div>
     <div class="serverBanner">
         <div class="banner">
