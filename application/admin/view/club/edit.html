@@ -5,6 +5,18 @@
 <link rel="stylesheet" href="/static/iCheck/custom.css">
 <link rel="stylesheet" href="/admin/css/chosen/chosen.css">
 <style>
+    .videofile{
+        display: none;
+    }
+    .audiofile{
+        display: none;
+    }
+    audio{
+        margin-top:10px;
+    }
+    textarea{
+        resize:none;
+    }
     .imggroup{
         position: relative;
     }
@@ -22,13 +34,13 @@
         opacity: 0;
     }
     .plus{
-         height: 100px;
-         width: 200px;
-         font-size: 100px;
-         line-height: 100px;
-         text-align: center;
-         color: rgba(204, 204, 204, 0.51);
-     }
+        height: 100px;
+        width: 200px;
+        font-size: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: rgba(204, 204, 204, 0.51);
+    }
     .plus:hover{
         font-size: 150px;
     }
@@ -38,13 +50,13 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>活动发布</h2>
+        <h2>我的社团</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Activity/index')}">主页</a>
+                <a href="{:Url('index')}">主页</a>
             </li>
             <li class="active">
-                <strong>{eq name="msg" value=""}新增{else/}修改{/eq}</strong>
+                <strong>{$msg['id'] ? "编辑":"新增"}</strong>
             </li>
         </ol>
     </div>
@@ -60,31 +72,61 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{eq name="msg" value=""}新增{else/}修改{/eq}</h5>
+                    <h5>{$msg['id'] ? "编辑":"新增"}社团</h5>
                     <div class="ibox-tools">
                         <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
                     </div>
                 </div>
-                <div class="ibox-content all">
+                <div class="ibox-content">
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>标题:</label>
+                                <label>封面图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>社团名称:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value="{$msg.title || default=''}">
+                                <input type="text" placeholder="请输入社团名称" class="form-control form_title" name="title" value='{$msg.title || default=""}'>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>简介:</label>
+                                <label>地址:</label>
                             </div>
                             <div class="col-lg-11">
-                                <div class=" float-e-margins">
-                                    <div class="ibox-content no-padding borders">
-                                        <textarea  class="text form-control form_title" name="description">{$msg.description || default=''}</textarea>
-                                    </div>
-                                </div>
+                                <input type="text" placeholder="请输入详细地址...(可为空)" class="form-control form_title" name="address" value="{$msg.address || default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>联系方式:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入联系方式...(可为空)" class="form-control form_title" name="telephone" value="{$msg.telephone || default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>报名方式:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入联系方式...(可为空)" class="form-control form_title" name="apply_tel" value="{$msg.apply_tel || default=''}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -94,7 +136,7 @@
                             <div class="col-lg-11">
                                 <div class=" float-e-margins">
                                     <div class="ibox-content no-padding borders">
-                                        <script id="container" name="content" type="text/plain">{$msg.content || default=''}</script>
+                                        <script id="container" name="content" type="text/plain">{$msg.content||default=''}</script>
                                     </div>
                                 </div>
                             </div>
@@ -104,46 +146,17 @@
                                 <label>发布人:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher || default=''}">
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
                             </div>
                         </div>
-                        {eq name="msg" value=""}
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推送:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="push">是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" checked="" value="0" name="push">否
-                                </label>
-                            </div>
-                        </div>
-                        {else/}
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推送:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
-                                </label>
-                            </div>
-                        </div>
-                        {/eq}
-                        <input type="hidden" name="id" value="{$msg.id || default=''}">
+                        <input type="hidden" name="id" value="{$msg.id||default=''}">
+
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
-                                <button class="btn btn-primary submit-btn post-put" type="button" target-form="form-horizontal" >发布</button>
+                                <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal" >发布</button>
                                 <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
                             </div>
                         </div>
-                        <div class="selblo"></div>
                     </form>
                 </div>
             </div>
@@ -157,27 +170,11 @@
 <script src="/static/iCheck/icheck.min.js"></script>
 <script src="/static/ueditor/ueditor.config.js"></script>
 <script src="/static/ueditor/ueditor.all.min.js"></script>
-<script src="/admin/js/chosen.jquery.js"></script>
-<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+
 <script>
     $(function(){
-        $( ".datetimepicker" ).datetimepicker({
-            language:  'cn',
-            format: 'yyyy-mm-dd hh:ii',
-            forceParse: false,
-            todayBtn: true,
-            autoclose: true,
-            todayHighlight: 1,
-            minuteStep: 5
-
-        });
-        //    单选按钮
-        $('.i-checks').iCheck({
-            checkboxClass: 'icheckbox_square-green',
-            radioClass: 'iradio_square-green'
-        });
-
-        highlight_subnav("{:Url('Activity/index')}");
+        //导航高亮
+        highlight_subnav("{:Url('Clubactivity/index')}");
 
         //上传图片
         var plus = $('.plus');
@@ -226,21 +223,24 @@
                 }
             });
         });
-
+        //百度编辑器
         var ue = UE.getEditor('container',{
             initialFrameHeight:400
         });
 
-        //发布
-        $(".post-put").off('click').on("click",function(){
+        $(".post-add").on("click",function(){
+            /*重组轮播图，删除多余字符串（i是键值，1表示几位开始*/
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
+                front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
-                description:$("textarea[name='description']").val(),
                 content:ue.getContent(),
+                telephone:$("input[name='telephone']").val(),
+                apply_tel:$("input[name='apply_tel']").val(),
+                address:$("input[name='address']").val(),
                 publisher:$("input[name='publisher']").val(),
-                type:1
+                status:0,
             };
             $.ajax({
                 type:"post",
@@ -254,7 +254,7 @@
                             updateAlert(data.msg ,'success');
                         }
                         it.prop('disabled','true');
-                        it.prev().prop('disabled','true');
+                        it.next('button').prop('disabled','true');
                         setTimeout(function(){
                             if (data.url) {
                                 location.href=data.url;
@@ -262,22 +262,92 @@
                                 location.reload();
                             }
                             it.removeAttr('disabled');
-                            it.prev().removeAttr('disabled')
+                            it.next('button').removeAttr('disabled')
                         },2000);
                     } else {
                         updateAlert(data.msg, 'error');
                         it.attr('disabled','true');
-                        it.prev().prop('disabled','true');
+                        it.next('button').prop('disabled','true');
                         setTimeout(function(){
                             it.removeAttr('disabled');
-                            it.prev().removeAttr('disabled')
+                            it.next('button').removeAttr('disabled')
                         },2000);
                     }
                 }
             });
             return false;
         });
+
+    })
+</script>
+
+
+<!--时间日历-->
+<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        //    时间日历
+        $( ".datetimepicker" ).datetimepicker( {
+            language:  'cn',
+            format: 'yyyy-mm-dd hh:ii',
+            minView: "hour",
+            forceParse: false,
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: 1,
+            minuteStep: 5
+
+        });
+        //    单选按钮
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
     })
 
+</script>
+<script src="/admin/js/chosen.jquery.js"></script>
+<script>
+    /*$(function(){
+        //下拉框
+        $("select").chosen({
+            no_results_text: "没有找到该选项",
+            allow_single_de: true,
+            width:'100%',
+            max_selected_options:'100'
+        });
+        var selgp = $(".selgp");
+        var selgp2 = $(".selgp2");
+        selHeight(selgp);
+        selHeight(selgp2);
+        function selHeight(e){
+            e.find('ul').on('click',function(){
+                var results = $(this ).next().find('.chosen-results' );
+                var h= results.height();
+                h=h-100;
+                $('.selblo' ).animate({'height':h+'px'},100);
+                //切出页面
+                var hiddenProperty = 'hidden' in document ? 'hidden' :
+                    'webkitHidden' in document ? 'webkitHidden' :
+                        null;
+                var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+                var onVisibilityChange = function(){
+                    if (!document[hiddenProperty]) {
+                        //selgp.find('.search-field').find('input').on('blur');
+                    }else{
+                        e.find('.search-field').find('input').off('blur');
+                    }
+                };
+                $(document).on(visibilityChangeEvent, onVisibilityChange);
+            });
+            e.find('.search-field').find('input').on('blur',function(){
+                setTimeout(function(){
+                    $('.selblo' ).animate({'height':'0'});
+                },100)
+            });
+        }
+    })*/
 </script>
 {/block}

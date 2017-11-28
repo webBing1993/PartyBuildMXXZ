@@ -7,16 +7,17 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Brand as BrandModel;
-use app\admin\model\BrandDetail as BrandDetailModel;
+use app\admin\model\Matter as MatterModel;
 use app\admin\model\Picture;
+use app\admin\model\Push;
 use com\wechat\TPQYWechat;
 use think\Config;
 
 /**
- * 品牌项目
+ * Class matter
+ * @package 重要文件
  */
-class Branddetail extends Admin {
+class Matter extends Admin {
     /**
      * 主页
      */
@@ -24,7 +25,7 @@ class Branddetail extends Admin {
         $map = array(
             'status' => array('egt',0),
         );
-        $list = $this->lists('BrandDetail',$map);
+        $list = $this->lists('Matter',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
             'recommend' => array(0=>"否",1=>"是"),
@@ -44,21 +45,17 @@ class Branddetail extends Admin {
             if(empty($data['id'])) {
                 unset($data['id']);
             }
-            $models = new BrandDetailModel();
+            $learnModel = new MatterModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            $model = $models->validate('BrandDetail')->save($data);
+            $model = $learnModel->validate('Matter')->save($data);
             if($model){
                 return $this->success('新增成功!',Url("index"));
             }else{
-                return $this->error($models->getError());
+                return $this->error($learnModel->getError());
             }
         }else{
-            $map = array(
-                'status' => array('egt',0),
-            );
-            $list = BrandModel::where($map)->order('id')->column('id,title');
-            $this->assign('list',$list);
             $this->assign('msg','');
+
             return $this->fetch('edit');
         }
     }
@@ -69,12 +66,12 @@ class Branddetail extends Admin {
     public function edit(){
         if(IS_POST){
             $data = input('post.');
-            $models = new BrandDetailModel();
-            $model = $models->validate('BrandDetail')->save($data,['id'=>input('id')]);
+            $specialModel = new MatterModel();
+            $model = $specialModel->validate('Matter')->save($data,['id'=>input('id')]);
             if($model){
                 return $this->success('修改成功!',Url("index"));
             }else{
-                return $this->get_update_error_msg($models->getError());
+                return $this->get_update_error_msg($specialModel->getError());
             }
         }else{
             //根据id获取课程
@@ -82,16 +79,7 @@ class Branddetail extends Admin {
             if(empty($id)){
                 return $this->error("系统错误,不存在该条数据!");
             }else{
-                $msg = BrandDetailModel::get($id);
-                $map = array(
-                    'id' => $msg['pid'],
-                );
-                $model = BrandModel::where($map)->field('id,title')->find();
-                if(!empty($msg['images']))
-                {
-                    $msg['images'] = json_decode($msg['images']);
-                }
-                $this->assign('model',$model);
+                $msg = MatterModel::get($id);
                 $this->assign('msg',$msg);
             }
             return $this->fetch();
@@ -104,7 +92,7 @@ class Branddetail extends Admin {
     public function del(){
         $id = input('id');
         $data['status'] = '-1';
-        $info = BrandDetailModel::where('id',$id)->update($data);
+        $info = MatterModel::where('id',$id)->update($data);
         if($info) {
             return $this->success("删除成功");
         }else{

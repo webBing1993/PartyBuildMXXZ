@@ -13,7 +13,7 @@ use com\wechat\TPQYWechat;
 use think\Config;
 
 /**
- * Class Learn
+ * Class Club
  * @package 我的社团
  */
 class Club extends Admin {
@@ -23,14 +23,10 @@ class Club extends Admin {
     public function index(){
         $map = array(
             'status' => array('egt',0),
-            'type'=> array('in',[1,2])
         );
-        $list = $this->lists('DreamFlash',$map);
+        $list = $this->lists('Club',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
-            'recommend' => array(0=>"否",1=>"是"),
-            'push' => array(0=>"否",1=>"是"),
-            'type' => array(1=>"视频快讯",2=>"图文快讯")
         ));
         $this->assign('list',$list);
 
@@ -46,14 +42,9 @@ class Club extends Admin {
             if(empty($data['id'])) {
                 unset($data['id']);
             }
-            if($data['type'] == 1){
-                if($data['video_path'] == "" && $data['net_path'] == ""){
-                    return $this->error("请上传视频文件或网址，如文件过大，请耐心等待..");
-                }
-            }
-            $learnModel = new DreamFlashModel();
+            $learnModel = new ClubModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            $model = $learnModel->validate('DreamFlash')->save($data);
+            $model = $learnModel->validate('Club')->save($data);
             if($model){
                 return $this->success('新增成功!',Url("index"));
             }else{
@@ -72,13 +63,8 @@ class Club extends Admin {
     public function edit(){
         if(IS_POST){
             $data = input('post.');
-            if($data['type'] == 1){
-                if($data['video_path'] == "" && $data['net_path'] == ""){
-                    return $this->error("请上传视频文件或网址，如文件过大，请耐心等待..");
-                }
-            }
-            $learnModel = new DreamFlashModel();
-            $model = $learnModel->validate('DreamFlash')->save($data,['id'=>input('id')]);
+            $learnModel = new ClubModel();
+            $model = $learnModel->validate('Club')->save($data,['id'=>input('id')]);
             if($model){
                 return $this->success('修改成功!',Url("index"));
             }else{
@@ -91,7 +77,7 @@ class Club extends Admin {
             if(empty($id)){
                 return $this->error("系统错误,不存在该条数据!");
             }else{
-                $msg = DreamFlashModel::get($id);
+                $msg = ClubModel::get($id);
                 $this->assign('msg',$msg);
             }
             return $this->fetch();
@@ -104,7 +90,7 @@ class Club extends Admin {
     public function del(){
         $id = input('id');
         $data['status'] = '-1';
-        $info = DreamFlashModel::where('id',$id)->update($data);
+        $info = ClubModel::where('id',$id)->update($data);
         if($info) {
             return $this->success("删除成功");
         }else{

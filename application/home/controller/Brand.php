@@ -27,7 +27,7 @@ class Brand extends Base{
         $map = array(
             'status' => array('egt',0),
         );
-        $list = BrandModel::where($map)->order('id desc')->select();
+        $list = BrandModel::where($map)->order('id')->select();
         $this->assign('list',$list);
         return $this->fetch();
     }

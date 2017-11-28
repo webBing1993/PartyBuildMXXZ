@@ -76,18 +76,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>简介:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <div class=" float-e-margins">
-                                    <div class="ibox-content no-padding borders">
-                                        <textarea  class="text form-control form_title" name="description">{$msg.description || default=''}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-lg-1 control-label">
                                 <label>内容:</label>
                             </div>
@@ -177,7 +165,7 @@
             radioClass: 'iradio_square-green'
         });
 
-        highlight_subnav("{:Url('Activity/index')}");
+        highlight_subnav("{:Url('matter/index')}");
 
         //上传图片
         var plus = $('.plus');
@@ -237,10 +225,8 @@
             var data = {
                 id:$("input[name='id']").val(),
                 title:$("input[name='title']").val(),
-                description:$("textarea[name='description']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
-                type:1
             };
             $.ajax({
                 type:"post",

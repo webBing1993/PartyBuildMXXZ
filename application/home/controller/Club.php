@@ -217,6 +217,7 @@ class Club extends Base{
         $likeModel = new Like;
         $like = $likeModel->getLike(9,$id,$userId);
         $article['is_like'] = $like;
+        var_dump($article['is_like']);
         $this->assign('article',$article);
 
         //获取 评论
