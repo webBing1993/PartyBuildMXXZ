@@ -1,0 +1,292 @@
+{extend name="base/common"}
+
+{block name="style"}
+<style>
+    .videofile{
+        display: none;
+    }
+    .audiofile{
+        display: none;
+    }
+    audio{
+        margin-top:10px;
+    }
+    textarea{
+        resize:none;
+    }
+    .imggroup{
+        position: relative;
+    }
+    .imgbox{
+        height: 100px;
+        width: 200px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    .imgfile{
+        height: 100px;
+        width: 200px;
+        position: absolute;
+        top:0;
+        opacity: 0;
+    }
+    .plus{
+        height: 100px;
+        width: 200px;
+        font-size: 100px;
+        line-height: 100px;
+        text-align: center;
+        color: rgba(204, 204, 204, 0.51);
+    }
+    .plus:hover{
+        font-size: 150px;
+    }
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>网上述职</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:Url('index')}">主页</a>
+            </li>
+            <li class="active">
+                <strong>{$msg['id'] ? "编辑":"新增"}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{$msg['id'] ? "编辑":"新增"}专题</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form id="form" class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>标题:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value='{$msg.title || default=""}'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 control-label">
+                                <label>内容:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class=" float-e-margins">
+                                    <div class="ibox-content no-padding borders">
+                                        <script id="container" name="content" type="text/plain">{$msg.content||default=''}</script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>发布人:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
+                            </div>
+                        </div>
+                        {eq name="msg" value=""}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="push">否
+                                </label>
+                            </div>
+                        </div>
+                        {else/}
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>是否推送:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
+                                </label>
+                            </div>
+                        </div>
+                        {/eq}
+                        <input type="hidden" name="id" value="{$msg.id||default=''}">
+
+                        <div class="form-group">
+                            <div class="col-lg-11 col-lg-offset-1">
+                                <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal" >发布</button>
+                                <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/uploadify/jquery.uploadify.min.js"></script>
+<script src="/static/iCheck/icheck.min.js"></script>
+<script src="/static/ueditor/ueditor.config.js"></script>
+<script src="/static/ueditor/ueditor.all.min.js"></script>
+
+<script>
+    $(function(){
+        //导航高亮
+        highlight_subnav("{:Url('index')}");
+
+        //上传图片
+        var plus = $('.plus');
+        var imgnum  = $('[n]' ).attr('n');
+        plus.on('click',function(){
+            var it = $(this);
+            it.hide().next().fadeIn();
+            imgnum = 3;
+            if(!it.hasClass('plus2')){
+                plus.eq(1).fadeIn();
+                imgnum = 2
+            }
+        });
+        $(document).ready(function () {
+            $(".imgfile").on("change",function(){
+                var size = ($(this)[0].files[0].size / 1024).toFixed(2);
+                var imgBox = $(this);
+                if(size <= 2048){
+                    var img = $(this)[0].files[0];
+                    var formData = new FormData();
+                    var pic=$(this);
+                    formData.append("picture",img);
+                    $.ajax({
+                        type:"post",
+                        url:"{:Url('File/uploadPicture')}",
+                        data: formData,
+                        processData : false,
+                        contentType : false,
+                        success:function(m){
+                            var msg = $.parseJSON(m);
+                            var path = msg.data.path;
+                            if(msg['code'] == 1){
+                                imgBox.siblings(".img").val(msg.data["id"]);
+                                //显示图片缩略图
+                                pic.parent().find("img" ).attr({src:path});
+                            } else
+                            {
+                                warning( { msg: msg[ 'msg' ] } );
+                                return;
+                            }
+                        }
+                    });
+                } else {
+                    warning({msg:"您选择的图片超过2mb，请重新选择"});
+                    return;
+                }
+            });
+        });
+        //百度编辑器
+        var ue = UE.getEditor('container',{
+            initialFrameHeight:400
+        });
+
+        $(".post-add").on("click",function(){
+            /*重组轮播图，删除多余字符串（i是键值，1表示几位开始*/
+            var it=$(this);
+            var data = {
+                id:$("input[name='id']").val(),
+                title:$("input[name='title']").val(),
+                content:ue.getContent(),
+                publisher:$("input[name='publisher']").val(),
+                status:0,
+            };
+            $.ajax({
+                type:"post",
+                url:$("#form").attr("action"),
+                data:data,
+                success:function(data){
+                    if(data.code == 1){
+                        if (data.url) {
+                            updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                        }else{
+                            updateAlert(data.msg ,'success');
+                        }
+                        it.prop('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            if (data.url) {
+                                location.href=data.url;
+                            } else {
+                                location.reload();
+                            }
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    } else {
+                        updateAlert(data.msg, 'error');
+                        it.attr('disabled','true');
+                        it.next('button').prop('disabled','true');
+                        setTimeout(function(){
+                            it.removeAttr('disabled');
+                            it.next('button').removeAttr('disabled')
+                        },2000);
+                    }
+                }
+            });
+            return false;
+        });
+
+    })
+</script>
+
+
+<!--时间日历-->
+<script src="/static/datepicker/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        //    时间日历
+        $( ".datetimepicker" ).datetimepicker( {
+            language:  'cn',
+            format: 'yyyy-mm-dd hh:ii',
+            minView: "hour",
+            forceParse: false,
+            todayBtn: true,
+            autoclose: true,
+            todayHighlight: 1,
+            minuteStep: 5
+
+        });
+        //    单选按钮
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+    })
+
+</script>
+<script src="/admin/js/chosen.jquery.js"></script>
+{/block}
