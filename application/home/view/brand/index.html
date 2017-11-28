@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
     /*.br_info {background: rgba(0,0,0,.2)}*/
-    a:active .br_info {background: #eeeeee; opacity: .3}
+    /*a:active .br_info {background: #eeeeee; opacity: .3}*/
 </style>
 {/block}
 {block name="body"}
@@ -16,20 +16,12 @@
           <div class="brand_main">
               <!--循环体-->
               {volist name="list" id="vo"}
-              <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
-                  <img src="{$vo.front_cover|get_cover='path'}">
-                  <div class="br_info">
-                      <div>{$vo.title}</div>
-                      <!--系列标题-->
-                    <!--<div class="hd_title">工匠系列</div>-->
-                        <!--内容-->
-                        <!--<div class="info">-->
-                            <!--&lt;!&ndash;标题&ndash;&gt;-->
-                            <!--<p class="info_title"></p>-->
-                            <!--&lt;!&ndash;<div class="info_text">{$vo.content}</div>&ndash;&gt;-->
-                        <!--</div>-->
-                  </div>
-              </a>
+                  <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
+                      <img src="{$vo.front_cover|get_cover='path'}">
+                      <div class="br_info">
+                          <div>{$vo.title}</div>
+                      </div>
+                  </a>
               {/volist}
           </div>
      <div>
@@ -37,6 +29,12 @@
 {/block}
 {block name="script"}
 <script>
+    //点击背景触发active
+    $(".brand_main").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(1,1,1,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","rgba(1,1,1,.1)");
+    });
 //    //首页加载是否需要上拉加载
 //    window.onload = function() {
 //        if ($(".brand_main a").length < 7) {

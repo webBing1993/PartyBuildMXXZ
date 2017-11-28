@@ -127,11 +127,13 @@
             $('.tabs>.tab ').eq(0).find('span').css('color','#999')
         }
         if(type == 1){
-            if(len >= 10){
+            if(len <= 10){
                 $('.tip' ).text('上拉加载更多');
                 //上拉加载
+                console.log(123123)
                 loadScroll();
             } else {
+                console.log(1111)
                 $('.tip' ).text('没有更多了');
             }
             loadScroll()
