@@ -39,4 +39,15 @@
 
 {/block}
 {block name="script"}
+
+<script>
+   var  len = $(".mass a").length;
+   if(len==0){
+       $(".club_activity").hide();
+   }else {
+       $(".club_activity").show();
+   }
+
+
+</script>
 {/block}

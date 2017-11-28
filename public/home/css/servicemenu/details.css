@@ -3,6 +3,7 @@ body{
 }
 .de_main{
     width: 100vw;
+    margin-bottom: 8vw;
 }
 .de_main  .title_name{
     font-size:1.4rem;

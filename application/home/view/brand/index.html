@@ -5,95 +5,100 @@
 <link rel="stylesheet" href="/home/css/brand/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
-    .br_info {background: rgba(0,0,0,.3)}
-    a:active .br_info {background: #666;}
+    /*.br_info {background: rgba(0,0,0,.2)}*/
+    a:active .br_info {background: #eeeeee; opacity: .3}
 </style>
 {/block}
 {block name="body"}
-<div style="position: relative;margin: auto;width:100%;">
-    <!--<div id="refreshContainer" class="mui-content mui-scroll-wrapper">-->
-        <!--<div class="mui-scroll">-->
-            <div class="brand_main">
-                <!--循环体-->
-                {volist name="list" id="vo"}
-                <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
-                    <img src="{$vo.front_cover|get_cover='path'}">
-                    <div class="br_info">
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div class="mui-scroll">
+
+          <div class="brand_main">
+              <!--循环体-->
+              {volist name="list" id="vo"}
+              <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
+                  <img src="{$vo.front_cover|get_cover='path'}">
+                  <div class="br_info">
+                      <!--系列标题-->
+                    <!--<div class="hd_title">工匠系列</div>-->
+                        <!--内容-->
                         <div class="info">
+                            <!--标题-->
                             <p class="info_title">{$vo.title}</p>
+                            <!--<div class="info_text">{$vo.content}</div>-->
                         </div>
-                    </div>
-                </a>
-                {/volist}
-            </div>
-        <!--</div>-->
-    <!--</div>-->
+                  </div>
+              </a>
+              {/volist}
+          </div>
+     <div>
 </div>
 {/block}
 {block name="script"}
 <script>
-    //首页加载是否需要上拉加载
-    window.onload = function() {
-        if ($(".brand_main a").length < 7) {
-            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
-        } else {
-            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
-        }
-    };
-
-    //初始化下拉加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                callback: loadScroll
-            }
-        }
-    });
-
-    function loadScroll(){
-        var len = $(".brand_main  a").length;
-        $.ajax({
-            type:"post",
-            url:"",
-            data:{
-                length:len,
-                type:3
-            },
-            beforeSend: function(XMLHttpRequest){
-            },
-            success:function(data){
-                addCourse(data);
-                if(data.code == 1){
-                    if(data.data.length == 7){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                    }
-                }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                }
-            }
-        })
-    };
-    function addCourse(data) {
-        console.log(data)
-        var html = '';
-        var lists = data.data;
-        var len = lists.length;
-        for (var i = 0; i < len; i++) {
-            var list = lists[i];
-            html +=
-                '<a href="/home/Activity/detail2/type/1/id/' + list.id + '">' +
-                '<p>' + list.title + '</p>' +
-                '<p>' + list.description + '</p>' +
-                '<span>' + list.create_time + '</span>' +
-                '<span>' + list.publisher + '</span>' +
-                '<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>' +
-                '</a>'
-        }
-        $(".list").append(html);
-    }
+//    //首页加载是否需要上拉加载
+//    window.onload = function() {
+//        if ($(".brand_main a").length < 7) {
+//            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+//        } else {
+//            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+//        }
+//    };
+//
+//    //初始化下拉加载
+//    mui.init({
+//        pullRefresh: {
+//            container: '#refreshContainer',
+//            up: {
+//                callback: loadScroll
+//            }
+//        }
+//    });
+//
+//    function loadScroll(){
+//        var len = $(".brand_main  a").length;
+//        $.ajax({
+//            type:"post",
+//            url:"",
+//            data:{
+//                length:len,
+//                type:3
+//            },
+//            beforeSend: function(XMLHttpRequest){
+//            },
+//            success:function(data){
+//                addCourse(data);
+//                if(data.code == 1){
+//                    if(data.data.length == 7){
+//                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
+//                    }else{
+//                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+//                    }
+//                }else{
+//                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+//                }
+//            }
+//        })
+//    };
+//
+//    function addCourse(data) {
+//        console.log(data)
+//        var html = '';
+//        var lists = data.data;
+//        var len = lists.length;
+//        for (var i = 0; i < len; i++) {
+//            var list = lists[i];
+//       html +=
+////                '<a href="/home/Activity/detail2/type/1/id/' + list.id + '">' +
+////                '<p>' + list.title + '</p>' +
+////                '<p>' + list.description + '</p>' +
+////                '<span>' + list.create_time + '</span>' +
+////                '<span>' + list.publisher + '</span>' +
+////                '<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>' +
+////                '</a>'
+//        }
+//       $(".list").append(html);
+//    }
 
 </script>
  {/block}

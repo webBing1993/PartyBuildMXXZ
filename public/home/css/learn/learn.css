@@ -103,3 +103,86 @@
   top: 4.53vw;
   left: calc( 50vw - 15px );
 }
+.tabs {
+  width: 100vw;
+  height: 11vw;
+}
+.clear {
+  zoom: 1;
+}
+.tabs .tab {
+  display: block;
+  float:left;
+  width: 50vw;
+  height: 100%;
+  color: #999;
+  font-size: 1.6rem;
+  line-height: 12.3vw;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+.tabs .active {
+  border-bottom: 2px solid #ff7f24;
+  color: orangered;
+}
+.tabs .tab:nth-child(1)::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 6vw;
+  float: right;
+  margin-top: 3vw;
+  background-color: #999;
+}
+.list {
+  background: #eeeeee;
+  border-bottom: 1px solid transparent;
+}
+.list {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 2.67vw;
+  margin-bottom: 2.67vw;
+  background: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+.list .tab {
+  position: absolute;
+  top: 5.53vw;
+  left: 1.13vw;
+  width: 12vw;
+  height: 8vw;
+  background: url("/home/images/learn/bg_blue.png") no-repeat;
+  background-size: 12vw 8vw;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height:5.33vw;
+}
+.list .img {
+  width: 100%;
+  height: 48vw;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
+.list .title {
+  color: #333333;
+  font-size: 1.4rem;
+  line-height: 9.6vw
+}
+.list .study {
+  display: inline-block;
+  background: url("/home/images/learn/people.png") 0 0 no-repeat;
+  background-size: 4vw 4vw;
+  padding-left: 4.8vw;
+  color: #999999;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 4vw;
+}
+.bulletin {
+  background: #eeeeee;
+  border-bottom: 1px solid transparent;
+}

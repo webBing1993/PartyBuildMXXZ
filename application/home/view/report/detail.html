@@ -61,10 +61,10 @@
                 id:{$pid},
             },
             success:function(data){
-                co
+                console.log(data);
             }
         });
-
+     //投票点击后禁止点击
       $(this).removeClass("vote_btn").addClass("area").text("已投票").off("click");
         $(".vote").find("b").text(aa+1);
 

@@ -44,7 +44,7 @@
 <script>
     //首页加载是否需要上拉加载
     window.onload = function() {
-        if ($(".main .re_list").length < 7) {
+        if ($(".main .re_list").length < 0) {
             mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
         } else {
             mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
@@ -64,11 +64,9 @@
     function loadScroll(){
         var len = $(".main .re_list").length;
         $.ajax({
-            type:"post",
-            url:"{:Url('Activity/more')}",
+            url:"{:Url('Repotr/indexmore')}",
             data:{
                 length:len,
-                type:3
             },
             beforeSend: function(XMLHttpRequest){
             },
