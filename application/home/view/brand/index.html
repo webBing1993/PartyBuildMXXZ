@@ -19,14 +19,15 @@
               <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
                   <img src="{$vo.front_cover|get_cover='path'}">
                   <div class="br_info">
+                      <div>{$vo.title}</div>
                       <!--系列标题-->
                     <!--<div class="hd_title">工匠系列</div>-->
                         <!--内容-->
-                        <div class="info">
-                            <!--标题-->
-                            <p class="info_title">{$vo.title}</p>
-                            <!--<div class="info_text">{$vo.content}</div>-->
-                        </div>
+                        <!--<div class="info">-->
+                            <!--&lt;!&ndash;标题&ndash;&gt;-->
+                            <!--<p class="info_title"></p>-->
+                            <!--&lt;!&ndash;<div class="info_text">{$vo.content}</div>&ndash;&gt;-->
+                        <!--</div>-->
                   </div>
               </a>
               {/volist}
