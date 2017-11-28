@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
     /*.br_info {background: rgba(0,0,0,.2)}*/
-    /*a:active .br_info {background: #eeeeee; opacity: .3}*/
+    a:active .br_info {background: #eeeeee; opacity: .6}
 </style>
 {/block}
 {block name="body"}
@@ -29,12 +29,14 @@
 {/block}
 {block name="script"}
 <script>
-    //点击背景触发active
-    $(".brand_main").on("touchstart","a",function(){
-        $(this).css("backgroundColor","rgba(1,1,1,.1)");
-    }).on("touchend","a", function () {
-        $(this).css("backgroundColor","rgba(1,1,1,.1)");
-    });
+//    //点击背景触发active
+//    $(".brand_main").on("touchstart","a",function(){
+//        console.log(12132)
+//        $(this).css("backgroundColor","rgba(1,1,1,.1)");
+//    }).on("touchend","a", function () {
+//        console.log(232323)
+//        $(this).css("backgroundColor","rgba(1,1,3,.1)");
+//    });
 //    //首页加载是否需要上拉加载
 //    window.onload = function() {
 //        if ($(".brand_main a").length < 7) {
