@@ -39,7 +39,8 @@
     font-size: 1.4rem;
     color: #333;
     line-height: 8vw;
-    padding: 0vw 5vw;
+    padding: 0 5vw;
+    text-align: justify;
 }
 
 .cont{
