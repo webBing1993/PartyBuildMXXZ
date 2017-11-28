@@ -84,7 +84,7 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {volist name="volunteerlist" id="vo"}
-            <div class="swiper-slide" style="background-image:url(/home/images/learn/banner.png)">
+            <div class="swiper-slide" style="background-image:url({$vo.front_cover|get_cover='path'})">
                   <div class="tm_info">
                       <i></i>
                       <div class="tm_name">{$vo.title}</div>
