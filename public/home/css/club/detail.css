@@ -11,8 +11,8 @@
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 130vw;
-    margin-bottom: 10vw;
+    /*min-height: 130vw;*/
+   padding-bottom: 10vw;
 }
 .detail_info .activityTitle{
     font-size: 1.8rem;
