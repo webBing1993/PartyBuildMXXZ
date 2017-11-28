@@ -151,6 +151,24 @@
     }
     var num = 0;
     var type = 1;
+
+    var Num = localStorage.getItem('num');
+    console.log(Num)
+    if(Num==0){
+        $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24');
+        $('.tabs>.tab ').eq(1).find('span').css('color','#999');
+        $('#side1').show();
+        $('#side2').hide();
+        $('.tabs>.tab ').eq(0).addClass('active');
+        $('.tabs>.tab ').eq(1).removeClass('active');
+    }else if(Num==1){
+        $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24');
+        $('.tabs>.tab ').eq(0).find('span').css('color','#999');
+        $('#side2').show();
+        $('#side1').hide();
+        $('.tabs>.tab ').eq(1).addClass('active');
+        $('.tabs>.tab ').eq(0).removeClass('active');
+    }
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
@@ -180,8 +198,17 @@
     $('.tabs .tab').on('click',function(){
         var num = $(this).index();
         var len =$('.bulletin').eq(num).find('.page>a').length;
+        console.log(num)
          type = $(this).data('side');
-        console.log($(this).data('side'));
+        localStorage.setItem('num',num);
+//        console.log($(this).data('side'));
+        if(num==0){
+            $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(1).find('span').css('color','#999')
+        }else if(num==1){
+            $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(0).find('span').css('color','#999')
+        }
         if(type == 1){
             if(len >= 10){
                 $('.tip' ).text('上拉加载更多');
