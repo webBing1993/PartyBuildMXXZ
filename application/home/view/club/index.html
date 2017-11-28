@@ -117,7 +117,8 @@
         $('.triangle-up').css('left','0.06vw');
         $('.notices').eq(club).siblings('.notices').addClass('hidden');
         $('.notices').eq(club).removeClass('hidden');
-    }else {
+    }
+    else if(club == 1) {
         $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
         $('.tabs>.tab ').eq(0).find('span').css('color','#999')
         $('.triangle-up').css('left','50.06vw');
@@ -151,7 +152,7 @@
         var ntc = $('.notices');
         var eq = $(this).index();
 //        $('.tabs>.tab ').find('span').css('color','#333')
-        console.log()
+        console.log(eq)
         localStorage.setItem('club',eq);
         c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');

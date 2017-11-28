@@ -3,6 +3,7 @@
 {block name="style"}
 <title>活动详情</title>
 <link rel="stylesheet" href="/home/css/common/detail.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
     .scrollDiy{
         position: absolute;
@@ -12,6 +13,7 @@
         /* 增加该属性，可以增加弹性 */
         -webkit-overflow-scrolling: touch;
         width:100%;
+        padding-bottom: 40px;
     }
 </style>
 {/block}
@@ -100,7 +102,7 @@
     $(function(){
         $(".uecontent p span").css("font-size","14px");
         //reset
-        var len = $(".list" ).length;
+        var len = $(".lists .list" ).length;
         if(len >= 7){
             $('.tip' ).text('上拉加载更多');
             //上拉加载评论
@@ -187,13 +189,14 @@
 
     };
     function loadScroll(){
-        $('.scrollDiy').off("scroll").on("scroll",function(){
+        $(window).off("scroll").on("scroll",function(){
             var dh = $('.article').height() + $('.comment').height();
-            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+            var end = $(window).height() + $(window).scrollTop();
             var len = $(".list" ).length;
             var tip = $(".tip");
             var loading = $('.loading');
             var id = {$article['id']};
+//            console.log('dh:'+dh,'end:'+end)
             if(dh <= end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
