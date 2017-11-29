@@ -38,22 +38,25 @@
 <script src="/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     $(function(){
-        $('.btn').on("click",function(){
-            login()
-        });
-        //绝对定位bug
-        var vh =$(window).height() - $('footer').height() - $('.banner').height() - $('.box').height();
-        if(vh < 0){
-            vh = '10vw';
-        }
+        $('.btn').on("click",function(){ login() });
 
-        $('footer').css({
+        //绝对定位bug
+        var vh =$(window).height() - $('.footer').height() - $('.banner').height() - $('.box').height();
+        if (vh < 0) {
+            vh = '10vw';
+        } else {
+            $('body').height(500);
+            $('body').css({'overflow':'hidden','max-height':'100vh'});
+        }
+        $('.footer').css({
             'position': 'relative',
             'margin-top': vh
         });
 
+
 //        18161784352
     });
+
     /**登陆**/
     function login(){
         var re=reg();
@@ -101,6 +104,7 @@
             });
         }
     }
+
     /**表单验证**/
     function reg(){
         var uid=$('.uid>input').val();

@@ -116,8 +116,8 @@ footer img{
 .register .verification input {height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
 .register #yan {position: relative;margin: auto;width:53.33vw;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
 .register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #e51c23;text-align: center;color: #fff;font-size: 1.6rem;}
-.footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;max-height: 120px;}
-.footer img {width:100%;height:100%;}
+.footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;}
+.footer img {width:100%;height:26.5vw; display: block}
 .rAccount {text-align: center;}
 .rAccount span ,.rAccount input {display: inline-block;vertical-align: middle;}
 .rAccount span {
