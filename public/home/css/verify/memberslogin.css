@@ -109,8 +109,8 @@ footer img{
 
 
 /*2017.11.22 Tony 新增注册页面*/
-.register {position: relative;margin: auto;width:100%;}
-.register .rAccount {position: relative;margin:20% auto 0;}
+.register {position: relative;margin: auto;width:100%;top:18vw;}
+.register .rAccount {position: relative;}
 .register .rAccount  input {position: relative;margin: auto;width:53.33vw;border: 1px solid #f1f1f1;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
 .register .verification {position: relative;margin:5.33vw auto 0;text-align: center;}
 .register .verification input {height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
