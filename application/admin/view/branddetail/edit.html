@@ -220,9 +220,9 @@
                 imgnum = 2
             }
         });
-        $(".imgfile").on("change",function(){
-            addImg(this);
-        });
+//        $(".imgfile").on("change",function(){
+//            addImg(this);
+//        });
         //百度编辑器
         var ue = UE.getEditor('container',{
             initialFrameHeight:400
@@ -429,12 +429,53 @@
 //            warning({msg:"您选择的图片超过5mb，请重新选择"});
 //            return;
 //        }
-        changState();
     }
     //上传成功响应
     function uploadComplete(evt) {
         var data = JSON.parse(evt.target.responseText);
         console.log(data)
+        var html =
+            '<div class="' + 'col-lg-3">' +
+            '<div class="' + 'imggroup">' +
+            '<img src="' + '" alt=' + '"图片' + '" class=' + '"thumbnail imgbox' + '">' +
+            '<input type="' + 'file"' + 'class="' + 'imgfile" accept=' + '"image/jpg, image/png, image/gif, image/jpeg' + '" onchange=' + '"addImg(this)' + '">' +
+            '<input type="' + 'hidden" name=' + '"front_cover' + '" class="' + 'img"  value=' + '"' + '" >' +
+            '<span></span>' +
+            '</div>' +
+            '<b>推荐尺寸：750*400px</b>' +
+            '</div>'
+        $('#frontCovers').append(html);
+    var _last = $('#frontCovers .col-lg-3:last-child').prev();
+        _last.find(".img").val(data.data.id);
+        //显示图片缩略图
+        _last.find("img").attr('src',data.data.path);
+
+//        var length = $('input[name=front_cover]').length;
+//        var check = false;
+//        if (length < imgSum) {
+//            for (var i = 0; i < length; i++) {
+//                if (!$('input[name=front_cover]')[i].value) {
+//                    check = true;
+//                }
+//            }
+//            alert(1)
+//            if (!check) {
+//                var html =
+//                    '<div class="' + 'col-lg-3">' +
+//                    '<div class="' + 'imggroup">' +
+//                    '<img src="' + '" alt=' + '"图片' + '" class=' + '"thumbnail imgbox' + '">' +
+//                    '<input type="' + 'file"' + 'class="' + 'imgfile" accept=' + '"image/jpg, image/png, image/gif, image/jpeg' + '" onchange=' + '"addImg(this)' + '">' +
+//                    '<input type="' + 'hidden" name=' + '"front_cover' + '" class="' + 'img"  value=' + '"' + '" >' +
+//                    '<span></span>' +
+//                    '</div>' +
+//                    '<b>推荐尺寸：750*400px</b>' +
+//                    '</div>'
+//                $('#frontCovers').append(html);
+//                delImg();
+//                changState();
+//            }
+//        }
+        changState();
     }
 //    //上传失败
     function uploadFailed(evt) {
