@@ -155,7 +155,7 @@ class Upload
         }
 
         /* 检查上传目录 */
-        if (!$this->uploader->checkSavePath($this->savePath)) {
+        if (!$this->uploader->checkSavePath($this->savePath)) {;
             $this->error = $this->uploader->getError();
             return false;
         }

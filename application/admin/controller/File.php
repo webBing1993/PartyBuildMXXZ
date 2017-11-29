@@ -59,7 +59,7 @@ class File extends Admin
             Config::get('download_upload'),
             Config::get('upload_drive'),
             Config::get("upload_{$pic_driver}_config")
-        ); 
+        );
 
         /* 记录图片信息 */
         /* 记录附件信息 */
