@@ -14,10 +14,10 @@
 <!--注册-->
 <div class="register">
     <div class="rAccount">
-        <span></span><input type="number" placeholder="请输入你的手机号/邮箱" id="account"/>
+        <span></span><input type="number" placeholder="请输入手机号码" id="account"/>
     </div>
     <div class="verification">
-        <span></span><input type="number" pattern="\d*" maxlength="4" placeholder="请输入4位短信验证码" id="yan"/>
+        <span></span><input type="number" pattern="\d*" maxlength="4" placeholder="请输入验证码" id="yan"/>
         <input type="button" class="verificationBtn" value="获取验证码" id="verify_code">
     </div>
     <div class="btns">注册提交</div>
@@ -49,7 +49,6 @@
             'position': 'relative',
             'margin-top': vh
         });
-
 
     });
     /**登陆**/
@@ -113,6 +112,10 @@
     }
 //    发送验证码
     function yans(){
+
+//        alert(13213);
+//        return;
+
         var InterValObj; //timer变量，控制时间
         var count = 90; //间隔函数，1秒执行
         var curCount;//当前剩余秒数
@@ -135,6 +138,11 @@
                     if (data.code == 1) {
                         $("#verify_code").attr("disabled", true);
                         $("#verify_code").val("重发(" + curCount+')');
+                        $("#verify_code").css({
+                            "color":"#ff8161",
+                            "border":"1px solid #ff8161",
+                            "background":"#fff"
+                        });
                         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
                         // 发送成功
                         swal({
@@ -144,7 +152,8 @@
                             confirmButtonText:'确定'
                         });
                     } else {
-                        // 失败直接返回弹出是数据
+
+                                   // 失败直接返回弹出是数据
                         swal({
                             title: ' ',
                             text: data.msg,
