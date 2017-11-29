@@ -7,6 +7,7 @@
 <style>
     /*.br_info {background: rgba(0,0,0,.2)}*/
     a:active .br_info {background: #eeeeee; opacity: .8}
+    .brand_main{margin-bottom: 8vw}
 </style>
 {/block}
 {block name="body"}
@@ -17,7 +18,8 @@
               <!--循环体-->
               {volist name="list" id="vo"}
                   <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
-                      <img src="{$vo.front_cover|get_cover='path'}">
+                      <img src="/home/images/baogao.jpg"  data-original="{$vo.front_cover|get_cover='path'}">
+                      <!--<img class="lazy" src="/home/images/index/newindex/fdzd" data-echo="{$vo.front_cover|get_cover='path'}">-->
                       <div class="br_info">
                           <div>{$vo.title}</div>
                       </div>
@@ -26,20 +28,17 @@
           </div>
      <!--<div>-->
 <!--</div>-->
+
 {/block}
 {block name="script"}
-<!--<script src="/home/js/userPublic/mui.lazyload.img.js"></script>-->
-<!--<script src="/home/js/userPublic/mui.lazyload.js"></script>-->
-<!--<script src="../js/mui.min.js "></script>-->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
-        </script><script type="text/javascript" src="http://www.jo2.org/js/jquery.lazyload.js"></script>
+<script src="/home/js/lazyload.js"></script>
 <script>
-            jQuery(document).ready(
-                function($){
-                    $("img").lazyload({
-                        placeholder : "/home/images/index/newindex/wdst.png", //加载图片前的占位图片
-                        effect : "fadeIn" //加载图片使用的效果(淡入)
-                    });
-                });
+
+        $(function() {
+            $("img").lazyload({
+                placeholder : "/home/images/baogao.jpg",
+                effect: "fadeIn"
+            });
+        });
 </script>
  {/block}

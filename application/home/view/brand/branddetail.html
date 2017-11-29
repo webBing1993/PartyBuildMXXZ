@@ -71,54 +71,12 @@
     </div>
 </div>
 {/volist}
-
-
-
-
-
-
-
-<!--<div class="serveries">-->
-    <!--<div class="serverContent">-->
-        <!--<span class="border"></span>-->
-        <!--<p class="serverTitle">创客学员</p>-->
-        <!--<p class="serverText">每月开展两次活动，提供公益性创业培训，解读创业政策，指导创客解决创业中的各种问题。</p>-->
-    <!--</div>-->
-    <!---->
-    <!--<div class="serverBanner">-->
-        <!--<div class="banner">-->
-            <!--<div class="swiper-container1">-->
-                <!--<div class="swiper-wrapper">-->
-                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
-                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
-                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
-                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
-                    <!--<div class="swiper-slide"><img src="/home/images/feedback/1.jpg" alt=""></div>-->
-                <!--</div>-->
-                <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
-                <!--<div class="swiper-pagination"></div>-->
-                <!--<div class="swiper-button-next"><img src="/home/images/feedback/right.png" alt=""></div>-->
-                <!--<div class="swiper-button-prev"><img src="/home/images/feedback/left.png" alt=""></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 {/block}
 
 
 {block name="script"}
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
-</script><script type="text/javascript" src="http://www.jo2.org/js/jquery.lazyload.js"></script>
-<script src="/home/js/swiper.min.js"></script>
 <script>
-    jQuery(document).ready(
-        function($){
-            $("img").lazyload({
 
-                placeholder : "/home/images/index/newindex/wdst.png", //加载图片前的占位图片
-                effect : "fadeIn" //加载图片使用的效果(淡入)
-            });
-        });
     var swiper = new Swiper('.swiper-container1', {
         loop:true,
         pagination: {
