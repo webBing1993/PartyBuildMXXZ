@@ -18,7 +18,7 @@
               <!--循环体-->
               {volist name="list" id="vo"}
                   <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
-                      <img class="lazy"  src="/home/images/banner/bg.jpg"  data-original="{$vo.front_cover|get_cover='path'}">
+                      <img src="/home/images/banner/bg.jpg"  data-original="{$vo.front_cover|get_cover='path'}">
                       <!--<img class="lazy" src="/home/images/index/newindex/fdzd" data-echo="{$vo.front_cover|get_cover='path'}">-->
                       <div class="br_info">
                           <div>{$vo.title}</div>
@@ -31,14 +31,7 @@
 
 {/block}
 {block name="script"}
-<script src="/home/js/lazyload.js"></script>
 <script>
 
-        $(function() {
-            $("img").lazyload({
-                placeholder : "/home/images/banner/banner.jpg",
-                effect: "fadeIn"
-            });
-        });
 </script>
  {/block}
