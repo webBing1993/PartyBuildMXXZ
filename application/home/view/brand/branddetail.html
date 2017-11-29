@@ -107,8 +107,17 @@
 
 
 {block name="script"}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+</script><script type="text/javascript" src="http://www.jo2.org/js/jquery.lazyload.js"></script>
 <script src="/home/js/swiper.min.js"></script>
 <script>
+    jQuery(document).ready(
+        function($){
+            $("img").lazyload({
+                placeholder : "/home/images/banner/1.jpg", //加载图片前的占位图片
+                effect : "fadeIn" //加载图片使用的效果(淡入)
+            });
+        });
     var swiper = new Swiper('.swiper-container1', {
         loop:true,
         pagination: {
