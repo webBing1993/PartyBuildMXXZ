@@ -84,8 +84,9 @@ class Sms extends Controller
                 $this->error($checkRes);
             }
 
-            $uid = md5(uniqid());//不重复随机id
+            $uid = md5(uniqid());// 不重复随机id
             Cookie::set('dypb',['user' =>$uid]);
+            session('userId','');
             $user = [
                 'userid' => $uid,
                 'name' => $data['tel'],
