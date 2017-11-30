@@ -22,49 +22,13 @@
     </div>
     <ul class="lists">
         <!--循环体-->
+        {volist name="modelAll" id="vo"}
         <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">01</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            <a class="info" href="{:Url('servicemenu/detail?id='.$vo.id)}">
+                <span class="seq">{$key<9?'0'.($key+1):$key+1;}</span ><span class="matter">{$vo.name}</span><span class="section">{$vo.department}</span><span class="else"> </span>
             </a>
         </li>
-        <li class="list_itme">
-        <a class="info" href="#">
-            <span class="seq">02</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-        </a>
-    </li>
-        <li class="list_itme">
-        <a class="info" href="#">
-            <span class="seq">03</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-        </a>
-    </li>
-        <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">04</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-            </a>
-        </li>
-        <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">01</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-            </a>
-        </li>
-        <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">05</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-            </a>
-        </li>
-        <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">06</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-            </a>
-        </li>
-        <li class="list_itme">
-            <a class="info" href="#">
-                <span class="seq">08</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
-            </a>
-        </li>
-
-
-
+        {/volist}
     </ul>
     <!--<div class="tip">上拉加载更多</div>-->
     <!--<div class="loading hidden">-->

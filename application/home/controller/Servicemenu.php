@@ -14,12 +14,15 @@ class Servicemenu extends Base{
      * 主页
      */
     public function index(){
-        $modelAll = [];
+        $modelAll = ServiceItems::where('1=1')->order('department_id, id')->select();
+        $this->assign('modelAll',$modelAll);
+
+        /*$modelAll = [];
         $result = ServiceItems::where('1=1')->group('department_id')->order('department_id')->column('department_id');
         foreach ($result as $key => $department_id){
             $modelAll[$key]['name'] = ServiceItems::where(['department_id' => $department_id])->value('department');
             $modelAll[$key]['data'] = ServiceItems::where(['department_id' => $department_id])->order('id')->column('id,name');
-        }
+        }*/
 //        var_dump($modelAll);die;
         $this->assign('modelAll',$modelAll);
         return $this->fetch();
