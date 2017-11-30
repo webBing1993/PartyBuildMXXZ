@@ -63,8 +63,13 @@ class Brand extends Base{
             'pid' => $id,
         );
         $list = BrandDetailModel::where($map)->order('id desc')->select();
-        foreach ($list as $model){
-            $model['images'] = json_decode($model['images'], true);
+        foreach ($list as $key => $model){
+            $images = json_decode($model['images'], true);
+            foreach ($images as $k => $m){
+                $img = Picture::get($m);
+                $images[$k] = $img['path'];
+            }
+            $model['images'] = $images;
         }
         if($list){
 //            $collection = new Collection($list);
