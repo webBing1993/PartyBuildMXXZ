@@ -337,9 +337,9 @@
         })
     }
 
-    function addImg() {
+    function addImg(e) {
         delImg();
-        var fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+        var fileObj = $(e).files[0]; // js 获取文件对象
         var formData = new FormData();
         formData.append("picture",fileObj);
         var url = "{:Url('File/uploadPicture')}"; // 接收上传文件的后台地址
@@ -445,7 +445,7 @@
             '<b>推荐尺寸：750*400px</b>' +
             '</div>'
         $('#frontCovers').append(html);
-    var _last = $('#frontCovers .col-lg-3:last-child').prev();
+        var _last = $('#frontCovers .col-lg-3:last-child').prev();
         _last.find(".img").val(data.data.id);
         //显示图片缩略图
         _last.find("img").attr('src',data.data.path);

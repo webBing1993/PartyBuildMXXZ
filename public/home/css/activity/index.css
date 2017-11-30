@@ -38,7 +38,7 @@
 }
 .lists>ul>a,.lists>ul>li{
     display: block;
-    padding:4vw;
+    padding:2vw 4vw;
     border-bottom:1.3vw solid #f7f7f7;
 }
 .lists>ul>a>p{
@@ -228,4 +228,15 @@ votes ul > li .comments .comment {
     padding-left: 1.8rem;
     float: right;
     text-indent: 0;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa:before {
+    content: "\f105";
 }
