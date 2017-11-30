@@ -22,7 +22,7 @@
         var settings = {
             threshold       : 0,
             failure_limit   : 0,
-            event           : "scroll.lazyload",
+            event           : "lazyload",
             effect          : "show",
             container       : window,
             data_attribute  : "original",
