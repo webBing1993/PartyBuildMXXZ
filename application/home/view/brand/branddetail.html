@@ -113,23 +113,24 @@
                     }
                     $('.swiper-wrapper').html(html);
                     var swiper = new Swiper('.swiper-container1', {
-                        lazyLoading : true,
+                        lazyLoading: true,
+                        pagination : '.swiper-pagination',
+                        paginationType : 'fraction',
+                        prevButton:'.swiper-button-prev',
+                        nextButton:'.swiper-button-next',
+                        loop:true
 //                        lazyLoadingInPrevNext : true,
 //                        lazyLoadingInPrevNextAmount : 2,
-//        loop:true,
-//        pagination: {
-//            el: '.swiper-pagination',
-//            type: 'fraction'
-//        },
-//        navigation: {
-//            nextEl: '.swiper-button-next',
-//            prevEl: '.swiper-button-prev',
-//        },
-//        preloadImages: false,
-//        // Enable lazy loading
-//        lazyLoading: true
+//                        pagination: {
+//                            el: '.swiper-pagination',
+//                            type: 'fraction'
+//                        },
+//                        navigation: {
+//                            nextEl: '.swiper-button-next',
+//                            prevEl: '.swiper-button-prev',
+//                        },
                     });
-                    console.log(html)
+//                    console.log(html)
                 }
             }
         }
