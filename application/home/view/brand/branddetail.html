@@ -2,7 +2,7 @@
 
 {block name="style"}
 <title>品牌项目</title>
-<link rel="stylesheet" href="/home/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" href="/home/css/swiper.css">
 <style>
     .serveries {position: relative;margin: 0 auto;width:100%; border-bottom: 1px solid #f1f1f1; padding-bottom: 5.33vw;}
     .serverContent {width:90%;position: relative;margin: auto;}
@@ -36,7 +36,9 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
+        height:50vw;
     }
+    /*.banner .swiper-slide div {width:100%;height:50vw;}*/
     .banner img {width:87.2vw;height:40vw;position: relative;border-radius: 8px;}
     .banner .swiper-pagination {width:10.7vw;height:4.8vw;line-height:4.8vw;background: #fff;right:13.33vw;left:inherit;bottom:inherit;top:4vw;border-radius: 20px;color: #ff7041;font-size: 1.2rem;box-shadow: 0 0 2px rgba(0,0,0,.2) }
     .num {position: absolute;top:0;right:0;}
@@ -56,11 +58,19 @@
     </div>
     <div class="serverBanner">
         <div class="banner">
-            <div class="swiper-container1">
+            <div class="swiper-container1 swiper-container-horizontal">
                 <div class="swiper-wrapper">
-                    {volist name="vo.images" id='v'}
-                    <div class="swiper-slide"><img src="/home/images/banner/bg.jpg" data-original="{$v|get_cover='path'}" alt=""></div>
-                    {/volist}
+                    <!--<div class="swiper-slide">-->
+                        <!--<img data-src="path/to/picture-1.jpg" class="swiper-lazy">-->
+                        <!--<div class="swiper-lazy-preloader"></div>-->
+                    <!--</div>-->
+                    <!--<div class="swiper-slide">-->
+                        <!--<img data-src="path/to/picture-2.jpg" class="swiper-lazy">-->
+                        <!--<div class="swiper-lazy-preloader"></div>-->
+                    <!--</div>-->
+                    <!--<div class="swiper-slide">-->
+                        <!--<div data-background="path/to/picture-3.jpg" class="swiper-lazy">slide3</div>-->
+                    <!--</div>-->
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
@@ -75,19 +85,55 @@
 
 
 {block name="script"}
-<script src="/home/js/swiper.min.js"></script>
+<script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
 <script>
-
-    var swiper = new Swiper('.swiper-container1', {
-        loop:true,
-        pagination: {
-            el: '.swiper-pagination',
-            type: 'fraction'
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+    var _id = '{$id}';
+    var url     = "{:Url('Brand/branddetailapi')}";
+    var data    = {id:_id}
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: url,
+        data: data,
+        success: function (data) {
+            if (!data.code==1) {
+                alert(data.msg);
+            } else {
+                console.log(data)
+                var list = data.data;
+                var _length = data.data.length;
+                for(var i=0;i<_length;i++){
+                    var html = '';
+                    for(var j =0;j<list[i].images.length;j++){
+                       html +='<div class="swiper-slide">'
+                                +'<img data-src="'+list[i].images[j]+'" class="swiper-lazy" alt="">'
+                                +'<div class="swiper-lazy-preloader"></div>'
+//                                +'<div data-background="'+list[i].images[j]+'" class="swiper-lazy"></div>'
+                                +'</div>'
+                    }
+                    $('.swiper-wrapper').html(html);
+                    var swiper = new Swiper('.swiper-container1', {
+                        lazyLoading : true,
+//                        lazyLoadingInPrevNext : true,
+//                        lazyLoadingInPrevNextAmount : 2,
+//        loop:true,
+//        pagination: {
+//            el: '.swiper-pagination',
+//            type: 'fraction'
+//        },
+//        navigation: {
+//            nextEl: '.swiper-button-next',
+//            prevEl: '.swiper-button-prev',
+//        },
+//        preloadImages: false,
+//        // Enable lazy loading
+//        lazyLoading: true
+                    });
+                    console.log(html)
+                }
+            }
+        }
     });
+
 </script>
 {/block}
