@@ -38,4 +38,11 @@ class Servicemenu extends Base{
         $this->assign('model',$model);
         return $this->fetch();
     }
+    /**
+     * 二次开发主页
+     *
+     */
+    public function newindex(){
+        return $this->fetch();
+    }
 }
