@@ -236,6 +236,7 @@ votes ul > li .comments .comment {
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin-left:2vw;
 }
 .fa:before {
     content: "\f105";

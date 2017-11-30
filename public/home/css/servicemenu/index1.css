@@ -12,9 +12,9 @@ body{
 .list_main{
     width: 95vw;
     margin: 0 auto;
-    padding-bottom:10vw;
+    padding-bottom:8vw;
     border-radius: 1vw;
-    box-shadow: 1px 3px 3px rgba(102, 102, 102, 0.2);
+    box-shadow: 0px 0px 9px rgba(102, 102, 102, 0.2);
     margin-top: 5vw;
 
 }

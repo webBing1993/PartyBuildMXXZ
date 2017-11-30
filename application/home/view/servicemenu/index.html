@@ -2,40 +2,54 @@
 
 {block name="style"}
 <title>服务菜单</title>
-<link rel="stylesheet" href="/home/css/servicemenu/index.css">
-<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/servicemenu/index1.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 {/block}
 
 {block name="body"}
+<!--banner-->
 <div class="banner">
-    <img src="/home/images/banner/banner2.png" alt="组织架构banner" class="banner-img">
+    <img src="/home/images/banner/1.jpg" alt="">
 </div>
-<div class="menu">
-    {volist name="modelAll" id="vo"}
-    <div class="menu_lists">
-        <div class="list_name">
-            <div class=" list_iocn_{$key+1}">{$vo.name}</div>
-        </div>
-        {volist name="vo.data" id="v"}
-        <a href="{:Url('servicemenu/detail?id='.$key)}">
-            <span>{$v}</span> <span class="fa"></span>
-        </a>
-        {/volist}
-        <a href="/home/servicemenu/newindex.html">12131313223</a>
+<!--表格列表-->
+<div class="list_main">
+    <div class="list_title">
+        <span class="seq">序号</span ><span class="matter">服务事项</span><span class="section">部门</span><span class="else"></span>
     </div>
-    {/volist}
+    <ul class="lists">
+        <!--循环体-->
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">01</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+    </ul>
+    <!--<div class="tip">上拉加载更多</div>-->
+    <!--<div class="loading hidden">-->
+        <!--<div class="typing_loader"></div>-->
+    <!--</div>-->
 </div>
+
 {/block}
 
 {block name="script"}
-<!--<script src="/home/js/reset.js"></script>-->
+<script src="/home/js/reset.js"></script>
 <script>
+   $(function () {
+       //点击背景触发active
+       $(".lists_itme").on("touchstart","a",function(){
+           $(this).css("backgroundColor","rgba(0,0,0,.1)");
+       }).on("touchend","a", function () {
+           $(this).css("backgroundColor","#fff");
+       });
+      //颜色变换
+       $(".lists>li").each(function(){
+           if($(this).index() %2 !==0){
+               $(this).css('background','#f1f1f1')
+           }
+       });
+   })
 
-    //点击背景触发active
-    $(".menu_lists").on("touchstart","a",function(){
-        $(this).css("backgroundColor","rgba(0,0,0,.1)");
-    }).on("touchend","a", function () {
-        $(this).css("backgroundColor","#fff");
-    });
+
 </script>
 {/block}

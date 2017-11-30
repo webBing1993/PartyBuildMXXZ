@@ -1,0 +1,41 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>服务菜单</title>
+<link rel="stylesheet" href="/home/css/servicemenu/index.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+{/block}
+
+{block name="body"}
+<div class="banner">
+    <img src="/home/images/banner/banner2.png" alt="组织架构banner" class="banner-img">
+</div>
+<div class="menu">
+    {volist name="modelAll" id="vo"}
+    <div class="menu_lists">
+        <div class="list_name">
+            <div class=" list_iocn_{$key+1}">{$vo.name}</div>
+        </div>
+        {volist name="vo.data" id="v"}
+        <a href="{:Url('servicemenu/detail?id='.$key)}">
+            <span>{$v}</span> <span class="fa"></span>
+        </a>
+        {/volist}
+        <a href="/home/servicemenu/newindex.html">12131313223</a>
+    </div>
+    {/volist}
+</div>
+{/block}
+
+{block name="script"}
+<!--<script src="/home/js/reset.js"></script>-->
+<script>
+
+    //点击背景触发active
+    $(".menu_lists").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+</script>
+{/block}
