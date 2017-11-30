@@ -50,6 +50,7 @@ class Brand extends Base{
             $model['images'] = json_decode($model['images'], true);
         }
         $this->assign('list',$list);
+        $this->assign('id',$id);
         return $this->fetch();
     }
     /*
