@@ -4,6 +4,10 @@
 <title>服务菜单</title>
 <link rel="stylesheet" href="/home/css/servicemenu/index1.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
+<style>
+    a:active {background-color: rgba(0,0,0,.1)}
+</style>
+
 {/block}
 
 {block name="body"}
@@ -23,6 +27,44 @@
                 <span class="seq">01</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
             </a>
         </li>
+        <li class="list_itme">
+        <a class="info" href="#">
+            <span class="seq">02</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+        </a>
+    </li>
+        <li class="list_itme">
+        <a class="info" href="#">
+            <span class="seq">03</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+        </a>
+    </li>
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">04</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">01</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">05</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">06</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+        <li class="list_itme">
+            <a class="info" href="#">
+                <span class="seq">08</span ><span class="matter">组织关系转接</span><span class="section">工会</span><span class="else"> </span>
+            </a>
+        </li>
+
+
+
     </ul>
     <!--<div class="tip">上拉加载更多</div>-->
     <!--<div class="loading hidden">-->
@@ -36,12 +78,6 @@
 <script src="/home/js/reset.js"></script>
 <script>
    $(function () {
-       //点击背景触发active
-       $(".lists_itme").on("touchstart","a",function(){
-           $(this).css("backgroundColor","rgba(0,0,0,.1)");
-       }).on("touchend","a", function () {
-           $(this).css("backgroundColor","#fff");
-       });
       //颜色变换
        $(".lists>li").each(function(){
            if($(this).index() %2 !==0){
@@ -49,6 +85,12 @@
            }
        });
    })
+   //点击背景触发active
+//   $(".list_itme").on("touchstart","a",function(){
+//       $(this).css("backgroundColor","rgba(0,0,0,.1)");
+//   }).on("touchend","a", function () {
+//       $(this).css("backgroundColor","#fff");
+//   });
 
 
 </script>
