@@ -14,7 +14,7 @@
         <!--活动列表-->
         <div class="notices">
             <div class="banner">
-                <img src="/home/images/banner/banner.png" alt="">
+                <img src="/home/images/banner/1.jpg" alt="">
             </div>
             <div class="notice regularmore">
                 <div class="lists">
@@ -23,7 +23,7 @@
                             <a  href="{:Url('Activity/activitydetails?id='.$lo['id'])}" class="clear" >
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
-                                <span class="lists time">{$lo.create_time|time_format='Y-m-d'}</span>
+                                <span class="lists time"><i class="fl">{$lo.create_time|time_format='Y-m-d'}</i><i  class="read fr">47</i></span>
                             </a>
                             {/volist}
                         </ul>
@@ -161,8 +161,8 @@
                     '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.description+'</span>'+
-                    '<span class="lists time">'+list.time+'</span>'+
-//                    '<i >进入认领<img src="/home/images/activity/arrow.png"></i>'+
+//                    '<span class="lists time">'+list.time+'</span>'+
+                  '<span class="lists time"><i class="fl">'+list.time+'</i><i  class="read fr">'+list.views  +'</i></span>'+
                     '</a>';
             } else {
                 html +=

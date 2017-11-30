@@ -39,7 +39,7 @@
 .lists>ul>a,.lists>ul>li{
     display: block;
     padding:4vw;
-    border-bottom: 1px solid #f7f7f7;
+    border-bottom:1.3vw solid #f7f7f7;
 }
 .lists>ul>a>p{
     font-size: 1.4rem;
@@ -52,10 +52,19 @@
     color: #999;
     display: block;
     text-align: justify;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 .lists.time{
     display: block;
-    margin-top: 4vw;
+  margin-top: 2vw;
+
+}
+.lists.time i{
+    font-style: normal;
+    display: block;
 }
 .lists>ul>a>i{
     font-style: inherit;
@@ -213,4 +222,10 @@ votes ul > li .comments .comment {
 .bottom .send:active {
     background: #fafafa;
 }
-
+.lists>.read {
+    background: url(/home/images/detail/scan_.png) 0 center no-repeat;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 1.8rem;
+    float: right;
+    text-indent: 0;
+}
