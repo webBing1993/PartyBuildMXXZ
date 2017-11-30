@@ -23,7 +23,9 @@
                             <a  href="{:Url('Activity/activitydetails?id='.$lo['id'])}" class="clear" >
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
-                                <span class="lists time"><i class="fl">{$lo.create_time|time_format='Y-m-d'}</i><i  class="read fr">47</i></span>
+                                <span class="lists time">
+                                    <i class="fl">{$lo.create_time|time_format='Y-m-d'}</i>
+                                    <i  class="read fr">{$lo.views} <em class="fa"></em></i></span>
                             </a>
                             {/volist}
                         </ul>
@@ -162,7 +164,7 @@
                     '<p>'+list.title+'</p>'+
                     '<span>'+list.description+'</span>'+
 //                    '<span class="lists time">'+list.time+'</span>'+
-                  '<span class="lists time"><i class="fl">'+list.time+'</i><i  class="read fr">'+list.views  +'</i></span>'+
+                  '<span class="lists time"><i class="fl">'+list.time+'</i><i  class="read fr">'+list.views  +'<em class="fa"></em></i></span>'+
                     '</a>';
             } else {
                 html +=
