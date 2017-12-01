@@ -150,6 +150,28 @@
 </div>
 <!--通知公告-->
 <div class="bulletin" id="side1" style="display: block">
+    {volist name="top_notice" id="ta"}
+    <a href="{:Url('forumnotice?id='.$ta['id'])}" class="list">
+        <div class="list_info">
+            <div class="info_text">
+                {if condition="($ta['type'] == 1)"}
+                    <i class="tz">通知</i>
+                {/if}
+                {if condition="($ta['type'] == 2)"}
+                    <i class="gg">公告</i>
+                {/if}
+                {if condition="($ta['type'] == 3)"}
+                    <i class="gs">公示</i>
+                {/if}
+                {$ta.title}
+            </div>
+            <div class="time">
+                <span class="time_ls">{$ta['create_time']|time_format='Y-m-d'}</span>
+                <i class="fa"></i>
+            </div>
+        </div>
+    </a>
+    {/volist}
     <!--通知文件-->
     <a href="/home/college/forummatter/id/2.html" class="list">
         <div class="list_info">
