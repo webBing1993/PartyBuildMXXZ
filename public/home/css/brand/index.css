@@ -1,18 +1,18 @@
 .brand_main .list{
   width: 90vw;
-  margin: 0 auto;
+  margin: 4vw auto 0;
   height:42.6vw;
   display: block;
-    background-color: #000;
     position: relative;
     -moz-opacity:0.8;
     opacity:0.8;
-    margin-top: 4vw;
     border-radius: 3vw;
+    text-align: center;
+    line-height: 42.6vw;
 }
 .brand_main  .list img{
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
     border-radius: 3vw;
 }
 .br_info{

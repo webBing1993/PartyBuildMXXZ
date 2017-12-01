@@ -36,10 +36,12 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
-        height:50vw;
+        height:40vw;
+        padding: 5vw;
+        margin: 5vw 0;
     }
     /*.banner .swiper-slide div {width:100%;height:50vw;}*/
-    .banner img {width:87.2vw;height:40vw;position: relative;border-radius: 8px;}
+    .banner img {position: relative;border-radius: 8px;}
     .banner .swiper-pagination {width:10.7vw;height:4.8vw;line-height:4.8vw;background: #fff;right:13.33vw;left:inherit;bottom:inherit;top:4vw;border-radius: 20px;color: #ff7041;font-size: 1.2rem;box-shadow: 0 0 2px rgba(0,0,0,.2) }
     .num {position: absolute;top:0;right:0;}
     .banner .swiper-button-next , .banner .swiper-button-prev  {width:8.53vw;height:8.53vw;margin-top: -4.3vw;}
@@ -60,10 +62,12 @@
         <div class="banner">
             <div class="swiper-container1">
                 <div class="swiper-wrapper">
+
                     {volist name="vo.images" id='v'}
                     <div class="swiper-slide">
                         <img data-src="{$v|get_cover='path'}" class="swiper-lazy" alt="">
-                        <div class="swiper-lazy-preloader"></div>
+                        <!--<img   alt="">-->
+                        <!--<div class="swiper-lazy-preloader"></div>-->
                     </div>
                     {/volist}
                 </div>
@@ -105,7 +109,7 @@
 <script>
     var _id = '{$id}';
     var url     = "{:Url('Brand/branddetailapi')}";
-    var data    = {id:_id}
+    var data    = {id:_id};
     $.ajax({
         type: 'POST',
         dataType: 'json',
@@ -171,6 +175,8 @@
             }
         }
     });
+
+
     //                    var html = '';
     //                    for(var j =0;j<list[i].images.length;j++){
     //                       html +='<div class="swiper-slide">'
