@@ -166,4 +166,10 @@ class Dreamflash extends Base {
         return $this->fetch();
     }
 
+     /*
+      *
+      */
+    public function newindex(){
+        return $this->fetch();
+    }
 }
