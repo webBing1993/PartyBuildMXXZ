@@ -5,15 +5,40 @@
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/index/index1.css">
 <link rel="stylesheet" href="/home/css/all.css">
-  <style>
-      a:active{
-          opacity: .6;
-      }
-  </style>
+<link rel="stylesheet" href="/home/css/swiper-3.4.2.min.css">
+<style>
+    .swiper-pagination-bullet-active{background-color: #999999;}
+    .swiper-pagination-bullet{background-color: #f1f1f1;}
+    .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{ bottom: 0 ;}
+</style>
 {/block}
 {block name="body"}
 <!--banner-->
 <div class="banners">
+    <div class="banner">
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                <!--循环体-->
+                <div class="swiper-slide">
+                    <a href="#">
+                        <img src="/home/images/banner/banner12.jpg" alt="">
+                        <div class="title limit">创业先锋营，选拔活动</div>
+                    </a>
+                </div>
+                <!--循环体-->
+                <div class="swiper-slide">
+                    <a href="">
+                        <img src="/home/images/banner/bannerhd.jpg" alt="">
+                        <div class="title limit">【奔跑吧梦想】梦想小镇夜跑嘉年华</div>
+                    </a>
+                </div>
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
     <img src="/home/images/banner/banner.jpg" alt="banner">
     <a  class="exit">
         <img src="/home/images/index/exit.png" alt="">
@@ -50,6 +75,7 @@
 </div>
 {/block}
 {block name="script"}
+<script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
 <script>
     $(function(){
         $(".exit").on("click",function(){
@@ -74,6 +100,13 @@
                     },1000)
                 });
         })
+        var swiper = new Swiper('.swiper-container1', {
+            pagination: '.swiper-pagination',
+            dynamicBullets: true,
+            autoplayDisableOnInteraction : false,
+            autoplay:5000,
+            loop:true
+        });
     });
 
     //正在调试开发项目
