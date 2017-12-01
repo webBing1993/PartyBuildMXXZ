@@ -69,6 +69,7 @@
     border-bottom-left-radius: 10vw;
     position: relative;
     left:-43vw;
+    opacity: 0;
     /*margin-left: -43vw;*/
 }
 .main .itme .fr{
@@ -77,6 +78,7 @@
     border-bottom-right-radius: 10vw;
     position: relative;
     right:-43vw;
+    opacity: 0;
     /*margin-right: -43vw;*/
 }
 .main{

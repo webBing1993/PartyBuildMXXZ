@@ -83,12 +83,14 @@
    for(var k=0;k<_length;k++){
        if(k%2==0){
            _this.eq(k).animate({
-               left:0
-           },k*200)
+               left:0,
+               opacity:1
+           },1000+k*200)
        }else {
            _this.eq(k).animate({
-               right:0
-           },k*200)
+               right:0,
+               opacity:1
+           },1000+k*200)
        }
    }
    console.log($(".itme>a").eq(9))
