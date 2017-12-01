@@ -60,14 +60,6 @@
         border-radius: 3vw;
         opacity: 0.3;
     }
-
-
-    #newActive {position: relative;margin: auto;overflow: hidden;width:100%;}
-    #newActive ul {position: relative;width:100%;margin: auto;}
-    #newActive li {width:50vw;height:33.38vw;border-bottom: 1px solid #eee;text-align: center;display: block;float:left;line-height: 33.33vw;}
-    #newActive li:nth-child(odd) {border-right: 1px solid #eee;}
-    #newActive img {width:34.667vw;height:21.333vw;position: relative;vertical-align: middle;}
-
 </style>
 {/block}
 {block name="body"}
@@ -78,21 +70,23 @@
     <span class="triangle-up"></span>
 </div>
  <!--社团活动-->
-<div class="notices " style="margin-bottom: inherit;">
-    <div id="newActive">
-        <ul>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-        </ul>
+<div class="notices ">
+    <div class="banner">
+        <img src="/home/images/banner/banner5.png" alt="">
     </div>
+    <div class="mass">
+        {volist name="clublist" id="vo"}
+        <a href="{:Url('club/detail?id='.$vo.id)}" class="list">
+            <img src="{$vo.front_cover|get_cover='path'}" alt="">
+            <div class="list_info">
+                <div class="info_text">{$vo.title}</div>
+                <div class="time"> <span>建立时间 : {$vo.set_date|time_format='Y-m-d'}</span><span class="fa"></span></div>
+            </div>
+        </a>
+        {/volist}
+
+       <div class="tip"></div>
+   </div>
 </div>
 <!--志愿服务-->
 <div class="notices hidden">
@@ -126,8 +120,6 @@
 <script src="/home/js/reset.js"></script>
 
 <script>
-
-
     var scrollNow = true;
     var club = localStorage.getItem('club');
 
