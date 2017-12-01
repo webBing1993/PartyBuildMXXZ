@@ -77,6 +77,47 @@
 {block name="script"}
 <script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
 <script>
+
+   var _length = $(".itme>a").length;
+   var _this = $(".itme>a");
+   for(var k=0;k<_length;k++){
+       if(k%2==0){
+           _this.eq(k).animate({
+               left:0
+           },k*200)
+       }else {
+           _this.eq(k).animate({
+               right:0
+           },k*200)
+       }
+   }
+   console.log($(".itme>a").eq(9))
+
+
+//    $(function(){
+//        function sA(s,a,t){
+//            s.animate(a,t || "normal",function(){
+//                if(s.next().length){
+//                    sA(s.next(),a,t);
+//                }
+//            });
+//        }
+//        var test = $(".itme>a");
+//        var testA = {"left":0};
+//        var testB = {"right":0};
+////        console.log(test.eq(2))
+//        for(var i=0;i<$('.itme a').length;i++){
+//            if(i%2==0){
+//                sA(test.eq(i),testA,2000);
+//            }else {
+//                sA(test.eq(i),testB,2000);
+//            }
+//        }
+//
+////        sA(test.eq(0),testA,3000);
+//    });
+
+
     $(function(){
         $(".exit").on("click",function(){
             swal({
@@ -108,7 +149,6 @@
             loop:true
         });
     });
-
     //正在调试开发项目
     function dataProject () {
         swal({
