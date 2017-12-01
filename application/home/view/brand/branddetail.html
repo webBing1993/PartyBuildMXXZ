@@ -49,17 +49,12 @@
 </style>
 {/block}
 {block name="body"}
-{volist name="list" id="vo"}
-<div class="serveries">
-    <div class="serverContent">
-        <span class="border"></span>
-        <div class="serverTitle">{$vo.title}</div>
-        <div class="serverText">{$vo.content}</div>
-    </div>
-    <div class="serverBanner">
-        <div class="banner">
-            <div class="swiper-container1 swiper-container-horizontal">
-                <div class="swiper-wrapper" style="height:50vw;">
+<!--<div class="serveries">-->
+    <!--<div class="serverContent"><span class="border"></span><div class="serverTitle"></div><div class="serverText"></div></div>-->
+    <!--<div class="serverBanner">-->
+        <!--<div class="banner">-->
+            <!--<div class="swiper-container swiper-container-horizontal">-->
+                <!--<div class="swiper-wrapper" style="height:50vw;">-->
                     <!--<div class="swiper-slide">-->
                         <!--<img data-src="path/to/picture-1.jpg" class="swiper-lazy">-->
                         <!--<div class="swiper-lazy-preloader"></div>-->
@@ -71,16 +66,15 @@
                     <!--<div class="swiper-slide">-->
                         <!--<div data-background="path/to/picture-3.jpg" class="swiper-lazy">slide3</div>-->
                     <!--</div>-->
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"><img src="/home/images/feedback/right.png" alt=""></div>
-                <div class="swiper-button-prev"><img src="/home/images/feedback/left.png" alt=""></div>
-            </div>
-        </div>
-    </div>
-</div>
-{/volist}
+                <!--</div>-->
+                <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
+                <!--<div class="swiper-pagination"></div>-->
+                <!--<div class="swiper-button-next"><img src="/home/images/feedback/right.png" alt=""></div>-->
+                <!--<div class="swiper-button-prev"><img src="/home/images/feedback/left.png" alt=""></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 {/block}
 
 
@@ -102,39 +96,45 @@
                 console.log(data)
                 var list = data.data;
                 var _length = data.data.length;
+                var str ='';
                 for(var i=0;i<_length;i++){
-                    var html = '';
-                    for(var j =0;j<list[i].images.length;j++){
-                       html +='<div class="swiper-slide">'
-                                +'<img data-src="'+list[i].images[j]+'" class="swiper-lazy" alt="">'
-                                +'<div class="swiper-lazy-preloader"></div>'
-//                                +'<div data-background="'+list[i].images[j]+'" class="swiper-lazy"></div>'
-                                +'</div>'
-                    }
-                    $('.swiper-wrapper').html(html);
-                    var swiper = new Swiper('.swiper-container1', {
-                        lazyLoading: true,
-                        pagination : '.swiper-pagination',
-                        paginationType : 'fraction',
-                        prevButton:'.swiper-button-prev',
-                        nextButton:'.swiper-button-next',
-                        loop:true,
-                        lazyLoadingInPrevNext : true,
-                        lazyLoadingInPrevNextAmount : 2,
-//                        pagination: {
-//                            el: '.swiper-pagination',
-//                            type: 'fraction'
-//                        },
-//                        navigation: {
-//                            nextEl: '.swiper-button-next',
-//                            prevEl: '.swiper-button-prev',
-//                        },
-                    });
-//                    console.log(html)
+                     str = '<div class="serveries">'
+                        +'    <div class="serverContent"><span class="border"></span><div class="serverTitle">'+list[i].title+'</div><div class="serverText">'+list[i].content+'</div></div>'
+                        +'</div>';
+                    $('body').html(str);
+
                 }
+//                console.log(str)
+
             }
         }
     });
+
+
+
+    //                    var html = '';
+    //                    for(var j =0;j<list[i].images.length;j++){
+    //                       html +='<div class="swiper-slide">'
+    //                                +'<img data-src="'+list[i].images[j]+'" class="swiper-lazy" alt="">'
+    //                                +'<div class="swiper-lazy-preloader"></div>'
+    ////                                +'<div data-background="'+list[i].images[j]+'" class="swiper-lazy"></div>'
+    //                                +'</div>'
+    //                    }
+    //                    str +='<div class="swiper-container'+i+' swiper-container-horizontal">'
+    //                        +'<div class="swiper-wrapper" style="height:50vw;">'
+    //                        +html
+    //                        +'</div>'
+    //                        +'</div>'
+//    var swiper = new Swiper('.swiper-container', {
+    //                    lazyLoading: true,
+    //                    pagination: '.swiper-pagination',
+    //                    paginationType: 'fraction',
+    //                    prevButton: '.swiper-button-prev',
+    //                    nextButton: '.swiper-button-next',
+    //                    loop: true,
+    //                    lazyLoadingInPrevNext: true,
+    //                    lazyLoadingInPrevNextAmount: 2
+    //                });
 
 </script>
 {/block}

@@ -50,12 +50,17 @@
 .lists>ul>a>span{
     font-size: 1.3rem;
     color: #999;
-    display: block;
-    text-align: justify;
+    /*display: block;*/
+    /*text-align: justify;*/
+    /*display: -webkit-box;*/
+    /*-webkit-box-orient: vertical;*/
+    /*-webkit-line-clamp: 3;*/
+    /*overflow: hidden;*/
+    overflow : hidden;
+    text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 .lists.time{
     display: block;
