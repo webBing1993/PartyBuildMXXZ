@@ -82,13 +82,15 @@
     /*margin-right: -43vw;*/
 }
 .main{
-    padding: 5vw 5vw 4vw 5vw;
+    /*padding: 5vw 5vw 4vw 5vw;*/
 }
 .main .itme{
-  width: 90vw;
+    width: 100vw;
     margin-top: 5vw;
     overflow: hidden;
+
 }
+
 .main .itme a{
     display: block;
     height: 18.6vw;
