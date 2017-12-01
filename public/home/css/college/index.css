@@ -12,9 +12,7 @@
 .fa:before {
     content: "\f105";
 }
-.list .list_info{
-    margin-left: 3vw;
-}
+
 .list .time{
     line-height: 6vw;
     color: #999;

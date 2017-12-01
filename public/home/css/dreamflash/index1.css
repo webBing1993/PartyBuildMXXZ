@@ -13,7 +13,6 @@
     content: "\f105";
 }
 .list .list_info{
-    margin-left: 3vw ;
     width: 64vw;
 }
 .list .time{
@@ -38,8 +37,8 @@
     display: flex;
 }
 .list  img{
-    width: 24vw;
-    height: 18vw;
+    width: 27vw;
+    height: 19vw;
     border-radius: 1vw;
     margin-left: 3vw;
 }

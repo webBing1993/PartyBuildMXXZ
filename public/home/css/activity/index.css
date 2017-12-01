@@ -44,18 +44,12 @@
 .lists>ul>a>p{
     font-size: 1.4rem;
     color: #333;
-    margin-bottom: 3vw;
-    text-align: justify;
+    margin-bottom: 2vw;
+
 }
 .lists>ul>a>span{
     font-size: 1.3rem;
     color: #999;
-    /*display: block;*/
-    /*text-align: justify;*/
-    /*display: -webkit-box;*/
-    /*-webkit-box-orient: vertical;*/
-    /*-webkit-line-clamp: 3;*/
-    /*overflow: hidden;*/
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
