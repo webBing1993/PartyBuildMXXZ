@@ -34,7 +34,7 @@ class Dreamflash extends Base {
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list2 = DreamFlashModel::where($map)->limit(5)->order('id desc')->select();
+        $list2 = DreamFlashModel::where($map)->limit(10)->order('id desc')->select();
         $this->assign('list2',$list2);
         return $this->fetch();
     }
