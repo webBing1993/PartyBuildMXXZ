@@ -119,7 +119,19 @@
                 var list = data.data;
                 var _length = data.data.length;
                 var str ='';
-                for(var i=0;i<_length;i++){
+                if(_length == 1){
+                    var swiper = new Swiper('.swiper-container1', {
+                        lazyLoading: true,
+                        pagination: '.swiper-pagination',
+                        paginationType: 'fraction',
+                        prevButton: '.swiper-button-prev',
+                        nextButton: '.swiper-button-next',
+                        loop: true,
+                        lazyLoadingInPrevNext: true,
+                        lazyLoadingInPrevNextAmount: 2
+                    });
+                }else {
+                    for(var i=0;i<_length;i++){
 //                    var html = '';
 //                    for (var j = 0; j < list[i].images.length; j++) {
 //                        html += '<div class="swiper-slide">'
@@ -139,18 +151,20 @@
 //                         +'</div>'
 //                         +'</div>';
 //                    $('body').html(str);
-                    var swiper = new Swiper('.swiper-container'+i, {
-                        lazyLoading: true,
-                        pagination: '.swiper-pagination',
-                        paginationType: 'fraction',
-                        prevButton: '.swiper-button-prev',
-                        nextButton: '.swiper-button-next',
-                        loop: true,
-                        lazyLoadingInPrevNext: true,
-                        lazyLoadingInPrevNextAmount: 2
-                    });
+                        var swiper = new Swiper('.swiper-container'+i, {
+                            lazyLoading: true,
+                            pagination: '.swiper-pagination',
+                            paginationType: 'fraction',
+                            prevButton: '.swiper-button-prev',
+                            nextButton: '.swiper-button-next',
+                            loop: true,
+                            lazyLoadingInPrevNext: true,
+                            lazyLoadingInPrevNextAmount: 2
+                        });
 
+                    }
                 }
+
 
 //                console.log(str)
 
