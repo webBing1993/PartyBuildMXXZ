@@ -64,19 +64,10 @@
     $(function() {
 
         $("img").lazyload({
-            placeholder : "/home/images/banner/loading.gif",
+            placeholder : "",
             effect: "fadeIn"
         });
 
     });
-    function timedMsg() {
-        if($('img').attr('src')=='/home/images/banner/loading.gif'){
-            $('img').css({'width':'48px','height':'48px'})
-        }else {
-            $('img').css({'width':'inherit','height':'inherit'})
-        }
-    }
-        setInterval('timedMsg()','200');
-//
 </script>
 </html>
