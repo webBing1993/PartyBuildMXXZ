@@ -69,6 +69,24 @@
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
+                                <label>封面图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
                             </div>
                             <div class="col-lg-11">
@@ -110,6 +128,19 @@
                         {eq name="msg" value=""}
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
+                                <label>是否推荐:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <label class="i-checks">
+                                    <input type="radio" value="1" name="recommend">是
+                                </label>
+                                <label class="i-checks">
+                                    <input type="radio" checked="" value="0" name="recommend">否
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
                                 <label>是否推送:</label>
                             </div>
                             <div class="col-lg-11">
@@ -123,6 +154,19 @@
                         </div>
                         {else/}
                         <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-lg-1 text-right control-label">
+                                    <label>是否推荐:</label>
+                                </div>
+                                <div class="col-lg-11">
+                                    <label class="i-checks">
+                                        <input type="radio" value="1" name="recommend" {eq name="msg.recommend" value="1"}checked{/eq}>是
+                                    </label>
+                                    <label class="i-checks">
+                                        <input type="radio" value="0" name="recommend" {eq name="msg.recommend" value="0"}checked{/eq}>否
+                                    </label>
+                                </div>
+                            </div>
                             <div class="col-lg-1 text-right control-label">
                                 <label>是否推送:</label>
                             </div>
@@ -236,10 +280,12 @@
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
+                front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
                 description:$("textarea[name='description']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                recommend:$("input[name='recommend']:checked").val(),
                 type:1
             };
             $.ajax({
