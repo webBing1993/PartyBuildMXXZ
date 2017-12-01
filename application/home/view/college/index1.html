@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>梦想快讯</title>
+<title>通知公告</title>
 <link rel="stylesheet" href="/home/css/college/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
@@ -109,7 +109,7 @@
         position: absolute;
         bottom:0vw;
         width: 100vw;
-        height: 12vw;
+         height: 12vw;
         line-height: 12vw;
         z-index: 1;
         background-color: #999;
@@ -128,7 +128,7 @@
 
     }
     .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
-        bottom: 0  ;
+   bottom: 0  ;
     }
     .tabs .tab:nth-child(1)::after {
         content: '';
@@ -143,49 +143,45 @@
 {/block}
 
 {block name="body"}
-<!--tab切换-->
+
 <div class="tabs clear">
     <div class="tab active" data-side="1"><span>通知公告</span></div>
     <div class="tab" data-side="2"><span>重要文件</span></div>
+    <!--<span class="triangle-up"></span>-->
 </div>
-<!--通知公告-->
+
 <div class="bulletin" id="side1" style="display: block">
-    <!--通知文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--通知文件-->
-            <div class="info_text"><i class="tz">通知</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
+    <div class="banner">
+        <div class="swiper-container1">
+            <div class="swiper-wrapper">
+                {volist name="top_notice" id="ta"}
+                <div class="swiper-slide">
+                    <a href="{:Url('forumnotice?id='.$ta['id'])}">
+                        <img src="{$ta.front_cover|get_cover='path'}" alt="">
+                        <div class="title limit">{$ta.title}</div>
+                    </a>
+                </div>
+                {/volist}
             </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
         </div>
-    </a>
-    <!--公告文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--公告文件-->
-            <div class="info_text"><i class="gg">公告</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
+    </div>
+    <div class="page">
+        {volist name="list" id="fno"}
+        <a href="{:Url('College/forumnotice?id='.$fno['id'])}" class="list">
+            <img src="{$fno.front_cover|get_cover='path'}" alt="">
+            <div class="list_info">
+                <div class="info_text">{$fno['title']}</div>
+                <div class="time">
+                    <span class="time_ls">{$fno['create_time']|time_format='Y-m-d'}</span>
+                    <i class="fa"></i>
+                </div>
             </div>
-        </div>
-    </a>
-    <!--公示文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--公示文件-->
-            <div class="info_text"><i class="gs">公示</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
-            </div>
-        </div>
-    </a>
+            {/volist}
+        </a>
     </div>
 </div>
-<!--重要文件-->
 <div class="bulletin" id="side2" >
     <div class="banner">
         <div class="swiper-container2">

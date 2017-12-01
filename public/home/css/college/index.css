@@ -13,15 +13,14 @@
     content: "\f105";
 }
 .list .list_info{
-    margin-left: 3vw ;
-    width: 64vw;
+    margin-left: 3vw;
 }
 .list .time{
     line-height: 6vw;
     color: #999;
-    margin-top: 2vw;
     display: flex;
     justify-content: space-between;
+    font-size: 1.2rem;
 }
 .list .time .end{
     color: red;
@@ -34,7 +33,7 @@
     ont-size: 1.4rem;
     color: #333;
     padding: 3vw;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1.2vw solid #eee;
     display: flex;
 }
 .list  img{
@@ -49,7 +48,7 @@
     -webkit-line-clamp:2;
     overflow: hidden;
     line-height: 6vw;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #333;
 }
 .mass .simple_info{
@@ -227,3 +226,28 @@
 .banner img {width:100%;height:50vw;position: relative;}
 #side2 .list .list_info {width:100%;}
 a:active {background: #eee;}
+
+
+
+.list_info .info_text i{
+    display:inline-block;
+    width:10vw;
+    line-height: 5vw;
+    font-style: normal;
+    text-align: center;
+    font-size: 1.4rem;
+    border-radius:1vw;
+    margin-right: 1.2vw;
+}
+.list_info .info_text .tz{
+    color:#ff1f1f;
+    border: 1px solid #ff1f1f;
+}
+.list_info .info_text .gg{
+    color:#ff9100;
+    border: 1px solid #ff9100;
+}
+.list_info .info_text .gs{
+    color: #0092ff;
+    border: 1px solid #0092ff;
+}

@@ -94,9 +94,101 @@
         </div>
         <img src="/uploads/download/2017-09-15/59bb9301e93b5.png" alt="">
     </a>
-
+    <!--加载更多-->
+    <div class="tip"></div>
+    <div class="loading hidden">
+        <div class="typing_loader"></div>
+    </div>
 </div>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
+<script>
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    $(function(){
+
+        //两学一做上拉加载
+        var len = $('.page>a').length;
+        if(len >= 5){
+            $('.tip' ).text('上拉加载更多');
+        }
+        loadScroll(1);
+
+    });
+    function loadScroll(type){
+
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+            var len = $('.page>a').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var url;
+            if(type == 1){
+                url = "{:Url('dreamflash/indexmore')}";
+            }
+            if(dh == end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: url,
+                    data:{
+                        length:len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        console.log(data);
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addCourse(data,type);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+    function addCourse(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            if(list.type == 1){
+                html+=
+                    '<a href="/home/dreamflash/video/id/'+list.id+'.html" class="list">'+
+                    '<div class="tab">视频</div>'
+            }else{
+                html+=
+                    '<a href="/home/dreamflash/article/id/'+list.id+'.html" class="list">'+
+                    '<div class="tab">图文</div>'
+            }
+            html +=
+                '<img src="'+list.path+'" alt="图片" class="img">'+
+                '<div class="title limit">'+ list.title+'</div>'+
+                '<span class="study">'+ list.views+'人阅读过</span>'+
+                '</a>'
+        }
+        $(".regularmore .lists" ).append(html);
+    }
+    //点击背景触发active
+    $(".page ").on("touchstart","a",function(){
+        $(this).css("backgroundColor","rgba(0,0,0,.1)");
+    }).on("touchend","a", function () {
+        $(this).css("backgroundColor","#fff");
+    });
+
+</script>
 {/block}
