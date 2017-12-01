@@ -10,17 +10,22 @@
 
 {block name="body"}
 <div class="page">
-
-    <a href="/home/college/forumnotice/id/20.html" class="list">
+    {volist name="list2" id="vo"}
+    {eq name="vo.type" value="2"}
+        <a href="{:Url('dreamflash/article?id='.$vo['id'])}" class="list">
+    {else/}
+        <a href="{:Url('dreamflash/video?id='.$vo['id'])}" class="list">
+    {/eq}
         <div class="list_info">
-            <div class="info_text">关于梦想小镇倾力打造原创直播节目 《花点时间》——直播创业者自己的故事的活动通知1</div>
+            <div class="info_text">{$vo.title}</div>
             <div class="time">
-                <span class="time_ls">2017-06-23</span>
+                <span class="time_ls">{$vo['create_time']|time_format='Y-m-d'}</span>
                 <i class="fa"></i>
             </div>
         </div>
-        <img src="/uploads/download/2017-09-15/59bb9301e93b5.png" alt="">
+        <img src="{$vo.front_cover|get_cover='path'}" alt="">
     </a>
+    {/volist}
     <!--加载更多-->
     <div class="tip"></div>
     <div class="loading hidden">
