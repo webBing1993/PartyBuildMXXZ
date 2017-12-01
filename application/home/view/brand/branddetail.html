@@ -49,6 +49,33 @@
 </style>
 {/block}
 {block name="body"}
+{volist name="list" id="vo"}
+<div class="serveries">
+    <div class="serverContent">
+        <span class="border"></span>
+        <div class="serverTitle">{$vo.title}</div>
+        <div class="serverText">{$vo.content}</div>
+    </div>
+    <div class="serverBanner">
+        <div class="banner">
+            <div class="swiper-container1">
+                <div class="swiper-wrapper">
+                    {volist name="vo.images" id='v'}
+                    <div class="swiper-slide">
+                        <img data-src="{$v|get_cover='path'}" class="swiper-lazy" alt="">
+                        <div class="swiper-lazy-preloader"></div>
+                    </div>
+                    {/volist}
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"><img src="/home/images/feedback/right.png" alt=""></div>
+                <div class="swiper-button-prev"><img src="/home/images/feedback/left.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+{/volist}
 <!--<div class="serveries">-->
     <!--<div class="serverContent"><span class="border"></span><div class="serverTitle"></div><div class="serverText"></div></div>-->
     <!--<div class="serverBanner">-->
@@ -58,13 +85,6 @@
                     <!--<div class="swiper-slide">-->
                         <!--<img data-src="path/to/picture-1.jpg" class="swiper-lazy">-->
                         <!--<div class="swiper-lazy-preloader"></div>-->
-                    <!--</div>-->
-                    <!--<div class="swiper-slide">-->
-                        <!--<img data-src="path/to/picture-2.jpg" class="swiper-lazy">-->
-                        <!--<div class="swiper-lazy-preloader"></div>-->
-                    <!--</div>-->
-                    <!--<div class="swiper-slide">-->
-                        <!--<div data-background="path/to/picture-3.jpg" class="swiper-lazy">slide3</div>-->
                     <!--</div>-->
                 <!--</div>-->
                 <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
@@ -80,6 +100,8 @@
 
 {block name="script"}
 <script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
+
+
 <script>
     var _id = '{$id}';
     var url     = "{:Url('Brand/branddetailapi')}";
@@ -98,20 +120,43 @@
                 var _length = data.data.length;
                 var str ='';
                 for(var i=0;i<_length;i++){
-                     str = '<div class="serveries">'
-                        +'    <div class="serverContent"><span class="border"></span><div class="serverTitle">'+list[i].title+'</div><div class="serverText">'+list[i].content+'</div></div>'
-                        +'</div>';
-                    $('body').html(str);
+//                    var html = '';
+//                    for (var j = 0; j < list[i].images.length; j++) {
+//                        html += '<div class="swiper-slide">'
+//                            + '<img data-src="' + list[i].images[j] + '" class="swiper-lazy" alt="">'
+//                            + '<div class="swiper-lazy-preloader"></div>'
+//                            + '</div>'
+//                    }
+//                    console.log(html)
+//                     str += '<div class="serveries">'
+//                         +'<div class="serverContent"><span class="border"></span><div class="serverTitle">'+list[i].title+'</div><div class="serverText">'+list[i].content+'</div></div>'
+//                         +'<div class="serverBanner">'
+//                         +'<div class="banner">'
+//                         +'<div class="swiper-container'+i+' swiper-container-horizontal">'
+//                         +html
+//                         +'</div>'
+//                         +'</div>'
+//                         +'</div>'
+//                         +'</div>';
+//                    $('body').html(str);
+                    var swiper = new Swiper('.swiper-container'+i, {
+                        lazyLoading: true,
+                        pagination: '.swiper-pagination',
+                        paginationType: 'fraction',
+                        prevButton: '.swiper-button-prev',
+                        nextButton: '.swiper-button-next',
+                        loop: true,
+                        lazyLoadingInPrevNext: true,
+                        lazyLoadingInPrevNextAmount: 2
+                    });
 
                 }
+
 //                console.log(str)
 
             }
         }
     });
-
-
-
     //                    var html = '';
     //                    for(var j =0;j<list[i].images.length;j++){
     //                       html +='<div class="swiper-slide">'
