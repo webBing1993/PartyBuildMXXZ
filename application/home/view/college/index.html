@@ -150,7 +150,8 @@
 </div>
 <!--通知公告-->
 <div class="bulletin" id="side1" style="display: block">
-    {volist name="top_notice" id="ta"}
+    <div class="page" >
+    {volist name="list" id="ta"}
     <a href="{:Url('forumnotice?id='.$ta['id'])}" class="list">
         <div class="list_info">
             <div class="info_text">
@@ -172,39 +173,6 @@
         </div>
     </a>
     {/volist}
-    <!--通知文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--通知文件-->
-            <div class="info_text"><i class="tz">通知</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
-            </div>
-        </div>
-    </a>
-    <!--公告文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--公告文件-->
-            <div class="info_text"><i class="gg">公告</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
-            </div>
-        </div>
-    </a>
-    <!--公示文件-->
-    <a href="/home/college/forummatter/id/2.html" class="list">
-        <div class="list_info">
-            <!--公示文件-->
-            <div class="info_text"><i class="gs">公示</i>关于开展“星座大咖面对面-12星座如何度水逆”活动的通知</div>
-            <div class="time">
-                <span class="time_ls">2017-12-01</span>
-                <i class="fa"></i>
-            </div>
-        </div>
-    </a>
     </div>
 </div>
 <!--重要文件-->
@@ -370,14 +338,29 @@
         var html = '';
         var lists = data.data;
         var len = lists.length;
-        console.log(data)
         if(type==1){
             for(var i = 0; i< len;i++){
                 var list = lists[i];
-                html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
-                    +'<img src="'+list.path+'" alt="">'
-                    +'<div class="list_info"><div class="info_text">'+list.title+'</div><div class="time"><span class="time_ls">'+list.create_time+'</span></div></div>'
-                    +'</a>'
+                var aa ={$ta['type']};
+                var t;
+                if(aa==1){
+                    t = '<i class="tz">通知</i>'
+                } else if( aa==2){
+                    t= '<i class="gg">公告</i>'
+                }else  if(aa==3){
+                    t= '<i class="gs">公示</i>'
+                }
+                html+= '<a href="/home/college/forummatter/id/'+list.id+'" class="list">'+
+                    ' <div class="list_info">'+
+                    ' <div class="info_text">' +
+                        t+
+                    list.title+'</div>'+
+                    ' <div class="time">'+
+                   ' <span class="time_ls">'+list.create_time+'</span>'+
+                   '  <i class="fa"></i>'+
+                   ' </div>'+
+                   '</div>'+
+                  '  </a>'
             }
         }else {
             for(var j = 0; j< len;j++){
@@ -390,6 +373,6 @@
 
         $('#side'+type).find('.page').append(html)
     }
-    //
+
 </script>
 {/block}

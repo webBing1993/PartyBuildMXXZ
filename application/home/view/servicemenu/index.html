@@ -17,6 +17,9 @@
 </div>
 <!--表格列表-->
 <div class="list_main">
+    <div class="list_box">
+        <span class="seq">序号</span ><span class="matter">服务事项</span><span class="section">部门</span><span class="else"></span>
+    </div>
     <div class="list_title">
         <span class="seq">序号</span ><span class="matter">服务事项</span><span class="section">部门</span><span class="else"></span>
     </div>
@@ -30,10 +33,7 @@
         </li>
         {/volist}
     </ul>
-    <!--<div class="tip">上拉加载更多</div>-->
-    <!--<div class="loading hidden">-->
-        <!--<div class="typing_loader"></div>-->
-    <!--</div>-->
+
 </div>
 
 {/block}
@@ -48,14 +48,25 @@
                $(this).css('background','#f1f1f1')
            }
        });
+       //页面滚动
+       $(window).scroll(function() {
+           var t = $(window).scrollTop();
+           var set = t+10;
+           var hh =$(".list_main").offset().top;
+           console.log(hh);
+           if(set>hh){
+               $(".list_title").hide();
+               $(".list_box").show();
+           }else {
+               $(".list_title").show();
+               $(".list_box ").hide();
+           }
+       })
    })
-   //点击背景触发active
-//   $(".list_itme").on("touchstart","a",function(){
-//       $(this).css("backgroundColor","rgba(0,0,0,.1)");
-//   }).on("touchend","a", function () {
-//       $(this).css("backgroundColor","#fff");
-//   });
+
+
 
 
 </script>
 {/block}
+

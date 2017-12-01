@@ -72,3 +72,32 @@ body{
 .info .matter{width:49vw;}
 .info  .section{width:16.5vw;}
 .info .else{width:16.5vw; }
+
+
+/*title 固定样式*/
+.list_main  .list_box span{
+    display:block;
+    float: left;
+    text-align: center;
+    border-right:0.5vw solid #eee ;
+    line-height:12vw;
+}
+.list_main  .list_box .seq{ width: 18.6vw;}
+.list_main  .list_box .matter{width:48.5vw;}
+.list_main  .list_box .section{width:16vw;}
+.list_main  .list_box .else{width:16vw; }
+
+.list_main  .list_box {
+    width: 95vw;
+    height: 12vw;
+    background-color: #fff;
+    border-bottom: 0.5vw solid #f1f1f1;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    font-size: 1.6rem;
+    position: fixed;
+    top: 0;
+    left: 2.6vw;
+    display: none;
+}
+
