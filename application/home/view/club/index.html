@@ -134,7 +134,6 @@
 
     var scrollNow = true;
     var club = localStorage.getItem('club');
-    var eq = '';
 
     if(club ==0 ){
         $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
@@ -175,7 +174,7 @@
     $('.tabs>.tab ').on('click',function() {
 
         var ntc = $('.notices');
-         eq = $(this).index();
+        var eq = $(this).index();
         localStorage.setItem('club',eq);
         c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');
@@ -232,7 +231,8 @@
             var ntc = $('.notices');
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-            var len = ntc.eq(type-1).find('.notice:last .list').length;
+//            var len = ntc.eq(type-1).find('.notice:last .list').length;
+            var len = ntc.find('li').length;
             var tip = $(".tip");
             var loading = $('.loading');
             var url= "{:Url('club/indexmore')}";
@@ -245,18 +245,12 @@
                     data:{
                         length:len
                     },
-                    beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
-                    },
                     success:function(data){
-
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
                             console.log(data)
                             addCourse(data,type);
-                            var dataLen =data.data.length;
                             if(data.data.length == 5){
                                 tip.text('上拉加载更多');
                             }
@@ -270,14 +264,15 @@
             }
         })
     }
-    function addCourse(data,eq){
+    function addCourse(data,type){
         var html = '';
         var lists = data.data;
         var len = lists.length;
+        console.log(club)
         for(var i = 0; i< len;i++) {
             var list = lists[i];
-            console.log(eq)
-            if (eq == 0) {
+
+            if (club == 0) {
                 html +=' <li><a href="/home/club/detail/'+list.id+'"><img src="'+list.path+'" alt=""></a></li>'
             }
         }
