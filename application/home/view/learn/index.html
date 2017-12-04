@@ -20,7 +20,7 @@
             <a href="{:Url('special/article?id='.$vo['id'])}" class="list lesson">
                 <div class="tab">图文</div>
                 {/eq}
-                <img data-original="{$vo.front_cover|get_cover='path'}" alt="图片" class="img">
+                <img data-original="{$vo.front_cover|get_cover='path'}" src="/home/images/loding.jpg" alt="图片" class="img lazyLoad">
                 <div class="title limit">{$vo.title}</div>
                 <span class="study">{$vo.views}人阅读过</span>
             </a >
@@ -152,6 +152,7 @@
 
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
+
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
 //            var len = $(".page>a" ).length;

@@ -33,6 +33,7 @@
             placeholder     : "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs="
         };
 
+
         function update() {
             var counter = 0;
 
@@ -175,7 +176,6 @@
         $(function() {
             update();
         });
-
         return this;
     };
 
@@ -184,7 +184,6 @@
 
     $.belowthefold = function(element, settings) {
         var fold;
-
         if (settings.container === undefined || settings.container === window) {
             fold = (window.innerHeight ? window.innerHeight : $window.height()) + $window.scrollTop();
         } else {
