@@ -18,7 +18,7 @@
               <!--循环体-->
               {volist name="list" id="vo"}
                   <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
-                      <img data-original="{$vo.front_cover|get_cover='path'}">
+                      <img  data-original="{$vo.front_cover|get_cover='path'}">
                       <!--<img class="lazy" src="/home/images/index/newindex/fdzd" data-echo="{$vo.front_cover|get_cover='path'}">-->
                       <div class="br_info">
                           <div>{$vo.title}</div>
