@@ -14,21 +14,39 @@
 }
 .list .list_info{
     width: 64vw;
+    position: relative;
 }
 .list .time{
     line-height: 6vw;
     color: #999;
     margin-top: 2vw;
-    display: flex;
-    justify-content: space-between;
+    overflow: hidden;
+
+}
+.list .time .la{
+    width: 64vw;
+    height: 5vw;
+    position: absolute;
+    bottom: 0vw;
+}
+
+
+.time .fade{
+    float: right;
+    background: url(/home/images/servicemenu/jt.png) center no-repeat;
+    background-size: 1.6vw 2.5vw;
+    width: 5vw;
+    height: 5.6vw;
+}
+
+.time_ls{
+    float: left;
 }
 .list .time .end{
     color: red;
     width: 15vw;
 }
-/*.time .time_ls {*/
-/*margin-left: 20vw;*/
-/*}*/
+
 .list{
     ont-size: 1.4rem;
     color: #333;
@@ -134,6 +152,8 @@
 }
 .fa{
     line-height: 6vw;
+    float: right;
+    display: block;
 }
 
 

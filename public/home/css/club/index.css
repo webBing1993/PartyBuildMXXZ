@@ -196,4 +196,8 @@
 .fa{
     line-height: 6vw;
 }
-a:active {background: #eee;}
+a:active {
+    background-color: rgba(0,0,0,.1);
+}
+
+

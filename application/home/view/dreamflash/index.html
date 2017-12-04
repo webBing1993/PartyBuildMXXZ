@@ -19,8 +19,10 @@
         <div class="list_info">
             <div class="info_text">{$vo.title}</div>
             <div class="time">
-                <span class="time_ls">{$vo['create_time']|time_format='Y-m-d'}</span>
-                <i class="fa"></i>
+                <div class="la">
+                    <span class="time_ls">{$vo['create_time']|time_format='Y-m-d'}</span>
+                    <span  class="fade"></span>
+                </div>
             </div>
         </div>
         <img src="{$vo.front_cover|get_cover='path'}" alt="">
@@ -104,17 +106,17 @@
             }else{
                 html+='<a href="/home/dreamflash/article/id/'+list.id+'.html" class="list">'
             }
-            html +=
-                '<div class="list_info">'+
-                '<div class="info_text">'+ list.title+'</div>'+
-                '<div class="time">'+
-                '<span class="time_ls">'+list.time+'</span>'+
-                '<i class="fa"></i>'+
-                '</div>'+
-                '</div>'+
-                '<img src="'+list.path+'" alt="">'+
-                '</a>'
-
+            html += '<div class="list_info">'+
+                    '<div class="info_text">'+ list.title+'</div>'+
+                    ' <div class="time">'+
+                    ' <div class="la">'+
+                    ' <span class="time_ls">'+list.time+'</span>'+
+                    ' <span class="fade"></span>'+
+                    ' </div>'+
+                    ' </div>'+
+                    ' </div>'+
+                    ' <img src="'+list.path+'" alt="">'+
+                    ' </a>'
         }
         $(".page" ).append(html);
 

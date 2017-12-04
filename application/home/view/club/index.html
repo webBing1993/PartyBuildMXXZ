@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/home/css/club/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/club/swiper.min.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
     body {
         background: #fff;
@@ -60,7 +61,6 @@
         border-radius: 3vw;
         opacity: 0.3;
     }
-
 
     #newActive {position: relative;margin: auto;overflow: hidden;width:100%;}
     #newActive ul {position: relative;width:100%;margin: auto;}
@@ -172,7 +172,6 @@
     loadScroll();
     //tab切换
     $('.tabs>.tab ').on('click',function() {
-
         var ntc = $('.notices');
         var eq = $(this).index();
         localStorage.setItem('club',eq);
@@ -245,11 +244,14 @@
                     data:{
                         length:len
                     },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
                     success:function(data){
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
-                            console.log(data)
                             addCourse(data,type);
                             if(data.data.length == 5){
                                 tip.text('上拉加载更多');
