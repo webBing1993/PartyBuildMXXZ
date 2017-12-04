@@ -93,6 +93,10 @@
             <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
         </ul>
     </div>
+    <div class="tip"></div>
+    <div class="loading hidden">
+        <div class="typing_loader"></div>
+    </div>
 </div>
 <!--志愿服务-->
 <div class="notices hidden">
@@ -130,6 +134,7 @@
 
     var scrollNow = true;
     var club = localStorage.getItem('club');
+    var eq = '';
 
     if(club ==0 ){
         $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
@@ -163,21 +168,19 @@
     }
     $(function(){
         c = getCookie("c")?getCookie("c"):0;
-       /* $(".tabs .tab ").eq(index).*/
-      // console.log(index)
         $(".triangle-up").eq(c).css("left","0.06vw");
     })
+    loadScroll();
     //tab切换
     $('.tabs>.tab ').on('click',function() {
+
         var ntc = $('.notices');
-        var eq = $(this).index();
-//        $('.tabs>.tab ').find('span').css('color','#333')
-        console.log(eq)
+         eq = $(this).index();
         localStorage.setItem('club',eq);
         c = this.getAttribute("data-index");
         ntc.eq(eq).siblings('.notices').addClass('hidden');
         ntc.eq(eq).removeClass('hidden');
-      // console.log(eq);
+
         if(eq == 0){
             $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(1).find('span').css('color','#999')
@@ -189,8 +192,8 @@
             });
             $(".triangle-up").css("left","0.06vw");
             var len = ntc.eq(eq ).find('.mass>.list').length;
-//            console.log(len);
-            if(len >= 10){
+            console.log(len);
+            if(len >=5){
                 $('.tip' ).text('上拉加载更多');
                loadScroll();
            }else{
@@ -198,6 +201,7 @@
                $(window ).off("scroll" );
            }
      }
+
         if(eq == 1) {
             $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(0).find('span').css('color','#999')
@@ -231,10 +235,8 @@
             var len = ntc.eq(type-1).find('.notice:last .list').length;
             var tip = $(".tip");
             var loading = $('.loading');
-            var url;
-            if(type == 0){
-                url = "{:Url('club/indexmore')}";
-            }
+            var url= "{:Url('club/indexmore')}";
+
             if(dh == end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
@@ -248,14 +250,14 @@
                         loading.toggleClass('hidden');
                     },
                     success:function(data){
-                        console.log(data);
+
                         loading.toggleClass('hidden');
                         tip.show();
                         if(data.code == 1){
                             console.log(data)
                             addCourse(data,type);
                             var dataLen =data.data.length;
-                            if(data.data.length == 12){
+                            if(data.data.length == 5){
                                 tip.text('上拉加载更多');
                             }
                         }else{
@@ -268,24 +270,18 @@
             }
         })
     }
-    function addCourse(data,type){
+    function addCourse(data,eq){
         var html = '';
         var lists = data.data;
         var len = lists.length;
         for(var i = 0; i< len;i++) {
             var list = lists[i];
-            if (type == 0) {
-                html +=
-            '<a href="/home/club/detail/'+list.id+'" class="list">' +
-                    '<img src="'+list.front_cover+'" alt="">' +
-                    '<div class="list_info">' +
-                    '<div class="info_text">'+list.title+'</div>' +
-                    '<div class="time"> <span>建立时间 :'+list.set_date+'</span><span class="fa"></span></div> ' +
-                '</div> ' +
-                '</a>';
+            console.log(eq)
+            if (eq == 0) {
+                html +=' <li><a href="/home/club/detail/'+list.id+'"><img src="'+list.path+'" alt=""></a></li>'
             }
         }
-        $(".regularmore .lists" ).append(html);
+        $("#newActive ul" ).append(html);
     }
 </script>
 {/block}
