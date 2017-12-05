@@ -87,6 +87,7 @@
     display: block;
     float:left;
     position: relative;
+    color: #333;
 }
 .reportSort .active {
     border-bottom: 2px solid  #ff7242;
@@ -101,3 +102,31 @@
     margin-left: -.935vw;
 }
 .reportDiv .reportDivSort {width:100%;position: relative;margin: auto;display: none;}
+.reportDivSort .banner {width:100%;height:50vw;}
+.reportDivSort .banner img {width:100%;height:100%;}
+.reportDivmain {position: relative;width:100%;margin: auto;background: #f1f1f1;padding-bottom: 1px;}
+.reportDivmain li {width:100%;height:20vw;margin-bottom: 1.6vw;background: #fff;position: relative;}
+.reportDivmain .reportDivmainImg {width:24.8vw;height:100%;text-align: center;line-height: 20vw;}
+.reportDivmain .reportDivmainImg img {width:18.67vw;height:18.67vw;position: relative;vertical-align: middle;}
+.reportDivmain .reportDivmainText .reportDivmainText_01{
+    width:70.2vw;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    color: #333;
+    font-size: 1.4rem;
+    margin-top: 5.33vw;
+    margin-bottom: 1.73vw;
+}
+.reportDivmain .reportDivmainText .reportDivmainText_02 {background: #ff7043;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
+.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom:0;right:5vw;color: #999;font-size: 1.2rem;}
+.reportDivmain .reportDivmainImg ,.reportDivmain .reportDivmainText {float:left;}
+.fa:before {
+    content: "\f105";
+}
+#side3 li {height:29.33vw;width:100%;position: relative;margin:0 auto 1.33vw;padding: 0 2.5%;}
+#side3 .reportDivmainText_04 {margin-top: 2.8vw;color: #333;}
+#side3 .reportDivmainText_01 {margin-top: 1vw;margin-bottom: 1.6vw;-webkit-line-clamp: 2;width:100%;font-size: 1.2rem;color: #999;}
+#side3 .reportDivmainText_02 {background: #9bcc35;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
+#side3 .reportDivmainText_03 {bottom:1.6vw;}
