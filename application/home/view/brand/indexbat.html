@@ -1,0 +1,42 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>品牌项目</title>
+<link rel="stylesheet" href="/home/css/brand/index.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<style>
+    /*.br_info {background: rgba(0,0,0,.2)}*/
+    a:active .br_info {background: #eeeeee; opacity: .8}
+    .brand_main{margin-bottom: 8vw}
+</style>
+{/block}
+{block name="body"}
+<!--<div id="refreshContainer" class="mui-content mui-scroll-wrapper">-->
+    <!--<div class="mui-scroll">-->
+
+          <div class="brand_main">
+              <!--循环体-->
+              {volist name="list" id="vo"}
+                  <a href="{:Url('brand/branddetail?id='.$vo.id)}" class="list">
+                      <img  data-original="{$vo.front_cover|get_cover='path'}">
+                      <!--<img class="lazy" src="/home/images/index/newindex/fdzd" data-echo="{$vo.front_cover|get_cover='path'}">-->
+                      <div class="br_info">
+                          <div>{$vo.title}</div>
+                      </div>
+                  </a>
+              {/volist}
+          </div>
+     <!--<div>-->
+<!--</div>-->
+
+{/block}
+{block name="script"}
+<!--<script>-->
+    <!--$(function () {-->
+        <!--$("img").lazyload({-->
+            <!--placeholder: "/home/images/banner/banner.jpg",-->
+            <!--effect: "fadeIn"-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+ {/block}
