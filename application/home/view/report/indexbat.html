@@ -8,28 +8,48 @@
 {/block}
 {block name="body"}
 <!--banner-->
-<div class="reportSort">
-    <div data-side="1" class="active"><span>组织述职</span><img src="/home/images/icon_001.png"></div>
-    <div data-side="2">个人风采</div>
-    <div data-side="3">活动展示</div>
-</div>
-<div class="reportDiv">
-    <div class="reportDivSort" id="side1" style="display: block;">1</div>
-    <div class="reportDivSort" id="side2">2</div>
-    <div class="reportDivSort" id="side3">3</div>
-</div>
+
 <!--列表-->
+<div id="refreshContainer" class="mui-scroll-wrapper">
+    <div class="mui-scroll">
+        <div class="banner">
+            <img src="/home/images/banner/baogao.jpg" alt="网上述职" class="banner-img">
+        </div>
+        <div class="main">
+            {volist name="list" id="vo"}
+            <a href="{:Url('report/detail?id='.$vo['id'])}"  class="re_list">
+                <!--时间-->
+                <div class="re_time">
+                    <span class="month"><b>{$vo.month}</b>/{$vo.day}</span>
+                    <span class="year">{$vo.year}</span>
+                </div>
+                <div class="re_info">
+                    <!--title-->
+                    <div   class=" title">{$vo.title}</div>
+                    <!--内容-->
+                    <div class="rep_text">
+                        {$vo.content}
+                    </div>
+                </div>
+            </a>
+            {/volist}
+        </div>
+
+
+    </div>
+    </div>
+</div>
 {/block}
 {block name="script"}
 <script>
-
-//    for(var i=0;i<){}
-
-
-
-
-
-
+    //首页加载是否需要上拉加载
+//    window.onload = function() {
+//        if ($(".main .re_list").length < 0) {
+//            mui('#refreshContainer').pullRefresh().disablePullupToRefresh();
+//        } else {
+//            mui('#refreshContainer').pullRefresh().enablePullupToRefresh();
+//        }
+//    };
 
     //初始化下拉加载
     mui.init({

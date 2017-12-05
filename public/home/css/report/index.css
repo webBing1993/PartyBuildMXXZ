@@ -70,3 +70,34 @@
     overflow:hidden;
     line-height: 6.4vw;
 }
+
+
+.reportSort {
+    width:100%;
+    position: relative;
+    margin: auto;
+    height:12vw;
+    text-align: center;
+    font-size: 1.6rem;
+}
+.reportSort div {
+    width:33.33vw;
+    height:12vw;
+    line-height: 12vw;
+    display: block;
+    float:left;
+    position: relative;
+}
+.reportSort .active {
+    border-bottom: 2px solid  #ff7242;
+    color: #ff7242;
+}
+.reportSort img {
+    position: absolute;
+    bottom:0;
+    width:2.4vw;
+    height:1.87vw;
+    left:50%;
+    margin-left: -.935vw;
+}
+.reportDiv .reportDivSort {width:100%;position: relative;margin: auto;display: none;}

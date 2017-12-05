@@ -104,7 +104,10 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {volist name="volunteerlist" id="vo"}
-            <div class="swiper-slide" style="background-image:url({$vo.front_cover|get_cover='path'})">
+            <div class="swiper-slide swiper-lazy" style="background-image:url({$vo.front_cover|get_cover='path'})">
+            <!--<div class="swiper-slide swiper-lazy" style="background-image:url({$vo.front_cover|get_cover='path'})">-->
+            <!--<div class="swiper-slide swiper-lazy">-->
+                <!--<img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;">-->
                 <div class="tm_info">
                       <i></i>
                       <div class="tm_name">{$vo.title}</div>
@@ -153,6 +156,7 @@
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
+            lazyLoading: true,
             coverflowEffect: {
                 rotate: 50,
                 stretch: 0,
@@ -210,6 +214,7 @@
                 effect: 'coverflow',
                 grabCursor: true,
                 centeredSlides: true,
+                lazyLoading: true,
                 slidesPerView: 'auto',
                 coverflowEffect: {
                     rotate: 50,
