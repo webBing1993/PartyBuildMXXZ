@@ -95,13 +95,13 @@ class Style extends Base{
 
         //获取 文章点赞
         $likeModel = new Like;
-        $like = $likeModel->getLike(13,$id,$userId);
+        $like = $likeModel->getLike(14,$id,$userId);
         $article['is_like'] = $like;
         $this->assign('article',$article);
 
         //获取 评论
         $commentModel = new Comment();
-        $comment = $commentModel->getComment(13,$id,$userId);
+        $comment = $commentModel->getComment(14,$id,$userId);
         $this->assign('comment',$comment);
 
         $Vote = new StyleVote();

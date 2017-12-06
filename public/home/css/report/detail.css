@@ -103,3 +103,4 @@
 .reportDetail .reportDetailText_02>span {width:100vw;padding: 0 3vw;font-size: 1.4rem;color: #333;margin-bottom: 2.67vw;display: block;margin-top: 1.67vw;}
 .reportDetail .reportDetailText_02>div {width:93.33vw;position: relative;margin: auto;background: #f9f9f9;border-radius: 8px;padding: 1.34vw 2.13vw;text-align: justify;}
 .reportDetail .reportDetailText_02 p {text-indent: 2em;text-align: justify;}
+.reportDetail .reportDetailText_02 p span , .reportDetail .reportDetailText_02 p {font-family: "Microsoft yahei" !important;}

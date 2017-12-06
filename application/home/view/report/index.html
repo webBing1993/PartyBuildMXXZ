@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/home/css/report/index.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/all.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 {/block}
 {block name="body"}
 <!--banner-->
@@ -14,8 +15,8 @@
     <div data-side="3"><span>活动展示</span></div>
 </div>
 <div class="reportDiv">
-    <div class="reportDivSort" id="side1"  style="display: block;">
-        <div class="banner"><img data-original="/home/images/banner/baogao.jpg" alt=""></div>
+    <div class="reportDivSort" id="side1"    style="display: block;">
+        <div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>
         <div class="reportDivmain">
             <ul>
                 {volist name="list" id="vo"}
@@ -24,7 +25,9 @@
                         <div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>
                         <div class="reportDivmainText">
                             <div class="reportDivmainText_01">{$vo.title}</div>
+                            {eq name="$vo.is_vote" value="1"}
                             <span class="reportDivmainText_02">投票数：{$vo.votes}</span>
+                            {/eq}
                             <div class="reportDivmainText_03">{$vo['create_time']|time_format='Y-m-d'} <em class="fa"></em></div>
                         </div>
                     </a>
@@ -34,7 +37,7 @@
         </div>
     </div>
     <div class="reportDivSort" id="side2">
-        <div class="banner"><img data-original="/home/images/banner/baogao.jpg" alt=""></div>
+        <div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>
         <div class="reportDivmain">
             <ul>
                 {volist name="list2" id="vo"}
@@ -42,10 +45,11 @@
                     <a href="{:Url('style/detail?id='.$vo['id'])}">
                         <div class="reportDivmainImg"><div>{$vo.name}</div></div>
                         <div class="reportDivmainText">
-                                <div class="reportDivmainText_04">{$vo.position}</div>
-                                <div class="reportDivmainText_01">{$vo.content}</div>
-                                <span class="reportDivmainText_02">点赞数：{$vo.votes}</span>
-                                <div class="reportDivmainText_03">{$vo['create_time']|time_format='Y-m-d'} <em class="fa"></em></div>
+                                <div class="reportDivmainText_04">{$vo.position}</div><div class="reportDivmainText_01">{$vo.content}</div>
+                            {eq name="$vo.is_vote" value="1"}
+                            <span class="reportDivmainText_02">点赞数：{$vo.votes}</span>
+                            {/eq}
+                            <div class="reportDivmainText_03">{$vo['create_time']|time_format='Y-m-d'} <em class="fa"></em></div>
                         </div>
                     </a>
                 </li>
@@ -54,18 +58,17 @@
         </div>
     </div>
     <div class="reportDivSort" id="side3">
-        <div class="banner"><img data-original="/home/images/banner/baogao.jpg" alt=""></div>
+        <div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>
         <div class="reportDivmain">
             <ul>
                 {volist name="list3" id="vo"}
                 <li>
                     <a href="{:Url('display/detail?id='.$vo['id'])}">
-                        <div class="reportDivmainText">
-                            <div class="reportDivmainText_04">
-                                {$vo.title}
-                            </div>
-                            <div class="reportDivmainText_01">{$vo.content}</div>
+                        <div class="reportDivmainText" style="float:inherit;">
+                            <div class="reportDivmainText_04">{$vo.title}</div><div class="reportDivmainText_01">{$vo.content}</div>
+                            {eq name="$vo.is_vote" value="1"}
                             <span class="reportDivmainText_02">打call数：{$vo.votes}</span>
+                            {/eq}
                             <div class="reportDivmainText_03">{$vo['create_time']|time_format='Y-m-d'} <em class="fa"></em></div>
                         </div>
                     </a>
@@ -75,99 +78,143 @@
         </div>
     </div>
 </div>
+<div class="tip"></div>
+<div class="loading hidden">
+    <div class="typing_loader"></div>
+</div>
 <!--列表-->
 {/block}
 {block name="script"}
 <script>
-
+var side = 1;
     for(var i=0;i<$('.reportSort div').length;i++){
         $('.reportSort div')[i].onclick = function(){
             $('.reportSort div').removeClass('active').find('img').remove();
             $(this).addClass('active').append('<img src="/home/images/icon_001.png">');
-            var side = $(this).data('side');
+            side = $(this).data('side');
             $('.reportDivSort').hide();
             $('#side'+side).show();
         }
     }
 
-
-
-
-
-
-
-    //初始化下拉加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                callback: loadScroll
-            }
+    loadScroll();
+$('.reportSort>div').on('click',function(){
+    var num = $(this).index();
+    var len =$('.reportDivSort').eq(num).find('li').length;
+    var type = $(this).data('side');
+    console.log(type)
+    if(type == 1){
+        if(len >= 10){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载
+            loadScroll();
+        } else {
+            $('.tip' ).text('没有更多了');
         }
-    });
+        loadScroll()
+    }else if (type == 2){
+        if(len >= 10){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载
+            loadScroll();
+        } else {
+            $('.tip' ).text('没有更多了');
+        }
+        loadScroll()
+    }
+    else if (type == 3){
+        if(len >= 10){
+            $('.tip' ).text('上拉加载更多');
+            //上拉加载
+            loadScroll();
+        } else {
+            $('.tip' ).text('没有更多了');
+        }
+        loadScroll()
+    }
 
+})
     function loadScroll(){
-        var len = $(".main .re_list").length;
-        $.ajax({
-            url:"{:Url('Repotr/indexmore')}",
-            data:{
-                length:len,
-            },
-            beforeSend: function(XMLHttpRequest){
-            },
-            success:function(data){
-                addCourse(data);
-                if(data.code == 1){
-                    if(data.data.length == 7){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+//            var len = $(".page>a" ).length;
+            var len = $('#side'+side).find('li').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            console.log(side)
+            if(dh == end){
+                $.ajax({
+                    side:"post",
+                    url:"{:Url('report/indexmore')}",
+                    data:{
+                        length:len,
+                        side:side
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        console.log(data)
+                        addMeets(data);
+                        if(data.code == 1){
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
                     }
-                }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                }
+                })
             }
         })
-    };
+    }
 
-    function addCourse(data) {
-        console.log(data)
+    function addMeets(data){
         var html = '';
         var lists = data.data;
         var len = lists.length;
-        for (var i = 0; i < len; i++) {
-            var list = lists[i];
-            html += '<a  href="/hone/report/detail/type/1/id'+list.id+'" class="re_list">'+
-                    '<div class="re_time">'+
-                    ' <span class="month"><b>09</b>/09</span>'+
-                    ' <span class="year">2017</span>'+
-                    '</div>'+
-                    ' <a class="re_info">'+
-                    ' <h4 class=" title"></h4>'+
-                    ' <div class="rep_text"> </div>'+
-                    ' </a>'
+        if(side==1){
+            for(var i = 0; i< len;i++){
+                var list = lists[i];
+                html+= '<li>'
+                        +'<a href="/home/report/detail/id/'+list.id+'">'
+                        +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
+                        +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>\<span class="reportDivmainText_02">投票数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div></div>'
+                        +'</a>'
+                        +'</li>'
+            }
+        }else if(side == 2) {
+            for(var j = 0; j< len;j++){
+                var list = lists[j];
+                html+= '<li>'
+                    +'<a href="/home/report/detail/id/'+list.id+'">'
+                    +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
+                    +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">点赞数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div></div>'
+                    +'</a>'
+                    +'</li>'
+            }
         }
-        $(".main").append(html);
-    };
+        else if(side == 3) {
+            for(var k = 0; k< len;k++){
+                var list = lists[k];
+                html+= '<li>'
+                    +'<a href="/home/report/detail/id/'+list.id+'">'
+                    +'<div class="reportDivmainText" style="float:inherit;">'
+                    +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">打call数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div>'
+                    +'</div>'
+                    +'</a>'
+                    +'</li>'
+            }
+        }
 
-    //点击背景触发active
-    mui("#refreshContainer").on("touchstart","a",function(){
-        $(this).css("backgroundColor","rgba(0,0,0,.1)");
-    }).on("touchend","a", function () {
-        $(this).css("backgroundColor","#fff");
-    });
-
-    //页面点击事件
-    mui("#refreshContainer").on("tap","a",function(){
-        var url = this.getAttribute("href");
-        window.location.href = url;
-    })
-
-
-
-
-
-
+        $('#side'+side).find('ul').append(html)
+    }
 
 </script>
 {/block}

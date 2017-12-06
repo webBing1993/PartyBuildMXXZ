@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>网上述职</title>
+<title>组织述职</title>
 <link rel="stylesheet" href="/home/css/report/detail.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
@@ -21,16 +21,23 @@
         <div class="info">
             　{$article.content}
         </div>
-        {$article.views}
+        <div class="cont" style="display: inherit;">
+            <span class="read" style="float:right;">{$article.views}</span>
+        </div>
+
     </div>
+    {eq name="visit" value="0"}
+    {eq name="$article.is_vote" value="1"}
     <div class="vote">
         <div class="is_vote">投票数：{$article.votes}</div>
         {notempty name="is_vote"}
         <div class="no_vote vote_btn">投票</div>
         {else/}
-        <div class="no_vote">以投票</div>
+        <div class="no_vote">已投票</div>
         {/notempty}
     </div>
+    {/eq}
+    {/eq}
 
 </div>
 {/block}
@@ -43,7 +50,7 @@
      //获取现在投票人数
      var aa = parseInt($(".vote").find("b").text());
      //点击投票按钮
-    $('.vote_btn').on("click",function () {
+    $('.vote_btn').one("click",function () {
         $.ajax({
             type:"post",
             url:"{:Url('Report/vote')}",
@@ -55,8 +62,7 @@
             }
         });
      //投票点击后禁止点击
-      $(this).removeClass("vote_btn").addClass("area").text("已投票").off("click");
-        $(".vote").find("b").text(aa+1);
+        $(this).removeClass("vote_btn").html('已投票');
 
 
     })
