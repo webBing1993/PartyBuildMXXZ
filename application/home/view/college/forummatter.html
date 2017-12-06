@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/home/css/college/relevant.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
+<script src="/static/sweetalert/sweetalert8.min.js"></script>
 <style>
 	.scrollDiy{
 		position: absolute;
@@ -14,7 +15,58 @@
 		/* 增加该属性，可以增加弹性 */
 		-webkit-overflow-scrolling: touch;
 		width:100%;
-		padding-bottom: 10.67vw;
+		padding-bottom: 12vw;
+	}
+
+	.bottom .myword input {
+		vertical-align: middle;
+		height: 8vw;
+		width: 94vw;
+		margin: 1.8vw 0;
+		padding-left: 2.6vw;
+		background: #fafafa;
+		border: 1px solid #d8d8d8;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+		font-size: 1.3rem;
+	}
+	.bottom .myword input::-webkit-input-placeholder {
+		color: #000;
+	}
+	.bottom .myword input:-moz-placeholder {
+		color:#000;
+	}
+	.bottom .myword input::-moz-placeholder {
+		color:#000;
+	}
+	.bottom .myword input:-ms-input-placeholder {
+		color:#000;
+	}
+	.sweet-alert fieldset{
+		margin-top: 5vw;
+	}
+	.sweet-alert.show-input textarea{
+		border: 1px solid #d8d8d8 !important;
+		border-radius: 6px;
+		width: 100%;
+		height: 20vw;
+		/*text-indent: 5vw;*/
+		padding: 3vw;
+	}
+	.sweet-alert p{
+		font-size: 18px !important;
+	}
+	.sweet-alert .sa-error-container p{
+		font-size: 16px !important;
+	}
+	.sweet-alert .sa-input-error.show{
+		opacity: 0 !important;
+	}
+	.sweet-alert.show-input textarea{
+		display: block;
+	}
+	.sweet-alert textarea{
+		display: none;
 	}
 </style>
 {/block}
@@ -90,11 +142,10 @@
 		</div>
 	</div>
 	{eq name="visit" value="0"}
-	<div class="bottom clear">
+	<div class="bottom clear" onclick="send(this,12,{$info['id']})">
 		<div class="myword fl">
-			<input type="text" placeholder="说说你的感想！">
+			<input type="text" placeholder="说说你的感想！" disabled>
 		</div>
-		<div class="send fr" onclick="send(this,12,{$info['id']})">发送</div>
 	</div>
 	{/eq}
 </div>
@@ -142,60 +193,79 @@
 			}
 		})
 	};
-	/**
-	 * 发送评论
-	 * @param e
-	 */
-	var send = function(e,type,id){
-		var it = $(e ).prev().find('input');
-		if(it.val() != '' && it.val().length > 4){
-			$.ajax({
-				type:"post",
-				url:"{:Url('Base/comment')}",
-				data:{
-					type:type,
-					aid:id,
-					content:it.val()
-				},
-				beforeSend:function(){
-					swal({
-						title: ' ',
-						text: '评论提交中...',
-						showConfirmButton:false
-					});
-				},
-				success:function(data){
-					var data = data.data;
-					var userid = "'"+data.create_user+"'";
-					var html = '';
-					html += '<div class="list clear">'+
-							'<div class="fl">'+
-							'<img src="'+data.header+'" alt="用户头像" class="user">'+
-							'</div>'+
-							'<div class="fl mid">'+
-							'<div class="name limit">'+data.nickname+'</div>'+
-							'<div class="content" >'+it.val()+'</div>'+
-							'<div class="time">'+data.time+'</div>'+
-							'</div>'+
-							'<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
-							'</div>';
-					$('.lists' ).append(html);
-					it.val('');
-					var sum = $('.sum span' );
-					sum.text(parseInt(sum.text())+1);
-					swal({
-						title: ' ',
-						text: '评论成功',
-						type: 'success',
-						confirmButtonText:'确定',
-						timer:3000
-					});
-				}
-			});
-		}else{
-			wAlert('您的评论少于5个字');
-		}
-	};
+
+    /**
+     * 发送评论
+     * @param e
+     */
+    var send = function(e,type,id){
+        swal({
+            title: '',
+            text: '请输入您的评论！',
+            type: 'input',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            cancelButtonText: "取消",
+            confirmButtonText: "确定",
+            animation: "slider-form-top"
+
+        }, function(inputValue) {
+            if (inputValue === false) return false;
+
+            if (inputValue.length < 5) {
+                swal.showInputError("评论字数不能少于5个字！");
+                return false
+            }
+
+            if (inputValue.length > 300) {
+                swal.showInputError("您输入的字超过了300！");
+                return false
+            }
+            $.ajax({
+                type: "post",
+                url: "{:Url('Base/comment')}",
+                data: {
+                    type: type,
+                    aid: id,
+                    content: inputValue
+                },
+                beforeSend: function () {
+                    swal({
+                        title: ' ',
+                        text: '评论提交中...',
+                        showConfirmButton: false
+                    });
+                },
+                success: function (msg) {
+                    var data = msg.data;
+                    var userid = "'" + data.create_user + "'";
+                    var html = '';
+                    html += '<div class="list clear">' +
+                        '<div class="fl">' +
+                        '<img src="' + data.header + '" alt="用户头像" class="user">' +
+                        '</div>' +
+                        '<div class="fl mid">' +
+                        '<div class="name limit">' + data.nickname + '</div>' +
+                        '<div class="content" >' + inputValue + '</div>' +
+                        '<div class="time">' + data.time + '</div>' +
+                        '</div>' +
+                        '<div class="fr isgood good" onclick="isGood(this,0,' + data.id + ')">' + data.likes + '</div>' +
+                        '</div>';
+                    $('.lists').prepend(html);
+                    inputValue = "";
+                    var sum = $('.sum span');
+                    sum.text(parseInt(sum.text()) + 1);
+                    swal({
+                        title: ' ',
+                        text: '评论成功',
+                        type: 'success',
+                        confirmButtonText: '确定',
+                        timer: 3000
+                    });
+                }
+            });
+        })
+    };
 
 	var tofixed = function(){
 		var u = navigator.userAgent;
