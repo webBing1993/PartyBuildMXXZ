@@ -1,23 +1,14 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>网上述职</title>
+<title>活动展示</title>
 <link rel="stylesheet" href="/home/css/report/detail.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
-    /*.scrollDiy{*/
-        /*position: absolute;*/
-        /*top:0;*/
-        /*bottom:0;*/
-        /*overflow-y: scroll;*/
-        /*!* 增加该属性，可以增加弹性 *!*/
-        /*-webkit-overflow-scrolling: touch;*/
-        /*width:100%;*/
-    /*}*/
 </style>
 {/block}
 {block name="body"}
-<div class="scrollDiy" data-id="0">
+<div class="scrollDiy" data-id="0" style="padding-bottom: 5vw;">
     <div class="banner">
         <img src="/home/images/banner/sz.jpg" alt="支部活动banner" class="banner-img">
     </div>
@@ -30,17 +21,21 @@
         <div class="info">
             　{$article.content}
         </div>
-        <div class=" cont ">
-            <span class="vote">已投票 <b>{$article.votes}</b>人</span>
-            <span class="read">{$article.views}</span>
-        </div>
+        <p style=";background: url(/home/images/detail/scan_.png) 0 center no-repeat;
+    background-size: 1.5rem 1.5rem;
+    padding-left: 1.8rem;
+    float: right;
+    text-indent: 0;"><i  class="read fr">{$article.views} <em class="fa"></em></i></span></p>
 
     </div>
-    {notempty name="is_vote"}
-    <div class="vote_btn"><a href="javaScript:;">投票</a></div>
-    {else/}
-    <div class="area"><a href="javaScript:;">已投票</a></div>
-    {/notempty}
+    <div class="vote">
+        <div class="is_vote">投票数：{$article.votes}</div>
+        {notempty name="is_vote"}
+        <div class="no_vote vote_btn" style="background: #9bcc35;">投票</div>
+        {else/}
+        <div class="no_vote" style="background: #9bcc35;">已投票</div>
+        {/notempty}
+    </div>
 
 </div>
 {/block}
@@ -50,9 +45,10 @@
 <script src="/home/js/reset.js"></script>
 <script>
 
-     //获取现在投票人数
-     var aa = parseInt($(".vote").find("b").text());
-     //点击投票按钮
+    //获取现在投票人数
+    var aa = parseInt($(".vote").find("b").text());
+    console.log($(".vote"))
+    //点击投票按钮
     $('.vote_btn').on("click",function () {
         $.ajax({
             type:"post",
@@ -64,9 +60,9 @@
                 console.log(data);
             }
         });
-     //投票点击后禁止点击
-      $(this).removeClass("vote_btn").addClass("area").text("已投票").off("click");
-        $(".vote").find("b").text(aa+1);
+        //投票点击后禁止点击
+        $(this).removeClass("vote_btn").html('已投票');
+//        $(".vote").find("b").text(aa+1);
 
 
     })

@@ -155,8 +155,9 @@
 #side3 li {height:29.33vw;width:100%;position: relative;margin:0 auto 1.33vw;padding: 0 2.5%;}
 #side3 .reportDivmainText_04 {margin-top: 2.8vw;color: #333;}
 
-#side3 .reportDivmainText_01 p {
+#side3 .reportDivmainText_01  {
      margin-top: 1vw;
+    white-space:inherit;
      margin-bottom: 1.6vw;
      width: 100%;
      font-size: 1.2rem;
