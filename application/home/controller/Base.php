@@ -115,7 +115,7 @@ class Base extends Controller {
         $userId = session('userId');
         $time = date('Y-m-d',time());
         $user = WechatUser::where('userid',$userId)->find();
-        if ($time != $user['daliy_sign']) {
+        if ($time != $user['daily_sign']) {
             WechatUser::where('userid',$userId)->setInc('score',1);
             $user->daily_sign = $time;
             $user->save();
