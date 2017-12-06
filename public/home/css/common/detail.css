@@ -242,7 +242,7 @@
 .comment {
   padding-left:0.3rem;
   padding-right: 0.3rem;
-  margin-bottom:15vw;
+  /*margin-bottom:15vw;*/
 }
 .comment .sum {
   height: 30px;
