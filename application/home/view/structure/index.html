@@ -18,16 +18,12 @@
 		font-size: 1.4rem;
 		line-height: 7.8vw;
 	}
-	body {position: fixed;}
 
 </style>
 
 {/block}
 
 {block name="body"}
-<div class="banner">
-	<img data-original="/home/images/banner/1.jpg" alt="" class="banner-img">
-</div>
 <div class="tabs">
 	<span class="tab active"><span>组织领导</span></span>
 	<span class="tab"><span>组织架构</span></span>
@@ -36,33 +32,38 @@
 <div class="listbox">
 	<!--组织领导   小镇介绍   党工青妇联介绍-->
 	<div class="box summary active">
-		<!--<div class="box_ ">-->
-			<!--<p>	梦想小镇是一个专为年轻人打造的互联网创业平台。2014年8月，在省市区谋篇布局特色小镇、大力培育信息经济的大背景下，梦想小镇扬帆起航。</p>-->
-			<!--<p>	抓住“大众创业、万众创新”的时代浪潮，瞄准互联网创业的台风口，充分发挥区域资源禀赋，梦想小镇大胆探索，大力构筑创新创业生态系统，快速吸引了一大批年轻创客。他们在这里将各种奇思妙想付诸实践，把创意变成产品，将智慧变成财富。</p>-->
-			<!--<p>经过两年多的发展，梦想小镇创新创业成效初显，为区域经济升级注入了全新动力，同时推动了基层党建和社会治理的创新。小镇虽小，但内涵丰富。这正是特色小镇的魅力所在。</p>-->
-			<!--&lt;!&ndash;7&ndash;&gt;-->
-		<!--</div>-->
-		<div class="box_ box_1  ">
-			<p>	梦想小镇是一个专为年轻人打造的互联网创业平台。2014年8月，在省市区谋篇布局特色小镇、大力培育信息经济的大背景下，梦想小镇扬帆起航。</p>
-			<p>	抓住“大众创业、万众创新”的时代浪潮，瞄准互联网创业的台风口，充分发挥区域资源禀赋，梦想小镇大胆探索，大力构筑创新创业生态系统，快速吸引了一大批年轻创客。他们在这里将各种奇思妙想付诸实践，把创意变成产品，将智慧变成财富。</p>
+		<!--banner-->
+		<div class="banner">
+			<img data-original="/home/images/banner/1.jpg" alt="" class="banner-img">
 		</div>
+		<!--党群组织领导架构-->
+		<div class="leadership">
+          	<div class="le_text"><div class="le_ioc"></div></div>
+			<!--主任级别-->
+			<div class="leader_info">
+			  <div class="le_de fr">
+				  <a class="fl" href="#">
+					  <img src="/home/images/structure/tx.jpg" alt="">
+				  </a>
+				  <a class="fl" href="#">
+					  <img src="/home/images/structure/tx.jpg" alt="">
+				  </a>
+				  <a class="fl" href="#">
+					  <img src="/home/images/structure/tx.jpg" alt="">
+				  </a>
+			  </div>
+				<div class="box_sl">
+					<span>主任:</span><span>王主任</span><span>李主任</span><span>陈主任</span>
+				</div>
+			</div>
+
+		</div>
+
 	</div>
 	<!--组织架构 村部名录-->
 	<div class="town box hidden">
-		<div class="box_ or">
-			<a href="{:Url('structure/pilot?id=1')}" class="bor_ls" >梦想小镇</a>
-			<div class="lists">
-				{volist name="modelAll" id="vo"}
-				<a href="{:Url('structure/communication?id='.$vo['id'])}">
-					<div class="list clear">
-						<div class="party1">
-							<div class="tri-left structure{$key+1}"></div>
-							<div class="name1">{$vo.name}</div>
-						</div>
-					</div>
-				</a>
-				{/volist}
-			</div>
+		<div class="banner">
+			<img data-original="/home/images/banner/1.jpg" alt="" class="banner-img">
 		</div>
 
 
@@ -83,80 +84,18 @@ $(function(){
             $('.listbox .town').show();
 		}
 	})
-	//组织架构切换
-	slide();
-	$('.name2' ).each(function(){
-		var t = $(this ).text();
-		var href = '/home/structure/detail?party='+t+'';
-		$(this ).attr('href', href);
-	})
-	$(function(){
-//		//tab值记录
-		tabRecord('.tab' ,'.box');
-//		//tab切换
-		tabSwitch('.tab' ,'.box');
-		//上拉加载
-	});
-	$(function() {
-		$("img.lazy").lazyload({effect: "fadeIn"});
-	});
+    $(function(){
+        //tab值记录
+        tabRecord('.tab' ,'.box');
+        //tab切换
+        tabSwitch('.tab' ,'.box');
+        //上拉加载
+    });
+    $(function() {
+        $("img.lazy").lazyload({effect: "fadeIn"});
+    });
 });
-function slide(){
-	$('.lists .party1' ).on('click',function(){
-		var it = $(this);
-		var detail = it.next('.detail1' );
-		if(detail.hasClass('down')){
-			detail.slideUp();
-			it.find('.tri').removeClass('toup').addClass('todown');
-		}else{
-			detail.slideDown();
-			it.find('.tri').removeClass('todown').addClass('toup');
-		}
-		detail.toggleClass('down');
-	});
-}
 
-function tabSwitch(a,b,fn,url){
-	$(a).off('click').on('click',function(){
-		var this_ = this ;
-		if($(this).index() == 1){
-		    $('.listbox .town').show();
-		}
-		var box = $(b ).parent();
-		var index = $(this_ ).index();
-		var ww = $(b ).parent().width();
-		$(this_ ).addClass('active' );
-		$(this_ ).siblings(a).removeClass('active');
-		$(b).removeClass('hidden');
-		ww = ww * index;
-		box.stop().animate({left: -ww +'px'},300,function(){
-			$(b).eq(index).siblings(b).addClass('hidden');
-			setCookie( 'tab', index );
-			if(fn){
-				var tab = $('.active' ).index() + 1;
-				fn(tab,url,7,5);
-			}
-		});
-
-	})
-}
-function tabRecord(a,b){
-	var tab = getCookie('tab');
-	if(tab){
-		var index = tab;
-		var box = $(b).parent();
-		var ww = $(b).parent().width();
-		$(a).eq(index).addClass('active');
-		$(a).eq(index).siblings(a).removeClass('active');
-		$(b).removeClass('hidden');
-		ww = ww * index;
-		box.css({left: -ww +'px'});
-		setTimeout(function(){
-			$(b).eq(index).siblings(b).addClass('hidden');
-		},100)
-	}
-
-}
 
 </script>
 {/block}

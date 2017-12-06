@@ -94,9 +94,6 @@ a:active {
   background-color: #f7f7f7;
 }
 body {
-
-  overflow-x: hidden;
-  /*position: fixed;*/
 }
 .banner {
   width: 100vw;
@@ -106,26 +103,22 @@ body {
 .banner .banner-img {
   width: 100%;
   height: 100%;
+  margin-top:2px;
 }
 .tabs {
   width: 100vw;
-  height: 11.7vw;
-  /*padding: 2.1vw 0;*/
-  background: #ffffff;
-  border-bottom: 1.3vw solid #f1f1f1;
-  border-top: 1.3vw solid #f1f1f1;
-  line-height: 11.7vw;
+  height: 11vw;
+  border-bottom: 1px solid #eee;
 }
 .tabs .tab {
   display: block;
-  width: 50vw;
-  line-height: 9.1vw;
-  color: #999999;
-  font-size: 1.5rem;
-  line-height: 9.1vw;
-  text-align: center;
   float: left;
-  /*border-right: 1px solid #eeeeee;*/
+  width: 50vw;
+  height: 100%;
+  color: #999;
+  font-size: 1.6rem;
+  line-height: 12.3vw;
+  text-align: center;
 }
   .tabs .tab:nth-child(1)::after {
     content: '';
@@ -496,3 +489,86 @@ body {
     font-weight: 100;
 
   }
+
+
+/*组织领导架构*/
+
+.leadership{
+  width: 100vw;
+  margin-top: 0.5vw ;
+  margin-bottom: 3vw;
+}
+.le_text {
+  width: 100vw;
+  background-color: #f1f1f1;
+}
+.leadership .le_ioc {
+  width: 69.3vw;
+  border-bottom:9.3vw solid #df4934;
+  border-right: 8.5vw solid transparent;
+  position: relative;
+}
+.leadership .le_ioc:before {
+  content: '党群工作委员';
+  position: absolute;
+  width: 69.3vw;
+  margin-left:4vw;
+  line-height:8.5vw;
+  color: #fff;
+  font-size:1.6rem;
+  letter-spacing:1vw;
+}
+.leader_info{
+  width: 100vw;
+  overflow: hidden;
+  border-bottom: 1px solid #f1f1f1;
+  position: relative;
+}
+.leader_info .le_fo{
+  width:15vw ;
+  color: #333;
+  font-size:1.4rem;
+  text-align: center;
+  position: absolute;
+
+}
+
+.leader_info .le_de{
+  width:100vw ;
+  padding: 5vw 0vw 2vw 25vw;
+}
+.leader_info .le_de a{
+  display: block;
+  width: 23vw;
+  padding:2vw 2vw 2vw 2vw;
+  height: 30vw;
+}
+.leader_info .le_de a img{
+  width: 18.67vw;
+  height: 26.67vw;
+}
+.leader_info .le_de a .le_name{
+  font-size:1.4rem;
+  color:#333 ;
+  text-align: center;
+  display: block;
+}
+.leader_info .le_de a:first-child >img{
+  line-height: 30vw;
+}
+.leader_info>.box_sl{
+  width: 100vw;
+  line-height: 3vw;
+  color: #333;
+  position: absolute;
+  bottom: 1vw;
+}
+.leader_info>.box_sl span{
+  display: block;
+  width: 25vw;
+  text-align: center;
+  float: left;
+}
+
+
+
