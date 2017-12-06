@@ -52,7 +52,7 @@
     $('.vote_btn').on("click",function () {
         $.ajax({
             type:"post",
-            url:"{:Url('Report/vote')}",
+            url:"{:Url('Display/vote')}",
             data:{
                 id:{$pid},
             },
