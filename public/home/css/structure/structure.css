@@ -152,7 +152,6 @@ body {
 }
 
 .listbox .box .box_ .lists {
-  padding:6.4vw;
   color: #333333;
   font-size: 14px;
 }
@@ -162,17 +161,17 @@ body {
   height: 12vw;
   font-size: 1.4rem;
   line-height: 12vw;
+  margin-left: 14.6vw;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
   top: 0;
   font-size: 1.6rem;
-  padding-left:10.6vw;
   line-height: 8vw;
+  border-bottom: 1px solid #eeeeee;
 }
 .lists a{
   display: block;
-  border-bottom: 1px solid #f1f1f1;
   color: #333;
 }
 .listbox .box .box_ .lists .party1 .tri {
@@ -190,35 +189,71 @@ body {
   top: 2.66vw;
   left: 2.33vw;
   content: '';
-  height: 6.33vw;
-  width: 6.33vw;
-  background: url('/home/images/structure/structure1.png') 0 0 no-repeat;
-  background-size: 6.33vw 6.33vw;
+  height: 8vw;
+  width: 10vw;
+  background: url('/home/images/structure/mxxz_ioc.png') 0 0 no-repeat;
+  background-size: 10vw 8vw;
 }
-.listbox .box .box_ .lists .party1 .tri-left.structure2{
-  background: url('/home/images/structure/structure2.png') 0 0 no-repeat;
-  background-size: 6.33vw 6.33vw;
+.listbox .box .box_ .lists .party2 .tri-left.structure2{
+  background: url('/home/images/structure/hlwc.png') 0 0 no-repeat;
+  background-size: 6vw 6vw;
+  height: 8vw;
+  width: 8vw;
+  position: absolute;
+  top: 2.66vw;
+  left: 10.33vw;
 }
-.listbox .box .box_ .lists .party1 .tri-left.structure3{
-  background: url('/home/images/structure/structure3.png') 0 0 no-repeat;
-  background-size: 6.33vw 6.33vw;
+.listbox .box .box_ .lists .party2 .tri-left.structure3{
+  background: url('/home/images/structure/tsc.png') 0 0 no-repeat;
+  background-size: 6vw 6vw;
+  height: 6vw;
+  width: 6vw;
+  position: absolute;
+  top: 2.66vw;
+  left:10.33vw;
 }
-  .listbox .box .box_ .lists .party1 .tri-left.structure4{
-    background: url('/home/images/structure/structure4.png') 0 0 no-repeat;
-    background-size:6.33vw 6.33vw;
+  .listbox .box .box_ .lists .party2 .tri-left.structure4{
+    background: url('/home/images/structure/cydj.png') 0 0 no-repeat;
+    background-size: 6vw 6vw;
+    height: 6vw;
+    width: 6vw;
+    position: absolute;
+    top: 2.66vw;
+    left: 10.33vw;
   }
+.listbox .box .box_ .lists .party2 .tri-left.structure5{
+  background: url('/home/images/structure/cyjs.png') 0 0 no-repeat;
+  background-size: 6vw 6vw;
+  height:6vw;
+  width: 6vw;
+  position: absolute;
+  top: 2.66vw;
+  left: 10.33vw;
+}
 .listbox .box .box_ .lists .detail1 {
   width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+  position: relative;
+  top: 0;
 }
 .listbox .box .box_ .lists .detail1 .name2 {
   display: inline-block;
+  width: 79vw;
+  height: 45px;
+  font-size: 14px;
+  color: #333333;
+  line-height: 45px;
+  margin-left: 18vw;
+}
+.listbox .box .box_ .lists .detail2 .name3 {
+  display: inline-block;
+  background-color: #eeeeee;
   width: 90%;
   height: 45px;
   margin-left: 40px;
   font-size: 14px;
   color: #333333;
   line-height: 45px;
-  border-bottom: 1px solid #f1f1f1;
 }
   .listbox .box .box_ .lists .detail1 .name2 .sj{
     float: right;
@@ -515,3 +550,28 @@ body {
 .structureTextRight li {float:left;width:18.67vw;margin-right: 6.4vw;text-align: center;margin-bottom: 2.678vw;}
 .structureTextRight li img {width:18.67vw;height:26.67vw;}
 .structureTextRight li p {font-size: 1.4rem;color: #333;}
+
+.party3{
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #f1f1f1;
+}
+.party3 .limit{
+
+  display: inline-block;
+  width: 74vw;
+  height: 45px;
+  font-size: 14px;
+  color: #333333;
+  line-height: 45px;
+  margin-left: 23vw;
+}
+.listbox .box .box_ .lists .party3 .limit .sj {
+  float: right;
+  width: 6px;
+  height: 11px;
+  background: url(/home/images/structure/sj.png) no-repeat;
+  background-size: 6px 11px;
+  margin-top: 17px;
+  margin-right: 20px;
+}
