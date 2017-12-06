@@ -144,7 +144,7 @@
     -webkit-box-orient: vertical;
     font-family: "Microsoft yahei" !important;
 }
-#side2 .reportDivmainText_01 p  , #side2 .reportDivmainText_01 span {font-family: "Microsoft yahei" !important;}
+#side2 .reportDivmainText_01 p  , #side2 .reportDivmainText_01 span {font-family: "Microsoft yahei" !important;line-height: 6.4vw;}
 #side2 .reportDivmainText_02 {background: #fe9903;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 #side2 .reportDivmainText_03 {bottom:4.6vw;}
 #side2 .reportDivmainImg {line-height: 32vw;}
@@ -170,6 +170,7 @@
      -webkit-line-clamp: 2;
      -webkit-box-orient: vertical;
  }
+#side3 .reportDivmainText_01 p ,#side3 .reportDivmainText_01 span {line-height: 6.4vw;}
 #side3 .reportDivmainText_02 {background: #9bcc35;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 #side3 .reportDivmainText_03 {bottom:2.6vw;}
 #side3 .reportDivmainText_03 {right:3.2vw;}

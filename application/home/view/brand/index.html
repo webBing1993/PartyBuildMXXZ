@@ -13,18 +13,18 @@
 {block name="body"}
     <div class="brandSort">
         <ul>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_01.png);color: #099;">小镇回忆</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_01.png);color: #099;">小镇教场</div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_02.png);color: #fe9901;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_03.png);color: #3199cc;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_04.png);color: #e20000;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_05.png);color: #9bcc35;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_06.png);color: #c231ff;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_07.png);color: #3199cc;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_09.png);color: #099;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_10.png);color: #fe9901;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_11.png);color: #e20000;">小镇说法</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #9bcc35;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_03.png);color: #3199cc;">小镇医生</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_04.png);color: #e20000;">职来职往</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_05.png);color: #9bcc35;">创客学院</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_06.png);color: #c231ff;">创业先锋营</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_07.png);color: #3199cc;">创业咖啡吧</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;">中国青年互联网创业大赛</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_09.png);color: #099;">财税大讲堂</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_10.png);color: #fe9901;">爱在小镇</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_11.png);color: #e20000;">伊心伊意</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #9bcc35;">女性创业创新大赛</div></li>
         </ul>
     </div>
 <div id="brandFixed">
@@ -39,6 +39,19 @@
 {/block}
 {block name="script"}
 <script>
+    var arr = ['根据企业需求，经常性开展职业技能培训，每年开展一次职业技能竞赛，提升小镇职工技能，培养工匠精神。',
+                '常态化提供法律咨询服务，定期举办法律知识讲座，为职工就业创业保驾护航。',
+                '关爱职工身体健康，经常性举办健康讲座，邀请医生走进小镇，为职工提供健康义诊活动。',
+                '定期发布人才需求信息、组织企业开展人才招聘活动，为企业引进人才搭建平台、提供服务。',
+                '为创客提供公益性创业培训，解读创业政策，指导解决创业过程中遇到的的各种问题。',
+                '每月组织一次创业先锋营项目路演，为小镇遴选优质项目，推动项目和投资机构、孵化器对接。',
+                '定期在咖啡吧组织青年畅聊会，分享创业经验，了解行业动态，促进创客增进沟通、碰撞思维。',
+                '每年承办一次中国青年互联网创业大赛，为创业青年们提供一个展示自我、突破自我、实现自我的平台。',
+                '定期举办财税大讲堂活动，常态化提供财税咨询服务，丰富创客财务税务知识，规范企业运营管理。',
+                '定期举办相亲活动，为男身男女青年提供交际平台和交友机会。',
+                '关爱创客心理健康，定期举办心理健康讲座，常态化提供心理健康咨询服务。',
+                '每年举办一次高规格女性创业创新大赛，展示女性创客风采。'
+                ]
     $('.brandSort li').each(function(){
         var num = $(this).index();
         if(num %2==0){
@@ -51,6 +64,7 @@
                 $('#brandFixed').show();
             $('.brandFixedContent_01').html($(this).find('div').text());
             var _height = $('.brandFixedContent').height()/2;
+            $('.brandFixedContent_02 p').eq(0).html(arr[$(this).index()])
             $('#brandFixed .brandFixedContent').css('margin-top',-_height);
         })
     })
