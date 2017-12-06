@@ -238,7 +238,7 @@
     };
     function loadScroll(){
         $('.scrollDiy').off("scroll" ).on("scroll",function(){
-            var dh = $('.scrollDiy>.content').height() +$('.scrollDiy>.banner').height() ;
+            var dh = $('.scrollDiy>.content').height();
             var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
             var len = $(".list" ).length;
             var tip = $(".tip");
@@ -284,6 +284,7 @@
         //is_like : 1为已点赞 0为未点赞
         var html = '';
         var lists = data.data;
+
         var len = lists.length;
         for(var i = 0; i< len;i++){
             var list = lists[i];

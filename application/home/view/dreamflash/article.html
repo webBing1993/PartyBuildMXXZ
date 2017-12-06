@@ -93,7 +93,6 @@ $(function(){
     $(".uecontent p span").css("font-size","14px");
 	//reset
 	var len = $(".list" ).length;
-	console.log
 	if(len >= 7){
 		$('.tip' ).text('上拉加载更多');
 		//上拉加载评论
@@ -181,7 +180,8 @@ var send = function(e,type,id){
 };
 function loadScroll(){
 	$('.scrollDiy').off("scroll").on("scroll",function(){
-		var dh = $('.article').height() + $('.comment').height();
+		var dh = $('.scrollDiy>.article').height();
+		console.log(dh);
 		var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
 		var len = $(".list" ).length;
 		var tip = $(".tip");
@@ -202,6 +202,7 @@ function loadScroll(){
 					loading.toggleClass('hidden');
 				},
 				success:function(data){
+                    console.log(data);
 					loading.toggleClass('hidden');
 					tip.show();
 					if(data.code == 1){
@@ -221,9 +222,11 @@ function loadScroll(){
 	})
 }
 function addComment(data){
+    console.log(121313213);
 	//is_like : 1为已点赞 0为未点赞
 	var html = '';
 	var lists = data.data;
+    console.log(lists);
 	var len = lists.length;
 	for(var i = 0; i< len;i++){
 		var list = lists[i];
