@@ -1,7 +1,7 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>网上述职</title>
+<title>个人风采</title>
 <link rel="stylesheet" href="/home/css/report/detail.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
@@ -18,20 +18,16 @@
 {/block}
 {block name="body"}
     <div class="reportDetail">
-        <div class="reportDetailImg"><img src="/home/images/icon_001.png" alt=""></div>
+        <div class="reportDetailImg"><img src="{$article.front_cover|get_cover='path'}" alt=""></div>
         <div class="reportDetailText">
-            <div class="reportDetailText_01"><span>姓名</span><span>郑家</span></div>
-            <div class="reportDetailText_01"><span>机构</span><span>梦想小镇</span></div>
-            <div class="reportDetailText_01"><span>职位</span><span>工会工作委员会主任</span></div>
-            <div class="reportDetailText_01"><span>联系方式</span><span><a href="tel://1231546">132145679846</a></span></div>
+            <div class="reportDetailText_01"><span>姓名</span><span>{$article.name}</span></div>
+            <div class="reportDetailText_01"><span>机构</span><span>{$article.mechanism}</span></div>
+            <div class="reportDetailText_01"><span>职位</span><span>{$article.position}</span></div>
+            <div class="reportDetailText_01"><span>联系方式</span><span><a href="tel:{$article.mobile}">{$article.mobile}</a></span></div>
             <div class="reportDetailText_02">
                 <span>个人介绍</span>
                 <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor fugiat necessitatibus quisquam unde. Animi aut ipsam itaque iure nostrum quae saepe sit totam vero. Incidunt nobis odio quas sint?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor fugiat necessitatibus quisquam unde. Animi aut ipsam itaque iure nostrum quae saepe sit totam vero. Incidunt nobis odio quas sint?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor fugiat necessitatibus quisquam unde. Animi aut ipsam itaque iure nostrum quae saepe sit totam vero. Incidunt nobis odio quas sint?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor fugiat necessitatibus quisquam unde. Animi aut ipsam itaque iure nostrum quae saepe sit totam vero. Incidunt nobis odio quas sint?
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor fugiat necessitatibus quisquam unde. Animi aut ipsam itaque iure nostrum quae saepe sit totam vero. Incidunt nobis odio quas sint?
+                    {$article.content}
                 </div>
             </div>
         </div>
