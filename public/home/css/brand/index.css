@@ -61,3 +61,10 @@
 .brandSort div {background-size:54.67vw 17.33vw;background-repeat: no-repeat;width:54.67vw;font-size: 2rem;}
 .brandSort .left {float:left;padding-left: 8vw;text-align: left}
 .brandSort .right {float:right;padding-right: 8vw;text-align: right}
+
+#brandFixed {position: fixed;background: rgba(0,0,0,.7);width:100%;height:100%;top:0;left:0;display: none;}
+#brandFixed .brandFixedContent {width:93.33vw;background: #fff;border-radius: 2.67vw;position: relative;padding-bottom: 8vw;top:50%;margin-left: 3.335vw;margin-right: 3.335vw;}
+#brandFixed .brandFixedContent_01 {height:13.33vw;line-height: 13.33vw;font-size: 1.7rem;color: #333;border-bottom: 1px solid #f1f1f1;text-align: center;}
+#brandFixed .brandFixedContent_02 {width:93.4%;position: relative;margin: auto;text-align: justify;}
+#brandFixed .brandFixedContent_02 p:first-child{line-height: 1.6rem;}
+#brandFixed .brandFixedContent_02 img {margin-top: 2.67vw;}

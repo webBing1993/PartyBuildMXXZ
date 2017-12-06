@@ -116,29 +116,30 @@
     overflow: hidden;
     color: #333;
     font-size: 1.4rem;
-    margin-top: 5.33vw;
-    margin-bottom: 1.73vw;
+    margin-top: 3.33vw;
+    margin-bottom: 2.73vw;
 }
 .reportDivmain .reportDivmainText .reportDivmainText_02 {background: #ff7043;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
-.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom:0;right:5vw;color: #999;font-size: 1.2rem;}
+.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom:2.67vw;right:5vw;color: #999;font-size: 1.2rem;}
 .reportDivmain .reportDivmainImg ,.reportDivmain .reportDivmainText {float:left;}
 .fa:before {
     content: "\f105";
 }
 
-#side2 li {height:32vw;width:100%;position: relative;margin:0 auto 1.33vw;padding: 0 2.5%;}
-#side2 .reportDivmainText {width:68vw;}
-#side2 .reportDivmainText_04 {margin-top: 2.8vw;color: #333;}
-#side2 .reportDivmainText_01 {margin-top: 1vw;margin-bottom: 1.6vw;-webkit-line-clamp: 2;width:100%;font-size: 1.2rem;color: #999;}
+#side2 li {height:32vw;width:100%;position: relative;margin:0 auto 1.33vw;}
+#side2 .reportDivmainText {width:72vw;}
+#side2 .reportDivmainText_04 {margin-top: 3.8vw;color: #333;}
+#side2 .reportDivmainText_01 {margin-top: 1vw;margin-bottom: 1.6vw;-webkit-line-clamp: 2;width:100%;font-size: 1.2rem;color: #999;line-height: 4.8vw;}
 #side2 .reportDivmainText_02 {background: #fe9903;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 #side2 .reportDivmainText_03 {bottom:4.6vw;}
 #side2 .reportDivmainImg {line-height: 32vw;}
-#side2 .reportDivmainImg div {width:18.67vw;height:18.67vw;border-radius: 50%;background:#b1e3fc;color: #fff;font-size: 1.5rem;line-height: 18.67vw;position: relative;top:50%;margin-top: -9vw;}
-
+#side2 .reportDivmainImg div {width:18.67vw;height:18.67vw;border-radius: 50%;background:#b1e3fc;color: #fff;font-size: 1.5rem;line-height: 18.67vw;position: relative;top:50%;margin: -9vw auto 0;}
+#side2 .reportDivmainText_03 {right:3.2vw;}
 
 
 #side3 li {height:29.33vw;width:100%;position: relative;margin:0 auto 1.33vw;padding: 0 2.5%;}
 #side3 .reportDivmainText_04 {margin-top: 2.8vw;color: #333;}
-#side3 .reportDivmainText_01 {margin-top: 1vw;margin-bottom: 1.6vw;-webkit-line-clamp: 2;width:100%;font-size: 1.2rem;color: #999;}
+#side3 .reportDivmainText_01 {margin-top: 1vw;margin-bottom: 1.6vw;-webkit-line-clamp: 2;width:100%;font-size: 1.2rem;color: #999;line-height: 4.8vw;}
 #side3 .reportDivmainText_02 {background: #9bcc35;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
-#side3 .reportDivmainText_03 {bottom:1.6vw;}
+#side3 .reportDivmainText_03 {bottom:2.6vw;}
+#side3 .reportDivmainText_03 {right:3.2vw;}

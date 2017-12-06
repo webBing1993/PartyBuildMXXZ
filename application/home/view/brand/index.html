@@ -13,20 +13,29 @@
 {block name="body"}
     <div class="brandSort">
         <ul>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_01.png);color: #099;">小镇回忆</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_02.png);color: #fe9901;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_03.png);color: #3199cc;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_04.png);color: #e20000;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_05.png);color: #9bcc35;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_06.png);color: #c231ff;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_07.png);color: #3199cc;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_09.png);color: #099;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_10.png);color: #fe9901;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_11.png);color: #e20000;">小镇说法</div></a></li>
-            <li><a href="#"><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #9bcc35;">小镇说法</div></a></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_01.png);color: #099;">小镇回忆</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_02.png);color: #fe9901;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_03.png);color: #3199cc;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_04.png);color: #e20000;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_05.png);color: #9bcc35;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_06.png);color: #c231ff;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_07.png);color: #3199cc;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_09.png);color: #099;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_10.png);color: #fe9901;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_11.png);color: #e20000;">小镇说法</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #9bcc35;">小镇说法</div></li>
         </ul>
     </div>
+<div id="brandFixed">
+    <div class="brandFixedContent">
+        <div class="brandFixedContent_01"></div>
+        <div class="brandFixedContent_02">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid assumenda consequatur culpa dolor, earum eos eveniet ex exercitationem fuga incidunt ipsa iusto libero nemo placeat quas sed voluptas voluptatum?</p>
+            <p><img src="/home/images/loading.jpg" alt=""></p>
+        </div>
+    </div>
+</div>
 {/block}
 {block name="script"}
 <script>
@@ -37,6 +46,16 @@
         }else {
             $('.brandSort li').eq(num).find('div').addClass('right')
         }
+        $(this).on('click',function(e){
+            $('.brandSort').css('position','fixed')
+            $('#brandFixed').show();
+            $('.brandFixedContent_01').html($(this).find('div').text());
+            var _height = $('.brandFixedContent').height()/2;
+            $('#brandFixed .brandFixedContent').css('margin-top',-_height);
+            $(document).click(function(){
+                e.stopPropagation();
+            })
+        })
     })
 </script>
 <!--<script>-->
