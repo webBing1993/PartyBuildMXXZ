@@ -78,6 +78,18 @@
                     <form id="form" class="form-horizontal" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
+                                <label>类别:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <select class="form-control" name="type">
+                                    <option value="1" >通知</option>
+                                    <option value="2" >公告</option>
+                                    <option value="3" >公示</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
                                 <label>顶部Banner:</label>
                             </div>
                             <div class="col-lg-5">
@@ -263,6 +275,7 @@
             var it = $(this);
 
             var data = {
+                type:$("select[name='type']").val(),
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
 //                telephone:$("input[name='tel']").val(),
@@ -272,6 +285,7 @@
 //                address:$("input[name='address']").val(),
                 publisher:$("input[name='publisher']").val(),
                 recommend:$("input[name='recommend']:checked").val(),
+                push:$("input[name='push']:checked").val(),
                 status:0,
             };
             $.ajax({

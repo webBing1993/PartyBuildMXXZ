@@ -28,6 +28,7 @@ class Notice extends Admin {
             'status' => array(0=>"已发布",1=>"已发布"),
             'recommend' => array(0=>"否",1=>"是"),
             'push' => array(0=>"否",1=>"是"),
+            'type' => array(1=>"通知",2=>"公告",3=>"公示")
         ));
 
         $this->assign('list',$list);
