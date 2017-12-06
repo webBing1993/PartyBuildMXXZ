@@ -114,10 +114,12 @@ class Base extends Controller {
         $userId = session('userId');
         $time = date('Y-m-d',time());
         $user = WechatUser::where('userid',$userId)->find();
-        if ($time != $user['daily_sign']) {
-            WechatUser::where('userid',$userId)->setInc('score',1);
-            $user->daily_sign = $time;
-            $user->save();
+        if($user){
+            if ($time != $user['daily_sign']) {
+                WechatUser::where('userid',$userId)->setInc('score',1);
+                $user->daily_sign = $time;
+                $user->save();
+            }
         }
     }
 
@@ -165,6 +167,7 @@ class Base extends Controller {
      * 11 special
      * 12 matter
      * 13 report
+     * 14 display
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -209,6 +212,9 @@ class Base extends Controller {
                 break;
             case 13:
                 $table = "report";
+                break;
+            case 14:
+                $table = "display";
                 break;
             default:
                 return $this->error("无该数据表");
@@ -322,6 +328,7 @@ class Base extends Controller {
      * 11 special
      * 12 matter
      * 13 report
+     * 14 display
      */
     public function comment(){
         if(IS_POST){
@@ -364,6 +371,9 @@ class Base extends Controller {
                     break;
                 case 13:
                     $table = "report";
+                    break;
+                case 14:
+                    $table = "display";
                     break;
                 default:
                     return $this->error("无该数据表");
