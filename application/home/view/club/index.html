@@ -81,16 +81,9 @@
 <div class="notices " style="margin-bottom: inherit;">
     <div id="newActive">
         <ul>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
-            <li><a href="#"><img src="/home/images/club/icon_01.png" alt=""></a></li>
+            {volist name="clublist" id="vo"}
+            <li><a href="{:Url('club/detail?id='.$vo.id)}"><img src="{$vo.front_cover|get_cover='path'}" alt=""></a></li>
+            {/volist}
         </ul>
     </div>
     <div class="tip"></div>

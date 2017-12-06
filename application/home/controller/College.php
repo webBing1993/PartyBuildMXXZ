@@ -35,6 +35,7 @@ class College extends Base {
             'status' => array('egt',0)
         );
         $list = NoticeModel::where($map)->order('id desc')->limit(10)->select();
+//        var_dump($list);die;
         /*foreach($list as $value){
             $value['is_over'] = 0;  // 未结束
             if (!empty($value['end_time']) && $value['end_time'] < time()){
