@@ -31,7 +31,7 @@
     <div class="brandFixedContent">
         <div class="brandFixedContent_01"></div>
         <div class="brandFixedContent_02">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid assumenda consequatur culpa dolor, earum eos eveniet ex exercitationem fuga incidunt ipsa iusto libero nemo placeat quas sed voluptas voluptatum?</p>
+            <p>强制转换的话，会有多余的参数比如length等出现，而且，会出现一些东西无法调用强制转换的话，会有多余的参数比如length等出现，而且，会出现一些东西无法调用。强制转换的话，会有多余的参数比如length等出现，而且，会出现一些东西无法调用。强制转换的话，会有多余的参数比如length等出现，而且，会出现一些东西无法调用。强制转换的话，会有多余的参数比如length等出现，而且，会出现一些东西无法调用。。</p>
             <p><img src="/home/images/loading.jpg" alt=""></p>
         </div>
     </div>
@@ -46,17 +46,23 @@
         }else {
             $('.brandSort li').eq(num).find('div').addClass('right')
         }
-        $(this).on('click',function(e){
-            $('.brandSort').css('position','fixed')
-            $('#brandFixed').show();
+        $(this).on('click',function(){
+                $('.brandSort').css('position','fixed')
+                $('#brandFixed').show();
             $('.brandFixedContent_01').html($(this).find('div').text());
             var _height = $('.brandFixedContent').height()/2;
             $('#brandFixed .brandFixedContent').css('margin-top',-_height);
-            $(document).click(function(){
-                e.stopPropagation();
-            })
         })
     })
+
+
+    $('#brandFixed').on('click',function(){
+        $('.brandSort').css('position','relative')
+        $('#brandFixed').hide();
+    })
+
+
+
 </script>
 <!--<script>-->
     <!--$(function () {-->

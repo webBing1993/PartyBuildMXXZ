@@ -110,9 +110,9 @@
 .reportDivmain .reportDivmainImg img {width:18.67vw;height:18.67vw;position: relative;vertical-align: middle;}
 .reportDivmain .reportDivmainText .reportDivmainText_01{
     width:70.2vw;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
     overflow: hidden;
     color: #333;
     font-size: 1.4rem;
@@ -120,7 +120,7 @@
     margin-bottom: 2.73vw;
 }
 .reportDivmain .reportDivmainText .reportDivmainText_02 {background: #ff7043;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
-.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom:2.67vw;right:5vw;color: #999;font-size: 1.2rem;}
+.reportDivmain .reportDivmainText .reportDivmainText_03 {position: relative;right:5vw;color: #999;font-size: 1.2rem;float:right;top:.6vw;}
 .reportDivmain .reportDivmainImg ,.reportDivmain .reportDivmainText {float:left;}
 .fa:before {
     content: "\f105";

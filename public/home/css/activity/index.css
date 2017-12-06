@@ -44,7 +44,7 @@
 .lists>ul>a>p{
     font-size: 1.4rem;
     color: #333;
-    /*margin-bottom: 1.6vw;*/
+    margin-bottom: 1.6vw;
 
 }
 .lists>ul>a>span{
@@ -58,7 +58,7 @@
 }
 .lists.time{
     display: block;
-  /*margin-top: 2vw;*/
+  margin-top: 2vw;
 
 }
 .lists.time i{

@@ -5,15 +5,6 @@
 <link rel="stylesheet" href="/home/css/report/detail.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
-    /*.scrollDiy{*/
-        /*position: absolute;*/
-        /*top:0;*/
-        /*bottom:0;*/
-        /*overflow-y: scroll;*/
-        /*!* 增加该属性，可以增加弹性 *!*/
-        /*-webkit-overflow-scrolling: touch;*/
-        /*width:100%;*/
-    /*}*/
 </style>
 {/block}
 {block name="body"}
@@ -30,17 +21,16 @@
         <div class="info">
             　{$article.content}
         </div>
-        <div class=" cont ">
-            <span class="vote">已投票 <b>{$article.votes}</b>人</span>
-            <span class="read">{$article.views}</span>
-        </div>
 
     </div>
-    {notempty name="is_vote"}
-    <div class="vote_btn"><a href="javaScript:;">投票</a></div>
-    {else/}
-    <div class="area"><a href="javaScript:;">已投票</a></div>
-    {/notempty}
+    <div class="vote">
+        <div class="is_vote">投票数：{$article.votes}</div>
+        {notempty name="is_vote"}
+        <div class="no_vote vote_btn">投票</div>
+        {else/}
+        <div class="no_vote">以投票</div>
+        {/notempty}
+    </div>
 
 </div>
 {/block}
