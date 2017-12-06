@@ -37,61 +37,19 @@
         <div class="banner"><img data-original="/home/images/banner/baogao.jpg" alt=""></div>
         <div class="reportDivmain">
             <ul>
+                {volist name="list2" id="vo"}
                 <li>
-                    <a href="/home/report/detail.html">
-                        <div class="reportDivmainImg"><div>郑夏夏</div></div>
+                    <a href="{:Url('style/detail?id='.$vo['id'])}">
+                        <div class="reportDivmainImg"><div>{$vo.name}</div></div>
                         <div class="reportDivmainText">
-                                <div class="reportDivmainText_04">梦想小镇报告</div>
-                                <div class="reportDivmainText_01">梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告</div>
-                                <span class="reportDivmainText_02">点赞数：222</span>
-                                <div class="reportDivmainText_03">2017-11-11 <em class="fa"></em></div>
+                                <div class="reportDivmainText_04">{$vo.position}</div>
+                                <div class="reportDivmainText_01">{$vo.title}</div>
+                                <span class="reportDivmainText_02">点赞数：{$vo.votes}</span>
+                                <div class="reportDivmainText_03">{$vo['create_time']|time_format='Y-m-d'} <em class="fa"></em></div>
                         </div>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <div class="reportDivmainImg"><div>郑夏夏</div></div>
-                        <div class="reportDivmainText">
-                            <div class="reportDivmainText_04">梦想小镇报告</div>
-                            <div class="reportDivmainText_01">梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告</div>
-                            <span class="reportDivmainText_02">点赞数：222</span>
-                            <div class="reportDivmainText_03">2017-11-11 <em class="fa"></em></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="reportDivmainImg"><div>郑夏夏</div></div>
-                        <div class="reportDivmainText">
-                            <div class="reportDivmainText_04">梦想小镇报告</div>
-                            <div class="reportDivmainText_01">梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告</div>
-                            <span class="reportDivmainText_02">点赞数：222</span>
-                            <div class="reportDivmainText_03">2017-11-11 <em class="fa"></em></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="reportDivmainImg"><div>郑夏夏</div></div>
-                        <div class="reportDivmainText">
-                            <div class="reportDivmainText_04">梦想小镇报告</div>
-                            <div class="reportDivmainText_01">梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告</div>
-                            <span class="reportDivmainText_02">点赞数：222</span>
-                            <div class="reportDivmainText_03">2017-11-11 <em class="fa"></em></div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <div class="reportDivmainImg"><div>郑夏夏</div></div>
-                        <div class="reportDivmainText">
-                            <div class="reportDivmainText_04">梦想小镇报告</div>
-                            <div class="reportDivmainText_01">梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告梦想小镇报告</div>
-                            <span class="reportDivmainText_02">点赞数：222</span>
-                            <div class="reportDivmainText_03">2017-11-11 <em class="fa"></em></div>
-                        </div>
-                    </a>
-                </li>
+                {/volist}
             </ul>
         </div>
     </div>
@@ -101,7 +59,7 @@
             <ul>
                 {volist name="list3" id="vo"}
                 <li>
-                    <a href="#">
+                    <a href="{:Url('display/detail?id='.$vo['id'])}">
                         <div class="reportDivmainText">
                             <div class="reportDivmainText_04">
                                 {$vo.title}
