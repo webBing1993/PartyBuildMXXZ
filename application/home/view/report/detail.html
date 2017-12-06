@@ -26,6 +26,8 @@
         </div>
 
     </div>
+    {eq name="visit" value="0"}
+    {eq name="$article.is_vote" value="1"}
     <div class="vote">
         <div class="is_vote">投票数：{$article.votes}</div>
         {notempty name="is_vote"}
@@ -34,6 +36,8 @@
         <div class="no_vote">已投票</div>
         {/notempty}
     </div>
+    {/eq}
+    {/eq}
 
 </div>
 {/block}
@@ -46,7 +50,7 @@
      //获取现在投票人数
      var aa = parseInt($(".vote").find("b").text());
      //点击投票按钮
-    $('.vote_btn').on("click",function () {
+    $('.vote_btn').one("click",function () {
         $.ajax({
             type:"post",
             url:"{:Url('Report/vote')}",

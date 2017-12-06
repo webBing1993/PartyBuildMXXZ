@@ -26,14 +26,18 @@
         </div>
 
     </div>
+    {eq name="visit" value="0"}
+    {eq name="$article.is_vote" value="1"}
     <div class="vote">
         <div class="is_vote">打call数：{$article.votes}</div>
         {notempty name="is_vote"}
-        <div class="no_vote vote_btn" style="background: #9bcc35;">投票</div>
+        <div class="no_vote vote_btn" style="background: #9bcc35;">打call</div>
         {else/}
-        <div class="no_vote" style="background: #9bcc35;">已投票</div>
+        <div class="no_vote" style="background: #9bcc35;">已打call</div>
         {/notempty}
     </div>
+    {/eq}
+    {/eq}
 
 </div>
 {/block}
@@ -47,7 +51,7 @@
     var aa = parseInt($(".vote").find("b").text());
     console.log($(".vote"))
     //点击投票按钮
-    $('.vote_btn').on("click",function () {
+    $('.vote_btn').one("click",function () {
         $.ajax({
             type:"post",
             url:"{:Url('Display/vote')}",
@@ -59,7 +63,7 @@
             }
         });
         //投票点击后禁止点击
-        $(this).removeClass("vote_btn").html('已投票');
+        $(this).removeClass("vote_btn").html('已打call');
 //        $(".vote").find("b").text(aa+1);
 
 

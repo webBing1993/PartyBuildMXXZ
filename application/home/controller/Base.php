@@ -167,7 +167,8 @@ class Base extends Controller {
      * 11 special
      * 12 matter
      * 13 report
-     * 14 display
+     * 14 style
+     * 15 display
      */
     public function like(){
         $uid = session('userId'); //点赞人
@@ -214,6 +215,9 @@ class Base extends Controller {
                 $table = "report";
                 break;
             case 14:
+                $table = "style";
+                break;
+            case 15:
                 $table = "display";
                 break;
             default:
@@ -328,7 +332,8 @@ class Base extends Controller {
      * 11 special
      * 12 matter
      * 13 report
-     * 14 display
+     * 14 style
+     * 15 display
      */
     public function comment(){
         if(IS_POST){
@@ -373,6 +378,9 @@ class Base extends Controller {
                     $table = "report";
                     break;
                 case 14:
+                    $table = "style";
+                    break;
+                case 15:
                     $table = "display";
                     break;
                 default:

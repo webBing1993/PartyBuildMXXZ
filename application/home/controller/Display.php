@@ -95,13 +95,13 @@ class Display extends Base{
 
         //获取 文章点赞
         $likeModel = new Like;
-        $like = $likeModel->getLike(13,$id,$userId);
+        $like = $likeModel->getLike(15,$id,$userId);
         $article['is_like'] = $like;
         $this->assign('article',$article);
 
         //获取 评论
         $commentModel = new Comment();
-        $comment = $commentModel->getComment(13,$id,$userId);
+        $comment = $commentModel->getComment(15,$id,$userId);
         $this->assign('comment',$comment);
 
         $Vote = new DisplayVote();
