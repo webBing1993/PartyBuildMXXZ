@@ -66,7 +66,6 @@ body{
 .btn{
     width:61.6vw;
     height:10.67vw;
-    background: url("/home/images/verify/loginbtn.png") no-repeat;
     background-size: 100% 100%;
     margin:0 auto;
     text-align: center;
@@ -74,7 +73,8 @@ body{
     font-size: 2rem;
     text-align: center;
     color: #ffffff;
-
+    background-color: #ff8161;
+    border-radius: 5.33vw;
 }
 .login{
     /*display: block;*/
@@ -115,7 +115,7 @@ footer img{
 .register .verification {position: relative;margin:5.33vw auto 0;text-align: center;}
 .register .verification input {height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
 .register #yan {position: relative;margin: auto;width:53.33vw;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
-.register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #e51c23;text-align: center;color: #fff;font-size: 1.6rem;}
+.register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #ff8161;text-align: center;color: #fff;font-size: 1.6rem;}
 .footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;}
 .footer img {width:100%;height:26.5vw; display: block}
 .rAccount {text-align: center;}
@@ -145,11 +145,11 @@ footer img{
     top:-4px;
     right:18vw;
     width: 20vw;
-    background: #eee;
+    background: #ff8161;
     outline: none;
     border: transparent;
     border-radius: 4px;
-    color: #999;
+    color: #fff;
 }
 
 

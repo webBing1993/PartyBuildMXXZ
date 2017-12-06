@@ -187,7 +187,11 @@
             if (curCount == 0) {
                 window.clearInterval(InterValObj);//停止计时器
                 $("#verify_code").removeAttr("disabled");//启用按钮
-                $("#verify_code").val("重新发送验证码");
+                $("#verify_code").val("重新发送");
+                $("#verify_code").css({
+                    "background":"#ff8161",
+                    "color":"#fff"
+                })
                 code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
             }
             else {
