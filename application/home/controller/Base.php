@@ -8,14 +8,10 @@
 
 namespace app\home\controller;
 
-use app\home\model\WechatTest;
-use app\user\controller\Index;
 use app\user\model\WechatUser;
 use think\Config;
 use think\Controller;
 use com\wechat\TPWechat;
-use think\Cache;
-use think\Log;
 use app\home\model\Browse;
 use app\home\model\Answers;
 use app\home\model\Comment;
@@ -30,6 +26,7 @@ class Base extends Controller {
         if(!empty($_SERVER['REQUEST_URI'])){
             session('url',$_SERVER['REQUEST_URI']);
         }
+
         $userId = session('userId');
         //读取本地cookie
         if(empty($userId)){
@@ -51,10 +48,11 @@ class Base extends Controller {
             $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
             if(empty($userId)) {
-//                $redirect_uri = Config::get("party.login");
-//                $url = $Wechat->getOauthRedirect($redirect_uri);
-                $this->redirect('Verify/memberslogin');//跳转登录页
+
+                //跳转登录页
+                $this->redirect('Verify/memberslogin');
             } else {
+
                 // 每日登录签到
                 $this->dailySign();
             }
@@ -107,6 +105,7 @@ class Base extends Controller {
             $this->redirect('Verify/null');
         }
     }
+
     /**
      *  每日登录签到
      */
@@ -121,6 +120,7 @@ class Base extends Controller {
             $user->save();
         }
     }
+
     /**
      * 获取公众号签名
      */
