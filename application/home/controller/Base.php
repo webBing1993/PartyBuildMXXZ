@@ -43,10 +43,10 @@ class Base extends Controller {
         }
 
         //如果是游客的话默认userid为visitors
-        if($userId == 'visitor'){
+        if ($userId == 'visitor') {
             session('nickname','游客');
             session('header','/home/images/common/vistor.jpg');
-        }else{
+        } else {
             //微信认证
             $Wechat = new TPWechat(Config::get('party'));
             // 1用户认证是否登陆
@@ -54,6 +54,9 @@ class Base extends Controller {
 //                $redirect_uri = Config::get("party.login");
 //                $url = $Wechat->getOauthRedirect($redirect_uri);
                 $this->redirect('Verify/memberslogin');//跳转登录页
+            } else {
+                // 每日登录签到
+                $this->dailySign();
             }
 
             // 2获取jsapi_ticket
@@ -104,7 +107,20 @@ class Base extends Controller {
             $this->redirect('Verify/null');
         }
     }
-    
+    /**
+     *  每日登录签到
+     */
+    protected function dailySign ()
+    {
+        $userId = session('userId');
+        $time = date('Y-m-d',time());
+        $user = WechatUser::where('userid',$userId)->find();
+        if ($time != $user['daliy_sign']) {
+            WechatUser::where('userid',$userId)->setInc('score',1);
+            $user->daliy_sign = $time;
+            $user->save();
+        }
+    }
     /**
      * 获取公众号签名
      */
