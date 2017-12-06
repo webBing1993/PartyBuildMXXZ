@@ -78,7 +78,7 @@ class Report extends Base{
     /**
      * 详情页
      */
-    public function detail(){
+    public function reportdetail(){
         $this->anonymous();        //判断是否是游客
         $this->jssdk();
 
