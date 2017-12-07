@@ -118,6 +118,7 @@
     font-size: 1.4rem;
     margin-top: 3.33vw;
     margin-bottom: 2.73vw;
+    padding-top: 2vw;
 }
 .reportDivmain .reportDivmainText .reportDivmainText_02 {background: #ff7043;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 .reportDivmain .reportDivmainText .reportDivmainText_03 {position: relative;right:5vw;color: #999;font-size: 1.2rem;float:right;top:.6vw;}
@@ -143,6 +144,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-family: "Microsoft yahei" !important;
+    padding-top: initial;
 }
 #side2 .reportDivmainText_01 p  , #side2 .reportDivmainText_01 span {font-family: "Microsoft yahei" !important;line-height: 6.4vw;}
 #side2 .reportDivmainText_02 {background: #fe9903;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
@@ -169,6 +171,7 @@
      display: -webkit-box;
      -webkit-line-clamp: 2;
      -webkit-box-orient: vertical;
+    padding-top: initial;
  }
 #side3 .reportDivmainText_01 p ,#side3 .reportDivmainText_01 span {line-height: 6.4vw;}
 #side3 .reportDivmainText_02 {background: #9bcc35;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
@@ -176,5 +179,5 @@
 #side3 .reportDivmainText_03 {right:3.2vw;}
 
 #side3 .reportDivmainText_02 , #side3>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
-#side1 .reportDivmainText_02 , #side1>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
+#side1 .reportDivmainText_02 , #side1>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 3vw;top:inherit;}
 #side2 .reportDivmainText_02 , #side2>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}

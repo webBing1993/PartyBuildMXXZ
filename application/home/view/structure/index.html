@@ -25,16 +25,16 @@
 
 {block name="body"}
 <div class="tabs">
-	<span class="tab active"><span>组织领导</span></span>
-	<span class="tab"><span>组织架构</span></span>
+	<span class="tab active" data-side="1"><span>组织领导</span></span>
+	<span class="tab" data-side="2"><span>组织架构</span></span>
 
 </div>
 <div class="listbox">
 	<!--组织领导   小镇介绍   党工青妇联介绍-->
-	<div class="box summary active">
+	<div class="box summary active" id="side1">
 		<!--banner-->
 		<div class="banner">
-			<img data-original="/home/images/banner/1.jpg" alt="" class="banner-img">
+			<img src="/home/images/banner/1.jpg" alt="" class="banner-img">
 		</div>
 		<!--党群组织领导架构-->
 		<div class="structureSort">
@@ -83,63 +83,66 @@
 		</div>
 	</div>
 	<!--组织架构 村部名录-->
-	<div class="town box hidden">
+	<div class="town box hidden" id="side2">
 		<div class="banner">
-			<img data-original="/home/images/banner/1.jpg" alt="" class="banner-img">
+			<img src="/home/images/banner/1.jpg" alt="" class="banner-img">
 		</div>
-        <div class="box_ or">
-            <div class="lists">
+		<div class="structureSort">
+			<div class="box_ or">
+				<div class="lists">
 
-                <div class="list clear">
-					<!--第一层-->
-                    <div class="party1">
-                        <div class="tri-left structure1"></div>
-                        <div class="name1">梦想小镇</div>
-                    </div>
-                    <!--第二层-->
-                    <div class="detail1 party2">
-						<div class="tri-left structure2"></div>
-                        <a class="name2 limit" href="javaSrcipt:;">互联网村<span class="rt sj"></span></a>
-                    </div>
-					<!--第三层-->
-					<div class="detail2 party3" >
-						<a class="name2 limit" href="">第七空间孵化器<span class="rt sj"></span></a>
+					<div class="list clear">
+						<!--第一层-->
+						<div class="party1">
+							<div class="tri-left structure1"></div>
+							<div class="name1">梦想小镇</div>
+						</div>
+						<!--第二层-->
+						<div class="detail1 party2">
+							<div class="tri-left structure2"></div>
+							<a class="name2 limit" href="javaSrcipt:;">互联网村<span class="rt sj"></span></a>
+						</div>
+						<!--第三层-->
+						<div class="detail2 party3" >
+							<a class="name2 limit" href="">第七空间孵化器<span class="rt sj"></span></a>
+						</div>
+
+						<!--第二层-->
+						<div class="detail1 party2">
+							<div class="tri-left structure3"></div>
+							<a class="name2 limit" href="javaSrcipt:;">天使村<span class="rt sj"></span></a>
+						</div>
+
+						<!--第三层-->
+						<div class="detail2 party3" >
+							<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
+						</div>
+						<!--第二层-->
+						<div class="detail1 party2">
+							<div class="tri-left structure4"></div>
+							<a class="name2 limit" href="javaSrcipt:;">创业大街<span class="rt sj"></span></a>
+						</div>
+
+						<!--第三层-->
+						<div class="detail2 party3" >
+							<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
+						</div>
+						<!--第二层-->
+						<div class="detail1 party2">
+							<div class="tri-left structure5"></div>
+							<a class="name2 limit" href="javaSrcipt:;">创业集市<span class="rt sj"></span></a>
+						</div>
+
+						<!--第三层-->
+						<div class="detail2 party3" >
+							<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
+						</div>
 					</div>
 
-					<!--第二层-->
-					<div class="detail1 party2">
-						<div class="tri-left structure3"></div>
-						<a class="name2 limit" href="javaSrcipt:;">天使村<span class="rt sj"></span></a>
-					</div>
+				</div>
+			</div>
+		</div>
 
-					<!--第三层-->
-					<div class="detail2 party3" >
-						<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
-					</div>
-					<!--第二层-->
-					<div class="detail1 party2">
-						<div class="tri-left structure4"></div>
-						<a class="name2 limit" href="javaSrcipt:;">创业大街<span class="rt sj"></span></a>
-					</div>
-
-					<!--第三层-->
-					<div class="detail2 party3" >
-						<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
-					</div>
-					<!--第二层-->
-					<div class="detail1 party2">
-						<div class="tri-left structure5"></div>
-						<a class="name2 limit" href="javaSrcipt:;">创业集市<span class="rt sj"></span></a>
-					</div>
-
-					<!--第三层-->
-					<div class="detail2 party3" >
-						<a class="name2 limit" href="">第七dasfasfasd空间孵化器<span class="rt sj"></span></a>
-					</div>
-                </div>
-
-            </div>
-        </div>
 	</div>
 </div>
 
@@ -149,14 +152,21 @@
 <script src="/home/js/reset.js"></script>
 <script src="/home/js/jquery.lazyload.min.js"></script>
 <script>
+	if(localStorage.getItem('yszz') == null){
+        $('.box').hide();
+        $('#side1').show();
+	}else {
+        $('.box').hide();
+        $('#side'+localStorage.getItem('yszz')).show();
+	}
 
-
+    $(document).on('click','.tab',function(){
+        var side = $(this).data('side');
+        $('.box').hide();
+        $('#side'+side).show();
+        localStorage.setItem('yszz',side);
+	});
 $(function(){
-    $('.tabs .tab').each(function(){
-        if($(this).index()==1 || $(this).hasClass('.active')){
-            $('.listbox .town').show();
-		}
-	})
     $(function(){
         //tab值记录
         tabRecord('.tab' ,'.box');
@@ -164,9 +174,20 @@ $(function(){
         tabSwitch('.tab' ,'.box');
         //上拉加载
     });
+    $('.tabs .tab').each(function(){
+        if($(this).index()==1 || $(this).hasClass('active')){
+            $('.listbox .town').show();
+		}
+	})
+
     $(function() {
         $("img.lazy").lazyload({effect: "fadeIn"});
     });
+
+//    $('.tabs>span').on('click',function(){
+//        var side = $(this).index()
+//		console.log(side)
+//	});
 
 
 
