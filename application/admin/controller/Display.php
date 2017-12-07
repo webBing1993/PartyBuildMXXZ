@@ -7,7 +7,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\model\Report as ReportModel;
+use app\admin\model\Display as DisplayModel;
 use app\admin\model\Picture;
 use app\admin\model\Push;
 use com\wechat\TPQYWechat;
@@ -15,9 +15,9 @@ use think\Config;
 
 /**
  * Class
- * @package 网上述职
+ * @package 网上述职活动展示
  */
-class Report extends Admin {
+class Display extends Admin {
     /**
      * 主页
      */
@@ -25,11 +25,10 @@ class Report extends Admin {
         $map = array(
             'status' => array('egt',0),
         );
-        $list = $this->lists('Report',$map);
+        $list = $this->lists('Display',$map);
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
             'push' => array(0=>"否",1=>"是"),
-            'type' => array(1=>"党",2=>"工",3=>"青",4=>"妇")
         ));
         $this->assign('list',$list);
 
@@ -45,9 +44,9 @@ class Report extends Admin {
             if(empty($data['id'])) {
                 unset($data['id']);
             }
-            $specialModel = new ReportModel();
+            $specialModel = new DisplayModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
-            $model = $specialModel->validate('Report')->save($data);
+            $model = $specialModel->validate('Display')->save($data);
             if($model){
                 return $this->success('新增成功!',Url("index"));
             }else{
@@ -66,8 +65,8 @@ class Report extends Admin {
     public function edit(){
         if(IS_POST){
             $data = input('post.');
-            $specialModel = new ReportModel();
-            $model = $specialModel->validate('Report')->save($data,['id'=>input('id')]);
+            $specialModel = new DisplayModel();
+            $model = $specialModel->validate('Display')->save($data,['id'=>input('id')]);
             if($model){
                 return $this->success('修改成功!',Url("index"));
             }else{
@@ -80,7 +79,7 @@ class Report extends Admin {
             if(empty($id)){
                 return $this->error("系统错误,不存在该条数据!");
             }else{
-                $msg = ReportModel::get($id);
+                $msg = DisplayModel::get($id);
                 $this->assign('msg',$msg);
             }
             return $this->fetch();
@@ -93,7 +92,7 @@ class Report extends Admin {
     public function del(){
         $id = input('id');
         $data['status'] = '-1';
-        $info = ReportModel::where('id',$id)->update($data);
+        $info = DisplayModel::where('id',$id)->update($data);
         if($info) {
             return $this->success("删除成功");
         }else{

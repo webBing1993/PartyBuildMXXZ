@@ -1,10 +1,16 @@
 {extend name="base/common"}
 
 {block name="style"}
-<link rel="stylesheet" href="/static/datepicker/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="/static/iCheck/custom.css">
-<link rel="stylesheet" href="/admin/css/chosen/chosen.css">
 <style>
+    .videofile{
+        display: none;
+    }
+    .audiofile{
+        display: none;
+    }
+    audio{
+        margin-top:10px;
+    }
     textarea{
         resize:none;
     }
@@ -41,13 +47,13 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>通知公告</h2>
+        <h2>个人风采</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="{:Url('Notice/index')}">相关通知</a>
+                <a href="{:Url('index')}">主页</a>
             </li>
             <li class="active">
-                <strong>编辑</strong>
+                <strong>{$msg['id'] ? "编辑":"新增"}</strong>
             </li>
         </ol>
     </div>
@@ -63,38 +69,26 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{eq name="msg.type" value="1"}编辑通知{else/}编辑活动{/eq}</h5>
+                    <h5>{$msg['id'] ? "编辑":"新增"}</h5>
                     <div class="ibox-tools">
                         <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form id="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>类型:</label>
+                                <label>照片:</label>
                             </div>
-                            <div class="col-lg-11">
-                                <select class="form-control" name="type">
-                                    {if condition="$msg['type'] eq 1"}
-                                    <option value="1" >通知</option>
-                                    {elseif condition="$msg['type'] eq 2"}
-                                    <option value="2" >公告</option>
-                                    {else /}
-                                    <option value="3" >公示</option>
-                                    {/if}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>顶部Banner:</label>
-                            </div>
-                            <div class="col-lg-5" >
+                            <div class="col-lg-5">
                                 <div class="imggroup">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
                                     <img src="{$msg.front_cover|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
-                                    <input type="file" class="imgfile" id="file" accept="image/png , image/jpg ,image/jpeg ,image/gif">
-                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover}" required="">
+                                    {/eq}
+                                    <input type="file" class="imgfile"  id="file" accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
                                 </div>
                                 <b>推荐尺寸：500*400px</b>
                             </div>
@@ -102,66 +96,10 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>标题:</label>
+                                <label>姓名:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入标题..." class="form-control form_title" name="title" value="{$msg.title}">
-                            </div>
-                        </div>
-                        <!--{empty name="msg.start_time"}
-                        <div class="form-group" id="timeRange">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>开始时间:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <div class="date">
-                                    <input type="text" placeholder="请输入开始时间...(可为空)" class="form-control datetimepicker" name="start_time"  value=""/>
-                                </div>
-
-                            </div>
-                        </div>
-                        {else/}
-                        <div class="form-group" id="timeRange">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>开始时间:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <div class="date">
-                                    <input type="text" placeholder="请输入开始时间...(可为空)" class="form-control datetimepicker " name="start_time"  value="{$msg.start_time|time_format='Y-m-d H:i'}"/>
-                                </div>
-                            </div>
-                        </div>
-                        {/empty}
-                        {empty name="msg.end_time"}
-                        <div class="form-group" id="timeRange">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>结束时间:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <div class="date">
-                                    <input type="text" placeholder="请输入结束时间...(可为空)" class="form-control datetimepicker" name="end_time"  value=""/>
-                                </div>
-
-                            </div>
-                        </div>
-                        {else/}
-                        <div class="form-group" id="timeRange">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>结束时间:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <div class="date">
-                                    <input type="text" placeholder="请输入结束时间...(可为空)" class="form-control datetimepicker " name="end_time"  value="{$msg.end_time|time_format='Y-m-d H:i'}"/>
-                                </div>
-                            </div>
-                        </div>
-                        {/empty}
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>地址:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <input type="text" placeholder="请输入详细地址...(可为空)" class="form-control form_title" name="address" value="{$msg.address}">
+                                <input type="text" placeholder="请输入姓名..." class="form-control form_title" name="name" value="{$msg.name || default=''}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -169,17 +107,33 @@
                                 <label>联系方式:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入联系方式...(可为空)" class="form-control form_title" name="telephone" value="{$msg.telephone}">
+                                <input type="text" placeholder="请输入联系方式..." class="form-control form_title" name="mobile" value="{$msg.mobile || default=''}">
                             </div>
-                        </div>-->
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>职位信息:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入职位信息..." class="form-control form_title" name="position" value="{$msg.position || default=''}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>机构:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <input type="text" placeholder="请输入机构..." class="form-control form_title" name="mechanism" value="{$msg.mechanism || default=''}">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-1 control-label">
-                                <label>内容:</label>
+                                <label>个人介绍:</label>
                             </div>
                             <div class="col-lg-11">
                                 <div class=" float-e-margins">
                                     <div class="ibox-content no-padding borders">
-                                        <script id="container" name="content" type="text/plain">{$msg.content}</script>
+                                        <script id="container" name="content" type="text/plain">{$msg.content||default=''}</script>
                                     </div>
                                 </div>
                             </div>
@@ -189,43 +143,17 @@
                                 <label>发布人:</label>
                             </div>
                             <div class="col-lg-11">
-                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher}">
+                                <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推荐:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="recommend" {eq name="msg.recommend" value="1"}checked{/eq}>是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" value="0" name="recommend" {eq name="msg.recommend" value="0"}checked{/eq}>否
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推送:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
-                                </label>
-                            </div>
-                        </div>
-                        <input type="hidden" name="id" value="{$msg.id}">
+                        <input type="hidden" name="id" value="{$msg.id||default=''}">
+
                         <div class="form-group">
                             <div class="col-lg-11 col-lg-offset-1">
                                 <button class="btn btn-primary submit-btn post-add" type="button" target-form="form-horizontal" >发布</button>
                                 <a class="btn btn-default" href="javascript:window.history.go(-1);">返回</a>
                             </div>
                         </div>
-                        <div class="selblo"></div>
                     </form>
                 </div>
             </div>
@@ -243,7 +171,7 @@
 <script>
     $(function(){
         //导航高亮
-        highlight_subnav("{:Url('Notice/index')}");
+        highlight_subnav("{:Url('index')}");
 
         //上传图片
         var plus = $('.plus');
@@ -312,17 +240,13 @@
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
-                type:$("select[name='type']").val(),
                 front_cover:$("input[name='front_cover']").val(),
-                title:$("input[name='title']").val(),
-//                start_time:$("input[name='start_time']").val(),
-//                end_time:$("input[name='end_time']").val(),
+                name:$("input[name='name']").val(),
+                mobile:$("input[name='mobile']").val(),
+                position:$("input[name='position']").val(),
+                mechanism:$("input[name='mechanism']").val(),
                 content:ue.getContent(),
-//                telephone:$("input[name='telephone']").val(),
-//                address:$("input[name='address']").val(),
                 publisher:$("input[name='publisher']").val(),
-                recommend:$("input[name='recommend']:checked").val(),
-                push:$("input[name='push']:checked").val(),
                 status:0,
             };
             $.ajax({
@@ -391,45 +315,5 @@
     })
 
 </script>
-<script>
-    $(function(){
-        //下拉框
-        $("select").chosen({
-            no_results_text: "没有找到该选项",
-            allow_single_de: true,
-            width:'100%',
-            max_selected_options:'100'
-        });
-        var selgp = $(".selgp");
-        var selgp2 = $(".selgp2");
-        selHeight(selgp);
-        selHeight(selgp2);
-        function selHeight(e){
-            e.find('ul').on('click',function(){
-                var results = $(this ).next().find('.chosen-results' );
-                var h= results.height();
-                h=h-100;
-                $('.selblo' ).animate({'height':h+'px'},100);
-                //切出页面
-                var hiddenProperty = 'hidden' in document ? 'hidden' :
-                        'webkitHidden' in document ? 'webkitHidden' :
-                                null;
-                var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
-                var onVisibilityChange = function(){
-                    if (!document[hiddenProperty]) {
-                        //selgp.find('.search-field').find('input').on('blur');
-                    }else{
-                        e.find('.search-field').find('input').off('blur');
-                    }
-                };
-                $(document).on(visibilityChangeEvent, onVisibilityChange);
-            });
-            e.find('.search-field').find('input').on('blur',function(){
-                setTimeout(function(){
-                    $('.selblo' ).animate({'height':'0'});
-                },100)
-            });
-        }
-    })
-</script>
+<script src="/admin/js/chosen.jquery.js"></script>
 {/block}

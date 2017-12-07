@@ -47,7 +47,7 @@
 {block name="page-header"}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>网上述职</h2>
+        <h2>活动展示</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="{:Url('index')}">主页</a>
@@ -69,56 +69,13 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>{$msg['id'] ? "编辑":"新增"}专题</h5>
+                    <h5>{$msg['id'] ? "编辑":"新增"}</h5>
                     <div class="ibox-tools">
                         <a href="javascript:window.history.go(-1);" class="btn btn-white btn-sm"><i class="fa fa-reply"></i> 返回</a>
                     </div>
                 </div>
                 <div class="ibox-content">
                     <form id="form" class="form-horizontal" method="post">
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>类型:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <select class="form-control" name="type">
-                                    {neq name="msg" value=""}
-                                    {if condition="$msg['type'] eq 1"}
-                                    <option value="1" >党</option>
-                                    {elseif condition="$msg['type'] eq 2"}
-                                    <option value="2" >工</option>
-                                    {elseif condition="$msg['type'] eq 3"}
-                                    <option value="3" >青</option>
-                                    {elseif condition="$msg['type'] eq 4"}
-                                    <option value="4" >妇</option>
-                                    {else /}
-                                    {/if}
-                                    {else/}
-                                    <option value="1" >党</option>
-                                    <option value="2" >工</option>
-                                    <option value="3" >青</option>
-                                    <option value="4" >妇</option>
-                                    {/neq}
-                                </select>
-                            </div>
-                        </div>
-                        <!--<div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>录音上传:</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="imggroup">
-                                    {eq name="$msg" value=""}
-                                    <img src="" alt='录音' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.record|get_cover='path'}" alt='录音' class='thumbnail imgbox'>
-                                    {/eq}
-                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="record" class="img"  value="{$msg.record||default=''}" required="">
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>-->
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
@@ -147,35 +104,6 @@
                                 <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
                             </div>
                         </div>
-                        {eq name="msg" value=""}
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推送:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="push">是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" checked="" value="0" name="push">否
-                                </label>
-                            </div>
-                        </div>
-                        {else/}
-                        <div class="form-group">
-                            <div class="col-lg-1 text-right control-label">
-                                <label>是否推送:</label>
-                            </div>
-                            <div class="col-lg-11">
-                                <label class="i-checks">
-                                    <input type="radio" value="1" name="push" {eq name="msg.push" value="1"}checked{/eq}>是
-                                </label>
-                                <label class="i-checks">
-                                    <input type="radio" value="0" name="push" {eq name="msg.push" value="0"}checked{/eq}>否
-                                </label>
-                            </div>
-                        </div>
-                        {/eq}
                         <input type="hidden" name="id" value="{$msg.id||default=''}">
 
                         <div class="form-group">
@@ -260,12 +188,9 @@
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
-                type:$("select[name='type']").val(),
-//                record:$("input[name='record']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
-                push:$("input[name='push']:checked").val(),
                 status:0,
             };
             $.ajax({
