@@ -82,12 +82,12 @@
    var _this = $(".itme>a");
    for(var k=0;k<_length;k++){
        if(k%2==0){
-           _this.eq(k).animate({
+           _this.eq(k).stop().animate({
                left:'5%',
                opacity:1
            },1000+k*100)
        }else {
-           _this.eq(k).animate({
+           _this.eq(k).stop().animate({
                right:'5%',
                opacity:1
            },1000+k*100)
