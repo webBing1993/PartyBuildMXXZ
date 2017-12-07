@@ -120,20 +120,20 @@ body {
   line-height: 12.3vw;
   text-align: center;
 }
-  .tabs .tab:nth-child(1)::after {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 5vw;
-    float: right;
-    margin-top: 3.5vw;
-    background-color: #999;
-  }
+.tabs .tab:nth-child(1)::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 5vw;
+  float: right;
+  margin-top: 3.5vw;
+  background-color: #999;
+}
 
 
-  .tabs .tab{
+.tabs .tab{
 
-  }
+}
 .tabs .active {
   color: #FF9800;
   border-bottom: 2px solid #FF9800;
@@ -212,15 +212,15 @@ body {
   top: 2.66vw;
   left:10.33vw;
 }
-  .listbox .box .box_ .lists .party2 .tri-left.structure4{
-    background: url('/home/images/structure/cydj.png') 0 0 no-repeat;
-    background-size: 6vw 6vw;
-    height: 6vw;
-    width: 6vw;
-    position: absolute;
-    top: 2.66vw;
-    left: 10.33vw;
-  }
+.listbox .box .box_ .lists .party2 .tri-left.structure4{
+  background: url('/home/images/structure/cydj.png') 0 0 no-repeat;
+  background-size: 6vw 6vw;
+  height: 6vw;
+  width: 6vw;
+  position: absolute;
+  top: 2.66vw;
+  left: 10.33vw;
+}
 .listbox .box .box_ .lists .party2 .tri-left.structure5{
   background: url('/home/images/structure/cyjs.png') 0 0 no-repeat;
   background-size: 6vw 6vw;
@@ -254,15 +254,15 @@ body {
   color: #333333;
   line-height:12vw;
 }
-  .listbox .box .box_ .lists .detail1 .name2 .sj{
-    float: right;
-    width: 1.6vw;
-    height: 2.9vw;
-    background: url(/home/images/structure/sj.png) no-repeat;
-    background-size: 6px 11px;
-    margin-top: 4.5vw;
-    margin-right: 8.06vw;
-  }
+.listbox .box .box_ .lists .detail1 .name2 .sj{
+  float: right;
+  width: 1.6vw;
+  height: 2.9vw;
+  background: url(/home/images/structure/sj.png) no-repeat;
+  background-size: 6px 11px;
+  margin-top: 4.5vw;
+  margin-right: 8.06vw;
+}
 @media screen and (max-width: 320px) {
   .listbox .box .box_ .lists .detail1 .name2 {
     font-size: 12px;
@@ -280,9 +280,9 @@ body {
   transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
 }
-  .listbox .summary {
-    left: 0;
-  }
+.listbox .summary {
+  left: 0;
+}
 .listbox .town {
   left: 100vw;
   display: none;
@@ -357,103 +357,103 @@ body {
 
 /*details*/
 
-  .d_lists{
-    background: #ffffff;
-  }
-  .d_list{
-    display: block;
-    padding:2vw 4vw;
-    border-bottom:1px solid #f7f7f7;
-    position: relative;
-  }
-  .d_list .d_img{
-    width:13.33vw;
-    height:13.33vw;
-    -webkit-border-radius:1.6vw;
-    -moz-border-radius:1.6vw;
-    border-radius:1.6vw;
-    color: #ffffff;
-    font-size: 3.5rem;
-    text-align: center;
-    line-height: 13.333vw;
-    margin-right: 3.2vw;
-  }
-  .d_list>.d_name{
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #333;
-    width:90vw;
-    line-height: 7.3vw;
-  }
-  .d_list>.d_tel{
-    color: #29adf0;
-    font-size: 1.2rem;
-  }
-  .d_list>.d_tel>.d_tel_icon{
-    width:26.67vw;
-    padding:2.4vw 2.13vw;
-    margin-right: 1.33vw;
-    background: url("/home/images/structure/tel.png") 50% 50% no-repeat;
-    -webkit-background-size:3.47vw 4.53vw;
-    background-size:3.47vw 4.53vw;
-  }
-  .d_list .d_name>img{
-    width: 3.5vw;
-    height: 3.5vw;
-    margin-top: 1.2vw;
-  }
-  .d_list .d_name>a .d_tel_img img {
-    width: 4.56vw;
-    height: 6vw;
-    margin-top: 5.66vw;
-    float: left;
-    margin-right: 2vw;
-  }
-  .d_list .d_tel_img  {
-    font-size: 1.6rem;
-    position: absolute;
-    right: 4vw;
-    top: 0;
-    height: 17.33vw;
-    line-height: 17.33vw;
-  }
+.d_lists{
+  background: #ffffff;
+}
+.d_list{
+  display: block;
+  padding:2vw 4vw;
+  border-bottom:1px solid #f7f7f7;
+  position: relative;
+}
+.d_list .d_img{
+  width:13.33vw;
+  height:13.33vw;
+  -webkit-border-radius:1.6vw;
+  -moz-border-radius:1.6vw;
+  border-radius:1.6vw;
+  color: #ffffff;
+  font-size: 3.5rem;
+  text-align: center;
+  line-height: 13.333vw;
+  margin-right: 3.2vw;
+}
+.d_list>.d_name{
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  width:90vw;
+  line-height: 7.3vw;
+}
+.d_list>.d_tel{
+  color: #29adf0;
+  font-size: 1.2rem;
+}
+.d_list>.d_tel>.d_tel_icon{
+  width:26.67vw;
+  padding:2.4vw 2.13vw;
+  margin-right: 1.33vw;
+  background: url("/home/images/structure/tel.png") 50% 50% no-repeat;
+  -webkit-background-size:3.47vw 4.53vw;
+  background-size:3.47vw 4.53vw;
+}
+.d_list .d_name>img{
+  width: 3.5vw;
+  height: 3.5vw;
+  margin-top: 1.2vw;
+}
+.d_list .d_name>a .d_tel_img img {
+  width: 4.56vw;
+  height: 6vw;
+  margin-top: 5.66vw;
+  float: left;
+  margin-right: 2vw;
+}
+.d_list .d_tel_img  {
+  font-size: 1.6rem;
+  position: absolute;
+  right: 4vw;
+  top: 0;
+  height: 17.33vw;
+  line-height: 17.33vw;
+}
 
-  .d_list .d_name>a{
-    display: block;
-    font-size:1.4rem;
-    line-height: 10vw;
-    font-weight: 100;
-  }
-  .d_list .d_name>a .d_lst img{
-    width: 3vw;
-    height: 3vw;
-    display: block;
-    float: left;
-    margin-top: 1.5vw;
-    /*margin-top: 3.5vw;*/
-  }
- .d_tel>.d_tel_icon {
-    width: 26.67vw;
-    padding: 0.4vw 2.13vw;
-    margin-right: 1.33vw;
-    background: url(/home/images/structure/tel.png) 50% 50% no-repeat;
-    -webkit-background-size: 3.47vw 4.53vw;
-    background-size: 3.47vw 4.53vw;
-   margin-left: 20vw;
-  }
-  .d_list .d_name>a>.d_lst{
-    color: #333;
-    line-height: 6vw;
-    height: 6vw;
-  }
-  .d_list .d_name>a>.d_lst>i{
-    font-style: normal;
-    margin-left:1vw;
-  }
-  .d_list .d_name>a>.d_lst>b{
-    font-weight: 100;
+.d_list .d_name>a{
+  display: block;
+  font-size:1.4rem;
+  line-height: 10vw;
+  font-weight: 100;
+}
+.d_list .d_name>a .d_lst img{
+  width: 3vw;
+  height: 3vw;
+  display: block;
+  float: left;
+  margin-top: 1.5vw;
+  /*margin-top: 3.5vw;*/
+}
+.d_tel>.d_tel_icon {
+  width: 26.67vw;
+  padding: 0.4vw 2.13vw;
+  margin-right: 1.33vw;
+  background: url(/home/images/structure/tel.png) 50% 50% no-repeat;
+  -webkit-background-size: 3.47vw 4.53vw;
+  background-size: 3.47vw 4.53vw;
+  margin-left: 20vw;
+}
+.d_list .d_name>a>.d_lst{
+  color: #333;
+  line-height: 6vw;
+  height: 6vw;
+}
+.d_list .d_name>a>.d_lst>i{
+  font-style: normal;
+  margin-left:1vw;
+}
+.d_list .d_name>a>.d_lst>b{
+  font-weight: 100;
 
-  }
+}
 
 
 /*组织领导架构*/
@@ -563,6 +563,7 @@ body {
   line-height: 12vw;
   border-bottom: 1px solid #eeeeee;
 }
+.party3 .limit img {width:4vw;height:4vw;position: relative;line-height: 12vw;vertical-align: middle;margin-left: 2vw;}
 .listbox .box .box_ .lists .party3 .limit .sj {
   float: right;
   width: 1.6vw;
