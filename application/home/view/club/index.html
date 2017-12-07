@@ -68,7 +68,11 @@
     #newActive li:nth-child(odd) {border-right: 1px solid #eee;}
     #newActive li a{display: block  }
     #newActive img {width:34.667vw;height:21.333vw;position: relative;vertical-align: middle;}
-
+    .frontCover {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 </style>
 {/block}
 {block name="body"}
@@ -98,10 +102,10 @@
     <div class="swiper-container">
         <div class="swiper-wrapper">
             {volist name="volunteerlist" id="vo"}
-            <div class="swiper-slide swiper-lazy" style="background-image:url({$vo.front_cover|get_cover='path'})">
+            <div class="swiper-slide swiper-lazy">
             <!--<div class="swiper-slide swiper-lazy" style="background-image:url({$vo.front_cover|get_cover='path'})">-->
             <!--<div class="swiper-slide swiper-lazy">-->
-                <!--<img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;">-->
+                <img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;" class="frontCover">
                 <div class="tm_info">
                       <i></i>
                       <div class="tm_name">{$vo.title}</div>
