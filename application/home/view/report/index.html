@@ -218,7 +218,7 @@ $('.reportSort>div').on('click',function(){
                 html+= '<li>'
                         +'<a href="/home/report/detail/id/'+list.id+'">'
                         +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
-                        +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>\<span class="reportDivmainText_02">投票数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div></div>'
+                        +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>\<span class="reportDivmainText_02">投票数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
                         +'</a>'
                         +'</li>'
             }
@@ -227,8 +227,8 @@ $('.reportSort>div').on('click',function(){
                 var list = lists[j];
                 html+= '<li>'
                     +'<a href="/home/style/detail/id/'+list.id+'">'
-                    +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
-                    +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">点赞数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div></div>'
+                    +'<div class="reportDivmainImg"><div>'+list.name+'</div></div>'
+                    +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">点赞数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
                     +'</a>'
                     +'</li>'
             }
@@ -239,7 +239,7 @@ $('.reportSort>div').on('click',function(){
                 html+= '<li>'
                     +'<a href="/home/display/detail/id/'+list.id+'">'
                     +'<div class="reportDivmainText" style="float:inherit;">'
-                    +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">打call数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div>'
+                    +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">打call数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div>'
                     +'</div>'
                     +'</a>'
                     +'</li>'
