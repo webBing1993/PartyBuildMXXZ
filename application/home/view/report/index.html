@@ -22,7 +22,7 @@
                 {volist name="list" id="vo"}
                 <li>
                     <a href="{:Url('report/detail?id='.$vo['id'])}">
-                        <div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>
+                        <div class="reportDivmainImg"><img src="/home/images/dang.jpg" alt=""></div>
                         <div class="reportDivmainText">
                             <div class="reportDivmainText_01">{$vo.title}</div>
                             {eq name="$vo.is_vote" value="1"}
@@ -215,9 +215,19 @@ $('.reportSort>div').on('click',function(){
         if(side==1){
             for(var i = 0; i< len;i++){
                 var list = lists[i];
+                var Img = '';
+                if(list.type == 1){
+                    Img = '/home/images/dang.jpg'
+                }else if(list.type == 2){
+                    Img = '/home/images/gong.jpg'
+                }else if(list.type == 3){
+                    Img = '/home/images/qing.jpg'
+                }else if(list.type == 4){
+                    Img = '/home/images/fu.jpg'
+                }
                 html+= '<li>'
                         +'<a href="/home/report/detail/id/'+list.id+'">'
-                        +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
+                        +'<div class="reportDivmainImg"><img src='+Img+' alt=""></div>'
                         +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>\<span class="reportDivmainText_02">投票数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
                         +'</a>'
                         +'</li>'

@@ -113,7 +113,7 @@
             <div class="swiper-slide swiper-lazy">
             <!--<div class="swiper-slide swiper-lazy" style="background-image:url({$vo.front_cover|get_cover='path'})">-->
             <!--<div class="swiper-slide swiper-lazy">-->
-                <img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;" class="frontCover">
+                <img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;" class="frontCover swiper-lazy" >
                 <div class="tm_info">
                       <i></i>
                       <div class="tm_name">{$vo.title}</div>
@@ -158,9 +158,6 @@
         $('.notices').eq(club).siblings('.notices').addClass('hidden');
         $('.notices').eq(club).removeClass('hidden');
         var swiper = new Swiper('.swiper-container', {
-            onSlideChangeStart: function(swiper){
-                alert(11111);
-            },
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
@@ -176,6 +173,10 @@
             pagination: {
                 el: '.swiper-pagination',
             },
+            onTouchStart: function(swiper,event){
+                var touch = event.touches[0];
+                console.log(touch)
+            }
         });
     }
     $(function(){
@@ -217,12 +218,8 @@
             $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(0).find('span').css('color','#999')
             $(".triangle-up").css("left", "50.06vw");
-
             //轮播
             var swiper = new Swiper('.swiper-container', {
-                onSlideChangeStart: function(swiper){
-                    alert(1111);
-                },
                 effect: 'coverflow',
                 grabCursor: true,
                 centeredSlides: true,
@@ -237,7 +234,7 @@
                 },
                 pagination: {
                     el: '.swiper-pagination',
-                },
+                }
             });
         }
         setCookie("c",c);
@@ -298,6 +295,12 @@
         $("#newActive ul" ).append(html);
     }
 
-    $('.swiper-container .swiper-wrapper .swiper-slide')
+    $('.swiper-container').on('touchmove ',function(){
+        $("img").lazyload({
+            placeholder : "/home/images/loading.jpg",
+            effect: "fadeIn",
+            threshold : 1
+        });
+    })
 </script>
 {/block}
