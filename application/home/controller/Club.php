@@ -149,6 +149,7 @@ class Club extends Base{
             'pid' => $id,
         );
         $list = ClubActivityModel::where($map)->order('id desc')->limit(10)->select();
+        $this->assign('pid',$id);
         $this->assign('list',$list);
         return $this->fetch();
     }
