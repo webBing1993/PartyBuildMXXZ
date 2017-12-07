@@ -19,7 +19,7 @@ class Service extends Controller
     // 服务号接收的应用
     public function event() {
         $Wechat = new TPWechat(Config::get('party'));
-        $Wechat->valid();
+//        $Wechat->valid();
         $type = $Wechat->getRev()->getRevType();
         switch ($type) {
             case Wechat::MSGTYPE_TEXT:
