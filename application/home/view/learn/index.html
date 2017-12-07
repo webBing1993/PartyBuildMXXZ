@@ -78,6 +78,7 @@
         $('#side2').hide();
         $('.tabs>.tab ').eq(0).addClass('active');
         $('.tabs>.tab ').eq(1).removeClass('active');
+        type=1;
     }else if(Num==1){
         $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24');
         $('.tabs>.tab ').eq(0).find('span').css('color','#999');
@@ -85,12 +86,12 @@
         $('#side1').hide();
         $('.tabs>.tab ').eq(1).addClass('active');
         $('.tabs>.tab ').eq(0).removeClass('active');
+        type=2;
     }
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
                 var len =$(this).find('.page>a').length;
-                console.log(len)
                 if(len >= 10){
                     $('.tip' ).text('上拉加载更多');
                     //上拉加载
@@ -118,7 +119,6 @@
         console.log(num)
          type = $(this).data('side');
         localStorage.setItem('num',num);
-//        console.log($(this).data('side'));
         if(num==0){
             $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(1).find('span').css('color','#999')
@@ -130,10 +130,8 @@
             if(len <= 10){
                 $('.tip' ).text('上拉加载更多');
                 //上拉加载
-                console.log(123123)
                 loadScroll();
             } else {
-                console.log(1111)
                 $('.tip' ).text('没有更多了');
             }
             loadScroll()
@@ -157,10 +155,8 @@
 
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
-
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
-//            var len = $(".page>a" ).length;
             var len = $('#side'+type).find('.page>a').length;
             var tip = $(".tip");
             var loading = $('.loading');
@@ -173,12 +169,7 @@
                         data:{
                             length:len
                         },
-                        beforeSend: function(XMLHttpRequest){
-                            tip.hide();
-                            loading.toggleClass('hidden');
-                        },
                         success:function(data){
-                            console.log(data);
                             loading.toggleClass('hidden');
                             tip.show();
                             if(data.code == 1){
@@ -201,12 +192,7 @@
                         data:{
                             length:len
                         },
-                        beforeSend: function(XMLHttpRequest){
-                            tip.hide();
-                            loading.toggleClass('hidden');
-                        },
                         success:function(data){
-                            console.log(data);
                             loading.toggleClass('hidden');
                             tip.show();
                             if(data.code == 1){
