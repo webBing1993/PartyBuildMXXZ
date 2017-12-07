@@ -275,6 +275,12 @@
         $('#side'+type).find('.page').append(html)
     }
     //
-
+    $(window).scroll(function() {
+        $("img").lazyload({
+            placeholder: "/home/images/loading.jpg",
+            effect: "fadeIn",
+            threshold: 1
+        });
+    });
 </script>
 {/block}
