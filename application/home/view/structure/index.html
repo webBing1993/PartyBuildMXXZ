@@ -25,8 +25,8 @@
 
 {block name="body"}
 <div class="tabs">
-	<span class="tab active" data-side="1" style="line-height: 11vw;"><span>组织领导</span></span>
-	<span class="tab" data-side="2" style="line-height: 11vw;"><span>组织架构</span></span>
+	<span class="tab active" data-side="1" style="line-height: 11vw;position: relative;"><span>组织领导</span><img src="/home/images/icon_001.png" alt="" style="position: absolute;bottom: 0;width: 2.4vw; height: 1.87vw;left: 50%;margin-left: -.935vw;"></span>
+	<span class="tab" data-side="2" style="line-height: 11vw;position: relative;"><span>组织架构</span><img src="/home/images/icon_001.png" alt="" style="position: absolute;bottom: 0;width: 2.4vw; height: 1.87vw;left: 50%;margin-left: -.935vw;"></span>
 
 </div>
 <div class="listbox" style="margin-top: -1px;display: block;" id="side1">
@@ -127,20 +127,23 @@
 <script src="/home/js/jquery.lazyload.min.js"></script>
 <script>
 	if(localStorage.getItem('yszz') == null || localStorage.getItem('yszz')==1){
-	    $('.tab').removeClass('active')
-        $('.tabs .tab').eq(0).addClass('active')
+	    $('.tab').removeClass('active');
+        $('.tabs .tab img').hide();
+        $('.tabs .tab').eq(0).addClass('active').find('img').show();
 		$('.listbox').hide();
         $('#side1').show();
 	}else {
-	    $('.tab').removeClass('active')
-        $('.tabs .tab').eq(1).addClass('active')
+	    $('.tab').removeClass('active');
+        $('.tabs .tab img').hide();
+        $('.tabs .tab').eq(1).addClass('active').find('img').show();
 		$('.listbox').hide();
         $('#side'+localStorage.getItem('yszz')).show();
 	}
 	for(var i=0;i<$('.tabs .tab').length;i++){
         $('.tabs .tab')[i].onclick = function(){
-            $('.tab').removeClass('active')
-            $(this).addClass('active')
+            $('.tab').removeClass('active');
+            $('.tab').find('img').hide();
+            $(this).addClass('active').find('img').show();
             var side = $(this).data('side');
             $('.listbox').hide();
             $('#side'+side).show();
