@@ -86,7 +86,32 @@
 {/block}
 {block name="script"}
 <script>
-var side = 1;
+    function dataSave (key, value) {
+        localStorage.setItem(key, value);
+    }
+    function dataGet (key) {
+        return localStorage.getItem(key);
+    }
+    var side = 1;
+    if(dataGet('reportSave') == 1){
+        $('.reportSort div').removeClass('active').find('img').remove();
+        $('.reportSort div').eq(0).addClass('active').append('<img src="/home/images/icon_001.png">');
+        $('.reportDivSort').hide();
+        $('#side1').show();
+        side = 1;
+    }else if(dataGet('reportSave') == 2){
+        $('.reportSort div').removeClass('active').find('img').remove();
+        $('.reportSort div').eq(1).addClass('active').append('<img src="/home/images/icon_001.png">');
+        $('.reportDivSort').hide();
+        $('#side2').show();
+        side = 2;
+    }else {
+        $('.reportSort div').removeClass('active').find('img').remove();
+        $('.reportSort div').eq(2).addClass('active').append('<img src="/home/images/icon_001.png">');
+        $('.reportDivSort').hide();
+        $('#side3').show();
+        side = 3;
+    }
     for(var i=0;i<$('.reportSort div').length;i++){
         $('.reportSort div')[i].onclick = function(){
             $('.reportSort div').removeClass('active').find('img').remove();
@@ -94,6 +119,7 @@ var side = 1;
             side = $(this).data('side');
             $('.reportDivSort').hide();
             $('#side'+side).show();
+            dataSave('reportSave',side)
         }
     }
 
@@ -142,11 +168,18 @@ $('.reportSort>div').on('click',function(){
             var len = $('#side'+side).find('li').length;
             var tip = $(".tip");
             var loading = $('.loading');
-            console.log(side)
+            var url = '';
+            if(side == 1){
+                url = "{:Url('report/indexmore')}"
+            }else if(side == 2){
+                url = "{:Url('style/indexmore')}"
+            }else if(side == 3){
+                url = "{:Url('display/indexmore')}"
+            }
             if(dh == end){
                 $.ajax({
                     side:"post",
-                    url:"{:Url('report/indexmore')}",
+                    url:url,
                     data:{
                         length:len,
                         side:side
@@ -193,7 +226,7 @@ $('.reportSort>div').on('click',function(){
             for(var j = 0; j< len;j++){
                 var list = lists[j];
                 html+= '<li>'
-                    +'<a href="/home/report/detail/id/'+list.id+'">'
+                    +'<a href="/home/style/detail/id/'+list.id+'">'
                     +'<div class="reportDivmainImg"><img src="/home/images/icon_002.jpg" alt=""></div>'
                     +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">点赞数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div></div>'
                     +'</a>'
@@ -204,7 +237,7 @@ $('.reportSort>div').on('click',function(){
             for(var k = 0; k< len;k++){
                 var list = lists[k];
                 html+= '<li>'
-                    +'<a href="/home/report/detail/id/'+list.id+'">'
+                    +'<a href="/home/display/detail/id/'+list.id+'">'
                     +'<div class="reportDivmainText" style="float:inherit;">'
                     +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">打call数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+'<em class="fa"></em></div>'
                     +'</div>'

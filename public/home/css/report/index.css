@@ -132,7 +132,7 @@
 
 #side2 .reportDivmainText_01 {
     margin-top: 1vw;
-    margin-bottom: 1.6vw;
+    margin-bottom: 2.6vw;
     width: 100%;
     font-size: 1.2rem;
     color: #999;
@@ -152,13 +152,13 @@
 #side2 .reportDivmainText_03 {right:3.2vw;}
 
 
-#side3 li {height:29.33vw;width:100%;position: relative;margin:0 auto 1.33vw;padding: 0 2.5%;}
-#side3 .reportDivmainText_04 {margin-top: 2.8vw;color: #333;}
-
+#side3 li {height:29.33vw;width:100%;position: relative;margin:0 auto 2.8vw;padding: 0 2.5%;}
+#side3 .reportDivmainText_04 {color: #333;}
+#side3 .reportDivmainText {padding-top: 1.8vw;}
 #side3 .reportDivmainText_01  {
      margin-top: 1vw;
     white-space:inherit;
-     margin-bottom: 1.6vw;
+     margin-bottom: 2.6vw;
      width: 100%;
      font-size: 1.2rem;
      color: #999;
@@ -174,3 +174,7 @@
 #side3 .reportDivmainText_02 {background: #9bcc35;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 #side3 .reportDivmainText_03 {bottom:2.6vw;}
 #side3 .reportDivmainText_03 {right:3.2vw;}
+
+#side3 .reportDivmainText_02 , #side3>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
+#side1 .reportDivmainText_02 , #side1>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
+#side2 .reportDivmainText_02 , #side2>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
