@@ -22,7 +22,20 @@
                 {volist name="list" id="vo"}
                 <li>
                     <a href="{:Url('report/detail?id='.$vo['id'])}">
-                        <div class="reportDivmainImg"><img src="/home/images/dang.jpg" alt=""></div>
+                        <div class="reportDivmainImg">
+                            {eq name="$vo.type" value="1"}
+                            <img src="/home/images/dang.jpg" alt="">
+                            {/eq}
+                            {eq name="$vo.type" value="2"}
+                            <img src="/home/images/gong.jpg" alt="">
+                            {/eq}
+                            {eq name="$vo.type" value="3"}
+                            <img src="/home/images/qing.jpg" alt="">
+                            {/eq}
+                            {eq name="$vo.type" value="4"}
+                            <img src="/home/images/fu.jpg" alt="">
+                            {/eq}
+                        </div>
                         <div class="reportDivmainText">
                             <div class="reportDivmainText_01">{$vo.title}</div>
                             {eq name="$vo.is_vote" value="1"}

@@ -8,6 +8,7 @@
 
 namespace app\home\controller;
 use app\admin\model\Picture;
+use app\home\model\Wish;
 use think\Controller;
 use app\home\model\News as NewsModel;
 use app\home\model\Learn as LearnModel;
@@ -36,6 +37,23 @@ class Index extends Base {
             $test = 0;
         }
 
+
+        $map = array(
+            'status' => ['egt',0],
+            'recommend' => 1
+        );
+//        $where = ' status>=0 and recommend=1';
+        $bannerList = wish::where($map)->field('id, front_cover, title, create_time,1 tab')->limit(3)->order('create_time desc')->select();
+
+        /*$bannerList = \think\Db::field('id, front_cover, title, create_time, 1 tab')
+            ->table('pb_wish')
+            ->union("SELECT id, front_cover, title, create_time, 2 tab FROM pb_notice where ".$where." order by create_time desc limit 3")
+            ->where($map);*/
+//            ->select();
+
+
+        $this->assign('bannerList',$bannerList);
+
         $this ->assign('user',$uid);
         $this ->assign('list2',$list2['data']);
         $this->assign('test',$test);
@@ -48,6 +66,9 @@ class Index extends Base {
     public function newindex(){
         $this ->anonymous();
         $uid = session('userId');
+        $len = array('wish' => 0);
+        $list = $this ->getDataList($len);
+        $this ->assign('list',$list['data']);
         $this ->assign('user',$uid);
 
         return $this->fetch();
@@ -66,26 +87,26 @@ class Index extends Base {
      */
     public function getDataList($len)
     {
-        $count1 = $len['news']; //从第几条开始取数据
-        $count2 = $len['learn'];
-        $count3 = $len['notice'];
-        $count4 = $len['pioneer'];
+//        $count1 = $len['news']; //从第几条开始取数据
+//        $count2 = $len['learn'];
+//        $count3 = $len['notice'];
+//        $count4 = $len['pioneer'];
         $count5 = $len['wish'];
-        $news = new NewsModel();
-        $learn = new LearnModel();
-        $notice = new NoticeModel();
-        $pioneer = new PioneerModel();
+//        $news = new NewsModel();
+//        $learn = new LearnModel();
+//        $notice = new NoticeModel();
+//        $pioneer = new PioneerModel();
         $wish = new WishModel();
-        $news_check = false; //新闻数据状态 true为取空
-        $learn_check = false;
-        $notice_check = false;
-        $pioneer_check = false;
+//        $news_check = false; //新闻数据状态 true为取空
+//        $learn_check = false;
+//        $notice_check = false;
+//        $pioneer_check = false;
         $wish_check = false;
         $all_list = array();
-        //获取数据  取满6条 或者取不出数据退出循环
+        //获取数据  取满4条 或者取不出数据退出循环
         while(true)
         {
-            if(!$learn_check &&
+            /*if(!$learn_check &&
                 count($all_list) < 6)
             {
                 $res = $learn ->getDataList($count2);
@@ -96,9 +117,9 @@ class Index extends Base {
                     $count2 ++;
                     $all_list = $this ->changeTpye($all_list,$res,2);
                 }
-            }
-            if(!$notice_check &&
-                count($all_list) < 6)
+            }*/
+            /*if(!$notice_check &&
+                count($all_list) < 4)
             {
                 $res = $notice ->getDataList($count3);
                 if(empty($res))
@@ -108,9 +129,9 @@ class Index extends Base {
                     $count3 ++;
                     $all_list = $this ->changeTpye($all_list,$res,3);
                 }
-            }
+            }*/
             
-            if(!$pioneer_check &&
+            /*if(!$pioneer_check &&
                 count($all_list) < 6)
             {
                 $res = $pioneer ->getDataList($count4);
@@ -121,10 +142,10 @@ class Index extends Base {
                     $count4 ++;
                     $all_list = $this ->changeTpye($all_list,$res,4);
                 }
-            }
+            }*/
 
             if(!$wish_check &&
-                count($all_list) < 6)
+                count($all_list) < 4)
             {
                 $res = $wish ->getDataList($count5);
                 if(empty($res))
@@ -135,8 +156,8 @@ class Index extends Base {
                     $all_list = $this ->changeTpye($all_list,$res,5);
                 }
             }
-            if(count($all_list) >= 6 ||
-                ($learn_check && $notice_check && $pioneer_check && $wish_check))
+            if(count($all_list) >= 4 ||
+                ($wish_check))
             {
                 break;
             }
