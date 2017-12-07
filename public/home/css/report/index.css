@@ -109,16 +109,17 @@
 .reportDivmain .reportDivmainImg {width:24.8vw;height:100%;text-align: center;line-height: 20vw;}
 .reportDivmain .reportDivmainImg img {width:18.67vw;height:18.67vw;position: relative;vertical-align: middle;}
 .reportDivmain .reportDivmainText .reportDivmainText_01{
-    width:70.2vw;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-    -o-text-overflow:ellipsis;
+    width: 70.2vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
     overflow: hidden;
     color: #333;
     font-size: 1.4rem;
-    margin-top: 3.33vw;
+    /* margin-top: 3.33vw; */
     margin-bottom: 2.73vw;
-    padding-top: 2vw;
+    /* padding-top: 2vw; */
+    line-height: 10vw;
 }
 .reportDivmain .reportDivmainText .reportDivmainText_02 {background: #ff7043;font-size: 1.2rem;color: #fff;padding:.5vw 5.33vw;border-radius: 5.33vw;}
 .reportDivmain .reportDivmainText .reportDivmainText_03 {position: relative;right:5vw;color: #999;font-size: 1.2rem;float:right;top:.6vw;}
