@@ -157,7 +157,7 @@ body {
 }
 .listbox .box .box_ .lists .name1 {
   display: inline-block;
-  width: 100%;
+  width: 82;
   height: 12vw;
   font-size: 1.4rem;
   line-height: 12vw;
@@ -231,7 +231,7 @@ body {
   left: 10.33vw;
 }
 .listbox .box .box_ .lists .detail1 {
-  width: 100%;
+  width: 100vw;
   border-bottom: 1px solid #f1f1f1;
   position: relative;
   top: 0;
@@ -239,30 +239,29 @@ body {
 .listbox .box .box_ .lists .detail1 .name2 {
   display: inline-block;
   width: 79vw;
-  height: 45px;
-  font-size: 14px;
+  height: 12vw;
+  font-size:1.4rem;
   color: #333333;
-  line-height: 45px;
-  margin-left: 18vw;
+  line-height: 12vw;
 }
 .listbox .box .box_ .lists .detail2 .name3 {
   display: inline-block;
   background-color: #eeeeee;
   width: 90%;
-  height: 45px;
-  margin-left: 40px;
-  font-size: 14px;
+  height: 12vw;
+  margin-left: 12vw;
+  font-size: 1.4rem;
   color: #333333;
-  line-height: 45px;
+  line-height:12vw;
 }
   .listbox .box .box_ .lists .detail1 .name2 .sj{
     float: right;
-    width:6px;
-    height:11px;
-    background: url("/home/images/structure/sj.png") no-repeat;
+    width: 1.6vw;
+    height: 2.9vw;
+    background: url(/home/images/structure/sj.png) no-repeat;
     background-size: 6px 11px;
     margin-top: 17px;
-    margin-right: 20px;
+    margin-right: 8.06vw;
   }
 @media screen and (max-width: 320px) {
   .listbox .box .box_ .lists .detail1 .name2 {
@@ -300,7 +299,7 @@ body {
   width: 100vw;
   font-size: 1.6rem;
   color: #333333;
-  line-height: 60px;
+  line-height: 16vw;
   text-align: center;
 }
 .listbox .vr img {
@@ -552,21 +551,28 @@ body {
 .structureTextRight li p {font-size: 1.4rem;color: #333;}
 
 .party3{
-  width: 100%;
+  width: 100vw;
   border-bottom: 1px solid #f1f1f1;
   background-color: #f1f1f1;
 }
 .party3 .limit{
-
   display: inline-block;
-  width: 74vw;
-  height: 45px;
-  font-size: 14px;
+  width: 100vw;
+  height: 12vw;
+  font-size: 1.4rem;
   color: #333333;
-  line-height: 45px;
-  margin-left: 23vw;
+  line-height: 12vw;
 }
 .listbox .box .box_ .lists .party3 .limit .sj {
+  float: right;
+  width: 1.6vw;
+  height: 2.9vw;
+  background: url(/home/images/structure/sj.png) no-repeat;
+  background-size: 6px 11px;
+  margin-top: 17px;
+  margin-right:8.06vw;
+}
+.listbox .box .box_ .lists .party1 .name1 .sj {
   float: right;
   width: 6px;
   height: 11px;
@@ -574,4 +580,7 @@ body {
   background-size: 6px 11px;
   margin-top: 17px;
   margin-right: 20px;
+}
+.party3 .limit .bor_name{
+  margin-left: 23vw;
 }
