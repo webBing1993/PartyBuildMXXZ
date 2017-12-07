@@ -225,20 +225,32 @@ $('.reportSort>div').on('click',function(){
                 }else if(list.type == 4){
                     Img = '/home/images/fu.jpg'
                 }
+                var _change = '';
+                if(list.is_vote == 1){
+                    _change = '<span class="reportDivmainText_02">投票数：'+list.votes+'</span>'
+                }else {
+                    _change = ''
+                }
                 html+= '<li>'
                         +'<a href="/home/report/detail/id/'+list.id+'">'
                         +'<div class="reportDivmainImg"><img src='+Img+' alt=""></div>'
-                        +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>\<span class="reportDivmainText_02">投票数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
+                        +' <div class="reportDivmainText"><div class="reportDivmainText_01">'+list.title+'</div>'+_change+'<div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
                         +'</a>'
                         +'</li>'
             }
         }else if(side == 2) {
             for(var j = 0; j< len;j++){
                 var list = lists[j];
+                var _change = '';
+                if(list.is_vote == 1){
+                    _change = '<span class="reportDivmainText_02">点赞数：'+list.votes+'</span>'
+                }else {
+                    _change = ''
+                }
                 html+= '<li>'
                     +'<a href="/home/style/detail/id/'+list.id+'">'
                     +'<div class="reportDivmainImg"><div>'+list.name+'</div></div>'
-                    +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">点赞数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
+                    +' <div class="reportDivmainText"><div class="reportDivmainText_04">'+list.position+'</div><div class="reportDivmainText_01">'+list.content+'</div>'+_change+'<div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div></div>'
                     +'</a>'
                     +'</li>'
             }
@@ -246,10 +258,16 @@ $('.reportSort>div').on('click',function(){
         else if(side == 3) {
             for(var k = 0; k< len;k++){
                 var list = lists[k];
+                var _change = '';
+                if(list.is_vote == 1){
+                    _change = '<span class="reportDivmainText_02">打call数：'+list.votes+'</span>'
+                }else {
+                    _change = ''
+                }
                 html+= '<li>'
                     +'<a href="/home/display/detail/id/'+list.id+'">'
                     +'<div class="reportDivmainText" style="float:inherit;">'
-                    +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div><span class="reportDivmainText_02">打call数：'+list.votes+'</span><div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div>'
+                    +'<div class="reportDivmainText_04">'+list.title+'</div><div class="reportDivmainText_01">'+list.content+'</div>'+_change+'<div class="reportDivmainText_03">'+list.year+'-'+list.month+'-'+list.day+' <em class="fa"></em></div>'
                     +'</div>'
                     +'</a>'
                     +'</li>'
