@@ -14,7 +14,7 @@
     <div class="page">
         {volist name="list" id="vo"}
         {eq name="$vo.type" value="1"}
-        <a href=" 'special/video?id='.$vo['id'])}" class="list lesson">
+        <a href="{:Url('special/video?id='.$vo['id'])}" class="list lesson">
             <div class="tab">视频</div>
             {else/}
             <a href="{:Url('special/article?id='.$vo['id'])}" class="list lesson">
@@ -238,7 +238,7 @@
                 var _str = '';
                 var list = lists[i];
                 if(list.type==1){
-                    str  = '/home/special/article/id/';
+                    str  = '/home/special/video/id/';
                     _str ='视频'
                 }else {
                     str  = '/home/special/article/id/';
@@ -257,7 +257,7 @@
                 var _str = '';
                 var list = lists[j];
                 if(list.type==1){
-                    str  = '/home/special/article/id/';
+                    str  = '/home/special/video/id/';
                     _str ='视频'
                 }else {
                     str  = '/home/special/article/id/';

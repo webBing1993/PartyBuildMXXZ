@@ -3,6 +3,8 @@
 {block name="style"}
 <title>十九大专题</title>
 <link rel="stylesheet" href="/home/css/common/detail.css">
+<link rel="stylesheet" href="/home/css/common/observer.css">
+<script src="/static/sweetalert/sweetalert8.min.js"></script>
 <style>
 	.scrollDiy{
 		position: absolute;
@@ -81,11 +83,10 @@
 		</div>
 	</div>
 	{eq name="visit" value="0"}
-	<div class="bottom clear">
+	<div class="bottom clear" onclick="send(this,11,{$video['id']})">
 		<div class="myword fl">
 			<input type="text" placeholder="说说你的感想！">
 		</div>
-		<div class="send fr" onclick="send(this,11,{$video['id']})">发送</div>
 	</div>
 	{/eq}
 </div>
@@ -140,54 +141,72 @@ var isGood = function(e,type,id){
  * @param e
  */
 var send = function(e,type,id){
-	var it = $(e ).prev().find('input');
-	if(it.val() != ''&& it.val().length > 4){
-		$.ajax({
-			type:"post",
-			url:"{:Url('Base/comment')}",
-			data:{
-				type:type,
-				aid:id,
-				content:it.val()
-			},
-			beforeSend:function(){
-				swal({
-					title: ' ',
-					text: '评论提交中...',
-					showConfirmButton:false
-				});
-			},
-			success:function(data){
-				var data = data.data;
-				var userid = "'"+data.create_user+"'";
-				var html = '';
-				html += '<div class="list clear">'+
-						'<div class="fl">'+
-						'<img src="'+data.header+'" alt="用户头像" class="user">'+
-						'</div>'+
-						'<div class="fl mid">'+
-						'<div class="name limit">'+data.nickname+'</div>'+
-						'<div class="content" >'+it.val()+'</div>'+
-						'<div class="time">'+data.time+'</div>'+
-						'</div>'+
-						'<div class="fr isgood good" onclick="isGood(this,0,'+data.id+')">'+data.likes+'</div>'+
-						'</div>';
-				$('.lists' ).append(html);
-				it.val('');
-				var sum = $('.sum span' );
-				sum.text(parseInt(sum.text())+1);
-				swal({
-					title: ' ',
-					text: '评论成功',
-					type: 'success',
-					confirmButtonText:'确定',
-					timer:3000
-				});
-			}
-		});
-	}else{
-		wAlert('您的评论少于5个字');
-	}
+    swal({
+        title: '',
+        text: '请输入您的评论！',
+        type: 'input',
+        showCancelButton: true,
+        closeOnConfirm: false,
+        cancelButtonText: "取消",
+        confirmButtonText: "确定",
+        animation: "slider-form-top"
+
+    }, function(inputValue) {
+        if (inputValue === false) return false;
+
+        if (inputValue.length < 5) {
+            swal.showInputError("评论字数不能少于5个字！");
+            return false
+        }
+
+        if (inputValue.length > 300) {
+            swal.showInputError("您输入的字超过了300！");
+            return false
+        }
+        $.ajax({
+            type: "post",
+            url: "{:Url('Base/comment')}",
+            data: {
+                type: type,
+                aid: id,
+                content: inputValue
+            },
+            beforeSend: function () {
+                swal({
+                    title: ' ',
+                    text: '评论提交中...',
+                    showConfirmButton: false
+                });
+            },
+            success: function (msg) {
+                var data = msg.data;
+                var userid = "'" + data.create_user + "'";
+                var html = '';
+                html += '<div class="list clear">' +
+                    '<div class="fl">' +
+                    '<img src="' + data.header + '" alt="用户头像" class="user">' +
+                    '</div>' +
+                    '<div class="fl mid">' +
+                    '<div class="name limit">' + data.nickname + '</div>' +
+                    '<div class="content" >' + inputValue + '</div>' +
+                    '<div class="time">' + data.time + '</div>' +
+                    '</div>' +
+                    '<div class="fr isgood good" onclick="isGood(this,0,' + data.id + ')">' + data.likes + '</div>' +
+                    '</div>';
+                $('.lists').prepend(html);
+                inputValue = "";
+                var sum = $('.sum span');
+                sum.text(parseInt(sum.text()) + 1);
+                swal({
+                    title: ' ',
+                    text: '评论成功',
+                    type: 'success',
+                    confirmButtonText: '确定',
+                    timer: 3000
+                });
+            }
+        });
+    })
 };
 var hideplay = function(){
 	var u = navigator.userAgent;
