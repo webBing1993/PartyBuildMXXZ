@@ -74,6 +74,7 @@
         <div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>
         <div class="reportDivmain">
             <ul>
+                {notempty name="$list3"}
                 {volist name="list3" id="vo"}
                 <li>
                     <a href="{:Url('display/detail?id='.$vo['id'])}">
@@ -87,6 +88,9 @@
                     </a>
                 </li>
                 {/volist}
+                {else/}
+                <div class="reportDivmain" style="text-align: center;margin-top: 10vw;background: #fff;padding-bottom: 5px;"><div class="tip"><img src="/home/images/null.png" style="width:40vw;height:40vw;"></div></div>
+                {/notempty}
             </ul>
         </div>
     </div>
@@ -105,6 +109,7 @@
     function dataGet (key) {
         return localStorage.getItem(key);
     }
+    loadScroll();
     var side = 1;
     if(dataGet('reportSave') == 1){
         $('.reportSort div').removeClass('active').find('img').remove();
@@ -125,6 +130,8 @@
         $('#side3').show();
         side = 3;
     }
+
+
     for(var i=0;i<$('.reportSort div').length;i++){
         $('.reportSort div')[i].onclick = function(){
             $('.reportSort div').removeClass('active').find('img').remove();
@@ -135,7 +142,6 @@
             dataSave('reportSave',side)
         }
     }
-
     loadScroll();
 $('.reportSort>div').on('click',function(){
     var num = $(this).index();

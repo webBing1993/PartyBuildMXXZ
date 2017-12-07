@@ -129,9 +129,17 @@
 
 #side2 li {height:32vw;width:100%;position: relative;margin:0 auto 1.33vw;}
 #side2 .reportDivmainText {width:72vw;}
-#side2 .reportDivmainText_04 {margin-top: 3.8vw;color: #333;}
+#side2 .reportDivmainText_04 {
+    margin-top: 3.8vw;color: #333;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    overflow: hidden;
+    width:100%;
+}
 
 #side2 .reportDivmainText_01 {
+    white-space:inherit;
     margin-top: 1vw;
     margin-bottom: 2.6vw;
     width: 100%;
