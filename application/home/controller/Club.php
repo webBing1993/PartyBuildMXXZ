@@ -164,11 +164,11 @@ class Club extends Base{
             'pid' => $id,
         );
         $list = ClubActivityModel::where($map)->order('id desc')->limit($len,6)->select();
-//        foreach($list as $value){
-//            $img = Picture::get($value['front_cover']);
-//            $value['path'] = $img['path'];
-//            $value['set_date'] = date("Y-m-d",$value['set_date']);
-//        }
+        foreach($list as $value){
+            $img = Picture::get($value['front_cover']);
+            $value['path'] = $img['path'];
+            $value['set_date'] = date("Y-m-d",$value['set_date']);
+        }
         if($list){
             return $this->success("加载成功",'',$list);
         }else{
