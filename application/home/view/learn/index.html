@@ -169,7 +169,12 @@
                         data:{
                             length:len
                         },
+                        beforeSend: function(XMLHttpRequest){
+                            tip.hide();
+                            loading.toggleClass('hidden');
+                        },
                         success:function(data){
+                            console.log(data);
                             loading.toggleClass('hidden');
                             tip.show();
                             if(data.code == 1){
@@ -191,6 +196,10 @@
                         url:"{:Url('learn/indexmore')}",
                         data:{
                             length:len
+                        },
+                        beforeSend: function(XMLHttpRequest){
+                            tip.hide();
+                            loading.toggleClass('hidden');
                         },
                         success:function(data){
                             loading.toggleClass('hidden');

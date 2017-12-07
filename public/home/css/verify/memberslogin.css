@@ -35,7 +35,7 @@ body{
     line-height: 8vw;
     border-radius: 0;
     font-size: 1.2rem;
-    padding-left: 6.66vw 2vw;
+    padding: 6.66vw 2vw;
 }
 .login-box>.form input::-webkit-input-placeholder{
     color: #ccc;
