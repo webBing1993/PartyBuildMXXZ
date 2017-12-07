@@ -148,7 +148,7 @@ class Club extends Base{
             'status' => ['egt',0],
             'pid' => $id,
         );
-        $list = ClubActivityModel::where($map)->order('id desc')->limit(5)->select();
+        $list = ClubActivityModel::where($map)->order('id desc')->limit(10)->select();
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -162,7 +162,7 @@ class Club extends Base{
             'status' => ['egt',0],
             'pid' => $id,
         );
-        $list = ClubActivityModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = ClubActivityModel::where($map)->order('id desc')->limit($len,6)->select();
 //        foreach($list as $value){
 //            $img = Picture::get($value['front_cover']);
 //            $value['path'] = $img['path'];
