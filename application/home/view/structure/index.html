@@ -293,8 +293,8 @@ $(function(){
 function slide(){
     $('.lists .party1' ).on('click',function(){
         var it = $(this).find('.sj');
-        $(".party2").slideToggle();
-        $(".party3").slideUp();
+        $(".party2").stop().slideToggle();
+        $(".party3").stop().slideUp();
         if(it.hasClass('todown')){
             it.addClass('toup').removeClass('todown');
 		}else {
@@ -303,7 +303,7 @@ function slide(){
 
      });
 	$(".party2>.name2").on('click',function () {
-        $(this).parents(".party2").next(".party3").slideToggle();
+        $(this).parents(".party2").next(".party3").stop().slideToggle();
         var it = $(this).find('.sj');
         if(it.hasClass('todown')){
             it.addClass('toup').removeClass('todown');
