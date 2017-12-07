@@ -25,13 +25,13 @@
 
 {block name="body"}
 <div class="tabs">
-	<span class="tab active" data-side="1"><span>组织领导</span></span>
-	<span class="tab" data-side="2"><span>组织架构</span></span>
+	<span class="tab active" data-side="1" style="line-height: 11vw;"><span>组织领导</span></span>
+	<span class="tab" data-side="2" style="line-height: 11vw;"><span>组织架构</span></span>
 
 </div>
-<div class="listbox">
+<div class="listbox" style="margin-top: -1px;display: block;" id="side1">
 	<!--组织领导   小镇介绍   党工青妇联介绍-->
-	<div class="box summary active" id="side1">
+	<div class="box summary active" >
 		<!--banner-->
 		<div class="banner">
 			<img src="/home/images/banner/1.jpg" alt="" class="banner-img">
@@ -83,7 +83,11 @@
 		</div>
 	</div>
 	<!--组织架构 村部名录-->
-	<div class="town box hidden" id="side2">
+</div>
+<div class="listbox" style="margin-top: -1px;display: none;" id="side2">
+	<!--组织领导   小镇介绍   党工青妇联介绍-->
+	<!--组织架构 村部名录-->
+	<div class=" box ">
 		<div class="banner">
 			<img src="/home/images/banner/1.jpg" alt="" class="banner-img">
 		</div>
@@ -152,33 +156,28 @@
 <script src="/home/js/reset.js"></script>
 <script src="/home/js/jquery.lazyload.min.js"></script>
 <script>
-	if(localStorage.getItem('yszz') == null){
-        $('.box').hide();
+	if(localStorage.getItem('yszz') == null || localStorage.getItem('yszz')==1){
+	    $('.tab').removeClass('active')
+        $('.tabs .tab').eq(0).addClass('active')
+		$('.listbox').hide();
         $('#side1').show();
 	}else {
-        $('.box').hide();
+	    $('.tab').removeClass('active')
+        $('.tabs .tab').eq(1).addClass('active')
+		$('.listbox').hide();
         $('#side'+localStorage.getItem('yszz')).show();
 	}
 
     $(document).on('click','.tab',function(){
+        $('.tab').removeClass('active')
+        $(this).addClass('active')
         var side = $(this).data('side');
-        $('.box').hide();
+        $('.listbox').hide();
         $('#side'+side).show();
         localStorage.setItem('yszz',side);
+        $('.structureTextLeft').css('height',$('.structureTextRight li').eq(0).height())
 	});
 $(function(){
-    $(function(){
-        //tab值记录
-        tabRecord('.tab' ,'.box');
-        //tab切换
-        tabSwitch('.tab' ,'.box');
-        //上拉加载
-    });
-    $('.tabs .tab').each(function(){
-        if($(this).index()==1 || $(this).hasClass('active')){
-            $('.listbox .town').show();
-		}
-	})
 
     $(function() {
         $("img.lazy").lazyload({effect: "fadeIn"});
