@@ -538,7 +538,7 @@ body {
 
 
 .structureSort {position: relative;margin: auto;width:100vw;}
-.structureSort .structureSortTop {width:100%;height:9.33vw;line-height: 9.33vw;font-size: 1.6rem;color: #fff;position: relative;}
+.structureSort .structureSortTop {width:100%;height:9.33vw;line-height: 9.33vw;font-size: 1.6rem;color: #fff;position: relative;background: #eee;}
 .structureSort .structureSortTop img {position: absolute;top:0;left:0;width:69.33vw;height:9.33vw;z-index: 0;}
 .structureSort .structureSortTop span {position: relative;z-index: 2;margin-left: 3.467vw;}
 .structureSortText {position: relative;width:100%;padding: 0 3.467vw;margin-top: 3.74vw;border-bottom: 1px solid #f1f1f1;}
@@ -580,6 +580,9 @@ body {
   background-size: 6px 11px;
   margin-top: 4.5vw;
   margin-right:8.06vw;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 .party3 .limit .bor_name{
   margin-left: 23vw;
