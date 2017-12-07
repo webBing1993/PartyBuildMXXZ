@@ -101,50 +101,23 @@
                             <div class="tri-left structure1"></div>
                             <div class="name1"><span class="mx_name">梦想小镇</span><span class="rt sj"></span></div>
                         </div>
+						{volist name="list" key="k" id="vo"}
                         <!--第二层-->
                         <div class="detail1 party2">
-                            <div class="tri-left structure2"></div>
-                            <a class="name2 limit" href="javascript:void(0);"><span class="box_name">天使村</span><span class="rt sj"></span></a>
+                            <div class="tri-left structure{$k+1}"></div>
+                            <a class="name2 limit" href="javascript:void(0);"><span class="box_name">{$key}</span><span class="rt sj"></span></a>
                         </div>
                         <!--第三层-->
                         <div class="detail2 party3" >
-                            <a class="name2 limit" href="javascript:void(0);"><span class="bor_name">第七空间孵化器</span><img
-									src="/home/images/icon_005.png" alt=""><span class="rt sj"></span></a>
+							{volist name="vo" id="v"}
+                            <a class="name2 limit" href="{:Url('detail?party='.$v['id'])}"><span class="bor_name">{$v.name}</span>
+								{neq name="$v.mark" value="0"}
+								<img src="/home/images/icon_005.png" alt="">
+								{/neq}
+								<span class="rt sj"></span></a>
+							{/volist}
                         </div>
-
-                        <!--第二层-->
-                        <div class="detail1 party2">
-                            <div class="tri-left structure3"></div>
-                            <a class="name2 limit"><span class="box_name">天使村</span><span class="rt sj"></span></a>
-                        </div>
-
-                        <!--第三层-->
-                        <div class="detail2 party3" >
-                            <a class="name2 limit" href="javascript:void(0);"><span class="bor_name">第七空间孵化器</span><span class="rt sj"></span></a>
-                        </div>
-                        <!--第二层-->
-                        <div class="detail1 party2">
-                            <div class="tri-left structure4"></div>
-                            <a class="name2 limit"><span class="box_name">天使村</span><span class="rt sj"></span></a>
-                        </div>
-
-                        <!--第三层-->
-                        <div class="detail2 party3" >
-                            <a class="name2 limit" href="javascript:void(0);"><span class="bor_name">第七空间孵化器</span><span class="rt sj"></span></a>
-                            <a class="name2 limit" href="javascript:void(0);"><span class="bor_name">第七空间孵化器</span><span class="rt sj"></span></a>
-                            <a class="name2 limit" href="javascript:void(0);"><span class="bor_name">第七空间孵化器</span><span class="rt sj"></span></a>
-
-                        </div>
-                        <!--第二层-->
-                        <div class="detail1 party2">
-                            <div class="tri-left structure5"></div>
-                            <a class="name2 limit"><span class="box_name">天使村</span><span class="rt sj"></span></a>
-                        </div>
-
-                        <!--第三层-->
-                        <div class="detail2 party3" >
-                            <a class="name2 limit"><span class="bor_name">第七空间孵化器</span><span class="rt sj"></span></a>
-                        </div>
+						{/volist}
                     </div>
 
 				</div>

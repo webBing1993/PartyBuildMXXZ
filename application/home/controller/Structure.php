@@ -17,7 +17,12 @@ class Structure extends Base{
      */
     public function index(){
         $modelAll = WechatDepartment::where(['parentid' => 1,'status' => 1])->order('id')->select();
-        $this->assign('modelAll',$modelAll);
+        $list = [];
+        foreach ($modelAll as $model){
+            $list[$model['name']] = WechatDepartment::where(['parentid' => $model['id'],'status' => 1])->field('id,name,mark')->order('id')->select();
+        }
+//        var_dump(json_decode(json_encode($list)));die;
+        $this->assign('list',$list);
         return $this->fetch();
     }
     /*

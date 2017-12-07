@@ -143,10 +143,9 @@ class Report extends Base{
         $this->checkAnonymous();
         $userId = session('userId');
         $id = input('id');
-        var_dump($id);die;
         $Vote = new ReportVote();
         $data = ['userid' => $userId, 'pid' => $id];
-        if(empty($Vote->where($data)->find())){ echo 1;die;
+        if(empty($Vote->where($data)->find())){
             $res = $Vote->save($data);
             if ($res){
                 ReportModel::where(['id' => $id,'status' => 0])->setInc('votes');
@@ -154,7 +153,7 @@ class Report extends Base{
             }else{
                 return $this->error('失败');
             }
-        }else{echo 2;die;
+        }else{
             return $this->error('已投票');
         }
 
