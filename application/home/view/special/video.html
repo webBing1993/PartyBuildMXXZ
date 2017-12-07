@@ -95,6 +95,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
 $(function(){
 	//reset
 	var len = $(".list" ).length;
@@ -255,139 +256,142 @@ var videoPlay =function(){
 	});
 };
 function loadScroll(){
-	$('.scrollDiy').off("scroll").on("scroll",function(){
-		var dh = $('.article').height() + $('.comment').height();
-		var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
-		var len = $(".list" ).length;
-		var tip = $(".tip");
-		var loading = $('.loading');
-		var id = {$video['id']};
-		if(dh <= end && scrollNow){
-			scrollNow = false;//请求执行中
-			$.ajax({
-				type:"post",
-				url:"{:Url('Base/morecomment')}",
-				data:{
-					type:11,
-					aid:id,
-					length:len
-				},
-				beforeSend: function(XMLHttpRequest){
-					tip.hide();
-					loading.toggleClass('hidden');
-				},
-				success:function(data){
-					loading.toggleClass('hidden');
-					tip.show();
-					if(data.code == 1){
-						addComment(data);
-						var dataLen =data.data.length;
-						if(data.data.length == 5){
-							tip.text('上拉加载更多');
-						}
-					}else{
-						tip.text('没有更多了');
-						$('.scrollDiy').off("scroll");
-					}
-					scrollNow = true;//请求结束
-				}
-			})
-		}
-	})
+    console.log(55555555555)
+    $('.scrollDiy').off("scroll").on("scroll",function(){
+        var dh = $('.article').height() + $('.comment').height();
+        var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
+        var len = $(".list" ).length;
+        var tip = $(".tip");
+        var loading = $('.loading');
+        var id = {$video['id']};
+        if(dh <= end && scrollNow){
+            scrollNow = false;//请求执行中
+            $.ajax({
+                type:"post",
+                url:"{:Url('Base/morecomment')}",
+                data:{
+                    type:3,
+                    aid:id,
+                    length:len
+                },
+                beforeSend: function(XMLHttpRequest){
+                    tip.hide();
+                    loading.toggleClass('hidden');
+                },
+                success:function(data){
+                    console.log(data);
+                    loading.toggleClass('hidden');
+                    tip.show();
+                    if(data.code == 1){
+                        addComment(data);
+                        var dataLen =data.data.length;
+                        if(data.data.length == 5){
+                            tip.text('上拉加载更多');
+                        }
+                    }else{
+                        tip.text('没有更多了');
+                        $('.scrollDiy').off("scroll");
+                    }
+                    scrollNow = true;//请求结束
+                }
+            })
+        }
+    })
 }
 function addComment(data){
-	//is_like : 1为已点赞 0为未点赞
-	var html = '';
-	var lists = data.data;
-	var len = lists.length;
-	for(var i = 0; i< len;i++){
-		var list = lists[i];
-		var userid = "'"+list.create_user+"'";
-		html += '<div class="list clear">'+
-				'<div class="fl">'+
-				'<img src="'+list.header+'" alt="用户" class="user">'+
-				'</div>'+
-				'<div class="fl mid">'+
-				'<div class="name limit">'+ list.nickname+'</div>'+
-				'<div class="content" >'+ list.content+'</div>'+
-				'<div class="time">'+ list.time+'</div>'+
-				'</div>';
-		if ({$visit} == 0){
-			if(list.is_like == 0){
-				html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
-			}else{
-				html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
-			}
-		}else {
-			html+='<div class="fr isgood good">'+list.likes+'</div>'
-		}
-		html+=
-				'</div>';
-	}
-	$(".lists" ).append(html);
+    //is_like : 1为已点赞 0为未点赞
+    var html = '';
+    var lists = data.data;
+    var len = lists.length;
+    for(var i = 0; i< len;i++){
+        var list = lists[i];
+        var userid = "'"+list.create_user+"'";
+        html += '<div class="list clear">'+
+            '<div class="fl">'+
+            '<img src="'+list.header+'" alt="用户" class="user">'+
+            '</div>'+
+            '<div class="fl mid">'+
+            '<div class="name limit">'+ list.nickname+'</div>'+
+            '<div class="content" >'+ list.content+'</div>'+
+            '<div class="time">'+ list.time+'</div>'+
+            '</div>';
+        if ({$visit} == 0){
+            if(list.is_like == 0){
+                html+='<div class="fr isgood good" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+            }else{
+                html+='<div class="fr isgood good_" onclick="isGood(this,0,'+list.id+')">'+list.likes+'</div>'
+            }
+        }else {
+            html+='<div class="fr isgood good">'+list.likes+'</div>'
+        }
+        html+=
+            '</div>';
+    }
+    $(".lists" ).append(html);
 }
 function ueLimit(){
-	var imgs = $('.content img');
-	var ww = $('.content').width();
-	imgs.each(function(){
-		if($(this ).width() > ww){
-			$(this ).width(ww)
-		}
-	});
+    var imgs = $('.content img');
+    var ww = $('.content').width();
+    imgs.each(function(){
+        if($(this ).width() > ww){
+            $(this ).width(ww)
+        }
+    });
 }
 </script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
-<script>
-	//---微信接口JS-SDK的调用
-	wx.config({
-		debug: false,
-		appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
-		timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
-		nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
-		signature: '{$jsSign.signature}', // 必填，签名，见附录1
-		jsApiList: [
-			'checkJsApi',
-			'chooseImage',
-			'previewImage',
-			'uploadImage',
-			'downloadImage',
-			'onMenuShareTimeline',
-			'onMenuShareAppMessage',
-		]
-	});
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+	<script>
+        //---微信接口JS-SDK的调用
+        wx.config({
+            debug: false,
+            appId: '{$jsSign.appId}', // 必填，公众号的唯一标识
+            timestamp: "{$jsSign['timestamp']}", // 必填，生成签名的时间戳，切记时间戳是整数型，别加引号
+            nonceStr: '{$jsSign.nonceStr}', // 必填，生成签名的随机串
+            signature: '{$jsSign.signature}', // 必填，签名，见附录1
+            jsApiList: [
+                'checkJsApi',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+            ]
+        });
 
-	wx.ready(function () {
-		//分享到朋友圈
-		wx.onMenuShareTimeline({
-			title: '{$video.title}',
-			link: '{$video.link}',
-			imgUrl: '{$video.share_image}',
-			success: function () {
-				// 用户确认分享后执行的回调函数
-			},
-			cancel: function () {
-				// 用户取消分享后执行的回调函数
-			}
-		});
-		//分享给朋友
-		wx.onMenuShareAppMessage({
-			title: '{$video.title}', // 分享标题
-			desc: '{$video.desc}', // 分享描述
-			link: '{$video.link}', // 分享链接
-			imgUrl: '{$video.share_image}', // 分享图标
-			type: '', // 分享类型,music、video或link，不填默认为link
-			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-			success: function () {
-				// 用户确认分享后执行的回调函数
-			},
-			cancel: function () {
-				// 用户取消分享后执行的回调函数
-			}
-		});
+        wx.ready(function () {
+            //分享到朋友圈
+            wx.onMenuShareTimeline({
+                title: '{$video.title}',
+                link: '{$video.link}',
+                imgUrl: '{$video.share_image}',
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            //分享给朋友
+            wx.onMenuShareAppMessage({
+                title: '{$video.title}', // 分享标题
+                desc: '{$video.desc}', // 分享描述
+                link: '{$video.link}', // 分享链接
+                imgUrl: '{$video.share_image}', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
 
-	});
-//	wx.error(function (res) {
-//		alert('wx.error: '+JSON.stringify(res));
-//	});
-</script>
+        });
+        //	wx.error(function (res) {
+        //		alert('wx.error: '+JSON.stringify(res));
+        //	});
+	</script>
+
 {/block}

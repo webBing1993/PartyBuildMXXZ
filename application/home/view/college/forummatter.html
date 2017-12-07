@@ -130,7 +130,6 @@
 		$(e).toggleClass('good' ).toggleClass('good_');
 		$(e ).hasClass('good')?n--:n++;
 		$(e ).text(n);
-
 		$.ajax({
 			type:"post",
 			url:"{:Url('Base/like')}",

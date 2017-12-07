@@ -96,6 +96,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+ var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
 $(function(){
 	//reset
 	var len = $(".list" ).length;
@@ -122,8 +123,6 @@ var isGood = function(e,type,id){
 	$(e).toggleClass('good' ).toggleClass('good_');
 	$(e ).hasClass('good')?n--:n++;
 	$(e ).text(n);
-	//type：1文章，2评论
-//	var type = $(e ).hasClass('fr')?2:1;
 	$.ajax({
 		type:"post",
 		url:"{:Url('Base/like')}",
@@ -256,6 +255,7 @@ var videoPlay =function(){
 	});
 };
 function loadScroll(){
+    console.log(132132121321132)
 	$('.scrollDiy').off("scroll").on("scroll",function(){
 		var dh = $('.article').height() + $('.comment').height();
 		var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
@@ -278,6 +278,7 @@ function loadScroll(){
 					loading.toggleClass('hidden');
 				},
 				success:function(data){
+				    console.log(data);
 					loading.toggleClass('hidden');
 					tip.show();
 					if(data.code == 1){
