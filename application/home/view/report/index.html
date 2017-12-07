@@ -89,7 +89,8 @@
                 </li>
                 {/volist}
                 {else/}
-                <div class="reportDivmain" style="text-align: center;margin-top: 10vw;background: #fff;padding-bottom: 5px;"><div class="tip"><img src="/home/images/null.png" style="width:40vw;height:40vw;"></div></div>
+                <li style="text-align: center;margin-top: 10vw;"><img src="/home/images/null.png" style="width:80vw;height:80vw;background: #fff;"></li>
+                <!--<div class="reportDivmain" style="text-align: center;margin-top: 10vw;background: #fff;padding-bottom: 5px;"><div class="tip"><img src="/home/images/null.png" style="width:80vw;height:80vw;"></div></div>-->
                 {/notempty}
             </ul>
         </div>
@@ -154,7 +155,6 @@ $('.reportSort>div').on('click',function(){
             //上拉加载
             loadScroll();
         } else {
-            $('.tip' ).text('没有更多了');
         }
         loadScroll()
     }else if (type == 2){
@@ -163,7 +163,6 @@ $('.reportSort>div').on('click',function(){
             //上拉加载
             loadScroll();
         } else {
-            $('.tip' ).text('没有更多了');
         }
         loadScroll()
     }
@@ -173,7 +172,6 @@ $('.reportSort>div').on('click',function(){
             //上拉加载
             loadScroll();
         } else {
-            $('.tip' ).text('没有更多了');
         }
         loadScroll()
     }

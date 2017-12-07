@@ -133,6 +133,12 @@
     }).on("touchend","a", function () {
         $(this).css("backgroundColor","#fff");
     });
-
+            $(window).scroll(function() {
+                $("img").lazyload({
+                    placeholder: "/home/images/loading.jpg",
+                    effect: "fadeIn",
+                    threshold: 1
+                });
+            });
 </script>
 {/block}

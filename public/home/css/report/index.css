@@ -104,7 +104,7 @@
 .reportDiv .reportDivSort {width:100%;position: relative;margin: auto;display: none;}
 .reportDivSort .banner {width:100%;height:50vw;}
 .reportDivSort .banner img {width:100%;height:100%;}
-.reportDivmain {position: relative;width:100%;margin: auto;background: #f1f1f1;padding-bottom: 1px;}
+.reportDivmain {position: relative;width:100%;margin: auto;background: #f1f1f1;}
 .reportDivmain li {width:100%;height:20vw;margin-bottom: 1.6vw;background: #fff;position: relative;}
 .reportDivmain .reportDivmainImg {width:24.8vw;height:100%;text-align: center;line-height: 20vw;}
 .reportDivmain .reportDivmainImg img {width:18.67vw;height:18.67vw;position: relative;vertical-align: middle;}
