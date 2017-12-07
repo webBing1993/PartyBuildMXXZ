@@ -75,14 +75,13 @@
                 threshold: 1
             });
         });
-//        $(window ).off("scroll" ).on("scroll",function(){
-//            console.log(1)
-//            $("img").lazyload({
-//            placeholder : "/home/images/loding.jpg",
-//                effect: "fadeIn",
-//                threshold : 1
-//            });
-//        })
+        $(window ).on("scroll",function(){
+            $("img").lazyload({
+                placeholder: "/home/images/loading.jpg",
+                effect: "fadeIn",
+                threshold: 1
+            });
+        })
     });
 </script>
 </html>
