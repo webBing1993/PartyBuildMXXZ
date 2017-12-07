@@ -148,6 +148,11 @@
             loadScroll()
         }
 
+        $("img").lazyload({
+            placeholder : "/home/images/loading.jpg",
+            effect: "fadeIn",
+            threshold : 1
+        });
     })
 
     function loadScroll(){
