@@ -256,8 +256,8 @@ body {
 }
 .listbox .box .box_ .lists .detail1 .name2 .sj{
   float: right;
-  width: 1.6vw;
-  height: 2.9vw;
+  width: 4vw;
+  height:4vw;
   background: url(/home/images/structure/sj.png) no-repeat;
   background-size: 6px 11px;
   margin-top: 4.5vw;
@@ -569,8 +569,8 @@ img {max-width: inherit;}
 .party3 .limit img {width:4vw;height:4vw;position: relative;line-height: 12vw;vertical-align: middle;margin-left: 2vw;}
 .listbox .box .box_ .lists .party3 .limit .sj {
   float: right;
-  width: 1.6vw;
-  height: 2.9vw;
+  width: 4vw;
+  height:4vw;
   background: url(/home/images/structure/sj.png) no-repeat;
   background-size: 6px 11px;
   margin-top: 4.5vw;
@@ -578,8 +578,8 @@ img {max-width: inherit;}
 }
 .listbox .box .box_ .lists .party1 .name1 .sj {
   float: right;
-  width: 1.6vw;
-  height: 2.9vw;
+  width:4vw;
+  height:4vw;
   background: url(/home/images/structure/sj.png) no-repeat;
   background-size: 6px 11px;
   margin-top: 4.5vw;
