@@ -171,16 +171,17 @@
 		$('.listbox').hide();
         $('#side'+localStorage.getItem('yszz')).show();
 	}
-
-    $(document).on('click','.tab',function(){
-        $('.tab').removeClass('active')
-        $(this).addClass('active')
-        var side = $(this).data('side');
-        $('.listbox').hide();
-        $('#side'+side).show();
-        localStorage.setItem('yszz',side);
-        $('.structureTextLeft').css('height',$('.structureTextRight li').eq(0).height())
-	});
+	for(var i=0;i<$('.tabs .tab').length;i++){
+        $('.tabs .tab')[i].onclick = function(){
+            $('.tab').removeClass('active')
+            $(this).addClass('active')
+            var side = $(this).data('side');
+            $('.listbox').hide();
+            $('#side'+side).show();
+            localStorage.setItem('yszz',side);
+            $('.structureTextLeft').css('height',$('.structureTextRight li').eq(0).height())
+		}
+	}
 $(function(){
 
     $(function() {

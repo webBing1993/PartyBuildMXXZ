@@ -158,6 +158,9 @@
         $('.notices').eq(club).siblings('.notices').addClass('hidden');
         $('.notices').eq(club).removeClass('hidden');
         var swiper = new Swiper('.swiper-container', {
+            onSlideChangeStart: function(swiper){
+                alert(11111);
+            },
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
@@ -217,6 +220,9 @@
 
             //轮播
             var swiper = new Swiper('.swiper-container', {
+                onSlideChangeStart: function(swiper){
+                    alert(1111);
+                },
                 effect: 'coverflow',
                 grabCursor: true,
                 centeredSlides: true,
@@ -291,5 +297,7 @@
         }
         $("#newActive ul" ).append(html);
     }
+
+    $('.swiper-container .swiper-wrapper .swiper-slide')
 </script>
 {/block}

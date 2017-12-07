@@ -20,11 +20,11 @@
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_05.png);color: #9bcc35;">创客学院</div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_06.png);color: #c231ff;">创业先锋营</div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_07.png);color: #3199cc;">创业咖啡吧</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;">中国青年互联网创业大赛</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_08.png);color: #0e4170;"><p style="color: #0e4170;">中国青年互联网</p><span>中国青年互联网创业大赛</span><p style="color: #0e4170;">创业大赛</p></div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_09.png);color: #099;">财税大讲堂</div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_10.png);color: #fe9901;">爱在小镇</div></li>
             <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_11.png);color: #e20000;">伊心伊意</div></li>
-            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #9bcc35;">女性创业创新大赛</div></li>
+            <li><div class="brandDel" style="background-image: url(/home/images/brand/bg_12.png);color: #c231ff;"><p style="color: #c231ff;">女性创业</p><span>女性创业创新大赛</span><p style="color: #c231ff;">创新大赛</p></div></li>
         </ul>
     </div>
 <div id="brandFixed">
@@ -39,6 +39,7 @@
 {/block}
 {block name="script"}
 <script>
+    alert(document.body.scrollWidth )
     var arr = [{text:'根据企业需求，经常性开展职业技能培训，每年开展一次职业技能竞赛，提升小镇职工技能，培养工匠精神。',img:'/home/images/brand/Img01.jpg'},
                 {text:'常态化提供法律咨询服务，定期举办法律知识讲座，为职工就业创业保驾护航。',img:'/home/images/brand/Img02.jpg'},
                 {text:'关爱职工身体健康，经常性举办健康讲座，邀请医生走进小镇，为职工提供健康义诊活动。',img:'/home/images/brand/Img03.jpg'},
@@ -71,7 +72,8 @@
     })
 
     $('#brandFixed').on('click',function(){
-        $('.brandSort').css('position','relative')
+        $('.brandFixedContent_02 p').eq(1).find('img').attr('src','/home/images/loading.jpg');
+        $('.brandSort').css('position','relative');
         $('#brandFixed').hide();
     })
 
