@@ -159,6 +159,11 @@ $(function(){
         if($(this).index()==1 || $(this).hasClass('.active')){
             $('.listbox .town').show();
 		}
+        $("img").lazyload({
+            placeholder : "/home/images/loading.jpg",
+            effect: "fadeIn",
+            threshold : 1
+        });
 	})
     $(function(){
         //tab值记录
