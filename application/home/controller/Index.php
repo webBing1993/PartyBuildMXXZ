@@ -25,7 +25,7 @@ class Index extends Base {
      * 首页
      * @return mixed
      */
-    public function index(){
+    public function indexbat(){
         $this ->anonymous();
         $uid = session('userId');
         $len = array('news' => 0,'learn' => 0,'notice' => 0,'pioneer' => 0,'wish' => 0);
@@ -63,7 +63,7 @@ class Index extends Base {
      * 新首页
      * @return mixed
      */
-    public function newindex(){
+    public function index(){
         $this ->anonymous();
         $uid = session('userId');
         $len = array('wish' => 0);

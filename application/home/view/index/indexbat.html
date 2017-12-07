@@ -1,0 +1,293 @@
+{extend name="public/pure"}
+
+{block name="style"}
+<title>梦想小镇红色驿站</title>
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/index/index.css">
+<link rel="stylesheet" href="/static/swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
+<link rel="stylesheet" href="/home/css/all.css">
+{/block}
+
+{block name="body"}
+<!--banner-->
+<div class="banner">
+    <img src="/home/images/index/banner20170609154838.png" alt="首页banner图">
+    <a  class="exit">
+        <img src="/home/images/index/exit.png" alt="">
+    </a>
+    {eq name="visit" value="0"}
+    <a href="{:Url('User/usercenter')}" class="rank">
+        <img src="/home/images/index/usercenter.png" alt="">
+
+        <img src="{$user|get_header}" alt="">
+    </a>
+    {/eq}
+</div>
+<!--图标轮播-->
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <ul class="model clearfix">
+                <li>
+                    <a href="{:Url('structure/index')}">
+                        <img src="/home/images/index/structure.png" alt="云上组织">
+                        <span>云上组织</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Pioneer/index?c=1')}">
+                        <img src="/home/images/index/star.png" alt="先锋引领">
+                        <span>先锋引领</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Learn/index?c=1')}">
+                        <img src="/home/images/index/learn.png" alt="每日一课">
+                        <span>两学一做</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('College/index')}">
+                        <img src="/home/images/index/announcement.png" alt="鸡毛传帖">
+                        <span>鸡毛传帖</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Activity/index?c=1')}">
+                        <img src="/home/images/index/active.png" alt="活动发起">
+                        <span>活动发起</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Feedback/index')}">
+                        <img src="/home/images/index/news.png" alt="红色足迹">
+                        <span>红色足迹</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {notempty name="test"}
+        <div class="swiper-slide">
+            <ul class="model">
+                <li>
+                    <a href="{:Url('Live/face')}">
+                        <img src="/home/images/index/live.jpg" alt="人脸识别">
+                        <span>人脸识别</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{:Url('Live/index')}">
+                        <img src="/home/images/index/face.jpg" alt="观看直播">
+                        <span>观看直播</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    {/notempty}
+</div>
+
+<!--分割线-->
+<div class="level"></div>
+<!--新闻通知-->
+<div class="content">
+    <div class="notices">
+        <div class="notice party">
+            {volist name="list2" id="loo"}
+            <a href="
+            {switch name='$loo.class'}
+            {case value='1'}{:Url('Details/index?id='.$loo['id'])}{/case}
+            {case value='2'}
+                {eq name='$loo.type' value='1'}
+                {:Url('Learn/video?id='.$loo['id'])}
+                {else/}
+                {:Url('Learn/article?id='.$loo['id'])}
+                {/eq}
+            {/case}
+            {case value='3'}
+                {:Url('College/forumnotice?id='.$loo['id'])}
+            {/case}
+             {case value='4'}
+                {:Url('Pioneer/detail?id='.$loo['id'])}
+            {/case}
+             {case value='5'}
+                {:Url('Activity/activitydetails?id='.$loo['id'])}
+            {/case}
+            {default/}
+            {/switch}"
+               class="list clear" data-type="{$loo.class}">
+                <div class="fl">
+                    <img src="{$loo.front_cover|get_cover='path'}" alt="图片">
+                    <span class="type">
+                    {switch name='$loo.class'}
+                    {case value='1'}红色足迹{/case}
+                    {case value='2'}两学一做{/case}
+                    {case value='3'}鸡毛传贴{/case}
+                    {case value='4'}先锋事迹{/case}
+                    {case value='5'}活动发起{/case}
+                    {default/}
+                    {/switch}
+                   </span>
+                </div>
+                <div class="fr right">
+                    <div class="title limit_">{$loo.title}</div>
+                    <div class="clear time">
+                        <span class="fl">{$loo.publisher|subtext=9}</span>
+                        <span class="fr">{$loo.create_time|time_format='Y-m-d'}</span>
+                    </div>
+                </div>
+            </a>
+            {/volist}
+        </div>
+    </div>
+</div>
+<!--加载更多-->
+<div class="tip"></div>
+<div class="loading hidden">
+    <div class="typing_loader"></div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/static/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script>
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    var mySwiper = new Swiper('.swiper-container', {
+//        loop: true,
+        autoplayDisableOnInteraction: false,
+        pagination : '.swiper-pagination',
+        paginationClickable :true
+    });
+    $(function(){
+        var len = $('.notice .list').length;
+        if(len >= 6){
+            $('.tip' ).text('上拉加载更多');
+        }
+        loadScroll();
+        $(".banner>.exit").on("click",function(){
+            swal({
+                        title:"",
+                        text: "是否确认退出",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "确认",
+                        closeOnConfirm: false,
+                        cancelButtonText:"取消"
+                    },
+                    function(){
+                        swal({
+                            title: ' ',
+                            text: '退出成功！',
+                            type: 'success',
+                            confirmButtonText:'确定'
+                        });
+                        setTimeout(function(){
+                            window.location.replace("{:Url('Verify/logout')}");
+                        },1000)
+                    });
+        })
+    });
+    //上拉加载更多
+    function loadScroll(){
+        $(window).off("scroll" ).on("scroll",function(){
+            var ntc = $('.notices');
+            var dh = $(document).height();
+            var end = $(window).height() + $(window).scrollTop();
+            var news_len = $('.notice .list[data-type=1]').length;
+            var learn_len = $('.notice .list[data-type=2]').length;
+            var notice_len = $('.notice .list[data-type=3]').length;
+            var pioneer_len = $('.notice .list[data-type=4]').length;
+            var wish_len = $('.notice .list[data-type=5]').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            if(dh == end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"get",
+                    url: "{:Url('Index/moreDataList')}",
+                    data:{
+                        news: news_len,
+                        learn: learn_len,
+                        notice: notice_len,
+                        pioneer: pioneer_len,
+                        wish: wish_len
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addLists(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 6){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+    //数据循环
+    function addLists(data){
+        var type;
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        for(var i = 0; i< len;i++){
+            var list = lists[i];
+            var link = '';
+            var type_name ='';
+            if(list.class == 1){
+                class_name = '红色足迹';
+                link = '/home/details/index/id/'+list.id;
+            }else if(list.class == 2){
+                class_name = '两学一做';
+                //1视频 2文字
+                if(list.type == 2){
+                    link = '/home/learn/article/id/'+list.id;
+                }else{
+                    link = '/home/learn/video/id/'+list.id;
+                }
+            }else if(list.class == 3){
+                class_name = '鸡毛传贴';
+                link = '/home/college/forumnotice/id/'+list.id;
+            }else if(list.class == 4){
+                class_name = '先锋事迹';
+                link = '/home/pioneer/detail/id/'+list.id;
+            }else if(list.class == 5){
+                class_name = '活动发起';
+                link = '/home/activity/activitydetails/id/'+list.id;
+            }
+            if(list.publisher.length >9){
+                list.publisher = list.publisher.substring(0,9)+'...';
+            }
+            html +=
+                    '<a href="'+link+'" class="list clear" data-type='+list.class+'>'+
+                    '<div class="fl">'+
+                    '<img src="'+list.path+'" alt="图片">'+
+                    '<span class="type">'+class_name+'</span>'+
+                    '</div>'+
+                    '<div class="fr right">'+
+                    '<div class="title limit_">'+list.title+'</div>'+
+                    '<div class="clear time">'+
+                    '<span class="fl">'+list.publisher+'</span>'+
+                    '<span class="fr">'+list.time+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '</a>'
+        }
+        $('.notice').append(html);
+    }
+
+</script>
+{/block}
