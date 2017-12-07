@@ -157,11 +157,10 @@ body {
 }
 .listbox .box .box_ .lists .name1 {
   display: inline-block;
-  width: 82;
+  width: 100vw;
   height: 12vw;
   font-size: 1.4rem;
   line-height: 12vw;
-  margin-left: 14.6vw;
 }
 .listbox .box .box_ .lists .party1 {
   position: relative;
@@ -169,6 +168,7 @@ body {
   font-size: 1.6rem;
   line-height: 8vw;
   border-bottom: 1px solid #eeeeee;
+  width: 100vw;
 }
 .lists a{
   display: block;
@@ -238,7 +238,7 @@ body {
 }
 .listbox .box .box_ .lists .detail1 .name2 {
   display: inline-block;
-  width: 79vw;
+  width: 100vw;
   height: 12vw;
   font-size:1.4rem;
   color: #333333;
@@ -260,7 +260,7 @@ body {
     height: 2.9vw;
     background: url(/home/images/structure/sj.png) no-repeat;
     background-size: 6px 11px;
-    margin-top: 17px;
+    margin-top: 4.5vw;
     margin-right: 8.06vw;
   }
 @media screen and (max-width: 320px) {
@@ -552,8 +552,7 @@ body {
 
 .party3{
   width: 100vw;
-  border-bottom: 1px solid #f1f1f1;
-  background-color: #f1f1f1;
+  background-color: #fcfcfc;
 }
 .party3 .limit{
   display: inline-block;
@@ -562,6 +561,7 @@ body {
   font-size: 1.4rem;
   color: #333333;
   line-height: 12vw;
+  border-bottom: 1px solid #eeeeee;
 }
 .listbox .box .box_ .lists .party3 .limit .sj {
   float: right;
@@ -569,18 +569,24 @@ body {
   height: 2.9vw;
   background: url(/home/images/structure/sj.png) no-repeat;
   background-size: 6px 11px;
-  margin-top: 17px;
+  margin-top: 4.5vw;
   margin-right:8.06vw;
 }
 .listbox .box .box_ .lists .party1 .name1 .sj {
   float: right;
-  width: 6px;
-  height: 11px;
+  width: 1.6vw;
+  height: 2.9vw;
   background: url(/home/images/structure/sj.png) no-repeat;
   background-size: 6px 11px;
-  margin-top: 17px;
-  margin-right: 20px;
+  margin-top: 4.5vw;
+  margin-right:8.06vw;
 }
 .party3 .limit .bor_name{
   margin-left: 23vw;
+}
+.party2 .limit .box_name{
+  margin-left: 18vw;
+}
+.party1 .name1 .mx_name{
+  margin-left: 14.6vw;
 }
