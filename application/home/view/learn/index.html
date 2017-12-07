@@ -155,6 +155,11 @@
 
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
+            $("img").lazyload({
+                placeholder: "/home/images/loading.jpg",
+                effect: "fadeIn",
+                threshold: 1
+            });
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
             var len = $('#side'+type).find('.page>a').length;
