@@ -537,7 +537,7 @@ body {
 
 
 
-.structureSort {position: relative;margin: auto;width:100%;}
+.structureSort {position: relative;margin: auto;width:100vw;}
 .structureSort .structureSortTop {width:100%;height:9.33vw;line-height: 9.33vw;font-size: 1.6rem;color: #fff;position: relative;}
 .structureSort .structureSortTop img {position: absolute;top:0;left:0;width:69.33vw;height:9.33vw;z-index: 0;}
 .structureSort .structureSortTop span {position: relative;z-index: 2;margin-left: 3.467vw;}
