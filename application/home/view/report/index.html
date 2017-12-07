@@ -292,7 +292,16 @@ $('.reportSort>div').on('click',function(){
         }
 
         $('#side'+side).find('ul').append(html)
+
+
     }
+
+    window.onpageshow = function(e){
+        if(e.persisted){
+            window.location.reload();
+        }
+    }
+
 
 </script>
 {/block}
