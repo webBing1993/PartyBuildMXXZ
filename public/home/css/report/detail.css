@@ -86,7 +86,7 @@
     color:#111;
 }
 
-.vote {position: fixed;bottom:0;width:100%;height:10.67vw;text-align: center;line-height: 10.67vw;}
+.vote {position: fixed;bottom:0;width:100%;height:10.67vw;text-align: center;line-height: 10.67vw;z-index: 99;}
 .vote div {width:50%;float:left;color: #fff;font-size: 1.5rem;}
 .is_vote {background: #cecece;}
 .no_vote {background: #ff7043;}
