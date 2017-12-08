@@ -320,7 +320,11 @@ function slide(){
     })
 }
 
-
+    $("img.loading").lazyload({
+        placeholder : "/home/images/loading2.jpg",
+        effect: "fadeIn",
+        threshold : 1
+    });
 
 </script>
 {/block}
