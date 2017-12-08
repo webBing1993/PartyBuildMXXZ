@@ -1,0 +1,44 @@
+.banner{
+    width: 100vw;
+    height: 50vw;
+}
+.banner img{
+    width: 100vw;
+    height: 50vw;
+}
+body{
+    background-color: #f1f1f1;
+}
+.detail {
+    background-color: #fff;
+    margin: 7vw 0;
+    width: 100%;
+    font-size: 1.3rem;
+    line-height: 5vw;
+    text-align: justify;
+    background: #ffffff;
+    padding: 6.6vw 6.4vw;
+    position: relative;
+    color: #333;
+}
+.detail .title_name {
+    font-size: 1.4rem;
+    color: #ffffff;
+    line-height: 6.67vw;
+    width: 28vw;
+    height: 7.67vw;
+    background: #ff7043;
+    position: absolute;
+    top: -3vw;
+    left: 0;
+    text-align: center;
+    border-radius: 0 5vw 5vw 0;
+    box-shadow: 0 3px 3px rgba(255,93,67,0.3)
+}
+.detail p{
+    line-height: 8vw;
+    color: #333;
+    text-indent: 2em;
+    margin-top: 3vw;
+    font-size: 1.4rem;
+}

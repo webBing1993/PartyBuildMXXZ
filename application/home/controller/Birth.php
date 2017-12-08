@@ -127,4 +127,13 @@ class Birth extends Controller {
         return ($y==0?'':$y.'年').($m==0?'':$m.'个月').($d==0?'':$d.'天');
 
     }
+
+    /**
+     *  关于小镇
+     */
+    public function smallTown(){
+        return $this->fetch();
+    }
+
+
 }
