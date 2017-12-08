@@ -256,12 +256,14 @@ body {
 }
 .listbox .box .box_ .lists .detail1 .name2 .sj{
   float: right;
-  width: 4vw;
-  height:4vw;
-  background: url(/home/images/structure/sj.png) no-repeat;
+  width: 12vw;
+  height: 12vw;
+  background: url(/home/images/structure/sj.png) center no-repeat;
   background-size: 6px 11px;
-  margin-top: 4.5vw;
-  margin-right: 8.06vw;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  margin-right: 3vw;
 }
 @media screen and (max-width: 320px) {
   .listbox .box .box_ .lists .detail1 .name2 {
@@ -569,24 +571,25 @@ img {max-width: inherit;}
 .party3 .limit img {width:4vw;height:4vw;position: relative;line-height: 12vw;vertical-align: middle;margin-left: 2vw;}
 .listbox .box .box_ .lists .party3 .limit .sj {
   float: right;
-  width: 4vw;
-  height:4vw;
-  background: url(/home/images/structure/sj.png) no-repeat;
+  width: 12vw;
+  height: 12vw;
+  background: url(/home/images/structure/sj.png) center no-repeat;
   background-size: 6px 11px;
-  margin-top: 4.5vw;
-  margin-right:8.06vw;
-}
-.listbox .box .box_ .lists .party1 .name1 .sj {
-  float: right;
-  width:4vw;
-  height:4vw;
-  background: url(/home/images/structure/sj.png) no-repeat;
-  background-size: 6px 11px;
-  margin-top: 4.5vw;
-  margin-right:8.06vw;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease;
+  margin-right: 3vw;
+}
+.listbox .box .box_ .lists .party1 .name1 .sj {
+  float: right;
+  width:12vw;
+  height:12vw;
+  background: url(/home/images/structure/sj.png) center no-repeat;
+  background-size: 6px 11px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  margin-right: 3vw;
 }
 .party3 .limit .bor_name{
   margin-left: 23vw;

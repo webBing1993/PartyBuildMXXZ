@@ -33,13 +33,6 @@
             </div>
         </div>
     </div>
-
-<div class="bottom clear">
-    <div class="myword fl">
-        <input type="text" placeholder="说说你的感想！">
-    </div>
-    <div class="send fr" onclick="send(this)">发送</div>
-</div>
 </div>
 <!--加载更多-->
 <div class="tip"></div>
@@ -59,9 +52,9 @@
 
        //活动列表上拉加载
         $(".triangle-up").css("left","21.06vw");
-        var len = ntc.find('.regularmore>.lists>ul>a').length;
-
-        if (len >= 6) {
+//        var len = ntc.find('.regularmore>.lists>ul>a').length;
+        console.log(len);
+        if (len >=10) {
             $('.tip' ).text('上拉加载更多');
             loadScroll();
         } else {
