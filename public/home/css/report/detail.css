@@ -13,7 +13,7 @@
 .rep_main{
     width: 100%;
     padding:3.4vw 3.4vw 10vw 3.4vw;
-
+    overflow-x: hidden;
 }
  .note {
     color: #999999;

@@ -1,14 +1,25 @@
 {extend name="public/common"}
 {block name="style"}
-    <title>两学一做</title>
+    <title>在线党课</title>
     <link rel="stylesheet" href="/home/css/learn/learn.css">
     <link rel="stylesheet" href="/home/css/common/tip.css">
    <!---->
+<style>
+    .tab img {
+        position: absolute;
+        bottom:0;
+        width:2.4vw;
+        height:1.87vw;
+        left:50%;
+        margin-left: -.935vw;
+    }
+</style>
 {/block}
 {block name="body"}
 <div class="tabs clear">
-    <div class="tab active" data-side="1"><span>十九大专题</span></div>
+    <div class="tab active" data-side="1"><span>十九大专题</span><img src="/home/images/icon_001.png"></div>
     <div class="tab" data-side="2"><span>两学一做</span></div>
+    <div class="tab" data-side="3"><span>VR全景</span></div>
 </div>
 <div class="bulletin"  style="display: block" id="side1">
     <div class="page">
@@ -45,7 +56,9 @@
         </a>
     </div>
 </div>
-
+<div class="bulletin" style="display: none;" id="side3">
+    这里是VR 全景
+</div>
 
 
 <div class="tip"></div>
@@ -57,10 +70,14 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
+
+    $('.tabs .tab').css('width',100/$('.tabs .tab').length+'vw')
+
     for(var i=0;i<$('.tabs .tab').length;i++){
         $('.tabs .tab')[i].onclick=function(){
-            $('.tabs .tab').removeClass('active');
-            $(this).addClass('active');
+            console.log($(this))
+            $('.tabs .tab').removeClass('active').find('img').remove();
+            $(this).addClass('active').append('<img src="/home/images/icon_001.png">');
             var side = $(this).data('side');
             $('.bulletin').hide();
             $('#side'+side).show();
@@ -70,24 +87,15 @@
     var type = 1;
 
     var Num = localStorage.getItem('num');
-    console.log(Num)
-    if(Num==0){
-        $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24');
-        $('.tabs>.tab ').eq(1).find('span').css('color','#999');
-        $('#side1').show();
-        $('#side2').hide();
-        $('.tabs>.tab ').eq(0).addClass('active');
-        $('.tabs>.tab ').eq(1).removeClass('active');
-        type=1;
-    }else if(Num==1){
-        $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24');
-        $('.tabs>.tab ').eq(0).find('span').css('color','#999');
-        $('#side2').show();
-        $('#side1').hide();
-        $('.tabs>.tab ').eq(1).addClass('active');
-        $('.tabs>.tab ').eq(0).removeClass('active');
-        type=2;
-    }
+    console.log(Num);
+    $('.tabs .tab').removeClass('active').find('img').remove().find('span').css('color','#999');
+    $('.tabs .tab').eq(Num).addClass('active').append('<img src="/home/images/icon_001.png">').find('span').css('color','#ff7f24');
+    $('.bulletin').hide();
+    $('#side'+(parseInt(Num)+1)).show();
+//    $('.tabs>.tab ').removeClass('active').append('<img src="/home/images/icon_001.png">');
+//    $('.tabs>.tab ').eq(Num).addClass('active').find('img').remove();
+    type = Num;
+
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
@@ -122,9 +130,15 @@
         if(num==0){
             $('.tabs>.tab ').eq(0).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(1).find('span').css('color','#999')
+            $('.tabs>.tab ').eq(2).find('span').css('color','#999')
         }else if(num==1){
             $('.tabs>.tab ').eq(1).find('span').css('color','#ff7f24')
             $('.tabs>.tab ').eq(0).find('span').css('color','#999')
+            $('.tabs>.tab ').eq(2).find('span').css('color','#999')
+        }else if(num==2){
+            $('.tabs>.tab ').eq(2).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(0).find('span').css('color','#999')
+            $('.tabs>.tab ').eq(1).find('span').css('color','#999')
         }
         if(type == 1){
             if(len <= 10){
@@ -142,6 +156,15 @@
                 loadScroll();
             } else {
                 $('.tip' ).text('没有更多了');
+            }
+            loadScroll()
+        }else if (type == 3){
+            if(len >= 10){
+                $('.tip' ).text('上拉加载更多');
+                //上拉加载
+                loadScroll();
+            } else {
+                $('.tip' ).text(' ');
             }
             loadScroll()
         }

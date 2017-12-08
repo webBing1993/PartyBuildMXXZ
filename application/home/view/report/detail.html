@@ -5,6 +5,45 @@
 <link rel="stylesheet" href="/home/css/report/detail.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
 <style>
+    #audio_btn {
+        width: 8vw;
+        height: 8vw;
+        background-image: url(/home/images/music.png);
+        background-size: contain;
+        position: fixed;
+        top:20vw;
+        right:10vw;
+    }
+    .rotate {
+        -webkit-animation: rotating 1.2s linear infinite;
+        -moz-animation: rotating 1.2s linear infinite;
+        -o-animation: rotating 1.2s linear infinite;
+        animation: rotating 1.2s linear infinite
+    }
+    @-webkit-keyframes rotating {
+        from {
+            -webkit-transform: rotate(0)
+        }
+        to {
+            -webkit-transform: rotate(360deg)
+        }
+    }
+    @keyframes rotating {
+        from {
+            transform: rotate(0)
+        }
+        to {
+            transform: rotate(360deg)
+        }
+    }
+    @-moz-keyframes rotating {
+        from {
+            -moz-transform: rotate(0)
+        }
+        to {
+            -moz-transform: rotate(360deg)
+        }
+    }
 </style>
 {/block}
 {block name="body"}
@@ -38,7 +77,9 @@
     </div>
     {/eq}
     {/eq}
-
+    <div id="audio_btn" class="">
+        <audio loop src="/home/images/5466.mp3" id="media"></audio>
+    </div>
 </div>
 {/block}
 
@@ -65,7 +106,19 @@
         $(this).removeClass("vote_btn").html('已投票');
         $(".is_vote span").text(aa+1)
     })
+     var x = document.getElementById("media");
+     $(function () {
+         $("#audio_btn").click(function () {
+             $(this).toggleClass("rotate"); //控制音乐图标 自转或暂停
 
+             //控制背景音乐 播放或暂停
+             if ($(this).hasClass("rotate")) {
+                 x.play();
+             } else {
+                 x.pause();
+             }
+         })
+     });
 
 </script>
 
