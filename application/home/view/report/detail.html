@@ -77,9 +77,11 @@
     </div>
     {/eq}
     {/eq}
+    {notempty name="$article.record"}
     <div id="audio_btn" class="">
-        <audio loop src="/home/images/5466.mp3" id="media"></audio>
+        <audio loop src="{$article.record}" id="media" autoplay="autoplay"></audio>
     </div>
+    {/notempty}
 </div>
 {/block}
 

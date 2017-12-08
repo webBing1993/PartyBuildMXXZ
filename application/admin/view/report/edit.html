@@ -102,23 +102,21 @@
                                 </select>
                             </div>
                         </div>
-                        <!--<div class="form-group">
+                        <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>录音上传:</label>
+                                <label>录音:</label>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="imggroup">
-                                    {eq name="$msg" value=""}
-                                    <img src="" alt='录音' class='thumbnail imgbox'>
-                                    {else/}
-                                    <img src="{$msg.record|get_cover='path'}" alt='录音' class='thumbnail imgbox'>
-                                    {/eq}
-                                    <input type="file" class="imgfile"  accept="image/jpg, image/png, image/gif, image/jpeg">
-                                    <input type="hidden" name="record" class="img"  value="{$msg.record||default=''}" required="">
-                                </div>
+                                <!--<div class="col-lg-3 videofile">
+                                    <input type="file" id="video" accept="video/mp4">
+                                    <input type="hidden" name="video_path" class="img localpath"  value="{$msg.video_path||default=''}" required="">
+                                </div>-->
+                            <div class="col-lg-11">
+                                <input type="file" id="audio"  accept="audio/mp3, audio/ogg, audio/mp4">
+                                <input type="hidden" name="record" class="img"  value="{$msg.record||default=''}" required="">
+                                <!--<audio src="/admin/huluwa.mp3" controls></audio>-->
                             </div>
                             <div class="clear"></div>
-                        </div>-->
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>标题:</label>
@@ -254,14 +252,44 @@
         var ue = UE.getEditor('container',{
             initialFrameHeight:400
         });
-
+        //上传本地音频
+        $("#audio" ).on("change",function(){
+            var audio = $(this)[0].files[0];
+            var formData = new FormData();
+            formData.append("download",audio);
+            //console.log(formData);
+            $.ajax({
+                type:"post",
+                url:"{:Url('File/upload')}",
+                data:formData,
+                processData : false,
+                contentType : false,
+                success:function(d){
+                    //console.log('1');
+                    var data = $.parseJSON(d);
+                    var video = $("#videoway");
+                    if(data.status == 1){
+                        $("input[name='record']").val(data.path);
+                        //显示音频
+                        video.parent().find("audio").remove();
+                        video.after("<audio controls></audio>");
+                        video.next().attr({"src":data.path}).css({"margin-top":5});
+                        //video.next().attr({"src":"/admin/huluwa.mp3"}).css({"margin-top":5});
+                        video.prop('disabled','true');
+                    }else {
+                        warning({msg:"上传失败"});
+                        video.removeAttr('disabled');
+                    }
+                }
+            });
+        });
         $(".post-add").on("click",function(){
             /*重组轮播图，删除多余字符串（i是键值，1表示几位开始*/
             var it=$(this);
             var data = {
                 id:$("input[name='id']").val(),
                 type:$("select[name='type']").val(),
-//                record:$("input[name='record']").val(),
+                record:$("input[name='record']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
