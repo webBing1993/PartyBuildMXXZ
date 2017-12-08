@@ -46,266 +46,133 @@
 <script>
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
 
-    $(function(){
+    $(function() {
         //tab初始化和数据存储
         var ntc = $('.notices');
 
-       //活动列表上拉加载
-        $(".triangle-up").css("left","21.06vw");
-//        var len = ntc.find('.regularmore>.lists>ul>a').length;
-        console.log(len);
-        if (len >=10) {
-            $('.tip' ).text('上拉加载更多');
-            loadScroll();
+        //活动列表上拉加载
+        $(".triangle-up").css("left", "21.06vw");
+        var len = ntc.find('.regularmore>.lists>ul>a').length;
+
+        if (len >= 10) {
+            $('.tip').text('上拉加载更多');
         } else {
-            $('.tip' ).hide();
+            $('.tip').hide();
         }
-
+        loadScroll();
         //点击背景触发active
-        $(".lists").on("touchstart","a",function(){
-            $(this).css("backgroundColor","rgba(0,0,0,.1)");
-        }).on("touchend","a", function () {
-            $(this).css("backgroundColor","#fff");
+        $(".lists").on("touchstart", "a", function () {
+            $(this).css("backgroundColor", "rgba(0,0,0,.1)");
+        }).on("touchend", "a", function () {
+            $(this).css("backgroundColor", "#fff");
         });
 
 
-        //tab切换
-        $('.tabs>.tab ').on('click',function(){
-            var ntc = $('.notices' );
-            var eq = $(this ).index();
-            ntc.eq(eq ).siblings('.notices' ).addClass('hidden');
-            ntc.eq(eq).removeClass('hidden');
-            if(eq == 0){
-                $(".triangle-up").css("left","21.06vw");
-                var len = ntc.eq(eq ).find('.regularmore>.lists>ul>a').length;
-                if(len >= 6){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }else{
-                    $('.tip' ).hide();
-                    $(window ).off("scroll" );
-                }
-            }
-            if(eq == 1){
-                $(".triangle-up").css("left","72vw");
-                var len = ntc.eq(eq ).find('.lists>ul>li').length;
-                if(len >= 5){
-                    $('.tip' ).text('上拉加载更多');
-                    loadScroll(eq+1);
-                }else{
-                    $('.tip' ).hide();
-                    $(window ).off("scroll" );
-                }
-            }
+        function loadScroll() {
+            $(window).off("scroll").on("scroll", function () {
+                var ntc = $('.notices');
+                var dh = $(document).height();
+                var end = $(window).height() + $(window).scrollTop();
+                var tip = $(".tip");
+                var loading = $('.loading');
+                var len = ntc.eq(0).find('.regularmore>.lists>ul>a').length;
 
 
-        });
-
-    });
-
-    function loadScroll () {
-        $(window).off("scroll" ).on("scroll",function(){
-            var ntc = $('.notices');
-            var dh = $(document).height();
-            var end = $(window).height() + $(window).scrollTop();
-            var tip = $(".tip");
-            var loading = $('.loading');
-            var len = ntc.eq(0).find('.regularmore>.lists>ul>a').length;
-
-            if(dh == end && scrollNow){
-                scrollNow = false;//请求执行中
-                $.ajax({
-                    type:"post",
-                    url: "{:Url('Activity/morelist')}",
-                    data:{
-                        length:len,
-                        type:1
-                    },
-                    beforeSend: function(XMLHttpRequest){
-                        tip.hide();
-                        loading.toggleClass('hidden');
-                    },
-                    success:function(data){
-                        loading.toggleClass('hidden');
-                        tip.show();
-                        if(data.code == 1){
-                            addCourse(data);
-                            var dataLen =data.data.length;
-                            if(data.data.length == 5){
-                                tip.text('上拉加载更多');
+                if (dh >= end && scrollNow) {
+                    scrollNow = false;//请求执行中
+                    $.ajax({
+                        type: "post",
+                        url: "{:Url('Activity/morelist')}",
+                        data: {
+                            length: len,
+                            type: 1
+                        },
+                        beforeSend: function (XMLHttpRequest) {
+                            tip.hide();
+                            loading.toggleClass('hidden');
+                        },
+                        success: function (data) {
+                            loading.toggleClass('hidden');
+                            tip.show();
+                            if (data.code == 1) {
+                                addCourse(data);
+                                var dataLen = data.data.length;
+                                if (data.data.length == 5) {
+                                    tip.text('上拉加载更多');
+                                }
+                            } else {
+                                tip.text('没有更多了');
+                                $(window).off("scroll");
                             }
-                        }else{
-                            tip.text('没有更多了');
-                            $(window ).off("scroll");
+                            scrollNow = true;//请求结束
                         }
-                        scrollNow = true;//请求结束
-                    }
-                })
-            }
-        })
-    }
-    function addCourse(data){
-        var type = 1;
-        var html = '';
-        var lists = data.data;
-        var len = lists.length;
-        for(var i = 0; i< len;i++){
-            var list = lists[i];
-            if (true) {
-                html +=
-                    '<a class="clear" href="/home/activity/activitydetails/id/'+list.id+'">'+
-                    '<p>'+list.title+'</p>'+
-                    '<span>'+list.description+'</span>'+
-//                    '<span class="lists time">'+list.time+'</span>'+
-                  '<span class="lists time"><i class="fl">'+list.time+'</i><i  class="read fr">'+list.views  +'<em class="fa"></em></i></span>'+
-                    '</a>';
-
-
-            } else {
-                html +=
-                    '<li>' +
-                    '<img src="'+list.head+'">' +
-                    '<p>'+list.publisher+'</p>' +
-                    '<span>'+list.content+'</span>' +
-                    '<div class="imgs">'
-                var imglen = list.images.length;
-                for(var j = 0 ;j<imglen ;j++){
-                    html+='	<div class="img">' +
-                            '		<img src="'+list.images[j]+'" alt="评论图" data-original="">' +
-                            '	</div>' ;
+                    })
                 }
-                   html+= '</div>' +
-                    '<span class="votes-time">'+list.department+'/'+list.create_time+'发布</span>'
-                var commentlen = list.comment.length;
-                if(commentlen)
-                {
-                    html += '<ul class="comments ">'
-                    for(var x = 0 ;x <commentlen ;x++){
-                        html+=
-                                '<li>'+
-                                '<span class="name">'+list.comment[x].nickname+'：</span>'+
-                                '<span class="comment">'+list.comment[x].content+'</span>'+
-                                '</li>'
-                    }
-                    html+='</ul>'
-                }
-                html+= '</li>';
-            }
-        }
-        if(type==1){
-            $(".regularmore .lists ul").append(html);
-        }else{
-            $(".votes>ul").append(html);
-            if(viewer) {
-                viewer = $('.imgs').viewer({
-                    url: 'data-original',
-                    toolbar:false,
-                    title:false
-                });
-            }
-        }
-
-    }
-
-
-
-    //发送评论
-    var send = function(e){
-        var it = $(e ).prev().find('input');
-        var index = $('.bottom' ).attr('data-tab');
-        if(it.val() != ''){
-            $.ajax({
-                type:"post",
-                url:"{:Url('Base/comment')}",
-                data:{
-                    type : 6,
-                    aid:$('.send' ).attr('data-tab'),
-                    content:it.val()
-                },
-                success:function(msg){
-                    var data = msg.data;
-                    var html = '';
-                    html +=
-                        '<li>'+
-                        '<span class="name">'+data.nickname+'：</span>'+
-                        '<span class="comment">'+data.content+'</span>'+
-                        '</li>';
-
-                    $('.votes>ul').children("li").eq(index).find('.comments').removeClass('hide').prepend(html);
-                    $('.tabs,.votes' ).click();
-                }
-            });
-        }else{
-            var not = $('.not');
-            not.fadeIn();
-            document.body.style.overflow='hidden';
-            $('.confirm,.not .bg' ).on('click',function(){
-                not.fadeOut();
-                document.body.style.overflow='scroll';
-                $('.banner,.lists' ).click();
-//			$('.bottom' ).animate({'bottom':'-45px'},500,'swing');
-//			$('.myword input' ).val('');
             })
         }
-    };
 
-    //同意
-    var agree = function(e,id,status){
-        //样式变化，移到suc
-        var n = $(e).next('span').text();
-        if($(e).hasClass('agree_')) return false;
-        if($(e).nextAll('i').hasClass('disagree_')) return false;
-        $(e).toggleClass('agree' ).toggleClass('agree_');
-        $(e ).hasClass('agree')?n--:n++;
-        $(e ).next('span').text(n);
-        $.ajax({
-            type:"post",
-            url:"{:Url('Activity/vote')}",
-            data:{
-                id:id,
-                status:status
-            },
-            success:function(data){
-                console.log('点赞成功');
-            }
-        })
-    };
+        function addCourse(data) {
+            var type = 1;
+            var html = '';
+            var lists = data.data;
+            var len = lists.length;
+            for (var i = 0; i < len; i++) {
+                var list = lists[i];
+                if (true) {
+                    html +=
+                        '<a class="clear" href="/home/activity/activitydetails/id/' + list.id + '">' +
+                        '<p>' + list.title + '</p>' +
+                        '<span>' + list.description + '</span>' +
+                        //                    '<span class="lists time">'+list.time+'</span>'+
+                        '<span class="lists time"><i class="fl">' + list.time + '</i><i  class="read fr">' + list.views + '<em class="fa"></em></i></span>' +
+                        '</a>';
 
-    var disagree = function(e,id,status){
-        //样式变化，移到suc
-        var n = $(e).next('span').text();
-        if($(e).hasClass('disagree_')) return false;
-        if($(e).prevAll('i').hasClass('agree_')) return false;
-        $(e).toggleClass('disagree' ).toggleClass('disagree_');
-        $(e ).hasClass('disagree')?n--:n++;
-        $(e ).next('span').text(n);
-        $.ajax({
-            type:"post",
-            url:"{:Url('Activity/vote')}",
-            data:{
-                id:id,
-                status:status
-            },
-            success:function(data){
-                console.log('点赞成功');
-            }
-        })
-    };
 
-    var layout = function(){
-        $('.lists ul li' ).each(function(){
-            var this_ = $(this);
-            var n_img = this_.find('.imgs .img' ).length;
-            var n_li = this_.find('.comments li' ).length;
-            if(n_img == 4){
-                this_.find('.imgs .img' ).eq(1).after('<br>')
+                } else {
+                    html +=
+                        '<li>' +
+                        '<img src="' + list.head + '">' +
+                        '<p>' + list.publisher + '</p>' +
+                        '<span>' + list.content + '</span>' +
+                        '<div class="imgs">'
+                    var imglen = list.images.length;
+                    for (var j = 0; j < imglen; j++) {
+                        html += '	<div class="img">' +
+                            '		<img src="' + list.images[j] + '" alt="评论图" data-original="">' +
+                            '	</div>';
+                    }
+                    html += '</div>' +
+                        '<span class="votes-time">' + list.department + '/' + list.create_time + '发布</span>'
+                    var commentlen = list.comment.length;
+                    if (commentlen) {
+                        html += '<ul class="comments ">'
+                        for (var x = 0; x < commentlen; x++) {
+                            html +=
+                                '<li>' +
+                                '<span class="name">' + list.comment[x].nickname + '：</span>' +
+                                '<span class="comment">' + list.comment[x].content + '</span>' +
+                                '</li>'
+                        }
+                        html += '</ul>'
+                    }
+                    html += '</li>';
+                }
             }
-            if(n_li == 0){
-                this_.find('.comments').addClass('hide');
+            if (type == 1) {
+                $(".regularmore .lists ul").append(html);
+            } else {
+                $(".votes>ul").append(html);
+                if (viewer) {
+                    viewer = $('.imgs').viewer({
+                        url: 'data-original',
+                        toolbar: false,
+                        title: false
+                    });
+                }
             }
-        })
-    };
-    //图片排版、评论框
-    layout();
+
+        }
+    })
+
 </script>
 {/block}
