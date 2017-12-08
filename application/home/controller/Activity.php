@@ -29,7 +29,8 @@ class Activity extends Base{
         $userId = session('userId');
         $Wish = new wishModel();
         $list = $Wish->where(['type' => 1,'status' => 0])->order('id desc')->limit(7)->select();  // 活动列表
-        $lists = $Wish->where(['type' => 2 ,'status' => 0])->order('id desc')->limit(5)->select(); // 投票
+        $banner = $Wish->getDataList(0);
+        /*$lists = $Wish->where(['type' => 2 ,'status' => 0])->order('id desc')->limit(5)->select(); // 投票
         foreach($lists as $value){
             $User = WechatUser::where('userid',$value['create_user'])->field('department,headimgurl')->find();
             $Depart = WechatDepartment::where('id',$User['department'])->field('name')->find();
@@ -45,9 +46,10 @@ class Activity extends Base{
             $commentModel = new Comment();
             $comment = $commentModel->getComment(6,$value['id'],$userId);
             $value['comment'] = $comment;
-        }
+        }*/
         $this->assign('list',$list);
-        $this->assign('lists',$lists);
+        $this->assign('banner',$banner);
+//        $this->assign('lists',$lists);
         return $this ->fetch();
     }
     /*

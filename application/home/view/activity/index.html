@@ -14,7 +14,9 @@
         <!--活动列表-->
         <div class="notices">
             <div class="banner">
-                <img data-original="/home/images/icon_010.jpg" alt="">
+                <a href="{:Url('Activity/activitydetails?id='.$banner['id'])}">
+                <img data-original="{$banner.front_cover|get_cover='path'}" alt="">
+                </a>
             </div>
             <div class="notice regularmore">
                 <div class="lists">

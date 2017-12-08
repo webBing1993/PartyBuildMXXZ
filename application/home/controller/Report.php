@@ -31,13 +31,13 @@ class Report extends Base{
         $map = array(
             'status' => array('egt',0),
         );
-        $list = $model->where($map)->order('id desc')->limit(10)->select();
+        $list = $model->where($map)->order('type,id desc')->limit(10)->select();
 
         $model = new StyleModel();
         $map2 = array(
             'status' => array('egt',0),
         );
-        $list2 = $model->where($map2)->order('id desc')->limit(10)->select();
+        $list2 = $model->where($map2)->order('id')->limit(10)->select();
 
         $model = new DisplayModel();
         $map3 = array(
@@ -62,12 +62,12 @@ class Report extends Base{
         $map = array(
             'status' => array('egt',0),
         );
-        $list = ReportModel::where($map)->order('id desc')->limit($len,5)->select();
-        foreach($list as $value){
+        $list = ReportModel::where($map)->order('type,id desc')->limit($len,5)->select();
+        /*foreach($list as $value){
             $value['year'] = date('Y', $value['create_time']);
             $value['month'] = date('m', $value['create_time']);
             $value['day'] = date('d', $value['create_time']);
-        }
+        }*/
         if($list){
             return $this->success("加载成功",'',$list);
         }else{

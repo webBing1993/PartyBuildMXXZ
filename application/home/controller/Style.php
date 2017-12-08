@@ -29,7 +29,7 @@ class Style extends Base{
         $map = array(
             'status' => array('egt',0),
         );
-        $list = $model->where($map)->order('id desc')->limit(10)->select();
+        $list = $model->where($map)->order('id')->limit(10)->select();
         $this->assign('list',$list);
         return $this ->fetch();
     }
@@ -41,7 +41,7 @@ class Style extends Base{
         $map = array(
             'status' => array('egt',0),
         );
-        $list = StyleModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = StyleModel::where($map)->order('id')->limit($len,5)->select();
         foreach($list as $value){
             $value['year'] = date('Y', $value['create_time']);
             $value['month'] = date('m', $value['create_time']);
