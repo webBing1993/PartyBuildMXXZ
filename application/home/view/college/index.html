@@ -333,6 +333,7 @@
         var lists = data.data;
         var len = lists.length;
         if(type==1){
+            console.log(1)
             for(var i = 0; i< len;i++){
                 var list = lists[i];
                 var aa ={$ta['type']};
@@ -344,11 +345,9 @@
                 }else  if(aa==3){
                     t= '<i class="gs">公示</i>'
                 }
-                html+= '<a href="/home/college/forummatter/id/'+list.id+'" class="list">'+
+                html+= '<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'+
                     ' <div class="list_info">'+
-                    ' <div class="info_text">' +
-                        t+
-                    list.title+'</div>'+
+                    ' <div class="info_text">' + t+ list.title+'</div>'+
                     ' <div class="time">'+
                    ' <span class="time_ls">'+list.create_time+'</span>'+
                    '  <i class="fa"></i>'+
@@ -357,6 +356,7 @@
                   '  </a>'
             }
         }else {
+            console.log(1)
             for(var j = 0; j< len;j++){
                 var list = lists[j];
                 html +='<a href="/home/college/forumnotice/id/'+list.id+'" class="list">'
@@ -364,7 +364,7 @@
                     +'</a>'
             }
         }
-
+        console.log(type)
         $('#side'+type).find('.page').append(html)
     }
 
