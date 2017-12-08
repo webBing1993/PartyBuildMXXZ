@@ -135,8 +135,8 @@ body {
 
 }
 .tabs .active {
-  color: #FF9800;
-  border-bottom: 2px solid #FF9800;
+  color: #ff7043;
+  border-bottom: 2px solid #ff7043;
 }
 .listbox {
   position: relative;
