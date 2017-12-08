@@ -34,10 +34,9 @@
     font-weight: 600;
 }
 .rep_main  .info{
-    margin-top: 10vw;
+    margin-top:5vw;
     font-size: 1.4rem;
     color: #333;
-    line-height: 8vw;
     padding: 0 5vw;
     text-align: justify;
 }
