@@ -104,6 +104,13 @@
 {/block}
 {block name="script"}
 <script>
+   $(function () {
+       window.onpageshow = function(e){
+            if(e.persisted){
+               window.location.reload();
+           }
+       }
+   })
     function dataSave (key, value) {
         localStorage.setItem(key, value);
     }
@@ -143,28 +150,28 @@
             dataSave('reportSave',side)
         }
     }
-    loadScroll();
+   loadScroll();
 $('.reportSort>div').on('click',function(){
     var num = $(this).index();
     var len =$('.reportDivSort').eq(num).find('li').length;
     var type = $(this).data('side');
-    console.log(type)
     if(type == 1){
-        if(len >= 10){
-            $('.tip' ).text('上拉加载更多');
-            //上拉加载
+        if(len > 10){
+           $('.tip' ).text('上拉加载更多');
             loadScroll();
         } else {
+            $('.tip' ).hide();
         }
-        loadScroll()
+       loadScroll()
     }else if (type == 2){
         if(len >= 10){
             $('.tip' ).text('上拉加载更多');
             //上拉加载
             loadScroll();
         } else {
+            $('.tip' ).hide();
         }
-        loadScroll()
+       loadScroll()
     }
     else if (type == 3){
         if(len >= 10){
@@ -172,8 +179,9 @@ $('.reportSort>div').on('click',function(){
             //上拉加载
             loadScroll();
         } else {
+            $('.tip' ).hide();
         }
-        loadScroll()
+      loadScroll()
     }
 
 })
@@ -296,11 +304,6 @@ $('.reportSort>div').on('click',function(){
 
     }
 
-    window.onpageshow = function(e){
-        if(e.persisted){
-            window.location.reload();
-        }
-    }
 
 
 </script>
