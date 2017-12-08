@@ -59,9 +59,10 @@
         }else {
             $('.brandSort li').eq(num).find('div').addClass('right')
         }
-    })
+    });
+    var _heights = $('.brandSort').height();
     $('.brandSort li div').on('click',function(){
-        $('.brandSort').css('position','fixed')
+        $('.brandSort').css('position','fixed');
         $('#brandFixed').show();
         $('.brandFixedContent_01').html($(this).text());
         var _height = $('.brandFixedContent').height()/2;
