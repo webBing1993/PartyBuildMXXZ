@@ -16,7 +16,7 @@
 <div class="reportSort">
     <div data-side="1" class="active"><span>组织述职</span><img src="/home/images/icon_001.png"></div>
     <div data-side="2"><span>个人风采</span></div>
-    <div data-side="3"><span>活动展示</span></div>
+    <!--<div data-side="3"><span>活动展示</span></div>-->
 </div>
 <div class="reportDiv">
     <div class="reportDivSort" id="side1"    style="display: block;">
@@ -54,9 +54,9 @@
         </div>
     </div>
     <div class="reportDivSort" id="side2">
-        <div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>
+        <!--<div class="banner"><img src="/home/images/banner/baogao.jpg" alt=""></div>-->
         <div class="reportDivmain">
-            <ul>
+            <ul style="border-top: 1px solid #eee;">
                 {volist name="list2" id="vo"}
                 <li>
                     <a href="{:Url('style/detail?id='.$vo['id'])}">
@@ -108,6 +108,7 @@
 {/block}
 {block name="script"}
 <script>
+    $('.reportSort div').css('width',100/$('.reportSort div').length+'vw')
    $(function () {
        window.onpageshow = function(e){
             if(e.persisted){

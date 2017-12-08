@@ -116,8 +116,8 @@
                 <img data-original="{$vo.front_cover|get_cover='path'}" style="background-position: center;" class="frontCover swiper-lazy" >
                 <div class="tm_info">
                       <i></i>
-                      <div class="tm_name">{$vo.title}</div>
-                      <div class="info">
+                      <div class="tm_name" style="line-height: 16vw;">{$vo.title}</div>
+                      <div class="info" style="display: none;">
                           {$vo.content}
                       </div>
                       <a href="{:Url('club/volunteer?id='.$vo.id)}">查看详情</a>
