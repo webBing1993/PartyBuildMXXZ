@@ -41,7 +41,7 @@
                             {/eq}
                         </div>
                         <div class="reportDivmainText">
-                            <div class="reportDivmainText_01">{$vo.title}</div>
+                            <div class="reportDivmainText_01 title">{$vo.title}</div>
                             {eq name="$vo.is_vote" value="1"}
                             <span class="reportDivmainText_02">投票数：{$vo.votes}</span>
                             {/eq}
@@ -137,11 +137,11 @@
         $('#side2').show();
         side = 2;
     }else {
-        $('.reportSort div').removeClass('active').find('img').remove();
-        $('.reportSort div').eq(2).addClass('active').append('<img src="/home/images/icon_001.png">');
-        $('.reportDivSort').hide();
-        $('#side3').show();
-        side = 3;
+//        $('.reportSort div').removeClass('active').find('img').remove();
+//        $('.reportSort div').eq(2).addClass('active').append('<img src="/home/images/icon_001.png">');
+//        $('.reportDivSort').hide();
+//        $('#side3').show();
+//        side = 3;
     }
 
 

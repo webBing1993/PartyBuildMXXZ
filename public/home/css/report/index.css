@@ -164,7 +164,7 @@
 #side3 .reportDivmainText {padding-top: 1.8vw;}
 #side3 .reportDivmainText_01  {
      margin-top: 1vw;
-    white-space:inherit;
+     white-space:inherit;
      margin-bottom: 2.6vw;
      width: 100%;
      font-size: 1.2rem;
@@ -186,3 +186,7 @@
 #side3 .reportDivmainText_02 , #side3>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
 #side1 .reportDivmainText_02 , #side1>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 3vw;top:inherit;}
 #side2 .reportDivmainText_02 , #side2>.reportDivmain .reportDivmainText .reportDivmainText_03 {position: absolute;bottom: 2vw;top:inherit;}
+
+.reportDivmainText .title{
+    line-height: 10vw;
+}
