@@ -113,7 +113,7 @@ class Sms extends Controller
         if (!isset($data['tel']) || empty($data['tel'])) {
 
             return '手机号码不能为空！';
-        } else if (!preg_match('/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[01678])\\d{8}$/',$data['tel'])) {
+        } else if (!preg_match('/^1(2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])\\d{8}$/',$data['tel'])) {
 
             return '请输入正确手机号码！';
         }
@@ -164,7 +164,7 @@ class Sms extends Controller
         if (!isset($data['tel']) || empty($data['tel'])) {
 
             return '手机号码不能为空！';
-        } else if (!preg_match('/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[01678])\\d{8}$/',$data['tel'])) {
+        } else if (!preg_match('/^1(2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])\\d{8}$/',$data['tel'])) {
 
             return '请输入正确手机号码！';
         }
