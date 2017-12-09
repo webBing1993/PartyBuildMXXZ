@@ -96,8 +96,7 @@
     $('#side'+(parseInt(Num)+1)).show();
 //    $('.tabs>.tab ').removeClass('active').append('<img src="/home/images/icon_001.png">');
 //    $('.tabs>.tab ').eq(Num).addClass('active').find('img').remove();
-    type = Num+1;
-
+    type = parseInt(Num)+1;
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
@@ -272,7 +271,7 @@
                 }
                 html +='<a href="'+str+list.id+'" class="list lesson">'
                     +'<div class="tab">'+_str+'</div>'
-                    +'<img data-original="'+list.path+'" alt="图片" class="img">'
+                    +'<img data-original="'+list.path+'" alt="" class="img">'
                     +'<div class="title limit">'+list.title+'</div>'
                     +'<span class="study">'+list.views+'人阅读过</span>'
                     +'</a>'
@@ -291,7 +290,7 @@
                 }
                 html +='<a href="'+str+list.id+'" class="list lesson">'
                     +'<div class="tab">'+_str+'</div>'
-                    +'<img data-original="'+list.path+'" alt="图片" class="img">'
+                    +'<img data-original="'+list.path+'" alt="" class="img">'
                     +'<div class="title limit">'+list.title+'</div>'
                     +'<span class="study">'+list.views+'人阅读过</span>'
                     +'</a>'
