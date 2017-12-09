@@ -78,11 +78,11 @@ body{
     display:block;
     float: left;
     text-align: center;
-    border-right:0.5vw solid #eee ;
+
     line-height:12vw;
 }
-.list_main  .list_box .seq{ width: 18.6vw;}
-.list_main  .list_box .matter{width:48.5vw;}
+.list_main  .list_box .seq{ width: 18.6vw;  border-right:0.5vw solid #eee ;}
+.list_main  .list_box .matter{width:48.5vw;  border-right:0.5vw solid #eee ;}
 .list_main  .list_box .section{width:16vw;}
 .list_main  .list_box .else{width:16vw; }
 
