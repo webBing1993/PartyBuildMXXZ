@@ -29,7 +29,7 @@ class Special extends Base{
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list = SpecialModel::where($map)->limit(10)->order('id desc')->select();
+        $list = SpecialModel::where($map)->limit(5)->order('id desc')->select();
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -42,7 +42,7 @@ class Special extends Base{
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list = SpecialModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = SpecialModel::where($map)->order('id desc')->limit($len,3)->select();
         foreach($list as $value){
             $img = Picture::get($value['front_cover']);
             $value['path'] = $img['path'];
