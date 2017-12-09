@@ -96,7 +96,7 @@
     $('#side'+(parseInt(Num)+1)).show();
 //    $('.tabs>.tab ').removeClass('active').append('<img src="/home/images/icon_001.png">');
 //    $('.tabs>.tab ').eq(Num).addClass('active').find('img').remove();
-    type = Num;
+    type = Num+1;
 
     $(function(){
         $('.bulletin').each(function(){
@@ -210,6 +210,7 @@
                             if(data.code == 1){
                                 addMeets(data);
                                 var dataLen =data.data.length;
+                                console.log(dataLen)
                                 if(data.data.length == 5){
                                     tip.text('上拉加载更多');
                                 }
