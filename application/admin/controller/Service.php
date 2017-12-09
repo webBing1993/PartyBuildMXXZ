@@ -71,8 +71,8 @@ class Service extends Controller
             ),
             array(
                 "type"=>"view",
-                "name"=>"为党庆生",
-                "url"=>"http://mxxz.0571ztnet.com/home/birth/index"
+                "name"=>"关于小镇",
+                "url"=>"http://mxxz.0571ztnet.com/home/birth/smalltown"
             ),
         );
         $Wechat = new TPWechat(Config::get('party'));

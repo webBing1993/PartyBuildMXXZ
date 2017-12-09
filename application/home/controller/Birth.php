@@ -131,7 +131,7 @@ class Birth extends Controller {
     /**
      *  关于小镇
      */
-    public function smallTown(){
+    public function smalltown(){
         return $this->fetch();
     }
 
