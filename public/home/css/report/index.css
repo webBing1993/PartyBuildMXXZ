@@ -191,9 +191,10 @@
 
 @media screen and (min-width: 500px) {
     #side2 .reportDivmainText {padding-top: 4vw;}
-    #side2 .reportDivmainText_04 {padding-bottom: 2vw;font-size: 1.4rem;}
+    #side2 .reportDivmainText_04 {font-size: 1.4rem;}
     #side2 .reportDivmainText_02, #side2>.reportDivmain .reportDivmainText .reportDivmainText_03 {bottom:4vw;}
     #side2 .reportDivmainText_01 {line-height: 4vw;}
     #side2 li {height:25vw;}
     #side2 .reportDivmainImg div {font-size: 2rem;}
+    #side2 .reportDivmainText_04{line-height: 6vw}
 }
