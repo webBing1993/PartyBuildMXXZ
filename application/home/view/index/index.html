@@ -144,10 +144,16 @@
         var swiper = new Swiper('.swiper-container1', {
             lazyLoading: true,
             pagination: '.swiper-pagination',
+            autoplay:3000,
+            loop:true,
+            autoplayDisableOnInteraction:false,// 滑动后继续轮播
+            paginationClickable: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
 //            paginationType: 'fraction',
 //            prevButton: '.swiper-button-prev',
 //            nextButton: '.swiper-button-next',
-            loop: true,
+           // loop: true,
             lazyLoadingInPrevNext: true,
             lazyLoadingInPrevNextAmount: 2
         });
