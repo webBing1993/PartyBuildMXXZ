@@ -201,3 +201,8 @@ html,body{
     right:4.3vw;
     top:3.7vw;
 }
+@media screen and (min-width: 500px) {
+    .main .itme {
+       font-size: 1.8rem;
+    }
+}
