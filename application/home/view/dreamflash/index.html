@@ -48,12 +48,6 @@
             $('.tip' ).text('上拉加载更多');
         }
         loadScroll();
-
-        $("img").lazyload({
-            placeholder : "/home/images/loading.jpg",
-            effect: "fadeIn",
-            threshold : 1
-        });
     });
     function loadScroll(type){
         $(window).off("scroll" ).on("scroll",function(){
@@ -85,6 +79,12 @@
                             var dataLen =data.data.length;
                             if(data.data.length == 5){
                                 tip.text('上拉加载更多');
+
+                                $("img").lazyload({
+                                    placeholder : "/home/images/loading.jpg",
+                                    effect: "fadeIn",
+                                    threshold : 1
+                                });
                             }
                         }else{
                             tip.text('没有更多了');
