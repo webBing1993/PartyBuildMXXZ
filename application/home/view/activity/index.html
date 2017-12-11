@@ -26,7 +26,7 @@
                                 <p>{$lo.title}</p>
                                 <span>{$lo.description}</span>
                                 <span class="lists time">
-                                    <i class="fl">{$lo.create_time|time_format='Y-m-d'}</i>
+                                    <i class="fl">{empty name='$lo.publish_time'}{$lo.create_time|time_format='Y-m-d'}{else/}{$lo.publish_time|time_format='Y-m-d'}{/empty}</i>
                                     <i  class="read fr">{$lo.views} <em class="fa"></em></i></span>
                             </a>
                             {/volist}

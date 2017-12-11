@@ -52,6 +52,7 @@ use app\admin\model\WishReceive;
              // 修改
              if(IS_POST) {
                  $data = input('post.');
+                 $data['publish_time'] = strtotime($data['publish_time']);
                  $data['update_time'] = time();
                  $data['update_user'] = $_SESSION['think']['user_auth']['id'];
                  $wishModel = new Wish();
@@ -72,6 +73,7 @@ use app\admin\model\WishReceive;
              if(IS_POST) {
                  $data = input('post.');
                  unset($data['id']);
+                 $data['publish_time'] = strtotime($data['publish_time']);
                  $data['create_user'] = $_SESSION['think']['user_auth']['id'];
                  $wishModel = new Wish();
                  $model = $wishModel->validate('wish')->save($data);

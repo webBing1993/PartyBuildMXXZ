@@ -93,6 +93,31 @@
                                 <input type="text" placeholder="请输入标题" class="form-control form_title" name="title" value="{$msg.title || default=''}">
                             </div>
                         </div>
+                        {empty name="$msg"}
+                        <div class="form-group" id="timeRange">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>发布时间:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class="date">
+                                    <input type="text" placeholder="请输入发布时间...(可为空)" class="form-control datetimepicker" name="publish_time"  value=""/>
+                                </div>
+
+                            </div>
+                        </div>
+                        {else/}
+                        <div class="form-group" id="timeRange">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>发布时间:</label>
+                            </div>
+                            <div class="col-lg-11">
+                                <div class="date">
+                                    <input type="text" placeholder="请输入发布时间...(可为空)" class="form-control datetimepicker" name="publish_time"  value="{empty name='$msg.publish_time'}{$msg.create_time|time_format='Y-m-d H:i'}{else/}{$msg.publish_time|time_format='Y-m-d H:i'}{/empty}"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        {/empty}
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>简介:</label>
@@ -292,6 +317,7 @@
                 id:$("input[name='id']").val(),
                 front_cover:$("input[name='front_cover']").val(),
                 title:$("input[name='title']").val(),
+                publish_time:$("input[name='publish_time']").val(),
                 description:$("textarea[name='description']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
