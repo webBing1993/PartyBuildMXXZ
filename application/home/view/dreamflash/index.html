@@ -43,8 +43,6 @@
 
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     $(function(){
-
-        //两学一做上拉加载
         var len = $('.page>a').length;
         if(len >= 7){
             $('.tip' ).text('上拉加载更多');
@@ -54,7 +52,7 @@
 
     });
     function loadScroll(type){
-        $(window ).off("scroll" ).on("scroll",function(){
+        $(window).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
             var len = $('.page>a').length;

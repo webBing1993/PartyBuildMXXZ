@@ -4,6 +4,7 @@
 <title>通讯录</title>
 <link rel="stylesheet" href="/home/css/structure/structure.css">
 <link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 <style>
 	.mui-pull-bottom-pocket {
 		height:3.06rem;
@@ -16,13 +17,11 @@
 {/block}
 
 {block name="body"}
-</div>
+
 <div class="list-t-wrap">
-	<div id="refreshContainer" class="mui-scroll-wrapper">
-		<div class="mui-scroll">
-			<div class="list-wrapper">
-				<!--列表一定要放到容器内,因为会有一个div append到mui-scroll中,需要在底部才能起作用-->
-				<ul class="d_lists" id="refreshContainers">
+	<div class="list-wrapper">
+		<!--列表一定要放到容器内,因为会有一个div append到mui-scroll中,需要在底部才能起作用-->
+		<ul class="d_lists" id="refreshContainers">
 					{volist name="modelAll" id="vo"}
 					<li class="d_list clearfix">
 						<div class="d_img_box">
@@ -52,52 +51,67 @@
 					</li>
 					{/volist}
 				</ul>
-			</div>
-		</div>
+	</div>
+	<!--加载更多-->
+	<div class="tip"></div>
+	<div class="loading hidden">
+		<div class="typing_loader"></div>
 	</div>
 </div>
 {/block}
 
 {block name="script"}
+<script src="/home/js/reset.js"></script>
 <script>
+
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
     var _party = '{$party}';
-    //    var len = 2;
-    //	上啦加载
-    mui.init({
-        pullRefresh: {
-            container: '#refreshContainer',
-            up: {
-                contentrefresh : "正在加载...",// 可选，正在加载状态时，上拉加载控件上显示的标题内容
-                contentnomore:'没有更多数据了',// 可选，请求完毕若没有更多数据时显示的提醒内容；
-                callback: loadScroll
-            }
+    $(function(){
+        //两学一做上拉加载
+        var len = $('.d_lists>li').length;
+        if(len >=7){
+            $('.tip').text('上拉加载更多');
         }
+        loadScroll();
     });
     function loadScroll(){
-        var len = $("#refreshContainer li").length;
-        $.ajax({
-            type:"post",
-            url:"{:Url('Structure/detailmore')}",
-            data:{
-                party:_party,
-                length:len
-            },
-            beforeSend: function(XMLHttpRequest){
-            },
-            success:function(data){
-                console.log(data);
-//				len++;
-                addCourse(data);
-                if(data.code == 1){
-                    var dataLen =data.data.length;
-                    if(data.data.length == 6){
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(false);
-                    }else{
-                        mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window ).scrollTop();
+            var len = $('.d_lists>li').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var url="{:Url('Structure/detailmore')}";
+
+            if(dh >= end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: url,
+                    data:{
+                        length:len,
+                        party:_party
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addCourse(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
                     }
-                }else{
-                    mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
-                }
+                })
             }
         })
     }
