@@ -20,6 +20,9 @@
     .imggroup{
         position: relative;
     }
+    .imggroups{
+        position: relative;
+    }
     .imgbox{
         height: 100px;
         width: 200px;
@@ -27,6 +30,13 @@
         margin-bottom: 0;
     }
     .imgfile{
+        height: 100px;
+        width: 200px;
+        position: absolute;
+        top:0;
+        opacity: 0;
+    }
+    .imgfiles{
         height: 100px;
         width: 200px;
         position: absolute;
@@ -81,7 +91,7 @@
                     <form id="form" class="form-horizontal" method="post">
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
-                                <label>封面图片:</label>
+                                <label>社团LOGO:</label>
                             </div>
                             <div class="col-lg-5">
                                 <div class="imggroup">
@@ -92,6 +102,24 @@
                                     {/eq}
                                     <input type="file" class="imgfile"  id="file" accept="image/jpg, image/png, image/gif, image/jpeg">
                                     <input type="hidden" name="front_cover" class="img"  value="{$msg.front_cover||default=''}" required="">
+                                </div>
+                                <b>推荐尺寸：500*400px</b>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-1 text-right control-label">
+                                <label>封面图片:</label>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="imggroups">
+                                    {eq name="$msg" value=""}
+                                    <img src="" alt='图片' class='thumbnail imgbox'>
+                                    {else/}
+                                    <img src="{$msg.front_covers|get_cover='path'}" alt='图片' class='thumbnail imgbox'>
+                                    {/eq}
+                                    <input type="file" class="imgfiles"  id="files" accept="image/jpg, image/png, image/gif, image/jpeg">
+                                    <input type="hidden" name="front_covers" class="img"  value="{$msg.front_covers||default=''}" required="">
                                 </div>
                                 <b>推荐尺寸：500*400px</b>
                             </div>
@@ -217,6 +245,35 @@
                 xhr.send(form); //开始上传，发送form数据
             }
         });
+        $(".imgfiles").on("change",function(){
+            var fileObj = document.getElementById("files").files[0]; // js 获取文件对象
+            var formData = new FormData();
+            formData.append("picture",fileObj);
+            var url = "{:Url('File/uploadPicture')}"; // 接收上传文件的后台地址
+            var form = new FormData(); // FormData 对象
+            if(fileObj.size/1024 > 1025) { //大于1M，进行压缩上传
+                photoCompress(fileObj, {
+                    quality: 0.2
+                }, function(base64Codes){
+                    //console.log("压缩后：" + base.length / 1024 + " " + base);
+                    var bl = convertBase64UrlToBlob(base64Codes);
+                    form.append("picture", bl, "file_"+Date.parse(new Date())+".jpg"); // 文件对象
+                    xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
+                    xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
+                    xhr.onload = uploadCompletes; //请求完成
+                    xhr.onerror =  uploadFailed; //请求失败
+                    xhr.send(form); //开始上传，发送form数据
+                });
+            }
+            else{ //小于等于1M 原图上传
+                form.append("picture", fileObj); // 文件对象
+                xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
+                xhr.open("post", url, true); //post方式，url为服务器请求地址，true 该参数规定请求是否异步处理。
+                xhr.onload = uploadCompletes; //请求完成
+                xhr.onerror =  uploadFailed; //请求失败
+                xhr.send(form); //开始上传，发送form数据
+            }
+        });
         //上传成功响应
         function uploadComplete(evt) {
             var data = JSON.parse(evt.target.responseText);
@@ -225,6 +282,15 @@
             //显示图片缩略图
             $('.imggroup').find("img" ).attr('src',data.data.path);
             console.log(document.getElementById("file").files[0].size)
+        }
+        //上传成功响应
+        function uploadCompletes(evt) {
+            var data = JSON.parse(evt.target.responseText);
+            console.log(data)
+            $('.imgfiles').siblings(".img").val(data.data.id);
+            //显示图片缩略图
+            $('.imggroups').find("img" ).attr('src',data.data.path);
+            console.log(document.getElementById("files").files[0].size)
         }
         //上传失败
         function uploadFailed(evt) {
@@ -245,6 +311,7 @@
             var data = {
                 id:$("input[name='id']").val(),
                 front_cover:$("input[name='front_cover']").val(),
+                front_covers:$("input[name='front_covers']").val(),
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 telephone:$("input[name='telephone']").val(),
