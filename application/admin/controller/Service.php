@@ -34,7 +34,7 @@ class Service extends Controller
                                 'Title' => "欢迎您关注“梦想小镇红色驿站”",
                                 'Description' => "梦想，源自对未来的向往；小镇，是历史浓缩的印记。",
                                 'PicUrl' => "http://mxxz.0571ztnet.com/home/images/birth/pic.jpg",
-                                'Url' => "http://v.xiumi.us/board/v5/2FAmS/49855733",
+                                'Url' => "http://mxxz.0571ztnet.com/home/verify/publicity",
                             ),
                         );
                         $Wechat->news($newsData)->reply();
