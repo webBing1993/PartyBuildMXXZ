@@ -33,6 +33,7 @@ body{
     float: left;
     text-align: center;
     line-height:12vw;
+    font-weight: bold;
 }
 
 .list_title .seq{ width: 18.6vw;    border-right:0.5vw solid #fff ;}
