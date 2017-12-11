@@ -46,10 +46,14 @@
         var len = $('.page>a').length;
         if(len >= 7){
             $('.tip' ).text('上拉加载更多');
-
         }
         loadScroll();
 
+        $("img").lazyload({
+            placeholder : "/home/images/loading.jpg",
+            effect: "fadeIn",
+            threshold : 1
+        });
     });
     function loadScroll(type){
         $(window).off("scroll" ).on("scroll",function(){

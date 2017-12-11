@@ -197,3 +197,21 @@
   background: #eeeeee;
   border-bottom: 1px solid transparent;
 }
+.tabs .tab:nth-child(1)::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 5vw;
+  float: right;
+  margin-top: 3.5vw;
+  background-color: #999;
+}
+.tabs .tab:nth-child(2)::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 5vw;
+  float: right;
+  margin-top: 3.5vw;
+  background-color: #999;
+}

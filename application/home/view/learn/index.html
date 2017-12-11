@@ -93,7 +93,6 @@
     for(var i=0;i<$('.tabs .tab').length;i++){
        // console.log(12123)
         $('.tabs .tab')[i].onclick=function(){
-            console.log($(this))
             $('.tabs .tab').removeClass('active').find('img').remove();
             $(this).addClass('active').append('<img src="/home/images/icon_001.png">');
             var side = $(this).data('side');
@@ -112,8 +111,6 @@
     $('.tabs .tab').eq(Num).addClass('active').append('<img src="/home/images/icon_001.png">').find('span').css('color','#ff7f24');
     $('.bulletin').hide();
     $('#side'+(parseInt(Num)+1)).show();
-//    $('.tabs>.tab ').removeClass('active').append('<img src="/home/images/icon_001.png">');
-//    $('.tabs>.tab ').eq(Num).addClass('active').find('img').remove();
     type = parseInt(Num)+1;
     $(function(){
         $('.bulletin').each(function(){
@@ -165,16 +162,16 @@
                 //上拉加载
                 loadScroll();
             } else {
-                $('.tip' ).text('没有更多了');
+                $('.tip' ).hide();
             }
             loadScroll()
         }else if (type == 2){
             if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
+                $('.tip' ).hide();
                 //上拉加载
                 loadScroll();
             } else {
-                $('.tip' ).text('没有更多了');
+                $('.tip' ).hide();
             }
             loadScroll()
          }

@@ -198,3 +198,12 @@
     #side2 .reportDivmainImg div {font-size: 2rem;}
     #side2 .reportDivmainText_04{line-height: 6vw}
 }
+.reportSort .tab:nth-child(1)::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 6vw;
+    float: right;
+    margin-top: 3vw;
+    background-color: #999;
+}
