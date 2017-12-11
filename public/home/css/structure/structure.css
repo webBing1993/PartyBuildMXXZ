@@ -427,11 +427,11 @@ body {
   font-weight: 100;
 }
 .d_list .d_name>a .d_lst img{
-  width: 2.4vw;
-  height:4vw;
+  width: 9px;
+  height: 15px;
   display: block;
   float: left;
-  margin-top: 1vw;
+  margin-top:1.2vw;
 }
 .d_tel>.d_tel_icon {
   width: 26.67vw;
