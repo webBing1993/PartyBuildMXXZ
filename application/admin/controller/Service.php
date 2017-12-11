@@ -66,13 +66,18 @@ class Service extends Controller
         $menu["button"] = array(
             array(
                 "type"=>"view",
+                "name"=>"关于小镇",
+                "url"=>"http://mxxz.0571ztnet.com/home/birth/smalltown"
+            ),
+            array(
+                "type"=>"view",
                 "name"=>"进入驿站",
                 "url"=>"http://mxxz.0571ztnet.com/home/index/index"
             ),
             array(
                 "type"=>"view",
-                "name"=>"关于小镇",
-                "url"=>"http://mxxz.0571ztnet.com/home/birth/smalltown"
+                "name"=>"驿站导览",
+                "url"=>"http://mxxz.0571ztnet.com/home/verify/publicity"
             ),
         );
         $Wechat = new TPWechat(Config::get('party'));
