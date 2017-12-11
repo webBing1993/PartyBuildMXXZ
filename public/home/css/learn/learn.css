@@ -171,7 +171,11 @@
 .list .title {
   color: #333333;
   font-size: 1.4rem;
-  line-height: 9.6vw
+  line-height: 9.6vw;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 .list .study {
   display: inline-block;

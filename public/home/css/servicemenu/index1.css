@@ -1,5 +1,5 @@
 body{
-    background-color: #f7f7f7;
+    background-color: #fff;
 }
 .banner {
     width: 100vw;
@@ -21,7 +21,7 @@ body{
 .list_main .list_title{
     width: 95vw;
     height: 12vw;
-    background-color: #fff;
+    background-color: #f1f1f1;
     border-bottom:0.5vw solid #f1f1f1 ;
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
@@ -35,8 +35,8 @@ body{
     line-height:12vw;
 }
 
-.list_title .seq{ width: 18.6vw;    border-right:0.5vw solid #eee ;}
-.list_title .matter{width:48.5vw;   border-right:0.5vw solid #eee ;}
+.list_title .seq{ width: 18.6vw;    border-right:0.5vw solid #fff ;}
+.list_title .matter{width:48.5vw;   border-right:0.5vw solid #fff;}
 .list_title .section{width:16vw; }
 .list_title .else{width:16vw; }
 
@@ -81,16 +81,16 @@ body{
 
     line-height:12vw;
 }
-.list_main  .list_box .seq{ width: 18.6vw;  border-right:0.5vw solid #eee ;}
-.list_main  .list_box .matter{width:48.5vw;  border-right:0.5vw solid #eee ;}
+.list_main  .list_box .seq{ width: 18.6vw;  border-right:0.5vw solid #fff ;}
+.list_main  .list_box .matter{width:48.5vw;  border-right:0.5vw solid #fff ;}
 .list_main  .list_box .section{width:16vw;}
 .list_main  .list_box .else{width:16vw; }
 
 .list_main  .list_box {
     width: 95vw;
     height: 12vw;
-    background-color: #fff;
-    border-bottom: 0.5vw solid #f1f1f1;
+    background-color: #f1f1f1;
+    border-bottom: 0.5vw solid #fff;
     border-top-left-radius: 1vw;
     border-top-right-radius: 1vw;
     font-size: 1.6rem;
