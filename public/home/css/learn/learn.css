@@ -168,6 +168,12 @@
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
+#side3 .list_ld img{
+  width: 87.2vw;
+  height: 48vw;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+}
 .list .title {
   color: #333333;
   font-size: 1.4rem;

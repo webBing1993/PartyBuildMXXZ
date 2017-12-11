@@ -19,7 +19,7 @@
 <div class="tabs clear">
     <div class="tab active" data-side="1"><span>十九大专题</span><img src="/home/images/icon_001.png"></div>
     <div class="tab" data-side="2"><span>两学一做</span></div>
-    <!--<div class="tab" data-side="3"><span>VR全景</span></div>-->
+    <div class="tab" data-side="3"><span>VR党教</span></div>
 </div>
 <div class="bulletin"  style="display: block" id="side1">
     <div class="page">
@@ -37,6 +37,11 @@
             </a >
             {/volist}
     </div>
+    <div class="tip"></div>
+    <div class="loading hidden">
+        <div class="typing_loader"></div>
+    </div>
+
 </div>
 <div class="bulletin" style="display: none;" id="side2">
     <div class="page" >
@@ -55,25 +60,38 @@
             {/volist}
         </a>
     </div>
+    <div class="tip"></div>
+    <div class="loading hidden">
+        <div class="typing_loader"></div>
+    </div>
 </div>
-<!--<div class="bulletin" style="display: none;" id="side3">-->
-    <!--这里是VR 全景-->
-<!--</div>-->
 
 
-<div class="tip"></div>
-<div class="loading hidden">
-    <div class="typing_loader"></div>
+<div class="bulletin" style="display: none;" id="side3">
+        <a href="http://beyond.3dnest.cn/play/?m=zq_lcez_2" class="list lesson list_ld">
+            <div class="title limit">四无粮仓二展区全景展示</div>
+            <img data-original="/home/images/banner/swlc.png" alt="" class="img">
+        </a>
+        <a href="http://beyond.3dnest.cn/play/?m=zq_zgxz_1" class="list lesson list_ld">
+            <div class="title limit">中共西镇区委旧址全景展示</div>
+            <img data-original="/home/images/banner/zgxz.png" alt="" class="img" >
+        </a>
+        <a href="http://beyond.3dnest.cn/play/?m=zq_ztyg_3" class="list lesson list_ld">
+            <div class="title limit">章太炎故宫全景展示</div>
+            <img data-original="/home/images/banner/zty.png" alt="" class="img" >
+        </a>
 </div>
+
 
 {/block}
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script>
 
-    $('.tabs .tab').css('width',100/$('.tabs .tab').length+'vw')
+    $('.tabs .tab').css('width',100/$('.tabs .tab').length+'vw');
 
     for(var i=0;i<$('.tabs .tab').length;i++){
+       // console.log(12123)
         $('.tabs .tab')[i].onclick=function(){
             console.log($(this))
             $('.tabs .tab').removeClass('active').find('img').remove();
@@ -125,7 +143,7 @@
     $('.tabs .tab').on('click',function(){
         var num = $(this).index();
         var len =$('.bulletin').eq(num).find('.page>a').length;
-        console.log(num)
+        //console.log(num)
          type = $(this).data('side');
         localStorage.setItem('num',num);
         if(num==0){
@@ -137,9 +155,9 @@
             $('.tabs>.tab ').eq(0).find('span').css('color','#999')
             $('.tabs>.tab ').eq(2).find('span').css('color','#999')
         }else if(num==2){
-//            $('.tabs>.tab ').eq(2).find('span').css('color','#ff7f24')
-//            $('.tabs>.tab ').eq(0).find('span').css('color','#999')
-//            $('.tabs>.tab ').eq(1).find('span').css('color','#999')
+            $('.tabs>.tab ').eq(2).find('span').css('color','#ff7f24')
+            $('.tabs>.tab ').eq(0).find('span').css('color','#999')
+            $('.tabs>.tab ').eq(1).find('span').css('color','#999')
         }
         if(type == 1){
             if(len <= 5){
@@ -159,15 +177,9 @@
                 $('.tip' ).text('没有更多了');
             }
             loadScroll()
-        }else if (type == 3){
-            if(len >= 5){
-                $('.tip' ).text('上拉加载更多');
-                //上拉加载
-                loadScroll();
-            } else {
-                $('.tip' ).text(' ');
-            }
-            loadScroll()
+         }
+         else if (type == 3){
+               $('.tip' ).hide();
         }
 
         $("img").lazyload({
@@ -187,9 +199,10 @@
             var dh = $(document).height();
             var end = $(window).height() + $(window ).scrollTop();
             var len = $('#side'+type).find('.page>a').length;
+//            console.log(len);
             var tip = $(".tip");
             var loading = $('.loading');
-            console.log(type)
+//            console.log(type)
             if(dh == end){
                 if(type==1){
                     $.ajax({
@@ -220,7 +233,7 @@
                         }
                     })
                 }
-                else {
+                else if(type==2){
                     $.ajax({
                         type:"post",
                         url:"{:Url('learn/indexmore')}",
