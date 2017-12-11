@@ -140,4 +140,13 @@ class Verify extends Controller{
     public function sign(){
         return $this ->fetch();
     }
+
+    /**
+     *  宣传页面
+     */
+    public function publicity()
+    {
+
+        return $this->fetch();
+    }
 }
