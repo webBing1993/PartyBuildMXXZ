@@ -71,7 +71,7 @@ body{
     margin:0 auto;
     text-align: center;
     line-height: 10.67vw;
-    font-size:1.8rem;
+    font-size:1.6rem;
     text-align: center;
     color: #ffffff;
     background-color: #ff8161;
@@ -86,12 +86,12 @@ body{
     margin-top: 4vw;
 }
 .links {text-align: center;margin-top: 4vw;}
-.login img{
-    height: 3.3vw;
-    margin-left: 2.66vw;
-    vertical-align: middle;
-    position: relative;
-    top:-0.5vw;
+.login i {
+    display: inline-block;
+    background: url(/home/images/verify/loginentrance.png) center no-repeat;
+    background-size: 20px 12px;
+    width: 20px;
+    height: 12px;
 }
 footer{
     width:100%;
@@ -116,7 +116,7 @@ footer img{
 .register .verification {position: relative;margin:5.33vw auto 0;text-align: center;}
 .register .verification input {height:8vw;line-height: 8vw;outline: none;font-size: 1.2rem;}
 .register #yan {position: relative;margin: auto;width:53.33vw;color: #999;height:8vw;line-height: 8vw;outline: none;font-size: 1.4rem;padding:2vw 0vw;color:#333; caret-color:#111;  }
-.register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #ff8161;text-align: center;color: #fff;font-size: 1.4rem;}
+.register .btns {position: relative;margin:16.47vw auto 0;width:62.33vw;height:11vw;line-height: 11vw;border-radius: 20px;background: #ff8161;text-align: center;color: #fff;font-size: 1.6rem;}
 .footer {width:100%;height:26.5vw;position: fixed;bottom:0;left:0;}
 .footer img {width:100%;height:26.5vw; display: block}
 .rAccount {text-align: center;}
@@ -154,17 +154,15 @@ footer img{
 }
 
 @media screen and (min-width: 500px) {
-    .login-box>.form input{
-        font-size: 1.8rem;
+    body{
+        font-size: 2.0rem;
     }
-    #account{
-        font-size: 1.8rem;
-    }
-    .register #yan{
-        font-size: 1.8rem;
-    }
-    .login-box>.form input{
-       font-size: 1.8rem;
+    .login i {
+        display: inline-block;
+        background: url(/home/images/verify/loginentrance.png) center no-repeat;
+        background-size:24px 15px;
+        width: 24px;
+        height:15px;
     }
 }
 
