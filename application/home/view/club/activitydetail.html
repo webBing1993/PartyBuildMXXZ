@@ -1,8 +1,9 @@
 {extend name="public/common"}
 
 {block name="style"}
-<title>社团活动</title>
-<link rel="stylesheet" href="/home/css/common/detail.css">
+<title>志愿服务</title>
+<link rel="stylesheet" href="/home/css/college/relevant.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
 <link rel="stylesheet" href="/home/css/common/tip.css">
 <link rel="stylesheet" href="/home/css/common/observer.css">
 <script src="/static/sweetalert/sweetalert8.min.js"></script>
@@ -20,76 +21,82 @@
 </style>
 {/block}
 {block name="body"}
-<div class="volunteer">
-    <div class="article">
-        <div class="title limit_">{$article.title}</div>
+<div class="scrollDiy">
+    <!--<div class="banner">-->
+        <!--<img data-original="{$article.front_cover|get_cover='path'}" alt="" class="banner-img">-->
+    <!--</div>-->
+    <div class="content">
+        <div class="top">
+            <div class="title limit_" style="text-align: center">{$article.title}</div>
+            <!--<div class="note">-->
+                <!--<span class="fl">{$article.publisher}</span>-->
+                <!--{$article.create_time|time_format='Y-m-d'}-->
+            <!--</div>-->
+        </div>
 
-        <div class="content">
-            <div class="uecontent">
-                {$article.content}
-            </div>
-            <div class="message">
-                {notempty name="article.start_time"}
-                <div class="name limit">{$article.start_time|time_format='Y/m/d H:i'}--{$article.end_time|time_format='Y/m/d H:i'}</div>
-                {/notempty}
-                {notempty name="article.address"}
-                <div class="content2" >{$article.address}</div>
-                {/notempty}
-                {notempty name="article.telephone"}
-                <div class="time"><a href="tel:{$article.telephone}">{$article.telephone}</a></div>
-                {/notempty}
-            </div>
+        <div class="article">{$article.content}</div>
+        <div class="message">
+            {notempty name="article.start_time"}
+            <div class="name limit">{$article.start_time|time_format='Y/m/d H:i'}</div>
+            {/notempty}
+            {notempty name="article.address"}
+            <div class="content" >{$article.address}</div>
+            {/notempty}
+            {notempty name="article.telephone"}
+            <div class="time"><a href="tel:{$article.telephone}">{$article.telephone}</a></div>
+            {/notempty}
+        </div>
+        <div class="article">
             <div class="note">
-                <span class="read">{$article.views}</span>
                 {eq name="visit" value="0"}
                 {eq name="article.is_like" value="1"}
-                <span class="isgood good_" onclick="isGood(this,9,{$article.id})">{$article.likes}</span>
+                <span class="isgood good_" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
                 {else/}
-                <span class="isgood good" onclick="isGood(this,9,{$article.id})">{$article.likes}</span>
+                <span class="isgood good" onclick="isGood(this,10,{$article.id})">{$article.likes}</span>
                 {/eq}
                 {else/}
                 <span class="isgood good">{$article.likes}</span>
                 {/eq}
+                <span class="read">{$article.views}</span>
             </div>
         </div>
-    </div>
-
-
-    <div class="comment">
-        <div class="sum">共<span>{$article.comments}</span>条评论</div>
-        <div class="lists">
-            {volist name="comment" id="co"}
-            <div class="list clear">
-                <div class="fl">
-                    <img src="{$co.header}" alt="用户" class="user">
+        <div class="comment">
+            <div class="sum">共<span>{$article.comments}</span>条评论</div>
+            <div class="lists">
+                {volist name="comment" id="co"}
+                <div class="list clear zbhd">
+                    <div class="fl">
+                        <img src="{$co.header}" alt="用户" class="user">
+                    </div>
+                    <div class="fl mid">
+                        <div class="name limit">{$co.nickname}</div>
+                        <div class="content" >{$co.content}</div>
+                        <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
+                    </div>
+                    {eq name="visit" value="0"}
+                    {eq name="co.is_like" value="1"}
+                    <div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {else/}
+                    <div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
+                    {/eq}
+                    {else/}
+                    <div class="fr isgood good">{$co.likes}</div>
+                    {/eq}
                 </div>
-                <div class="fl mid">
-                    <div class="name limit">{$co.nickname}</div>
-                    <div class="content" >{$co.content}</div>
-                    <div class="time">{$co.create_time|time_format="Y-m-d"}</div>
-                </div>
-                {eq name="visit" value="0"}
-                {eq name="co.is_like" value="1"}
-                <div class="fr isgood good_" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
-                {else/}
-                <div class="fr isgood good" onclick="isGood(this,0,{$co.id})">{$co.likes}</div>
-                {/eq}
-                {else/}
-                <div class="fr isgood good" >{$co.likes}</div>
-                {/eq}
+                {/volist}
             </div>
-            {/volist}
-        </div>
-        <div class="tip"></div>
-        <div class="loading hidden">
-            <div class="typing_loader"></div>
+            <div class="tip"></div>
+            <div class="loading hidden">
+                <div class="typing_loader"></div>
+            </div>
         </div>
     </div>
     {eq name="visit" value="0"}
-    <div class="bottom clear" onclick="send(this,9,{$article['id']})">
-        <div class="myword fl">
+    <div class="bottom clear">
+        <div class="myword fl" onclick="send(this,10,{$article['id']})">
             <input type="text" placeholder="说说你的感想！">
         </div>
+
     </div>
     {/eq}
 </div>
@@ -103,8 +110,8 @@
     $(function(){
         $(".uecontent p span").css("font-size","14px");
         //reset
-        var len = $(".lists .list" ).length;
-        if(len >= 3){
+        var len = $(".list" ).length;
+        if(len >= 7){
             $('.tip' ).text('上拉加载更多');
             //上拉加载评论
             loadScroll();
@@ -139,7 +146,6 @@
      * @param e
      */
     var send = function(e,type,id){
-        var it = $(e ).prev().find('input');
         swal({
             title: '',
             text: '请输入您的评论！',
@@ -206,19 +212,15 @@
                 }
             });
         })
-
     };
     function loadScroll(){
-        console.log(1222211)
-        $(window).off("scroll").on("scroll",function(){
+        $('.scrollDiy').off("scroll").on("scroll",function(){
             var dh = $('.article').height() + $('.comment').height();
-            console.log(dh);
-            var end = $(window).height() + $(window).scrollTop();
+            var end = $('.scrollDiy').height() + $('.scrollDiy').scrollTop();
             var len = $(".list" ).length;
             var tip = $(".tip");
             var loading = $('.loading');
             var id = {$article['id']};
-//            console.log('dh:'+dh,'end:'+end)
             if(dh <= end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
@@ -244,7 +246,7 @@
                             }
                         }else{
                             tip.text('没有更多了');
-                            $('.window').off("scroll");
+                            $('.scrollDiy').off("scroll");
                         }
                         scrollNow = true;//请求结束
                     }

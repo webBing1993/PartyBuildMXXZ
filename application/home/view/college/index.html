@@ -237,6 +237,11 @@
     var num = 0;
     var type = 1;
     var club = localStorage.getItem('college');
+    console.log(club)
+    $('.tabs .tab').removeClass('active');
+    $('.tabs .tab').eq(club-1).addClass('active');
+    $('.bulletin').hide();
+    $('#side'+club).show();
     $(function(){
         $('.bulletin').each(function(){
             if($(this).css('display')=='block'){
@@ -267,6 +272,7 @@
         console.log(len)
         var type = $(this).data('side');
         console.log($(this).data('side'));
+        localStorage.setItem('college',type);
         if(type == 1){
             if(len >= 10){
                 $('.tip' ).text('上拉加载更多');
@@ -282,7 +288,7 @@
                 //上拉加载
                 loadScroll();
             } else {
-                $('.tip' ).text('没有更多了');
+                $('.tip' ).hide();
             }
             loadScroll()
         }
