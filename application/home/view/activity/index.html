@@ -13,11 +13,13 @@
     <div class="content" style="overflow-x: hidden">
         <!--活动列表-->
         <div class="notices">
+            {notempty name="$banner'}
             <div class="banner">
                 <a href="{:Url('Activity/activitydetails?id='.$banner['id'])}">
                 <img data-original="{$banner.front_cover|get_cover='path'}" alt="">
                 </a>
             </div>
+            {/notempty}
             <div class="notice regularmore">
                 <div class="lists">
                         <ul>
