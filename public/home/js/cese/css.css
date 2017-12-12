@@ -107,7 +107,7 @@
 
 .audio_area .audio_title {
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     width: auto;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -163,4 +163,9 @@
     top:10px;
     left:62px;
     width:70vw;
+}
+@media screen and (max-width: 350px) {
+    .audio_area .audio_title{
+        font-size: 1.6rem;
+    }
 }
