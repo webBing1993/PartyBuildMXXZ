@@ -236,7 +236,7 @@
 <script>
     var num = 0;
     var type = 1;
-    var club = localStorage.getItem('college');
+    var club = localStorage.getItem('college')==null?1:localStorage.getItem('college');
     console.log(club)
     $('.tabs .tab').removeClass('active');
     $('.tabs .tab').eq(club-1).addClass('active');
