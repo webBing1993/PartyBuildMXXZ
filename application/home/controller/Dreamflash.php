@@ -34,7 +34,7 @@ class Dreamflash extends Base {
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list2 = DreamFlashModel::where($map)->limit(10)->order('id desc')->select();
+        $list2 = DreamFlashModel::where($map)->limit(10)->order('create_time desc')->select();
         $this->assign('list2',$list2);
         return $this->fetch();
     }
@@ -48,7 +48,7 @@ class Dreamflash extends Base {
             'type' => array('in',[1,2]),
             'status' => array('egt',0),
         );
-        $list = DreamFlashModel::where($map)->order('id desc')->limit($len,5)->select();
+        $list = DreamFlashModel::where($map)->order('create_time desc')->limit($len,5)->select();
         foreach($list as $value){
             $img = Picture::get($value['front_cover']);
             $value['path'] = $img['path'];
