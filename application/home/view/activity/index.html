@@ -58,11 +58,11 @@
         $(".triangle-up").css("left","21.06vw");
         var len = ntc.find('.regularmore>.lists>ul>a').length;
         console.log(len);
-        if (len >=10) {
+        if (len >= 7) {
             $('.tip' ).text('上拉加载更多');
             loadScroll();
         } else {
-            $('.tip' ).hide();
+            $('.tip' ).text('暂无数据');
         }
 
         //点击背景触发active
@@ -82,22 +82,22 @@
             if(eq == 0){
                 $(".triangle-up").css("left","21.06vw");
                 var len = ntc.eq(eq ).find('.regularmore>.lists>ul>a').length;
-                if(len >= 6){
+                if(len >= 7){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
                 }else{
-                    $('.tip' ).hide();
+                    $('.tip' ).text('暂无数据');
                     $(window ).off("scroll" );
                 }
             }
             if(eq == 1){
                 $(".triangle-up").css("left","72vw");
                 var len = ntc.eq(eq ).find('.lists>ul>li').length;
-                if(len >= 5){
+                if(len >= 7){
                     $('.tip' ).text('上拉加载更多');
                     loadScroll(eq+1);
                 }else{
-                    $('.tip' ).hide();
+                    $('.tip' ).text('暂无数据');
                     $(window ).off("scroll" );
                 }
             }
