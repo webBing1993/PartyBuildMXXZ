@@ -1,0 +1,227 @@
+{extend name="public/common"}
+
+{block name="style"}
+<title>组织述职</title>
+<style type="text/css">
+
+    .icon_audiodefault{
+        display: block;
+    }
+    .icon_audiodefault img{
+        width: 34px;
+        height: 34px;}
+    .icon_audioplaying img{
+        width: 34px;
+        height: 34px;}
+    .icon_audioplaying{display: none;}
+    .db {
+        display: block;
+    }
+
+    .weixinAudio {
+        width: 80vw;
+        height: 20vw;
+        line-height: 1.5;
+        margin: 0 auto;
+    }
+
+    .audio_area {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        margin: 0px 1px 0px 0;
+        font-size: 0;
+        position: relative;
+        font-weight: 400;
+        text-decoration: none;
+        -ms-text-size-adjust: none;
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+    }
+
+    .audio_wrp {
+        position: relative;
+        border: 1px solid #ebebeb;
+        background-color: #fcfcfc;
+        overflow: hidden;
+        padding: 12px 20px 12px 12px;
+    }
+
+    .audio_play_area {
+        float: left;
+        margin: 7px 22px 10px 5px;
+        font-size: 0;
+        width: 37px;
+        height: 25px;
+    }
+
+    .playing .audio_play_area .icon_audio_default {
+        display: block;
+    }
+
+    .audio_play_area .icon_audio_default {
+        background: transparent url(/home/images/zt.png) no-repeat 0 0;
+        width: 34px;
+        height: 34px;
+        vertical-align: middle;
+        display: inline-block;
+        -webkit-background-size: 54px 25px;
+        background-size: 54px 25px;
+        background-position: -36px center;
+    }
+
+    .audio_play_area .icon_audio_playing {
+        background: transparent url(/home/images/bf.png) no-repeat 0 0;
+        width: 34px;
+        height: 34px;
+        vertical-align: middle;
+        display: inline-block;
+        -webkit-background-size: 54px 25px;
+        background-size: 54px 25px;
+        -webkit-animation: audio_playing 1s infinite;
+        background-position: 0px center;
+        display: none;
+    }
+
+    .audio_area .pic_audio_default {
+        display: none;
+        width: 18px;
+    }
+
+    .tips_global {
+        color: #8c8c8c;
+    }
+
+    .audio_area .audio_length {
+        float: right;
+        font-size: 14px;
+        position: absolute;
+        top: 42px;
+        right: 23px;
+    }
+    #curent_time{
+        float: right;
+        font-size: 14px;
+        position: absolute;
+        top: 42px;
+        left: 68px;
+    }
+    .audio_info_area {
+        overflow: hidden;
+    }
+
+    .audio_area .audio_title {
+        font-weight: 400;
+        font-size: 12px;
+        margin-top: 0px;
+        margin-bottom: -3px;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        color: #333333;
+        margin-left:11px;;
+    }
+
+    .audio_area .audio_source {
+        font-size: 14px;
+    }
+
+    .progress_bar_box{
+        display: block;
+        position: absolute;
+        left: 69px;
+        bottom: 30px;
+        background-color: #c3c3c3;
+        height: 2px;
+    }
+    .audio_area .progress_bar_box .progress_bar{
+        background-color: #0cbb08;
+        height: 2px;
+        display: block;
+    }
+    .playing .audio_play_area .icon_audio_default {
+        display: none;
+    }
+
+    .playing .audio_play_area .icon_audio_playing {
+        display: inline-block;
+    }
+
+    @-webkit-keyframes audio_playing {
+        30% {
+            background-position: 0px center;
+        }
+        31% {
+            background-position: -18px center;
+        }
+        61% {
+            background-position: -18px center;
+        }
+        61.5% {
+            background-position: -36px center;
+        }
+        100% {
+            background-position: -36px center;
+        }
+    }
+</style>
+
+
+{/block}
+{block name="body"}
+<div class="weixinAudio">
+    <audio src="" id="media" width="1" height="1" preload></audio>
+    <span id="audio_area" class="db audio_area">
+				<span class="audio_wrp db">
+					<span class="audio_play_area">
+						<i class="icon_audiodefault"><img src="/home/images/bf.png" alt=""></i>
+						<i class="icon_audioplaying"><img src=/home/images/zt.png alt=""></i>
+            		</span>
+					<span id="audio_length" class="audio_length tips_global"></span>
+					<span id="curent_time">0:00</span>
+					<span class="db audio_info_area">
+                		<strong class="db audio_title">浮夸</strong>
+					</span>
+					<span id="int_c"></span>
+					<span class="progress_bar_box" style="width: 345px;">
+					<span id="audio_progress" class="progress_bar" style="width: 0%;"></span>
+			</span>
+				</span>
+			</span>
+
+</div>
+
+
+
+
+{/block}
+
+
+{block name="script"}
+<script type="text/javascript" src="/home/js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript" src="/home/js/cese/min1.js"></script>
+
+<script type="text/javascript">
+    $('.weixinAudio').weixinAudio({
+        autoplay:true,
+        src:'fukua.mp3',
+    });
+</script>
+<script>
+    var a=0;
+    $(".audio_play_area").click(function () {
+        a++;
+        if(a%2!=0){
+            $(".icon_audiodefault").css({"display":"none"});
+            $(".icon_audioplaying").css({"display":"block"});
+        }
+        if(a%2==0){
+            $(".icon_audiodefault").css({"display":"block"});
+            $(".icon_audioplaying").css({"display":"none"});
+        }
+    })
+</script>
+
+{/block}
