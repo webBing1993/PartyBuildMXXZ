@@ -159,4 +159,12 @@ class Report extends Base{
 
 
     }
+
+    /*
+     * 测试
+     */
+    public function cese(){
+        return $this->fetch();
+    }
+
 }

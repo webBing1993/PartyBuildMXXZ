@@ -269,8 +269,8 @@
 }
 .comment .lists .list .fl img {
   float:left;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   margin-top: 13px;
   margin-right: 10px;
   margin-bottom: 13px;
@@ -279,12 +279,12 @@
   border-radius: 50%;
 }
 .comment .lists .list .mid {
-  width: 84%;
+  width: 78vw;
   margin-top: 10px;
 }
 .comment .lists .list .mid .name {
   font-size:1.4rem;
-  width: 80%;
+  width: 78vw;
   margin-top: 0.8rem;
   margin-bottom: 0.2rem;
   overflow: hidden;
