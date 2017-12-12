@@ -36,7 +36,7 @@
 .audio_wrp {
     position: relative;
     overflow: hidden;
-    padding: 12px 20px 12px 12px;
+    padding: 10px 20px 10px 12px;
     border: 0.5vw solid #49dd81 ;
     border-radius: 1vw;
     margin-top: 3vw;
@@ -90,7 +90,7 @@
     float: right;
     font-size: 14px;
     position: absolute;
-    top: 42px;
+    top: 40px;
     right: 23px;
 }
 #curent_time{

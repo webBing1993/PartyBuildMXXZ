@@ -195,7 +195,6 @@
 }
 .bulletin {
   background: #eeeeee;
-  border-bottom: 1px solid transparent;
 }
 .tabs .tab:nth-child(1)::after {
   content: '';
