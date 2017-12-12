@@ -73,7 +73,7 @@ use app\admin\model\WishReceive;
              if(IS_POST) {
                  $data = input('post.');
                  unset($data['id']);
-                 $data['publish_time'] = strtotime($data['publish_time']);
+                 $data['publish_time'] = !empty($data['publish_time']) ? strtotime($data['publish_time']) : time();
                  $data['create_user'] = $_SESSION['think']['user_auth']['id'];
                  $wishModel = new Wish();
                  $model = $wishModel->validate('wish')->save($data);
