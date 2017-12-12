@@ -7,7 +7,9 @@
 <style>
     a:active {background-color: rgba(0,0,0,.1)}
 </style>
-
+<!--<script>-->
+    <!--$(".banner img").attr('src','/home/images/loading.jpg')-->
+<!--</script>-->
 {/block}
 
 {block name="body"}
@@ -60,10 +62,17 @@
                $(".list_title").show();
                $(".list_box ").hide();
            }
-       })
+       });
+//       $(".banner img").attr('src','/home/images/loading.jpg')
+//       $(window).off("scroll" ).on("scroll",function(){
+//           $(".banner img").attr('data-original','/home/images/banner/zdpbanner.jpg')
+//       })
+       $("img").lazyload({
+           placeholder : "/home/images/banner/zdpbanner.jpg",
+           container: $(".banner img")
+       });
+//       $('.banner').html('<img src="/home/images/loading.jpg">');
    })
-
-
 
 
 </script>

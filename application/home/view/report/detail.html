@@ -68,9 +68,9 @@
 						<i class="icon_audioplaying"><img src=/home/images/zt.png alt=""></i>
             		</span>
 					<span id="audio_length" class="audio_length tips_global"></span>
-					<span id="curent_time">0:00/32:00</span>
+					<span id="curent_time">0:00</span>
 					<span class="db audio_info_area">
-                		<strong class="db audio_title">{$article.title}</strong>
+                		<strong class="db audio_title">梦想小镇团委述职报告</strong>
 					</span>
 					<span id="int_c"></span>
 					<span class="progress_bar_box" style="width:53vw">
@@ -112,7 +112,7 @@
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script  src="/home/js/jquery-1.12.1.min.js"></script>
-<!--<script  src="/home/js/cese/min1.js"></script>-->
+<script  src="/home/js/cese/min1.js"></script>
 <script>
 
      //获取现在投票人数
@@ -149,12 +149,12 @@
 //     });
 
 </script>
-<!--<script type="text/javascript">-->
-    <!--$('.weixinAudio').weixinAudio({-->
-        <!--autoplay:true,-->
-        <!--src:'{$article.record}',-->
-    <!--});-->
-<!--</script>-->
+<script type="text/javascript">
+    $('.weixinAudio').weixinAudio({
+        autoplay:true,
+        src:'{$article.record}',
+    });
+</script>
 <script>
     var a=0;
     $(".audio_play_area").click(function () {
