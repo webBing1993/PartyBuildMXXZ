@@ -17,6 +17,7 @@ class ClubActivity extends Validate {
         'title' => 'require',
         'content' => 'require',
         'publisher' => 'require',
+        'start_time' => 'require',
 
     ];
 
@@ -25,6 +26,7 @@ class ClubActivity extends Validate {
         'title' =>  '标题不能为空',
         'content'  =>  '内容不能为空',
         'publisher' => '发布者不能为空',
+        'start_time' => '开始时间不能为空',
     ];
     
 }
