@@ -554,7 +554,7 @@ img {max-width: inherit;}
   width: 18.68vw;
   height: 26.67vw;
 }
-.structureTextRight li p {font-size: 1.4rem;color: #333;}
+.structureTextRight li p {font-size: 1.4rem;color: #333;margin-top: 1vw}
 
 .party3{
   width: 100vw;
@@ -608,4 +608,13 @@ img {max-width: inherit;}
     margin-top: 1.8vw;
 
   }
+  .structureTextRight li p {
+    font-size: 1.4rem;
+    color: #333;
+    line-height: 9vw;
+  }
+}
+.structureTextRight .img_boxs{
+  width: 18.68vw;
+  height: 26.67vw;
 }
