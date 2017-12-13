@@ -40,7 +40,7 @@
             <div class="title limit_" style="text-align: center">{$info.title}</div>
             <div class="note">
                 <span class="fl">{$info.publisher}</span>
-                {empty name='$info.publish_time'}{$info.create_time|time_format='Y-m-d'}{else/}{$info.publish_time|time_format='Y-m-d'}{/empty}
+                {$info.publish_time|time_format='Y-m-d'}
             </div>
         </div>
         <div class="message">

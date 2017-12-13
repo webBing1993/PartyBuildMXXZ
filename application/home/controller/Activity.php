@@ -66,7 +66,7 @@ class Activity extends Base{
             // 活动  列表
             $list = $Wish->where(['type' => 1,'status' => 0])->order('publish_time desc')->limit($len,5)->select();  // 活动列表
             foreach($list as $value){
-                $value['time'] = date('Y-m-d',$value['create_time']);
+                $value['time'] = date('Y-m-d',$value['publish_time']);
             }
         }else{
             // 投票  
