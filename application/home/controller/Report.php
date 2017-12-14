@@ -63,11 +63,12 @@ class Report extends Base{
             'status' => array('egt',0),
         );
         $list = ReportModel::where($map)->order('type,id desc')->limit($len,5)->select();
-        /*foreach($list as $value){
-            $value['year'] = date('Y', $value['create_time']);
-            $value['month'] = date('m', $value['create_time']);
-            $value['day'] = date('d', $value['create_time']);
-        }*/
+        foreach($list as $value){
+            $value['time'] = date("Y-m-d",$value['create_time']);
+//            $value['year'] = date('Y', $value['create_time']);
+//            $value['month'] = date('m', $value['create_time']);
+//            $value['day'] = date('d', $value['create_time']);
+        }
         if($list){
             return $this->success("加载成功",'',$list);
         }else{
