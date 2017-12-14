@@ -48,7 +48,6 @@ class Clubactivity extends Admin {
             $learnModel = new ClubActivityModel();
             $data['create_user'] = $_SESSION['think']['user_auth']['id'];
             $data['start_time'] = $data['start_time']?strtotime($data['start_time']):'';
-            $data['end_time'] = $data['end_time']?strtotime($data['end_time']):'';
             $model = $learnModel->validate('ClubActivity')->save($data);
             if($model){
                 return $this->success('新增成功!',Url("index"));
@@ -74,7 +73,6 @@ class Clubactivity extends Admin {
             $data = input('post.');
             $learnModel = new ClubActivityModel();
             $data['start_time'] = $data['start_time']?strtotime($data['start_time']):'';
-            $data['end_time'] = $data['end_time']?strtotime($data['end_time']):'';
             $model = $learnModel->validate('ClubActivity')->save($data,['id'=>input('id')]);
             if($model){
                 return $this->success('修改成功!',Url("index"));

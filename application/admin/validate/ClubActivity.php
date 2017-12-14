@@ -15,18 +15,22 @@ class ClubActivity extends Validate {
     protected $rule = [
         'front_cover' => 'require',
         'title' => 'require',
+        'start_time' => 'require',
+        'address' => 'require',
+        'telephone' => 'require',
         'content' => 'require',
         'publisher' => 'require',
-        'start_time' => 'require',
 
     ];
 
     protected $message = [
         'front_cover' => '封面图片不能为空',
         'title' =>  '标题不能为空',
+        'start_time' => '开始时间不能为空',
+        'address' => '地址不能为空',
+        'telephone' => '联系方式不能为空',
         'content'  =>  '内容不能为空',
         'publisher' => '发布者不能为空',
-        'start_time' => '开始时间不能为空',
     ];
     
 }
