@@ -267,18 +267,20 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green'
         });
-
         var videoway = $("#videoway" );
         var audio = $(".audiofile");
         var file = $(".videofile");
         var sel = $("select[name = 'type']");
         var val = sel.val();
+        console.log(videoway.find('option[value="1"]' ))
         var label = videoway.parent().next().find('label');
         if(val == 1){
             $(".two").hide();
             videoway.find('option[value="2"]' ).prop('disabled','true');
+            $('#videoway').find('option:eq(1)').attr('selected','selected');
         }else{
             $(".one").hide();
+            $('#videoway').find('option:eq(0)').attr('selected','selected');
         }
         sel.on("change",function(){
             var val = $(this).val();
