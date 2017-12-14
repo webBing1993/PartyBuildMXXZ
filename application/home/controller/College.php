@@ -58,9 +58,9 @@ class College extends Base {
             'status' => array('egt',0),
         );
         if ($type == 1){
-            $list = NoticeModel::where($map)->order('id desc')->limit($len,6)->field('id,title,create_time,end_time')->select();
+            $list = NoticeModel::where($map)->order('id desc')->limit($len,6)->select();
         }else{
-            $list = MatterModel::where($map)->order('id desc')->limit($len,6)->field('id,title,create_time')->select();
+            $list = MatterModel::where($map)->order('id desc')->limit($len,6)->select();
         }
         foreach($list as $value){
             $value['create_time'] = date("Y-m-d",$value['create_time']);
