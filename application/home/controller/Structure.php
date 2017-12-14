@@ -33,7 +33,7 @@ class Structure extends Base{
         $userId = session('userId');
         $tag = WechatUser::getTag($userId);
         $party = input('party');
-        $modelAll = WechatUser::where(['department' => $party,'state' => 1])->order('id')->limit(10)->select();
+        $modelAll = WechatUser::where(['department' => $party,'state' => 1])->where("tag", "<>", 3)->order('tag desc,id')->limit(10)->select();
         $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
         foreach ($modelAll as $model){
             $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
@@ -60,7 +60,7 @@ class Structure extends Base{
             'state' => 1,
         );
         $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
-        $modelAll = WechatUser::where($map)->order('id')->limit($len,6)->select();
+        $modelAll = WechatUser::where($map)->where("tag", "<>", 3)->order('tag desc,id')->limit($len,6)->select();
         foreach($modelAll as $model){
             $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
             $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
@@ -71,6 +71,56 @@ class Structure extends Base{
         }
         if($modelAll){
             return $this->success("加载成功",'',$modelAll);
+        }else{
+            return $this->error("加载失败");
+        }
+    }
+    /**
+     * 搜索
+     */
+    public function search(){
+        $userId = session('userId');
+        $tag = WechatUser::getTag($userId);
+        $name = input('val');
+        $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
+        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit(10)->select();  // 模糊查询
+        foreach($list as $model){
+            $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
+            $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+            $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+            if($tag!=3){
+                $model['mobile'] = hide_mobile($model['mobile']);
+            }
+            $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
+        }
+        if($list){
+            return $this->success("加载成功",'',$list);
+        }else{
+            return $this->error("加载失败");
+        }
+    }
+
+    /**
+     * 搜索-加载更多
+     */
+    public function searchmore(){
+        $userId = session('userId');
+        $tag = WechatUser::getTag($userId);
+        $name = input('val');
+        $len = input('length');
+        $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
+        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,6)->select();  // 模糊查询
+        foreach($list as $model){
+            $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
+            $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+            $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+            if($tag!=3){
+                $model['mobile'] = hide_mobile($model['mobile']);
+            }
+            $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
+        }
+        if($list){
+            return $this->success("加载成功",'',$list);
         }else{
             return $this->error("加载失败");
         }
