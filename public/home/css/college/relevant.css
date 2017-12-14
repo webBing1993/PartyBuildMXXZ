@@ -84,7 +84,7 @@
   padding-right: 0!important;
 }
 .content .message .name  {
-  background: url("/home/images/detail/time.png") 18px 10px no-repeat;
+  background: url("/home/images/detail/time.png") 15px 10px no-repeat;
   background-size: 20px 20px ;
 }
 .content .message div:nth-child(3)>a{
