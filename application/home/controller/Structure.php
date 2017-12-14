@@ -109,7 +109,7 @@ class Structure extends Base{
         $name = input('val');
         $len = input('length');
         $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
-        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,6)->select();  // 模糊查询
+        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,10)->select();  // 模糊查询
         foreach($list as $model){
             $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
             $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
