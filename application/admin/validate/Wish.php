@@ -13,6 +13,7 @@ use think\Validate;
 
 class Wish extends Validate {
     protected $rule = [
+        'front_cover' => 'require',
         'title' => 'require',
         'description' => 'require',
         'content' => 'require',
@@ -20,6 +21,7 @@ class Wish extends Validate {
     ];
 
     protected $message = [
+        'front_cover' => '封面图片不能为空',
         'title' =>  '标题不能为空',
         'description' => '简介不能为空',
         'content'  =>  '内容不能为空',
