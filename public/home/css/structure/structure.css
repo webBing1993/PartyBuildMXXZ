@@ -148,7 +148,7 @@ body {
 .listbox .box {
   position: absolute;
   top: 0;
-  width: 99vw;
+  width: 100vw;
 }
 
 .listbox .box .box_ .lists {

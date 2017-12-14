@@ -3,8 +3,25 @@
 {block name="style"}
 <title>云上组织</title>
 <link rel="stylesheet" href="/home/css/structure/structure.css">
+<link rel="stylesheet" href="/home/css/common/rem.css">
+<link rel="stylesheet" href="/home/css/common/tip.css">
 <!--<link rel="stylesheet" href="/home/css/common/rem.css">-->
 <style>
+	.address {
+		position: absolute;
+		right: 4vw;
+		top: -3.73vw;
+		height: 17.33vw;
+		line-height: 17.33vw;
+		font-size: 1.2rem;
+		color: #333;
+		display: block;
+		width:32vw;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		-o-text-overflow:ellipsis;
+		overflow: hidden;
+	}
 	.listbox .box .box_  .bor_ls {
 		position: absolute;
 		top: 3vw;
@@ -18,6 +35,77 @@
 		font-size: 1.4rem;
 		line-height: 7.8vw;
 	}
+	.search{
+		background: #f0eff5;
+		padding:2.133vw 4vw;
+		border-bottom: 1px solid #f0eff5;
+	}
+	.search>.searchBox{
+		border-radius: 5px;
+		height:7.467vw;
+		background: #ffffff;
+		text-align: center;
+
+	}
+	.search>.unBtn{
+		display: none;
+	}
+	.search>.searchBox>.searchInput{
+		display: none;
+	}
+	.search>.searchBox>.searchText{
+		display: inline-block;
+		font-size:1.4rem;
+		color: #999;
+		padding-left:6.4vw;
+		min-width: 1px;
+		line-height: 7.467vw;
+		height:7.467vw;
+		background: url("/home/images/search.png") 0 50% no-repeat;
+		background-size: 4.8vw 4.8vw;
+	}
+	.search.isClick{
+		background: #ffffff;
+		border-bottom: 1px solid #f1f1f1;
+		display: flex;
+	}
+	.search.isClick>.searchBox{
+		background: #f0eff5;
+		padding-left: 2.667vw;
+		width:74vw;
+		display: flex;
+		align-items: center;
+	}
+	.search.isClick>.searchBox>.searchText{
+		display: inline-block;
+	}
+	.search.isClick>.searchBox>.searchText>.searchText_c{
+		display: none;
+	}
+	.search.isClick .searchInput{
+		background: #f0eff5;
+		display: inline-block;
+		height:6.4vw;
+		width:61.33vw;
+	}
+	.search.isClick>.unBtn{
+		margin-left: 5.333vw;
+		display: block;
+		box-sizing: border-box;
+		width:13.333vw;
+		height:7.467vw;
+		border-radius: 5px;
+		border:1px solid #5d9cec;
+		color: #5d9cec;
+		text-align: center;
+		line-height: 6.933vw;
+		font-size: 1.4rem;
+	}
+
+
+
+
+
 
 </style>
 
@@ -29,6 +117,9 @@
 	<span class="tab" data-side="2" style="line-height: 11vw;position: relative;"><span>通讯录</span><img src="/home/images/icon_001.png" alt="" style="position: absolute;bottom: 0;width: 2.4vw; height: 1.87vw;left: 50%;margin-left: -.935vw;"></span>
 
 </div>
+
+
+
 <div class="listbox" style="margin-top: -1px;display: block;" id="side1">
 	<div class="box summary active" >
 		<!--banner-->
@@ -219,24 +310,17 @@
 	<!--组织架构 村部名录-->
 </div>
 
-<div class="search ">
-	<div class="searchBox">
-		<div class="searchText"><span class="searchText_c">搜索</span></div>
-		<input type="text" class="searchInput">
-	</div>
-	<div class="unBtn">取消</div>
-</div>
 
 
-<!--搜索返回列表-->
-<ul class="result_box hidden">
+<!--&lt;!&ndash;搜索返回列表&ndash;&gt;-->
+<!--<ul class="result_box hidden">-->
 
-</ul>
+<!--</ul>-->
 
-<!--加载等待-->
-<div class="onloading hidden">
-	加载中...
-</div>
+<!--&lt;!&ndash;加载等待&ndash;&gt;-->
+<!--<div class="onloading hidden">-->
+	<!--加载中...-->
+<!--</div>-->
 
 <div class="listbox" style="margin-top: -1px;display: none;" id="side2">
 	<!--组织领导   小镇介绍   党工青妇联介绍-->
@@ -244,6 +328,13 @@
 	<div class=" box ">
 		<div class="banner">
 			<img src="/home/images/banner/ysbanner.jpg" alt="" class="banner-img">
+		</div>
+		<div class="search ">
+			<div class="searchBox">
+				<div class="searchText"><span class="searchText_c">搜索</span></div>
+				<input type="text" class="searchInput" style="margin-bottom: inherit;border: transparent;font-size: 1.4rem;color: #999;">
+			</div>
+			<div class="unBtn">取消</div>
 		</div>
 		<div class="structureSort">
 			<div class="box_ or">
@@ -281,11 +372,188 @@
 	</div>
 </div>
 
+
+
+<div class="list-t-wrap" style="position: absolute;top:13.33vw;left:0;display: none;">
+<!--<div class="list-t-wrap" style="display: none;">-->
+	<div class="list-wrapper">
+		<!--列表一定要放到容器内,因为会有一个div append到mui-scroll中,需要在底部才能起作用-->
+		<ul class="d_lists" id="refreshContainers">
+			<!--<li class="d_list clearfix">-->
+				<!--<div class="d_img_box" style="float:left;">-->
+					<!--<div class="d_img" style="background-color: red;">-->
+						<!--张-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="d_name ">张三-->
+					<!--<img src="/home/images/structure/xx.jpg" alt="">-->
+					<!--<a class="d_tel" href="tel:18329199210">-->
+						<!--<span class="d_lst fl">-->
+							<!--<img src="/home/images/structure/woman.png" alt="">-->
+							<!--<i>群众</i>-->
+						<!--</span>-->
+						<!--<span class="address">这是一个地址</span>-->
+						<!--<span class="fr d_tel_img" style="bottom:-2.67vw;top:inherit;">-->
+							<!--<img src="/home/images/structure/tel.png" alt="">-->
+							<!--18329199210-->
+						<!--</span>-->
+					<!--</a>-->
+				<!--</div>-->
+			<!--</li>-->
+		</ul>
+	</div>
+	<!--加载更多-->
+	<div class="tip"></div>
+	<div class="loading hidden">
+		<div class="typing_loader"></div>
+	</div>
+</div>
+
 {/block}
 
 {block name="script"}
 <script src="/home/js/reset.js"></script>
 <script src="/home/js/jquery.lazyload.min.js"></script>
+<script>
+    onInput();
+    //取消输入
+    $(".search .unBtn").on("click",function(){
+        offInput();
+        onInput();
+        $(".searchInput").val('');
+    });
+    function onInput() {
+        $(".searchBox").off('click').on('click',function(){
+            $(".search").addClass('isClick');
+            $(this).off('click').find('.searchInput').focus();
+            $('.main').addClass('hidden');
+            $('.tabs').hide();
+            $('#side2 .banner').hide();
+            $('#side2 .structureSort').hide();
+            $('.list-t-wrap').show();
+        })
+    }
+    //关闭输入框函数
+    function offInput(){
+        $(".search").removeClass("isClick");
+        $('.main').removeClass('hidden');
+        $(".result_box").addClass('hidden');
+        $(".onloading").addClass('hidden');
+        $('.tabs').show();
+        $('#side2 .banner').show();
+        $('#side2 .structureSort').show();
+        $('.list-t-wrap').hide();
+        $('#refreshContainers').html('')
+    }
+
+
+//    搜索
+    $(".searchInput").on("input",function(){
+        var val=$(this).val();
+        if(!val)
+        {
+            $("#refreshContainers").html('');
+            return '';
+        }
+        $.ajax({
+            type:"post",
+            url:"{:Url('structure/search')}",
+            data:{
+                val:val
+            },
+//            beforeSend:function(XMLHttpRequest){
+//                $(".onloading").removeClass("hidden");
+//            },
+            success:function(data){
+                loadScroll();
+                $('#refreshContainers').html('')
+                addCourse(data);
+            }
+        });
+	})
+
+
+
+
+    var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
+    $(function(){
+        //两学一做上拉加载
+        var len = $('.d_lists>li').length;
+        if(len >=7){
+            $('.tip').text('上拉加载更多');
+        }
+    });
+    function loadScroll(){
+        $(window ).off("scroll" ).on("scroll",function(){
+            var dh = $(document).height();
+            var end = $(window).height() + $(window).scrollTop();
+            var len = $('.d_lists>li').length;
+            var tip = $(".tip");
+            var loading = $('.loading');
+            var val = $('.searchInput').val();
+            var url="{:Url('Structure/searchmore')}";
+			console.log(dh,end);
+            if(dh >= end && scrollNow){
+                scrollNow = false;//请求执行中
+                $.ajax({
+                    type:"post",
+                    url: url,
+                    data:{
+                        length:len,
+						val:val
+                    },
+                    beforeSend: function(XMLHttpRequest){
+                        tip.hide();
+                        loading.toggleClass('hidden');
+                    },
+                    success:function(data){
+                        loading.toggleClass('hidden');
+                        tip.show();
+                        if(data.code == 1){
+                            addCourse(data);
+                            var dataLen =data.data.length;
+                            if(data.data.length == 5){
+                                tip.text('上拉加载更多');
+                            }
+                        }else{
+                            tip.text('没有更多了');
+                            $(window ).off("scroll");
+                        }
+                        scrollNow = true;//请求结束
+                    }
+                })
+            }
+        })
+    }
+
+    function addCourse(data){
+        var html = '';
+        var lists = data.data;
+        var len = lists.length;
+        var str='';
+        for (var i=0;i<len;i++){
+            var img = '';
+            if(lists[i].gender == 1){
+                img = '/home/images/structure/man.png'
+            }else {
+                img = '/home/images/structure/woman.png'
+            }
+            str += '<li class="d_list clearfix">'
+                +'<div class="d_img_box" style="float:left;"><div class="d_img" style="background-color:'+lists[i].color+'">'+lists[i].surname+'</div></div>'
+                +'<div class="d_name ">'
+                +'<span>'+lists[i].name+'</span>'
+                +'<a class="d_tel" href="tel:'+lists[i].mobile+'">'
+                +'<span class="d_lst fl"><img src="'+img+'" alt=""><i>'+lists[i].politics_status+'</i></span>'
+				+'<span class="address">这是一个地址</span>'
+                +'<span class="fr d_tel_img" style="bottom:-2.67vw;top:inherit;"><img src="/home/images/structure/tel.png" alt=""><span>'+lists[i].mobile+'</span></span>'
+                +'</a>'
+                +'</div>'
+                +'</li>'
+        }
+        $('#refreshContainers').append(str);
+    }
+
+</script>
 <script>
 	if(localStorage.getItem('yszz') == null || localStorage.getItem('yszz')==1){
 	    $('.tab').removeClass('active');

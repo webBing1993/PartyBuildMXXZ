@@ -77,12 +77,12 @@
     function loadScroll(){
         $(window ).off("scroll" ).on("scroll",function(){
             var dh = $(document).height();
-            var end = $(window).height() + $(window ).scrollTop();
+            var end = $(window).height() + $(window).scrollTop();
             var len = $('.d_lists>li').length;
             var tip = $(".tip");
             var loading = $('.loading');
             var url="{:Url('Structure/detailmore')}";
-
+			console.log(dh,end)
             if(dh >= end && scrollNow){
                 scrollNow = false;//请求执行中
                 $.ajax({
