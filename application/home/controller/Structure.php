@@ -82,19 +82,23 @@ class Structure extends Base{
         $userId = session('userId');
         $tag = WechatUser::getTag($userId);
         $name = input('val');
-        $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
-        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit(10)->select();  // 模糊查询
-        foreach($list as $model){
-            $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
-            $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
-            $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
-            if($tag!=3){
-                $model['mobile'] = hide_mobile($model['mobile']);
+        if($name){
+            $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
+            $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit(10)->select();  // 模糊查询
+            foreach($list as $model){
+                $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
+                $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+                $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+                if($tag!=3){
+                    $model['mobile'] = hide_mobile($model['mobile']);
+                }
+                $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
             }
-            $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
-        }
-        if($list){
-            return $this->success("加载成功",'',$list);
+            if($list){
+                return $this->success("加载成功",'',$list);
+            }else{
+                return $this->error("加载失败");
+            }
         }else{
             return $this->error("加载失败");
         }
@@ -108,19 +112,23 @@ class Structure extends Base{
         $tag = WechatUser::getTag($userId);
         $name = input('val');
         $len = input('length');
-        $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
-        $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,10)->select();  // 模糊查询
-        foreach($list as $model){
-            $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
-            $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
-            $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
-            if($tag!=3){
-                $model['mobile'] = hide_mobile($model['mobile']);
+        if($name){
+            $bg_color=["#b1e3fc", "#aeefef", "#ffa351", "#9393f5", "#cf88f7", "#65abfa", "#ebcffb", "#76f4f0", "#ffcf6e", "#ff8ff4"];
+            $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,10)->select();  // 模糊查询
+            foreach($list as $model){
+                $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
+                $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+                $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
+                if($tag!=3){
+                    $model['mobile'] = hide_mobile($model['mobile']);
+                }
+                $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
             }
-            $model['department'] = WechatDepartment::where(['id' => $model['department']])->value('name'); //  获取用户所在部门
-        }
-        if($list){
-            return $this->success("加载成功",'',$list);
+            if($list){
+                return $this->success("加载成功",'',$list);
+            }else{
+                return $this->error("加载失败");
+            }
         }else{
             return $this->error("加载失败");
         }
