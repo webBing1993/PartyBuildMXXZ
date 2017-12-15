@@ -428,11 +428,11 @@ body {
 }
 
 .d_list .d_name>a .d_lst img{
-  width: 10px;
-  height:15px;
+  width: 3.7vw;
+  height:3.7vw;
   display: block;
   float: left;
-  margin-top:1.2vw;
+  margin-top:1.1vw;
 }
 .d_tel>.d_tel_icon {
   width: 26.67vw;
@@ -603,9 +603,9 @@ img {max-width: inherit;}
 }
 @media screen and (min-width: 500px) {
   .d_list .d_name>a .d_lst img{
-    width: 14px;
-    height: 22px;
-    margin-top: 1.8vw;
+    width: 3.7vw;
+    height: 3.7vw;
+    margin-top: 1.7vw;
 
   }
   .structureTextRight li p {
