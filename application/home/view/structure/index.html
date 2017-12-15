@@ -69,6 +69,8 @@
 		background: #ffffff;
 		border-bottom: 1px solid #f1f1f1;
 		display: flex;
+		position: absolute;
+		top:0;
 	}
 	.search.isClick>.searchBox{
 		background: #f0eff5;
@@ -339,7 +341,7 @@
 		<div class="search ">
 			<div class="searchBox">
 				<div class="searchText"><span class="searchText_c">搜索</span></div>
-				<input type="text" class="searchInput" style="margin-bottom: inherit;border: transparent;font-size: 1.4rem;color: #999;">
+				<input type="text" class="searchInput" style="margin-bottom: inherit;border: transparent;font-size: 1.4rem;color: #999;padding: 0;">
 			</div>
 			<div class="unBtn">取消</div>
 		</div>
@@ -457,29 +459,34 @@
 //    搜索
     $(".searchInput").on("input",function(){
         var val=$(this).val();
-        if(!val)
-        {
-            $("#refreshContainers").html('');
-            return '';
-        }
-        $.ajax({
-            type:"post",
-            url:"{:Url('structure/search')}",
-            data:{
-                val:val
-            },
+            if(!val) {
+                $("#refreshContainers").html('');
+                        serach()
+                return '';
+            }else{
+                $.ajax({
+                    type:"post",
+                    url:"{:Url('structure/search')}",
+                    data:{
+                        val:val
+                    },
 //            beforeSend:function(XMLHttpRequest){
 //                $(".onloading").removeClass("hidden");
 //            },
-            success:function(data){
-                loadScroll();
-                $('#refreshContainers').html('')
-                addCourse(data);
-            }
-        });
+                    success:function(data){
+                        $('#refreshContainers').html('');
+                        addCourse(data);
+                        loadScroll();
+                    }
+                });
+			}
 	})
 
-
+	function serach(){
+        setTimeout(function () {
+            $("#refreshContainers").html('');
+        }, 1000);
+	}
 
 
     var scrollNow = true;//判断下拉请求是否执行中.false为正在请求
