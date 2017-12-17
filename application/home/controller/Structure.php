@@ -87,7 +87,9 @@ class Structure extends Base{
             $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit(10)->select();  // 模糊查询
             foreach($list as $model){
                 $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
-                $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+                $byte = substr($model['mobile'], 7, 1);
+                $byte = $byte ? $byte : 0;
+                $model['color'] = $bg_color[$byte];
                 $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
                 if($tag!=3){
                     $model['mobile'] = hide_mobile($model['mobile']);
@@ -117,7 +119,9 @@ class Structure extends Base{
             $list = WechatUser::where('name',['like',"%$name%"],['neq',''])->where("tag", "<>", 3)->order('tag desc,id')->limit($len,10)->select();  // 模糊查询
             foreach($list as $model){
                 $model['surname'] = mb_substr($model['name'], 0, 1,'utf-8');
-                $model['color'] = $bg_color[substr($model['mobile'], 7, 1)];
+                $byte = substr($model['mobile'], 7, 1);
+                $byte = $byte ? $byte : 0;
+                $model['color'] = $bg_color[$byte];
                 $model['politics_status'] = WechatUser::POLITICS_ARRAY[$model['politics_status']];
                 if($tag!=3){
                     $model['mobile'] = hide_mobile($model['mobile']);
