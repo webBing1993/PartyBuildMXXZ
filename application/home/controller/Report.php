@@ -109,9 +109,9 @@ class Report extends Base{
         if($article['type'] == 1){
             $article['record_text'] = "党委语音述职";
         }elseif($article['type'] == 2){
-            $article['record_text'] = "团委语音述职";
-        }elseif($article['type'] == 3){
             $article['record_text'] = "工会语音述职";
+        }elseif($article['type'] == 3){
+            $article['record_text'] = "团委语音述职";
         }elseif($article['type'] == 4){
             $article['record_text'] = "妇联语音述职";
         }else{
