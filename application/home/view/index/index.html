@@ -74,16 +74,21 @@
         <a href="{:Url('report/index')}" class="fr wssz"><span>网上述职</span></a>
     </div>
 </div>
-<div id="fixed">
-    这里放图片
-</div>
-<div id="video">
-    <!--<video src="/home/images/video.mp4"  controls="controls" width="300" height="300" id="videos"></video>-->
-    <!--<video src="/home/images/video.mp4" id="videos" class="video-source" width="100%" height="300px" controls="controls"-->
-           <!--&gt;</video>-->
+{eq name="$show" value="1"}
+<div>
+    <div id="fixed">
+        这里放图片
+    </div>
+    <div id="video">
+        <!--<video src="/home/images/video.mp4"  controls="controls" width="300" height="300" id="videos"></video>-->
+        <!--<video src="/home/images/video.mp4" id="videos" class="video-source" width="100%" height="300px" controls="controls"-->
+        <!--&gt;</video>-->
 
-    <video id="videos" src="/home/images/video.mp4"   x5-playsinline="" playsinline="" webkit-playsinline="" poster="" preload="auto" style="object-fit: fill;position: relative;top:50%;margin-top: -150px;width:100vw;"></video>
+        <video id="videos" src="/home/images/video.mp4"   x5-playsinline="" playsinline="" webkit-playsinline="" poster="" preload="auto" style="object-fit: fill;position: relative;top:50%;margin-top: -150px;width:100vw;"></video>
+    </div>
 </div>
+{/eq}
+
 {/block}
 {block name="script"}
 <script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
@@ -101,13 +106,14 @@ $("#fixed").click(function(){
     x.play();
     //视频停止API
     //objVideo.pause();
-});
-var vid = document.getElementsByTagName('video')[0];
-vid.addEventListener('ended',function(){        //视频播放完的事件
-    //这里写跳转
+    var vid = document.getElementsByTagName('video')[0];
+    vid.addEventListener('ended',function(){        //视频播放完的事件
+        //这里写跳转
 //        window.location = "http://www.baidu.com";
-    $('#video').remove();
-},false);
+        $('#video').remove();
+    },false);
+});
+
 //    $(function(){
 //        function sA(s,a,t){
 //            s.animate(a,t || "normal",function(){

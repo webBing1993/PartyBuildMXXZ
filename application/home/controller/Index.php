@@ -8,6 +8,7 @@
 
 namespace app\home\controller;
 use app\admin\model\Picture;
+use app\home\model\WechatUser;
 use app\home\model\Wish;
 use think\Controller;
 use app\home\model\News as NewsModel;
@@ -68,10 +69,38 @@ class Index extends Base {
         $uid = session('userId');
         $len = array('wish' => 0);
         $list = $this ->getDataList($len);
+        // 启动仪式功能只对之图科技一体机开放
+        $start = WechatUser::where('userid',$uid)->value('start');
+//        var_dump($start);die;
+        if($start){
+            $show = 1;
+        }else{
+//            if($uid == 'visitor'){
+            $show = 0;
+        }
+        $this ->assign('show',$show);
         $this ->assign('list',$list['data']);
         $this ->assign('user',$uid);
 
         return $this->fetch();
+    }
+
+    /**
+     * 关闭启动仪式
+     */
+    public function shutdown()
+    {
+        $uid = session('userId');
+        if(time() > strtotime("2017-12-20 13:56")){
+            $res = WechatUser::where(array('userid'=>$uid))->update(['start' => 0]);
+            if ($res){
+                return $this->success('成功');
+            }else{
+                return $this->error('失败');
+            }
+        }else{
+            return $this->error('没到时间');
+        }
     }
 
     /*
