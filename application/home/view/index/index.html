@@ -10,6 +10,8 @@
     .swiper-pagination-bullet-active{background-color: #999999;}
     .swiper-pagination-bullet{background-color: #f1f1f1;}
     .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{ bottom: 0 ;}
+    #fixed {position: fixed;top:0;left:0;background: #eee;width:100vw;height:100vh;z-index: 99999;display: block;}
+    #video {position: fixed;top:0;left:0;background: #eee;width:100vw;height:100vh;z-index: 99999;display: none;}
 </style>
 {/block}
 {block name="body"}
@@ -72,28 +74,34 @@
         <a href="{:Url('report/index')}" class="fr wssz"><span>网上述职</span></a>
     </div>
 </div>
+<div id="fixed">
+    这里放图片
+</div>
+<div id="video"><video src="/home/images/case.mp4"  controls="controls" width="300" height="300" id="videos"></video></div>
 {/block}
 {block name="script"}
 <script src="/home/js/swiper-3.4.2.jquery.min.js"></script>
 <script>
 
-   var _length = $(".itme>a").length;
-   var _this = $(".itme>a");
-   for(var k=0;k<_length;k++){
-       if(k%2==0){
-           _this.eq(k).stop().animate({
-               left:'5%',
-               opacity:1
-           },1000+k*100)
-       }else {
-           _this.eq(k).stop().animate({
-               right:'5%',
-               opacity:1
-           },1000+k*100)
-       }
-   }
+//    视频播放
 
-
+$("#fixed").click(function(){
+    //此处写点击触发的操作
+    $(this).css("display","none");
+    $('#video').css("display","block");
+    //1、取得播放器的对象
+    var x = document.getElementById("videos");
+    //2、调用视频播放API
+    x.play();
+    //视频停止API
+    //objVideo.pause();
+});
+var vid = document.getElementsByTagName('video')[0];
+vid.addEventListener('ended',function(){        //视频播放完的事件
+    //这里写跳转
+//        window.location = "http://www.baidu.com";
+    $('#video').hide();
+},false);
 //    $(function(){
 //        function sA(s,a,t){
 //            s.animate(a,t || "normal",function(){
@@ -117,6 +125,21 @@
 ////        sA(test.eq(0),testA,3000);
 //    });
 
+var _length = $(".itme>a").length;
+var _this = $(".itme>a");
+for(var k=0;k<_length;k++){
+    if(k%2==0){
+        _this.eq(k).stop().animate({
+            left:'5%',
+            opacity:1
+        },1000+k*100)
+    }else {
+        _this.eq(k).stop().animate({
+            right:'5%',
+            opacity:1
+        },1000+k*100)
+    }
+}
 
     $(function(){
         $(".exit").on("click",function(){
