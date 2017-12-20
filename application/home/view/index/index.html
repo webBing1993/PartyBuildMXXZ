@@ -111,6 +111,13 @@ $("#fixed").click(function(){
         //这里写跳转
 //        window.location = "http://www.baidu.com";
         $('#video').remove();
+        $.ajax({
+            type:"post",
+            url:"{:Url('index/shutdown')}",
+            data:{},
+            success:function(data){
+            }
+        })
     },false);
 });
 
