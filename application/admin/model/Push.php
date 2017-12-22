@@ -15,7 +15,7 @@ class Push extends Base{
     //分类
     public function classify($info) {
         if($info == 1) {
-            return "活动发起";
+            return "活动发布";
         } elseif($info == 2) {
             return "梦想快讯";
         } elseif($info == 3) {
@@ -35,7 +35,7 @@ class Push extends Base{
         if($class == 1) {
             $wish = \app\admin\model\Wish::where('id',$info) ->field('title,type') ->find();
 
-            return "【活动发起】".$wish->title;
+            return "【活动发布】".$wish->title;
         } elseif($class == 2) {
             $dreamflash = \app\admin\model\DreamFlash::where('id',$info) ->field('title') ->find();
 

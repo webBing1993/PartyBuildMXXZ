@@ -6,7 +6,7 @@
  * Time: 16:55
  */
 namespace  app\admin\controller;
-use app\admin\model\Dreamflash;
+use app\admin\model\DreamFlash;
 use app\admin\model\Learn;
 use app\admin\model\Notice;
 use app\admin\model\Wish;
@@ -39,12 +39,12 @@ class Push extends Admin
             //获取推送数据
             $infoArr   = [];
 
-            $wish    = new Wish();//活动发起
+            $wish    = new Wish();//活动发布
             $wishArr = $wish->push($info, $idArr);
             foreach ($wishArr as $v) {
                 $infoArr[] = $v;
             }
-            $dreamflash = new Dreamflash();//梦想快讯
+            $dreamflash = new DreamFlash();//梦想快讯
             $dreamflashArr   = $dreamflash->push($info, $idArr);//在model层封装
             foreach ($dreamflashArr as $v) {//合成一个数组,方便前端取值
                 $infoArr[] = $v;
@@ -87,10 +87,10 @@ class Push extends Admin
                 'push'        => 1
             );
             //获取推送数据
-            $wish    = new Wish();//活动发起
+            $wish    = new Wish();//活动发布
             $wishArr = $wish->push($info);
 
-            $dreamflash = new Dreamflash();//梦想快讯
+            $dreamflash = new DreamFlash();//梦想快讯
             $dreamflashArr   = $dreamflash->push($info);//在model层封装
 
             $notice    = new Notice();//通知公告
@@ -125,7 +125,7 @@ class Push extends Admin
         $vice   = [];//副图文
         $all    = array();
         $wish   = new Wish();
-        $dreamflash = new Dreamflash();
+        $dreamflash = new DreamFlash();
         $notice    = new Notice();
         $matter    = new Matter();
         $learn  = new Learn();
@@ -243,13 +243,17 @@ class Push extends Admin
             //上传图文消息素材
             $article = array();
             foreach ($push as $k =>$v ){
+                $v['content'] = str_replace('&nbsp;','',strip_tags($v['content']));
+                $v['content'] = str_replace(" ",'',$v['content']);
+                $v['content'] = str_replace("\n",'',$v['content']);
+                $v['content'] = mb_substr($v['content'], 0, 100);
                 $article['articles'][$k] = [
                     'thumb_media_id' => $v['thumb_media_id'],
                     'author' => $v['publisher'],
                     'title' => $v['title'],
                     'content_source_url' => $v['content_source_url'],
                     "content" => $v['content'],
-                    "digest" => msubstr(strip_tags($v['content']),0,30),
+                    "digest" => msubstr(strip_tags($v['content']),0,40),
                     "show_cover_pic" => 0,
                 ];
             }
@@ -261,16 +265,18 @@ class Push extends Admin
                 /*"filter"=>array(
                     "is_to_all"=>true,     //是否群发给所有用户.True不用分组id，False需填写分组id
                 ),*/
-                'touser'=>'4a08b03f568be7ea7642591a357483db',
+                'towxname'=>'Birkhoff-shadow',
                 "msgtype"=>"mpnews",        //群发的消息类型，图文消息为mpnews，文本消息为text，语音为voice，音乐为music，图片为image，视频为video，卡券为wxcard
                 "mpnews" => ['media_id' => $info['media_id']]//用于设定即将发送的图文消息
             ];
-            $res = $Wechat ->sendGroupMassMessage($send);
+//            $res = $Wechat ->sendGroupMassMessage($send);
+            $res = $Wechat ->previewMassMessage($send);
+//            var_dump($res);die;
             //发送成功 修改对应数据状态
             //var_dump($Wechat->errCode);exit;
             if($res['errcode'] == 0) {
                 $wish   = new Wish();
-                $dreamflash = new Dreamflash();
+                $dreamflash = new DreamFlash();
                 $notice    = new Notice();
                 $matter    = new Matter();
                 $learn  = new Learn();
@@ -294,7 +300,10 @@ class Push extends Admin
                     ];
                     PushModel::create($datas);
                 }
-                return  $this->success('推送成功');
+                $result = [
+                    'code' => 1,
+                ];
+                return $result;
             }else{
                 return $this->error('推送失败');
             }

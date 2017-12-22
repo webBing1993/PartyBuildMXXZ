@@ -227,6 +227,7 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
+                push:$("input[name='push']:checked").val(),
             };
             $.ajax({
                 type:"post",

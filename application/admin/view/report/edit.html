@@ -145,7 +145,7 @@
                                 <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
                             </div>
                         </div>
-                        {eq name="msg" value=""}
+                        <!--{eq name="msg" value=""}
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>是否推送:</label>
@@ -173,7 +173,7 @@
                                 </label>
                             </div>
                         </div>
-                        {/eq}
+                        {/eq}-->
                         <input type="hidden" name="id" value="{$msg.id||default=''}">
 
                         <div class="form-group">
@@ -293,7 +293,7 @@
                 title:$("input[name='title']").val(),
                 content:ue.getContent(),
                 publisher:$("input[name='publisher']").val(),
-                push:$("input[name='push']:checked").val(),
+//                push:$("input[name='push']:checked").val(),
                 status:0,
             };
             $.ajax({

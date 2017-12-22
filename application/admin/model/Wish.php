@@ -27,7 +27,7 @@ class Wish extends Model {
             $arr = $this ->where($info)->where('type',1)->select();
         }
         foreach($arr as  $value){
-            $value['title'] = '【活动发起】'.$value['title'];
+            $value['title'] = '【活动发布】'.$value['title'];
             $value['id'] = '1-'.$value->id;
         }
         return $arr;

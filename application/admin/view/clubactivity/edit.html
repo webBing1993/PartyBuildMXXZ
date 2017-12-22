@@ -181,7 +181,7 @@
                                 <input type="text" placeholder="请输入发布人" class="form-control form_title" name="publisher" value="{$msg.publisher||default=''}">
                             </div>
                         </div>
-                        {eq name="msg" value=""}
+                        <!--{eq name="msg" value=""}
                         <div class="form-group">
                             <div class="col-lg-1 text-right control-label">
                                 <label>是否推送:</label>
@@ -209,7 +209,7 @@
                                 </label>
                             </div>
                         </div>
-                        {/eq}
+                        {/eq}-->
                         <input type="hidden" name="id" value="{$msg.id||default=''}">
 
                         <div class="form-group">
@@ -313,7 +313,7 @@
                 telephone:$("input[name='telephone']").val(),
                 address:$("input[name='address']").val(),
                 publisher:$("input[name='publisher']").val(),
-                recommend:$("input[name='recommend']:checked").val(),
+//                recommend:$("input[name='recommend']:checked").val(),
                 status:0,
             };
             $.ajax({
