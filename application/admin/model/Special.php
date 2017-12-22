@@ -20,6 +20,21 @@ class Special extends Base {
     public function user(){
         return $this->hasOne('Member','id','create_user');
     }
+    //推送
+    public function push($info,$idArr=[]) {
+        if(empty($idArr)) {
+            $arr = $this ->where($info)->where('type',2)->select();
+        } elseif(!empty($idArr) && $idArr[0] == 6) {
+            $arr = $this ->where($info) ->where(['type'=>2, 'id'=>['neq',$idArr[1]]])->select();
+        } else {
+            $arr = $this ->where($info)->where('type',2)->select();
+        }
 
+        foreach($arr as  $value){
+            $value['title'] = '【十九大专题】'.$value['title'];
+            $value['id'] = '6-'.$value->id;
+        }
+        return $arr;
+    }
 
 }

@@ -465,4 +465,35 @@ class Admin extends Controller {
         }
 
     }
+    /**
+     * 获取本周时间
+     */
+    public function week_time() {
+        date_default_timezone_set("PRC");        //初始化时区
+        $y = date("Y");        //获取当天的年份
+        $m = date("m");        //获取当天的月份
+        $d = date("d");        //获取当天的号数
+        $todayTime= mktime(0,0,0,$m,$d,$y);        //将今天开始的年月日时分秒，转换成unix时间戳
+        $time = date("N",$todayTime);        //获取星期数进行判断，当前时间做对比取本周一和上周一时间。
+        //$t为本周周一，$s为上周周一
+        switch($time){
+            case 1: $t = $todayTime;
+                break;
+            case 2: $t = $todayTime - 86400*1;
+                break;
+            case 3: $t = $todayTime - 86400*2;
+                break;
+            case 4: $t = $todayTime - 86400*3;
+                break;
+            case 5: $t = $todayTime - 86400*4;
+                break;
+            case 6: $t = $todayTime - 86400*5;
+                break;
+            case 7: $t = $todayTime - 86400*6;
+                break;
+            default:
+                break;
+        }
+        return $t;
+    }
 }

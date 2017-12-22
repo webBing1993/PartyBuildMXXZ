@@ -1,0 +1,275 @@
+{extend name="base/common"}
+
+{block name="style"}
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">
+<style>
+    .note{
+        margin-left: 10px;
+        color: red;
+    }
+</style>
+{/block}
+
+{block name="page-header"}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>推送管理</h2>
+        <ol class="breadcrumb">
+            <li>
+                <strong><a href="{:Url('Learn/pushlist')}">推送列表</a></strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+{/block}
+
+{block name="main"}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>推送列表</h5>
+                    <div class="ibox-tools">
+                        <a data-toggle="modal" class="btn btn-primary" href="#modal-form">添加推送</a>
+                        <div id="modal-form" class="modal fade" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" id="form" method="post" action="{:Url('Push/pushList')}">
+                                            <p class="tt">消息推送(只可推送本周的信息)</p>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2 col-sm-2 no-padding text-right" style="text-align:center;line-height:30px;margin-bottom: 10px">
+                                                        <label>主图文:</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-sm-10 sel" style="padding-right:35px;">
+                                                        <select class="form-control chosen-select" name="focus_main" id="main">
+                                                            <option value="-1" >--请选择--</option>
+                                                            {foreach $wishArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                            {foreach $dreamflashArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                            {foreach $noticeArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                            {foreach $matterArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                            {foreach $learnArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                            {foreach $specialArr as $k=>$v}
+                                                            <option value="{$v->id}" >{$v->title}</option>
+                                                            {/foreach}
+                                                           <!-- <option value="" >【红色足迹-活动情况】标题1</option>
+                                                            <option value="" >【两学一做-手机党校】标题1</option>
+                                                            <option value="" >【信息驿站-学习资料】标题1</option>
+                                                            <option value="" >【信息驿站-通知公告】标题1</option>
+                                                            <option value="" >【活动发起-活动报道】标题1</option>
+                                                            <option value="" >【支部建设-活动报道】标题1</option>-->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="vice">
+                                                    <div class="col-lg-2 col-sm-2 no-padding text-right" style="text-align:center;line-height:30px;margin-bottom: 10px">
+                                                        <label>副图文:</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-sm-10 sel vice" style="padding-right:35px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <button class="btn btn-primary post-put" type="button" target-form="form-horizontal">发送</button>
+                                                    <span class="note">（* 点击直接发送至频道）</span>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="id" value="">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="i-checks check-all" type="checkbox"></th>
+                                <th>ID</th>
+                                <th>图文信息</th>
+                                <th>推送</th>
+                                <th>创建人</th>
+                                <th>创建时间</th>
+                                <th>状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="vo"}
+                            <tr>
+                                <td><input type="checkbox" class="i-checks" name="input[]"></td>
+                                <td>{$vo.id}</td>
+                                <td>{$vo->title($vo.class,$vo.focus)}</td>
+                                <td>{$vo->classify($vo.class)}</td>
+                                {neq name="vo.create_user" value=""}<td>{$vo.create_user}</td>{else/}<td>无</td>{/neq}
+                                <td>{$vo.create_time|time_format}</td>
+
+                                <td>{$vo.status_text}</td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="10">
+                                    <div class="page"></div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script src="/admin/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/admin/js/chosen.jquery.js"></script>
+<script>
+    $(function(){
+        highlight_subnav("{:Url('Push/index')}");
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+
+    });
+
+    //点击主图文传递数据,并显示副图文
+    $("#vice").hide();
+    $("select[name='focus_main']").on("change",function () {
+        var id = $("select[name='focus_main']").val();
+        if(id == -1){
+            $("#vice").hide();
+        }else{
+            $("#vice").show();
+        }
+        $.ajax({
+            type:"post",
+            url:"{:Url('push/index')}",
+            data:{id:id},
+            success:function(data){
+                //console.log(data);
+                var html = "";
+                var titles = data.msg;
+                var len = titles.length;
+               $('.vice' ).empty();
+               html += '<select class="chosen-select form-control" data-placeholder="--请选择--" name="focus_vice" multiple>';
+               for(var i = 0; i < len; i++ ){
+                   var t = titles[i];
+                   html += '<option value="'+ t.id +'">'+ t.title +'</option>';
+               }
+               html += '</select>';
+               $('.vice' ).append(html);
+                $(".vice select" ).chosen({
+                    no_results_text: "没有找到该选项",
+                    allow_single_de: true,
+                    width:'100%',
+                    max_selected_options:'7'
+                });
+            }
+        });
+
+    });
+
+    //多选框
+    $(".sel select" ).chosen({
+        no_results_text: "没有找到该选项",
+        allow_single_de: true,
+        width:'100%',
+        max_selected_options:'5'
+    });
+    selHeight($('.sel select'));
+    function selHeight(e){
+        e.find('ul').on('click',function(){
+            var results = $(this ).next().find('.chosen-results' );
+            var h= results.height();
+            h=h-100;
+            $('.selblo' ).animate({'height':h+'px'},100);
+            //切出页面
+            var hiddenProperty = 'hidden' in document ? 'hidden' :
+                    'webkitHidden' in document ? 'webkitHidden' :
+                            null;
+            var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+            var onVisibilityChange = function(){
+                if (!document[hiddenProperty]) {
+                    //selgp.find('.search-field').find('input').on('blur');
+                }else{
+                    e.find('.search-field').find('input').off('blur');
+                }
+            };
+            $(document).on(visibilityChangeEvent, onVisibilityChange);
+        });
+        e.find('.search-field').find('input').on('blur',function(){
+            setTimeout(function(){
+                $('.selblo' ).animate({'height':'0'});
+            },100)
+        });
+    }
+    $(".post-put").off('click').on("click",function(){
+        var it=$(this);
+        var data = {
+//            type: $("input[name='type']:checked" ).val(),
+            focus_main: $("select[name='focus_main']").val(),
+            focus_vice: $("select[name='focus_vice']").val(),
+        };
+        $.ajax({
+            type:"post",
+            url:$("#form").attr("action"),
+            data:data,
+            success:function(data){
+                console.log(data);
+                if(data.code == 1){
+                    if (data.url) {
+                        updateAlert(data.msg + ' 页面即将自动跳转~','success');
+                    }else{
+                        updateAlert(data.msg ,'success');
+                    }
+                    it.prop('disabled','true');
+                    $('input,select').prop('disabled','true');
+                    setTimeout(function(){
+                        if (data.url) {
+                            location.href=data.url;
+                        } else {
+                            location.reload();
+                        }
+                        it.removeAttr('disabled');
+                        $('input,select').removeAttr('disabled');
+                    },2000);
+                } else {
+                    updateAlert(data.msg, 'error');
+                    it.attr('disabled','true');
+                    $('input,select').prop('disabled','true');
+                    setTimeout(function(){
+                        it.removeAttr('disabled');
+                        $('input,select').removeAttr('disabled');
+                    },2000);
+                }
+            }
+        });
+        return false;
+    });
+
+</script>
+{/block}

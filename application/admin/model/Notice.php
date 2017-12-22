@@ -27,4 +27,20 @@ class Notice extends Base {
     public function name(){
         return $this->hasOne('WechatUser','userid','userid');
     }
+    //推送
+    public function push($info,$idArr=[]) {
+        if(empty($idArr)) {
+            $arr = $this ->where($info)->select();
+        } elseif(!empty($idArr) && $idArr[0] == 3) {
+            $arr = $this ->where($info) ->where(['id'=>['neq',$idArr[1]]])->select();
+        } else {
+            $arr = $this ->where($info)->select();
+        }
+
+        foreach($arr as  $value){
+            $value['title'] = '【通知公告】'.$value['title'];
+            $value['id'] = '3-'.$value->id;
+        }
+        return $arr;
+    }
 }
