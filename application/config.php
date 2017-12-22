@@ -30,7 +30,7 @@ return [
     
     /* 公众号配置 */
     'party' => array(
-        'login' =>'http://zthm.0571ztnet.com/home/verify/index',
+        'login' =>'http://mxxz.0571ztnet.com/home/verify/index',
         'token' =>'mxxzdj',
         'encodingaeskey' =>'8Bzq5oDfWQJSWAgvOsHbOmmUOP54lcCGokJ2tXsaGrN',
         'appid' =>'wxd4e86a2f4f1e299b',

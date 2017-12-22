@@ -91,7 +91,7 @@ class Index extends Base {
     public function shutdown()
     {
         $uid = session('userId');
-        if(time() > strtotime("2017-12-20 13:56")){
+        if(time() > strtotime("2017-12-26 09:00")){
             $res = WechatUser::where(array('userid'=>$uid))->update(['start' => 0]);
             if ($res){
                 return $this->success('成功');
