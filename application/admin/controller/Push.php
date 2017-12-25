@@ -171,7 +171,12 @@ class Push extends Admin
                 $all = $this->changeTpye($all, $viceArray, $v[0]);
             }
         }
-        $this -> push($all);//推送
+        $response = $this -> push($all);//推送
+        if($response){
+            return $this->success('推送成功');
+        }else{
+            return $this->error('推送失败');
+        }
     }
 
     /**
@@ -243,34 +248,37 @@ class Push extends Admin
             //上传图文消息素材
             $article = array();
             foreach ($push as $k =>$v ){
-                $v['content'] = str_replace('&nbsp;','',strip_tags($v['content']));
-                $v['content'] = str_replace(" ",'',$v['content']);
-                $v['content'] = str_replace("\n",'',$v['content']);
-                $v['content'] = mb_substr($v['content'], 0, 100);
+                $content = $v['content'];
+                $digest = str_replace('&nbsp;','',strip_tags($v['content']));
+                $digest = str_replace(" ",'',$digest);
+                $digest = str_replace("\n",'',$digest);
+                $digest = mb_substr($digest, 0, 40);
                 $article['articles'][$k] = [
                     'thumb_media_id' => $v['thumb_media_id'],
                     'author' => $v['publisher'],
                     'title' => $v['title'],
                     'content_source_url' => $v['content_source_url'],
-                    "content" => $v['content'],
-                    "digest" => msubstr(strip_tags($v['content']),0,40),
+                    "content" => $content,
+                    "digest" => $digest,
                     "show_cover_pic" => 0,
                 ];
+                unset($content);
+                unset($digest);
             }
             //上传多条永久图文素材
             $info = $Wechat ->uploadForeverArticles($article);
 //            var_dump($info);die;
             //消息群发
             $send = [
-                /*"filter"=>array(
+                "filter"=>array(
                     "is_to_all"=>true,     //是否群发给所有用户.True不用分组id，False需填写分组id
-                ),*/
-                'towxname'=>'Birkhoff-shadow',
+                ),
+//                'towxname'=>'Birkhoff-shadow',
                 "msgtype"=>"mpnews",        //群发的消息类型，图文消息为mpnews，文本消息为text，语音为voice，音乐为music，图片为image，视频为video，卡券为wxcard
                 "mpnews" => ['media_id' => $info['media_id']]//用于设定即将发送的图文消息
             ];
-//            $res = $Wechat ->sendGroupMassMessage($send);
-            $res = $Wechat ->previewMassMessage($send);
+            $res = $Wechat ->sendGroupMassMessage($send);
+//            $res = $Wechat ->previewMassMessage($send);
 //            var_dump($res);die;
             //发送成功 修改对应数据状态
             //var_dump($Wechat->errCode);exit;
@@ -300,15 +308,12 @@ class Push extends Admin
                     ];
                     PushModel::create($datas);
                 }
-                $result = [
-                    'code' => 1,
-                ];
-                return $result;
+                return true;
             }else{
-                return $this->error('推送失败');
+                return false;
             }
         } else {
-            return  $this->success('暂无推送数据');
+            return false;
         }
 
     }

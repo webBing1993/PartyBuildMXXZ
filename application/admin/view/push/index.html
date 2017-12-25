@@ -236,11 +236,10 @@
         };
         $.ajax({
             type:"post",
-            url:$("#form").attr("action"),
+            url:"{:Url('push/pushList')}",
             data:data,
-            success:function(json){
-                console.log(1);
-                console.log(json);
+            success:function(data){
+                console.log(data);
                 if(data.code == 1){
                     if (data.url) {
                         updateAlert(data.msg + ' 页面即将自动跳转~','success');

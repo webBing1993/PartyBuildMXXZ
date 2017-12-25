@@ -128,10 +128,11 @@ class Activity extends Base{
                 }
             }
         }
-        $list = Wish::where(['id' => $id,'status' => 0])->find();
+        $list = wishModel::get($id);
+        /*$list = Wish::where(['id' => $id,'status' => 0])->find();
         if (empty($list)){
             return $this->error('系统错误,数据不存在');
-        }
+        }*/
         // 认领权限
         $User = WechatUser::where('userid',$userId)->field('review,department')->find();
         $list['review'] = $User['review'];
