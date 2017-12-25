@@ -107,15 +107,15 @@ class Report extends Base{
         }
         $article = $learnModel::get($id);
         if($article['type'] == 1){
-            $article['record_text'] = "党委语音述职";
+            $article['record_text'] = "点击收听党委述职";
         }elseif($article['type'] == 2){
-            $article['record_text'] = "工会语音述职";
+            $article['record_text'] = "点击收听工会述职";
         }elseif($article['type'] == 3){
-            $article['record_text'] = "团委语音述职";
+            $article['record_text'] = "点击收听团委述职";
         }elseif($article['type'] == 4){
-            $article['record_text'] = "妇联语音述职";
+            $article['record_text'] = "点击收听妇联述职";
         }else{
-            $article['record_text'] = "语音述职";
+            $article['record_text'] = "点击收听述职";
         }
 
         $article['user'] = session('userId');
