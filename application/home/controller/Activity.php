@@ -28,7 +28,11 @@ class Activity extends Base{
         $this->anonymous();
         $userId = session('userId');
         $Wish = new wishModel();
-        $list = $Wish->where(['type' => 1,'status' => 0])->order('publish_time desc')->limit(7)->select();  // 活动列表
+        $map = array(
+            'type' => 1,
+            'status' => array('egt',0),
+        );
+        $list = $Wish->where($map)->order('publish_time desc')->limit(7)->select();  // 活动列表
         $banner = $Wish->getDataList(0);
         /*$lists = $Wish->where(['type' => 2 ,'status' => 0])->order('id desc')->limit(5)->select(); // 投票
         foreach($lists as $value){
@@ -64,7 +68,11 @@ class Activity extends Base{
         $len = input('post.length');
         if ($type == 1){
             // 活动  列表
-            $list = $Wish->where(['type' => 1,'status' => 0])->order('publish_time desc')->limit($len,5)->select();  // 活动列表
+            $map = array(
+                'type' => 1,
+                'status' => array('egt',0),
+            );
+            $list = $Wish->where($map)->order('publish_time desc')->limit($len,5)->select();  // 活动列表
             foreach($list as $value){
                 $value['time'] = date('Y-m-d',$value['publish_time']);
             }
