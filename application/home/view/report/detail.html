@@ -61,8 +61,11 @@
             <span class="frs">{$article.create_time|time_format="Y-m-d"}</span>
         </div>
         {notempty name="$article.record"}
-        <p style="text-align: center;"><img src="/home/images/lyd.gif" style="width:80vw;height:22.5vh;"></p>
-        <div id="player1" class="aplayer" style="margin: 4vw auto 0;width:82.3vw;"></div>
+        <div style="background: #eae6db;padding: 4vh 0 2vh 0;margin-top: 1vh;">
+            <p style="text-align: center;width:82.3vw;margin: auto;background: #fff;border-radius: 2px;padding: 1vh 0 .5vh 0;"><img src="/home/images/lyd.gif" style="width:64vw;height:9.6vh;"></p>
+            <div id="player1" class="aplayer" style="margin: 4vw auto 0;width:82.3vw;background: #fff;"></div>
+        </div>
+
         {/notempty}
 
 
