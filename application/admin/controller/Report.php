@@ -29,7 +29,7 @@ class Report extends Admin {
         int_to_string($list,array(
             'status' => array(0=>"已发布",1=>"已发布"),
             'push' => array(0=>"否",1=>"是"),
-            'type' => array(1=>"党",2=>"工",3=>"青",4=>"妇")
+            'type' => array(1=>"党委",2=>"工会",3=>"团委",4=>"妇联",5=>"科协")
         ));
         $this->assign('list',$list);
 

@@ -114,6 +114,8 @@ class Report extends Base{
             $article['record_text'] = "点击收听团委述职";
         }elseif($article['type'] == 4){
             $article['record_text'] = "点击收听妇联述职";
+        }elseif($article['type'] == 5){
+            $article['record_text'] = "点击收听科协述职";
         }else{
             $article['record_text'] = "点击收听述职";
         }

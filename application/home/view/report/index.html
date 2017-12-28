@@ -39,6 +39,9 @@
                             {eq name="$vo.type" value="4"}
                             <img src="/home/images/fu.jpg" alt="">
                             {/eq}
+                            {eq name="$vo.type" value="5"}
+                            <img src="/home/images/ke.jpg" alt="">
+                            {/eq}
                         </div>
                         <div class="reportDivmainText">
                             <div class="reportDivmainText_01 title">{$vo.title}</div>
@@ -253,6 +256,8 @@ $('.reportSort>div').on('click',function(){
                     Img = '/home/images/qing.jpg'
                 }else if(list.type == 4){
                     Img = '/home/images/fu.jpg'
+                }else if(list.type == 5){
+                    Img = '/home/images/ke.jpg'
                 }
                 var _change = '';
                 if(list.is_vote == 1){
