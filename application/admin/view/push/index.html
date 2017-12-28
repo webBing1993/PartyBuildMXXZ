@@ -234,6 +234,7 @@
             focus_main: $("select[name='focus_main']").val(),
             focus_vice: $("select[name='focus_vice']").val(),
         };
+        console.log($("#form").attr("action"))
         $.ajax({
             type:"post",
             url:"{:Url('push/pushList')}",
