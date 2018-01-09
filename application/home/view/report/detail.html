@@ -105,19 +105,22 @@
 <!--<script  src="/home/js/jquery-1.12.1.min.js"></script>-->
 <!--<script  src="/home/js/cese/min1.js"></script>-->
 <script>
-    var ap1 = new APlayer({
-        element: document.getElementById('player1'),
-        narrow: false,
-        autoplay: true,
-        showlrc: false,
-        music: {
-            title: '{$article.record_text}',
-            author: ' ',
-            url: '{$article.record}',
-            pic: '/home/images/bf.png'
-        }
-    });
-    ap1.init();
+    if($('#player1').length>0){
+        var ap1 = new APlayer({
+            element: document.getElementById('player1'),
+            narrow: false,
+            autoplay: true,
+            showlrc: false,
+            music: {
+                title: '{$article.record_text}',
+                author: ' ',
+                url: '{$article.record}',
+                pic: '/home/images/bf.png'
+            }
+        });
+        ap1.init();
+    }
+
      //获取现在投票人数
      var aa = parseInt( $(".is_vote span").text());
      //点击投票按钮
